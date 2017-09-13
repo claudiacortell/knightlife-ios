@@ -274,58 +274,62 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let defaults = UserDefaults.standard
         
         // get/set values for class names
-        var User_Info = [String]()
+        var classNames = [String]()
         if (defaults.object(forKey: "ButtonTexts") != nil) {
-            User_Info = defaults.object(forKey: "ButtonTexts") as! Array<String>
+            classNames = defaults.object(forKey: "ButtonTexts") as! Array<String>
         } else {
             var count = 0
             while count < 7 {
-                User_Info.append("")
+                classNames.append("")
                 count += 1
             }
-            defaults.set(User_Info, forKey: "ButtonTexts")
+            defaults.set(classNames, forKey: "ButtonTexts")
         }
         
         // get/set values for lunch boolean settings
-        var Switch_Info = [Bool]()
+        var firstLunches = [Bool]()
         if (defaults.object(forKey: "SwitchValues") != nil) {
-            Switch_Info = defaults.object(forKey: "SwitchValues") as! Array<Bool>
+            firstLunches = defaults.object(forKey: "SwitchValues") as! Array<Bool>
         } else {
             var count = 0
             while count < 5 {
-                Switch_Info.append(true)
+                firstLunches.append(true)
                 count += 1
             }
-            defaults.set(Switch_Info, forKey: "SwitchValues")
+            defaults.set(firstLunches, forKey: "SwitchValues")
         }
         
         // get/set values for class color selection
-        var Color_Info = [String]()
-        if (defaults.object(forKey: "ColorIDs") != nil) {
-            Color_Info = defaults.object(forKey: "ColorIDs") as! Array<String>
-        } else {
-            Color_Info.append("E74C3C-A")
-            Color_Info.append("E67E22-B")
-            Color_Info.append("F1C40F-C")
-            Color_Info.append("2ECC71-D")
-            Color_Info.append("3498DB-E")
-            Color_Info.append("9B59B6-F")
-            Color_Info.append("DE59B6-G")
-            Color_Info.append("999999-X")
-            defaults.set(Color_Info, forKey: "ColorIDs")
+        var classColors = [String]()
+        if (defaults.object(forKey: "ColorIDs") != nil)
+		{
+            classColors = defaults.object(forKey: "ColorIDs") as! Array<String>
+        } else
+		{
+//			Default color values
+            classColors.append("E74C3C-A")
+            classColors.append("E67E22-B")
+            classColors.append("F1C40F-C")
+            classColors.append("2ECC71-D")
+            classColors.append("3498DB-E")
+            classColors.append("9B59B6-F")
+            classColors.append("DE59B6-G")
+            classColors.append("999999-X")
+			
+            defaults.set(classColors, forKey: "ColorIDs")
         }
         
         // get/set values for class notes
-        var Note_Info = [String]()
+        var classNotes = [String]()
         if (defaults.object(forKey: "NoteTexts") != nil) {
-            Note_Info = defaults.object(forKey: "NoteTexts") as! Array<String>
+            classNotes = defaults.object(forKey: "NoteTexts") as! Array<String>
         } else {
             var count = 0
             while count < 8 {
-                Note_Info.append("")
+                classNotes.append("")
                 count += 1
             }
-            defaults.set(Note_Info, forKey: "NoteTexts")
+            defaults.set(classNotes, forKey: "NoteTexts")
         }
         
         var dayCounter = 0;
@@ -335,7 +339,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             print(dayCounter)
             
-            let firstLunch = Switch_Info[dayCounter]
+            let firstLunch = firstLunches[dayCounter]
             
             for (date, block) in day.timeToBlock {
                 
@@ -347,7 +351,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // name of block
                 var message = block;
                 
-                if (block_copy.characters.count == 2) {
+                if (block_copy.characters.count == 2) { // E.G. B1 or B2 (Is a lunch block)
                     
                     if (firstLunch && block_copy.hasSuffix("1")) {
                         // first lunch
@@ -377,8 +381,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     // set block name to user value
                     let indexOfUserInfo = self.BlockOrder.index(of: block_copy)!
                     
-                    if (User_Info[indexOfUserInfo] != "") {
-                        message = User_Info[indexOfUserInfo]
+                    if (classNames[indexOfUserInfo] != "")
+					{
+                        message = classNames[indexOfUserInfo]
                     }
                 }
                 
@@ -399,11 +404,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     if(!self.Vacation){ //only set notifications if it's not vacation
                     
-                    let DateScheduled = day.NSDateToString(RegularDate)
-                    localNotification.fireDate = RegularDate as Date
-                    localNotification.soundName = UILocalNotificationDefaultSoundName;
-                    localNotification.repeatInterval = NSCalendar.Unit.weekOfYear
-                    UIApplication.shared.scheduleLocalNotification(localNotification)
+						let DateScheduled = day.NSDateToString(RegularDate)
+						localNotification.fireDate = RegularDate as Date
+						localNotification.soundName = UILocalNotificationDefaultSoundName;
+						localNotification.repeatInterval = NSCalendar.Unit.weekOfYear
+						UIApplication.shared.scheduleLocalNotification(localNotification)
                     
                     }
                     
@@ -426,11 +431,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     if(!self.Vacation){ //only set notifications if it's not vacation
                     
-                    let DateScheduled = day.NSDateToString(Earlydate)
-                    localNotification.fireDate = Earlydate as Date
-                    localNotification.repeatInterval = NSCalendar.Unit.weekOfYear
-                    localNotification.soundName = UILocalNotificationDefaultSoundName;
-                    UIApplication.shared.scheduleLocalNotification(localNotification)
+						let DateScheduled = day.NSDateToString(Earlydate)
+						localNotification.fireDate = Earlydate as Date
+						localNotification.repeatInterval = NSCalendar.Unit.weekOfYear
+						localNotification.soundName = UILocalNotificationDefaultSoundName;
+						UIApplication.shared.scheduleLocalNotification(localNotification)
                         
                     }
                 }

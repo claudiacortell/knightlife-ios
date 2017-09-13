@@ -33,6 +33,9 @@
 		740756CC1C33720A0039844B /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740756CB1C33720A0039844B /* Label.swift */; };
 		740756CE1C34C7050039844B /* WeekTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740756CD1C34C7050039844B /* WeekTableViewController.swift */; };
 		740756D01C34CA470039844B /* Block2TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740756CF1C34CA470039844B /* Block2TableViewCell.swift */; };
+		C0707FBC1F6970FA00C7D2ED /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0707FBB1F6970FA00C7D2ED /* Schedule.swift */; };
+		C0707FBE1F69720800C7D2ED /* ClassManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0707FBD1F69720800C7D2ED /* ClassManager.swift */; };
+		C0707FC01F69753100C7D2ED /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0707FBF1F69753100C7D2ED /* Storage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +95,9 @@
 		740756CB1C33720A0039844B /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		740756CD1C34C7050039844B /* WeekTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekTableViewController.swift; sourceTree = "<group>"; };
 		740756CF1C34CA470039844B /* Block2TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Block2TableViewCell.swift; sourceTree = "<group>"; };
+		C0707FBB1F6970FA00C7D2ED /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		C0707FBD1F69720800C7D2ED /* ClassManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassManager.swift; sourceTree = "<group>"; };
+		C0707FBF1F69753100C7D2ED /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +175,8 @@
 			children = (
 				5B55DC2C1B27B21500D55EB9 /* Glancer.entitlements */,
 				5BD285DC1B03CF29007A0472 /* AppDelegate.swift */,
+				C0707FBD1F69720800C7D2ED /* ClassManager.swift */,
+				C0707FBB1F6970FA00C7D2ED /* Schedule.swift */,
 				740756CD1C34C7050039844B /* WeekTableViewController.swift */,
 				5BD072471C74AEB40074B56D /* Main.storyboard */,
 				5B49D0F41C76814B00645883 /* HomeTableViewController.swift */,
@@ -182,6 +190,7 @@
 				5BD285E31B03CF29007A0472 /* Images.xcassets */,
 				5BD285E51B03CF29007A0472 /* LaunchScreen.xib */,
 				5BD285DA1B03CF29007A0472 /* Supporting Files */,
+				C0707FBF1F69753100C7D2ED /* Storage.swift */,
 			);
 			path = Glancer;
 			sourceTree = "<group>";
@@ -336,14 +345,17 @@
 			files = (
 				5BD285DD1B03CF29007A0472 /* AppDelegate.swift in Sources */,
 				740756CE1C34C7050039844B /* WeekTableViewController.swift in Sources */,
+				C0707FBC1F6970FA00C7D2ED /* Schedule.swift in Sources */,
 				5BD0724A1C74AEE00074B56D /* ViewController.swift in Sources */,
 				5B4A65791C14FD34001FE2B2 /* BlockTableViewCell.swift in Sources */,
+				C0707FBE1F69720800C7D2ED /* ClassManager.swift in Sources */,
 				5BC261961B0EAEC500AEBAC1 /* Day.swift in Sources */,
 				5B49D0F51C76814B00645883 /* HomeTableViewController.swift in Sources */,
 				5BB503C71D7920CC00F9B2F7 /* ColorSelectionViewController.swift in Sources */,
 				740756CC1C33720A0039844B /* Label.swift in Sources */,
 				5BB503C51D7920AE00F9B2F7 /* NoteViewController.swift in Sources */,
 				740756D01C34CA470039844B /* Block2TableViewCell.swift in Sources */,
+				C0707FC01F69753100C7D2ED /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
