@@ -25,7 +25,8 @@ class WeekTableViewController: UITableViewController {
     var selectedLabel: Label = Label(bL: "", cN: "", cT: "", c: "")
     let allBlocks: [String] = ["A", "B", "C", "D", "E", "F", "G", "X"]
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+	{
         super.viewDidLoad()
         
         self.tabBarController?.tabBar.items![0].imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)

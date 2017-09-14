@@ -10,110 +10,84 @@ import UIKit
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-    
+class AppDelegate: UIResponder, UIApplicationDelegate
+{
     var window: UIWindow?
-    let BlockOrder = ["A","B","C","D","E","F","G"]
-    let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
-    let dayKeyStrs = ["M", "T", "W", "Th", "F"]
-    
-    var End_Times = [Int]();
-    var Second_Lunch_Start = Array<String>();
-    
-    var getData: Bool = false;
     
     var transitionFROMsettingtoHome: Bool = false; ///coming from settings
     var transitionFROMsettingtoWeek: Bool = false;
     var Setting_Updated : Bool = false;
     
     var WeekUpdateNeeded : Bool = false;
-    var Days = [Day]()
     var Id : String = ""
-    var MondayExists = false
     var Timer = Foundation.Timer();
-    var Widget_Block = [Array<String>]();
-    var Time_Block = [Array<String>]();
-    var End_Time_Block = [Array<String>]();
-    
-    var tokenStringPub = ""
-    var posted_string = false;
-    
-    var Schedule = NSDictionary();
-    
-    var Vacation = false;
-    var Forced_Update = false;
+	
+    var Forced_Update = false; // Needs to update view on shit idk
     
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
+	{
         UIApplication.shared.setMinimumBackgroundFetchInterval(
             UIApplicationBackgroundFetchIntervalMinimum)
-        
-        self.getData  = true;
-        
+                
         // register for Push Notitications, if running iOS 8
-        if application.responds(to: #selector(UIApplication.registerUserNotificationSettings(_:))) {
-            let types:UIUserNotificationType = ([.alert, .badge, .sound])
-            let settings:UIUserNotificationSettings = UIUserNotificationSettings(types: types, categories: nil)
+        if application.responds(to: #selector(UIApplication.registerUserNotificationSettings(_:)))
+		{
+            let types: UIUserNotificationType = ([.alert, .badge, .sound])
+            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: types, categories: nil)
             
             application.registerUserNotificationSettings(settings)
             application.registerForRemoteNotifications()
         }
         
-        // override point for customization after application launch.
         return true
     }
     
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data)
+	{
         print("didRegisterForRemoteNotificationsWithDeviceToken")
         
         let tokenChars = (deviceToken as NSData).bytes.bindMemory(to: CChar.self, capacity: deviceToken.count)
         var tokenString = ""
         
-        for i in 0..<deviceToken.count {
+        for i in 0..<deviceToken.count
+		{
             tokenString += String(format: "%02.2hhx", arguments: [tokenChars[i]])
         }
         
         print("Device Token:", tokenString)
-        
-        let defaults = UserDefaults(suiteName:"group.vishnu.squad.widget")
-        
-        if(defaults!.object(forKey: "SavedToDB") != nil){
-            
-            posted_string = defaults!.object(forKey: "SavedToDB") as! Bool
-            
-            
-        }else{
-            
-            defaults!.set(false, forKey: "SavedToDB")
-            posted_string = false;
-        }
-        
-        
-        tokenStringPub = tokenString
-        
-        print(posted_string);
-        
-        
-        if(!posted_string){
-            
-            print("in here");
-            
-            defaults!.set(true, forKey: "SavedToDB")
+		
+		var savedInDB: Bool = false
+		if Storage.DB_SAVED.exists()
+		{
+			savedInDB = Storage.DB_SAVED.getValue() as! Bool
+		} else
+		{
+			Storage.DB_SAVED.set(data: false)
+		}
+
+		print("Device stored in database: \(savedInDB)");
+
+        let tokenStringPub = tokenString
+		
+        if (!savedInDB)
+		{
+			Storage.DB_SAVED.set(data: true)
+			
             var request = URLRequest(url: URL(string: "https://bbnknightlife.herokuapp.com/api/deviceTokens/")!)
             request.httpMethod = "POST"
             // let postString = "deviceToken=13234323"
             let postString = "deviceToken=" + tokenStringPub
             request.httpBody = postString.data(using: .utf8)
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                guard let data = data, error == nil else
+				{                                                 // check for fundamental networking error
                     print("error=\(error)")
                     return
                 }
-                
-                
-                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+				
+                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200
+				{           // check for http errors
                     print("statusCode should be 200, but is \(httpStatus.statusCode)")
                     print("response = \(response)")
                     
@@ -123,10 +97,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("responseString = \(responseString)")
                 
             }
+			
             task.resume()
-            
-            
-            
         }
         
         let currentInstallation = PFInstallation.current()
@@ -137,22 +109,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error)
+	{
         print("failed to register for remote notifications:  (error)")
     }
     
     
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        
-        if let aps = userInfo["aps"] as? NSDictionary {
-            let message : String = aps["alert"] as! String;
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void)
+	{
+        if let aps = userInfo["aps"] as? NSDictionary
+		{
+            let message: String = aps["alert"] as! String;
             
-            if (message == "Auto-Updating..."){
-                let x = self.update();
+            if (message == "Auto-Updating...")
+			{
                 self.Forced_Update = true;
                 
-                if(x == true){
-                    
+                if (ScheduleManager.instance.loadBlocks(true))
+				{
                     completionHandler(UIBackgroundFetchResult.newData);
                 }
             }
@@ -171,92 +145,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // check if days are already constructed
         if (self.Days.count > 0) {
-            self.WeekUpdateNeeded = true;
+            self.WeekUpdateNeeded = true; // Week view needs to be updated to reflect the new settings
             setUserValues()
             return true;
         } else {
             // days not yet constructed
             return false;
         }
-    }
-    
-    func update() -> Bool{
-        
-        var Success = false;
-        
-       
-        
-        let app:UIApplication = UIApplication.shared
-        for Event in app.scheduledLocalNotifications! {
-            let notification = Event
-            app.cancelLocalNotification(notification)
-        }
-        
-        let urlPath: String = "https://bbnknightlife.herokuapp.com/api/scheduleObject/OG"
-        let url: URL = URL(string: urlPath)!
-        let request1: URLRequest = URLRequest(url: url)
-        let response: AutoreleasingUnsafeMutablePointer<URLResponse?>?=nil
-        
-        
-        do{
-            
-            let dataVal = try NSURLConnection.sendSynchronousRequest(request1, returning: response)
-            
-            print(response)
-            do {
-                if let jsonResult = try JSONSerialization.jsonObject(with: dataVal, options: []) as? NSDictionary {
-                    print("Synchronous\(jsonResult)")
-                    Schedule = jsonResult;
-                    
-                    
-                }
-            } catch let error as NSError {
-                print(error.localizedDescription)
-            }
-            
-            
-            
-        }catch let error as NSError
-        {
-            print(error.localizedDescription)
-        }
-
-        
-         
-                
-                if (self.Schedule["push"] != nil) {
-                    
-                    let show : Bool = self.Schedule["push"] as! Bool
-                    self.Vacation = !show
-                    
-                    self.Days.removeAll()
-                    self.WeekUpdateNeeded = true;
-                    
-                    self.Widget_Block.removeAll()
-                    self.Time_Block.removeAll()
-                    self.End_Time_Block.removeAll()
-                    
-                    for i in 0..<self.days.count{
-                        self.setDay(self.days[i], dayKeyStr: self.dayKeyStrs[i])
-                    }
-                    
-                    if (self.Schedule["SchoolET"] != nil) {
-                        self.End_Times = self.Schedule["SchoolET"] as! Array<Int>
-                    }
-                    
-                    if (self.Schedule["SecondLunchST"] != nil) {
-                        //pulls info from parse for second lunch info
-                        self.Second_Lunch_Start = self.Schedule["SecondLunchST"]  as! Array<String>
-                    }
-                    
-                    self.setUserValues()
-                    Success = true;
-                } else {
-                    print("Check interenet connection")
-                }
-            
-        
-        return Success
     }
     
     func setUserValues() {
@@ -445,55 +340,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func setDay(_ dayName: String, dayKeyStr: String) {
-        let day = Day(name: dayName)
-        let dayKeyB = dayKeyStr + "B"
-        let dayKeyST = dayKeyStr + "ST"
-        let dayKeyET = dayKeyStr + "ET"
-        
-        if (self.Schedule[dayKeyB] != nil && self.Schedule[dayKeyST] != nil && self.Schedule[dayKeyET] != nil) {
-            let bO: Array<String> = self.Schedule[dayKeyB] as! Array<String>
-            let t: Array<String> = self.Schedule[dayKeyST] as! Array<String>
-            let Et: Array<String> = self.Schedule[dayKeyET] as! Array<String>
-            
-            self.Widget_Block.append(bO)
-            self.Time_Block.append(t)
-            self.End_Time_Block.append(Et);
-            day.refreshDay(bO, times: t)
-        }
-        
-        self.Days.append(day)
-    }
-    
-    func applicationWillResignActive(_ application: UIApplication) {
+    func applicationWillResignActive(_ application: UIApplication)
+	{
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        Timer.invalidate()
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+
+		Timer.invalidate()
     }
     
-    func applicationDidEnterBackground(_ application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication)
+	{
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
     
-    func applicationWillEnterForeground(_ application: UIApplication) {
+    func applicationWillEnterForeground(_ application: UIApplication)
+	{
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
     
-    func applicationDidBecomeActive(_ application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication)
+	{
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
     
-    func applicationWillTerminate(_ application: UIApplication) {
+    func applicationWillTerminate(_ application: UIApplication)
+	{
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        let x = update();
-        
-        if (x) {
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void)
+	{
+        if (ScheduleManager.instance.loadBlocks(true))
+		{
             completionHandler(.newData)
-        } else{
+        } else
+		{
             completionHandler(.failed)
         }
     }

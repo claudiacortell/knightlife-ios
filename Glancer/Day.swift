@@ -22,7 +22,8 @@ open class Day: NSObject {
         self.name = name;
     }
     
-    func getDateAsString() -> String{
+    func getDateAsString() -> String
+	{
         let date = Date()
         let calendar = Calendar.current
         let components = (calendar as NSCalendar).components([.month, .year, .day], from: date)
@@ -43,14 +44,18 @@ open class Day: NSObject {
         return outDate
     }
     
-    func refreshDay(_ block_order: Array<String>, times: Array<String>){
-        for index in 0...(times.count-1){
+    func refreshDay(_ block_order: Array<String>, startTimes: Array<String>)
+	{ // Array of blocks (E.G. a, b, c, d), array of start times for those blocks. Assumed to be properly indexed to each other
+        for index in 0..<startTimes.count
+		{
             orderedBlocks.append(block_order[index]);
-            orderedTimes.append(times[index]);
+            orderedTimes.append(startTimes[index]);
+			
             let block = block_order[index]
-            let time = times[index]
+            let time = startTimes[index]
             let timerDate = timeToNSDate(time)
-            timeToBlock[timerDate] = block
+			
+			timeToBlock[timerDate] = block
         }
         
     }

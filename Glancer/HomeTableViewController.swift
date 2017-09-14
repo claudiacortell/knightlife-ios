@@ -7,29 +7,32 @@
 //
 
 import UIKit
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
+//fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool
+//{
+//	switch (lhs, rhs)
+//	{
+//	case let (l?, r?):
+//		return l < r
+//	case (nil, _?):
+//		return true
+//	default:
+//		return false
+//	}
+//}
+//
+//fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool
+//{
+//	switch (lhs, rhs)
+//	{
+//	case let (l?, r?):
+//		return l >= r
+//	default:
+//		return !(lhs < rhs)
+//	}
+//}
 
-fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l >= r
-  default:
-    return !(lhs < rhs)
-  }
-}
-
-
-class HomeTableViewController: UITableViewController {
-    
+class HomeTableViewController: UITableViewController
+{
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var timer = Timer()
     var timer2 = Timer()
@@ -38,7 +41,7 @@ class HomeTableViewController: UITableViewController {
     @IBOutlet weak var mainTimeLabel: UILabel!
     @IBOutlet weak var mainNextBlockLabel: UILabel!
     
-    var dayNum: Int = 0
+    var localizedDayOfWeekFuckMeOmfg: Int = 0 // Day of week
     var numOfRows: Int = 0
     var row: Int = 0
     var minutesUntilNextBlock: Int = 0
@@ -50,23 +53,20 @@ class HomeTableViewController: UITableViewController {
     
     var labelsGenerated: Bool = false
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+	{
         super.viewDidLoad()
         
-        if(appDelegate.getData){
-            appDelegate.update() 
-            appDelegate.getData = false
+        _ = ScheduleManager.instance.loadBlocks()
             
-            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(HomeTableViewController.generateHomeScreenData), userInfo: nil, repeats: true)
-            
-            self.tabBarController?.tabBar.items![0].isEnabled = false
-            self.tabBarController?.tabBar.items![0].imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
-            self.tabBarController?.tabBar.items![1].isEnabled = false
-            self.tabBarController?.tabBar.items![1].imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
-            self.tabBarController?.tabBar.items![2].isEnabled = false
-            self.tabBarController?.tabBar.items![2].imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
-            
-        }
+		timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(HomeTableViewController.generateHomeScreenData), userInfo: nil, repeats: true)
+		
+		self.tabBarController?.tabBar.items![0].isEnabled = false
+		self.tabBarController?.tabBar.items![0].imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
+		self.tabBarController?.tabBar.items![1].isEnabled = false
+		self.tabBarController?.tabBar.items![1].imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
+		self.tabBarController?.tabBar.items![2].isEnabled = false
+		self.tabBarController?.tabBar.items![2].imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
     }
     
     
@@ -80,12 +80,9 @@ class HomeTableViewController: UITableViewController {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        if(appDelegate.Forced_Update){
-            appDelegate.update()
-            appDelegate.Forced_Update = false
-        }
-        
+    override func viewDidAppear(_ animated: Bool)
+	{
+        ScheduleManager.instance.loadBlocks()
         timer2 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(HomeTableViewController.generateHomeScreenData), userInfo: nil, repeats: true)
     }
     
@@ -94,8 +91,10 @@ class HomeTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func generateHomeScreenData() {
-        if (appDelegate.Vacation){
+    func generateHomeScreenData()
+	{
+        if (ScheduleManager.instance.onVacation)
+		{
             mainDayLabel.text = "Vacation"
             mainBlockLabel.text = "Enjoy"
             mainTimeLabel.text = ""
@@ -110,10 +109,12 @@ class HomeTableViewController: UITableViewController {
             self.tabBarController?.tabBar.items![1].isEnabled = true
             self.tabBarController?.tabBar.items![2].isEnabled = true
             timer.invalidate()
-        } else if (appDelegate.Days.count > 0){
+        } else if (appDelegate.Days.count > 0)
+		{
             updateMainHomePage()
             
-            if dayNum < 5 {
+            if localizedDayOfWeekFuckMeOmfg < 5
+			{
                 checkSecondLunch()
             }
             
@@ -143,7 +144,7 @@ class HomeTableViewController: UITableViewController {
     func getMainDayLabel() -> String {
         let currentDateTime = appDelegate.Days[0].getDateAsString()
         let dayNum = appDelegate.Days[0].getDayOfWeekFromString(currentDateTime)
-        self.dayNum = dayNum
+        self.localizedDayOfWeekFuckMeOmfg = dayNum
         if dayNum == 5 {
             return "Saturday"
         } else if dayNum == 6 {
@@ -247,7 +248,7 @@ class HomeTableViewController: UITableViewController {
         var firstLunchTemp: Bool = true
         if defaults.object(forKey: "SwitchValues") != nil {
             let UserSwitch: [Bool] = defaults.object(forKey: "SwitchValues") as! Array<Bool>
-            firstLunchTemp = UserSwitch[dayNum]
+            firstLunchTemp = UserSwitch[localizedDayOfWeekFuckMeOmfg]
         }
         
         // we change the time's array to reflect the second lunch when applicable
@@ -270,15 +271,16 @@ class HomeTableViewController: UITableViewController {
     func generateLabels() {
         //generates array of information for each cell
         if !labelsGenerated {
-            if dayNum < 5 {
-                if !appDelegate.Vacation{
+            if localizedDayOfWeekFuckMeOmfg < 5 {
+                if !ScheduleManager.instance.onVacation
+				{
                     
-                    for (index, time) in appDelegate.Days[dayNum].orderedTimes.enumerated(){
+                    for (index, time) in appDelegate.Days[localizedDayOfWeekFuckMeOmfg].orderedTimes.enumerated(){
                         
                         var blockLetter = ""
-                        let blockName = appDelegate.Days[dayNum].orderedBlocks[index]
+                        let blockName = appDelegate.Days[localizedDayOfWeekFuckMeOmfg].orderedBlocks[index]
                         if blockName == "Lab" {
-                            blockLetter = "\(appDelegate.Days[dayNum].orderedBlocks[index - 1])L"
+                            blockLetter = "\(appDelegate.Days[localizedDayOfWeekFuckMeOmfg].orderedBlocks[index - 1])L"
                         } else if blockName == "Activities" {
                             blockLetter = "Ac"
                         } else {
@@ -286,11 +288,11 @@ class HomeTableViewController: UITableViewController {
                         }
                         
                         var classLabel = ""
-                        let className = appDelegate.Days[dayNum].messagesForBlock[blockName]
+                        let className = appDelegate.Days[localizedDayOfWeekFuckMeOmfg].messagesForBlock[blockName]
                         if className == blockLetter {
                             classLabel = "\(blockName) Block"
                         } else if blockName == "Lab" {
-                            classLabel = "\(appDelegate.Days[dayNum].orderedBlocks[index - 1]) Lab"
+                            classLabel = "\(appDelegate.Days[localizedDayOfWeekFuckMeOmfg].orderedBlocks[index - 1]) Lab"
                         } else {
                             classLabel = className!
                         }

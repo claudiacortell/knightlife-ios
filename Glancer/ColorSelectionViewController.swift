@@ -12,32 +12,36 @@ class ColorSelectionViewController: UIViewController {
     
     var ArrayOfColor: [String] = [String]()
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+	{
         super.viewDidLoad()
         
         let defaults = UserDefaults.standard
         self.ArrayOfColor = defaults.object(forKey: "ColorIDs") as! Array<String>
-        
-        // Do any additional setup after loading the view.
     }
     
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+	{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+	{
         print("old array", ArrayOfColor)
         print()
         var newArrayOfColor: [String] = [String]()
         let blocks: [String] = ["-A", "-B", "-C", "-D", "-E", "-F", "-G", "-X"]
         var count = 0;
         
-        for color in ArrayOfColor {
+        for color in ArrayOfColor
+		{
             var newColor: String = ""
-            if (color.characters.count == 9) {
+            if (color.characters.count == 9)
+			{
                 newColor = segue.identifier! + blocks[count]
-            } else {
+            } else
+			{
                 newColor = color
             }
             newArrayOfColor.append(newColor)
@@ -51,7 +55,6 @@ class ColorSelectionViewController: UIViewController {
         let defaults = UserDefaults.standard
         defaults.set(newArrayOfColor, forKey: "ColorIDs")
 
-        
         let tabBar: UITabBarController = segue.destination as! UITabBarController
         tabBar.selectedIndex = 2
     }
