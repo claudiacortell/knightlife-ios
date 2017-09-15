@@ -7,29 +7,6 @@
 //
 
 import UIKit
-//fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool
-//{
-//	switch (lhs, rhs)
-//	{
-//	case let (l?, r?):
-//		return l < r
-//	case (nil, _?):
-//		return true
-//	default:
-//		return false
-//	}
-//}
-//
-//fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool
-//{
-//	switch (lhs, rhs)
-//	{
-//	case let (l?, r?):
-//		return l >= r
-//	default:
-//		return !(lhs < rhs)
-//	}
-//}
 
 class HomeTableViewController: UITableViewController
 {
@@ -494,13 +471,15 @@ class HomeTableViewController: UITableViewController
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //creates cells
-        if (appDelegate.Days.count > 0) {
+        if (appDelegate.Days.count > 0)
+		{
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! BlockTableViewCell
             let label = labels[(indexPath as NSIndexPath).row]
             cell.label = label
             
             return cell
-        } else {
+        } else
+		{
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! BlockTableViewCell
             let label = Label(bL: "", cN: "", cT: "", c: "999999")
             cell.label = label
@@ -509,45 +488,7 @@ class HomeTableViewController: UITableViewController
         }
         
     }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // tells the delegate that the specified row is now selected
-        selectedLabel = labels[(indexPath as NSIndexPath).row]
-        for i in 0 ..< allBlocks.count {
-            if allBlocks[i] == selectedLabel.blockLetter || (allBlocks[i] + "L") == selectedLabel.blockLetter || (allBlocks[i] + "1") == selectedLabel.blockLetter || (allBlocks[i] + "2") == selectedLabel.blockLetter {
-                selectedBlockIndex = i
-                self.performSegue(withIdentifier: "ShowClassNotes", sender: self)
-            }
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let noteViewController = segue.destination as! NoteViewController
-        let defaults = UserDefaults.standard
-        
-        let allNames = defaults.object(forKey: "ButtonTexts") as! Array<String>
-        if (selectedBlockIndex == 7) {
-            noteViewController.classNameStr = "X Block"
-        } else {
-            noteViewController.classNameStr = allNames[selectedBlockIndex]
-            if allNames[selectedBlockIndex] == "" {
-                noteViewController.classNameStr = String(selectedLabel.blockLetter.characters.prefix(1)) + " Block"
-            }
-        }
-        let allNotes = defaults.object(forKey: "NoteTexts") as! Array<String>
-        noteViewController.classNoteStr = allNotes[selectedBlockIndex]
-        let allColors = defaults.object(forKey: "ColorIDs") as! Array<String>
-        if (selectedBlockIndex == 7) {
-            noteViewController.classNameStr = "X Block"
-        } else {
-            noteViewController.classColor = hexStringToUIColor(allColors[selectedBlockIndex])
-        }
-        noteViewController.classColor = hexStringToUIColor(allColors[selectedBlockIndex])
-        
-        noteViewController.selectedBlockIndex = selectedBlockIndex
-        noteViewController.returnSegueIndex = 0
-    }
-    
+	
     func hexStringToUIColor (_ hex: String) -> UIColor {
         let cString = self.substring(hex, StartIndex: 0, EndIndex: 6)
         

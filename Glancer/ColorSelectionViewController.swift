@@ -8,55 +8,32 @@
 
 import UIKit
 
-class ColorSelectionViewController: UIViewController {
-    
-    var ArrayOfColor: [String] = [String]()
-    
+class ColorSelectionViewController: UIViewController
+{
+	var block: BlockID?
+	
     override func viewDidLoad()
 	{
         super.viewDidLoad()
-        
-        let defaults = UserDefaults.standard
-        self.ArrayOfColor = defaults.object(forKey: "ColorIDs") as! Array<String>
     }
     
     override func didReceiveMemoryWarning()
 	{
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
 	{
-        print("old array", ArrayOfColor)
-        print()
-        var newArrayOfColor: [String] = [String]()
-        let blocks: [String] = ["-A", "-B", "-C", "-D", "-E", "-F", "-G", "-X"]
-        var count = 0;
-        
-        for color in ArrayOfColor
+		let background = self.view.layer.backgroundColor
+		if background != nil && self.block != nil
 		{
-            var newColor: String = ""
-            if (color.characters.count == 9)
+			var meta = UserPrefsManager.instance.blockMeta[self.block!]
+			if meta != nil
 			{
-                newColor = segue.identifier! + blocks[count]
-            } else
-			{
-                newColor = color
-            }
-            newArrayOfColor.append(newColor)
-            count += 1
-        }
-        
-        print("new array", newArrayOfColor)
-        print()
-        
-        //let defaults = UserDefaults.standard
-        let defaults = UserDefaults.standard
-        defaults.set(newArrayOfColor, forKey: "ColorIDs")
-
-        let tabBar: UITabBarController = segue.destination as! UITabBarController
+				meta!.customColor = Utils.getHexFromCGColor(background!)
+			}
+		}
+		let tabBar: UITabBarController = segue.destination as! UITabBarController
         tabBar.selectedIndex = 2
-    }
-    
+	}
 }

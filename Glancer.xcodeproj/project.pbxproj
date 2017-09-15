@@ -13,11 +13,9 @@
 		5B4A65791C14FD34001FE2B2 /* BlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4A65781C14FD34001FE2B2 /* BlockTableViewCell.swift */; };
 		5B93E4781BE26A1300D0D101 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B93E4771BE26A1300D0D101 /* Bolts.framework */; };
 		5B93E47B1BE26A6F00D0D101 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B93E47A1BE26A6F00D0D101 /* Parse.framework */; };
-		5BB503C51D7920AE00F9B2F7 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB503C41D7920AE00F9B2F7 /* NoteViewController.swift */; };
 		5BB503C71D7920CC00F9B2F7 /* ColorSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB503C61D7920CC00F9B2F7 /* ColorSelectionViewController.swift */; };
-		5BC261961B0EAEC500AEBAC1 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC261951B0EAEC500AEBAC1 /* Day.swift */; };
 		5BD072481C74AEB40074B56D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BD072471C74AEB40074B56D /* Main.storyboard */; };
-		5BD0724A1C74AEE00074B56D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD072491C74AEE00074B56D /* ViewController.swift */; };
+		5BD0724A1C74AEE00074B56D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD072491C74AEE00074B56D /* SettingsViewController.swift */; };
 		5BD285DD1B03CF29007A0472 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD285DC1B03CF29007A0472 /* AppDelegate.swift */; };
 		5BD285E41B03CF29007A0472 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BD285E31B03CF29007A0472 /* Images.xcassets */; };
 		5BD285E71B03CF29007A0472 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BD285E51B03CF29007A0472 /* LaunchScreen.xib */; };
@@ -32,7 +30,8 @@
 		5BD288391B03D24B007A0472 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD288381B03D24B007A0472 /* SystemConfiguration.framework */; };
 		740756CC1C33720A0039844B /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740756CB1C33720A0039844B /* Label.swift */; };
 		740756CE1C34C7050039844B /* WeekTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740756CD1C34C7050039844B /* WeekTableViewController.swift */; };
-		740756D01C34CA470039844B /* Block2TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740756CF1C34CA470039844B /* Block2TableViewCell.swift */; };
+		740756D01C34CA470039844B /* WeekTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740756CF1C34CA470039844B /* WeekTableViewCell.swift */; };
+		C069CF771F6B697E001FE527 /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C069CF761F6B697E001FE527 /* NotificationsManager.swift */; };
 		C0707FBE1F69720800C7D2ED /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0707FBD1F69720800C7D2ED /* Schedule.swift */; };
 		C0707FC01F69753100C7D2ED /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0707FBF1F69753100C7D2ED /* Storage.swift */; };
 		C0A5D3BA1F69874A00DBDCAD /* WebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A5D3B91F69874A00DBDCAD /* WebCall.swift */; };
@@ -72,12 +71,10 @@
 		5B6B5F8D1C6A62BF00C53849 /* Glancer-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Glancer-Bridging-Header.h"; sourceTree = "<group>"; };
 		5B93E4771BE26A1300D0D101 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "parse-library-1/Bolts.framework"; sourceTree = "<group>"; };
 		5B93E47A1BE26A6F00D0D101 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "parse-library-1/Parse.framework"; sourceTree = "<group>"; };
-		5BB503C41D7920AE00F9B2F7 /* NoteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		5BB503C61D7920CC00F9B2F7 /* ColorSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSelectionViewController.swift; sourceTree = "<group>"; };
 		5BC261811B0EA7D700AEBAC1 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
-		5BC261951B0EAEC500AEBAC1 /* Day.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		5BD072471C74AEB40074B56D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		5BD072491C74AEE00074B56D /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5BD072491C74AEE00074B56D /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		5BD285D71B03CF29007A0472 /* Glancer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Glancer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BD285DB1B03CF29007A0472 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5BD285DC1B03CF29007A0472 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -96,7 +93,8 @@
 		5BD288381B03D24B007A0472 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		740756CB1C33720A0039844B /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		740756CD1C34C7050039844B /* WeekTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekTableViewController.swift; sourceTree = "<group>"; };
-		740756CF1C34CA470039844B /* Block2TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Block2TableViewCell.swift; sourceTree = "<group>"; };
+		740756CF1C34CA470039844B /* WeekTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekTableViewCell.swift; sourceTree = "<group>"; };
+		C069CF761F6B697E001FE527 /* NotificationsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
 		C0707FBD1F69720800C7D2ED /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		C0707FBF1F69753100C7D2ED /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		C0A5D3B91F69874A00DBDCAD /* WebCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebCall.swift; sourceTree = "<group>"; };
@@ -184,11 +182,9 @@
 				5BD072471C74AEB40074B56D /* Main.storyboard */,
 				5B49D0F41C76814B00645883 /* HomeTableViewController.swift */,
 				5B4A65781C14FD34001FE2B2 /* BlockTableViewCell.swift */,
-				5BD072491C74AEE00074B56D /* ViewController.swift */,
-				740756CF1C34CA470039844B /* Block2TableViewCell.swift */,
-				5BC261951B0EAEC500AEBAC1 /* Day.swift */,
+				5BD072491C74AEE00074B56D /* SettingsViewController.swift */,
+				740756CF1C34CA470039844B /* WeekTableViewCell.swift */,
 				740756CB1C33720A0039844B /* Label.swift */,
-				5BB503C41D7920AE00F9B2F7 /* NoteViewController.swift */,
 				5BB503C61D7920CC00F9B2F7 /* ColorSelectionViewController.swift */,
 				5BD285E31B03CF29007A0472 /* Images.xcassets */,
 				5BD285E51B03CF29007A0472 /* LaunchScreen.xib */,
@@ -197,6 +193,7 @@
 				C0A5D3B91F69874A00DBDCAD /* WebCall.swift */,
 				C0A5D3BB1F69E07500DBDCAD /* UserPrefsManager.swift */,
 				C0A5D3BF1F6A07D500DBDCAD /* Utils.swift */,
+				C069CF761F6B697E001FE527 /* NotificationsManager.swift */,
 			);
 			path = Glancer;
 			sourceTree = "<group>";
@@ -351,16 +348,15 @@
 			files = (
 				5BD285DD1B03CF29007A0472 /* AppDelegate.swift in Sources */,
 				740756CE1C34C7050039844B /* WeekTableViewController.swift in Sources */,
-				5BD0724A1C74AEE00074B56D /* ViewController.swift in Sources */,
+				5BD0724A1C74AEE00074B56D /* SettingsViewController.swift in Sources */,
 				5B4A65791C14FD34001FE2B2 /* BlockTableViewCell.swift in Sources */,
 				C0707FBE1F69720800C7D2ED /* Schedule.swift in Sources */,
 				C0A5D3C01F6A07D500DBDCAD /* Utils.swift in Sources */,
-				5BC261961B0EAEC500AEBAC1 /* Day.swift in Sources */,
 				5B49D0F51C76814B00645883 /* HomeTableViewController.swift in Sources */,
 				5BB503C71D7920CC00F9B2F7 /* ColorSelectionViewController.swift in Sources */,
 				740756CC1C33720A0039844B /* Label.swift in Sources */,
-				5BB503C51D7920AE00F9B2F7 /* NoteViewController.swift in Sources */,
-				740756D01C34CA470039844B /* Block2TableViewCell.swift in Sources */,
+				C069CF771F6B697E001FE527 /* NotificationsManager.swift in Sources */,
+				740756D01C34CA470039844B /* WeekTableViewCell.swift in Sources */,
 				C0A5D3BC1F69E07500DBDCAD /* UserPrefsManager.swift in Sources */,
 				C0A5D3BA1F69874A00DBDCAD /* WebCall.swift in Sources */,
 				C0707FC01F69753100C7D2ED /* Storage.swift in Sources */,
