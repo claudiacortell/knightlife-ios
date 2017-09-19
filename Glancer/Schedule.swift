@@ -88,16 +88,18 @@ class ScheduleManager
 							continue
 						}
 						
-						var blockLibrary: [BlockID: Block] = [:]
+						var blockLibrary: [Block] = []
 						for y in 0..<blocks!.count
 						{
 							var block = Block()
 							
-							let blockId = BlockID.fromRaw(raw: String(blocks![y].characters.first!)) // Get block value even if it's a lunch block
+							var rawId = blocks![y]
+							rawId = Utils.substring(rawId, StartIndex: 0, EndIndex: rawId.characters.count - 1)
+							var blockId = BlockID.fromRaw(raw: rawId) // Get block value even if it's a lunch block
 							if blockId == nil
 							{
-								print("A false block ID was passed. Error")
-								continue
+								blockId = BlockID.custom
+								block.overrideDisplayName = rawId
 							}
 							
 //							-----------------------------------------------
@@ -111,13 +113,17 @@ class ScheduleManager
 							block.endTime = TimeContainer(endTimes![y])
 							block.startTime = TimeContainer(startTimes![y])
 							
-							blockLibrary[block.blockId] = block
+							blockLibrary.append(block)
 						}
 						
 						var weekday: Weekday = Weekday()
 						weekday.dayId = dayId
 						weekday.secondLunchStart = secondLunch == nil ? nil : TimeContainer(secondLunch!)
 						weekday.blocks = blockLibrary
+						
+						
+						// TODO: SET UP LUNCH BLOCKS RIGHT HERE.
+						
 						
 						newSchedule[weekday.dayId] = weekday
 					} else
@@ -230,7 +236,8 @@ enum BlockID: String // Don't touch this either for good measure unless like we 
 	e = "E",
 	f = "F",
 	g = "G",
-	x = "X"
+	x = "X",
+	custom = "Custom"
 	
 	var id: Int
 	{
@@ -261,14 +268,15 @@ enum BlockID: String // Don't touch this either for good measure unless like we 
 		return nil
 	}
 	
-	static func values() -> [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x] }
+	static func values() -> [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x, .custom] }
+	static func regularBlocks() -> [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x] }
 	static func academicBlocks() -> [BlockID] { return [.a, .b, .c, .d, .e, .f, .g] }
 }
 
 struct Weekday
 {
 	var dayId: DayID! // M, T, W, Th, F
-	var blocks: [BlockID: Block]! // Class ID to Block
+	var blocks: [Block]! // Class ID to Block MAJOR ISSUE THIS WON'T PRESERVE ORDER.
 	var secondLunchStart: TimeContainer? // I hate having this here but I can't really think of a better way to do it rn
 }
 

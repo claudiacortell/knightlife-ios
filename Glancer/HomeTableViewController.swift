@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeTableViewController: UITableViewController
+class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, PrefsUpdateHandler
 {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var timer = Timer()
@@ -29,7 +29,10 @@ class HomeTableViewController: UITableViewController
     let allBlocks: [String] = ["A", "B", "C", "D", "E", "F", "G", "X"]
     
     var labelsGenerated: Bool = false
-    
+	
+	var scheduleUpdated = false
+	var settingsUpdated = false
+	
     override func viewDidLoad()
 	{
         super.viewDidLoad()
@@ -67,6 +70,16 @@ class HomeTableViewController: UITableViewController
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+	
+	func scheduleDidUpdate(didUpdateSuccessfully: Bool, newSchedule: inout [DayID: Weekday])
+	{
+		self.scheduleUpdated = didUpdateSuccessfully
+	}
+	
+	func prefsDidUpdate(manager: UserPrefsManager)
+	{
+		self.settingsUpdated = true
+	}
     
     func generateHomeScreenData()
 	{

@@ -183,9 +183,7 @@
                                 <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="P4s-dT-Q2W">
                                     <rect key="frame" x="168" y="40" width="264" height="29"/>
                                     <segments>
-                                        <segment title="   Mon">
-                                            <size key="contentOffset" width="-4" height="0.0"/>
-                                        </segment>
+                                        <segment title="Mon"/>
                                         <segment title="Tue"/>
                                         <segment title="Wed"/>
                                         <segment title="Thu"/>

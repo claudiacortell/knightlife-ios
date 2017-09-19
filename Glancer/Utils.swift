@@ -168,4 +168,34 @@ class Utils
 		
 		return values
 	}
+	
+	static func getUIColorFromHex (_ hex: String) -> UIColor
+	{
+		let cString = Utils.substring(hex, StartIndex: 0, EndIndex: 6)
+		
+		var rgbValue:UInt32 = 0
+		Scanner(string: cString).scanHexInt32(&rgbValue)
+		
+		return UIColor(
+			red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+			green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+			blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+			alpha: CGFloat(1.0)
+		)
+	}
+	
+	static func substring(_ origin: String, StartIndex : Int, EndIndex : Int) -> String
+	{
+		var counter = 0
+		var subString = ""
+		for char in origin.characters
+		{
+			if(StartIndex <= counter && counter < EndIndex){
+				subString += String(char)
+			}
+			counter += 1
+		}
+		
+		return subString
+	}
 }

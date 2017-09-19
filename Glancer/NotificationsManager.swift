@@ -8,13 +8,42 @@
 
 import Foundation
 
-class NotificationsManager
+class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 {
 	static let instance = NotificationsManager()
 	
 	init()
 	{
 		
+	}
+	
+	func scheduleDidUpdate(didUpdateSuccessfully: Bool, newSchedule: inout [DayID: Weekday])
+	{
+		if didUpdateSuccessfully
+		{
+			self.clearNotifications()
+			for weekday in newSchedule.values
+			{
+				for (blockid, block) in weekday.blocks
+				{
+					let meta = UserPrefsManager.instance.blockMeta[blockid]
+					self.updateNotifications(day: weekday, block: block, meta: meta!)
+				}
+			}
+		}
+	}
+	
+	func prefsDidUpdate(manager: UserPrefsManager)
+	{
+		self.clearNotifications()
+		for weekday in ScheduleManager.instance.weekSchedule.values
+		{
+			for (blockid, block) in weekday.blocks
+			{
+				let meta = UserPrefsManager.instance.blockMeta[blockid]
+				self.updateNotifications(day: weekday, block: block, meta: meta!)
+			}
+		}
 	}
 	
 	func clearNotifications()

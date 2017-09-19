@@ -11,7 +11,14 @@ import Foundation
 class UserPrefsManager
 {
 	static let instance = UserPrefsManager()
+	
+	private var updateHandlers: [PrefsUpdateHandler] = []
 
+	func addHandler(_ handler: PrefsUpdateHandler)
+	{
+		updateHandlers.append(handler)
+	}
+	
 	struct BlockMeta
 	{
 		init(_ blockId: BlockID, _ customColor: String) { self.blockId = blockId; self.customName = blockId.rawValue; self.customColor = customColor }
@@ -39,16 +46,34 @@ class UserPrefsManager
 		.wednesday: true,
 		.thursday: true,
 		.friday: true
-	] // Day Id: On/Off
+	] {
+		didSet { UserPrefsManager.instance.lunchSwitchChanged()}
+	} // Day Id: On/Off
 	
 	private func metaNameChanged(_ meta: BlockMeta)
 	{
+		notifyHandlers()
 		// TODO Set name
 	}
 	
 	private func metaColorChanged(_ meta: BlockMeta)
 	{
+		notifyHandlers()
 		// TODO Set color
+	}
+	
+	private func lunchSwitchChanged()
+	{
+		notifyHandlers()
+		// TODO Set lunch switch
+	}
+	
+	private func notifyHandlers()
+	{
+		for handler in self.updateHandlers
+		{
+			handler.prefsDidUpdate(manager: self)
+		}
 	}
 	
 	func reloadPrefs()
@@ -62,6 +87,11 @@ class UserPrefsManager
 		if Storage.storageMethodUpdated // Account for old storage method to keep legacy data
 		{
 			// Retrieve shit
+			
+			
+			// TODO
+			
+			
 		} else
 		{
 			// get/set values for custom class names
@@ -140,4 +170,9 @@ class UserPrefsManager
 			}
 		}
 	}
+}
+
+protocol PrefsUpdateHandler
+{
+	func prefsDidUpdate(manager: UserPrefsManager)
 }

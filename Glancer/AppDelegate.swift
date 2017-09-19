@@ -111,7 +111,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         print("failed to register for remote notifications: \(error)")
     }
     
-    
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void)
 	{
         if let aps = userInfo["aps"] as? NSDictionary
@@ -120,7 +119,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
             
             if (message == "Auto-Updating...")
 			{
-                if (ScheduleManager.instance.loadBlocks(true))
+                if (ScheduleManager.instance.loadBlocks())
 				{
                     completionHandler(UIBackgroundFetchResult.newData);
                 }
@@ -128,24 +127,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         }
         
         PFPush.handle(userInfo)
-    }
-    
-    func update_userinfo_things() -> Bool
-	{
-        // cancel all previous notifications
-        NotificationsManager.instance.clearNotifications()
-        
-        // check if days are already constructed
-        if (ScheduleManager.instance.scheduleLoaded())
-		{
-            self.WeekUpdateNeeded = true; // Week view needs to be updated to reflect the new settings
-			ScheduleManager.instance.loadBlocks()
-			
-			return true;
-        } else {
-            // days not yet constructed
-            return false;
-        }
     }
 	
     func applicationWillResignActive(_ application: UIApplication)
@@ -179,7 +160,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void)
 	{
-        if (ScheduleManager.instance.loadBlocks(true))
+        if (ScheduleManager.instance.loadBlocks())
 		{
             completionHandler(.newData)
         } else
