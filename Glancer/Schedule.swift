@@ -127,10 +127,17 @@ class ScheduleManager: PrefsUpdateHandler
 //							-----------------------------------------------
 							
 							block.blockId = blockId!
+							block.weekday = dayId
 							block.endTime = TimeContainer(endTimes![y])
 							block.startTime = TimeContainer(startTimes![y])
 							
 							blockLibrary.append(block)
+						}
+						
+						// Set last block
+						if blockLibrary.last != nil
+						{
+							blockLibrary[blockLibrary.endIndex].isLastBlock = true
 						}
 						
 						var weekday: Weekday = Weekday()
@@ -180,6 +187,22 @@ class ScheduleManager: PrefsUpdateHandler
 		for (dayId, weekday) in self.weekSchedule
 		{
 			self.updateLunch(dayId: dayId, day: weekday, updateHandlers)
+		}
+	}
+	
+	func currentDayOfWeek() -> DayID
+	{
+		let today = TimeUtils.getDayOfWeekFromString(TimeUtils.currentDateAsString()) // 0 to 6 for Monday - Sunday
+		return DayID.fromId(today)!
+	}
+	
+	func getCurrentBlock() -> Block
+	{
+		var currentDate = Date()
+		for block in self.weekSchedule[self.currentDayOfWeek()]!.blocks
+		{
+			let analyst = BlockAnalyst(block: block)
+			
 		}
 	}
 	
@@ -353,6 +376,7 @@ struct Weekday
 struct Block
 {
 	var blockId: BlockID! // E.G. A, B, C, D, E
+	var weekday: DayID!
 	
 	var overrideDisplayName: String? // Only used for overriding the default meta's name
 	var hasOverridenDisplayName: Bool { get { return self.overrideDisplayName != nil } }
@@ -367,6 +391,13 @@ struct Block
 	
 	var lunchBlockNumber: Int? // 1 or 2 for first or second lunch
 	var isLunchBlock: Bool { get { return self.lunchBlockNumber != nil } }
+	
+	var isLastBlock: Bool = false
+	
+	public static func ==(lhs: Block, rhs: Block) -> Bool
+	{
+		return lhs.blockId == rhs.blockId && lhs.weekday == rhs.weekday && lhs.startTime == rhs.startTime && lhs.endTime == rhs.endTime && lhs.isLastBlock == rhs.isLastBlock && (lhs.hasOverridenDisplayName ? lhs.overrideDisplayName! == rhs.overrideDisplayName! : true) && (lhs.hasOverridenStartTime ? lhs.overrideStartTime! == rhs.overrideStartTime! : true) && (lhs.hasOverridenEndTime ? lhs.overrideEndTime! == rhs.overrideEndTime! : true) // Checks if all values are equal
+	}
 }
 
 struct TimeContainer
@@ -386,6 +417,11 @@ struct TimeContainer
 		let minute = Utils.substring(timeString, StartIndex: 4, EndIndex: 6)
 		
 		return "\(hour):\(minute)"
+	}
+	
+	public static func ==(lhs: TimeContainer, rhs: TimeContainer) -> Bool
+	{
+		return lhs.timeString == rhs.timeString
 	}
 }
 

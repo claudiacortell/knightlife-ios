@@ -10,25 +10,19 @@ import UIKit
 
 class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, PrefsUpdateHandler
 {
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var timer = Timer()
 	
     @IBOutlet weak var mainDayLabel: UILabel!
     @IBOutlet weak var mainBlockLabel: UILabel!
     @IBOutlet weak var mainTimeLabel: UILabel!
     @IBOutlet weak var mainNextBlockLabel: UILabel!
-    
-    var localizedDayOfWeekFuckMeOmfg: Int = 0 // Day of week
-    var numOfRows: Int = 0
+
+	var dayId: DayID = .monday
+	
     var row: Int = 0
     var minutesUntilNextBlock: Int = 0
-    var labels: [Label] = []
-    var cell: BlockTableViewCell = BlockTableViewCell()
-    var selectedBlockIndex: Int = 0
-    var selectedLabel: Label = Label(bL: "", cN: "", cT: "", c: "")
-    let allBlocks: [String] = ["A", "B", "C", "D", "E", "F", "G", "X"]
-    
-    var labelsGenerated: Bool = false
+	
+	var labels: [Label] = []
 	
 	var scheduleUpdated = false
 	var settingsUpdated = false
@@ -85,47 +79,36 @@ class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 	
     func generateHomeScreenData()
 	{
+		if self.timer.isValid
+		{
+			self.timer.invalidate()
+		}
+		
         if (ScheduleManager.instance.onVacation)
 		{
             mainDayLabel.text = "Vacation"
             mainBlockLabel.text = "Enjoy"
             mainTimeLabel.text = ""
             mainNextBlockLabel.text = ""
-            
-            labels = []
-            self.labelsGenerated = false
-            generateLabels()
-            getNumOfRows()
-            self.tableView.reloadData()
-            self.tabBarController?.tabBar.items![0].isEnabled = true
-            self.tabBarController?.tabBar.items![1].isEnabled = true
-            self.tabBarController?.tabBar.items![2].isEnabled = true
-            timer.invalidate()
-        } else if (appDelegate.Days.count > 0)
+		} else
 		{
             updateMainHomePage()
-            
-            if localizedDayOfWeekFuckMeOmfg < 5
-			{
-                checkSecondLunch()
-            }
-            
-            labels = []
-            self.labelsGenerated = false
-            generateLabels()
-            getNumOfRows()
-            self.tableView.reloadData()
-            self.tabBarController?.tabBar.items![0].isEnabled = true
-            self.tabBarController?.tabBar.items![1].isEnabled = true
-            self.tabBarController?.tabBar.items![2].isEnabled = true
-            timer.invalidate()
         }
-        
+		
+		labels.removeAll()
+		generateLabels()
+		
+		self.tableView.reloadData()
+		self.tabBarController?.tabBar.items![0].isEnabled = true
+		self.tabBarController?.tabBar.items![1].isEnabled = true
+		self.tabBarController?.tabBar.items![2].isEnabled = true
     }
-    
+	
     func updateMainHomePage()
 	{
         //updates the main labels on home page
+		self.dayId = ScheduleManager.instance.currentDayOfWeek() // Set the day ID
+		
         mainDayLabel.text = getMainDayLabel()
         mainBlockLabel.text = getMainBlockLabel()
         mainTimeLabel.text = getMainTimeLabel()
@@ -134,48 +117,64 @@ class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
     
     
     // get Home Page labels
-    func getMainDayLabel() -> String {
-        let currentDateTime = appDelegate.Days[0].getDateAsString()
-        let dayNum = appDelegate.Days[0].getDayOfWeekFromString(currentDateTime)
-        self.localizedDayOfWeekFuckMeOmfg = dayNum
-        if dayNum == 5 {
-            return "Saturday"
-        } else if dayNum == 6 {
-            return "Sunday"
-        } else {
-            return appDelegate.Days[dayNum].name
-        }
-    }
+    func getMainDayLabel() -> String
+	{
+		return self.dayId.displayName
+	}
     
-    func getMainBlockLabel() -> String {
-        let currentDateTime = appDelegate.Days[0].getDateAsString()
-        let dayNum = appDelegate.Days[0].getDayOfWeekFromString(currentDateTime)
-        
-        if dayNum < 5 {
-            let currentValues = getCurrentDayInformation()
-            let currentBlock = currentValues.currentBlock
-            let currentClass = appDelegate.Days[dayNum].messagesForBlock[currentBlock]
-            if currentClass != nil {
-                if currentBlock == "X" {
-                    return "\(currentBlock) Block"
-                } else if currentBlock == "Activities" || currentBlock == "Lab" {
-                    return "\(currentBlock)"
-                } else {
-                    return "\(currentBlock) Block (\(currentClass!))"
-                }
-            } else if currentBlock == "GetToClass" {
-                return "Class Over"
-            }
-            else if currentBlock == "BeforeSchoolGetToClass"{
-                return "School Begins"
-            }
-            else {
-                return ""
-            }
-        } else {
-            return ""
-        }
-        
+    func getMainBlockLabel() -> String
+	{
+		if DayID.weekdays().contains(self.dayId)
+		{
+			var dayInfo = getCurrentDayInformation()
+			
+			let currentClass = appDelegate.Days[dayNum].messagesForBlock[currentBlock]
+			if currentClass != nil {
+				if currentBlock == "X" {
+					return "\(currentBlock) Block"
+				} else if currentBlock == "Activities" || currentBlock == "Lab" {
+					return "\(currentBlock)"
+				} else {
+					return "\(currentBlock) Block (\(currentClass!))"
+				}
+			} else if currentBlock == "GetToClass" {
+				return "Class Over"
+			}
+			else if currentBlock == "BeforeSchoolGetToClass"{
+				return "School Begins"
+			}
+			else {
+				return ""
+			}
+		}
+		
+		return nil
+		
+//        if dayNum < 5 {
+//            let currentValues = getCurrentDayInformation()
+//            let currentBlock = currentValues.currentBlock
+//            let currentClass = appDelegate.Days[dayNum].messagesForBlock[currentBlock]
+//            if currentClass != nil {
+//                if currentBlock == "X" {
+//                    return "\(currentBlock) Block"
+//                } else if currentBlock == "Activities" || currentBlock == "Lab" {
+//                    return "\(currentBlock)"
+//                } else {
+//                    return "\(currentBlock) Block (\(currentClass!))"
+//                }
+//            } else if currentBlock == "GetToClass" {
+//                return "Class Over"
+//            }
+//            else if currentBlock == "BeforeSchoolGetToClass"{
+//                return "School Begins"
+//            }
+//            else {
+//                return ""
+//            }
+//        } else {
+//            return ""
+//        }
+//        
     }
     
     func getMainTimeLabel() -> String {
@@ -283,8 +282,8 @@ class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
         return diffHours*60 + diffMinutes
     }
     
-    func getCurrentDayInformation() -> (currentBlock : String, nextBlock : String, minutesRemaining : Int){
-        
+    func getCurrentDayInformation() -> (currentBlock : String, nextBlock : String, minutesRemaining : Int)
+	{
         let currentDateTime = appDelegate.Days[0].getDateAsString()
         let dayNum = appDelegate.Days[0].getDayOfWeekFromString(currentDateTime)
         var widgetBlock = appDelegate.Widget_Block
@@ -321,7 +320,8 @@ class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
             }
         }
         
-        for i in Array((0...widgetBlock[dayNum].count-1).reversed()){
+        for i in Array((0...widgetBlock[dayNum].count-1).reversed())
+		{
             
             let dateAfter = timeBlock[dayNum][i]
             let CurrTime = appDelegate.Days[0].NSDateToStringWidget(Date())

@@ -78,4 +78,28 @@ class BlockAnalyst
 		}
 		return "999999"
 	}
+	
+	func isLastBlock() -> Bool
+	{
+		return self.block.isLastBlock
+	}
+	
+	func getNextBlock() -> Block?
+	{
+		if isLastBlock() { return nil }
+		
+		if let blocks = ScheduleManager.instance.weekSchedule[self.block.weekday]?.blocks
+		{
+			var found = false // If the block has been found return the next one in series
+			for block in blocks
+			{
+				if found { return block }
+				if block == self.block { found = true } // Identify the current iterator block as this one.
+			}
+			return nil
+		} else
+		{
+			return nil
+		}
+	}
 }
