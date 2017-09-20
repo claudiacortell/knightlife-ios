@@ -31,6 +31,7 @@
 		740756CC1C33720A0039844B /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740756CB1C33720A0039844B /* Label.swift */; };
 		740756CE1C34C7050039844B /* WeekTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740756CD1C34C7050039844B /* WeekTableViewController.swift */; };
 		740756D01C34CA470039844B /* WeekTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740756CF1C34CA470039844B /* WeekTableViewCell.swift */; };
+		C011DB4D1F71C63200BBD490 /* BlockAnalyst.swift in Sources */ = {isa = PBXBuildFile; fileRef = C011DB4C1F71C63200BBD490 /* BlockAnalyst.swift */; };
 		C069CF771F6B697E001FE527 /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C069CF761F6B697E001FE527 /* NotificationsManager.swift */; };
 		C0707FBE1F69720800C7D2ED /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0707FBD1F69720800C7D2ED /* Schedule.swift */; };
 		C0707FC01F69753100C7D2ED /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0707FBF1F69753100C7D2ED /* Storage.swift */; };
@@ -94,6 +95,7 @@
 		740756CB1C33720A0039844B /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		740756CD1C34C7050039844B /* WeekTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekTableViewController.swift; sourceTree = "<group>"; };
 		740756CF1C34CA470039844B /* WeekTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekTableViewCell.swift; sourceTree = "<group>"; };
+		C011DB4C1F71C63200BBD490 /* BlockAnalyst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockAnalyst.swift; sourceTree = "<group>"; };
 		C069CF761F6B697E001FE527 /* NotificationsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
 		C0707FBD1F69720800C7D2ED /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		C0707FBF1F69753100C7D2ED /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				C0A5D3BB1F69E07500DBDCAD /* UserPrefsManager.swift */,
 				C0A5D3BF1F6A07D500DBDCAD /* Utils.swift */,
 				C069CF761F6B697E001FE527 /* NotificationsManager.swift */,
+				C011DB4C1F71C63200BBD490 /* BlockAnalyst.swift */,
 			);
 			path = Glancer;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 				5BB503C71D7920CC00F9B2F7 /* ColorSelectionViewController.swift in Sources */,
 				740756CC1C33720A0039844B /* Label.swift in Sources */,
 				C069CF771F6B697E001FE527 /* NotificationsManager.swift in Sources */,
+				C011DB4D1F71C63200BBD490 /* BlockAnalyst.swift in Sources */,
 				740756D01C34CA470039844B /* WeekTableViewCell.swift in Sources */,
 				C0A5D3BC1F69E07500DBDCAD /* UserPrefsManager.swift in Sources */,
 				C0A5D3BA1F69874A00DBDCAD /* WebCall.swift in Sources */,

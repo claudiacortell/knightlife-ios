@@ -21,10 +21,15 @@ class UserPrefsManager
 	
 	struct BlockMeta
 	{
-		init(_ blockId: BlockID, _ customColor: String) { self.blockId = blockId; self.customName = blockId.rawValue; self.customColor = customColor }
+		init(_ blockId: BlockID, _ customColor: String) { self.blockId = blockId; self.customColor = customColor }
 		var blockId: BlockID! // E.G. A, B, C, D, E (Corresponds to Class ID)
-		var customName: String! { didSet { UserPrefsManager.instance.metaNameChanged(self) } } // Same as block id by default. Can be changed to reflect user preferences
+		var customName: String? { didSet { UserPrefsManager.instance.metaNameChanged(self) } } // Same as block id by default. Can be changed to reflect user preferences
 		var customColor: String! { didSet { UserPrefsManager.instance.metaColorChanged(self) } }
+	}
+	
+	enum PrefsChange
+	{
+		case blockMeta, lunchSwitches, dataLoaded
 	}
 	
 	var blockMeta: [BlockID: BlockMeta] =
@@ -36,7 +41,9 @@ class UserPrefsManager
 		.e: BlockMeta(.e, "3498DB"),
 		.f: BlockMeta(.f, "9B59B6"),
 		.g: BlockMeta(.g, "DE59B6"),
-		.x: BlockMeta(.x, "999999")
+		.x: BlockMeta(.x, "999999"),
+		.activities: BlockMeta(.activities, "999999"),
+		.custom: BlockMeta(.custom, "999999")
 	]
 	
 	var lunchSwitches: [DayID: Bool] =
@@ -52,27 +59,27 @@ class UserPrefsManager
 	
 	private func metaNameChanged(_ meta: BlockMeta)
 	{
-		notifyHandlers()
+		notifyHandlers(.blockMeta)
 		// TODO Set name
 	}
 	
 	private func metaColorChanged(_ meta: BlockMeta)
 	{
-		notifyHandlers()
+		notifyHandlers(.blockMeta)
 		// TODO Set color
 	}
 	
 	private func lunchSwitchChanged()
 	{
-		notifyHandlers()
+		notifyHandlers(.lunchSwitches)
 		// TODO Set lunch switch
 	}
 	
-	private func notifyHandlers()
+	private func notifyHandlers(_ change: PrefsChange)
 	{
 		for handler in self.updateHandlers
 		{
-			handler.prefsDidUpdate(manager: self)
+			handler.prefsDidUpdate(manager: self, change: change)
 		}
 	}
 	
@@ -128,51 +135,14 @@ class UserPrefsManager
 				if lunchSwitches.count > i { lunchSwitches[day] = firstLunches[i] }
 			}
 			
-			Storage.deleteOldMethodRemnants() // This removes the aforementioned previous 3 values from storage
-			
-//			// get/set values for class notes
-//			var classNotes = [String]()
-//			if (defaults.object(forKey: "NoteTexts") != nil) {
-//				classNotes = defaults.object(forKey: "NoteTexts") as! Array<String>
-//			} else {
-//				var count = 0
-//				while count < 8 {
-//					classNotes.append("")
-//					count += 1
-//				}
-//				defaults.set(classNotes, forKey: "NoteTexts")
-//			}
+			Storage.deleteOldMethodRemnants()
 		}
 		
-		// Set up Lunch blocks for first and second lunch
-		for dayIndex in ScheduleManager.instance.weekSchedule.keys
-		{
-			var day = ScheduleManager.instance.weekSchedule[dayIndex]!
-			let firstLunch: Bool = self.lunchSwitches[day.dayId]!
-			
-			for blockIndex in day.blocks.keys
-			{
-				var block = day.blocks[blockIndex]!
-				
-				if (block.isLunchBlock)
-				{															// E.G. B1 or B2 (Is a lunch block)
-					if (firstLunch && block.lunchBlockNumber! == 1) // First lunch
-					{
-						block.overrideDisplayName = "Lunch"
-					} else if (!firstLunch && block.lunchBlockNumber! == 2) // Second lunch
-					{
-						block.overrideDisplayName = "Lunch"
-					} else
-					{
-						block.overrideDisplayName = block.blockId.rawValue
-					}
-				}
-			}
-		}
+		self.notifyHandlers(.dataLoaded)
 	}
 }
 
 protocol PrefsUpdateHandler
 {
-	func prefsDidUpdate(manager: UserPrefsManager)
+	func prefsDidUpdate(manager: UserPrefsManager, change: UserPrefsManager.PrefsChange)
 }

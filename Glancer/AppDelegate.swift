@@ -24,8 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 	
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
 	{
-        UIApplication.shared.setMinimumBackgroundFetchInterval(
-            UIApplicationBackgroundFetchIntervalMinimum)
+        UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
                 
         // register for Push Notitications, if running iOS 8
         if application.responds(to: #selector(UIApplication.registerUserNotificationSettings(_:)))
@@ -36,6 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
             application.registerUserNotificationSettings(settings)
             application.registerForRemoteNotifications()
         }
+		
+		ScheduleManager.instance.loadBlocks()
         
         return true
     }

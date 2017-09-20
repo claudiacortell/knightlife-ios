@@ -32,29 +32,6 @@ class WebCall
 //		TODO: Implement this. It'll have to be soon and I probably should be doing them now but whatever idc
 	}
 	
-	func idk()
-	{
-		request.httpBody = postString.data(using: .utf8)
-		let task = URLSession.shared.dataTask(with: request) { data, response, error in
-			guard let data = data, error == nil else {                                                 // check for fundamental networking error
-				print("error=\(error)")
-				return
-			}
-			
-			
-			if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-				print("statusCode should be 200, but is \(httpStatus.statusCode)")
-				print("response = \(response)")
-				
-			}
-			
-			let responseString = String(data: data, encoding: .utf8)
-			print("responseString = \(responseString)")
-			
-		}
-		task.resume()
-	}
-	
 	func runSync() -> SynchronizedWebCallHandler
 	{
 		let request = self.buildRequest()

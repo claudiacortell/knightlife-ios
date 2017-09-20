@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ScheduleManager
+class ScheduleManager: PrefsUpdateHandler
 {
 	static let instance: ScheduleManager = ScheduleManager()
 	
@@ -40,9 +40,27 @@ class ScheduleManager
 		updateHandlers.append(handler)
 	}
 	
+	func updateHandlers(_ success: Bool)
+	{
+		for handler in self.updateHandlers
+		{
+			handler.scheduleDidUpdate(didUpdateSuccessfully: success, newSchedule: &self.weekSchedule)
+		}
+	}
+	
 	func scheduleLoaded() -> Bool
 	{
 		return self.weekSchedule.count > 0
+	}
+	
+	@discardableResult
+	func loadBlocksIfNotLoaded() -> Bool
+	{
+		if self.scheduleLoaded()
+		{
+			return false
+		}
+		return loadBlocks()
 	}
 	
 	@discardableResult
@@ -65,7 +83,7 @@ class ScheduleManager
 				
 				var newSchedule: [DayID: Weekday] = [:]
 				
-				var endTimes: [String]! = data[CallKeys.SCHOOL_END] != nil ? data[CallKeys.SCHOOL_END] as! [String] : []
+//				var endTimes: [String]! = data[CallKeys.SCHOOL_END] != nil ? data[CallKeys.SCHOOL_END] as! [String] : []
 				var secondLunchStarts: [String]! = data[CallKeys.SECONDLUNCH_START] != nil ? data[CallKeys.SECONDLUNCH_START] as! [String] : []
 				
 				var i = -1
@@ -73,14 +91,14 @@ class ScheduleManager
 				{
 					i+=1
 					
-					let endTime: String? = endTimes.count > i ? endTimes[i] : nil // Required
+//					let endTime: String? = endTimes.count > i ? endTimes[i] : nil // Required
 					let secondLunch: String? = secondLunchStarts.count > i ? secondLunchStarts[i] : nil // Not required.
 					
 					var blocks: [String]? = data[dayId.rawValue + CallKeys.BLOCK] != nil ? data[dayId.rawValue + CallKeys.BLOCK] as? [String] : nil
 					var startTimes: [String]? = data[dayId.rawValue + CallKeys.START_TIME] != nil ? data[dayId.rawValue + CallKeys.START_TIME] as? [String] : nil
 					var endTimes: [String]? = data[dayId.rawValue + CallKeys.END_TIME] != nil ? data[dayId.rawValue + CallKeys.END_TIME] as? [String] : []
 					
-					if endTime != nil && blocks != nil && blocks != nil && startTimes != nil && endTimes != nil
+					if /*endTime != nil &&*/ blocks != nil && blocks != nil && startTimes != nil && endTimes != nil
 					{
 						if blocks!.count != startTimes!.count || startTimes!.count != endTimes!.count || endTimes!.count != blocks!.count
 						{
@@ -94,12 +112,11 @@ class ScheduleManager
 							var block = Block()
 							
 							var rawId = blocks![y]
-							rawId = Utils.substring(rawId, StartIndex: 0, EndIndex: rawId.characters.count - 1)
+							rawId = Utils.substring(rawId, StartIndex: 0, EndIndex: rawId.characters.count - (rawId.characters.count == 2 ? 1 : 0))
 							var blockId = BlockID.fromRaw(raw: rawId) // Get block value even if it's a lunch block
 							if blockId == nil
 							{
 								blockId = BlockID.custom
-								block.overrideDisplayName = rawId
 							}
 							
 //							-----------------------------------------------
@@ -121,25 +138,18 @@ class ScheduleManager
 						weekday.secondLunchStart = secondLunch == nil ? nil : TimeContainer(secondLunch!)
 						weekday.blocks = blockLibrary
 						
-						
-						// TODO: SET UP LUNCH BLOCKS RIGHT HERE.
-						
-						
 						newSchedule[weekday.dayId] = weekday
 					} else
 					{
 						success = false
 						
 						print("One of the loaded values for the schedule was null.")
-						print("EndTime: \(String(describing: endTime)) Blocks: \(String(describing: blocks)) StartTimes: \(String(describing: startTimes)) EndTimes: \(String(describing: endTimes))")
+						print("Blocks: \(String(describing: blocks)) StartTimes: \(String(describing: startTimes)) EndTimes: \(String(describing: endTimes))")
 					}
 				}
 				
 				self.weekSchedule.removeAll()
 				self.weekSchedule = newSchedule
-
-//				TODO: Update user preferences.
-//				self.setUserValues()
 			} else
 			{
 				success = false
@@ -151,12 +161,71 @@ class ScheduleManager
 			print("WebCall failed: \(response.token.error!)")
 		}
 		
-		for handler in self.updateHandlers
-		{
-			handler.scheduleDidUpdate(didUpdateSuccessfully: success, newSchedule: &self.weekSchedule)
-		}
+		self.updateLunch(false)
+		self.updateHandlers(success)
 		
 		return success
+	}
+	
+	func prefsDidUpdate(manager: UserPrefsManager, change: UserPrefsManager.PrefsChange)
+	{
+		if change == .lunchSwitches || change == .dataLoaded
+		{
+			self.updateLunch(true)
+		}
+	}
+	
+	func updateLunch(_ updateHandlers: Bool?)
+	{
+		for (dayId, weekday) in self.weekSchedule
+		{
+			self.updateLunch(dayId: dayId, day: weekday, updateHandlers)
+		}
+	}
+	
+	private func updateLunch(dayId: DayID, day: Weekday, _ updateHandlers: Bool?)
+	{
+		let flip: Bool = UserPrefsManager.instance.lunchSwitches[dayId]!
+		var updated: Bool = false
+		
+		for i in 0..<day.blocks.count
+		{
+			var block = day.blocks[i]
+			
+			if !block.isLunchBlock { continue }
+			
+			// Reset custom flags
+			block.overrideEndTime = nil
+			block.overrideStartTime = nil
+			block.overrideDisplayName = nil
+			
+			if flip // User has first lunch
+			{
+				if block.lunchBlockNumber! == 1 // First lunch block - B1
+				{
+					// Lunch
+					block.overrideDisplayName = "Lunch"
+				}
+			} else // User has second lunch
+			{
+				if block.lunchBlockNumber! == 1 // First lunch block - B1
+				{
+					// Class
+					block.overrideEndTime = day.secondLunchStart ?? nil // SEt its end time to the start of lunch
+				} else // Second lunch block - B2
+				{
+					block.overrideDisplayName = "Lunch"
+					block.overrideStartTime = day.secondLunchStart ?? nil // Set its start time to the start of lunch
+				}
+			}
+			
+			updated = true
+		}
+	
+		if updateHandlers != nil && updateHandlers!
+		{
+			self.updateHandlers(updated)
+		}
 	}
 }
 
@@ -237,6 +306,7 @@ enum BlockID: String // Don't touch this either for good measure unless like we 
 	f = "F",
 	g = "G",
 	x = "X",
+	activities = "Activities",
 	custom = "Custom"
 	
 	var id: Int
@@ -288,8 +358,12 @@ struct Block
 	var hasOverridenDisplayName: Bool { get { return self.overrideDisplayName != nil } }
 	
 	var startTime: TimeContainer!
-	var overrideStartTime: TimeContainer? // used in extreme circumstances idk
+	var overrideStartTime: TimeContainer?
+	var hasOverridenStartTime: Bool { get { return self.overrideStartTime != nil } }
+
 	var endTime: TimeContainer!
+	var overrideEndTime: TimeContainer?
+	var hasOverridenEndTime: Bool { get { return self.overrideEndTime != nil } }
 	
 	var lunchBlockNumber: Int? // 1 or 2 for first or second lunch
 	var isLunchBlock: Bool { get { return self.lunchBlockNumber != nil } }
@@ -304,6 +378,14 @@ struct TimeContainer
 	func asDate() -> Date
 	{
 		return TimeUtils.timeToNSDate(self.timeString)
+	}
+	
+	func toFormattedString() -> String
+	{
+		let hour = String(Int(Utils.substring(timeString, StartIndex: 1, EndIndex: 3))! % 12)
+		let minute = Utils.substring(timeString, StartIndex: 4, EndIndex: 6)
+		
+		return "\(hour):\(minute)"
 	}
 }
 

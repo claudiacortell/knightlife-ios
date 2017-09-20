@@ -89,6 +89,8 @@ class ViewController: UIViewController, UITextFieldDelegate
 		{
 			textField.delegate = self
 		}
+		
+		ScheduleManager.instance.loadBlocksIfNotLoaded()
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -204,5 +206,4 @@ class ViewController: UIViewController, UITextFieldDelegate
         self.view.endEditing(true)
         return false
     }
-    
 }

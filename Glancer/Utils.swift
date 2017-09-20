@@ -190,7 +190,8 @@ class Utils
 		var subString = ""
 		for char in origin.characters
 		{
-			if(StartIndex <= counter && counter < EndIndex){
+			if (StartIndex <= counter && counter < EndIndex)
+			{
 				subString += String(char)
 			}
 			counter += 1
