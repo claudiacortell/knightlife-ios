@@ -13,14 +13,6 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate
 {
     var window: UIWindow?
-    
-    var transitionFROMsettingtoHome: Bool = false; ///coming from settings
-    var transitionFROMsettingtoWeek: Bool = false;
-    var Setting_Updated : Bool = false;
-    
-    var WeekUpdateNeeded : Bool = false;
-    var Id : String = ""
-    var Timer = Foundation.Timer();
 	
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
 	{
@@ -80,19 +72,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 guard let data = data, error == nil else
 				{                                                 // check for fundamental networking error
-                    print("error=\(error)")
+                    print("error=\(error!)")
                     return
                 }
 				
                 if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200
 				{           // check for http errors
                     print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                    print("response = \(response)")
+                    print("response = \(response!)")
                     
                 }
                 
                 let responseString = String(data: data, encoding: .utf8)
-                print("responseString = \(responseString)")
+                print("responseString = \(responseString!)")
                 
             }
 			
@@ -134,8 +126,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 	{
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-
-		Timer.invalidate()
     }
     
     func applicationDidEnterBackground(_ application: UIApplication)

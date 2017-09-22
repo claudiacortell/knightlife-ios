@@ -27,10 +27,9 @@ class ColorSelectionViewController: UIViewController
 		let background = self.view.layer.backgroundColor
 		if background != nil && self.block != nil
 		{
-			var meta = UserPrefsManager.instance.blockMeta[self.block!]
-			if meta != nil
+			if var meta = UserPrefsManager.instance.getMeta(id: self.block!)
 			{
-				meta!.customColor = Utils.getHexFromCGColor(background!)
+				meta.customColor = Utils.getHexFromCGColor(background!)
 			}
 		}
 		let tabBar: UITabBarController = segue.destination as! UITabBarController

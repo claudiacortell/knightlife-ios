@@ -14,7 +14,8 @@ class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 	
 	init()
 	{
-		
+		ScheduleManager.instance.addHandler(self)
+		UserPrefsManager.instance.addHandler(self)
 	}
 	
 	func scheduleDidUpdate(didUpdateSuccessfully: Bool, newSchedule: inout [DayID: Weekday])
@@ -26,8 +27,10 @@ class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 			{
 				for block in weekday.blocks
 				{
-					let meta = UserPrefsManager.instance.blockMeta[block.blockId]
-					self.updateNotifications(day: weekday, block: block, meta: meta!)
+					if let meta = UserPrefsManager.instance.getMeta(id: block.blockId)
+					{
+						self.updateNotifications(day: weekday, block: block, meta: meta)
+					}
 				}
 			}
 		}
@@ -40,8 +43,10 @@ class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 		{
 			for block in weekday.blocks
 			{
-				let meta = UserPrefsManager.instance.blockMeta[block.blockId]
-				self.updateNotifications(day: weekday, block: block, meta: meta!)
+				if let meta = UserPrefsManager.instance.getMeta(id: block.blockId)
+				{
+					self.updateNotifications(day: weekday, block: block, meta: meta)
+				}
 			}
 		}
 	}

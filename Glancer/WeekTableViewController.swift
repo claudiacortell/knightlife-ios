@@ -10,11 +10,13 @@ import UIKit
 
 class WeekTableViewController: UITableViewController, ScheduleUpdateHandler, PrefsUpdateHandler
 {
+	var firstOpen = true
+	
     var timer = Timer()
     
     @IBOutlet weak var segControl: UISegmentedControl!
     
-	var dayId: DayID? = .monday
+	var dayId: DayID = .monday
 
     var labels: [Label] = []
 	
@@ -24,20 +26,27 @@ class WeekTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
     override func viewDidLoad()
 	{
         super.viewDidLoad()
+		
+		if self.firstOpen
+		{
+			// Register as handler
+			ScheduleManager.instance.addHandler(self)
+			UserPrefsManager.instance.addHandler(self)
+		}
         
         self.tabBarController?.tabBar.items![0].imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
         self.tabBarController?.tabBar.items![1].imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
         self.tabBarController?.tabBar.items![2].imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
-        
-		ScheduleManager.instance.loadBlocksIfNotLoaded()
 		
-		if self.scheduleUpdated || self.settingsUpdated
+		if self.scheduleUpdated || self.settingsUpdated || self.firstOpen
 		{
 			self.scheduleUpdated = false
 			self.settingsUpdated = false
 			
 			self.generateWeekData()
 		}
+		
+		self.firstOpen = false
 		
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -76,12 +85,12 @@ class WeekTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
     
     @IBAction func segControlChanged(_ sender: AnyObject)
 	{
-		self.dayId = DayID.fromId(segControl.selectedSegmentIndex)
+		self.dayId = DayID.fromId(segControl.selectedSegmentIndex)!
     }
     
     func generateWeekData()
 	{
-        if (ScheduleManager.instance.scheduleLoaded())
+        if (ScheduleManager.instance.scheduleLoaded)
 		{
 			setWeekData()
         }
@@ -93,6 +102,11 @@ class WeekTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 	
 	func setWeekData()
 	{
+		if !ScheduleManager.instance.scheduleLoaded
+		{
+			return
+		}
+		
 		if self.timer.isValid
 		{
 			self.timer.invalidate()
@@ -106,12 +120,11 @@ class WeekTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 	
     func generateLabels()
 	{
-		if self.dayId != nil
+		if let blocks = ScheduleManager.instance.blockList(id: self.dayId)
 		{
-			let day = ScheduleManager.instance.weekSchedule[self.dayId!]!
-			for block in day.blocks
+			for block in blocks
 			{
-				let analyst = BlockAnalyst(block: block)
+				let analyst = block.analyst
 				
 				let finalTime = "\(analyst.getStartTime().toFormattedString()) - \(analyst.getEndTime().toFormattedString())"
 				
@@ -119,7 +132,6 @@ class WeekTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 				labels.append(newLabel)
 			}
 		}
-		
     }
 	
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -129,7 +141,7 @@ class WeekTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
-        if (ScheduleManager.instance.scheduleLoaded())
+        if (ScheduleManager.instance.scheduleLoaded)
 		{
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! WeekTableViewCell
             let label = labels[(indexPath as NSIndexPath).row]

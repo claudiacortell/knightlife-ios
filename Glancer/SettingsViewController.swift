@@ -88,9 +88,7 @@ class ViewController: UIViewController, UITextFieldDelegate
 		for textField in self.blockTextFields.values
 		{
 			textField.delegate = self
-		}
-		
-		ScheduleManager.instance.loadBlocksIfNotLoaded()
+		}		
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -99,13 +97,19 @@ class ViewController: UIViewController, UITextFieldDelegate
 		
 		for (block, field) in self.blockTextFields
 		{
-			field.text = UserPrefsManager.instance.blockMeta[block]!.customName
+			if let meta = UserPrefsManager.instance.getMeta(id: block)
+			{
+				field.text = meta.customName
+			}
 		}
 		
 		for (block, button) in self.blockColorButtons
 		{
-			let rgb = Utils.getRGBFromHex(UserPrefsManager.instance.blockMeta[block]!.customColor)
-			button.backgroundColor = UIColor(red: (rgb[0] / 255.0), green: (rgb[1] / 255.0), blue: (rgb[2] / 255.0), alpha: 1)
+			if let meta = UserPrefsManager.instance.getMeta(id: block)
+			{
+				let rgb = Utils.getRGBFromHex(meta.customColor)
+				button.backgroundColor = UIColor(red: (rgb[0] / 255.0), green: (rgb[1] / 255.0), blue: (rgb[2] / 255.0), alpha: 1)
+			}
 		}
 		
 		for (day, flip) in self.daySwitches
@@ -137,8 +141,11 @@ class ViewController: UIViewController, UITextFieldDelegate
 		{
 			if field === textField
 			{
-				UserPrefsManager.instance.blockMeta[block]!.customName = textField.text
-				return
+				if var meta = UserPrefsManager.instance.getMeta(id: block)
+				{
+					meta.customName = textField.text
+					return
+				}
 			}
 		}
 		

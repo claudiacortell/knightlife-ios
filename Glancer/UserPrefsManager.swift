@@ -43,8 +43,11 @@ class UserPrefsManager
 		.g: BlockMeta(.g, "DE59B6"),
 		.x: BlockMeta(.x, "999999"),
 		.activities: BlockMeta(.activities, "999999"),
-		.custom: BlockMeta(.custom, "999999")
+		.custom: BlockMeta(.custom, "999999"),
+		.lab: BlockMeta(.lab, "999999")
 	]
+	
+	var allowMetaChanges: [BlockID] = [ .a, .b, .c, .d, .e, .f, .e, .g ]
 	
 	var lunchSwitches: [DayID: Bool] =
 	[
@@ -59,12 +62,16 @@ class UserPrefsManager
 	
 	private func metaNameChanged(_ meta: BlockMeta)
 	{
+		if !allowMetaChanges.contains(meta.blockId) { return }
+		
 		notifyHandlers(.blockMeta)
 		// TODO Set name
 	}
 	
 	private func metaColorChanged(_ meta: BlockMeta)
 	{
+		if !allowMetaChanges.contains(meta.blockId) { return }
+		
 		notifyHandlers(.blockMeta)
 		// TODO Set color
 	}
@@ -73,6 +80,15 @@ class UserPrefsManager
 	{
 		notifyHandlers(.lunchSwitches)
 		// TODO Set lunch switch
+	}
+	
+	func getMeta(id: BlockID) -> BlockMeta?
+	{
+		if let meta = self.blockMeta[id]
+		{
+			return meta
+		}
+		return nil
 	}
 	
 	private func notifyHandlers(_ change: PrefsChange)
@@ -124,9 +140,11 @@ class UserPrefsManager
 			
 			for i in 0..<7
 			{
-				var meta: BlockMeta = self.blockMeta[BlockID.fromId(i)!]!
-				if classColors.count > i { meta.customColor = classColors[i] }
-				if classNames.count > i { meta.customName = classNames[i] }
+				if var meta = self.getMeta(id: BlockID.fromId(i)!)
+				{
+					if classColors.count > i { meta.customColor = classColors[i] }
+					if classNames.count > i { meta.customName = classNames[i] }
+				}
 			}
 			
 			for i in 0..<5

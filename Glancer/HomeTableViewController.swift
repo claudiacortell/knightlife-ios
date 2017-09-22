@@ -10,6 +10,8 @@ import UIKit
 
 class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, PrefsUpdateHandler
 {
+	var firstOpen = true
+	
     var timer = Timer()
 	
     @IBOutlet weak var mainDayLabel: UILabel!
@@ -31,22 +33,32 @@ class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 	{
         super.viewDidLoad()
 		
-		self.tabBarController?.tabBar.items![0].isEnabled = false
+		Debug.out("HomeTable")
+		
+		if self.firstOpen
+		{
+			// Register as handler
+			ScheduleManager.instance.addHandler(self)
+			UserPrefsManager.instance.addHandler(self)
+		}
+		
+//		self.tabBarController?.tabBar.items![0].isEnabled = false
 		self.tabBarController?.tabBar.items![0].imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
-		self.tabBarController?.tabBar.items![1].isEnabled = false
+//		self.tabBarController?.tabBar.items![1].isEnabled = false
 		self.tabBarController?.tabBar.items![1].imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
-		self.tabBarController?.tabBar.items![2].isEnabled = false
+//		self.tabBarController?.tabBar.items![2].isEnabled = false
 		self.tabBarController?.tabBar.items![2].imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
 		
-		ScheduleManager.instance.loadBlocksIfNotLoaded()
-		
-		if self.scheduleUpdated || self.settingsUpdated
+		if self.scheduleUpdated || self.settingsUpdated || self.firstOpen
 		{
 			self.scheduleUpdated = false
 			self.settingsUpdated = false
-			
-			self.generateWeekData()
+			self.firstOpen = false
+
+			self.updateCurInfo(true)
 		}
+		
+		self.setTimer() // Reinitialize timer
 	}
 	
     override func didReceiveMemoryWarning()
@@ -55,14 +67,27 @@ class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
         // Dispose of any resources that can be recreated.
     }
 	
+	func setTimer()
+	{
+		if !timer.isValid
+		{
+			timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(HomeTableViewController.timerCall), userInfo: nil, repeats: true)
+		}
+	}
+	
+	func timerCall()
+	{
+		self.updateCurInfo(false)
+	}
+	
 	func scheduleDidUpdate(didUpdateSuccessfully: Bool, newSchedule: inout [DayID: Weekday])
 	{
 		if self.isViewLoaded && didUpdateSuccessfully
 		{
-			self.generateWeekData()
+			self.updateCurInfo(true)
 		} else
 		{
-			self.scheduleUpdated = didUpdateSuccessfully
+			self.scheduleUpdated = true
 		}
 	}
 	
@@ -70,52 +95,46 @@ class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 	{
 		if self.isViewLoaded
 		{
-			self.generateWeekData()
+			self.updateCurInfo(true)
 		} else
 		{
 			self.settingsUpdated = true
 		}
 	}
 	
-    func generateHomeScreenData()
+	func updateCurInfo(_ updateBlocks: Bool)
 	{
-		if self.timer.isValid
+		if !ScheduleManager.instance.scheduleLoaded
 		{
-			self.timer.invalidate()
+			return
 		}
 		
-        if (ScheduleManager.instance.onVacation)
-		{
-            mainDayLabel.text = "Vacation"
-            mainBlockLabel.text = "Enjoy"
-            mainTimeLabel.text = ""
-            mainNextBlockLabel.text = ""
-		} else
-		{
-            updateMainHomePage()
-        }
-		
-		labels.removeAll()
-		generateLabels()
-		
-		self.tableView.reloadData()
-		self.tabBarController?.tabBar.items![0].isEnabled = true
-		self.tabBarController?.tabBar.items![1].isEnabled = true
-		self.tabBarController?.tabBar.items![2].isEnabled = true
-    }
-	
-    func updateMainHomePage()
-	{
-        //updates the main labels on home page
 		self.dayId = ScheduleManager.instance.currentDayOfWeek() // Set the day ID
 		
-        mainDayLabel.text = getMainDayLabel()
-        mainBlockLabel.text = getMainBlockLabel()
-        mainTimeLabel.text = getMainTimeLabel()
-        mainNextBlockLabel.text = getMainNextBlockLabel()
-    }
-    
-    
+		if (ScheduleManager.instance.onVacation)
+		{
+			mainDayLabel.text = "Vacation"
+			mainBlockLabel.text = "Enjoy"
+			mainTimeLabel.text = ""
+			mainNextBlockLabel.text = ""
+		} else
+		{
+			//updates the main labels on home page
+			mainDayLabel.text = getMainDayLabel()
+			mainBlockLabel.text = getMainBlockLabel()
+			mainTimeLabel.text = getMainTimeLabel()
+			mainNextBlockLabel.text = getMainNextBlockLabel()
+		}
+		
+		if updateBlocks
+		{
+			labels.removeAll()
+			generateLabels()
+			
+			self.tableView.reloadData()
+		}
+	}
+	
     // get Home Page labels
     func getMainDayLabel() -> String
 	{
@@ -124,145 +143,79 @@ class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
     
     func getMainBlockLabel() -> String
 	{
-		if DayID.weekdays().contains(self.dayId)
+		if DayID.weekdays().contains(self.dayId) // Is a weekday
 		{
-			var dayInfo = getCurrentDayInformation()
+			let dayInfo = getCurrentScheduleInfo()
 			
-			let currentClass = appDelegate.Days[dayNum].messagesForBlock[currentBlock]
-			if currentClass != nil {
-				if currentBlock == "X" {
-					return "\(currentBlock) Block"
-				} else if currentBlock == "Activities" || currentBlock == "Lab" {
-					return "\(currentBlock)"
-				} else {
-					return "\(currentBlock) Block (\(currentClass!))"
-				}
-			} else if currentBlock == "GetToClass" {
+			switch dayInfo.scheduleState
+			{
+			case .inClass:
+				return dayInfo.curBlock!.analyst.getDisplayName()
+			case .beforeSchool:
+				return "School Starts"
+			case .beforeSchoolGetToClass:
+				return "School Starts"
+			case .afterSchool:
+				return "School Over"
+			case .getToClass:
 				return "Class Over"
+			case .noClass:
+				return "No Classes"
+			case .error:
+				return "Error Loading"
 			}
-			else if currentBlock == "BeforeSchoolGetToClass"{
-				return "School Begins"
-			}
-			else {
+		}
+		return "No Classes"
+    }
+    
+    func getMainTimeLabel() -> String
+	{
+		if DayID.weekdays().contains(self.dayId) // Is a weekday
+		{
+			let dayInfo = getCurrentScheduleInfo()
+			
+			switch dayInfo.scheduleState
+			{
+			case .inClass:
+				return "\(dayInfo.minutesRemaining) minutes left"
+			case .beforeSchool:
+				return "In \(dayInfo.minutesRemaining) minutes"
+			case .beforeSchoolGetToClass:
+				return "In \(dayInfo.minutesRemaining) minutes"
+			case .afterSchool:
 				return ""
+			case .getToClass:
+				return "In \(dayInfo.minutesRemaining) minutes"
+			case .noClass:
+				return ""
+			case .error:
+				return "Error"
 			}
 		}
-		
-		return nil
-		
-//        if dayNum < 5 {
-//            let currentValues = getCurrentDayInformation()
-//            let currentBlock = currentValues.currentBlock
-//            let currentClass = appDelegate.Days[dayNum].messagesForBlock[currentBlock]
-//            if currentClass != nil {
-//                if currentBlock == "X" {
-//                    return "\(currentBlock) Block"
-//                } else if currentBlock == "Activities" || currentBlock == "Lab" {
-//                    return "\(currentBlock)"
-//                } else {
-//                    return "\(currentBlock) Block (\(currentClass!))"
-//                }
-//            } else if currentBlock == "GetToClass" {
-//                return "Class Over"
-//            }
-//            else if currentBlock == "BeforeSchoolGetToClass"{
-//                return "School Begins"
-//            }
-//            else {
-//                return ""
-//            }
-//        } else {
-//            return ""
-//        }
-//        
+		return ""
     }
     
-    func getMainTimeLabel() -> String {
-        let currentDateTime = appDelegate.Days[0].getDateAsString()
-        let dayNum = appDelegate.Days[0].getDayOfWeekFromString(currentDateTime)
-        
-        if dayNum < 5 {
-            let currentValues = getCurrentDayInformation()
-            let currentBlock = currentValues.currentBlock
-            let currentClass = appDelegate.Days[dayNum].messagesForBlock[currentBlock]
-            if currentClass != nil {
-                let minutesRemaining = currentValues.minutesRemaining
-                return "\(minutesRemaining) mins remaining"
-            } else if currentBlock == "GetToClass" ||  currentBlock == "BeforeSchoolGetToClass"{
-                let minutesRemaining = currentValues.minutesRemaining
-                let minutesUntil = 5 - (-minutesRemaining)
-                return "\(minutesUntil) mins until"
-            } else if currentBlock == "BeforeSchool"{
-                return "Before School"
-            }else{
-                return "School Over"
-            }
-        } else {
-            return "No School"
-        }
-    }
-    
-    func getMainNextBlockLabel() -> String {
-        let currentDateTime = appDelegate.Days[0].getDateAsString()
-        let dayNum = appDelegate.Days[0].getDayOfWeekFromString(currentDateTime)
-        
-        if dayNum < 5 {
-            let currentValues = getCurrentDayInformation()
-            let currentBlock = currentValues.currentBlock
-            let nextBlock = currentValues.nextBlock
-            let nextClass = appDelegate.Days[dayNum].messagesForBlock[nextBlock]
-            if nextClass != nil {
-                if nextClass == "X" {
-                    return "Next: \(nextClass!) Block"
-                } else if nextClass == "Activities" || nextClass == "Lab" {
-                    return "Next: \(nextClass!)"
-                } else {
-                    return "Next: \(nextBlock) Block (\(nextClass!))"
-                }
-            } else if currentBlock == "GetToClass" {
-                //return "Next Block"
-            } else {
-                return ""
-            }
-        } else {
-            return ""
-        }
-        return ""
-    }
-    
-	func generateWeekData()
+    func getMainNextBlockLabel() -> String
 	{
-		if (ScheduleManager.instance.scheduleLoaded())
+		if DayID.weekdays().contains(self.dayId) // Is a weekday
 		{
-			setWeekData()
+			let dayInfo = getCurrentScheduleInfo()
+			
+			if dayInfo.nextBlock != nil
+			{
+				return dayInfo.nextBlock!.analyst.getDisplayName()
+			}
 		}
-		else if !timer.isValid
-		{
-			timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(WeekTableViewController.setWeekData), userInfo: nil, repeats: true)
-		}
-	}
-	
-	func setWeekData()
-	{
-		if self.timer.isValid
-		{
-			self.timer.invalidate()
-		}
-		
-		labels.removeAll()
-		generateLabels()
-		
-		self.tableView.reloadData()
-	}
+		return ""
+    }
 	
 	func generateLabels()
 	{
-		if self.dayId != nil
+		if let blocks = ScheduleManager.instance.blockList(id: self.dayId)
 		{
-			let day = ScheduleManager.instance.weekSchedule[self.dayId!]!
-			for block in day.blocks
+			for block in blocks
 			{
-				let analyst = BlockAnalyst(block: block)
+				let analyst = block.analyst
 				
 				let finalTime = "\(analyst.getStartTime().toFormattedString()) - \(analyst.getEndTime().toFormattedString())"
 				
@@ -272,143 +225,71 @@ class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 		}
 	}
 	
-    func findMinutes(_ hourBefore : Int, hourAfter : Int)->Int{
-        let numHoursLess = Int(hourBefore/100)
-        let numHoursMore = Int(hourAfter/100)
-        
-        let diffHours = numHoursMore - numHoursLess
-        let diffMinutes = hourAfter%100 - hourBefore%100
-        
-        return diffHours*60 + diffMinutes
-    }
-    
-    func getCurrentDayInformation() -> (currentBlock : String, nextBlock : String, minutesRemaining : Int)
+	enum ScheduleState
 	{
-        let currentDateTime = appDelegate.Days[0].getDateAsString()
-        let dayNum = appDelegate.Days[0].getDayOfWeekFromString(currentDateTime)
-        var widgetBlock = appDelegate.Widget_Block
-        var timeBlock = appDelegate.Time_Block
-        var endTimes = appDelegate.End_Times
-        var endTimesBlock = appDelegate.End_Time_Block
-        
-        var currentBlock = ""
-        var nextBlock = ""
-        
-        var minutesUntilNextBlock = 0
-        
-        let defaults = UserDefaults.standard
-        
-        var firstLunchTemp = true
-        
-        if(defaults.object(forKey: "SwitchValues") != nil){
-            let UserSwitch: [Bool] = defaults.object(forKey: "SwitchValues") as! Array<Bool>
-            firstLunchTemp = UserSwitch[dayNum]
-        }
-        
-        if(!firstLunchTemp){
-            
-            let secondLunchTime = appDelegate.Second_Lunch_Start[dayNum]
-            var counter = 0
-            
-            for x in widgetBlock[dayNum]{
-                if(x.hasSuffix("2")){
-                    timeBlock[dayNum][counter] = secondLunchTime
-                    endTimesBlock[dayNum][counter-1] = secondLunchTime
-                }
-
-                counter += 1
-            }
-        }
-        
-        for i in Array((0...widgetBlock[dayNum].count-1).reversed())
+		case beforeSchool, beforeSchoolGetToClass, noClass, getToClass, inClass, afterSchool, error
+	}
+	
+	func getCurrentScheduleInfo() -> (minutesRemaining: Int, curBlock: Block?, nextBlock: Block?, scheduleState: ScheduleState)
+	{
+		let curBlock = ScheduleManager.instance.getCurrentBlock()
+		if curBlock != nil // If we're currently in class
 		{
-            
-            let dateAfter = timeBlock[dayNum][i]
-            let CurrTime = appDelegate.Days[0].NSDateToStringWidget(Date())
-            
-            let endTimeString = endTimesBlock[dayNum][i]
-            
-            var hour4 = self.substring(dateAfter,StartIndex: 1,EndIndex: 3)
-            hour4 = hour4 + self.substring(dateAfter,StartIndex: 4,EndIndex: 6)
-            
-            var hour2 = self.substring(CurrTime,StartIndex: 1,EndIndex: 3)
-            hour2 = hour2 + self.substring(CurrTime,StartIndex: 4,EndIndex: 6)
-            var end_time = self.substring(endTimeString,StartIndex: 1,EndIndex: 3)
-            end_time = end_time + self.substring(endTimeString,StartIndex: 4,EndIndex: 6)
-            
-            
-            let hourOne = Int(hour4)
-            let hourTwo = Int(hour2)
-            let hourAfter = Int(end_time)
-        
-            if(i==0 && hourTwo < hourOne ){ // if before school
-                currentBlock = "BeforeSchool"
-                nextBlock = widgetBlock[dayNum][i]
-
-                minutesUntilNextBlock = self.findMinutes(hourTwo!, hourAfter: (hourOne!))
- 
-                if(minutesUntilNextBlock <= 5){
-                    
-                    minutesUntilNextBlock = -5+minutesUntilNextBlock
-                    currentBlock = "BeforeSchoolGetToClass"
-                    nextBlock = widgetBlock[dayNum][i]
- 
-                }
-            }
-            
-            //last block
-            if(i == widgetBlock[dayNum].count-1 && hourTwo >= hourOne){
-                
-                let EndTime = endTimes[dayNum]
-                if(hourTwo! - EndTime < 0) {
-
-                    minutesUntilNextBlock = self.findMinutes(hourTwo!, hourAfter: (EndTime))
-                    
-                    if(minutesUntilNextBlock > 0){
-                        currentBlock = widgetBlock[dayNum][i]
-                        nextBlock = "No Class"
-                    }
-                    else {
-                        currentBlock = "GetToClass"
-                        nextBlock = widgetBlock[dayNum][i]
-                    }
-                }
-                else {
-                    currentBlock = "NOCLASSNOW"
-                    nextBlock = "No Class"
-                    
-                }
-                break
-            }
-            
-            
-            if(hourTwo >= hourOne){
-                minutesUntilNextBlock = self.findMinutes(hourTwo!, hourAfter: (hourAfter!))
-                
-                if(minutesUntilNextBlock > 0){
-                    currentBlock = widgetBlock[dayNum][i]
-                    nextBlock = widgetBlock[dayNum][i + 1]
-                }
-                else{
-                    currentBlock = "GetToClass"
-                    nextBlock = widgetBlock[dayNum][i + 1]
-                }
-                break
-            }
-            
-        }
-        return (currentBlock, nextBlock, minutesUntilNextBlock)
+			let analyst = curBlock!.analyst
+			
+			let nextBlock = analyst.getNextBlock()
+			let minutesToEnd = TimeUtils.timeToDateInMinutes(to: analyst.getEndTime().asDate())
+			
+			return (minutesToEnd, curBlock!, nextBlock!, .inClass) // Return the time until the end of the class
+		} else
+		{
+			let curDate = Date()
+			
+			if let blocks = ScheduleManager.instance.blockList(id: self.dayId)
+			{
+				for block in blocks
+				{
+					let analyst = block.analyst
+					
+					if analyst.isFirstBlock() && curDate < analyst.getStartTime().asDate() // Before first block -> Before school
+					{
+						let timeToSchoolStart = TimeUtils.timeToDateInMinutes(to: analyst.getStartTime().asDate())
+						return (timeToSchoolStart, nil, block, timeToSchoolStart <= 5 ? .beforeSchoolGetToClass : .beforeSchool) // If there's less than 5 minutes before the first block starts
+					}
+					
+					if analyst.isLastBlock() && curDate >= analyst.getEndTime().asDate() // After school
+					{
+						return (-1, nil, nil, .afterSchool)
+					}
+					
+					let nextBlock = analyst.getNextBlock()
+					if nextBlock != nil // There SHOULD always be another block since it should've caught if it's the last block or we're in class so this check is mainly just a failsafe
+					{
+						let nextBlockAnalyst = nextBlock!.analyst
+						if curDate >= analyst.getEndTime().asDate() && curDate < nextBlockAnalyst.getStartTime().asDate() // Inbetween classes
+						{
+							let timeToNextBlock = TimeUtils.timeToDateInMinutes(to: nextBlockAnalyst.getStartTime().asDate())
+							return (timeToNextBlock, block, nextBlock, .getToClass) // Return the previous class as the current class if we're inbetween. This is just for convenience.
+						}
+					}
+				}
+			} else
+			{
+				return (-1, nil, nil, .error)
+			}
+			
+			return (-1, nil, nil, .noClass) // Holiday or vacation or just no blocks were loaded into the system for some reason
+		}
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
-        // Return the number of rows in the section.
         return self.labels.count
     }
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
-		if (ScheduleManager.instance.scheduleLoaded())
+		if (ScheduleManager.instance.scheduleLoaded)
 		{
 			let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! WeekTableViewCell
 			let label = labels[(indexPath as NSIndexPath).row]

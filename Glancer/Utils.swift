@@ -126,6 +126,17 @@ class TimeUtils
 		
 		return outDate
 	}
+	
+	static func timeToDateInMinutes(to: Date) -> Int
+	{
+		let cur = Date()
+		var components = Calendar.autoupdatingCurrent.dateComponents([.hour, .minute], from: cur, to: to)
+		
+		let hours = components.hour!
+		let minutes = components.minute!
+		
+		return (hours * 60) + minutes // Convert the hours to minutes then add the other minutes.
+	}
 }
 
 class Utils

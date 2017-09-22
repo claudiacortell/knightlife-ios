@@ -30,9 +30,31 @@ class ScheduleManager: PrefsUpdateHandler
 	private(set) var weekSchedule: [DayID: Weekday] = [:]
 	private var updateHandlers: [ScheduleUpdateHandler] = []
 	
+	var scheduleLoaded: Bool
+	{
+		get
+		{
+			return self.weekSchedule.count > 0
+		}
+	}
+	
+	func dayLoaded(id: DayID) -> Bool
+	{
+		return self.weekSchedule[id] != nil
+	}
+	
+	func blockList(id: DayID) -> [Block]?
+	{
+		if let day = self.weekSchedule[id]
+		{
+			return day.blocks
+		}
+		return nil
+	}
+	
 	init()
 	{
-		//TODO I'm sure there's something htat needs to be initialized and I haven't done it yet
+		UserPrefsManager.instance.addHandler(self)
 	}
 	
 	func addHandler(_ handler: ScheduleUpdateHandler)
@@ -48,15 +70,10 @@ class ScheduleManager: PrefsUpdateHandler
 		}
 	}
 	
-	func scheduleLoaded() -> Bool
-	{
-		return self.weekSchedule.count > 0
-	}
-	
 	@discardableResult
 	func loadBlocksIfNotLoaded() -> Bool
 	{
-		if self.scheduleLoaded()
+		if self.scheduleLoaded
 		{
 			return false
 		}
@@ -79,17 +96,21 @@ class ScheduleManager: PrefsUpdateHandler
 			{
 				self.onVacation = !(data[CallKeys.PUSH] as! Bool)
 				
-				print(data) // Debugging
+//				print(data) // Debugging
 				
 				var newSchedule: [DayID: Weekday] = [:]
 				
 //				var endTimes: [String]! = data[CallKeys.SCHOOL_END] != nil ? data[CallKeys.SCHOOL_END] as! [String] : []
 				var secondLunchStarts: [String]! = data[CallKeys.SECONDLUNCH_START] != nil ? data[CallKeys.SECONDLUNCH_START] as! [String] : []
 				
+				Debug.out("About to go through days")
+				
 				var i = -1
 				for dayId in DayID.weekdays() // Only retrieve schedules for weekdays
 				{
 					i+=1
+					
+					Debug.out("In DayID: \(dayId)")
 					
 //					let endTime: String? = endTimes.count > i ? endTimes[i] : nil // Required
 					let secondLunch: String? = secondLunchStarts.count > i ? secondLunchStarts[i] : nil // Not required.
@@ -105,6 +126,8 @@ class ScheduleManager: PrefsUpdateHandler
 							print("Loaded an inconsistent amount of StartTimes, EndTimes, and Blocks")
 							continue
 						}
+						
+						Debug.out("Got the right number of everything.")
 						
 						var blockLibrary: [Block] = []
 						for y in 0..<blocks!.count
@@ -131,13 +154,21 @@ class ScheduleManager: PrefsUpdateHandler
 							block.endTime = TimeContainer(endTimes![y])
 							block.startTime = TimeContainer(startTimes![y])
 							
+//							Debug.out("Block ID:\(block.blockId) Day:\(block.weekday) EndTime:\(block.endTime.timeString) StartTime:\(block.startTime.timeString)")
+							Debug.out("Block: \(block)")
+							
 							blockLibrary.append(block)
 						}
 						
 						// Set last block
 						if blockLibrary.last != nil
 						{
-							blockLibrary[blockLibrary.endIndex].isLastBlock = true
+							blockLibrary[blockLibrary.endIndex - 1].isLastBlock = true
+						}
+						
+						if blockLibrary.first != nil
+						{
+							blockLibrary[blockLibrary.startIndex].isFirstBlock = true
 						}
 						
 						var weekday: Weekday = Weekday()
@@ -154,6 +185,8 @@ class ScheduleManager: PrefsUpdateHandler
 						print("Blocks: \(String(describing: blocks)) StartTimes: \(String(describing: startTimes)) EndTimes: \(String(describing: endTimes))")
 					}
 				}
+				
+				Debug.out("Done with loading schedule. NewSchedule size: \(newSchedule.count)")
 				
 				self.weekSchedule.removeAll()
 				self.weekSchedule = newSchedule
@@ -196,14 +229,26 @@ class ScheduleManager: PrefsUpdateHandler
 		return DayID.fromId(today)!
 	}
 	
-	func getCurrentBlock() -> Block
+	func getCurrentBlock() -> Block?
 	{
-		var currentDate = Date()
-		for block in self.weekSchedule[self.currentDayOfWeek()]!.blocks
+		let currentDate = Date()
+		if let blocks = self.blockList(id: self.currentDayOfWeek())
 		{
-			let analyst = BlockAnalyst(block: block)
-			
+			for block in blocks
+			{
+				let analyst = block.analyst
+				
+				let start = analyst.getStartTime().asDate()
+				let end = analyst.getEndTime().asDate()
+				
+				if currentDate >= start && currentDate < end
+				{
+					return block
+				}
+			}
 		}
+		
+		return nil
 	}
 	
 	private func updateLunch(dayId: DayID, day: Weekday, _ updateHandlers: Bool?)
@@ -330,6 +375,7 @@ enum BlockID: String // Don't touch this either for good measure unless like we 
 	g = "G",
 	x = "X",
 	activities = "Activities",
+	lab = "Lab",
 	custom = "Custom"
 	
 	var id: Int
@@ -375,28 +421,192 @@ struct Weekday
 
 struct Block
 {
+	var analyst: BlockAnalyst // A middle man that interprets all the data in Block and makes it easier to get what you want it's pretty cool really
+	
 	var blockId: BlockID! // E.G. A, B, C, D, E
 	var weekday: DayID!
 	
 	var overrideDisplayName: String? // Only used for overriding the default meta's name
-	var hasOverridenDisplayName: Bool { get { return self.overrideDisplayName != nil } }
 	
 	var startTime: TimeContainer!
 	var overrideStartTime: TimeContainer?
-	var hasOverridenStartTime: Bool { get { return self.overrideStartTime != nil } }
 
 	var endTime: TimeContainer!
 	var overrideEndTime: TimeContainer?
-	var hasOverridenEndTime: Bool { get { return self.overrideEndTime != nil } }
 	
 	var lunchBlockNumber: Int? // 1 or 2 for first or second lunch
-	var isLunchBlock: Bool { get { return self.lunchBlockNumber != nil } }
 	
+	var isFirstBlock: Bool = false
 	var isLastBlock: Bool = false
+	
+	init()
+	{
+		analyst = BlockAnalyst()
+		analyst.setBlock(self)
+	}
+}
+
+extension Block
+{
+	var hasOverridenDisplayName: Bool { get { return self.overrideDisplayName != nil } }
+	var hasOverridenStartTime: Bool { get { return self.overrideStartTime != nil } }
+	var hasOverridenEndTime: Bool { get { return self.overrideEndTime != nil } }
+	var isLunchBlock: Bool { get { return self.lunchBlockNumber != nil } }
 	
 	public static func ==(lhs: Block, rhs: Block) -> Bool
 	{
-		return lhs.blockId == rhs.blockId && lhs.weekday == rhs.weekday && lhs.startTime == rhs.startTime && lhs.endTime == rhs.endTime && lhs.isLastBlock == rhs.isLastBlock && (lhs.hasOverridenDisplayName ? lhs.overrideDisplayName! == rhs.overrideDisplayName! : true) && (lhs.hasOverridenStartTime ? lhs.overrideStartTime! == rhs.overrideStartTime! : true) && (lhs.hasOverridenEndTime ? lhs.overrideEndTime! == rhs.overrideEndTime! : true) // Checks if all values are equal
+		return lhs.blockId == rhs.blockId && lhs.weekday == rhs.weekday && lhs.startTime == rhs.startTime && lhs.endTime == rhs.endTime && lhs.isFirstBlock && rhs.isFirstBlock && lhs.isLastBlock == rhs.isLastBlock && (lhs.hasOverridenDisplayName ? lhs.overrideDisplayName! == rhs.overrideDisplayName! : true) && (lhs.hasOverridenStartTime ? lhs.overrideStartTime! == rhs.overrideStartTime! : true) && (lhs.hasOverridenEndTime ? lhs.overrideEndTime! == rhs.overrideEndTime! : true) // Checks if all values are equal
+	}
+}
+
+class BlockAnalyst
+{
+	private var block: Block!
+	
+	var meta: UserPrefsManager.BlockMeta?
+	{
+		get
+		{
+			if let meta = UserPrefsManager.instance.getMeta(id: self.block.blockId)
+			{
+				return meta
+			}
+			return nil
+		}
+	}
+	var hasMeta: Bool
+	{
+		get
+		{
+			return self.meta != nil
+		}
+	}
+	
+	fileprivate init()
+	{
+	}
+	
+	fileprivate func setBlock(_ block: Block)
+	{
+		self.block = block
+	}
+	
+	func getStartTime() -> TimeContainer
+	{
+		return self.block.overrideStartTime ?? self.block.startTime
+	}
+	
+	func getEndTime() -> TimeContainer
+	{
+		return self.block.overrideEndTime ?? self.block.endTime
+	}
+	
+	func getDisplayLetter() -> String
+	{
+		if block.hasOverridenDisplayName
+		{
+			var firstTwoLetters = Utils.substring(block.overrideDisplayName!, StartIndex: 0, EndIndex: 2)
+			let firstLetter = String(describing: firstTwoLetters.characters.first)
+			
+			return BlockID.fromRaw(raw: firstLetter) == nil ? firstLetter : firstTwoLetters // If the first letter isalready a block then return the first two letters
+		}
+		
+		return Utils.substring(self.block.blockId.rawValue, StartIndex: 0, EndIndex: 2) // Return the first two letters. This should only return the first letter if it's a 1 letter string.
+	}
+	
+	func getDisplayName() -> String // E.G. X Block
+	{
+		if self.block.blockId == .lab
+		{
+			let previous = getPreviousBlock()
+			if previous != nil
+			{
+				return "\(previous!.analyst.getDisplayName()) Lab" // Return a new block analyst to get the display name if this is a lab block
+			}
+		}
+		
+		if block.hasOverridenDisplayName
+		{
+			return block.overrideDisplayName!
+		}
+		
+		if self.hasMeta && self.meta!.customName != nil
+		{
+			return self.meta!.customName!
+		}
+		
+		if self.block.blockId == .activities || self.block.blockId == .lab || self.block.blockId == .custom
+		{
+			return block.blockId.rawValue
+		}
+		
+		return block.blockId.rawValue + " Block"
+	}
+	
+	func getColor() -> String
+	{
+		if self.block.blockId == .lab
+		{
+			let previous = getPreviousBlock()
+			if previous != nil
+			{
+				return previous!.analyst.getColor() // Return a new block analyst to get the color if this is a lab block
+			}
+		}
+		
+		if self.hasMeta
+		{
+			return self.meta!.customColor
+		}
+		return "999999"
+	}
+	
+	func isLastBlock() -> Bool
+	{
+		return self.block.isLastBlock
+	}
+	
+	func isFirstBlock() -> Bool
+	{
+		return self.block.isFirstBlock
+	}
+	
+	func getNextBlock() -> Block?
+	{
+		if isLastBlock() { return nil }
+		
+		if let blocks = ScheduleManager.instance.blockList(id: self.block.weekday)
+		{
+			var found = false // If the block has been found return the next one in series
+			for block in blocks
+			{
+				if found { return block }
+				if block == self.block { found = true } // Identify the current iterator block as this one.
+			}
+			return nil
+		} else
+		{
+			return nil
+		}
+	}
+	
+	func getPreviousBlock() -> Block?
+	{
+		if isFirstBlock() { return nil }
+		
+		if let blocks = ScheduleManager.instance.blockList(id: self.block.weekday)
+		{
+			var found = false // If the block has been found return the next one in series
+			for block in blocks.reversed()
+			{
+				if found { return block }
+				if block == self.block { found = true } // Identify the current iterator block as this one.
+			}
+			return nil
+		} else
+		{
+			return nil
+		}
 	}
 }
 
@@ -405,7 +615,10 @@ struct TimeContainer
 	var timeString: String!
 	
 	init(_ timeString: String) { self.timeString = timeString }
-	
+}
+
+extension TimeContainer
+{
 	func asDate() -> Date
 	{
 		return TimeUtils.timeToNSDate(self.timeString)
