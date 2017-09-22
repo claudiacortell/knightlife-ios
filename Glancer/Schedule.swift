@@ -89,21 +89,19 @@ class ScheduleManager: PrefsUpdateHandler
 			{
 				self.onVacation = !(data[CallKeys.PUSH] as! Bool)
 				
-//				Debug.out("\(data)") // Debugging
-				
 				var newSchedule: [DayID: Weekday] = [:]
 				
 //				var endTimes: [String]! = data[CallKeys.SCHOOL_END] != nil ? data[CallKeys.SCHOOL_END] as! [String] : []
 				var secondLunchStarts: [String]! = data[CallKeys.SECONDLUNCH_START] != nil ? data[CallKeys.SECONDLUNCH_START] as! [String] : []
 				
-				Debug.out("About to go through days")
+//				Debug.out("About to go through days")
 				
 				var i = -1
 				for dayId in DayID.weekdays() // Only retrieve schedules for weekdays
 				{
 					i+=1
 					
-					Debug.out("In DayID: \(dayId)")
+//					Debug.out("In DayID: \(dayId)")
 					
 //					let endTime: String? = endTimes.count > i ? endTimes[i] : nil // Required
 					let secondLunch: String? = secondLunchStarts.count > i ? secondLunchStarts[i] : nil // Not required.
@@ -226,44 +224,44 @@ class ScheduleManager: PrefsUpdateHandler
 	{
 		for dayId in self.weekSchedule.keys
 		{
-			var day = self.weekSchedule[dayId]!
+			let day = self.weekSchedule[dayId]!
 			
-			let flip: Bool = UserPrefsManager.instance.lunchSwitches[dayId]!
-			
-			var blockList = self.blockList(id: dayId)!
-			for i in 0..<blockList.count // Use this iterator so we can modify block
+			if let flip = UserPrefsManager.instance.getSwitch(id: dayId)
 			{
-				var block = blockList[i]
-				
-				if !block.isLunchBlock { continue }
-				
-				// Reset custom flags
-				block.overrideEndTime = nil
-				block.overrideStartTime = nil
-				block.overrideDisplayName = nil
-				
-				if flip // User has first lunch
+				var blockList = self.blockList(id: dayId)!
+				for i in 0..<blockList.count // Use this iterator so we can modify block
 				{
-					if block.lunchBlockNumber! == 1 // First lunch block - B1
+					var block = blockList[i]
+					
+					if !block.isLunchBlock { continue }
+					
+					// Reset custom flags
+					block.overrideEndTime = nil
+					block.overrideStartTime = nil
+					block.overrideDisplayName = nil
+					
+					if flip // User has first lunch
 					{
-						// Lunch
-						block.overrideDisplayName = "Lunch"
+						if block.lunchBlockNumber! == 1 // First lunch block - B1
+						{
+							// Lunch
+							block.overrideDisplayName = "Lunch"
+						}
+					} else // User has second lunch
+					{
+						if block.lunchBlockNumber! == 1 // First lunch block - B1
+						{
+							// Class
+							block.overrideEndTime = day.secondLunchStart ?? nil // SEt its end time to the start of lunch
+						} else // Second lunch block - B2
+						{
+							block.overrideDisplayName = "Lunch"
+							block.overrideStartTime = day.secondLunchStart ?? nil // Set its start time to the start of lunch
+						}
 					}
-				} else // User has second lunch
-				{
-					if block.lunchBlockNumber! == 1 // First lunch block - B1
-					{
-						// Class
-						block.overrideEndTime = day.secondLunchStart ?? nil // SEt its end time to the start of lunch
-					} else // Second lunch block - B2
-					{
-						block.overrideDisplayName = "Lunch"
-						block.overrideStartTime = day.secondLunchStart ?? nil // Set its start time to the start of lunch
-					}
+					
+					self.weekSchedule[dayId]!.blocks[i] = block
 				}
-				
-				self.weekSchedule[dayId]!.blocks[i] = block
-				print("Block: \(block)\n")
 			}
 		}
 		

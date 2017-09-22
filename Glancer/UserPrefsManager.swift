@@ -27,7 +27,7 @@ class UserPrefsManager
 		var customColor: String!
 	}
 	
-	var blockMeta: [BlockID: BlockMeta] =
+	private var blockMeta: [BlockID: BlockMeta] =
 	[
 		.a: BlockMeta(.a, "E74C3C"),
 		.b: BlockMeta(.b, "E67E22"),
@@ -42,23 +42,36 @@ class UserPrefsManager
 		.lab: BlockMeta(.lab, "999999")
 	]
 	
-	var allowMetaChanges: [BlockID] = [ .a, .b, .c, .d, .e, .f, .g ]
+	private var allowMetaChanges: [BlockID] = [ .a, .b, .c, .d, .e, .f, .g ]
 	
-	var lunchSwitches: [DayID: Bool] =
+	private var lunchSwitches: [DayID: Bool] =
 	[
 		.monday: true,
 		.tuesday: true,
 		.wednesday: true,
 		.thursday: true,
 		.friday: true
-	] {
-		didSet { UserPrefsManager.instance.lunchSwitchChanged()}
-	} // Day Id: On/Off
+	]
 	
-	private func lunchSwitchChanged()
+	init()
 	{
-		notifyHandlers()
-		// TODO Set lunch switch
+		self.reloadPrefs()
+	}
+	
+	func getSwitch(id: DayID) -> Bool?
+	{
+		if let boo = self.lunchSwitches[id]
+		{
+			return boo
+		}
+		return nil
+	}
+	
+	func setSwitch(id: DayID, val: Bool)
+	{
+		self.lunchSwitches[id] = val
+		self.savePrefs()
+		self.notifyHandlers()
 	}
 	
 	func getMeta(id: BlockID) -> BlockMeta?
@@ -74,7 +87,10 @@ class UserPrefsManager
 	{
 		if self.allowMetaChanges.contains(id)
 		{
+			Debug.out("Allowed!!!!!!")
+			
 			self.blockMeta[id] = meta
+			self.savePrefs()
 			self.notifyHandlers()
 		}
 	}
@@ -89,22 +105,73 @@ class UserPrefsManager
 	
 	func reloadPrefs()
 	{
-		/*
-		M  T  W  TH  F  SA  SU
-		0  1  2  3   4  5   6
-		*/
-		
 		// get/set values for class names
 		if Storage.storageMethodUpdated // Account for old storage method to keep legacy data
 		{
-			// Retrieve shit
+			Debug.out("Method updated.")
 			
+			// Load lunches
+			for (dayId, _) in self.lunchSwitches // Iterate through the default day settings for first lunch
+			{
+				let lunchStorage = Storage.LUNCH_SWITCHES.child(name: dayId.rawValue)
+				if lunchStorage.exists()
+				{
+					if let set = lunchStorage.getValue() as? Bool
+					{
+						self.lunchSwitches[dayId] = set
+					}
+				}
+			}
 			
-			// TODO
-			
-			
+			// Load blocks
+			for (blockId) in self.blockMeta.keys
+			{
+				Debug.out("------------------------")
+				Debug.out("BlockID: \(blockId)")
+
+				if var meta = self.getMeta(id: blockId)
+				{
+					Debug.out("Meta: \(meta)")
+
+					if !self.allowMetaChanges.contains(blockId) { continue }
+					
+					Debug.out("Allow meta")
+
+					let metaStorage = Storage.BLOCK_META.child(name: blockId.rawValue)
+					let nameStorage = metaStorage.child(name: "name")
+					let colorStorage = metaStorage.child(name: "color")
+					
+					if nameStorage.exists()
+					{
+						Debug.out("Name storage exists")
+
+						if let parsed = nameStorage.getValue() as? String
+						{
+							meta.customName = parsed
+							Debug.out(parsed)
+						}
+					}
+					
+					if colorStorage.exists()
+					{
+						Debug.out("Color storage exists")
+
+						if let parsed = colorStorage.getValue() as? String
+						{
+							Debug.out("Got parse! \(parsed)")
+
+							meta.customColor = parsed
+							Debug.out(parsed)
+						}
+					}
+					
+					self.setMeta(id: blockId, meta: meta)
+				}
+			}
 		} else
 		{
+			Debug.out("Method not updated.")
+
 			// get/set values for custom class names
 			var classNames = [String]() // 7 of these (7 class blocks)
 			if Storage.OLD_CLASS_NAMES.exists()
@@ -144,10 +211,48 @@ class UserPrefsManager
 				if lunchSwitches.count > i { lunchSwitches[day] = firstLunches[i] }
 			}
 			
-//			Storage.deleteOldMethodRemnants()
+			Storage.deleteOldMethodRemnants() // Enable when we're ok getting rid of the old storage data.
 		}
 		
 		self.notifyHandlers()
+	}
+	
+	private func savePrefs()
+	{
+		for (dayId, val) in self.lunchSwitches // Iterate through the default day settings for first lunch
+		{
+//			Debug.out("Saving: \(dayId), \(val)")
+			
+			let lunchStorage = Storage.LUNCH_SWITCHES.child(name: dayId.rawValue)
+			lunchStorage.set(data: val)
+		}
+		
+		// Load blocks
+		for (blockId) in self.blockMeta.keys
+		{
+			if let meta = self.getMeta(id: blockId)
+			{
+				if !self.allowMetaChanges.contains(blockId) { continue }
+				
+				let metaStorage = Storage.BLOCK_META.child(name: blockId.rawValue)
+				let nameStorage = metaStorage.child(name: "name")
+				let colorStorage = metaStorage.child(name: "color")
+				
+//				Debug.out("Saving: \(blockId), \(meta.customColor), \(meta.customName)")
+				
+				if let name = meta.customName
+				{
+					nameStorage.set(data: "\(name)")
+				} else
+				{
+					nameStorage.delete()
+				}
+				
+				colorStorage.set(data: "\(meta.customColor!)")
+			}
+		}
+		
+//		self.reloadPrefs()
 	}
 }
 

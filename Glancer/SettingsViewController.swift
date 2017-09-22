@@ -114,7 +114,10 @@ class ViewController: UIViewController, UITextFieldDelegate
 		
 		for (day, flip) in self.daySwitches
 		{
-			flip.isOn = UserPrefsManager.instance.lunchSwitches[day]!
+			if let flop = UserPrefsManager.instance.getSwitch(id: day)
+			{
+				flip.isOn = flop
+			}
 		}
 	}
     
@@ -139,13 +142,13 @@ class ViewController: UIViewController, UITextFieldDelegate
 	{
 		for (block, field) in self.blockTextFields
 		{
-			if field == textField
+			if field === textField
 			{
 				if var meta = UserPrefsManager.instance.getMeta(id: block)
 				{
 					meta.customName = textField.text
 					UserPrefsManager.instance.setMeta(id: block, meta: meta)
-					return
+					break
 				}
 			}
 		}
@@ -177,7 +180,7 @@ class ViewController: UIViewController, UITextFieldDelegate
 		{
 			if switchButton === send
 			{
-				UserPrefsManager.instance.lunchSwitches[dayId]! = send.isOn
+				UserPrefsManager.instance.setSwitch(id: dayId, val: send.isOn)
 			}
 		}
 	}

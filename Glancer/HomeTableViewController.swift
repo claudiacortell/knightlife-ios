@@ -33,8 +33,6 @@ class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 	{
         super.viewDidLoad()
 		
-		Debug.out("HomeTable")
-		
 		if self.firstOpen
 		{
 			// Register as handler
@@ -90,8 +88,6 @@ class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 	
 	func prefsDidUpdate()
 	{
-		Debug.out("UPDATINGGGGGG")
-		
 		if self.isViewLoaded
 		{
 			self.updateCurInfo(true)

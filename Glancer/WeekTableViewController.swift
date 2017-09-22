@@ -112,7 +112,7 @@ class WeekTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 		}
     }
 	
-	func setWeekData()
+	@objc func setWeekData()
 	{
 		if !ScheduleManager.instance.scheduleLoaded
 		{
