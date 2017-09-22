@@ -139,11 +139,12 @@ class ViewController: UIViewController, UITextFieldDelegate
 	{
 		for (block, field) in self.blockTextFields
 		{
-			if field === textField
+			if field == textField
 			{
 				if var meta = UserPrefsManager.instance.getMeta(id: block)
 				{
 					meta.customName = textField.text
+					UserPrefsManager.instance.setMeta(id: block, meta: meta)
 					return
 				}
 			}

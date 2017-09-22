@@ -18,34 +18,40 @@ class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 		UserPrefsManager.instance.addHandler(self)
 	}
 	
-	func scheduleDidUpdate(didUpdateSuccessfully: Bool, newSchedule: inout [DayID: Weekday])
+	func scheduleDidUpdate(didUpdateSuccessfully: Bool)
 	{
 		if didUpdateSuccessfully
 		{
 			self.clearNotifications()
-			for weekday in newSchedule.values
+			for dayId in DayID.values()
 			{
-				for block in weekday.blocks
+				if let blocks = ScheduleManager.instance.blockList(id: dayId)
 				{
-					if let meta = UserPrefsManager.instance.getMeta(id: block.blockId)
+					for block in blocks
 					{
-						self.updateNotifications(day: weekday, block: block, meta: meta)
+						if let meta = UserPrefsManager.instance.getMeta(id: block.blockId)
+						{
+							self.updateNotifications(day: dayId, block: block, meta: meta)
+						}
 					}
 				}
 			}
 		}
 	}
 	
-	func prefsDidUpdate(manager: UserPrefsManager, change: UserPrefsManager.PrefsChange)
+	func prefsDidUpdate()
 	{
 		self.clearNotifications()
-		for weekday in ScheduleManager.instance.weekSchedule.values
+		for dayId in DayID.values()
 		{
-			for block in weekday.blocks
+			if let blocks = ScheduleManager.instance.blockList(id: dayId)
 			{
-				if let meta = UserPrefsManager.instance.getMeta(id: block.blockId)
+				for block in blocks
 				{
-					self.updateNotifications(day: weekday, block: block, meta: meta)
+					if let meta = UserPrefsManager.instance.getMeta(id: block.blockId)
+					{
+						self.updateNotifications(day: dayId, block: block, meta: meta)
+					}
 				}
 			}
 		}
@@ -61,7 +67,7 @@ class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 		}
 	}
 	
-	func updateNotifications(day: Weekday, block: Block, meta: UserPrefsManager.BlockMeta)
+	func updateNotifications(day: DayID, block: Block, meta: UserPrefsManager.BlockMeta)
 	{
 		let blockName: String! = block.hasOverridenDisplayName ? block.overrideDisplayName : meta.customName
 		if (!ScheduleManager.instance.onVacation) // only perform notifications if we aren't on vacation
@@ -75,7 +81,7 @@ class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 			notification.soundName = UILocalNotificationDefaultSoundName;
 			
 			let today = TimeUtils.getDayOfWeekFromString(TimeUtils.currentDateAsString()) // 0 to 6 for Monday - Sunday
-			let dayMult = day.dayId.id
+			let dayMult = day
 			
 			// TODO: Fix notifications
 			

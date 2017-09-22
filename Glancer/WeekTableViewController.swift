@@ -73,7 +73,7 @@ class WeekTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
         // Dispose of any resources that can be recreated.
     }
 	
-	func scheduleDidUpdate(didUpdateSuccessfully: Bool, newSchedule: inout [DayID: Weekday])
+	func scheduleDidUpdate(didUpdateSuccessfully: Bool)
 	{
 		if self.isViewLoaded && didUpdateSuccessfully
 		{
@@ -84,7 +84,7 @@ class WeekTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 		}
 	}
 	
-	func prefsDidUpdate(manager: UserPrefsManager, change: UserPrefsManager.PrefsChange)
+	func prefsDidUpdate()
 	{
 		if self.isViewLoaded
 		{
@@ -140,7 +140,7 @@ class WeekTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 				
 				let finalTime = "\(analyst.getStartTime().toFormattedString()) - \(analyst.getEndTime().toFormattedString())"
 				
-				let newLabel = Label(bL: analyst.getDisplayLetter(), cN: analyst.getDisplayNameWithBlock(), cT: finalTime, c: analyst.getColor())
+				let newLabel = Label(bL: analyst.getDisplayLetter(), cN: analyst.getDisplayName(), cT: finalTime, c: analyst.getColor())
 				labels.append(newLabel)
 			}
 		}

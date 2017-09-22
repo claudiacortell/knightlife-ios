@@ -24,12 +24,14 @@ class ColorSelectionViewController: UIViewController
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
 	{
-		let background = self.view.layer.backgroundColor
-		if background != nil && self.block != nil
+		let id = segue.identifier!
+		
+		if self.block != nil
 		{
 			if var meta = UserPrefsManager.instance.getMeta(id: self.block!)
 			{
-				meta.customColor = Utils.getHexFromCGColor(background!)
+				meta.customColor = id
+				UserPrefsManager.instance.setMeta(id: self.block!, meta: meta)
 			}
 		}
 		let tabBar: UITabBarController = segue.destination as! UITabBarController

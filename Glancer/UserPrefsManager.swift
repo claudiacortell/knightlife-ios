@@ -23,13 +23,8 @@ class UserPrefsManager
 	{
 		init(_ blockId: BlockID, _ customColor: String) { self.blockId = blockId; self.customColor = customColor }
 		var blockId: BlockID! // E.G. A, B, C, D, E (Corresponds to Class ID)
-		var customName: String? { didSet { UserPrefsManager.instance.metaNameChanged(self) } } // Same as block id by default. Can be changed to reflect user preferences
-		var customColor: String! { didSet { UserPrefsManager.instance.metaColorChanged(self) } }
-	}
-	
-	enum PrefsChange
-	{
-		case blockMeta, lunchSwitches, dataLoaded
+		var customName: String? // Same as block id by default. Can be changed to reflect user preferences
+		var customColor: String!
 	}
 	
 	var blockMeta: [BlockID: BlockMeta] =
@@ -47,7 +42,7 @@ class UserPrefsManager
 		.lab: BlockMeta(.lab, "999999")
 	]
 	
-	var allowMetaChanges: [BlockID] = [ .a, .b, .c, .d, .e, .f, .e, .g ]
+	var allowMetaChanges: [BlockID] = [ .a, .b, .c, .d, .e, .f, .g ]
 	
 	var lunchSwitches: [DayID: Bool] =
 	[
@@ -60,25 +55,9 @@ class UserPrefsManager
 		didSet { UserPrefsManager.instance.lunchSwitchChanged()}
 	} // Day Id: On/Off
 	
-	private func metaNameChanged(_ meta: BlockMeta)
-	{
-		if !allowMetaChanges.contains(meta.blockId) { return }
-		
-		notifyHandlers(.blockMeta)
-		// TODO Set name
-	}
-	
-	private func metaColorChanged(_ meta: BlockMeta)
-	{
-		if !allowMetaChanges.contains(meta.blockId) { return }
-		
-		notifyHandlers(.blockMeta)
-		// TODO Set color
-	}
-	
 	private func lunchSwitchChanged()
 	{
-		notifyHandlers(.lunchSwitches)
+		notifyHandlers()
 		// TODO Set lunch switch
 	}
 	
@@ -91,11 +70,20 @@ class UserPrefsManager
 		return nil
 	}
 	
-	private func notifyHandlers(_ change: PrefsChange)
+	func setMeta(id: BlockID, meta: BlockMeta)
+	{
+		if self.allowMetaChanges.contains(id)
+		{
+			self.blockMeta[id] = meta
+			self.notifyHandlers()
+		}
+	}
+	
+	private func notifyHandlers()
 	{
 		for handler in self.updateHandlers
 		{
-			handler.prefsDidUpdate(manager: self, change: change)
+			handler.prefsDidUpdate()
 		}
 	}
 	
@@ -138,12 +126,15 @@ class UserPrefsManager
 				classColors = Storage.OLD_COLOR_IDS.getValue() as! [String]
 			}
 			
-			for i in 0..<7
+			for i in 0..<8
 			{
-				if var meta = self.getMeta(id: BlockID.fromId(i)!)
+				let id = BlockID.fromId(i)!
+				if var meta = self.getMeta(id: id)
 				{
 					if classColors.count > i { meta.customColor = classColors[i] }
 					if classNames.count > i { meta.customName = classNames[i] }
+					
+					self.setMeta(id: id, meta: meta)
 				}
 			}
 			
@@ -153,14 +144,14 @@ class UserPrefsManager
 				if lunchSwitches.count > i { lunchSwitches[day] = firstLunches[i] }
 			}
 			
-			Storage.deleteOldMethodRemnants()
+//			Storage.deleteOldMethodRemnants()
 		}
 		
-		self.notifyHandlers(.dataLoaded)
+		self.notifyHandlers()
 	}
 }
 
 protocol PrefsUpdateHandler
 {
-	func prefsDidUpdate(manager: UserPrefsManager, change: UserPrefsManager.PrefsChange)
+	func prefsDidUpdate()
 }

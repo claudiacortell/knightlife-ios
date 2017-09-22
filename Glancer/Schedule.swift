@@ -27,16 +27,9 @@ class ScheduleManager: PrefsUpdateHandler
 	static let CURRENT_SCHOOL_YEAR = "2017-2018" // THIS MUST BE CHANGED EVERY YEAR. I THINK. IT MIGHT WORK IF YOU DON'T BUT LIKE DON'T TAKE CHANCES BRUH
 	private(set) var onVacation = false
 
-	private(set) var weekSchedule: [DayID: Weekday] = [:]
+	private var weekSchedule: [DayID: Weekday] = [:]
 	private var updateHandlers: [ScheduleUpdateHandler] = []
-	
-	var scheduleLoaded: Bool
-	{
-		get
-		{
-			return self.weekSchedule.count > 0
-		}
-	}
+	var scheduleLoaded = false
 	
 	func dayLoaded(id: DayID) -> Bool
 	{
@@ -66,7 +59,7 @@ class ScheduleManager: PrefsUpdateHandler
 	{
 		for handler in self.updateHandlers
 		{
-			handler.scheduleDidUpdate(didUpdateSuccessfully: success, newSchedule: &self.weekSchedule)
+			handler.scheduleDidUpdate(didUpdateSuccessfully: success)
 		}
 	}
 	
@@ -96,7 +89,7 @@ class ScheduleManager: PrefsUpdateHandler
 			{
 				self.onVacation = !(data[CallKeys.PUSH] as! Bool)
 				
-				Debug.out("\(data)") // Debugging
+//				Debug.out("\(data)") // Debugging
 				
 				var newSchedule: [DayID: Weekday] = [:]
 				
@@ -146,6 +139,7 @@ class ScheduleManager: PrefsUpdateHandler
 							if blockId == nil
 							{
 								blockId = BlockID.custom
+								block.overrideDisplayName = rawId
 							}
 							
 //							-----------------------------------------------
@@ -215,31 +209,67 @@ class ScheduleManager: PrefsUpdateHandler
 		self.updateLunch(false)
 		self.updateHandlers(success)
 		
+		if success
+		{
+			self.scheduleLoaded = true
+		}
+		
 		return success
 	}
 	
-	func prefsDidUpdate(manager: UserPrefsManager, change: UserPrefsManager.PrefsChange)
+	func prefsDidUpdate()
 	{
-		if change == .lunchSwitches || change == .dataLoaded
-		{
-			self.updateLunch(true)
-		}
+		self.updateLunch(true)
 	}
 	
 	func updateLunch(_ updateHandlers: Bool?)
 	{
-		var updated = false
-		for (dayId, weekday) in self.weekSchedule
+		for dayId in self.weekSchedule.keys
 		{
-			if self.updateLunch(dayId: dayId, day: weekday, updateHandlers)
+			var day = self.weekSchedule[dayId]!
+			
+			let flip: Bool = UserPrefsManager.instance.lunchSwitches[dayId]!
+			
+			var blockList = self.blockList(id: dayId)!
+			for i in 0..<blockList.count // Use this iterator so we can modify block
 			{
-				updated = true
+				var block = blockList[i]
+				
+				if !block.isLunchBlock { continue }
+				
+				// Reset custom flags
+				block.overrideEndTime = nil
+				block.overrideStartTime = nil
+				block.overrideDisplayName = nil
+				
+				if flip // User has first lunch
+				{
+					if block.lunchBlockNumber! == 1 // First lunch block - B1
+					{
+						// Lunch
+						block.overrideDisplayName = "Lunch"
+					}
+				} else // User has second lunch
+				{
+					if block.lunchBlockNumber! == 1 // First lunch block - B1
+					{
+						// Class
+						block.overrideEndTime = day.secondLunchStart ?? nil // SEt its end time to the start of lunch
+					} else // Second lunch block - B2
+					{
+						block.overrideDisplayName = "Lunch"
+						block.overrideStartTime = day.secondLunchStart ?? nil // Set its start time to the start of lunch
+					}
+				}
+				
+				self.weekSchedule[dayId]!.blocks[i] = block
+				print("Block: \(block)\n")
 			}
 		}
 		
 		if updateHandlers != nil && updateHandlers!
 		{
-			self.updateHandlers(updated)
+			self.updateHandlers(true)
 		}
 	}
 	
@@ -269,45 +299,6 @@ class ScheduleManager: PrefsUpdateHandler
 		}
 		
 		return nil
-	}
-	
-	private func updateLunch(dayId: DayID, day: Weekday, _ updateHandlers: Bool?) -> Bool
-	{
-		let flip: Bool = UserPrefsManager.instance.lunchSwitches[dayId]!
-		
-		for i in 0..<day.blocks.count // Use this iterator so we can modify block
-		{
-			var block = day.blocks[i]
-			
-			if !block.isLunchBlock { continue }
-			
-			// Reset custom flags
-			block.overrideEndTime = nil
-			block.overrideStartTime = nil
-			block.overrideDisplayName = nil
-			
-			if flip // User has first lunch
-			{
-				if block.lunchBlockNumber! == 1 // First lunch block - B1
-				{
-					// Lunch
-					block.overrideDisplayName = "Lunch"
-				}
-			} else // User has second lunch
-			{
-				if block.lunchBlockNumber! == 1 // First lunch block - B1
-				{
-					// Class
-					block.overrideEndTime = day.secondLunchStart ?? nil // SEt its end time to the start of lunch
-				} else // Second lunch block - B2
-				{
-					block.overrideDisplayName = "Lunch"
-					block.overrideStartTime = day.secondLunchStart ?? nil // Set its start time to the start of lunch
-				}
-			}
-			
-			print("Block: \(block)\n")
-		}
 	}
 }
 
@@ -526,23 +517,25 @@ class BlockAnalyst
 		
 		if block.hasOverridenDisplayName
 		{
-			var firstTwoLetters = Utils.substring(block.overrideDisplayName!, StartIndex: 0, EndIndex: 2)
-			let firstLetter = String(describing: firstTwoLetters.characters.first)
-			
-			return BlockID.fromRaw(raw: firstLetter) == nil ? firstLetter : firstTwoLetters // If the first letter isalready a block then return the first two letters. This is just to avoid ambiguity
+			return Utils.substring(block.overrideDisplayName!, StartIndex: 0, EndIndex: 2)
 		}
 		
-		return Utils.substring(self.block.blockId.rawValue, StartIndex: 0, EndIndex: 2) // Return the first two letters. This should only return the first letter if it's a 1 letter string.
+		let id = self.block.blockId.rawValue // Return the first two letters. This should only return the first letter if it's a 1 letter string.
+		if self.block.isLunchBlock
+		{
+			return "\(id)\(self.block.lunchBlockNumber!)"
+		}
+		return id
 	}
 	
-	func getDisplayName() -> String // E.G. X Block
+	func getDisplayName(_ appendBlock: Bool = true) -> String // E.G. X Block
 	{
 		if self.block.blockId == .lab
 		{
 			let previous = getPreviousBlock()
 			if previous != nil
 			{
-				return "\(previous!.analyst.getDisplayName()) Lab" // Return a new block analyst to get the display name if this is a lab block
+				return "\(previous!.analyst.getDisplayName(false)) Lab" // Return a new block analyst to get the display name if this is a lab block
 			}
 		}
 		
@@ -559,17 +552,12 @@ class BlockAnalyst
 			}
 		}
 		
-		if self.block.blockId == .activities || self.block.blockId == .lab || self.block.blockId == .custom
+		if self.block.blockId == .activities || self.block.blockId == .custom
 		{
 			return block.blockId.rawValue
 		}
 		
-		return block.blockId.rawValue
-	}
-	
-	func getDisplayNameWithBlock() -> String
-	{
-		return self.getDisplayName() + " Block"
+		return block.blockId.rawValue + (appendBlock ? " Block" : "")
 	}
 	
 	func getColor() -> String
@@ -621,14 +609,14 @@ class BlockAnalyst
 	
 	func getPreviousBlock() -> Block?
 	{
-		Debug.out("Checking previous block")
+//		Debug.out("Checking previous block")
 		if isFirstBlock() { return nil }
 		
-		Debug.out("Not previous block")
+//		Debug.out("Not previous block")
 		
 		if let blocks = ScheduleManager.instance.blockList(id: self.block.weekday)
 		{
-			Debug.out("Block list")
+//			Debug.out("Block list")
 
 			var found = false // If the block has been found return the next one in series
 			for block in blocks.reversed()
@@ -677,5 +665,5 @@ extension TimeContainer
 
 protocol ScheduleUpdateHandler
 {
-	func scheduleDidUpdate(didUpdateSuccessfully: Bool, newSchedule: inout [DayID: Weekday])
+	func scheduleDidUpdate(didUpdateSuccessfully: Bool)
 }

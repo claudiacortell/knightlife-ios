@@ -42,11 +42,8 @@ class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 			UserPrefsManager.instance.addHandler(self)
 		}
 		
-//		self.tabBarController?.tabBar.items![0].isEnabled = false
 		self.tabBarController?.tabBar.items![0].imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
-//		self.tabBarController?.tabBar.items![1].isEnabled = false
 		self.tabBarController?.tabBar.items![1].imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
-//		self.tabBarController?.tabBar.items![2].isEnabled = false
 		self.tabBarController?.tabBar.items![2].imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
 		
 		if self.scheduleUpdated || self.settingsUpdated || self.firstOpen
@@ -80,7 +77,7 @@ class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 		self.updateCurInfo(false)
 	}
 	
-	func scheduleDidUpdate(didUpdateSuccessfully: Bool, newSchedule: inout [DayID: Weekday])
+	func scheduleDidUpdate(didUpdateSuccessfully: Bool)
 	{
 		if self.isViewLoaded && didUpdateSuccessfully
 		{
@@ -91,8 +88,10 @@ class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 		}
 	}
 	
-	func prefsDidUpdate(manager: UserPrefsManager, change: UserPrefsManager.PrefsChange)
+	func prefsDidUpdate()
 	{
+		Debug.out("UPDATINGGGGGG")
+		
 		if self.isViewLoaded
 		{
 			self.updateCurInfo(true)
@@ -150,7 +149,7 @@ class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 			switch dayInfo.scheduleState
 			{
 			case .inClass:
-				return dayInfo.curBlock!.analyst.getDisplayNameWithBlock()
+				return dayInfo.curBlock!.analyst.getDisplayName()
 			case .beforeSchool:
 				return "School Starts"
 			case .beforeSchoolGetToClass:
@@ -204,7 +203,7 @@ class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 			
 			if dayInfo.nextBlock != nil
 			{
-				return dayInfo.nextBlock!.analyst.getDisplayNameWithBlock()
+				return dayInfo.nextBlock!.analyst.getDisplayName()
 			}
 		}
 		return ""
@@ -220,7 +219,7 @@ class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 				
 				let finalTime = "\(analyst.getStartTime().toFormattedString()) - \(analyst.getEndTime().toFormattedString())"
 				
-				let newLabel = Label(bL: analyst.getDisplayLetter(), cN: analyst.getDisplayNameWithBlock(), cT: finalTime, c: analyst.getColor())
+				let newLabel = Label(bL: analyst.getDisplayLetter(), cN: analyst.getDisplayName(), cT: finalTime, c: analyst.getColor())
 				labels.append(newLabel)
 			}
 		}
@@ -241,7 +240,7 @@ class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 			let nextBlock = analyst.getNextBlock()
 			let minutesToEnd = TimeUtils.timeToDateInMinutes(to: analyst.getEndTime().asDate())
 			
-			return (minutesToEnd, curBlock!, nextBlock!, .inClass) // Return the time until the end of the class
+			return (minutesToEnd, curBlock!, nextBlock, .inClass) // Return the time until the end of the class
 		} else
 		{
 			let curDate = Date()
