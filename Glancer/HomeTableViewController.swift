@@ -75,7 +75,7 @@ class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 		}
 	}
 	
-	func timerCall()
+	@objc func timerCall()
 	{
 		self.updateCurInfo(false)
 	}
@@ -150,7 +150,7 @@ class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 			switch dayInfo.scheduleState
 			{
 			case .inClass:
-				return dayInfo.curBlock!.analyst.getDisplayName()
+				return dayInfo.curBlock!.analyst.getDisplayNameWithBlock()
 			case .beforeSchool:
 				return "School Starts"
 			case .beforeSchoolGetToClass:
@@ -173,13 +173,14 @@ class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 		if DayID.weekdays().contains(self.dayId) // Is a weekday
 		{
 			let dayInfo = getCurrentScheduleInfo()
+//			var formattedMinutes = "\(floor(Double(dayInfo.minutesRemaining / 60))):\(dayInfo.minutesRemaining % 60)" // Formatted time left in block. HH:MM
 			
 			switch dayInfo.scheduleState
 			{
 			case .inClass:
-				return "\(dayInfo.minutesRemaining) minutes left"
+				return "\(dayInfo.minutesRemaining) left"
 			case .beforeSchool:
-				return "In \(dayInfo.minutesRemaining) minutes"
+				return "In \(dayInfo.minutesRemaining)"
 			case .beforeSchoolGetToClass:
 				return "In \(dayInfo.minutesRemaining) minutes"
 			case .afterSchool:
@@ -203,7 +204,7 @@ class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 			
 			if dayInfo.nextBlock != nil
 			{
-				return dayInfo.nextBlock!.analyst.getDisplayName()
+				return dayInfo.nextBlock!.analyst.getDisplayNameWithBlock()
 			}
 		}
 		return ""
@@ -219,7 +220,7 @@ class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 				
 				let finalTime = "\(analyst.getStartTime().toFormattedString()) - \(analyst.getEndTime().toFormattedString())"
 				
-				let newLabel = Label(bL: analyst.getDisplayLetter(), cN: analyst.getDisplayName(), cT: finalTime, c: analyst.getColor())
+				let newLabel = Label(bL: analyst.getDisplayLetter(), cN: analyst.getDisplayNameWithBlock(), cT: finalTime, c: analyst.getColor())
 				labels.append(newLabel)
 			}
 		}
@@ -291,14 +292,14 @@ class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 	{
 		if (ScheduleManager.instance.scheduleLoaded)
 		{
-			let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! WeekTableViewCell
+			let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! BlockTableViewCell
 			let label = labels[(indexPath as NSIndexPath).row]
 			cell.label = label
 			
 			return cell
 		} else
 		{
-			let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! WeekTableViewCell
+			let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! BlockTableViewCell
 			let label = Label(bL: "", cN: "", cT: "", c: "999999")
 			cell.label = label
 			

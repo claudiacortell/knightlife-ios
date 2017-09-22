@@ -96,7 +96,7 @@ class ScheduleManager: PrefsUpdateHandler
 			{
 				self.onVacation = !(data[CallKeys.PUSH] as! Bool)
 				
-//				print(data) // Debugging
+				Debug.out("\(data)") // Debugging
 				
 				var newSchedule: [DayID: Weekday] = [:]
 				
@@ -127,16 +127,22 @@ class ScheduleManager: PrefsUpdateHandler
 							continue
 						}
 						
-						Debug.out("Got the right number of everything.")
+//						Debug.out("Got the right number of everything.")
 						
 						var blockLibrary: [Block] = []
 						for y in 0..<blocks!.count
 						{
 							var block = Block()
 							
-							var rawId = blocks![y]
-							rawId = Utils.substring(rawId, StartIndex: 0, EndIndex: rawId.characters.count - (rawId.characters.count == 2 ? 1 : 0))
-							var blockId = BlockID.fromRaw(raw: rawId) // Get block value even if it's a lunch block
+							let rawId = blocks![y]
+							
+//							Debug.out("rawId A: \(rawId)")
+							
+							let trimmedRawId = Utils.substring(rawId, StartIndex: 0, EndIndex: rawId.characters.count - (rawId.characters.count == 2 ? 1 : 0))
+							
+//							Debug.out("trimmedRawId B: \(trimmedRawId)")
+							
+							var blockId = BlockID.fromRaw(raw: trimmedRawId) // Get block value even if it's a lunch block
 							if blockId == nil
 							{
 								blockId = BlockID.custom
@@ -144,9 +150,15 @@ class ScheduleManager: PrefsUpdateHandler
 							
 //							-----------------------------------------------
 //							Below: a very hacky chunk of code that sets a block as a lunch block if the recieved block contains a 1 or 2 at the end.
-							let lunchId = blocks![y].characters.last
-							block.lunchBlockNumber = Int(String(describing: lunchId))
-							if block.lunchBlockNumber != 1 && block.lunchBlockNumber != 2 { block.lunchBlockNumber = nil } // If it isn't a 1 or a 2 then it isn't valid.
+							let lunchId = rawId.last
+							if lunchId != nil
+							{
+								if let lunchBlockNumber = Int(String(describing: lunchId!))
+								{
+									block.lunchBlockNumber = lunchBlockNumber
+									if block.lunchBlockNumber != 1 && block.lunchBlockNumber != 2 { block.lunchBlockNumber = nil } // If it isn't a 1 or a 2 then it isn't valid.
+								}
+							}
 //							-----------------------------------------------
 							
 							block.blockId = blockId!
@@ -154,8 +166,7 @@ class ScheduleManager: PrefsUpdateHandler
 							block.endTime = TimeContainer(endTimes![y])
 							block.startTime = TimeContainer(startTimes![y])
 							
-//							Debug.out("Block ID:\(block.blockId) Day:\(block.weekday) EndTime:\(block.endTime.timeString) StartTime:\(block.startTime.timeString)")
-							Debug.out("Block: \(block)")
+//							Debug.out("Block: \(block)")
 							
 							blockLibrary.append(block)
 						}
@@ -217,9 +228,18 @@ class ScheduleManager: PrefsUpdateHandler
 	
 	func updateLunch(_ updateHandlers: Bool?)
 	{
+		var updated = false
 		for (dayId, weekday) in self.weekSchedule
 		{
-			self.updateLunch(dayId: dayId, day: weekday, updateHandlers)
+			if self.updateLunch(dayId: dayId, day: weekday, updateHandlers)
+			{
+				updated = true
+			}
+		}
+		
+		if updateHandlers != nil && updateHandlers!
+		{
+			self.updateHandlers(updated)
 		}
 	}
 	
@@ -251,12 +271,11 @@ class ScheduleManager: PrefsUpdateHandler
 		return nil
 	}
 	
-	private func updateLunch(dayId: DayID, day: Weekday, _ updateHandlers: Bool?)
+	private func updateLunch(dayId: DayID, day: Weekday, _ updateHandlers: Bool?) -> Bool
 	{
 		let flip: Bool = UserPrefsManager.instance.lunchSwitches[dayId]!
-		var updated: Bool = false
 		
-		for i in 0..<day.blocks.count
+		for i in 0..<day.blocks.count // Use this iterator so we can modify block
 		{
 			var block = day.blocks[i]
 			
@@ -287,12 +306,7 @@ class ScheduleManager: PrefsUpdateHandler
 				}
 			}
 			
-			updated = true
-		}
-	
-		if updateHandlers != nil && updateHandlers!
-		{
-			self.updateHandlers(updated)
+			print("Block: \(block)\n")
 		}
 	}
 }
@@ -407,7 +421,7 @@ enum BlockID: String // Don't touch this either for good measure unless like we 
 		return nil
 	}
 	
-	static func values() -> [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x, .custom] }
+	static func values() -> [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x, .custom, .activities, .lab] }
 	static func regularBlocks() -> [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x] }
 	static func academicBlocks() -> [BlockID] { return [.a, .b, .c, .d, .e, .f, .g] }
 }
@@ -422,6 +436,12 @@ struct Weekday
 struct Block
 {
 	var analyst: BlockAnalyst // A middle man that interprets all the data in Block and makes it easier to get what you want it's pretty cool really
+	{
+		get
+		{
+			return BlockAnalyst(self)
+		}
+	}
 	
 	var blockId: BlockID! // E.G. A, B, C, D, E
 	var weekday: DayID!
@@ -438,12 +458,6 @@ struct Block
 	
 	var isFirstBlock: Bool = false
 	var isLastBlock: Bool = false
-	
-	init()
-	{
-		analyst = BlockAnalyst()
-		analyst.setBlock(self)
-	}
 }
 
 extension Block
@@ -455,13 +469,23 @@ extension Block
 	
 	public static func ==(lhs: Block, rhs: Block) -> Bool
 	{
-		return lhs.blockId == rhs.blockId && lhs.weekday == rhs.weekday && lhs.startTime == rhs.startTime && lhs.endTime == rhs.endTime && lhs.isFirstBlock && rhs.isFirstBlock && lhs.isLastBlock == rhs.isLastBlock && (lhs.hasOverridenDisplayName ? lhs.overrideDisplayName! == rhs.overrideDisplayName! : true) && (lhs.hasOverridenStartTime ? lhs.overrideStartTime! == rhs.overrideStartTime! : true) && (lhs.hasOverridenEndTime ? lhs.overrideEndTime! == rhs.overrideEndTime! : true) // Checks if all values are equal
+//		Debug.out("Equal?????")
+		return
+			lhs.blockId == rhs.blockId &&
+			lhs.weekday == rhs.weekday &&
+			lhs.startTime == rhs.startTime &&
+			lhs.endTime == rhs.endTime &&
+			lhs.isFirstBlock == rhs.isFirstBlock &&
+			lhs.isLastBlock == rhs.isLastBlock &&
+			(lhs.hasOverridenDisplayName ? lhs.overrideDisplayName! == rhs.overrideDisplayName! : true) &&
+			(lhs.hasOverridenStartTime ? lhs.overrideStartTime! == rhs.overrideStartTime! : true) &&
+			(lhs.hasOverridenEndTime ? lhs.overrideEndTime! == rhs.overrideEndTime! : true) // Checks if all values are equal
 	}
 }
 
 class BlockAnalyst
 {
-	private var block: Block!
+	fileprivate var block: Block!
 	
 	var meta: UserPrefsManager.BlockMeta?
 	{
@@ -474,19 +498,8 @@ class BlockAnalyst
 			return nil
 		}
 	}
-	var hasMeta: Bool
-	{
-		get
-		{
-			return self.meta != nil
-		}
-	}
 	
-	fileprivate init()
-	{
-	}
-	
-	fileprivate func setBlock(_ block: Block)
+	fileprivate init(_ block: Block)
 	{
 		self.block = block
 	}
@@ -503,12 +516,20 @@ class BlockAnalyst
 	
 	func getDisplayLetter() -> String
 	{
+		if block.blockId == .lab
+		{
+			if let previous = block.analyst.getPreviousBlock() // If it's a lab return the previous block letter + L
+			{
+				return Utils.substring(previous.analyst.getDisplayLetter(), StartIndex: 0, EndIndex: 1) + "L" // Return the first two letters. This should only return the first letter if it's a 1 letter string.
+			}
+		}
+		
 		if block.hasOverridenDisplayName
 		{
 			var firstTwoLetters = Utils.substring(block.overrideDisplayName!, StartIndex: 0, EndIndex: 2)
 			let firstLetter = String(describing: firstTwoLetters.characters.first)
 			
-			return BlockID.fromRaw(raw: firstLetter) == nil ? firstLetter : firstTwoLetters // If the first letter isalready a block then return the first two letters
+			return BlockID.fromRaw(raw: firstLetter) == nil ? firstLetter : firstTwoLetters // If the first letter isalready a block then return the first two letters. This is just to avoid ambiguity
 		}
 		
 		return Utils.substring(self.block.blockId.rawValue, StartIndex: 0, EndIndex: 2) // Return the first two letters. This should only return the first letter if it's a 1 letter string.
@@ -530,9 +551,12 @@ class BlockAnalyst
 			return block.overrideDisplayName!
 		}
 		
-		if self.hasMeta && self.meta!.customName != nil
+		if let meta = self.meta
 		{
-			return self.meta!.customName!
+			if let name = meta.customName
+			{
+				return name
+			}
 		}
 		
 		if self.block.blockId == .activities || self.block.blockId == .lab || self.block.blockId == .custom
@@ -540,7 +564,12 @@ class BlockAnalyst
 			return block.blockId.rawValue
 		}
 		
-		return block.blockId.rawValue + " Block"
+		return block.blockId.rawValue
+	}
+	
+	func getDisplayNameWithBlock() -> String
+	{
+		return self.getDisplayName() + " Block"
 	}
 	
 	func getColor() -> String
@@ -554,9 +583,9 @@ class BlockAnalyst
 			}
 		}
 		
-		if self.hasMeta
+		if let meta = self.meta
 		{
-			return self.meta!.customColor
+			return meta.customColor
 		}
 		return "999999"
 	}
@@ -592,14 +621,19 @@ class BlockAnalyst
 	
 	func getPreviousBlock() -> Block?
 	{
+		Debug.out("Checking previous block")
 		if isFirstBlock() { return nil }
+		
+		Debug.out("Not previous block")
 		
 		if let blocks = ScheduleManager.instance.blockList(id: self.block.weekday)
 		{
+			Debug.out("Block list")
+
 			var found = false // If the block has been found return the next one in series
 			for block in blocks.reversed()
 			{
-				if found { return block }
+				if found { return block  }
 				if block == self.block { found = true } // Identify the current iterator block as this one.
 			}
 			return nil
@@ -626,7 +660,10 @@ extension TimeContainer
 	
 	func toFormattedString() -> String
 	{
-		let hour = String(Int(Utils.substring(timeString, StartIndex: 1, EndIndex: 3))! % 12)
+		var hourInt = Int(Utils.substring(timeString, StartIndex: 1, EndIndex: 3))!
+		hourInt = hourInt % 12 == 0 ? hourInt : hourInt % 12 // If the hour is 12 let it be, otherwise change to the remainder E.G. 1:30
+		let hour = String(hourInt)
+		
 		let minute = Utils.substring(timeString, StartIndex: 4, EndIndex: 6)
 		
 		return "\(hour):\(minute)"

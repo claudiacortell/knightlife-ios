@@ -42,7 +42,7 @@ class Storage
 //	------------------------------------------------------------------------------------------
 
 	private static let directory = "group.vishnu.squad.widget"
-	private static let defaults = UserDefaults(suiteName: directory)!
+	private static let defaults = UserDefaults.standard
 	
 	static func has(_ key: String) -> Bool
 	{

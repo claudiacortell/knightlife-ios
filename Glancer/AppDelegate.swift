@@ -56,8 +56,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 			Storage.DB_SAVED.set(data: false)
 		}
 
-		print("Device stored in database: \(savedInDB)");
-
         let tokenStringPub = tokenString
 		
         if (!savedInDB)
@@ -84,8 +82,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
                 }
                 
                 let responseString = String(data: data, encoding: .utf8)
-                print("responseString = \(responseString!)")
-                
+//                print("responseString = \(responseString!)")
+				
             }
 			
             task.resume()

@@ -15,8 +15,20 @@ class WeekTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
     var timer = Timer()
     
     @IBOutlet weak var segControl: UISegmentedControl!
-    
-	var dayId: DayID = .monday
+	
+	private var _dayId: DayID = .monday
+	var dayId: DayID
+	{
+		get
+		{
+			return self._dayId
+		}
+		set
+		{
+			self._dayId = newValue
+			self.generateWeekData()
+		}
+	}
 
     var labels: [Label] = []
 	
@@ -128,7 +140,7 @@ class WeekTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 				
 				let finalTime = "\(analyst.getStartTime().toFormattedString()) - \(analyst.getEndTime().toFormattedString())"
 				
-				let newLabel = Label(bL: analyst.getDisplayLetter(), cN: analyst.getDisplayName(), cT: finalTime, c: analyst.getColor())
+				let newLabel = Label(bL: analyst.getDisplayLetter(), cN: analyst.getDisplayNameWithBlock(), cT: finalTime, c: analyst.getColor())
 				labels.append(newLabel)
 			}
 		}

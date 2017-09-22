@@ -135,7 +135,7 @@ class TimeUtils
 		let hours = components.hour!
 		let minutes = components.minute!
 		
-		return (hours * 60) + minutes // Convert the hours to minutes then add the other minutes.
+		return (hours * 60) + minutes + 1 // Convert the hours to minutes then add the other minutes. Add one to account for seconds difference that's ignored.
 	}
 }
 
