@@ -58,10 +58,7 @@ class ViewController: UIViewController, UITextFieldDelegate
     override func viewDidLoad()
 	{
         super.viewDidLoad()
-        self.tabBarController?.tabBar.items![0].imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
-        self.tabBarController?.tabBar.items![1].imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
-        self.tabBarController?.tabBar.items![2].imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
-        
+		
         //this actauly holds the UI elements, you will make these prgramtically but add the "UITextField" to "ArrayOfField"
 		self.blockTextFields[BlockID.a] = Ablock
 		self.blockTextFields[BlockID.b] = Bblock

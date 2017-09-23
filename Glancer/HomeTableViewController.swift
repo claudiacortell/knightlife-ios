@@ -40,10 +40,6 @@ class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 			UserPrefsManager.instance.addHandler(self)
 		}
 		
-		self.tabBarController?.tabBar.items![0].imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
-		self.tabBarController?.tabBar.items![1].imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
-		self.tabBarController?.tabBar.items![2].imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
-		
 		if self.scheduleUpdated || self.settingsUpdated || self.firstOpen
 		{
 			self.scheduleUpdated = false
