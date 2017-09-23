@@ -64,16 +64,6 @@ class ScheduleManager: PrefsUpdateHandler
 	}
 	
 	@discardableResult
-	func loadBlocksIfNotLoaded() -> Bool
-	{
-		if self.scheduleLoaded
-		{
-			return false
-		}
-		return loadBlocks()
-	}
-	
-	@discardableResult
 	func loadBlocks() -> Bool
 	{
 		var success = true
@@ -189,7 +179,7 @@ class ScheduleManager: PrefsUpdateHandler
 					}
 				}
 				
-				Debug.out("Done with loading schedule. NewSchedule size: \(newSchedule.count)")
+				Debug.out("Done with loading schedule")
 				
 				self.weekSchedule.removeAll()
 				self.weekSchedule = newSchedule
@@ -215,9 +205,12 @@ class ScheduleManager: PrefsUpdateHandler
 		return success
 	}
 	
-	func prefsDidUpdate()
+	func prefsDidUpdate(_ type: UserPrefsManager.PrefsUpdateType)
 	{
-		self.updateLunch(true)
+		if type == .load || type == .lunch
+		{
+			self.updateLunch(true)
+		}
 	}
 	
 	func updateLunch(_ updateHandlers: Bool?)

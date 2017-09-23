@@ -14,9 +14,22 @@ class UserPrefsManager
 	
 	private var updateHandlers: [PrefsUpdateHandler] = []
 
+	private func notifyHandlers(_ type: PrefsUpdateType)
+	{
+		for handler in self.updateHandlers
+		{
+			handler.prefsDidUpdate(type)
+		}
+	}
+	
 	func addHandler(_ handler: PrefsUpdateHandler)
 	{
 		updateHandlers.append(handler)
+	}
+	
+	enum PrefsUpdateType
+	{
+		case meta, lunch, load
 	}
 	
 	struct BlockMeta
@@ -42,6 +55,12 @@ class UserPrefsManager
 		.lab: BlockMeta(.lab, "999999")
 	]
 	
+	private class AccessKeys
+	{
+		fileprivate static let NAME = "name"
+		fileprivate static let COLOR = "color"
+	}
+	
 	private var allowMetaChanges: [BlockID] = [ .a, .b, .c, .d, .e, .f, .g ]
 	
 	private var lunchSwitches: [DayID: Bool] =
@@ -55,7 +74,7 @@ class UserPrefsManager
 	
 	init()
 	{
-		self.reloadPrefs()
+		self.loadPrefs()
 	}
 	
 	func getSwitch(id: DayID) -> Bool?
@@ -67,11 +86,11 @@ class UserPrefsManager
 		return nil
 	}
 	
-	func setSwitch(id: DayID, val: Bool)
+	func setSwitch(id: DayID, val: Bool, save: Bool = true)
 	{
 		self.lunchSwitches[id] = val
-		self.savePrefs()
-		self.notifyHandlers()
+		if save { self.saveLunch() }
+		self.notifyHandlers(.lunch)
 	}
 	
 	func getMeta(id: BlockID) -> BlockMeta?
@@ -83,89 +102,68 @@ class UserPrefsManager
 		return nil
 	}
 	
-	func setMeta(id: BlockID, meta: BlockMeta)
+	func setMeta(id: BlockID, meta: BlockMeta, save: Bool = true)
 	{
 		if self.allowMetaChanges.contains(id)
 		{
-			Debug.out("Allowed!!!!!!")
+			if let curMeta = self.blockMeta[id]
+			{
+				if curMeta.customColor != meta.customColor { Debug.out("Changed \(id.rawValue):Color from \(curMeta.customColor) to \(meta.customColor)") }
+				if curMeta.customName != meta.customName { Debug.out("Changed \(id.rawValue):Name from \(curMeta.customName ?? "null") to \(meta.customName ?? "null")") }
+			}
 			
 			self.blockMeta[id] = meta
-			self.savePrefs()
-			self.notifyHandlers()
+			if save { self.saveMeta() }
+			self.notifyHandlers(.meta)
 		}
 	}
 	
-	private func notifyHandlers()
-	{
-		for handler in self.updateHandlers
-		{
-			handler.prefsDidUpdate()
-		}
-	}
-	
-	func reloadPrefs()
+	func loadPrefs()
 	{
 		// get/set values for class names
 		if Storage.storageMethodUpdated // Account for old storage method to keep legacy data
 		{
-			Debug.out("Method updated.")
-			
 			// Load lunches
-			for (dayId, _) in self.lunchSwitches // Iterate through the default day settings for first lunch
+			if let switches = Storage.USER_SWITCHES.getValue() as? [String: Bool]
 			{
-				let lunchStorage = Storage.LUNCH_SWITCHES.child(name: dayId.rawValue)
-				if lunchStorage.exists()
+				for (rawDayId, val) in switches
 				{
-					if let set = lunchStorage.getValue() as? Bool
+					if let dayId = DayID.fromRaw(raw: rawDayId)
 					{
-						self.lunchSwitches[dayId] = set
+						self.setSwitch(id: dayId, val: val, save: false)
 					}
 				}
 			}
 			
-			// Load blocks
-			for (blockId) in self.blockMeta.keys
+			if let meta = Storage.USER_META.getValue() as? [String:[String:String?]]
 			{
-				Debug.out("------------------------")
-				Debug.out("BlockID: \(blockId)")
-
-				if var meta = self.getMeta(id: blockId)
+				for (rawBlockId, keyPairs) in meta
 				{
-					Debug.out("Meta: \(meta)")
-
-					if !self.allowMetaChanges.contains(blockId) { continue }
-					
-					Debug.out("Allow meta")
-
-					let metaStorage = Storage.BLOCK_META.child(name: blockId.rawValue)
-					let nameStorage = metaStorage.child(name: "name")
-					let colorStorage = metaStorage.child(name: "color")
-					
-					if nameStorage.exists()
+					if let blockId = BlockID.fromRaw(raw: rawBlockId)
 					{
-						Debug.out("Name storage exists")
-
-						if let parsed = nameStorage.getValue() as? String
+						if self.allowMetaChanges.contains(blockId)
 						{
-							meta.customName = parsed
-							Debug.out(parsed)
+							if var defaultMeta = self.getMeta(id: blockId)
+							{
+								for (key, val) in keyPairs
+								{
+									switch key
+									{
+									case AccessKeys.NAME:
+										if val != nil { defaultMeta.customName = val! }
+										break
+									case AccessKeys.COLOR:
+										if val != nil { defaultMeta.customColor = val! }
+										break
+									default:
+										break
+									}
+								}
+								
+								self.setMeta(id: blockId, meta: defaultMeta, save: false)
+							}
 						}
 					}
-					
-					if colorStorage.exists()
-					{
-						Debug.out("Color storage exists")
-
-						if let parsed = colorStorage.getValue() as? String
-						{
-							Debug.out("Got parse! \(parsed)")
-
-							meta.customColor = parsed
-							Debug.out(parsed)
-						}
-					}
-					
-					self.setMeta(id: blockId, meta: meta)
 				}
 			}
 		} else
@@ -214,49 +212,47 @@ class UserPrefsManager
 			Storage.deleteOldMethodRemnants() // Enable when we're ok getting rid of the old storage data.
 		}
 		
-		self.notifyHandlers()
+		self.notifyHandlers(.load)
 	}
 	
-	private func savePrefs()
+	private func saveLunch()
 	{
-		for (dayId, val) in self.lunchSwitches // Iterate through the default day settings for first lunch
+		Debug.out("Attempting to save lunches...")
+		var map: [String:Bool] = [:]
+		for (dayId, val) in self.lunchSwitches
 		{
-//			Debug.out("Saving: \(dayId), \(val)")
-			
-			let lunchStorage = Storage.LUNCH_SWITCHES.child(name: dayId.rawValue)
-			lunchStorage.set(data: val)
+			map[dayId.rawValue] = val
 		}
 		
-		// Load blocks
+		Storage.USER_SWITCHES.set(data: map)
+		Debug.out("Finished saving lunches...")
+	}
+	
+	private func saveMeta()
+	{
+		Debug.out("Attempting to save meta...")
+		var map: [String:[String:String?]] = [:]
 		for (blockId) in self.blockMeta.keys
 		{
+			if !self.allowMetaChanges.contains(blockId) { continue }
+
+			var keyValMap: [String: String?] = [:]
+			
 			if let meta = self.getMeta(id: blockId)
 			{
-				if !self.allowMetaChanges.contains(blockId) { continue }
-				
-				let metaStorage = Storage.BLOCK_META.child(name: blockId.rawValue)
-				let nameStorage = metaStorage.child(name: "name")
-				let colorStorage = metaStorage.child(name: "color")
-				
-//				Debug.out("Saving: \(blockId), \(meta.customColor), \(meta.customName)")
-				
-				if let name = meta.customName
-				{
-					nameStorage.set(data: "\(name)")
-				} else
-				{
-					nameStorage.delete()
-				}
-				
-				colorStorage.set(data: "\(meta.customColor!)")
+				keyValMap[AccessKeys.NAME] = meta.customName == nil ? nil : "\(meta.customName!)"
+				keyValMap[AccessKeys.COLOR] = meta.customColor == nil ? nil : "\(meta.customColor!)"
 			}
+			
+			map[blockId.rawValue] = keyValMap
 		}
 		
-//		self.reloadPrefs()
+		Storage.USER_META.set(data: map)
+		Debug.out("Finished saving meta...")
 	}
 }
 
 protocol PrefsUpdateHandler
 {
-	func prefsDidUpdate()
+	func prefsDidUpdate(_ type: UserPrefsManager.PrefsUpdateType)
 }

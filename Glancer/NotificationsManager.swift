@@ -39,7 +39,7 @@ class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 		}
 	}
 	
-	func prefsDidUpdate()
+	func prefsDidUpdate(_ type: UserPrefsManager.PrefsUpdateType)
 	{
 		self.clearNotifications()
 		for dayId in DayID.values()

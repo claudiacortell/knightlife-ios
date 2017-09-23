@@ -17,9 +17,8 @@ class Storage
 	static let OLD_FIRSTLUNCH_VALUES = StorageKey("SwitchValues")
 	static let OLD_COLOR_IDS = StorageKey("ColorIDs")
 	
-	static let USER = StorageKey("user")
-	static let LUNCH_SWITCHES = USER.child(name: "lunch_switches")
-	static let BLOCK_META = USER.child(name: "block_meta")
+	static let USER_SWITCHES = StorageKey("userswitches")
+	static let USER_META = StorageKey("usermeta")
 	
 //	------------------------------------------------------------------------------------------
 // This is used while switching from their old data storage system to my new one. If this whole system is removed then users who haven't updated (to the new version as of September 14 2017) will have their prefs wiped which isn't the end of the world i guess. This can all be deleted at some point. It's just to phase the active users into the new system which consists of better labeled hierchy and key:value pairs.
@@ -110,7 +109,7 @@ class StorageKey
 	
 	func child(name: String) -> StorageKey
 	{
-		return StorageKey("\(self.key).\(name)")
+		return StorageKey("\(self.key)_\(name)")
 	}
 	
 	func delete()

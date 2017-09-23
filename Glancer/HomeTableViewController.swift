@@ -86,7 +86,7 @@ class HomeTableViewController: UITableViewController, ScheduleUpdateHandler, Pre
 		}
 	}
 	
-	func prefsDidUpdate()
+	func prefsDidUpdate(_ type: UserPrefsManager.PrefsUpdateType)
 	{
 		if self.isViewLoaded
 		{
