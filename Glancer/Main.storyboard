@@ -173,7 +173,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CSq-sm-yNf" customClass="WeekBlockTableController" customModule="Glancer" customModuleProvider="target">
-                                <rect key="frame" x="5" y="20" width="404" height="715"/>
+                                <rect key="frame" x="5" y="20" width="404" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -331,7 +331,7 @@
                             <constraint firstItem="qtK-Oz-2Nw" firstAttribute="leading" secondItem="grn-ra-12S" secondAttribute="leading" id="cqZ-fe-8xf"/>
                             <constraint firstAttribute="trailing" secondItem="CSq-sm-yNf" secondAttribute="trailing" constant="5" id="iNs-lT-Ads"/>
                             <constraint firstAttribute="trailing" secondItem="qtK-Oz-2Nw" secondAttribute="trailing" id="m6M-KO-eD1"/>
-                            <constraint firstItem="vBo-lo-cqL" firstAttribute="top" secondItem="CSq-sm-yNf" secondAttribute="bottom" constant="-48" id="n5t-5X-xuN"/>
+                            <constraint firstItem="vBo-lo-cqL" firstAttribute="top" secondItem="CSq-sm-yNf" secondAttribute="bottom" id="n5t-5X-xuN"/>
                             <constraint firstAttribute="trailing" secondItem="bIi-l5-N2P" secondAttribute="trailing" id="y1t-X2-8li"/>
                         </constraints>
                     </view>

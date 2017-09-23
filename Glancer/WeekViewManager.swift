@@ -38,6 +38,7 @@ class WeekViewController: UIViewController, ScheduleUpdateHandler, PrefsUpdateHa
 			self.scheduleUpdated = false
 			self.settingsUpdated = false
 			
+			self.updateLabel()
 			self.tableView.generateWeekData()
 		}
 		
@@ -46,7 +47,7 @@ class WeekViewController: UIViewController, ScheduleUpdateHandler, PrefsUpdateHa
 	
 	@IBAction func segControlChanged(_ sender: AnyObject)
 	{
-		self.dayLabel.text = DayID.fromId(segControl.selectedSegmentIndex)!.displayName
+		self.updateLabel()
 		self.tableView.dayIndexChanged(new: segControl.selectedSegmentIndex)
 	}
 	
@@ -70,6 +71,11 @@ class WeekViewController: UIViewController, ScheduleUpdateHandler, PrefsUpdateHa
 		{
 			self.settingsUpdated = true
 		}
+	}
+	
+	func updateLabel()
+	{
+		self.dayLabel.text = DayID.fromId(segControl.selectedSegmentIndex)!.displayName
 	}
 }
 
