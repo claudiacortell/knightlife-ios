@@ -226,12 +226,13 @@ class ScheduleManager: PrefsUpdateHandler
 				{
 					var block = blockList[i]
 					
-					if !block.isLunchBlock { continue }
+					if !block.hasLunchBlockNumber { continue }
 					
 					// Reset custom flags
 					block.overrideEndTime = nil
 					block.overrideStartTime = nil
 					block.overrideDisplayName = nil
+					block.isLunchBlock = false
 					
 					if flip // User has first lunch
 					{
@@ -239,6 +240,7 @@ class ScheduleManager: PrefsUpdateHandler
 						{
 							// Lunch
 							block.overrideDisplayName = "Lunch"
+							block.isLunchBlock = true
 						}
 					} else // User has second lunch
 					{
@@ -250,6 +252,7 @@ class ScheduleManager: PrefsUpdateHandler
 						{
 							block.overrideDisplayName = "Lunch"
 							block.overrideStartTime = day.secondLunchStart ?? nil // Set its start time to the start of lunch
+							block.isLunchBlock = true
 						}
 					}
 					
@@ -437,6 +440,7 @@ struct Block
 	var overrideEndTime: TimeContainer?
 	
 	var lunchBlockNumber: Int? // 1 or 2 for first or second lunch
+	var isLunchBlock: Bool = false
 	
 	var isFirstBlock: Bool = false
 	var isLastBlock: Bool = false
@@ -447,7 +451,7 @@ extension Block
 	var hasOverridenDisplayName: Bool { get { return self.overrideDisplayName != nil } }
 	var hasOverridenStartTime: Bool { get { return self.overrideStartTime != nil } }
 	var hasOverridenEndTime: Bool { get { return self.overrideEndTime != nil } }
-	var isLunchBlock: Bool { get { return self.lunchBlockNumber != nil } }
+	var hasLunchBlockNumber: Bool { get { return self.lunchBlockNumber != nil } }
 	
 	public static func ==(lhs: Block, rhs: Block) -> Bool
 	{
@@ -512,7 +516,7 @@ class BlockAnalyst
 		}
 		
 		let id = self.block.blockId.rawValue // Return the first two letters. This should only return the first letter if it's a 1 letter string.
-		if self.block.isLunchBlock
+		if self.block.hasLunchBlockNumber
 		{
 			return "\(id)\(self.block.lunchBlockNumber!)"
 		}

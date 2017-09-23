@@ -29,10 +29,7 @@ class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 				{
 					for block in blocks
 					{
-						if let meta = UserPrefsManager.instance.getMeta(id: block.blockId)
-						{
-							self.updateNotifications(day: dayId, block: block, meta: meta)
-						}
+						self.updateNotifications(block: block)
 					}
 				}
 			}
@@ -48,10 +45,7 @@ class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 			{
 				for block in blocks
 				{
-					if let meta = UserPrefsManager.instance.getMeta(id: block.blockId)
-					{
-						self.updateNotifications(day: dayId, block: block, meta: meta)
-					}
+					self.updateNotifications(block: block)
 				}
 			}
 		}
@@ -67,40 +61,39 @@ class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 		}
 	}
 	
-	func updateNotifications(day: DayID, block: Block, meta: UserPrefsManager.BlockMeta)
+	func updateNotifications(block: Block)
 	{
-		let blockName: String! = block.hasOverridenDisplayName ? block.overrideDisplayName : meta.customName
-		if (!ScheduleManager.instance.onVacation) // only perform notifications if we aren't on vacation
+		if !ScheduleManager.instance.onVacation
 		{
 			let notification: UILocalNotification = UILocalNotification()
-			var scheduledDate = block.startTime.asDate()
-			
 			notification.alertAction = "Knight Life"
-			
 			notification.repeatInterval = NSCalendar.Unit.weekOfYear
 			notification.soundName = UILocalNotificationDefaultSoundName;
+
+			let analyst = block.analyst
+			var date: Date = analyst.getStartTime().asDate()
 			
-			let today = TimeUtils.getDayOfWeekFromString(TimeUtils.currentDateAsString()) // 0 to 6 for Monday - Sunday
-			let dayMult = day
+			let blockStartDateId: Int = TimeUtils.getDayOfWeek(date: date)
+			let todayId: Int = TimeUtils.getDayOfWeek(date: Date())
 			
-			// TODO: Fix notifications
+			var dayMultiplier: Int = blockStartDateId - todayId
+			if dayMultiplier < 0 { dayMultiplier += 7 }
 			
-//			if (block.isLunchBlock)
-//			{
-//				notification.alertBody = blockName
-//				
-//				scheduledDate = day.secondLunchStart != nil ? day.secondLunchStart!.asDate() : scheduledDate
-//				scheduledDate = scheduledDate.addingTimeInterval(60 * 60 * 24 * dayMultiplier)
-//			} else
-//			{
-//				notification.alertBody = "5 minutes until " + blockName;
-//
-//				scheduledDate = scheduledDate.addingTimeInterval(-60*5) // call 5 minutes before the class starts
-//				scheduledDate = scheduledDate.addingTimeInterval(60 * 60 * 24 * dayMultiplier) // Register for the previous week so it for sure works this week
-//			}
-//
-//			notification.fireDate = scheduledDate
-//			UIApplication.shared.scheduleLocalNotification(notification)
+			if block.isLunchBlock
+			{
+				notification.alertBody = analyst.getDisplayName(true)
+				
+				date = date.addingTimeInterval(TimeInterval(60 * 60 * 24 * dayMultiplier))
+			} else
+			{
+				notification.alertBody = "5 minutes until \(analyst.getDisplayName(true))"
+				
+				date = date.addingTimeInterval(-60 * 5) // call 5 minutes before the class starts
+				date = date.addingTimeInterval(TimeInterval(60 * 60 * 24 * dayMultiplier)) // Register for the previous week so it for sure works this week
+			}
+			
+			notification.fireDate = date
+			UIApplication.shared.scheduleLocalNotification(notification)
 		}
 	}
 }

@@ -54,6 +54,23 @@ class TimeUtils
 		return weekDay!
 	}
 	
+	static func getDayOfWeek(date: Date) -> Int
+	{
+		let myCalendar = Calendar(identifier: Calendar.Identifier.gregorian)
+		let myComponents = (myCalendar as NSCalendar).components(.weekday, from: date)
+		var weekDay = myComponents.weekday
+		
+		if (weekDay == 1)
+		{
+			weekDay = 6
+		} else
+		{
+			weekDay = weekDay! - 2;
+		}
+		
+		return weekDay!
+	}
+	
 	static func timeToNSDate(_ time: String) -> Date
 	{
 		var currentDate = TimeUtils.currentDateAsString()
