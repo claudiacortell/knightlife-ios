@@ -1,14 +1,14 @@
 //
-//  BlockTableViewCell.swift
+//  Block2TableViewCell.swift
 //  Glancer
 //
-//  Created by Cassandra Kane on 11/29/15.
-//  Copyright (c) 2015 Vishnu Murale. All rights reserved.
+//  Created by Cassandra Kane on 12/30/15.
+//  Copyright © 2015 Vishnu Murale. All rights reserved.
 //
 
 import UIKit
 
-class BlockTableViewCell: UITableViewCell
+class WeekTableViewCell: UITableViewCell
 {
     @IBOutlet weak var blockLetter: UILabel!
     @IBOutlet weak var className: UILabel!

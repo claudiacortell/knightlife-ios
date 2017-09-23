@@ -8,13 +8,15 @@
 
 import Foundation
 
-class Label {
+struct Label
+{
     var blockLetter: String = ""
     var className: String = ""
     var classTimes: String = ""
     var color: String = ""
     
-    init(bL: String, cN: String, cT: String, c: String) {
+    init(bL: String, cN: String, cT: String, c: String)
+	{
         blockLetter = bL
         className = cN
         classTimes = cT
