@@ -512,7 +512,31 @@ class BlockAnalyst
 		
 		if block.hasOverridenDisplayName
 		{
-			return Utils.substring(block.overrideDisplayName!, StartIndex: 0, EndIndex: 2)
+			let displayName = block.overrideDisplayName!
+			if displayName.contains(" ") // 2+ words then make the block letter the first letter of each
+			{
+				let split = displayName.split(separator: " ")
+				var built = ""
+				var count = 0
+				
+				let acceptableCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".characters
+				for word in split
+				{
+					if count >= 2 { break }
+					if word.first != nil && acceptableCharacters.contains(word.first!)
+					{
+						built += String(describing: word.first!)
+					}
+					count+=1
+				}
+				
+				if built.count >= 2
+				{
+					return built
+				}
+			}
+			
+			return Utils.substring(displayName, StartIndex: 0, EndIndex: 2)
 		}
 		
 		let id = self.block.blockId.rawValue // Return the first two letters. This should only return the first letter if it's a 1 letter string.
