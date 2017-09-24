@@ -31,7 +31,7 @@ class ColorSelectionViewController: UIViewController
 			if var meta = UserPrefsManager.instance.getMeta(id: self.block!)
 			{
 				meta.customColor = id
-				UserPrefsManager.instance.setMeta(id: self.block!, meta: meta)
+				UserPrefsManager.instance.setMeta(id: self.block!, meta: &meta)
 			}
 		}
 		let tabBar: UITabBarController = segue.destination as! UITabBarController

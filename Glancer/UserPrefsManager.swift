@@ -36,7 +36,7 @@ class UserPrefsManager
 	{
 		init(_ blockId: BlockID, _ customColor: String) { self.blockId = blockId; self.customColor = customColor }
 		var blockId: BlockID! // E.G. A, B, C, D, E (Corresponds to Class ID)
-		var customName: String? // Same as block id by default. Can be changed to reflect user preferences
+		var customName: String?// Same as block id by default. Can be changed to reflect user preferences
 		var customColor: String!
 	}
 	
@@ -102,7 +102,7 @@ class UserPrefsManager
 		return nil
 	}
 	
-	func setMeta(id: BlockID, meta: BlockMeta, save: Bool = true)
+	func setMeta(id: BlockID, meta: inout BlockMeta, save: Bool = true)
 	{
 		if self.allowMetaChanges.contains(id)
 		{
@@ -110,6 +110,11 @@ class UserPrefsManager
 			{
 				if curMeta.customColor != meta.customColor { Debug.out("Changed \(id.rawValue):Color from \(curMeta.customColor) to \(meta.customColor)") }
 				if curMeta.customName != meta.customName { Debug.out("Changed \(id.rawValue):Name from \(curMeta.customName ?? "null") to \(meta.customName ?? "null")") }
+			}
+			
+			if meta.customName != nil && meta.customName!.count <= 0 // Prevent renaming to nothing.
+			{
+				meta.customName = nil
 			}
 			
 			self.blockMeta[id] = meta
@@ -160,7 +165,7 @@ class UserPrefsManager
 									}
 								}
 								
-								self.setMeta(id: blockId, meta: defaultMeta, save: false)
+								self.setMeta(id: blockId, meta: &defaultMeta, save: false)
 							}
 						}
 					}
@@ -199,7 +204,7 @@ class UserPrefsManager
 					if classColors.count > i { meta.customColor = classColors[i] }
 					if classNames.count > i { meta.customName = classNames[i] }
 					
-					self.setMeta(id: id, meta: meta)
+					self.setMeta(id: id, meta: &meta)
 				}
 			}
 			

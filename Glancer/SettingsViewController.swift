@@ -144,7 +144,7 @@ class ViewController: UIViewController, UITextFieldDelegate
 				if var meta = UserPrefsManager.instance.getMeta(id: block)
 				{
 					meta.customName = textField.text
-					UserPrefsManager.instance.setMeta(id: block, meta: meta)
+					UserPrefsManager.instance.setMeta(id: block, meta: &meta)
 					break
 				}
 			}
