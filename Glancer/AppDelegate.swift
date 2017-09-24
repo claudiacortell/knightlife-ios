@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         }
 		
 		ScheduleManager.instance.loadBlocks()
-        
+		
         return true
     }
     
