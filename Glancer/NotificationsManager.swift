@@ -53,11 +53,14 @@ class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 	
 	func clearNotifications()
 	{
+		Debug.out("Clearing notifications")
 		let app:UIApplication = UIApplication.shared
 		for Event in app.scheduledLocalNotifications!
 		{
 			let notification = Event
 			app.cancelLocalNotification(notification)
+			
+			Debug.out("Cancelling local notification: \(notification.alertBody)")
 		}
 	}
 	
@@ -65,6 +68,8 @@ class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 	{
 		if !ScheduleManager.instance.onVacation
 		{
+			Debug.out("Updating notifications for: \(block.weekday) - \(block.blockId)")
+			
 			let notification: UILocalNotification = UILocalNotification()
 			notification.alertAction = "Knight Life"
 			notification.repeatInterval = NSCalendar.Unit.weekOfYear
@@ -81,12 +86,12 @@ class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 			
 			if block.isLunchBlock
 			{
-				notification.alertBody = analyst.getDisplayName(true)
+				notification.alertBody = analyst.getDisplayName()
 				
 				date = date.addingTimeInterval(TimeInterval(60 * 60 * 24 * dayMultiplier))
 			} else
 			{
-				notification.alertBody = "5 minutes until \(analyst.getDisplayName(true))"
+				notification.alertBody = "5 minutes until \(analyst.getDisplayName())"
 				
 				date = date.addingTimeInterval(-60 * 5) // call 5 minutes before the class starts
 				date = date.addingTimeInterval(TimeInterval(60 * 60 * 24 * dayMultiplier)) // Register for the previous week so it for sure works this week

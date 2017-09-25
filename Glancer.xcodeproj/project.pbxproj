@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		5B22DE9C1BE2691800215F11 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B22DE9B1BE2691800215F11 /* libz.tbd */; };
 		5B22DE9E1BE2692E00215F11 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B22DE9D1BE2692E00215F11 /* libsqlite3.tbd */; };
-		5B49D0F51C76814B00645883 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B49D0F41C76814B00645883 /* HomeTableViewController.swift */; };
 		5B4A65791C14FD34001FE2B2 /* BlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4A65781C14FD34001FE2B2 /* BlockTableViewCell.swift */; };
 		5B93E4781BE26A1300D0D101 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B93E4771BE26A1300D0D101 /* Bolts.framework */; };
 		5B93E47B1BE26A6F00D0D101 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B93E47A1BE26A6F00D0D101 /* Parse.framework */; };
@@ -19,7 +18,6 @@
 		5BD285DD1B03CF29007A0472 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD285DC1B03CF29007A0472 /* AppDelegate.swift */; };
 		5BD285E41B03CF29007A0472 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BD285E31B03CF29007A0472 /* Images.xcassets */; };
 		5BD285E71B03CF29007A0472 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BD285E51B03CF29007A0472 /* LaunchScreen.xib */; };
-		5BD285F31B03CF29007A0472 /* GlancerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD285F21B03CF29007A0472 /* GlancerTests.swift */; };
 		5BD288291B03D218007A0472 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD288281B03D218007A0472 /* AudioToolbox.framework */; };
 		5BD2882B1B03D21E007A0472 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD2882A1B03D21E007A0472 /* CFNetwork.framework */; };
 		5BD2882D1B03D223007A0472 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD2882C1B03D223007A0472 /* CoreGraphics.framework */; };
@@ -29,6 +27,7 @@
 		5BD288351B03D23E007A0472 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD288341B03D23E007A0472 /* Security.framework */; };
 		5BD288391B03D24B007A0472 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD288381B03D24B007A0472 /* SystemConfiguration.framework */; };
 		740756CC1C33720A0039844B /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740756CB1C33720A0039844B /* Label.swift */; };
+		C03D148B1F79479C00211D28 /* HomeViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03D148A1F79479C00211D28 /* HomeViewManager.swift */; };
 		C06220E51F74A8930032A2EC /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06220E41F74A8930032A2EC /* Debug.swift */; };
 		C069CF771F6B697E001FE527 /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C069CF761F6B697E001FE527 /* NotificationsManager.swift */; };
 		C0707FBE1F69720800C7D2ED /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0707FBD1F69720800C7D2ED /* Schedule.swift */; };
@@ -65,7 +64,6 @@
 /* Begin PBXFileReference section */
 		5B22DE9B1BE2691800215F11 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		5B22DE9D1BE2692E00215F11 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		5B49D0F41C76814B00645883 /* HomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
 		5B4A65781C14FD34001FE2B2 /* BlockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockTableViewCell.swift; sourceTree = "<group>"; };
 		5B55DC2C1B27B21500D55EB9 /* Glancer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Glancer.entitlements; sourceTree = "<group>"; };
 		5B6B5F8D1C6A62BF00C53849 /* Glancer-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Glancer-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -81,8 +79,6 @@
 		5BD285E31B03CF29007A0472 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5BD285E61B03CF29007A0472 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		5BD285EC1B03CF29007A0472 /* GlancerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GlancerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5BD285F11B03CF29007A0472 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5BD285F21B03CF29007A0472 /* GlancerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlancerTests.swift; sourceTree = "<group>"; };
 		5BD288281B03D218007A0472 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		5BD2882A1B03D21E007A0472 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		5BD2882C1B03D223007A0472 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -92,6 +88,7 @@
 		5BD288341B03D23E007A0472 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		5BD288381B03D24B007A0472 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		740756CB1C33720A0039844B /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		C03D148A1F79479C00211D28 /* HomeViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewManager.swift; sourceTree = "<group>"; };
 		C06220E41F74A8930032A2EC /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		C069CF761F6B697E001FE527 /* NotificationsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
 		C0707FBD1F69720800C7D2ED /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
@@ -156,7 +153,6 @@
 			isa = PBXGroup;
 			children = (
 				5BD285D91B03CF29007A0472 /* Glancer */,
-				5BD285EF1B03CF29007A0472 /* GlancerTests */,
 				5BC261801B0EA7D700AEBAC1 /* Frameworks */,
 				5BD285D81B03CF29007A0472 /* Products */,
 				5B6B5F8D1C6A62BF00C53849 /* Glancer-Bridging-Header.h */,
@@ -179,7 +175,6 @@
 				5BD285DC1B03CF29007A0472 /* AppDelegate.swift */,
 				C0707FBD1F69720800C7D2ED /* Schedule.swift */,
 				5BD072471C74AEB40074B56D /* Main.storyboard */,
-				5B49D0F41C76814B00645883 /* HomeTableViewController.swift */,
 				5B4A65781C14FD34001FE2B2 /* BlockTableViewCell.swift */,
 				5BD072491C74AEE00074B56D /* SettingsViewController.swift */,
 				740756CB1C33720A0039844B /* Label.swift */,
@@ -194,6 +189,7 @@
 				C069CF761F6B697E001FE527 /* NotificationsManager.swift */,
 				C06220E41F74A8930032A2EC /* Debug.swift */,
 				C0A908C51F76C8BF008AAB3F /* WeekViewManager.swift */,
+				C03D148A1F79479C00211D28 /* HomeViewManager.swift */,
 			);
 			path = Glancer;
 			sourceTree = "<group>";
@@ -202,23 +198,6 @@
 			isa = PBXGroup;
 			children = (
 				5BD285DB1B03CF29007A0472 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		5BD285EF1B03CF29007A0472 /* GlancerTests */ = {
-			isa = PBXGroup;
-			children = (
-				5BD285F21B03CF29007A0472 /* GlancerTests.swift */,
-				5BD285F01B03CF29007A0472 /* Supporting Files */,
-			);
-			path = GlancerTests;
-			sourceTree = "<group>";
-		};
-		5BD285F01B03CF29007A0472 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				5BD285F11B03CF29007A0472 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -353,11 +332,11 @@
 				5B4A65791C14FD34001FE2B2 /* BlockTableViewCell.swift in Sources */,
 				C0707FBE1F69720800C7D2ED /* Schedule.swift in Sources */,
 				C0A5D3C01F6A07D500DBDCAD /* Utils.swift in Sources */,
-				5B49D0F51C76814B00645883 /* HomeTableViewController.swift in Sources */,
 				5BB503C71D7920CC00F9B2F7 /* ColorSelectionViewController.swift in Sources */,
 				740756CC1C33720A0039844B /* Label.swift in Sources */,
 				C069CF771F6B697E001FE527 /* NotificationsManager.swift in Sources */,
 				C0A5D3BC1F69E07500DBDCAD /* UserPrefsManager.swift in Sources */,
+				C03D148B1F79479C00211D28 /* HomeViewManager.swift in Sources */,
 				C0A5D3BA1F69874A00DBDCAD /* WebCall.swift in Sources */,
 				C0707FC01F69753100C7D2ED /* Storage.swift in Sources */,
 			);
@@ -367,7 +346,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BD285F31B03CF29007A0472 /* GlancerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
