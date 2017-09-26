@@ -78,6 +78,7 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 		if self.isViewLoaded && didUpdateSuccessfully
 		{
 			self.updateView()
+			self.tableView.setWeekData()
 		}
 	}
 	
@@ -86,6 +87,7 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 		if self.isViewLoaded
 		{
 			self.updateView()
+			self.tableView.setWeekData()
 		}
 	}
 	

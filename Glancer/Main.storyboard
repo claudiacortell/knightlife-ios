@@ -29,9 +29,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9NT-sa-JiL" customClass="HomeBlockTableController" customModule="Glancer" customModuleProvider="target">
-                                <rect key="frame" x="5" y="34" width="404" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9NT-sa-JiL" customClass="HomeBlockTableController" customModule="Glancer" customModuleProvider="target">
+                                <rect key="frame" x="5" y="20" width="404" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -223,10 +222,14 @@
                         </subviews>
                         <color key="backgroundColor" red="0.90980988740921021" green="0.90981018543243408" blue="0.90980863571166992" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="9NT-sa-JiL" firstAttribute="leading" secondItem="oIf-eE-Xrs" secondAttribute="leading" constant="5" id="0Wj-X8-KnE"/>
                             <constraint firstAttribute="trailing" secondItem="by3-5p-ImB" secondAttribute="trailing" id="6aQ-np-owF"/>
                             <constraint firstItem="by3-5p-ImB" firstAttribute="top" secondItem="AaA-IB-4IY" secondAttribute="bottom" id="M3t-SI-O4I"/>
+                            <constraint firstItem="9NT-sa-JiL" firstAttribute="top" secondItem="AaA-IB-4IY" secondAttribute="bottom" id="XUR-gQ-yIc"/>
                             <constraint firstItem="by3-5p-ImB" firstAttribute="leading" secondItem="oIf-eE-Xrs" secondAttribute="leading" id="XjM-PA-eRo"/>
+                            <constraint firstItem="zDr-rc-6zS" firstAttribute="top" secondItem="9NT-sa-JiL" secondAttribute="bottom" id="YuY-0J-CrW"/>
                             <constraint firstItem="SvK-iD-jc9" firstAttribute="top" secondItem="AaA-IB-4IY" secondAttribute="bottom" constant="-20" id="rX7-EH-JhD"/>
+                            <constraint firstAttribute="trailing" secondItem="9NT-sa-JiL" secondAttribute="trailing" constant="5" id="vca-Zz-0sz"/>
                             <constraint firstItem="SvK-iD-jc9" firstAttribute="leading" secondItem="oIf-eE-Xrs" secondAttribute="leading" id="w4g-x7-EKw"/>
                             <constraint firstAttribute="trailing" secondItem="SvK-iD-jc9" secondAttribute="trailing" id="xzJ-2r-oRY"/>
                         </constraints>
