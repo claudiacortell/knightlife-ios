@@ -11,6 +11,8 @@ import Foundation
 class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandler
 {
 	private var dayId: DayID = .monday
+	private var tableOverrideId: DayID? = nil
+	
 	private var timer: Timer = Timer()
 	
 	@IBOutlet weak var tableView: HomeBlockTableController!
@@ -22,10 +24,9 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 	@IBOutlet weak var blockLabel: UILabel!
 	@IBOutlet weak var nextBlockLabel: UILabel!
 	
-	private var firstOpen = true
+	@IBOutlet weak var nextLabel: UILabel!
 	
-	var scheduleUpdated = false
-	var settingsUpdated = false
+	private var firstOpen = true
 	
 	override func viewDidLoad()
 	{
@@ -41,19 +42,12 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 			UserPrefsManager.instance.addHandler(self)
 		}
 		
-		if self.scheduleUpdated || self.settingsUpdated || self.firstOpen
-		{
-			self.scheduleUpdated = false
-			self.settingsUpdated = false
-			
-			self.tableView.generateWeekData()
-		}
+		self.tableOverrideId = nil
 		
 		self.updateTime()
-		if !self.timer.isValid
-		{
-			timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(HomeViewManager.updateTime), userInfo: nil, repeats: true)
-		}
+		
+		self.timer.invalidate() // Create a new timer.
+		self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(HomeViewManager.updateTime), userInfo: nil, repeats: true)
 		
 		self.firstOpen = false
 	}
@@ -65,21 +59,25 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 		self.dayId = DayID.fromId(TimeUtils.getDayOfWeek(date: Date()))!
 		if self.dayId != oldDay
 		{
-			self.tableView.dayIndexChanged(new: self.dayId)
+			self.tableOverrideId = nil // If it's a new day E.G. past midnight then set the table to the same time as the day.
 		}
 		
-		self.updateLabels()
+		if self.tableOverrideId == nil
+		{
+			self.tableView.dayIndexChanged(new: self.dayId)
+		} else
+		{
+			self.tableView.dayIndexChanged(new: self.tableOverrideId!)
+		}
+		
+		self.updateView()
 	}
 	
 	func scheduleDidUpdate(didUpdateSuccessfully: Bool)
 	{
 		if self.isViewLoaded && didUpdateSuccessfully
 		{
-			self.updateLabels()
-			self.tableView.generateWeekData()
-		} else
-		{
-			self.scheduleUpdated = didUpdateSuccessfully
+			self.updateView()
 		}
 	}
 	
@@ -87,19 +85,18 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 	{
 		if self.isViewLoaded
 		{
-			self.updateLabels()
-			self.tableView.generateWeekData()
-		} else
-		{
-			self.settingsUpdated = true
+			self.updateView()
 		}
 	}
 	
-	func updateLabels()
+	func updateView()
 	{
 		self.dayLabel.text = self.dayId.displayName
+		self.nextLabel.text = "Next"
 		
 		let state = getCurrentScheduleInfo()
+		
+		self.tableOverrideId = nil
 		
 		if state.scheduleState == .inClass
 		{
@@ -148,7 +145,12 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 			self.headerMinutesLabel.text = ""
 			
 			self.blockLabel.text = "School Over"
-			self.nextBlockLabel.text = "-"
+
+			self.tableOverrideId = self.dayId.nextDay
+			self.tableView.dayIndexChanged(new: self.tableOverrideId!)
+
+			self.nextLabel.text = "Tomorrow's Schedule"
+			self.nextBlockLabel.text = self.tableOverrideId!.displayName
 		} else
 		{
 			self.headerBlockLabel.text = "ERROR"
@@ -219,32 +221,13 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 class HomeBlockTableController: UITableView, UITableViewDataSource, UITableViewDelegate
 {
 	var dayId = DayID.monday
-	
-	var timer = Timer()
 	var labels: [Label] = []
 	
-	func generateWeekData()
-	{
-		if (ScheduleManager.instance.scheduleLoaded)
-		{
-			setWeekData()
-		}
-		else if !timer.isValid
-		{
-			timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(WeekBlockTableController.setWeekData), userInfo: nil, repeats: true)
-		}
-	}
-	
-	@objc func setWeekData()
+	func setWeekData()
 	{
 		if !ScheduleManager.instance.scheduleLoaded
 		{
 			return
-		}
-		
-		if self.timer.isValid
-		{
-			self.timer.invalidate()
 		}
 		
 		labels.removeAll()
@@ -255,8 +238,11 @@ class HomeBlockTableController: UITableView, UITableViewDataSource, UITableViewD
 	
 	func dayIndexChanged(new: DayID)
 	{
-		self.dayId = new
-		self.generateWeekData()
+		if self.dayId != new
+		{
+			self.dayId = new
+			self.setWeekData()
+		}
 	}
 	
 	func generateLabels()

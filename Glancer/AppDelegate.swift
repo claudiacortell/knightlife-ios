@@ -28,6 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate
             application.registerForRemoteNotifications()
         }
 		
+		_ = UserPrefsManager.instance
+		_ = ScheduleManager.instance
+		_ = NotificationsManager.instance
+		
 		ScheduleManager.instance.loadBlocks()
 		
         return true

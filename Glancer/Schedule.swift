@@ -104,7 +104,7 @@ class ScheduleManager: PrefsUpdateHandler
 					{
 						if blocks!.count != startTimes!.count || startTimes!.count != endTimes!.count || endTimes!.count != blocks!.count
 						{
-							print("Loaded an inconsistent amount of StartTimes, EndTimes, and Blocks")
+							Debug.out("Loaded an inconsistent amount of StartTimes, EndTimes, and Blocks")
 							continue
 						}
 						
@@ -174,8 +174,8 @@ class ScheduleManager: PrefsUpdateHandler
 					{
 						success = false
 						
-						print("One of the loaded values for the schedule was null.")
-						print("Blocks: \(String(describing: blocks)) StartTimes: \(String(describing: startTimes)) EndTimes: \(String(describing: endTimes))")
+						Debug.out("One of the loaded values for the schedule was null.")
+						Debug.out("Blocks: \(String(describing: blocks)) StartTimes: \(String(describing: startTimes)) EndTimes: \(String(describing: endTimes))")
 					}
 				}
 				
@@ -186,12 +186,12 @@ class ScheduleManager: PrefsUpdateHandler
 			} else
 			{
 				success = false
-				print("WebCall failed: Check internet connection")
+				Debug.out("WebCall failed: Check internet connection")
 			}
 		} else
 		{
 			success = false
-			print("WebCall failed: \(response.token.error!)")
+			Debug.out("WebCall failed: \(response.token.error!)")
 		}
 		
 		self.updateLunch(false)
@@ -326,6 +326,13 @@ enum DayID: String // DO NOT EVER CHANGE ANYTHING IN THIS CLASS I SWEAR TO GOD I
 		case .sunday:
 			return "Sunday"
 		}
+	}
+	
+	var nextDay: DayID
+	{
+		var id = self.id
+		id += 1
+		return DayID.values()[id % 7]
 	}
 	
 	var id: Int
