@@ -20,25 +20,20 @@ class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 	
 	func scheduleDidUpdate(didUpdateSuccessfully: Bool)
 	{
-		if didUpdateSuccessfully
-		{
-			self.clearNotifications()
-			Debug.out("Updating notifications")
-			for dayId in DayID.values()
-			{
-				if let blocks = ScheduleManager.instance.blockList(id: dayId)
-				{
-					for block in blocks
-					{
-						self.updateNotifications(block: block)
-					}
-				}
-			}
-			Debug.out("Successfully updated notifications")
-		}
+		updateGlobalNotifications()
 	}
 	
 	func prefsDidUpdate(_ type: UserPrefsManager.PrefsUpdateType)
+	{
+		if type == .lunch
+		{
+			return // The schedule will update from lunch changes. So we'll deal with this there.
+		}
+		
+		updateGlobalNotifications()
+	}
+	
+	private func updateGlobalNotifications()
 	{
 		self.clearNotifications()
 		Debug.out("Updating notifications")
