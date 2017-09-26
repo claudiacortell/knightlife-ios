@@ -148,7 +148,7 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 			self.headerMinutesLabel.text = ""
 			
 			self.blockLabel.text = "School Over"
-			self.blockLabel.text = "-"
+			self.nextBlockLabel.text = "-"
 		} else
 		{
 			self.headerBlockLabel.text = "ERROR"
