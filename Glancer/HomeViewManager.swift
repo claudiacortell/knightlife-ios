@@ -13,6 +13,8 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 	private var dayId: DayID = .monday
 	private var tableOverrideId: DayID? = nil
 	
+	private var previousState: ScheduleState?
+	
 	private var timer: Timer = Timer()
 	
 	@IBOutlet weak var tableView: HomeBlockTableController!
@@ -42,14 +44,21 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 			UserPrefsManager.instance.addHandler(self)
 		}
 		
-		self.tableOverrideId = nil
-		
-		self.updateTime()
-		
+		self.firstOpen = false
+	}
+	
+	override func viewDidAppear(_ animated: Bool)
+	{
 		self.timer.invalidate() // Create a new timer.
 		self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(HomeViewManager.updateTime), userInfo: nil, repeats: true)
 		
-		self.firstOpen = false
+		self.tableOverrideId = nil
+		self.updateTime()
+	}
+	
+	override func viewDidDisappear(_ animated: Bool)
+	{
+		self.timer.invalidate()
 	}
 	
 	@objc func updateTime()
@@ -65,9 +74,11 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 		if self.tableOverrideId == nil
 		{
 			self.tableView.dayIndexChanged(new: self.dayId)
+			self.tableView.doPassage = true
 		} else
 		{
 			self.tableView.dayIndexChanged(new: self.tableOverrideId!)
+			self.tableView.doPassage = false
 		}
 		
 		self.updateView()
@@ -97,6 +108,14 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 		self.nextLabel.text = "Next"
 		
 		let state = getCurrentScheduleInfo()
+		
+		if self.previousState != nil
+		{
+			if self.previousState != state.scheduleState // On a state change.
+			{
+				self.tableView.reloadData() // Updates the opacity thing
+			}
+		}
 		
 		self.tableOverrideId = nil
 		
@@ -150,6 +169,7 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 
 			self.tableOverrideId = self.dayId.nextDay
 			self.tableView.dayIndexChanged(new: self.tableOverrideId!)
+			self.tableView.doPassage = false
 
 			self.nextLabel.text = "Tomorrow's Schedule"
 			self.nextBlockLabel.text = self.tableOverrideId!.displayName
@@ -223,8 +243,11 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 class HomeBlockTableController: UITableView, UITableViewDataSource, UITableViewDelegate
 {
 	var dayId = DayID.monday
+	
 	var labels: [Label] = []
 	
+	var doPassage = true
+
 	func setWeekData()
 	{
 		if !ScheduleManager.instance.scheduleLoaded
@@ -257,7 +280,7 @@ class HomeBlockTableController: UITableView, UITableViewDataSource, UITableViewD
 				
 				let finalTime = "\(analyst.getStartTime().toFormattedString()) - \(analyst.getEndTime().toFormattedString())"
 				
-				let newLabel = Label(bL: analyst.getDisplayLetter(), cN: analyst.getDisplayName(), cT: finalTime, c: analyst.getColor())
+				let newLabel = Label(bL: analyst.getDisplayLetter(), cN: analyst.getDisplayName(), cT: finalTime, c: analyst.getColor(), block: block)
 				labels.append(newLabel)
 			}
 		}
@@ -272,9 +295,14 @@ class HomeBlockTableController: UITableView, UITableViewDataSource, UITableViewD
 	{
 		if (ScheduleManager.instance.scheduleLoaded)
 		{
-			let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! HomeBlockCell
 			let label = labels[(indexPath as NSIndexPath).row]
+			let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! HomeBlockCell
 			cell.label = label
+			
+			if self.doPassage
+			{
+				cell.updatePassed(animate: true) // TODO: Figure out the best way to fade this in.
+			}
 			
 			return cell
 		} else
@@ -295,6 +323,10 @@ class HomeBlockCell: UITableViewCell
 	@IBOutlet weak var classTimes: UILabel!
 	@IBOutlet weak var bodyView: UIView!
 	
+	@IBOutlet weak var viewMask: UIView!
+	
+	var curAlpha = 0.0
+	
 	var label: Label?
 	{
 		didSet
@@ -307,9 +339,44 @@ class HomeBlockCell: UITableViewCell
 				self.classTimes.text = label.classTimes
 				let RGBvalues = Utils.getRGBFromHex(label.color)
 				
+				self.block = label.block
+				
 				self.bodyView.backgroundColor = UIColor(red: (RGBvalues[0] / 255.0), green: (RGBvalues[1] / 255.0), blue: (RGBvalues[2] / 255.0), alpha: 1)
 			}
 		}
 	}
-}
+	
+	var block: Block?
+	
+	func updatePassed(animate: Bool = false)
+	{
+		if self.block != nil
+		{
+			if self.block!.analyst.hasPassed() // Only update the opacity if it hasn't been updated yet.
+			{
+				if self.curAlpha == 0.0
+				{
+					self.curAlpha = 0.6
 
+					if animate
+					{
+						UIView.animate(withDuration: 0.5, animations:
+						{
+							self.viewMask.alpha = CGFloat(0.6)
+						})
+					} else
+					{
+						self.viewMask.alpha = CGFloat(0.6)
+					}
+				}
+			} else
+			{
+				if self.curAlpha == 0.6
+				{
+					self.curAlpha = 0.0
+					self.viewMask.alpha = CGFloat(0.0)
+				}
+			}
+		}
+	}
+}

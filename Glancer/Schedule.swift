@@ -656,6 +656,12 @@ class BlockAnalyst
 			return nil
 		}
 	}
+	
+	func hasPassed() -> Bool
+	{
+		let date = Date()
+		return date > self.getEndTime().asDate()
+	}
 }
 
 struct TimeContainer

@@ -37,6 +37,11 @@ class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 	{
 		self.clearNotifications()
 		Debug.out("Updating notifications")
+		if ScheduleManager.instance.onVacation
+		{
+			return
+		}
+		
 		for dayId in DayID.values()
 		{
 			if let blocks = ScheduleManager.instance.blockList(id: dayId)
@@ -65,41 +70,36 @@ class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 	
 	func updateNotifications(block: Block)
 	{
-		if !ScheduleManager.instance.onVacation
-		{
-//			Debug.out("Updating notifications for: \(block.weekday) - \(block.blockId)")
-			
-			let notification: UILocalNotification = UILocalNotification()
-			notification.alertAction = "Knight Life"
-			notification.repeatInterval = NSCalendar.Unit.weekOfYear
-			notification.soundName = UILocalNotificationDefaultSoundName;
+		let notification: UILocalNotification = UILocalNotification()
+		notification.alertAction = "Knight Life"
+		notification.repeatInterval = NSCalendar.Unit.weekOfYear
+		notification.soundName = UILocalNotificationDefaultSoundName
 
-			let analyst = block.analyst
-			var date: Date = analyst.getStartTime().asDate()
+		let analyst = block.analyst
+		var date: Date = analyst.getStartTime().asDate()
+		
+		let blockStartDateId: Int = block.weekday.id
+		let todayId: Int = TimeUtils.getDayOfWeek(date: Date())
+		
+		var dayMultiplier: Int = blockStartDateId - todayId
+		if dayMultiplier < 0 { dayMultiplier += 7 }
+		
+		if block.isLunchBlock
+		{
+			notification.alertBody = analyst.getDisplayName()
 			
-			let blockStartDateId: Int = TimeUtils.getDayOfWeek(date: date)
-			let todayId: Int = TimeUtils.getDayOfWeek(date: Date())
+			date = date.addingTimeInterval(TimeInterval(60 * 60 * 24 * dayMultiplier))
+		} else
+		{
+			notification.alertBody = "5 minutes until \(analyst.getDisplayName())"
 			
-			var dayMultiplier: Int = blockStartDateId - todayId
-			if dayMultiplier < 0 { dayMultiplier += 7 }
-			
-			if block.isLunchBlock
-			{
-				notification.alertBody = analyst.getDisplayName()
-				
-				date = date.addingTimeInterval(TimeInterval(60 * 60 * 24 * dayMultiplier))
-			} else
-			{
-				notification.alertBody = "5 minutes until \(analyst.getDisplayName())"
-				
-				date = date.addingTimeInterval(-60 * 5) // call 5 minutes before the class starts
-				date = date.addingTimeInterval(TimeInterval(60 * 60 * 24 * dayMultiplier)) // Register for the previous week so it for sure works this week
-			}
-			
-//			Debug.out("Adding notification with alert: \(notification.alertBody!)")
-			
-			notification.fireDate = date
-			UIApplication.shared.scheduleLocalNotification(notification)
+			date = date.addingTimeInterval(-60 * 5) // call 5 minutes before the class starts
+			date = date.addingTimeInterval(TimeInterval(60 * 60 * 24 * dayMultiplier)) // Register for the previous week so it for sure works this week
 		}
+		
+//			Debug.out("Adding notification with alert: \(notification.alertBody!)")
+		
+		notification.fireDate = date
+		UIApplication.shared.scheduleLocalNotification(notification)
 	}
 }

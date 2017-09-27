@@ -31,18 +31,27 @@ class WeekViewController: UIViewController, ScheduleUpdateHandler, PrefsUpdateHa
 			// Register as handler
 			ScheduleManager.instance.addHandler(self)
 			UserPrefsManager.instance.addHandler(self)
+			
+			self.scheduleUpdated = false
+			self.settingsUpdated = false
+			
+			self.updateLabel()
+			self.tableView.setWeekData()
 		}
 		
-		if self.scheduleUpdated || self.settingsUpdated || self.firstOpen
+		self.firstOpen = false
+	}
+	
+	override func viewDidAppear(_ animated: Bool)
+	{
+		if self.scheduleUpdated || self.settingsUpdated
 		{
 			self.scheduleUpdated = false
 			self.settingsUpdated = false
 			
 			self.updateLabel()
-			self.tableView.generateWeekData()
+			self.tableView.setWeekData()
 		}
-		
-		self.firstOpen = false
 	}
 	
 	@IBAction func segControlChanged(_ sender: AnyObject)
@@ -55,7 +64,7 @@ class WeekViewController: UIViewController, ScheduleUpdateHandler, PrefsUpdateHa
 	{
 		if self.isViewLoaded && didUpdateSuccessfully
 		{
-			self.tableView.generateWeekData()
+			self.tableView.setWeekData()
 		} else
 		{
 			self.scheduleUpdated = didUpdateSuccessfully
@@ -66,7 +75,7 @@ class WeekViewController: UIViewController, ScheduleUpdateHandler, PrefsUpdateHa
 	{
 		if self.isViewLoaded
 		{
-			self.tableView.generateWeekData()
+			self.tableView.setWeekData()
 		} else
 		{
 			self.settingsUpdated = true
@@ -81,33 +90,15 @@ class WeekViewController: UIViewController, ScheduleUpdateHandler, PrefsUpdateHa
 
 class WeekBlockTableController: UITableView, UITableViewDataSource, UITableViewDelegate
 {
-	var timer = Timer()
 	var labels: [Label] = []
 
 	private var dayId: DayID = .monday
 	
-	func generateWeekData()
-	{
-		if (ScheduleManager.instance.scheduleLoaded)
-		{
-			setWeekData()
-		}
-		else if !timer.isValid
-		{
-			timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(WeekBlockTableController.setWeekData), userInfo: nil, repeats: true)
-		}
-	}
-	
-	@objc func setWeekData()
+	func setWeekData()
 	{
 		if !ScheduleManager.instance.scheduleLoaded
 		{
 			return
-		}
-		
-		if self.timer.isValid
-		{
-			self.timer.invalidate()
 		}
 		
 		labels.removeAll()
@@ -119,7 +110,7 @@ class WeekBlockTableController: UITableView, UITableViewDataSource, UITableViewD
 	func dayIndexChanged(new: Int)
 	{		
 		self.dayId = DayID.fromId(new)!
-		self.generateWeekData()
+		self.setWeekData()
 	}
 	
 	func generateLabels()

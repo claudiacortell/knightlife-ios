@@ -17,10 +17,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--New Home Controller-->
+        <!--Home Controller-->
         <scene sceneID="5Mc-iL-Bd1">
             <objects>
-                <viewController id="Jiy-hv-3ej" userLabel="New Home Controller" customClass="HomeViewManager" customModule="Glancer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Jiy-hv-3ej" userLabel="Home Controller" customClass="HomeViewManager" customModule="Glancer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AaA-IB-4IY"/>
                         <viewControllerLayoutGuide type="bottom" id="zDr-rc-6zS"/>
@@ -92,6 +92,10 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="46W-xj-Gc0">
                                                             <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
                                                             <subviews>
+                                                                <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wS1-n7-rv9" userLabel="Mask">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                </view>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKr-Zp-tNK" userLabel="Block Letter">
                                                                     <rect key="frame" x="10" y="10" width="75" height="75"/>
                                                                     <constraints>
@@ -105,9 +109,13 @@
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
+                                                                <constraint firstAttribute="bottom" secondItem="wS1-n7-rv9" secondAttribute="bottom" id="Got-Wo-nLf"/>
                                                                 <constraint firstItem="qKr-Zp-tNK" firstAttribute="centerY" secondItem="46W-xj-Gc0" secondAttribute="centerY" id="I1K-S3-Xk5"/>
                                                                 <constraint firstAttribute="width" constant="96" id="IUf-5T-bpK"/>
+                                                                <constraint firstAttribute="trailing" secondItem="wS1-n7-rv9" secondAttribute="trailing" id="JFz-Gs-hgu"/>
+                                                                <constraint firstItem="wS1-n7-rv9" firstAttribute="top" secondItem="46W-xj-Gc0" secondAttribute="top" id="MxE-lE-Amk"/>
                                                                 <constraint firstItem="qKr-Zp-tNK" firstAttribute="centerX" secondItem="46W-xj-Gc0" secondAttribute="centerX" id="NSK-h8-usL"/>
+                                                                <constraint firstItem="wS1-n7-rv9" firstAttribute="leading" secondItem="46W-xj-Gc0" secondAttribute="leading" id="OOX-ep-eLd"/>
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X:XX - X:XX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6fN-Bw-7xp" userLabel="Class Times">
@@ -158,6 +166,7 @@
                                             <outlet property="bodyView" destination="46W-xj-Gc0" id="zPh-Le-9We"/>
                                             <outlet property="className" destination="c9j-2A-FXJ" id="64S-uu-YM5"/>
                                             <outlet property="classTimes" destination="6fN-Bw-7xp" id="TM7-1c-a22"/>
+                                            <outlet property="viewMask" destination="wS1-n7-rv9" id="doz-Vw-Knv"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

@@ -14,12 +14,16 @@ struct Label
     var className: String = ""
     var classTimes: String = ""
     var color: String = ""
+	
+	var block: Block?
     
-    init(bL: String, cN: String, cT: String, c: String)
+	init(bL: String, cN: String, cT: String, c: String, block: Block? = nil)
 	{
         blockLetter = bL
         className = cN
         classTimes = cT
         color = c
+		
+		self.block = block
     }
 }
