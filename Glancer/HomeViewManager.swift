@@ -53,6 +53,7 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 		self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(HomeViewManager.updateTime), userInfo: nil, repeats: true)
 		
 		self.tableOverrideId = nil
+		
 		self.updateTime()
 	}
 	
@@ -63,33 +64,20 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 	
 	@objc func updateTime()
 	{
-		let oldDay = self.dayId
+		if !ScheduleManager.instance.scheduleLoaded
+		{
+			return
+		}
 		
 		self.dayId = DayID.fromId(TimeUtils.getDayOfWeek(date: Date()))!
-		if self.dayId != oldDay
-		{
-			self.tableOverrideId = nil // If it's a new day E.G. past midnight then set the table to the same time as the day.
-		}
-		
-		if self.tableOverrideId == nil
-		{
-			self.tableView.dayIndexChanged(new: self.dayId)
-			self.tableView.doPassage = true
-		} else
-		{
-			self.tableView.dayIndexChanged(new: self.tableOverrideId!)
-			self.tableView.doPassage = false
-		}
-		
-		self.updateView()
+		self.updateViews()
 	}
 	
 	func scheduleDidUpdate(didUpdateSuccessfully: Bool)
 	{
 		if self.isViewLoaded && didUpdateSuccessfully
 		{
-			self.updateView()
-			self.tableView.setWeekData()
+			self.updateViews()
 		}
 	}
 	
@@ -97,27 +85,19 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 	{
 		if self.isViewLoaded
 		{
-			self.updateView()
-			self.tableView.setWeekData()
+			self.updateViews()
 		}
 	}
 	
-	func updateView()
+	func updateViews()
 	{
 		self.dayLabel.text = self.dayId.displayName
 		self.nextLabel.text = "Next"
 		
 		let state = getCurrentScheduleInfo()
-		
-		if self.previousState != nil
-		{
-			if self.previousState != state.scheduleState // On a state change.
-			{
-				self.tableView.reloadData() // Updates the opacity thing
-			}
-		}
-		
-		self.tableOverrideId = nil
+
+		self.tableOverrideId = nil // Reset it. It'll get changed below if we really want it overriden.
+		self.tableView.showExpiredBlocks = true
 		
 		if state.scheduleState == .inClass
 		{
@@ -162,23 +142,26 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 			self.nextBlockLabel.text = "-"
 		} else if state.scheduleState == .afterSchool
 		{
+			self.tableOverrideId = self.dayId.nextDay
+
 			self.headerBlockLabel.text = "School Over"
 			self.headerMinutesLabel.text = ""
-			
 			self.blockLabel.text = "School Over"
-
-			self.tableOverrideId = self.dayId.nextDay
-			self.tableView.dayIndexChanged(new: self.tableOverrideId!)
-			self.tableView.doPassage = false
-
 			self.nextLabel.text = "Tomorrow's Schedule"
 			self.nextBlockLabel.text = self.tableOverrideId!.displayName
+
+			self.tableView.showExpiredBlocks = false
 		} else
 		{
 			self.headerBlockLabel.text = "ERROR"
 			self.headerMinutesLabel.text = "ERROR"
 			self.blockLabel.text = "ERROR"
 			self.nextBlockLabel.text = "ERROR"
+		}
+		
+		if !self.tableView.dayIndexChanged(new: self.tableOverrideId ?? self.dayId) // Update the table view to the new day. This will do nothing if the table is already set to the right day.
+		{
+			self.tableView.updateExpiredBlocks(animate: true) // Only manually update the expired blocks if the table view wasn't updated.
 		}
 	}
 	
@@ -246,9 +229,9 @@ class HomeBlockTableController: UITableView, UITableViewDataSource, UITableViewD
 	
 	var labels: [Label] = []
 	
-	var doPassage = true
+	var showExpiredBlocks = true
 
-	func setWeekData()
+	private func setWeekData()
 	{
 		if !ScheduleManager.instance.scheduleLoaded
 		{
@@ -261,16 +244,19 @@ class HomeBlockTableController: UITableView, UITableViewDataSource, UITableViewD
 		self.reloadData()
 	}
 	
-	func dayIndexChanged(new: DayID)
+	@discardableResult
+	func dayIndexChanged(new: DayID) -> Bool // Whether or not the schedule was updated.
 	{
 		if self.dayId != new
 		{
 			self.dayId = new
 			self.setWeekData()
+			return true
 		}
+		return false
 	}
 	
-	func generateLabels()
+	private func generateLabels()
 	{
 		if let blocks = ScheduleManager.instance.blockList(id: self.dayId)
 		{
@@ -283,6 +269,34 @@ class HomeBlockTableController: UITableView, UITableViewDataSource, UITableViewD
 				let newLabel = Label(bL: analyst.getDisplayLetter(), cN: analyst.getDisplayName(), cT: finalTime, c: analyst.getColor(), block: block)
 				labels.append(newLabel)
 			}
+		}
+	}
+	
+	func updateExpiredBlocks(animate: Bool = false)
+	{
+		for cell in self.visibleCells
+		{
+			if cell is HomeBlockCell
+			{
+				let newCell = cell as! HomeBlockCell
+				self.updateExpiredBlock(cell: newCell, animate: animate)
+			}
+		}
+	}
+	
+	private func updateExpiredBlock(cell: HomeBlockCell, animate: Bool)
+	{
+		if self.showExpiredBlocks
+		{
+			if cell.block != nil
+			{
+				cell.animateChange = true
+				cell.setExpired(expired: cell.block!.analyst.hasPassed())
+				cell.animateChange = false
+			}
+		} else
+		{
+			cell.setExpired(expired: false)
 		}
 	}
 	
@@ -299,10 +313,7 @@ class HomeBlockTableController: UITableView, UITableViewDataSource, UITableViewD
 			let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! HomeBlockCell
 			cell.label = label
 			
-			if self.doPassage
-			{
-				cell.updatePassed(animate: true) // TODO: Figure out the best way to fade this in.
-			}
+			updateExpiredBlock(cell: cell, animate: false)
 			
 			return cell
 		} else
@@ -326,6 +337,8 @@ class HomeBlockCell: UITableViewCell
 	@IBOutlet weak var viewMask: UIView!
 	
 	var curAlpha = 0.0
+	var block: Block?
+	var animateChange: Bool = false
 	
 	var label: Label?
 	{
@@ -346,35 +359,25 @@ class HomeBlockCell: UITableViewCell
 		}
 	}
 	
-	var block: Block?
 	
-	func updatePassed(animate: Bool = false)
+	func setExpired(expired: Bool)
 	{
 		if self.block != nil
 		{
-			if self.block!.analyst.hasPassed() // Only update the opacity if it hasn't been updated yet.
+			let newAlpha = expired ? 0.6 : 0.0
+			if newAlpha != self.curAlpha
 			{
-				if self.curAlpha == 0.0
+				self.curAlpha = newAlpha
+				
+				if self.animateChange
 				{
-					self.curAlpha = 0.6
-
-					if animate
-					{
-						UIView.animate(withDuration: 0.5, animations:
-						{
-							self.viewMask.alpha = CGFloat(0.6)
-						})
-					} else
+					UIView.animate(withDuration: 0.5, animations:
 					{
 						self.viewMask.alpha = CGFloat(0.6)
-					}
-				}
-			} else
-			{
-				if self.curAlpha == 0.6
+					})
+				} else
 				{
-					self.curAlpha = 0.0
-					self.viewMask.alpha = CGFloat(0.0)
+					self.viewMask.alpha = CGFloat(0.6)
 				}
 			}
 		}

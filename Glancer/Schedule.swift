@@ -660,7 +660,7 @@ class BlockAnalyst
 	func hasPassed() -> Bool
 	{
 		let date = Date()
-		return date > self.getEndTime().asDate()
+		return date >= self.getEndTime().asDate()
 	}
 }
 
