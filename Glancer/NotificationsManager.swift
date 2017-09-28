@@ -99,7 +99,7 @@ class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 			date = date.addingTimeInterval(TimeInterval(60 * 60 * 24 * dayMultiplier)) // Register for the previous week so it for sure works this week
 		}
 		
-		var dateFormatter = DateFormatter()
+		let dateFormatter = DateFormatter()
 		dateFormatter.timeZone = TimeZone.autoupdatingCurrent
 		dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
 		

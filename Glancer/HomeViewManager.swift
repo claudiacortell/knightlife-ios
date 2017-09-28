@@ -279,20 +279,18 @@ class HomeBlockTableController: UITableView, UITableViewDataSource, UITableViewD
 			if cell is HomeBlockCell
 			{
 				let newCell = cell as! HomeBlockCell
-				self.updateExpiredBlock(cell: newCell, animate: animate)
+				self.updateExpiredBlock(cell: newCell)
 			}
 		}
 	}
 	
-	private func updateExpiredBlock(cell: HomeBlockCell, animate: Bool)
+	private func updateExpiredBlock(cell: HomeBlockCell)
 	{
 		if self.showExpiredBlocks
 		{
 			if cell.block != nil
 			{
-				cell.animateChange = true
 				cell.setExpired(expired: cell.block!.analyst.hasPassed())
-				cell.animateChange = false
 			}
 		} else
 		{
@@ -313,7 +311,7 @@ class HomeBlockTableController: UITableView, UITableViewDataSource, UITableViewD
 			let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! HomeBlockCell
 			cell.label = label
 			
-			updateExpiredBlock(cell: cell, animate: false)
+			updateExpiredBlock(cell: cell)
 			
 			return cell
 		} else
@@ -335,10 +333,9 @@ class HomeBlockCell: UITableViewCell
 	@IBOutlet weak var bodyView: UIView!
 	
 	@IBOutlet weak var viewMask: UIView!
-	
-	var curAlpha = 0.0
+
+	var expired: Bool = false
 	var block: Block?
-	var animateChange: Bool = false
 	
 	var label: Label?
 	{
@@ -350,10 +347,9 @@ class HomeBlockCell: UITableViewCell
 				self.blockLetter.text = label.blockLetter
 				self.className.text = label.className
 				self.classTimes.text = label.classTimes
-				let RGBvalues = Utils.getRGBFromHex(label.color)
-				
 				self.block = label.block
-				
+
+				let RGBvalues = Utils.getRGBFromHex(label.color)
 				self.bodyView.backgroundColor = UIColor(red: (RGBvalues[0] / 255.0), green: (RGBvalues[1] / 255.0), blue: (RGBvalues[2] / 255.0), alpha: 1)
 			}
 		}
@@ -364,22 +360,12 @@ class HomeBlockCell: UITableViewCell
 	{
 		if self.block != nil
 		{
-			let newAlpha = expired ? 0.6 : 0.0
-			if newAlpha != self.curAlpha
-			{
-				self.curAlpha = newAlpha
-				
-				if self.animateChange
-				{
-					UIView.animate(withDuration: 0.5, animations:
-					{
-						self.viewMask.alpha = CGFloat(0.6)
-					})
-				} else
-				{
-					self.viewMask.alpha = CGFloat(0.6)
-				}
-			}
+//			Debug.out("\(self.block!.blockId.rawValue): \(expired)")
+			
+			if self.expired == expired { return }
+			
+			self.expired = expired
+			self.viewMask.alpha = self.expired ? 0.6 : 0.0
 		}
 	}
 }

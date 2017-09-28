@@ -17,7 +17,6 @@
 		5BD0724A1C74AEE00074B56D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD072491C74AEE00074B56D /* SettingsViewController.swift */; };
 		5BD285DD1B03CF29007A0472 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD285DC1B03CF29007A0472 /* AppDelegate.swift */; };
 		5BD285E41B03CF29007A0472 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BD285E31B03CF29007A0472 /* Images.xcassets */; };
-		5BD285E71B03CF29007A0472 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BD285E51B03CF29007A0472 /* LaunchScreen.xib */; };
 		5BD288291B03D218007A0472 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD288281B03D218007A0472 /* AudioToolbox.framework */; };
 		5BD2882B1B03D21E007A0472 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD2882A1B03D21E007A0472 /* CFNetwork.framework */; };
 		5BD2882D1B03D223007A0472 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD2882C1B03D223007A0472 /* CoreGraphics.framework */; };
@@ -27,6 +26,7 @@
 		5BD288351B03D23E007A0472 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD288341B03D23E007A0472 /* Security.framework */; };
 		5BD288391B03D24B007A0472 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD288381B03D24B007A0472 /* SystemConfiguration.framework */; };
 		740756CC1C33720A0039844B /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740756CB1C33720A0039844B /* Label.swift */; };
+		C019C1611F7D3CED00FC4EED /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C019C1601F7D3CED00FC4EED /* Launch.storyboard */; };
 		C03D148B1F79479C00211D28 /* HomeViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03D148A1F79479C00211D28 /* HomeViewManager.swift */; };
 		C06220E51F74A8930032A2EC /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06220E41F74A8930032A2EC /* Debug.swift */; };
 		C069CF771F6B697E001FE527 /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C069CF761F6B697E001FE527 /* NotificationsManager.swift */; };
@@ -77,7 +77,6 @@
 		5BD285DB1B03CF29007A0472 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5BD285DC1B03CF29007A0472 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BD285E31B03CF29007A0472 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		5BD285E61B03CF29007A0472 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		5BD285EC1B03CF29007A0472 /* GlancerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GlancerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BD288281B03D218007A0472 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		5BD2882A1B03D21E007A0472 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -88,6 +87,7 @@
 		5BD288341B03D23E007A0472 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		5BD288381B03D24B007A0472 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		740756CB1C33720A0039844B /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		C019C1601F7D3CED00FC4EED /* Launch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
 		C03D148A1F79479C00211D28 /* HomeViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewManager.swift; sourceTree = "<group>"; };
 		C06220E41F74A8930032A2EC /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		C069CF761F6B697E001FE527 /* NotificationsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
@@ -180,7 +180,7 @@
 				740756CB1C33720A0039844B /* Label.swift */,
 				5BB503C61D7920CC00F9B2F7 /* ColorSelectionViewController.swift */,
 				5BD285E31B03CF29007A0472 /* Images.xcassets */,
-				5BD285E51B03CF29007A0472 /* LaunchScreen.xib */,
+				C019C1601F7D3CED00FC4EED /* Launch.storyboard */,
 				5BD285DA1B03CF29007A0472 /* Supporting Files */,
 				C0707FBF1F69753100C7D2ED /* Storage.swift */,
 				C0A5D3B91F69874A00DBDCAD /* WebCall.swift */,
@@ -306,8 +306,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BD072481C74AEB40074B56D /* Main.storyboard in Resources */,
-				5BD285E71B03CF29007A0472 /* LaunchScreen.xib in Resources */,
 				5BD285E41B03CF29007A0472 /* Images.xcassets in Resources */,
+				C019C1611F7D3CED00FC4EED /* Launch.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,17 +358,6 @@
 			targetProxy = 5BD285ED1B03CF29007A0472 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		5BD285E51B03CF29007A0472 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5BD285E61B03CF29007A0472 /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		5BD285F41B03CF29007A0472 /* Debug */ = {
