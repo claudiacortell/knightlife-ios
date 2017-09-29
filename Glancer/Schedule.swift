@@ -24,7 +24,6 @@ class ScheduleManager: PrefsUpdateHandler
 		static let SECONDLUNCH_START = "SecondLunch" + START_TIME
 	}
 	
-	static let CURRENT_SCHOOL_YEAR = "2017-2018" // THIS MUST BE CHANGED EVERY YEAR. I THINK. IT MIGHT WORK IF YOU DON'T BUT LIKE DON'T TAKE CHANCES BRUH
 	private(set) var onVacation = false
 
 	private var weekSchedule: [DayID: Weekday] = [:]

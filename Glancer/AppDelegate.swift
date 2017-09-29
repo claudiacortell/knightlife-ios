@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 		
         return true
     }
-    
+	
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data)
 	{        
         let tokenChars = (deviceToken as NSData).bytes.bindMemory(to: CChar.self, capacity: deviceToken.count)

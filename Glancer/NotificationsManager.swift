@@ -12,6 +12,8 @@ class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 {
 	static let instance = NotificationsManager()
 	
+	private var queueTimer: Timer? = nil
+	
 	init()
 	{
 		ScheduleManager.instance.addHandler(self)
@@ -35,7 +37,8 @@ class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 	
 	private func updateGlobalNotifications()
 	{
-		self.clearNotifications()
+		UIApplication.shared.cancelAllLocalNotifications()
+		
 		Debug.out("Updating notifications")
 		if ScheduleManager.instance.onVacation
 		{
@@ -53,29 +56,12 @@ class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 				}
 			}
 		}
+		
 		Debug.out("Successfully updated notifications")
-	}
-	
-	func clearNotifications()
-	{
-		Debug.out("Clearing notifications")
-		let app:UIApplication = UIApplication.shared
-		for Event in app.scheduledLocalNotifications!
-		{
-			let notification = Event
-			app.cancelLocalNotification(notification)
-			
-			Debug.out("Cancelling local notification: \(notification.alertBody!)")
-		}
 	}
 	
 	func updateNotifications(block: Block)
 	{
-		let notification: UILocalNotification = UILocalNotification()
-		notification.alertAction = "Knight Life"
-		notification.repeatInterval = NSCalendar.Unit.weekOfYear
-		notification.soundName = UILocalNotificationDefaultSoundName
-		
 		let analyst = block.analyst
 		var date: Date = analyst.getStartTime().asDate()
 		
@@ -86,14 +72,16 @@ class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 		if dayMultiplier < 0 { dayMultiplier += 7 }
 		dayMultiplier -= 7 // Start schedule on the previous week
 		
+		var alertBody = ""
+		
 		if block.isLunchBlock
 		{
-			notification.alertBody = analyst.getDisplayName()
+			alertBody = analyst.getDisplayName()
 			
 			date = date.addingTimeInterval(TimeInterval(60 * 60 * 24 * dayMultiplier))
 		} else
 		{
-			notification.alertBody = "5 minutes until \(analyst.getDisplayName())"
+			alertBody = "5 minutes until \(analyst.getDisplayName())"
 			
 			date = date.addingTimeInterval(-60 * 5) // call 5 minutes before the class starts
 			date = date.addingTimeInterval(TimeInterval(60 * 60 * 24 * dayMultiplier)) // Register for the previous week so it for sure works this week
@@ -103,9 +91,18 @@ class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 		dateFormatter.timeZone = TimeZone.autoupdatingCurrent
 		dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
 		
-		Debug.out("Adding notification with alert: '\(notification.alertBody!)' on date: \(dateFormatter.string(from: date))")
-		
-		notification.fireDate = date
+		Debug.out("Adding notification with alert: '\(alertBody)' on date: \(dateFormatter.string(from: date))")
+		self.scheduleNotification(text: alertBody, fireDate: date)
+	}
+	
+	private func scheduleNotification(text: String, fireDate: Date)
+	{
+		let notification: UILocalNotification = UILocalNotification()
+		notification.alertAction = "Knight Life"
+		notification.repeatInterval = NSCalendar.Unit.weekOfYear
+		notification.soundName = UILocalNotificationDefaultSoundName
+		notification.alertBody = text
+		notification.fireDate = fireDate
 		UIApplication.shared.scheduleLocalNotification(notification)
 	}
 }
