@@ -143,11 +143,11 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 		} else if state.scheduleState == .afterSchool
 		{
 			self.tableOverrideId = self.dayId.nextDay
-
+			
 			self.headerBlockLabel.text = "School Over"
 			self.headerMinutesLabel.text = ""
 			self.blockLabel.text = "School Over"
-			self.nextLabel.text = "Tomorrow's Schedule"
+			self.nextLabel.text = ScheduleManager.instance.dayLoaded(id: self.tableOverrideId!) ? "Tomorrow's Schedule" : "Tomorrow (No School)"
 			self.nextBlockLabel.text = self.tableOverrideId!.displayName
 
 			self.tableView.showExpiredBlocks = false
