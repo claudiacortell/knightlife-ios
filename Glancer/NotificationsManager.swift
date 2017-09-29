@@ -12,8 +12,6 @@ class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 {
 	static let instance = NotificationsManager()
 	
-	private var queueTimer: Timer? = nil
-	
 	init()
 	{
 		ScheduleManager.instance.addHandler(self)
