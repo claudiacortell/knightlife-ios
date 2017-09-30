@@ -135,11 +135,20 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 			self.nextBlockLabel.text = state.nextBlock!.analyst.getDisplayName()
 		} else if state.scheduleState == .noClass
 		{
-			self.headerBlockLabel.text = "No Class"
-			self.headerMinutesLabel.text = "Enjoy"
+			self.headerBlockLabel.text = ""
+			self.headerMinutesLabel.text = ""
+			
+			self.nextLabel.text = "Next Schoolday"
 			
 			self.blockLabel.text = "No Class"
-			self.nextBlockLabel.text = "-"
+
+			if let nextDay = ScheduleManager.instance.getNextSchoolday()
+			{
+				self.nextBlockLabel.text = nextDay.displayName
+			} else
+			{
+				self.nextBlockLabel.text = "-"
+			}
 		} else if state.scheduleState == .afterSchool
 		{
 			self.tableOverrideId = self.dayId.nextDay

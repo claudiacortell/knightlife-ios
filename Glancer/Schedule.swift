@@ -272,6 +272,24 @@ class ScheduleManager: PrefsUpdateHandler
 		return DayID.fromId(today)!
 	}
 	
+	func getNextSchoolday() -> DayID?
+	{
+		for i in 0..<DayID.values().count
+		{
+			let day = (i+self.currentDayOfWeek().id + 1) % DayID.values().count
+
+			let nextDay = DayID.fromId(day)
+			if let schedule = self.blockList(id: nextDay!)
+			{
+				if schedule.count > 0
+				{
+					return nextDay!
+				}
+			}
+		}
+		return nil
+	}
+	
 	func getCurrentBlock() -> Block?
 	{
 		let currentDate = Date()
