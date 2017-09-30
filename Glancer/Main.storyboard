@@ -243,8 +243,8 @@
                             <constraint firstAttribute="trailing" secondItem="SvK-iD-jc9" secondAttribute="trailing" id="xzJ-2r-oRY"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="HomeIcon" selectedImage="HomeIcon" id="NK2-dA-SQ6">
-                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-10"/>
+                    <tabBarItem key="tabBarItem" title="" image="icon_home" selectedImage="icon_home" id="NK2-dA-SQ6">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -440,8 +440,8 @@
                             <constraint firstAttribute="trailing" secondItem="bIi-l5-N2P" secondAttribute="trailing" id="y1t-X2-8li"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="WeekIcon" id="obV-cy-Gty">
-                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-10"/>
+                    <tabBarItem key="tabBarItem" title="" image="icon_calendar" selectedImage="icon_calendar" id="obV-cy-Gty">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -515,7 +515,7 @@
                                                 <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bI7-uF-ubx" userLabel="A Block">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bI7-uF-ubx" userLabel="A Block">
                                                 <rect key="frame" x="38" y="10" width="104.99999999999997" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="8HG-eE-j14"/>
@@ -576,7 +576,7 @@
                                                 <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bNh-xc-Kzy" userLabel="B Block">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bNh-xc-Kzy" userLabel="B Block">
                                                 <rect key="frame" x="37" y="10" width="105.99999999999997" height="29.999999999999972"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="DTZ-cu-SEK"/>
@@ -634,7 +634,7 @@
                                                 <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v7z-ML-xKb" userLabel="C Block">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v7z-ML-xKb" userLabel="C Block">
                                                 <rect key="frame" x="38" y="10" width="104.99999999999997" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="210-hK-xOu"/>
@@ -692,7 +692,7 @@
                                                 <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8AU-Ps-pJc" userLabel="D Block">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8AU-Ps-pJc" userLabel="D Block">
                                                 <rect key="frame" x="39" y="10" width="103.99999999999997" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="97" id="8J9-9C-gAK"/>
@@ -750,7 +750,7 @@
                                                 <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FTE-an-w7z" userLabel="E Block">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FTE-an-w7z" userLabel="E Block">
                                                 <rect key="frame" x="36" y="10" width="106.99999999999997" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="aVQ-Is-8xu"/>
@@ -808,7 +808,7 @@
                                                 <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q6t-bq-PxJ" userLabel="F Block">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q6t-bq-PxJ" userLabel="F Block">
                                                 <rect key="frame" x="35.666666666666657" y="10" width="107.33333333333331" height="29.999999999999943"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="RYp-Mt-a8K"/>
@@ -866,7 +866,7 @@
                                                 <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PcH-ap-fq7" userLabel="G Block">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PcH-ap-fq7" userLabel="G Block">
                                                 <rect key="frame" x="39" y="10" width="103.99999999999997" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="97" id="lgz-XO-zsQ"/>
@@ -1196,8 +1196,8 @@
                             <constraint firstAttribute="trailing" secondItem="VUu-y2-2V1" secondAttribute="trailing" id="xhg-Ud-3DP"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="SettingsIcon" selectedImage="SettingsIcon" id="Wsy-Y0-h4H">
-                        <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-10"/>
+                    <tabBarItem key="tabBarItem" title="" image="icon_settings" selectedImage="icon_settings" id="Wsy-Y0-h4H">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <navigationItem key="navigationItem" id="cwP-hd-8oa"/>
                     <connections>
@@ -1395,9 +1395,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="HomeIcon" width="36" height="36"/>
-        <image name="SettingsIcon" width="26" height="26"/>
-        <image name="WeekIcon" width="26" height="26"/>
+        <image name="icon_calendar" width="20" height="20"/>
+        <image name="icon_home" width="20" height="20"/>
+        <image name="icon_settings" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="prw-YB-XEI"/>

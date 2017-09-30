@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "savePNG2.png",
+      "filename" : "icons8-Calendar-520.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "savePNG3.png",
+      "filename" : "icons8-Calendar-521.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "savePNG5.png",
+      "filename" : "icons8-Calendar-522.png",
       "scale" : "3x"
     }
   ],
