@@ -452,7 +452,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tmA-bG-kXt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-855.07246376811599" y="-258.42391304347831"/>
+            <point key="canvasLocation" x="-855" y="-85"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Uf8-iE-nDf">
@@ -1227,7 +1227,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-855" y="435"/>
+            <point key="canvasLocation" x="-855" y="669"/>
         </scene>
         <!--Color Selection View Controller-->
         <scene sceneID="H3k-vM-0vU">
@@ -1395,12 +1395,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icon_calendar" width="20" height="20"/>
-        <image name="icon_home" width="20" height="20"/>
-        <image name="icon_settings" width="20" height="20"/>
+        <image name="icon_calendar" width="25" height="25"/>
+        <image name="icon_home" width="25" height="25"/>
+        <image name="icon_settings" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="prw-YB-XEI"/>
-        <segue reference="qyU-9z-EyO"/>
+        <segue reference="FXp-CX-9Jh"/>
     </inferredMetricsTieBreakers>
 </document>
