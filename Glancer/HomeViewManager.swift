@@ -52,8 +52,6 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 		self.timer.invalidate() // Create a new timer.
 		self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(HomeViewManager.updateTime), userInfo: nil, repeats: true)
 		
-		self.tableOverrideId = nil
-		
 		self.updateTime()
 	}
 	
@@ -170,7 +168,7 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 		
 		if !self.tableView.dayIndexChanged(new: self.tableOverrideId ?? self.dayId) // Update the table view to the new day. This will do nothing if the table is already set to the right day.
 		{
-			self.tableView.updateExpiredBlocks(animate: true) // Only manually update the expired blocks if the table view wasn't updated.
+			self.tableView.updateExpiredBlocks() // Only manually update the expired blocks if the table view wasn't updated.
 		}
 	}
 	
@@ -235,7 +233,7 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 
 class HomeBlockTableController: UITableView, UITableViewDataSource, UITableViewDelegate
 {
-	var dayId = DayID.monday
+	var dayId: DayID?
 	
 	var labels: [Label] = []
 	
@@ -268,21 +266,24 @@ class HomeBlockTableController: UITableView, UITableViewDataSource, UITableViewD
 	
 	private func generateLabels()
 	{
-		if let blocks = ScheduleManager.instance.blockList(id: self.dayId)
+		if let day = self.dayId
 		{
-			for block in blocks
+			if let blocks = ScheduleManager.instance.blockList(id: day)
 			{
-				let analyst = block.analyst
-				
-				let finalTime = "\(analyst.getStartTime().toFormattedString()) - \(analyst.getEndTime().toFormattedString())"
-				
-				let newLabel = Label(bL: analyst.getDisplayLetter(), cN: analyst.getDisplayName(), cT: finalTime, c: analyst.getColor(), block: block)
-				labels.append(newLabel)
+				for block in blocks
+				{
+					let analyst = block.analyst
+					
+					let finalTime = "\(analyst.getStartTime().toFormattedString()) - \(analyst.getEndTime().toFormattedString())"
+					
+					let newLabel = Label(bL: analyst.getDisplayLetter(), cN: analyst.getDisplayName(), cT: finalTime, c: analyst.getColor(), block: block)
+					labels.append(newLabel)
+				}
 			}
 		}
 	}
 	
-	func updateExpiredBlocks(animate: Bool = false)
+	func updateExpiredBlocks()
 	{
 		for cell in self.visibleCells
 		{
