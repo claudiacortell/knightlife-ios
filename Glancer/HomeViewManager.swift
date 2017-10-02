@@ -136,7 +136,7 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 			self.headerBlockLabel.text = ""
 			self.headerMinutesLabel.text = ""
 			
-			self.nextLabel.text = "Next Schoolday"
+			self.nextLabel.text = "Next School Day"
 			
 			self.blockLabel.text = "No Class"
 
