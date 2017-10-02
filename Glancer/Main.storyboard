@@ -398,14 +398,14 @@
                                             <constraint firstAttribute="height" constant="3" id="8bX-im-igy"/>
                                         </constraints>
                                     </view>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="WdB-a4-L1e">
-                                        <rect key="frame" x="30" y="11" width="354" height="29"/>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="WdB-a4-L1e">
+                                        <rect key="frame" x="35" y="11" width="344" height="29"/>
                                         <segments>
-                                            <segment title="Monday"/>
-                                            <segment title="Tuesday"/>
-                                            <segment title="Wednesday"/>
-                                            <segment title="Thursday"/>
-                                            <segment title="Friday"/>
+                                            <segment title="Mon"/>
+                                            <segment title="Tues"/>
+                                            <segment title="Wed"/>
+                                            <segment title="Thurs"/>
+                                            <segment title="Fri"/>
                                         </segments>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
@@ -419,8 +419,8 @@
                                     <constraint firstAttribute="trailing" secondItem="zsF-5f-y7p" secondAttribute="trailing" id="Lq8-l6-qRf"/>
                                     <constraint firstItem="WdB-a4-L1e" firstAttribute="centerX" secondItem="bIi-l5-N2P" secondAttribute="centerX" id="OVd-8X-73a"/>
                                     <constraint firstItem="WdB-a4-L1e" firstAttribute="centerY" secondItem="bIi-l5-N2P" secondAttribute="centerY" id="Pjx-Z4-rEY"/>
-                                    <constraint firstItem="WdB-a4-L1e" firstAttribute="leading" secondItem="bIi-l5-N2P" secondAttribute="leading" constant="30" id="VHg-8z-LsB"/>
-                                    <constraint firstAttribute="trailing" secondItem="WdB-a4-L1e" secondAttribute="trailing" constant="30" id="b0J-y2-LpS"/>
+                                    <constraint firstItem="WdB-a4-L1e" firstAttribute="leading" secondItem="bIi-l5-N2P" secondAttribute="leading" constant="35" id="VHg-8z-LsB"/>
+                                    <constraint firstAttribute="trailing" secondItem="WdB-a4-L1e" secondAttribute="trailing" constant="35" id="b0J-y2-LpS"/>
                                     <constraint firstAttribute="bottom" secondItem="zsF-5f-y7p" secondAttribute="bottom" id="nx7-fR-cRI"/>
                                     <constraint firstItem="zsF-5f-y7p" firstAttribute="leading" secondItem="bIi-l5-N2P" secondAttribute="leading" id="xNC-Vj-DDA"/>
                                 </constraints>
