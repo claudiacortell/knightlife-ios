@@ -182,17 +182,17 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="qcd-ig-edd" userLabel="Dummy">
-                                        <rect key="frame" x="152.33333333333331" y="0.0" width="109.99999999999994" height="50"/>
+                                        <rect key="frame" x="169.33333333333334" y="0.0" width="76.333333333333314" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="ERROR" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8dM-IK-aaO">
-                                                <rect key="frame" x="0.0" y="0.0" width="99.333333333333314" height="50"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="65.666666666666657" height="50"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mal-Hi-WoV">
-                                                <rect key="frame" x="105.33333333333334" y="0.0" width="4.6666666666666288" height="50"/>
-                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="21"/>
+                                                <rect key="frame" x="71.666666666666657" y="0.0" width="4.6666666666666572" height="50"/>
+                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -252,7 +252,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iVs-97-Bqw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-855.07246376811599" y="-1023.0978260869566"/>
+            <point key="canvasLocation" x="-1152" y="-810"/>
         </scene>
         <!--Week Controller-->
         <scene sceneID="Hgl-6b-Ycz">
@@ -445,7 +445,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tmA-bG-kXt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-855" y="-85"/>
+            <point key="canvasLocation" x="-1152" y="-85"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Uf8-iE-nDf">

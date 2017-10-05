@@ -326,12 +326,12 @@ class ColorBlockView: UIView
             return self.colorHex
         }
         
-		if let col = self.backgroundColor
-		{
-			let str = Utils.getHexFromCGColor(col.cgColor)
-//			self.backgroundColor = Utils.getUIColorFromHex(str)
-			return str
-		}
+//		if let col = self.backgroundColor
+//		{
+//			let str = Utils.getHexFromCGColor(col.cgColor)
+////			self.backgroundColor = Utils.getUIColorFromHex(str)
+//			return str
+//		}
 		return nil
 	}
 	
