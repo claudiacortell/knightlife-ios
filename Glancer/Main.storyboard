@@ -305,8 +305,8 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="75" height="73"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UiD-oW-6O1" userLabel="Block Letter">
-                                                                    <rect key="frame" x="20.666666666666664" y="10.333333333333332" width="33.333333333333329" height="51.666666666666671"/>
-                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
+                                                                    <rect key="frame" x="21.999999999999996" y="10.333333333333332" width="30.666666666666661" height="51.666666666666671"/>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="44"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
