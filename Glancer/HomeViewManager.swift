@@ -44,6 +44,8 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 			UserPrefsManager.instance.addHandler(self)
 		}
 		
+		self.tabBarController
+		
 		self.firstOpen = false
 	}
 	

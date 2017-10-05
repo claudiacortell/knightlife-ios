@@ -35,6 +35,7 @@
 		C0A5D3C01F6A07D500DBDCAD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A5D3BF1F6A07D500DBDCAD /* Utils.swift */; };
 		C0A908C61F76C8BF008AAB3F /* WeekViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A908C51F76C8BF008AAB3F /* WeekViewManager.swift */; };
 		C0ADDF341F831A9000775AF2 /* SettingsViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ADDF331F831A9000775AF2 /* SettingsViewManager.swift */; };
+		C0CD2BC51F86F776001600C2 /* TabBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD2BC41F86F776001600C2 /* TabBarManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,7 @@
 		C0A5D3BF1F6A07D500DBDCAD /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		C0A908C51F76C8BF008AAB3F /* WeekViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewManager.swift; sourceTree = "<group>"; };
 		C0ADDF331F831A9000775AF2 /* SettingsViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewManager.swift; sourceTree = "<group>"; };
+		C0CD2BC41F86F776001600C2 /* TabBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +189,7 @@
 				C0A908C51F76C8BF008AAB3F /* WeekViewManager.swift */,
 				C03D148A1F79479C00211D28 /* HomeViewManager.swift */,
 				C0ADDF331F831A9000775AF2 /* SettingsViewManager.swift */,
+				C0CD2BC41F86F776001600C2 /* TabBarManager.swift */,
 			);
 			path = Glancer;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				C069CF771F6B697E001FE527 /* NotificationsManager.swift in Sources */,
 				C0A5D3BC1F69E07500DBDCAD /* UserPrefsManager.swift in Sources */,
 				C03D148B1F79479C00211D28 /* HomeViewManager.swift in Sources */,
+				C0CD2BC51F86F776001600C2 /* TabBarManager.swift in Sources */,
 				C0A5D3BA1F69874A00DBDCAD /* WebCall.swift in Sources */,
 				C0707FC01F69753100C7D2ED /* Storage.swift in Sources */,
 			);

@@ -19,11 +19,11 @@
                         <viewControllerLayoutGuide type="bottom" id="zDr-rc-6zS"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="oIf-eE-Xrs">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9NT-sa-JiL" customClass="HomeBlockTableController" customModule="Glancer" customModuleProvider="target">
-                                <rect key="frame" x="5" y="20" width="404" height="667"/>
+                                <rect key="frame" x="5" y="20" width="404" height="598"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -263,11 +263,11 @@
                         <viewControllerLayoutGuide type="bottom" id="vBo-lo-cqL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="grn-ra-12S">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CSq-sm-yNf" customClass="WeekBlockTableController" customModule="Glancer" customModuleProvider="target">
-                                <rect key="frame" x="5" y="20" width="404" height="667"/>
+                                <rect key="frame" x="5" y="20" width="404" height="598"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -469,10 +469,10 @@
             </objects>
             <point key="canvasLocation" x="-1932" y="-84"/>
         </scene>
-        <!--Home Controller-->
+        <!--Settings-->
         <scene sceneID="9Du-Wc-HPU">
             <objects>
-                <viewController id="a6O-hV-seh" userLabel="Home Controller" sceneMemberID="viewController">
+                <viewController id="a6O-hV-seh" userLabel="Settings" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TY7-nK-9MG"/>
                         <viewControllerLayoutGuide type="bottom" id="VOz-ig-DOm"/>
