@@ -12,9 +12,7 @@
 		5B4A65791C14FD34001FE2B2 /* BlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4A65781C14FD34001FE2B2 /* BlockTableViewCell.swift */; };
 		5B93E4781BE26A1300D0D101 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B93E4771BE26A1300D0D101 /* Bolts.framework */; };
 		5B93E47B1BE26A6F00D0D101 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B93E47A1BE26A6F00D0D101 /* Parse.framework */; };
-		5BB503C71D7920CC00F9B2F7 /* ColorSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB503C61D7920CC00F9B2F7 /* ColorSelectionViewController.swift */; };
 		5BD072481C74AEB40074B56D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BD072471C74AEB40074B56D /* Main.storyboard */; };
-		5BD0724A1C74AEE00074B56D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD072491C74AEE00074B56D /* SettingsViewController.swift */; };
 		5BD285DD1B03CF29007A0472 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD285DC1B03CF29007A0472 /* AppDelegate.swift */; };
 		5BD285E41B03CF29007A0472 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BD285E31B03CF29007A0472 /* Images.xcassets */; };
 		5BD288291B03D218007A0472 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD288281B03D218007A0472 /* AudioToolbox.framework */; };
@@ -36,6 +34,7 @@
 		C0A5D3BC1F69E07500DBDCAD /* UserPrefsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A5D3BB1F69E07500DBDCAD /* UserPrefsManager.swift */; };
 		C0A5D3C01F6A07D500DBDCAD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A5D3BF1F6A07D500DBDCAD /* Utils.swift */; };
 		C0A908C61F76C8BF008AAB3F /* WeekViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A908C51F76C8BF008AAB3F /* WeekViewManager.swift */; };
+		C0ADDF341F831A9000775AF2 /* SettingsViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ADDF331F831A9000775AF2 /* SettingsViewManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,10 +68,8 @@
 		5B6B5F8D1C6A62BF00C53849 /* Glancer-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Glancer-Bridging-Header.h"; sourceTree = "<group>"; };
 		5B93E4771BE26A1300D0D101 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "parse-library-1/Bolts.framework"; sourceTree = "<group>"; };
 		5B93E47A1BE26A6F00D0D101 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "parse-library-1/Parse.framework"; sourceTree = "<group>"; };
-		5BB503C61D7920CC00F9B2F7 /* ColorSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSelectionViewController.swift; sourceTree = "<group>"; };
 		5BC261811B0EA7D700AEBAC1 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		5BD072471C74AEB40074B56D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		5BD072491C74AEE00074B56D /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		5BD285D71B03CF29007A0472 /* Glancer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Glancer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BD285DB1B03CF29007A0472 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5BD285DC1B03CF29007A0472 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +94,7 @@
 		C0A5D3BB1F69E07500DBDCAD /* UserPrefsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPrefsManager.swift; sourceTree = "<group>"; };
 		C0A5D3BF1F6A07D500DBDCAD /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		C0A908C51F76C8BF008AAB3F /* WeekViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewManager.swift; sourceTree = "<group>"; };
+		C0ADDF331F831A9000775AF2 /* SettingsViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,9 +174,7 @@
 				C0707FBD1F69720800C7D2ED /* Schedule.swift */,
 				5BD072471C74AEB40074B56D /* Main.storyboard */,
 				5B4A65781C14FD34001FE2B2 /* BlockTableViewCell.swift */,
-				5BD072491C74AEE00074B56D /* SettingsViewController.swift */,
 				740756CB1C33720A0039844B /* Label.swift */,
-				5BB503C61D7920CC00F9B2F7 /* ColorSelectionViewController.swift */,
 				5BD285E31B03CF29007A0472 /* Images.xcassets */,
 				C019C1601F7D3CED00FC4EED /* Launch.storyboard */,
 				5BD285DA1B03CF29007A0472 /* Supporting Files */,
@@ -190,6 +186,7 @@
 				C06220E41F74A8930032A2EC /* Debug.swift */,
 				C0A908C51F76C8BF008AAB3F /* WeekViewManager.swift */,
 				C03D148A1F79479C00211D28 /* HomeViewManager.swift */,
+				C0ADDF331F831A9000775AF2 /* SettingsViewManager.swift */,
 			);
 			path = Glancer;
 			sourceTree = "<group>";
@@ -328,11 +325,10 @@
 				5BD285DD1B03CF29007A0472 /* AppDelegate.swift in Sources */,
 				C06220E51F74A8930032A2EC /* Debug.swift in Sources */,
 				C0A908C61F76C8BF008AAB3F /* WeekViewManager.swift in Sources */,
-				5BD0724A1C74AEE00074B56D /* SettingsViewController.swift in Sources */,
 				5B4A65791C14FD34001FE2B2 /* BlockTableViewCell.swift in Sources */,
 				C0707FBE1F69720800C7D2ED /* Schedule.swift in Sources */,
 				C0A5D3C01F6A07D500DBDCAD /* Utils.swift in Sources */,
-				5BB503C71D7920CC00F9B2F7 /* ColorSelectionViewController.swift in Sources */,
+				C0ADDF341F831A9000775AF2 /* SettingsViewManager.swift in Sources */,
 				740756CC1C33720A0039844B /* Label.swift in Sources */,
 				C069CF771F6B697E001FE527 /* NotificationsManager.swift in Sources */,
 				C0A5D3BC1F69E07500DBDCAD /* UserPrefsManager.swift in Sources */,
