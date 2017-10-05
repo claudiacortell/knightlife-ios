@@ -24,8 +24,17 @@ class SettingsMenuViewController: UITableViewController
 	@IBOutlet weak var fDot: UIView!
 	@IBOutlet weak var gDot: UIView!
 	
+	@IBOutlet weak var aName: UILabel!
+	@IBOutlet weak var bName: UILabel!
+	@IBOutlet weak var cName: UILabel!
+	@IBOutlet weak var dName: UILabel!
+	@IBOutlet weak var eName: UILabel!
+	@IBOutlet weak var fName: UILabel!
+	@IBOutlet weak var gName: UILabel!
+	
 	var daySwitches: [DayID: UISwitch] = [:] // First lunch toggle
 	var blockDots: [BlockID: UIView] = [:] // First lunch toggle
+	var blockNames: [BlockID: UILabel] = [:] // Block names view
 	
 	override func viewDidLoad()
 	{
@@ -44,6 +53,14 @@ class SettingsMenuViewController: UITableViewController
 		self.blockDots[BlockID.e] = self.eDot
 		self.blockDots[BlockID.f] = self.fDot
 		self.blockDots[BlockID.g] = self.gDot
+		
+		self.blockNames[BlockID.a] = self.aName
+		self.blockNames[BlockID.b] = self.bName
+		self.blockNames[BlockID.c] = self.cName
+		self.blockNames[BlockID.d] = self.dName
+		self.blockNames[BlockID.e] = self.eName
+		self.blockNames[BlockID.f] = self.fName
+		self.blockNames[BlockID.g] = self.gName
 	}
 	
 	override func viewWillAppear(_ animated: Bool)
@@ -65,6 +82,17 @@ class SettingsMenuViewController: UITableViewController
 			if let meta = UserPrefsManager.instance.getMeta(id: block)
 			{
 				view.layer.backgroundColor = Utils.getUIColorFromHex(meta.customColor).cgColor
+			}
+		}
+		
+		for (block, field) in self.blockNames
+		{
+			if let meta = UserPrefsManager.instance.getMeta(id: block)
+			{
+				if meta.customName != nil
+				{
+					field.text = meta.customName
+				}
 			}
 		}
 	}
@@ -156,16 +184,18 @@ class SettingsDetailPageViewController: UIViewController
 		{
 			if let tabBar = segue.destination as? UITabBarController
 			{
-				tabBar.selectedIndex = 3
+				tabBar.selectedIndex = 2
 			}
 		}
 	}
 }
 
-class BlockDetailMenuViewController: UITableViewController, UITextFieldDelegate, UIGestureRecognizerDelegate
+class BlockDetailMenuViewController: UITableViewController, UITextFieldDelegate
 {
 	var blockId: BlockID!
-	var colorBlocks: [ColorBlockView] = []
+	
+	var selectedColorChanged = false
+	var selectedColor: String?
 	
 	@IBOutlet weak var classNameField: UITextField!
 	
@@ -176,6 +206,18 @@ class BlockDetailMenuViewController: UITableViewController, UITextFieldDelegate,
 		self.classNameField.delegate = self
 	}
 	
+	override func viewWillDisappear(_ animated: Bool)
+	{
+		if self.selectedColorChanged && self.selectedColor != nil
+		{
+			if var meta = UserPrefsManager.instance.getMeta(id: self.blockId)
+			{
+				meta.customColor = self.selectedColor
+				UserPrefsManager.instance.setMeta(id: self.blockId, meta: &meta)
+			}
+		}
+	}
+	
     @IBAction func blockTapped(_ sender: Any)
     {
         if let button = sender as? UIButton
@@ -183,63 +225,54 @@ class BlockDetailMenuViewController: UITableViewController, UITextFieldDelegate,
             if let view = button.superview as? ColorBlockView
             {
                 let color = view.getColorHex()
-                if var meta = UserPrefsManager.instance.getMeta(id: self.blockId)
-                {
-                    if meta.customColor != color
-                    {
-                        meta.customColor = color
-                        UserPrefsManager.instance.setMeta(id: self.blockId, meta: &meta)
-                        
-                        self.updateVisuals()
-                    }
-                }
+				if color != nil
+				{
+					if self.selectedColor != color
+					{
+						self.selectedColor = color
+						self.selectedColorChanged = true
+						
+						self.updateVisuals()
+					}
+				}
             }
         }
     }
     
 	override func viewWillAppear(_ animated: Bool)
 	{
-		super.viewWillAppear(animated)
-		
-		if self.colorBlocks.isEmpty
+		if let meta = UserPrefsManager.instance.getMeta(id: self.blockId)
 		{
-			for cell in self.tableView.visibleCells
+			self.selectedColor = meta.customColor
+			if meta.customName != nil
 			{
-				if let colorCell = cell as? BlockDetailMenuColorCell
-				{
-					colorCell.blockId = self.blockId
-					for block in colorCell.getColorBlocks()
-					{
-						self.colorBlocks.append(block)
-					}
-				}
+				self.classNameField.text = meta.customName
+			}
+			self.updateVisuals()
+		}
+	}
+	
+	override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
+	{
+		if let colorCell = cell as? BlockDetailMenuColorCell
+		{
+			for block in colorCell.getColorBlocks()
+			{
+				block.setShadow(on: block.colorHex == self.selectedColor)
 			}
 		}
-		
-		self.updateVisuals()
 	}
 	
 	private func updateVisuals()
 	{
-		if let meta = UserPrefsManager.instance.getMeta(id: self.blockId)
+		for cell in self.tableView.visibleCells
 		{
-			if let name = meta.customName
+			if let colorCell = cell as? BlockDetailMenuColorCell
 			{
-				self.classNameField.text = name
-			} else
-			{
-				self.classNameField.text = nil
-			}
-			
-            for color in self.colorBlocks
-			{
-				if color.getColorHex() == Utils.substring(meta.customColor, StartIndex: 0, EndIndex: 6) // Account for the old system's weird tagging
+				for block in colorCell.getColorBlocks()
 				{
-					color.setShadow(on: true)
-				} else
-                {
-                    color.setShadow(on: false)
-                }
+					block.setShadow(on: block.colorHex == self.selectedColor)
+				}
 			}
 		}
 	}
@@ -284,12 +317,7 @@ class BlockDetailMenuColorCell: UITableViewCell
 
 class ColorBlockView: UIView
 {
-    var colorHex: String?
-    
-	func getColor() -> CGColor?
-	{
-		return self.layer.backgroundColor
-	}
+    @objc var colorHex: String?
 	
 	func getColorHex() -> String?
 	{
@@ -298,9 +326,11 @@ class ColorBlockView: UIView
             return self.colorHex
         }
         
-		if let col = self.getColor()
+		if let col = self.backgroundColor
 		{
-			return Utils.getHexFromCGColor(col)
+			let str = Utils.getHexFromCGColor(col.cgColor)
+//			self.backgroundColor = Utils.getUIColorFromHex(str)
+			return str
 		}
 		return nil
 	}
