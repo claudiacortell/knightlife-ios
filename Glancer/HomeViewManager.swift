@@ -221,13 +221,10 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 					}
 				}
 			}
-			else
-			{
-				return (-1, nil, nil, .noClass) // Holiday or vacation or just no blocks were loaded into the system for some reason
-
-			}
+			
+			return (-1, nil, nil, .noClass) // Holiday or vacation or just no blocks were loaded into the system for some reason
 		}
-		return (-1, nil, nil, .error) // Final failsafe error catch.
+//		return (-1, nil, nil, .error) // Final failsafe error catch.
 	}
 }
 
