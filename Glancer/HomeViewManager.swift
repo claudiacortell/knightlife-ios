@@ -276,7 +276,7 @@ class HomeBlockTableController: UITableView, UITableViewDataSource, UITableViewD
 					
 					let finalTime = "\(analyst.getStartTime().toFormattedString()) - \(analyst.getEndTime().toFormattedString())"
 					
-					let newLabel = Label(bL: analyst.getDisplayLetter(), cN: analyst.getDisplayName(), cT: finalTime, c: analyst.getColor(), block: block)
+					let newLabel = Label(bL: analyst.getDisplayLetter(), cN: analyst.getDisplayName(), cT: finalTime, c: analyst.getColor(), rN: analyst.getRoom(), block: block)
 					labels.append(newLabel)
 				}
 			}
@@ -328,7 +328,7 @@ class HomeBlockTableController: UITableView, UITableViewDataSource, UITableViewD
 		} else
 		{
 			let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! HomeBlockCell
-			let label = Label(bL: "", cN: "", cT: "", c: "999999")
+			let label = Label(bL: "", cN: "", cT: "", c: "999999", rN: "")
 			cell.label = label
 			
 			return cell
@@ -342,6 +342,7 @@ class HomeBlockCell: UITableViewCell
 	@IBOutlet weak var className: UILabel!
 	@IBOutlet weak var classTimes: UILabel!
 	@IBOutlet weak var bodyView: UIView!
+	@IBOutlet weak var roomNumber: UILabel!
 	
 	@IBOutlet weak var viewMask: UIView!
 
@@ -358,6 +359,7 @@ class HomeBlockCell: UITableViewCell
 				self.blockLetter.text = label.blockLetter
 				self.className.text = label.className
 				self.classTimes.text = label.classTimes
+				self.roomNumber.text = label.roomNumber
 				self.block = label.block
 
 				let RGBvalues = Utils.getRGBFromHex(label.color)

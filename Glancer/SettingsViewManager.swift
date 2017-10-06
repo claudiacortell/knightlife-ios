@@ -196,12 +196,14 @@ class BlockDetailMenuViewController: UITableViewController, UITextFieldDelegate
 	var selectedColor: String?
 	
 	@IBOutlet weak var classNameField: UITextField!
+	@IBOutlet weak var roomField: UITextField!
 	
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
 	
 		self.classNameField.delegate = self
+		self.roomField.delegate = self
 	}
 	
 	override func viewWillDisappear(_ animated: Bool)
@@ -246,6 +248,10 @@ class BlockDetailMenuViewController: UITableViewController, UITextFieldDelegate
 			{
 				self.classNameField.text = meta.customName
 			}
+			if meta.roomNumber != nil
+			{
+				self.roomField.text = meta.roomNumber!
+			}
 			self.updateVisuals()
 		}
 	}
@@ -277,16 +283,26 @@ class BlockDetailMenuViewController: UITableViewController, UITextFieldDelegate
 	
 	func textFieldDidEndEditing(_ textField: UITextField)
 	{
-		if var meta = UserPrefsManager.instance.getMeta(id: self.blockId)
+		if textField == self.classNameField || textField == self.roomField
 		{
-			meta.customName = textField.text
-			UserPrefsManager.instance.setMeta(id: blockId, meta: &meta)
+			if var meta = UserPrefsManager.instance.getMeta(id: self.blockId)
+			{
+				if textField == self.classNameField
+				{
+					meta.customName = textField.text
+				} else
+				{
+					meta.roomNumber = textField.text
+				}
+				
+				UserPrefsManager.instance.setMeta(id: blockId, meta: &meta)
+			}
 		}
 	}
 	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool
 	{
-		self.classNameField.endEditing(true)
+		textField.endEditing(true)
 		return false
 	}
 }

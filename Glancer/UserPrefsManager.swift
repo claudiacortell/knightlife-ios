@@ -38,6 +38,7 @@ class UserPrefsManager
 		var blockId: BlockID! // E.G. A, B, C, D, E (Corresponds to Class ID)
 		var customName: String?// Same as block id by default. Can be changed to reflect user preferences
 		var customColor: String!
+		var roomNumber: String?
 	}
 	
 	private var blockMeta: [BlockID: BlockMeta] =
@@ -59,6 +60,7 @@ class UserPrefsManager
 	{
 		fileprivate static let NAME = "name"
 		fileprivate static let COLOR = "color"
+		fileprivate static let ROOM = "room"
 	}
 	
 	private var allowMetaChanges: [BlockID] = [ .a, .b, .c, .d, .e, .f, .g ]
@@ -110,11 +112,17 @@ class UserPrefsManager
 			{
 				if curMeta.customColor != meta.customColor { Debug.out("Changed \(id.rawValue):Color from \(curMeta.customColor) to \(meta.customColor)") }
 				if curMeta.customName != meta.customName { Debug.out("Changed \(id.rawValue):Name from \(curMeta.customName ?? "null") to \(meta.customName ?? "null")") }
+				if curMeta.roomNumber != meta.roomNumber { Debug.out("Changed \(id.rawValue):Name from \(curMeta.roomNumber ?? "null") to \(meta.roomNumber ?? "null")") }
 			}
 			
 			if meta.customName != nil && meta.customName!.count <= 0 // Prevent renaming to nothing.
 			{
 				meta.customName = nil
+			}
+			
+			if meta.roomNumber != nil && meta.roomNumber!.count <= 0
+			{
+				meta.roomNumber = nil
 			}
 			
 			self.blockMeta[id] = meta
@@ -160,6 +168,8 @@ class UserPrefsManager
 									case AccessKeys.COLOR:
 										if val != nil { defaultMeta.customColor = val! }
 										break
+									case AccessKeys.ROOM:
+										if val != nil { defaultMeta.roomNumber = val! }
 									default:
 										break
 									}
@@ -247,6 +257,7 @@ class UserPrefsManager
 			{
 				keyValMap[AccessKeys.NAME] = meta.customName == nil ? nil : "\(meta.customName!)"
 				keyValMap[AccessKeys.COLOR] = meta.customColor == nil ? nil : "\(meta.customColor!)"
+				keyValMap[AccessKeys.ROOM] = meta.roomNumber == nil ? nil : "\(meta.roomNumber!)"
 			}
 			
 			map[blockId.rawValue] = keyValMap

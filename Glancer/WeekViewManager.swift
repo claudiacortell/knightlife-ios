@@ -123,7 +123,7 @@ class WeekBlockTableController: UITableView, UITableViewDataSource, UITableViewD
 				
 				let finalTime = "\(analyst.getStartTime().toFormattedString()) - \(analyst.getEndTime().toFormattedString())"
 				
-				let newLabel = Label(bL: analyst.getDisplayLetter(), cN: analyst.getDisplayName(), cT: finalTime, c: analyst.getColor())
+				let newLabel = Label(bL: analyst.getDisplayLetter(), cN: analyst.getDisplayName(), cT: finalTime, c: analyst.getColor(), rN: analyst.getRoom())
 				labels.append(newLabel)
 			}
 		}
@@ -146,7 +146,7 @@ class WeekBlockTableController: UITableView, UITableViewDataSource, UITableViewD
 		} else
 		{
 			let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! WeekBlockCell
-			let label = Label(bL: "", cN: "", cT: "", c: "999999")
+			let label = Label(bL: "", cN: "", cT: "", c: "999999", rN: "")
 			cell.label = label
 			
 			return cell
@@ -160,6 +160,7 @@ class WeekBlockCell: UITableViewCell
 	@IBOutlet weak var className: UILabel!
 	@IBOutlet weak var classTimes: UILabel!
 	@IBOutlet weak var bodyView: UIView!
+	@IBOutlet weak var roomName: UILabel!
 	
 	var label: Label?
 	{
@@ -171,6 +172,7 @@ class WeekBlockCell: UITableViewCell
 				self.blockLetter.text = label.blockLetter
 				self.className.text = label.className
 				self.classTimes.text = label.classTimes
+				self.roomName.text = label.roomNumber
 				let RGBvalues = Utils.getRGBFromHex(label.color)
 				
 				self.bodyView.backgroundColor = UIColor(red: (RGBvalues[0] / 255.0), green: (RGBvalues[1] / 255.0), blue: (RGBvalues[2] / 255.0), alpha: 1)

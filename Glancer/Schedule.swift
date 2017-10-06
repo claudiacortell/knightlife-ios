@@ -627,6 +627,20 @@ class BlockAnalyst
 		return "999999"
 	}
 	
+	func getRoom() -> String
+	{
+		if self.block.isLunchBlock
+		{
+			return ""
+		}
+		
+		if let meta = self.meta
+		{
+			return meta.roomNumber == nil ? "" : meta.roomNumber!
+		}
+		return ""
+	}
+	
 	func isLastBlock() -> Bool
 	{
 		return self.block.isLastBlock
