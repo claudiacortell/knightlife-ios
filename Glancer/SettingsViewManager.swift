@@ -67,8 +67,6 @@ class SettingsMenuViewController: UITableViewController
 	{
 		super.viewWillAppear(animated)
 		
-		super.viewWillAppear(true)
-		
 		for (day, flip) in self.daySwitches
 		{
 			if let flop = UserPrefsManager.instance.getSwitch(id: day)
