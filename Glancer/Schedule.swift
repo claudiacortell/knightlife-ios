@@ -568,6 +568,12 @@ class BlockAnalyst
 		{
 			return "\(id)\(self.block.lunchBlockNumber!)"
 		}
+		
+		if id.count > 2
+		{
+			return Utils.substring(id, StartIndex: 0, EndIndex: 2)
+		}
+		
 		return id
 	}
 	
