@@ -250,7 +250,7 @@
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0900;
-				ORGANIZATIONNAME = "Vishnu Murale";
+				ORGANIZATIONNAME = "BB&N";
 				TargetAttributes = {
 					5BD285D61B03CF29007A0472 = {
 						CreatedOnToolsVersion = 6.3.1;
