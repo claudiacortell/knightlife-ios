@@ -342,7 +342,9 @@ class HomeBlockCell: UITableViewCell
 	@IBOutlet weak var roomNumber: UILabel!
 	
 	@IBOutlet weak var viewMask: UIView!
-
+	
+	@IBOutlet weak var timeRoomSeparator: UILabel!
+	
 	var expired: Bool = false
 	var block: Block?
 	
@@ -358,6 +360,8 @@ class HomeBlockCell: UITableViewCell
 				self.classTimes.text = label.classTimes
 				self.roomNumber.text = label.roomNumber
 				self.block = label.block
+				
+				self.timeRoomSeparator.alpha = (label.roomNumber == "") ? 0.0 : 1.0
 
 				let RGBvalues = Utils.getRGBFromHex(label.color)
 				self.bodyView.backgroundColor = UIColor(red: (RGBvalues[0] / 255.0), green: (RGBvalues[1] / 255.0), blue: (RGBvalues[2] / 255.0), alpha: 1)

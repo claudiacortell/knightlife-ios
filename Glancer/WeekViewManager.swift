@@ -162,6 +162,8 @@ class WeekBlockCell: UITableViewCell
 	@IBOutlet weak var bodyView: UIView!
 	@IBOutlet weak var roomName: UILabel!
 	
+	@IBOutlet weak var timeRoomSeparator: UILabel!
+	
 	var label: Label?
 	{
 		didSet
@@ -173,6 +175,9 @@ class WeekBlockCell: UITableViewCell
 				self.className.text = label.className
 				self.classTimes.text = label.classTimes
 				self.roomName.text = label.roomNumber
+				
+				self.timeRoomSeparator.alpha = (label.roomNumber == "") ? 0.0 : 1.0
+				
 				let RGBvalues = Utils.getRGBFromHex(label.color)
 				
 				self.bodyView.backgroundColor = UIColor(red: (RGBvalues[0] / 255.0), green: (RGBvalues[1] / 255.0), blue: (RGBvalues[2] / 255.0), alpha: 1)
