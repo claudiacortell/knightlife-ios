@@ -112,7 +112,7 @@ class UserPrefsManager
 			{
 				if curMeta.customColor != meta.customColor { Debug.out("Changed \(id.rawValue):Color from \(curMeta.customColor) to \(meta.customColor)") }
 				if curMeta.customName != meta.customName { Debug.out("Changed \(id.rawValue):Name from \(curMeta.customName ?? "null") to \(meta.customName ?? "null")") }
-				if curMeta.roomNumber != meta.roomNumber { Debug.out("Changed \(id.rawValue):Name from \(curMeta.roomNumber ?? "null") to \(meta.roomNumber ?? "null")") }
+				if curMeta.roomNumber != meta.roomNumber { Debug.out("Changed \(id.rawValue):Room from \(curMeta.roomNumber ?? "null") to \(meta.roomNumber ?? "null")") }
 			}
 			
 			if meta.customName != nil && meta.customName!.count <= 0 // Prevent renaming to nothing.

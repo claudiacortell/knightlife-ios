@@ -145,7 +145,7 @@ class SettingsDetailPageViewController: UIViewController
 {
 	var blockId: BlockID!
 	
-	@IBOutlet weak var navBar: UINavigationBar!
+	@IBOutlet weak var titleText: UILabel!
 	
 	override func viewDidLoad()
 	{
@@ -157,11 +157,16 @@ class SettingsDetailPageViewController: UIViewController
 		}
 	}
 	
+	@IBAction func returnButtonClicked(_ sender: Any)
+	{
+		self.dismiss(animated: true, completion: nil)
+	}
+	
 	override func viewWillAppear(_ animated: Bool)
 	{
 		super.viewWillAppear(animated)
 		
-		self.navBar.topItem?.title = "\(self.blockId.rawValue) Block"
+		self.titleText.text = "\(self.blockId.rawValue) Block"
 	}
 	
 	func getTableView() -> BlockDetailMenuViewController?
@@ -174,17 +179,6 @@ class SettingsDetailPageViewController: UIViewController
 			}
 		}
 		return nil
-	}
-	
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-	{
-		if segue.identifier == "home"
-		{
-			if let tabBar = segue.destination as? UITabBarController
-			{
-				tabBar.selectedIndex = 2
-			}
-		}
 	}
 }
 
@@ -331,7 +325,7 @@ class BlockDetailMenuColorCell: UITableViewCell
 
 class ColorBlockView: UIView
 {
-    @objc var colorHex: String?
+    @objc var colorHex: String? // Set in the runtime variables
 	
 	func getColorHex() -> String?
 	{
@@ -339,13 +333,7 @@ class ColorBlockView: UIView
         {
             return self.colorHex
         }
-        
-//		if let col = self.backgroundColor
-//		{
-//			let str = Utils.getHexFromCGColor(col.cgColor)
-////			self.backgroundColor = Utils.getUIColorFromHex(str)
-//			return str
-//		}
+		
 		return nil
 	}
 	
