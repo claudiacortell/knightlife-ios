@@ -159,7 +159,9 @@ class SettingsDetailPageViewController: UIViewController
 	
 	@IBAction func returnButtonClicked(_ sender: Any)
 	{
-		self.dismiss(animated: true, completion: nil)
+		self.navigationController?.popViewController(animated: true)
+		
+//		self.dismiss(animated: true, completion: nil)
 	}
 	
 	override func viewWillAppear(_ animated: Bool)

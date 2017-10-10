@@ -42,7 +42,7 @@ class WeekViewController: UIViewController, ScheduleUpdateHandler, PrefsUpdateHa
 		self.firstOpen = false
 	}
 	
-	override func viewDidAppear(_ animated: Bool)
+	override func viewWillAppear(_ animated: Bool)
 	{
 		if self.scheduleUpdated || self.settingsUpdated
 		{

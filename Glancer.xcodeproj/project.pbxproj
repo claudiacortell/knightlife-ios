@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		5B22DE9C1BE2691800215F11 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B22DE9B1BE2691800215F11 /* libz.tbd */; };
 		5B22DE9E1BE2692E00215F11 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B22DE9D1BE2692E00215F11 /* libsqlite3.tbd */; };
-		5B4A65791C14FD34001FE2B2 /* BlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4A65781C14FD34001FE2B2 /* BlockTableViewCell.swift */; };
 		5B93E4781BE26A1300D0D101 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B93E4771BE26A1300D0D101 /* Bolts.framework */; };
 		5B93E47B1BE26A6F00D0D101 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B93E47A1BE26A6F00D0D101 /* Parse.framework */; };
 		5BD072481C74AEB40074B56D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BD072471C74AEB40074B56D /* Main.storyboard */; };
@@ -64,7 +63,6 @@
 /* Begin PBXFileReference section */
 		5B22DE9B1BE2691800215F11 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		5B22DE9D1BE2692E00215F11 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		5B4A65781C14FD34001FE2B2 /* BlockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockTableViewCell.swift; sourceTree = "<group>"; };
 		5B55DC2C1B27B21500D55EB9 /* Glancer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Glancer.entitlements; sourceTree = "<group>"; };
 		5B6B5F8D1C6A62BF00C53849 /* Glancer-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Glancer-Bridging-Header.h"; sourceTree = "<group>"; };
 		5B93E4771BE26A1300D0D101 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "parse-library-1/Bolts.framework"; sourceTree = "<group>"; };
@@ -175,7 +173,6 @@
 				5BD285DC1B03CF29007A0472 /* AppDelegate.swift */,
 				C0707FBD1F69720800C7D2ED /* Schedule.swift */,
 				5BD072471C74AEB40074B56D /* Main.storyboard */,
-				5B4A65781C14FD34001FE2B2 /* BlockTableViewCell.swift */,
 				740756CB1C33720A0039844B /* Label.swift */,
 				5BD285E31B03CF29007A0472 /* Images.xcassets */,
 				C019C1601F7D3CED00FC4EED /* Launch.storyboard */,
@@ -328,7 +325,6 @@
 				5BD285DD1B03CF29007A0472 /* AppDelegate.swift in Sources */,
 				C06220E51F74A8930032A2EC /* Debug.swift in Sources */,
 				C0A908C61F76C8BF008AAB3F /* WeekViewManager.swift in Sources */,
-				5B4A65791C14FD34001FE2B2 /* BlockTableViewCell.swift in Sources */,
 				C0707FBE1F69720800C7D2ED /* Schedule.swift in Sources */,
 				C0A5D3C01F6A07D500DBDCAD /* Utils.swift in Sources */,
 				C0ADDF341F831A9000775AF2 /* SettingsViewManager.swift in Sources */,

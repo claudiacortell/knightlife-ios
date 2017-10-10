@@ -494,7 +494,7 @@
                     <connections>
                         <segue destination="Jiy-hv-3ej" kind="relationship" relationship="viewControllers" id="6jh-Nm-cxe"/>
                         <segue destination="Ktx-4v-c97" kind="relationship" relationship="viewControllers" id="BDW-VK-CnP"/>
-                        <segue destination="a6O-hV-seh" kind="relationship" relationship="viewControllers" id="CfC-Ad-5bR"/>
+                        <segue destination="lJZ-6Y-Ts3" kind="relationship" relationship="viewControllers" id="W7F-kH-DVq"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UzW-Oa-pTA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -570,14 +570,12 @@
                             <constraint firstAttribute="trailing" secondItem="9aA-H4-cW4" secondAttribute="trailing" id="zwT-BM-gVz"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="icon_settings" selectedImage="icon_settings" id="dgo-OV-wzw">
-                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
-                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="l9O-v6-j93"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B7E-dZ-G6P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1152" y="668"/>
+            <point key="canvasLocation" x="-1071" y="666"/>
         </scene>
         <!--Settings Menu View Controller-->
         <scene sceneID="Pky-kD-e7g">
@@ -645,7 +643,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="separatorInset" minX="53" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
-                                            <segue destination="H2R-mz-pjJ" kind="presentation" identifier="A" modalTransitionStyle="coverVertical" id="dKf-Me-zYq"/>
+                                            <segue destination="H2R-mz-pjJ" kind="show" identifier="A" id="dKf-Me-zYq"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="B" id="nEJ-K0-0AV" customClass="DayCell" customModule="Glancer" customModuleProvider="target">
@@ -694,7 +692,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="separatorInset" minX="53" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
-                                            <segue destination="H2R-mz-pjJ" kind="presentation" identifier="B" modalTransitionStyle="coverVertical" id="RDR-DX-nUw"/>
+                                            <segue destination="H2R-mz-pjJ" kind="show" identifier="B" id="RDR-DX-nUw"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="C" id="nQN-Gi-Dr1" customClass="DayCell" customModule="Glancer" customModuleProvider="target">
@@ -743,7 +741,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="separatorInset" minX="53" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
-                                            <segue destination="H2R-mz-pjJ" kind="presentation" identifier="C" modalTransitionStyle="coverVertical" id="3bN-hf-NAm"/>
+                                            <segue destination="H2R-mz-pjJ" kind="show" identifier="C" id="3bN-hf-NAm"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="D" id="GYK-Xv-PgZ" customClass="DayCell" customModule="Glancer" customModuleProvider="target">
@@ -792,7 +790,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="separatorInset" minX="53" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
-                                            <segue destination="H2R-mz-pjJ" kind="presentation" identifier="D" modalTransitionStyle="coverVertical" id="4z7-Zp-SR4"/>
+                                            <segue destination="H2R-mz-pjJ" kind="show" identifier="D" id="4z7-Zp-SR4"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="E" id="zUl-Xm-q9x" customClass="DayCell" customModule="Glancer" customModuleProvider="target">
@@ -841,7 +839,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="separatorInset" minX="53" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
-                                            <segue destination="H2R-mz-pjJ" kind="presentation" identifier="E" modalTransitionStyle="coverVertical" id="70s-w2-zLX"/>
+                                            <segue destination="H2R-mz-pjJ" kind="show" identifier="E" id="70s-w2-zLX"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="F" id="ojU-IN-fBD" customClass="DayCell" customModule="Glancer" customModuleProvider="target">
@@ -890,7 +888,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="separatorInset" minX="53" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
-                                            <segue destination="H2R-mz-pjJ" kind="presentation" identifier="F" modalTransitionStyle="coverVertical" id="if9-0E-Uq5"/>
+                                            <segue destination="H2R-mz-pjJ" kind="show" identifier="F" id="if9-0E-Uq5"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="G" id="7k8-9U-fWA" customClass="DayCell" customModule="Glancer" customModuleProvider="target">
@@ -939,7 +937,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="separatorInset" minX="53" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
-                                            <segue destination="H2R-mz-pjJ" kind="presentation" identifier="G" modalTransitionStyle="coverVertical" id="jX8-8C-cDS"/>
+                                            <segue destination="H2R-mz-pjJ" kind="show" identifier="G" id="jX8-8C-cDS"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -1121,10 +1119,30 @@
             </objects>
             <point key="canvasLocation" x="-261" y="668"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="8BP-D7-0DR">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="lJZ-6Y-Ts3" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="icon_settings" id="v64-sb-Zik">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ULY-80-2bK">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="a6O-hV-seh" kind="relationship" relationship="rootViewController" id="69q-YH-1ra"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="34g-hm-gQF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1933" y="668"/>
+        </scene>
         <!--Settings Detail Page View Controller-->
         <scene sceneID="p1o-mn-DFl">
             <objects>
-                <viewController id="H2R-mz-pjJ" customClass="SettingsDetailPageViewController" customModule="Glancer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="H2R-mz-pjJ" customClass="SettingsDetailPageViewController" customModule="Glancer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sIX-XU-Adx"/>
                         <viewControllerLayoutGuide type="bottom" id="4Ux-CF-cU1"/>
@@ -2226,6 +2244,6 @@
         <image name="icon_settings" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jX8-8C-cDS"/>
+        <segue reference="if9-0E-Uq5"/>
     </inferredMetricsTieBreakers>
 </document>

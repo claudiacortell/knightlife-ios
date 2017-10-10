@@ -24,6 +24,11 @@ class ScheduleManager: PrefsUpdateHandler
 		static let SECONDLUNCH_START = "SecondLunch" + START_TIME
 	}
 	
+	enum ScheduleState
+	{
+		case beforeSchool, beforeSchoolGetToClass, noClass, getToClass, inClass, afterSchool, error
+	}
+	
 	private(set) var onVacation = false
 
 	private var weekSchedule: [DayID: Weekday] = [:]
@@ -310,6 +315,56 @@ class ScheduleManager: PrefsUpdateHandler
 		}
 		
 		return nil
+	}
+	
+	func getCurrentScheduleInfo() -> (minutesRemaining: Int, curBlock: Block?, nextBlock: Block?, scheduleState: ScheduleState)
+	{
+		let curBlock = ScheduleManager.instance.getCurrentBlock()
+		if curBlock != nil // If we're currently in class
+		{
+			let analyst = curBlock!.analyst
+			
+			let nextBlock = analyst.getNextBlock()
+			let minutesToEnd = TimeUtils.timeToDateInMinutes(to: analyst.getEndTime().asDate())
+			
+			return (minutesToEnd, curBlock!, nextBlock, .inClass) // Return the time until the end of the class
+		} else
+		{
+			let curDate = Date()
+			
+			if let blocks = ScheduleManager.instance.blockList(id: self.currentDayOfWeek())
+			{
+				for block in blocks
+				{
+					let analyst = block.analyst
+					
+					if analyst.isFirstBlock() && curDate < analyst.getStartTime().asDate() // Before first block -> Before school
+					{
+						let timeToSchoolStart = TimeUtils.timeToDateInMinutes(to: analyst.getStartTime().asDate())
+						return (timeToSchoolStart, nil, block, timeToSchoolStart <= 5 ? .beforeSchoolGetToClass : .beforeSchool) // If there's less than 5 minutes before the first block starts
+					}
+					
+					if analyst.isLastBlock() && curDate >= analyst.getEndTime().asDate() // After school
+					{
+						return (-1, nil, nil, .afterSchool)
+					}
+					
+					let nextBlock = analyst.getNextBlock()
+					if nextBlock != nil // There SHOULD always be another block since it should've caught if it's the last block or we're in class so this check is mainly just a failsafe
+					{
+						let nextBlockAnalyst = nextBlock!.analyst
+						if curDate >= analyst.getEndTime().asDate() && curDate < nextBlockAnalyst.getStartTime().asDate() // Inbetween classes
+						{
+							let timeToNextBlock = TimeUtils.timeToDateInMinutes(to: nextBlockAnalyst.getStartTime().asDate())
+							return (timeToNextBlock, block, nextBlock, .getToClass) // Return the previous class as the current class if we're inbetween. This is just for convenience.
+						}
+					}
+				}
+			}
+			
+			return (-1, nil, nil, .noClass) // Holiday or vacation or just no blocks were loaded into the system for some reason
+		}
+		//		return (-1, nil, nil, .error) // Final failsafe error catch.
 	}
 }
 
