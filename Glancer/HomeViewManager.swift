@@ -28,27 +28,22 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 	
 	@IBOutlet weak var nextLabel: UILabel!
 	
-	private var firstOpen = true
-	
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
 		
-		if self.firstOpen
-		{
-			self.tableView.delegate = self.tableView!
-			self.tableView.dataSource = self.tableView!
-			
-			// Register as handler
-			ScheduleManager.instance.addHandler(self)
-			UserPrefsManager.instance.addHandler(self)
-		}
+		self.tableView.delegate = self.tableView!
+		self.tableView.dataSource = self.tableView!
 		
-		self.firstOpen = false
+		// Register as handler
+		ScheduleManager.instance.addHandler(self)
+		UserPrefsManager.instance.addHandler(self)
 	}
 	
 	override func viewDidAppear(_ animated: Bool)
 	{
+		super.viewDidAppear(animated)
+		
 		self.timer.invalidate() // Create a new timer.
 		self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(HomeViewManager.updateTime), userInfo: nil, repeats: true)
 		
@@ -57,6 +52,8 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 	
 	override func viewDidDisappear(_ animated: Bool)
 	{
+		super.viewDidDisappear(animated)
+		
 		self.timer.invalidate()
 	}
 	
@@ -73,18 +70,13 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 	
 	func scheduleDidUpdate(didUpdateSuccessfully: Bool)
 	{
-		if self.isViewLoaded && didUpdateSuccessfully
-		{
-			self.updateViews()
-		}
+		self.updateViews()
 	}
 	
 	func prefsDidUpdate(_ type: UserPrefsManager.PrefsUpdateType)
 	{
-		if self.isViewLoaded
-		{
-			self.updateViews()
-		}
+		self.updateViews()
+		self.tableView.setWeekData()
 	}
 	
 	func updateViews()
@@ -181,7 +173,7 @@ class HomeBlockTableController: UITableView, UITableViewDataSource, UITableViewD
 	
 	var showExpiredBlocks = true
 
-	private func setWeekData()
+	func setWeekData()
 	{
 		if !ScheduleManager.instance.scheduleLoaded
 		{

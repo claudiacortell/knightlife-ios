@@ -34,6 +34,7 @@ class ScheduleManager: PrefsUpdateHandler
 	private var weekSchedule: [DayID: Weekday] = [:]
 	private var updateHandlers: [ScheduleUpdateHandler] = []
 	var scheduleLoaded = false
+	var attemptedLoad = false
 	
 	func dayLoaded(id: DayID) -> Bool
 	{
@@ -71,6 +72,8 @@ class ScheduleManager: PrefsUpdateHandler
 	func loadBlocks() -> Bool
 	{
 		var success = true
+		
+		self.attemptedLoad = true
 		
 		let call = WebCall(app: "scheduleObject/OG")
 		let response = call.runSync()

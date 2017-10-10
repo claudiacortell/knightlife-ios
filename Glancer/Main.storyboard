@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9NT-sa-JiL" customClass="HomeBlockTableController" customModule="Glancer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="20" width="414" height="667"/>
+                                <rect key="frame" x="0.0" y="40" width="414" height="647"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -181,14 +181,14 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SvK-iD-jc9" userLabel="Status Bar">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="20"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="20"/>
                                 <color key="backgroundColor" red="0.27129095790000002" green="0.51216697690000001" blue="0.80008721350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="O7v-cI-enc"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="by3-5p-ImB" userLabel="Header Container">
-                                <rect key="frame" x="0.0" y="20" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="40" width="414" height="50"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i70-dd-9bf" userLabel="Shadow">
                                         <rect key="frame" x="0.0" y="47" width="414" height="3"/>
@@ -288,27 +288,35 @@
                                 <gestureRecognizers/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="XRv-v8-nhY" userLabel="Under Status Bar">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="110"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ERROR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jkC-d1-rbt">
-                                            <rect key="frame" x="10" y="74.666666666666671" width="394" height="52"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="44"/>
+                                            <rect key="frame" x="10" y="61.666666666666657" width="394" height="38.333333333333343"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No School" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y79-5n-GCN">
+                                            <rect key="frame" x="166" y="99" width="82" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                            <color key="textColor" red="0.40784019231796265" green="0.40784034132957458" blue="0.40783959627151489" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="jkC-d1-rbt" firstAttribute="centerX" secondItem="XRv-v8-nhY" secondAttribute="centerX" id="EI9-hy-F8i"/>
-                                        <constraint firstAttribute="bottom" secondItem="jkC-d1-rbt" secondAttribute="bottom" constant="24" id="h6f-2s-5hu"/>
+                                        <constraint firstAttribute="bottom" secondItem="jkC-d1-rbt" secondAttribute="bottom" constant="10" id="h6f-2s-5hu"/>
                                         <constraint firstItem="jkC-d1-rbt" firstAttribute="leading" secondItem="XRv-v8-nhY" secondAttribute="leading" constant="10" id="kFw-Td-jav"/>
+                                        <constraint firstAttribute="bottom" secondItem="Y79-5n-GCN" secondAttribute="bottom" constant="-10" id="lkH-gg-ND8"/>
                                         <constraint firstAttribute="trailing" secondItem="jkC-d1-rbt" secondAttribute="trailing" constant="10" id="qYl-hC-NAx"/>
+                                        <constraint firstItem="Y79-5n-GCN" firstAttribute="centerX" secondItem="XRv-v8-nhY" secondAttribute="centerX" id="tIo-oa-t8g"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="75" id="d0Y-uC-Lwv" customClass="WeekBlockCell" customModule="Glancer" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="178" width="414" height="75"/>
+                                        <rect key="frame" x="0.0" y="138" width="414" height="75"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="d0Y-uC-Lwv" id="SmR-nC-0lh">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
@@ -471,6 +479,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="dayLabel" destination="jkC-d1-rbt" id="Qx6-76-K7v"/>
+                        <outlet property="noSchoolLabel" destination="Y79-5n-GCN" id="taM-KY-MFt"/>
                         <outlet property="segControl" destination="WdB-a4-L1e" id="uZp-zu-JBO"/>
                         <outlet property="tableView" destination="CSq-sm-yNf" id="xEl-4f-N1i"/>
                     </connections>
@@ -575,7 +584,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B7E-dZ-G6P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1071" y="666"/>
+            <point key="canvasLocation" x="-1933" y="1376"/>
         </scene>
         <!--Settings Menu View Controller-->
         <scene sceneID="Pky-kD-e7g">
@@ -1117,7 +1126,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l72-bk-Kcr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-261" y="668"/>
+            <point key="canvasLocation" x="-1933" y="2090"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8BP-D7-0DR">
@@ -1226,7 +1235,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vtp-T0-hmC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="645" y="667"/>
+            <point key="canvasLocation" x="-1022" y="2090"/>
         </scene>
         <!--Block Detail Menu View Controller-->
         <scene sceneID="Ik7-gC-zbn">
@@ -2234,7 +2243,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FWF-rE-A3G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1529" y="668"/>
+            <point key="canvasLocation" x="-1023" y="2810"/>
         </scene>
     </scenes>
     <resources>

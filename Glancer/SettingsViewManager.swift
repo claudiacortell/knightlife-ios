@@ -67,6 +67,18 @@ class SettingsMenuViewController: UITableViewController
 	{
 		super.viewWillAppear(animated)
 		
+		self.updateVisuals()
+	}
+	
+	override func viewDidAppear(_ animated: Bool)
+	{
+		super.viewDidAppear(animated)
+		
+		self.updateVisuals()
+	}
+	
+	private func updateVisuals()
+	{
 		for (day, flip) in self.daySwitches
 		{
 			if let flop = UserPrefsManager.instance.getSwitch(id: day)
@@ -106,12 +118,6 @@ class SettingsMenuViewController: UITableViewController
 		}
 	}
 	
-	override func viewWillDisappear(_ animated: Bool)
-	{
-		super.viewWillDisappear(animated)
-		// If settings changed then reload user prefs.
-	}
-	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?)
 	{
 		if let destination = segue.destination as? SettingsDetailPageViewController
@@ -132,12 +138,6 @@ class SettingsMenuViewController: UITableViewController
 		{
 			Debug.out("No destination found.")
 		}
-	}
-	
-	override func didReceiveMemoryWarning()
-	{
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
 	}
 }
 
@@ -286,7 +286,7 @@ class BlockDetailMenuViewController: UITableViewController, UITextFieldDelegate
 				if textField == self.classNameField
 				{
 					meta.customName = textField.text
-				} else
+				} else if textField == self.roomField
 				{
 					meta.roomNumber = textField.text
 				}

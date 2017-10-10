@@ -13,45 +13,26 @@ class WeekViewController: UIViewController, ScheduleUpdateHandler, PrefsUpdateHa
 	@IBOutlet weak var segControl: UISegmentedControl!
 	@IBOutlet weak var tableView: WeekBlockTableController!
 	@IBOutlet weak var dayLabel: UILabel!
-	
-	private var firstOpen = true
-	
-	var scheduleUpdated = false
-	var settingsUpdated = false
+	@IBOutlet weak var noSchoolLabel: UILabel!
 	
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
 		
-		if self.firstOpen
-		{
-			self.tableView.delegate = self.tableView!
-			self.tableView.dataSource = self.tableView!
-			
-			// Register as handler
-			ScheduleManager.instance.addHandler(self)
-			UserPrefsManager.instance.addHandler(self)
-			
-			self.scheduleUpdated = false
-			self.settingsUpdated = false
-			
-			self.updateLabel()
-			self.tableView.setWeekData()
-		}
+		self.tableView.delegate = self.tableView!
+		self.tableView.dataSource = self.tableView!
 		
-		self.firstOpen = false
+		// Register as handler
+		ScheduleManager.instance.addHandler(self)
+		UserPrefsManager.instance.addHandler(self)
 	}
 	
 	override func viewWillAppear(_ animated: Bool)
 	{
-		if self.scheduleUpdated || self.settingsUpdated
-		{
-			self.scheduleUpdated = false
-			self.settingsUpdated = false
-			
-			self.updateLabel()
-			self.tableView.setWeekData()
-		}
+		super.viewWillAppear(animated)
+		
+		self.updateLabel()
+		self.tableView.setWeekData()
 	}
 	
 	@IBAction func segControlChanged(_ sender: AnyObject)
@@ -62,29 +43,27 @@ class WeekViewController: UIViewController, ScheduleUpdateHandler, PrefsUpdateHa
 	
 	func scheduleDidUpdate(didUpdateSuccessfully: Bool)
 	{
-		if self.isViewLoaded && didUpdateSuccessfully
-		{
-			self.tableView.setWeekData()
-		} else
-		{
-			self.scheduleUpdated = didUpdateSuccessfully
-		}
+		self.tableView.setWeekData()
 	}
 	
 	func prefsDidUpdate(_ type: UserPrefsManager.PrefsUpdateType)
 	{
-		if self.isViewLoaded
-		{
-			self.tableView.setWeekData()
-		} else
-		{
-			self.settingsUpdated = true
-		}
+		self.tableView.setWeekData()
 	}
 	
 	func updateLabel()
 	{
-		self.dayLabel.text = DayID.fromId(segControl.selectedSegmentIndex)!.displayName
+		let day = DayID.fromId(segControl.selectedSegmentIndex)!
+		
+		self.dayLabel.text = day.displayName
+		
+		if !ScheduleManager.instance.dayLoaded(id: day) && ScheduleManager.instance.attemptedLoad
+		{
+			self.noSchoolLabel.isHidden = false
+		} else
+		{
+			self.noSchoolLabel.isHidden = true
+		}
 	}
 }
 
