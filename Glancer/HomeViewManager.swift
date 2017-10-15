@@ -28,16 +28,20 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 	
 	@IBOutlet weak var nextLabel: UILabel!
 	
+	required init?(coder aDecoder: NSCoder)
+	{
+		super.init(coder: aDecoder)
+		
+		ScheduleManager.instance.addHandler(self)
+		UserPrefsManager.instance.addHandler(self)
+	}
+	
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
 		
 		self.tableView.delegate = self.tableView!
 		self.tableView.dataSource = self.tableView!
-		
-		// Register as handler
-		ScheduleManager.instance.addHandler(self)
-		UserPrefsManager.instance.addHandler(self)
 	}
 	
 	override func viewDidAppear(_ animated: Bool)
@@ -135,6 +139,9 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 			if let nextDay = ScheduleManager.instance.getNextSchoolday()
 			{
 				self.nextBlockLabel.text = nextDay.displayName
+				
+				self.tableOverrideId = nextDay
+				self.tableView.showExpiredBlocks = false
 			} else
 			{
 				self.nextBlockLabel.text = "-"
