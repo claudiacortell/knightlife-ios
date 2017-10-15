@@ -18,38 +18,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fkg-9L-UGD">
-                                <rect key="frame" x="67.5" y="203.5" width="240" height="240"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logolarge" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ySy-bz-ub0">
-                                        <rect key="frame" x="57.5" y="0.0" width="125" height="164"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="164" id="3Yk-YZ-RnB"/>
-                                            <constraint firstAttribute="width" constant="125" id="NJG-gj-hiE"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Knight Life" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CPe-qn-y7Q">
-                                        <rect key="frame" x="32" y="178" width="176" height="42"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
-                                        <color key="textColor" red="0.16862745100000001" green="0.51764705879999995" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_large" translatesAutoresizingMaskIntoConstraints="NO" id="TaE-R3-7y2">
+                                <rect key="frame" x="87" y="243.5" width="200" height="200"/>
                                 <constraints>
-                                    <constraint firstItem="CPe-qn-y7Q" firstAttribute="bottom" secondItem="fkg-9L-UGD" secondAttribute="bottom" constant="-20" id="3lP-xh-Krh"/>
-                                    <constraint firstAttribute="height" constant="240" id="5aA-NU-GeR"/>
-                                    <constraint firstItem="CPe-qn-y7Q" firstAttribute="centerX" secondItem="fkg-9L-UGD" secondAttribute="centerX" id="Ixf-rj-INw"/>
-                                    <constraint firstItem="ySy-bz-ub0" firstAttribute="top" secondItem="fkg-9L-UGD" secondAttribute="top" id="XK6-MZ-fEO"/>
-                                    <constraint firstItem="ySy-bz-ub0" firstAttribute="centerX" secondItem="fkg-9L-UGD" secondAttribute="centerX" id="cCC-WF-C9K"/>
-                                    <constraint firstAttribute="width" constant="240" id="xWy-lo-dAY"/>
+                                    <constraint firstAttribute="height" constant="200" id="p2Q-Ge-JEo"/>
+                                    <constraint firstAttribute="width" constant="200" id="xGE-2F-sDP"/>
                                 </constraints>
-                            </view>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="fkg-9L-UGD" firstAttribute="centerY" secondItem="YEu-Wv-SfL" secondAttribute="centerY" constant="-20" id="4QT-GE-IK5"/>
-                            <constraint firstItem="fkg-9L-UGD" firstAttribute="centerX" secondItem="YEu-Wv-SfL" secondAttribute="centerX" id="Ze2-KX-cc6"/>
+                            <constraint firstItem="TaE-R3-7y2" firstAttribute="centerX" secondItem="YEu-Wv-SfL" secondAttribute="centerX" id="npB-6q-Cth"/>
+                            <constraint firstItem="TaE-R3-7y2" firstAttribute="centerY" secondItem="YEu-Wv-SfL" secondAttribute="centerY" id="seM-RN-BTU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YEu-Wv-SfL"/>
                     </view>
@@ -60,6 +40,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="logolarge" width="198" height="259"/>
+        <image name="logo_large" width="333" height="333"/>
     </resources>
 </document>

@@ -28,23 +28,19 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 	
 	@IBOutlet weak var nextLabel: UILabel!
 	
-	required init?(coder aDecoder: NSCoder)
-	{
-		super.init(coder: aDecoder)
-		
-		ScheduleManager.instance.addHandler(self)
-		UserPrefsManager.instance.addHandler(self)
-	}
-	
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
 		
 		self.tableView.delegate = self.tableView!
 		self.tableView.dataSource = self.tableView!
+		
+		ScheduleManager.instance.addHandler(self)
+		UserPrefsManager.instance.addHandler(self)
 	}
 	
-	override func viewDidAppear(_ animated: Bool)
+	override func 
+		viewDidAppear(_ animated: Bool)
 	{
 		super.viewDidAppear(animated)
 		

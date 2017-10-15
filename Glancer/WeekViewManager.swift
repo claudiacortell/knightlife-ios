@@ -15,20 +15,15 @@ class WeekViewController: UIViewController, ScheduleUpdateHandler, PrefsUpdateHa
 	@IBOutlet weak var dayLabel: UILabel!
 	@IBOutlet weak var noSchoolLabel: UILabel!
 	
-	required init?(coder aDecoder: NSCoder)
-	{
-		super.init(coder: aDecoder)
-		
-		ScheduleManager.instance.addHandler(self)
-		UserPrefsManager.instance.addHandler(self)
-	}
-	
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
 		
 		self.tableView.delegate = self.tableView!
 		self.tableView.dataSource = self.tableView!
+		
+		ScheduleManager.instance.addHandler(self)
+		UserPrefsManager.instance.addHandler(self)
 	}
 	
 	override func viewWillAppear(_ animated: Bool)

@@ -201,13 +201,13 @@ class ScheduleManager: PrefsUpdateHandler
 			Debug.out("WebCall failed: \(response.token.error!)")
 		}
 		
-		self.updateLunch(false)
-		self.updateHandlers(success)
-		
 		if success
 		{
 			self.scheduleLoaded = true
 		}
+		
+		self.updateLunch(false)
+		self.updateHandlers(success)
 		
 		return success
 	}
