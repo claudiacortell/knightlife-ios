@@ -979,19 +979,10 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZT-NO-LFt">
-                                                    <rect key="frame" x="190.66666666666663" y="29.666666666666668" width="190.33333333333337" height="0.0"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="16"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="LZT-NO-LFt" firstAttribute="leading" secondItem="Vhv-zB-dr1" secondAttribute="centerX" id="344-S3-a8A"/>
                                                 <constraint firstItem="tuS-zp-ZFJ" firstAttribute="centerY" secondItem="Vhv-zB-dr1" secondAttribute="centerY" id="B0X-nF-fZN"/>
                                                 <constraint firstItem="L0r-GC-yEU" firstAttribute="centerY" secondItem="Vhv-zB-dr1" secondAttribute="centerY" id="N9e-YQ-MGW"/>
-                                                <constraint firstAttribute="trailing" secondItem="LZT-NO-LFt" secondAttribute="trailing" id="VIb-yp-WG1"/>
-                                                <constraint firstItem="LZT-NO-LFt" firstAttribute="centerY" secondItem="Vhv-zB-dr1" secondAttribute="centerY" id="ZR4-I3-xXe"/>
                                                 <constraint firstItem="L0r-GC-yEU" firstAttribute="leading" secondItem="tuS-zp-ZFJ" secondAttribute="trailing" constant="20" id="nAl-7h-VOL"/>
                                                 <constraint firstItem="tuS-zp-ZFJ" firstAttribute="leading" secondItem="Vhv-zB-dr1" secondAttribute="leading" constant="20" id="qJj-8c-mYv"/>
                                             </constraints>
@@ -999,7 +990,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="separatorInset" minX="53" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
-                                            <segue destination="ujp-VO-44z" kind="show" id="iIQ-b6-X53"/>
+                                            <segue destination="ujp-VO-44z" kind="show" identifier="Custom" id="iIQ-b6-X53"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -1166,6 +1157,7 @@
                         <outlet property="dName" destination="OTJ-6r-QaM" id="a8w-XH-lYX"/>
                         <outlet property="eDot" destination="Jkw-rp-zuc" id="kgw-tj-xm2"/>
                         <outlet property="eName" destination="Caa-hc-qAd" id="OU7-AW-HD7"/>
+                        <outlet property="eventsDot" destination="tuS-zp-ZFJ" id="hHa-Nc-O1f"/>
                         <outlet property="fDot" destination="EP4-2t-9Ny" id="k3U-lk-dDX"/>
                         <outlet property="fName" destination="fKw-wl-SRI" id="Bi9-Ze-9S8"/>
                         <outlet property="fridaySwitch" destination="nTa-Gz-dVq" id="VvN-rv-gBi"/>
@@ -2145,8 +2137,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X5E-7g-lAJ" userLabel="Header Container">
                                 <rect key="frame" x="0.0" y="20" width="414" height="50"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Custom Block" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lBC-om-Zps">
-                                        <rect key="frame" x="142" y="13.666666666666664" width="131" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Events" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lBC-om-Zps">
+                                        <rect key="frame" x="175" y="13.666666666666664" width="64" height="24"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -2238,7 +2230,7 @@
                                                     <subviews>
                                                         <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9b2-Cc-HaS" userLabel="Shadow" customClass="ColorBlockShadowView" customModule="Glancer" customModuleProvider="target">
                                                             <rect key="frame" x="10" y="10" width="187" height="54.666666666666671"/>
-                                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                     <integer key="value" value="5"/>
@@ -2265,7 +2257,7 @@
                                                         <constraint firstAttribute="trailing" secondItem="fYp-Y9-b0W" secondAttribute="trailing" id="tRO-QD-25P"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="colorHex" value="34495E"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="colorHex" value="000000"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PxW-9Y-XN2" userLabel="Pallate Right" customClass="ColorBlockView" customModule="Glancer" customModuleProvider="target">
@@ -2299,7 +2291,7 @@
                                                         <constraint firstItem="vgm-ZG-yoJ" firstAttribute="leading" secondItem="PxW-9Y-XN2" secondAttribute="leading" id="yqc-Ik-vSX"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="colorHex" value="2C3E50"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="colorHex" value="888888"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>

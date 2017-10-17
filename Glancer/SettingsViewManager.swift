@@ -23,6 +23,7 @@ class SettingsMenuViewController: UITableViewController
 	@IBOutlet weak var eDot: UIView!
 	@IBOutlet weak var fDot: UIView!
 	@IBOutlet weak var gDot: UIView!
+	@IBOutlet weak var eventsDot: UIView!
 	
 	@IBOutlet weak var aName: UILabel!
 	@IBOutlet weak var bName: UILabel!
@@ -53,6 +54,7 @@ class SettingsMenuViewController: UITableViewController
 		self.blockDots[BlockID.e] = self.eDot
 		self.blockDots[BlockID.f] = self.fDot
 		self.blockDots[BlockID.g] = self.gDot
+		self.blockDots[BlockID.custom] = self.eventsDot
 		
 		self.blockNames[BlockID.a] = self.aName
 		self.blockNames[BlockID.b] = self.bName
@@ -159,16 +161,20 @@ class SettingsDetailPageViewController: UIViewController
 	
 	@IBAction func returnButtonClicked(_ sender: Any)
 	{
-		self.navigationController?.popViewController(animated: true)
-		
-//		self.dismiss(animated: true, completion: nil)
+		self.navigationController?.popViewController(animated: true)		
 	}
 	
 	override func viewWillAppear(_ animated: Bool)
 	{
 		super.viewWillAppear(animated)
 		
-		self.titleText.text = "\(self.blockId.rawValue) Block"
+		if self.blockId == .custom
+		{
+			self.titleText.text = "Events"
+		} else
+		{
+			self.titleText.text = "\(self.blockId.rawValue) Block"
+		}
 	}
 	
 	func getTableView() -> BlockDetailMenuViewController?
@@ -198,8 +204,11 @@ class BlockDetailMenuViewController: UITableViewController, UITextFieldDelegate
 	{
 		super.viewDidLoad()
 	
-		self.classNameField.delegate = self
-		self.roomField.delegate = self
+		if self.classNameField != nil && self.roomField != nil
+		{
+			self.classNameField.delegate = self
+			self.roomField.delegate = self
+		}
 	}
 	
 	override func viewWillDisappear(_ animated: Bool)
@@ -240,11 +249,11 @@ class BlockDetailMenuViewController: UITableViewController, UITextFieldDelegate
 		if let meta = UserPrefsManager.instance.getMeta(id: self.blockId)
 		{
 			self.selectedColor = meta.customColor
-			if meta.customName != nil
+			if self.classNameField != nil && meta.customName != nil
 			{
 				self.classNameField.text = meta.customName
 			}
-			if meta.roomNumber != nil
+			if self.roomField != nil && meta.roomNumber != nil
 			{
 				self.roomField.text = meta.roomNumber!
 			}
