@@ -23,6 +23,7 @@ class SettingsMenuViewController: UITableViewController
 	@IBOutlet weak var eDot: UIView!
 	@IBOutlet weak var fDot: UIView!
 	@IBOutlet weak var gDot: UIView!
+	@IBOutlet weak var xDot: UIView!
 	@IBOutlet weak var eventsDot: UIView!
 	
 	@IBOutlet weak var aName: UILabel!
@@ -54,6 +55,7 @@ class SettingsMenuViewController: UITableViewController
 		self.blockDots[BlockID.e] = self.eDot
 		self.blockDots[BlockID.f] = self.fDot
 		self.blockDots[BlockID.g] = self.gDot
+		self.blockDots[BlockID.x] = self.xDot
 		self.blockDots[BlockID.custom] = self.eventsDot
 		
 		self.blockNames[BlockID.a] = self.aName

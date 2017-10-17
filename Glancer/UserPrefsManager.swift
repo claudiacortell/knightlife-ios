@@ -63,7 +63,7 @@ class UserPrefsManager
 		fileprivate static let ROOM = "room"
 	}
 	
-	private var allowMetaChanges: [BlockID] = [ .a, .b, .c, .d, .e, .f, .g, .custom ]
+	private var allowMetaChanges: [BlockID] = [ .a, .b, .c, .d, .e, .f, .g, .x, .custom ]
 	
 	private var lunchSwitches: [DayID: Bool] =
 	[
