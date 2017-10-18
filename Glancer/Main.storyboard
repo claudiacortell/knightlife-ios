@@ -2178,8 +2178,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X5E-7g-lAJ" userLabel="Header Container">
                                 <rect key="frame" x="0.0" y="20" width="414" height="50"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Events" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lBC-om-Zps">
-                                        <rect key="frame" x="175" y="13.666666666666664" width="64" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="X Block" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lBC-om-Zps">
+                                        <rect key="frame" x="172" y="13.666666666666664" width="71" height="24"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -3105,6 +3105,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="iIQ-b6-X53"/>
-        <segue reference="3bN-hf-NAm"/>
+        <segue reference="jX8-8C-cDS"/>
     </inferredMetricsTieBreakers>
 </document>

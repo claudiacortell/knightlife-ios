@@ -43,13 +43,14 @@ class UserPrefsManager
 	
 	private var blockMeta: [BlockID: BlockMeta] =
 	[
-		.a: BlockMeta(.a, "E74C3C"),
+		.a: BlockMeta(.a, "C0392B"),
 		.b: BlockMeta(.b, "E67E22"),
 		.c: BlockMeta(.c, "F1C40F"),
-		.d: BlockMeta(.d, "2ECC71"),
-		.e: BlockMeta(.e, "3498DB"),
-		.f: BlockMeta(.f, "9B59B6"),
-		.g: BlockMeta(.g, "DE59B6"),
+		.d: BlockMeta(.d, "16A085"),
+		.e: BlockMeta(.e, "1ABC9C"),
+		.f: BlockMeta(.f, "2980B9"),
+		.g: BlockMeta(.g, "9B59B6"),
+		
 		.x: BlockMeta(.x, "999999"),
 		.activities: BlockMeta(.activities, "999999"),
 		.custom: BlockMeta(.custom, "999999"),
