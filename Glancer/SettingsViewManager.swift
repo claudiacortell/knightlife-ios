@@ -209,9 +209,6 @@ class BlockDetailMenuViewController: UITableViewController, UITextFieldDelegate
 	{
 		super.viewDidLoad()
 	
-		self.classNameField.enablesReturnKeyAutomatically = true
-		self.roomField.enablesReturnKeyAutomatically = true
-		
 		if self.classNameField != nil && self.roomField != nil
 		{
 			self.classNameField.delegate = self
