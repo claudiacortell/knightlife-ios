@@ -106,6 +106,9 @@ class SettingsMenuViewController: UITableViewController
 				if meta.customName != nil
 				{
 					field.text = meta.customName
+				} else
+				{
+					field.text = ""
 				}
 			}
 		}
@@ -206,6 +209,9 @@ class BlockDetailMenuViewController: UITableViewController, UITextFieldDelegate
 	{
 		super.viewDidLoad()
 	
+		self.classNameField.enablesReturnKeyAutomatically = true
+		self.roomField.enablesReturnKeyAutomatically = true
+		
 		if self.classNameField != nil && self.roomField != nil
 		{
 			self.classNameField.delegate = self
