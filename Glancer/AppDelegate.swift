@@ -110,13 +110,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 	{
         if let aps = userInfo["aps"] as? NSDictionary
 		{
-            let message: String = aps["alert"] as! String;
+            let message: String = aps["alert"] as! String
             
             if (message == "Auto-Updating...")
 			{
                 if (ScheduleManager.instance.loadBlocks())
 				{
-                    completionHandler(UIBackgroundFetchResult.newData);
+                    completionHandler(UIBackgroundFetchResult.newData)
                 }
             }
         }
