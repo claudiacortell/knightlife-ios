@@ -7,21 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5B22DE9C1BE2691800215F11 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B22DE9B1BE2691800215F11 /* libz.tbd */; };
-		5B22DE9E1BE2692E00215F11 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B22DE9D1BE2692E00215F11 /* libsqlite3.tbd */; };
-		5B93E4781BE26A1300D0D101 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B93E4771BE26A1300D0D101 /* Bolts.framework */; };
-		5B93E47B1BE26A6F00D0D101 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B93E47A1BE26A6F00D0D101 /* Parse.framework */; };
 		5BD072481C74AEB40074B56D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BD072471C74AEB40074B56D /* Main.storyboard */; };
 		5BD285DD1B03CF29007A0472 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD285DC1B03CF29007A0472 /* AppDelegate.swift */; };
 		5BD285E41B03CF29007A0472 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BD285E31B03CF29007A0472 /* Images.xcassets */; };
-		5BD288291B03D218007A0472 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD288281B03D218007A0472 /* AudioToolbox.framework */; };
-		5BD2882B1B03D21E007A0472 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD2882A1B03D21E007A0472 /* CFNetwork.framework */; };
-		5BD2882D1B03D223007A0472 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD2882C1B03D223007A0472 /* CoreGraphics.framework */; };
-		5BD2882F1B03D22B007A0472 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD2882E1B03D22B007A0472 /* CoreLocation.framework */; };
-		5BD288311B03D230007A0472 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD288301B03D230007A0472 /* MobileCoreServices.framework */; };
-		5BD288331B03D236007A0472 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD288321B03D236007A0472 /* QuartzCore.framework */; };
-		5BD288351B03D23E007A0472 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD288341B03D23E007A0472 /* Security.framework */; };
-		5BD288391B03D24B007A0472 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BD288381B03D24B007A0472 /* SystemConfiguration.framework */; };
+		65BA44637FB6DB212334CB8A /* Pods_Glancer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE066EA111D4A8CDBE0D469 /* Pods_Glancer.framework */; };
 		740756CC1C33720A0039844B /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740756CB1C33720A0039844B /* Label.swift */; };
 		C019C1611F7D3CED00FC4EED /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C019C1601F7D3CED00FC4EED /* Launch.storyboard */; };
 		C03D148B1F79479C00211D28 /* HomeViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03D148A1F79479C00211D28 /* HomeViewManager.swift */; };
@@ -37,16 +26,6 @@
 		C0CD2BC51F86F776001600C2 /* TabBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD2BC41F86F776001600C2 /* TabBarManager.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		5BD285ED1B03CF29007A0472 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5BD285CF1B03CF29007A0472 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5BD285D61B03CF29007A0472;
-			remoteInfo = Glancer;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		5BC261901B0EA7D700AEBAC1 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -61,27 +40,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5B22DE9B1BE2691800215F11 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		5B22DE9D1BE2692E00215F11 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		2CE066EA111D4A8CDBE0D469 /* Pods_Glancer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Glancer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B55DC2C1B27B21500D55EB9 /* Glancer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Glancer.entitlements; sourceTree = "<group>"; };
-		5B6B5F8D1C6A62BF00C53849 /* Glancer-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Glancer-Bridging-Header.h"; sourceTree = "<group>"; };
-		5B93E4771BE26A1300D0D101 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "parse-library-1/Bolts.framework"; sourceTree = "<group>"; };
-		5B93E47A1BE26A6F00D0D101 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "parse-library-1/Parse.framework"; sourceTree = "<group>"; };
-		5BC261811B0EA7D700AEBAC1 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		5BD072471C74AEB40074B56D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		5BD285D71B03CF29007A0472 /* Glancer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Glancer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BD285DB1B03CF29007A0472 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5BD285DC1B03CF29007A0472 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BD285E31B03CF29007A0472 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		5BD285EC1B03CF29007A0472 /* GlancerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GlancerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5BD288281B03D218007A0472 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		5BD2882A1B03D21E007A0472 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		5BD2882C1B03D223007A0472 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		5BD2882E1B03D22B007A0472 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		5BD288301B03D230007A0472 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		5BD288321B03D236007A0472 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		5BD288341B03D23E007A0472 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		5BD288381B03D24B007A0472 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		740756CB1C33720A0039844B /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		C019C1601F7D3CED00FC4EED /* Launch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
 		C03D148A1F79479C00211D28 /* HomeViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewManager.swift; sourceTree = "<group>"; };
@@ -95,6 +60,8 @@
 		C0A908C51F76C8BF008AAB3F /* WeekViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewManager.swift; sourceTree = "<group>"; };
 		C0ADDF331F831A9000775AF2 /* SettingsViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewManager.swift; sourceTree = "<group>"; };
 		C0CD2BC41F86F776001600C2 /* TabBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarManager.swift; sourceTree = "<group>"; };
+		ED285753F482025155B7F02B /* Pods-Glancer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Glancer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Glancer/Pods-Glancer.release.xcconfig"; sourceTree = "<group>"; };
+		F7AA3009FC934C94A6712AAD /* Pods-Glancer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Glancer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Glancer/Pods-Glancer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,47 +69,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B22DE9E1BE2692E00215F11 /* libsqlite3.tbd in Frameworks */,
-				5B22DE9C1BE2691800215F11 /* libz.tbd in Frameworks */,
-				5BD288391B03D24B007A0472 /* SystemConfiguration.framework in Frameworks */,
-				5B93E4781BE26A1300D0D101 /* Bolts.framework in Frameworks */,
-				5BD288351B03D23E007A0472 /* Security.framework in Frameworks */,
-				5BD288331B03D236007A0472 /* QuartzCore.framework in Frameworks */,
-				5B93E47B1BE26A6F00D0D101 /* Parse.framework in Frameworks */,
-				5BD288311B03D230007A0472 /* MobileCoreServices.framework in Frameworks */,
-				5BD2882F1B03D22B007A0472 /* CoreLocation.framework in Frameworks */,
-				5BD2882D1B03D223007A0472 /* CoreGraphics.framework in Frameworks */,
-				5BD2882B1B03D21E007A0472 /* CFNetwork.framework in Frameworks */,
-				5BD288291B03D218007A0472 /* AudioToolbox.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5BD285E91B03CF29007A0472 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				65BA44637FB6DB212334CB8A /* Pods_Glancer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5BC261801B0EA7D700AEBAC1 /* Frameworks */ = {
+		3111053731F1E9F3E0C89582 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5B22DE9D1BE2692E00215F11 /* libsqlite3.tbd */,
-				5B22DE9B1BE2691800215F11 /* libz.tbd */,
-				5B93E47A1BE26A6F00D0D101 /* Parse.framework */,
-				5B93E4771BE26A1300D0D101 /* Bolts.framework */,
-				5BD288381B03D24B007A0472 /* SystemConfiguration.framework */,
-				5BD288341B03D23E007A0472 /* Security.framework */,
-				5BD288321B03D236007A0472 /* QuartzCore.framework */,
-				5BD288301B03D230007A0472 /* MobileCoreServices.framework */,
-				5BD2882E1B03D22B007A0472 /* CoreLocation.framework */,
-				5BD2882C1B03D223007A0472 /* CoreGraphics.framework */,
-				5BD2882A1B03D21E007A0472 /* CFNetwork.framework */,
-				5BD288281B03D218007A0472 /* AudioToolbox.framework */,
-				5BC261811B0EA7D700AEBAC1 /* NotificationCenter.framework */,
+				2CE066EA111D4A8CDBE0D469 /* Pods_Glancer.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -151,9 +88,9 @@
 			isa = PBXGroup;
 			children = (
 				5BD285D91B03CF29007A0472 /* Glancer */,
-				5BC261801B0EA7D700AEBAC1 /* Frameworks */,
 				5BD285D81B03CF29007A0472 /* Products */,
-				5B6B5F8D1C6A62BF00C53849 /* Glancer-Bridging-Header.h */,
+				E0B71CD64FC684278A749224 /* Pods */,
+				3111053731F1E9F3E0C89582 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -161,7 +98,6 @@
 			isa = PBXGroup;
 			children = (
 				5BD285D71B03CF29007A0472 /* Glancer.app */,
-				5BD285EC1B03CF29007A0472 /* GlancerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -199,6 +135,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E0B71CD64FC684278A749224 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F7AA3009FC934C94A6712AAD /* Pods-Glancer.debug.xcconfig */,
+				ED285753F482025155B7F02B /* Pods-Glancer.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -206,10 +151,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5BD285F61B03CF29007A0472 /* Build configuration list for PBXNativeTarget "Glancer" */;
 			buildPhases = (
+				0C3A044E7439971D5D72181F /* [CP] Check Pods Manifest.lock */,
 				5BD285D31B03CF29007A0472 /* Sources */,
 				5BD285D41B03CF29007A0472 /* Frameworks */,
 				5BD285D51B03CF29007A0472 /* Resources */,
 				5BC261901B0EA7D700AEBAC1 /* Embed App Extensions */,
+				15B94933DF1B4404D654C6D7 /* [CP] Embed Pods Frameworks */,
+				88CF998982A2A256136A47C4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -219,24 +167,6 @@
 			productName = Glancer;
 			productReference = 5BD285D71B03CF29007A0472 /* Glancer.app */;
 			productType = "com.apple.product-type.application";
-		};
-		5BD285EB1B03CF29007A0472 /* GlancerTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5BD285F91B03CF29007A0472 /* Build configuration list for PBXNativeTarget "GlancerTests" */;
-			buildPhases = (
-				5BD285E81B03CF29007A0472 /* Sources */,
-				5BD285E91B03CF29007A0472 /* Frameworks */,
-				5BD285EA1B03CF29007A0472 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5BD285EE1B03CF29007A0472 /* PBXTargetDependency */,
-			);
-			name = GlancerTests;
-			productName = GlancerTests;
-			productReference = 5BD285EC1B03CF29007A0472 /* GlancerTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -269,13 +199,6 @@
 							};
 						};
 					};
-					5BD285EB1B03CF29007A0472 = {
-						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = P57BN8GJ33;
-						LastSwiftMigration = 0900;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 5BD285D61B03CF29007A0472;
-					};
 				};
 			};
 			buildConfigurationList = 5BD285D21B03CF29007A0472 /* Build configuration list for PBXProject "Glancer" */;
@@ -292,7 +215,6 @@
 			projectRoot = "";
 			targets = (
 				5BD285D61B03CF29007A0472 /* Glancer */,
-				5BD285EB1B03CF29007A0472 /* GlancerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -308,14 +230,63 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5BD285EA1B03CF29007A0472 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0C3A044E7439971D5D72181F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Glancer-checkManifestLockResult.txt",
+			);
 			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
-/* End PBXResourcesBuildPhase section */
+		15B94933DF1B4404D654C6D7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Glancer/Pods-Glancer-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/Parse/Parse.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Parse.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Glancer/Pods-Glancer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		88CF998982A2A256136A47C4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Glancer/Pods-Glancer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5BD285D31B03CF29007A0472 /* Sources */ = {
@@ -338,22 +309,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5BD285E81B03CF29007A0472 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		5BD285EE1B03CF29007A0472 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5BD285D61B03CF29007A0472 /* Glancer */;
-			targetProxy = 5BD285ED1B03CF29007A0472 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		5BD285F41B03CF29007A0472 /* Debug */ = {
@@ -463,6 +419,7 @@
 		};
 		5BD285F71B03CF29007A0472 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F7AA3009FC934C94A6712AAD /* Pods-Glancer.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -475,9 +432,7 @@
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/vmurale/Downloads/parse-library-1",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(PROJECT_DIR)/parse-library-1",
 				);
 				INFOPLIST_FILE = Glancer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -491,7 +446,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Glancer-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -500,6 +454,7 @@
 		};
 		5BD285F81B03CF29007A0472 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ED285753F482025155B7F02B /* Pods-Glancer.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -512,9 +467,7 @@
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/vmurale/Downloads/parse-library-1",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(PROJECT_DIR)/parse-library-1",
 				);
 				INFOPLIST_FILE = Glancer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -526,57 +479,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = MAD.BBN.KnightLife;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Glancer-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
-			};
-			name = Release;
-		};
-		5BD285FA1B03CF29007A0472 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = P57BN8GJ33;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = GlancerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Squad.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Glancer.app/Glancer";
-			};
-			name = Debug;
-		};
-		5BD285FB1B03CF29007A0472 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = P57BN8GJ33;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = GlancerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Squad.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Glancer.app/Glancer";
 			};
 			name = Release;
 		};
@@ -597,15 +501,6 @@
 			buildConfigurations = (
 				5BD285F71B03CF29007A0472 /* Debug */,
 				5BD285F81B03CF29007A0472 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5BD285F91B03CF29007A0472 /* Build configuration list for PBXNativeTarget "GlancerTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5BD285FA1B03CF29007A0472 /* Debug */,
-				5BD285FB1B03CF29007A0472 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

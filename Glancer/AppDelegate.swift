@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate
@@ -83,7 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
                     
                 }
                 
-                let responseString = String(data: data, encoding: .utf8)
+//                let responseString = String(data: data, encoding: .utf8)
 //                print("responseString = \(responseString!)")
 				
             }
@@ -91,11 +91,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate
             task.resume()
         }
         
-        let currentInstallation = PFInstallation.current()
-        
-        currentInstallation.setDeviceTokenFrom(deviceToken)
-        currentInstallation.saveInBackground { (succeeded, e) -> Void in
-            // TODO: implement?
+        if let currentInstallation = PFInstallation.current()
+        {
+            currentInstallation.setDeviceTokenFrom(deviceToken)
+            currentInstallation.saveInBackground
+            {
+                (succeeded, e) -> Void in
+            }
         }
     }
     
@@ -159,5 +161,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate
             completionHandler(.failed)
         }
     }
-    
 }
