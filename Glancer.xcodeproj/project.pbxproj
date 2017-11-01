@@ -21,12 +21,15 @@
 		C00232A51FA37E760019D328 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00232A41FA37E760019D328 /* Activity.swift */; };
 		C00232A71FA37EFC0019D328 /* MeetingSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00232A61FA37EFC0019D328 /* MeetingSchedule.swift */; };
 		C00232A91FA382510019D328 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00232A81FA382510019D328 /* FileManager.swift */; };
+		C0134A1B1FA7E446009B4399 /* ScheduleAttemptedLoadEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0134A1A1FA7E446009B4399 /* ScheduleAttemptedLoadEvent.swift */; };
 		C019C1611F7D3CED00FC4EED /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C019C1601F7D3CED00FC4EED /* Launch.storyboard */; };
+		C020061E1FA904380050F864 /* UserPrefsUpdateEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C020061D1FA904380050F864 /* UserPrefsUpdateEvent.swift */; };
+		C02006201FA904B10050F864 /* BlockMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = C020061F1FA904B10050F864 /* BlockMeta.swift */; };
 		C03D148B1F79479C00211D28 /* HomeViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03D148A1F79479C00211D28 /* HomeViewManager.swift */; };
 		C03FB1271FA120E20041BD99 /* ActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03FB1261FA120E20041BD99 /* ActivityManager.swift */; };
 		C06220E51F74A8930032A2EC /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06220E41F74A8930032A2EC /* Debug.swift */; };
 		C069CF771F6B697E001FE527 /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C069CF761F6B697E001FE527 /* NotificationsManager.swift */; };
-		C0707FBE1F69720800C7D2ED /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0707FBD1F69720800C7D2ED /* Schedule.swift */; };
+		C0707FBE1F69720800C7D2ED /* ScheduleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0707FBD1F69720800C7D2ED /* ScheduleManager.swift */; };
 		C0707FC01F69753100C7D2ED /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0707FBF1F69753100C7D2ED /* Storage.swift */; };
 		C0A5D3BA1F69874A00DBDCAD /* WebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A5D3B91F69874A00DBDCAD /* WebCall.swift */; };
 		C0A5D3BC1F69E07500DBDCAD /* UserPrefsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A5D3BB1F69E07500DBDCAD /* UserPrefsManager.swift */; };
@@ -67,12 +70,15 @@
 		C00232A41FA37E760019D328 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		C00232A61FA37EFC0019D328 /* MeetingSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingSchedule.swift; sourceTree = "<group>"; };
 		C00232A81FA382510019D328 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		C0134A1A1FA7E446009B4399 /* ScheduleAttemptedLoadEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAttemptedLoadEvent.swift; sourceTree = "<group>"; };
 		C019C1601F7D3CED00FC4EED /* Launch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
+		C020061D1FA904380050F864 /* UserPrefsUpdateEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPrefsUpdateEvent.swift; sourceTree = "<group>"; };
+		C020061F1FA904B10050F864 /* BlockMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockMeta.swift; sourceTree = "<group>"; };
 		C03D148A1F79479C00211D28 /* HomeViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewManager.swift; sourceTree = "<group>"; };
 		C03FB1261FA120E20041BD99 /* ActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityManager.swift; sourceTree = "<group>"; };
 		C06220E41F74A8930032A2EC /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		C069CF761F6B697E001FE527 /* NotificationsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
-		C0707FBD1F69720800C7D2ED /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		C0707FBD1F69720800C7D2ED /* ScheduleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleManager.swift; sourceTree = "<group>"; };
 		C0707FBF1F69753100C7D2ED /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		C0A5D3B91F69874A00DBDCAD /* WebCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebCall.swift; sourceTree = "<group>"; };
 		C0A5D3BB1F69E07500DBDCAD /* UserPrefsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPrefsManager.swift; sourceTree = "<group>"; };
@@ -128,7 +134,6 @@
 				C00232971FA34B290019D328 /* Management */,
 				5B55DC2C1B27B21500D55EB9 /* Glancer.entitlements */,
 				5BD285DC1B03CF29007A0472 /* AppDelegate.swift */,
-				C0707FBD1F69720800C7D2ED /* Schedule.swift */,
 				5BD072471C74AEB40074B56D /* Main.storyboard */,
 				740756CB1C33720A0039844B /* Label.swift */,
 				5BD285E31B03CF29007A0472 /* Images.xcassets */,
@@ -136,7 +141,6 @@
 				5BD285DA1B03CF29007A0472 /* Supporting Files */,
 				C0707FBF1F69753100C7D2ED /* Storage.swift */,
 				C0A5D3B91F69874A00DBDCAD /* WebCall.swift */,
-				C0A5D3BB1F69E07500DBDCAD /* UserPrefsManager.swift */,
 				C0A5D3BF1F6A07D500DBDCAD /* Utils.swift */,
 				C069CF761F6B697E001FE527 /* NotificationsManager.swift */,
 				C06220E41F74A8930032A2EC /* Debug.swift */,
@@ -154,15 +158,6 @@
 				5BD285DB1B03CF29007A0472 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		E0B71CD64FC684278A749224 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				F7AA3009FC934C94A6712AAD /* Pods-Glancer.debug.xcconfig */,
-				ED285753F482025155B7F02B /* Pods-Glancer.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		C00232951FA34AB70019D328 /* Event */ = {
@@ -186,6 +181,8 @@
 		C00232971FA34B290019D328 /* Management */ = {
 			isa = PBXGroup;
 			children = (
+				C020061B1FA903D30050F864 /* Preferences */,
+				C0134A181FA7E1D5009B4399 /* Schedule */,
 				C002329C1FA37D700019D328 /* Activity */,
 				C00232951FA34AB70019D328 /* Event */,
 				C00232981FA34B610019D328 /* Manager.swift */,
@@ -212,6 +209,50 @@
 				C00232A21FA37E3A0019D328 /* ClubActivity.swift */,
 			);
 			name = Activities;
+			sourceTree = "<group>";
+		};
+		C0134A181FA7E1D5009B4399 /* Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				C0134A191FA7E1F6009B4399 /* Events */,
+				C0707FBD1F69720800C7D2ED /* ScheduleManager.swift */,
+			);
+			name = Schedule;
+			sourceTree = "<group>";
+		};
+		C0134A191FA7E1F6009B4399 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				C0134A1A1FA7E446009B4399 /* ScheduleAttemptedLoadEvent.swift */,
+			);
+			name = Events;
+			sourceTree = "<group>";
+		};
+		C020061B1FA903D30050F864 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				C020061C1FA904140050F864 /* Events */,
+				C0A5D3BB1F69E07500DBDCAD /* UserPrefsManager.swift */,
+				C020061F1FA904B10050F864 /* BlockMeta.swift */,
+			);
+			name = Preferences;
+			sourceTree = "<group>";
+		};
+		C020061C1FA904140050F864 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				C020061D1FA904380050F864 /* UserPrefsUpdateEvent.swift */,
+			);
+			name = Events;
+			sourceTree = "<group>";
+		};
+		E0B71CD64FC684278A749224 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F7AA3009FC934C94A6712AAD /* Pods-Glancer.debug.xcconfig */,
+				ED285753F482025155B7F02B /* Pods-Glancer.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -367,10 +408,11 @@
 				C00232941FA3489A0019D328 /* EventManager.swift in Sources */,
 				5BD285DD1B03CF29007A0472 /* AppDelegate.swift in Sources */,
 				C06220E51F74A8930032A2EC /* Debug.swift in Sources */,
+				C0134A1B1FA7E446009B4399 /* ScheduleAttemptedLoadEvent.swift in Sources */,
 				C00232991FA34B610019D328 /* Manager.swift in Sources */,
 				C0A908C61F76C8BF008AAB3F /* WeekViewManager.swift in Sources */,
 				C00232A11FA37E100019D328 /* CourseActivity.swift in Sources */,
-				C0707FBE1F69720800C7D2ED /* Schedule.swift in Sources */,
+				C0707FBE1F69720800C7D2ED /* ScheduleManager.swift in Sources */,
 				C03FB1271FA120E20041BD99 /* ActivityManager.swift in Sources */,
 				C00232A91FA382510019D328 /* FileManager.swift in Sources */,
 				C0A5D3C01F6A07D500DBDCAD /* Utils.swift in Sources */,
@@ -380,9 +422,11 @@
 				740756CC1C33720A0039844B /* Label.swift in Sources */,
 				C069CF771F6B697E001FE527 /* NotificationsManager.swift in Sources */,
 				C0A5D3BC1F69E07500DBDCAD /* UserPrefsManager.swift in Sources */,
+				C02006201FA904B10050F864 /* BlockMeta.swift in Sources */,
 				C002329E1FA37D8D0019D328 /* EventHandler.swift in Sources */,
 				C03D148B1F79479C00211D28 /* HomeViewManager.swift in Sources */,
 				C00232A31FA37E3A0019D328 /* ClubActivity.swift in Sources */,
+				C020061E1FA904380050F864 /* UserPrefsUpdateEvent.swift in Sources */,
 				C0CD2BC51F86F776001600C2 /* TabBarManager.swift in Sources */,
 				C0A5D3BA1F69874A00DBDCAD /* WebCall.swift in Sources */,
 				C0707FC01F69753100C7D2ED /* Storage.swift in Sources */,

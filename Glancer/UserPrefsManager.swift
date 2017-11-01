@@ -8,38 +8,9 @@
 
 import Foundation
 
-class UserPrefsManager
+class UserPrefsManager: Manager
 {
 	static let instance = UserPrefsManager()
-	
-	private var updateHandlers: [PrefsUpdateHandler] = []
-
-	private func notifyHandlers(_ type: PrefsUpdateType)
-	{
-		for handler in self.updateHandlers
-		{
-			handler.prefsDidUpdate(type)
-		}
-	}
-	
-	func addHandler(_ handler: PrefsUpdateHandler)
-	{
-		updateHandlers.append(handler)
-	}
-	
-	enum PrefsUpdateType
-	{
-		case meta, lunch, load
-	}
-	
-	struct BlockMeta
-	{
-		init(_ blockId: BlockID, _ customColor: String) { self.blockId = blockId; self.customColor = customColor }
-		var blockId: BlockID! // E.G. A, B, C, D, E (Corresponds to Class ID)
-		var customName: String?// Same as block id by default. Can be changed to reflect user preferences
-		var customColor: String!
-		var roomNumber: String?
-	}
 	
 	private var blockMeta: [BlockID: BlockMeta] =
 	[
@@ -77,6 +48,7 @@ class UserPrefsManager
 	
 	init()
 	{
+		super.init(name: "User Prefs Manager")
 		self.loadPrefs()
 	}
 	
@@ -93,7 +65,9 @@ class UserPrefsManager
 	{
 		self.lunchSwitches[id] = val
 		if save { self.saveLunch() }
-		self.notifyHandlers(.lunch)
+
+		let event = UserPrefsUpdateEvent(type: .lunch)
+		self.callEvent(event)
 	}
 	
 	func getMeta(id: BlockID) -> BlockMeta?
@@ -128,7 +102,9 @@ class UserPrefsManager
 			
 			self.blockMeta[id] = meta
 			if save { self.saveMeta() }
-			self.notifyHandlers(.meta)
+			
+			let event = UserPrefsUpdateEvent(type: .meta)
+			self.callEvent(event)
 		}
 	}
 	
@@ -228,7 +204,8 @@ class UserPrefsManager
 			Storage.deleteOldMethodRemnants() // Enable when we're ok getting rid of the old storage data.
 		}
 		
-		self.notifyHandlers(.load)
+		let event = UserPrefsUpdateEvent(type: .load)
+		self.callEvent(event)
 	}
 	
 	private func saveLunch()
@@ -267,9 +244,4 @@ class UserPrefsManager
 		Storage.USER_META.set(data: map)
 		Debug.out("Finished saving meta...")
 	}
-}
-
-protocol PrefsUpdateHandler
-{
-	func prefsDidUpdate(_ type: UserPrefsManager.PrefsUpdateType)
 }

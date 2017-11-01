@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ScheduleManager: PrefsUpdateHandler
+class ScheduleManager: Manager
 {
 	static let instance: ScheduleManager = ScheduleManager()
 	
@@ -52,19 +52,19 @@ class ScheduleManager: PrefsUpdateHandler
 	
 	init()
 	{
-		UserPrefsManager.instance.addHandler(self)
+		super.init(name: "Schedule Manager")
 	}
 	
-	func addHandler(_ handler: ScheduleUpdateHandler)
+	override func eventHandlerTriggers() -> [String]
 	{
-		updateHandlers.append(handler)
+		return ["userprefs.update"]
 	}
 	
-	func updateHandlers(_ success: Bool)
+	override func eventHandler(event: Event)
 	{
-		for handler in self.updateHandlers
+		if let prefsUpdate = event as? UserPrefsUpdateEvent
 		{
-			handler.scheduleDidUpdate(didUpdateSuccessfully: success)
+			
 		}
 	}
 	
@@ -207,7 +207,9 @@ class ScheduleManager: PrefsUpdateHandler
 		}
 		
 		self.updateLunch(false)
-		self.updateHandlers(success)
+		
+		let event = ScheduleAttemptedLoadEvent(success: success)
+		self.callEvent(event)
 		
 		return success
 	}

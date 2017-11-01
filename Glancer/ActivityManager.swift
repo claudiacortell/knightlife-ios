@@ -16,8 +16,10 @@ class ActivityManager: FileManager
     
     init()
     {
-        self.activities = []
+		self.activities = []
+		
+		super.init(name: "Activity Manager", dataTree: "activity")
     }
-    
-    
+	
+	
 }

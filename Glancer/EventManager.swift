@@ -17,7 +17,7 @@ class EventManager: Manager
     required init()
     {
         self.eventHandlers = [:]
-        super.init(name: "Event Manager")
+        super.init(name: "Event Manager", registerEvents: false)
     }
     
     func registerHandler(handler: EventHandler)

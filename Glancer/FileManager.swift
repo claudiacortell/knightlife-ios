@@ -23,5 +23,4 @@ class FileManager: Manager
     
     func loadUserData() { /* Override point */ }
     func saveUserData() { /* Override point */ }
-
 }
