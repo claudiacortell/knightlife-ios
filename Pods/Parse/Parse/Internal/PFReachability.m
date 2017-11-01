@@ -130,10 +130,12 @@ static void _reachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReac
 }
 
 - (void)removeListener:(id<PFReachabilityListener>)listener {
+    @weakify(listener);
     dispatch_barrier_sync(_synchronizationQueue, ^{
+        @strongify(listener);
         [_listenersArray filterUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
             id weakObject = [evaluatedObject weakObject];
-            return (weakObject == nil || weakObject == listener);
+            return !(weakObject == nil || weakObject == listener);
         }]];
     });
 }
@@ -154,7 +156,7 @@ static void _reachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReac
         }
 
         dispatch_barrier_async(_synchronizationQueue, ^{
-            [_listenersArray filterUsingPredicate:[NSPredicate predicateWithFormat:@"SELf.weakObject != nil"]];
+            [_listenersArray filterUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.weakObject != nil"]];
         });
     });
 }

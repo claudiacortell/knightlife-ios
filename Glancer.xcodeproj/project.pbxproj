@@ -11,6 +11,7 @@
 		5BD285DD1B03CF29007A0472 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD285DC1B03CF29007A0472 /* AppDelegate.swift */; };
 		5BD285E41B03CF29007A0472 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BD285E31B03CF29007A0472 /* Images.xcassets */; };
 		740756CC1C33720A0039844B /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740756CB1C33720A0039844B /* Label.swift */; };
+		A136D0EB43B90703297222B9 /* Pods_Glancer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AB979089EAD429A4648A763 /* Pods_Glancer.framework */; };
 		C00232941FA3489A0019D328 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00232931FA3489A0019D328 /* EventManager.swift */; };
 		C00232991FA34B610019D328 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00232981FA34B610019D328 /* Manager.swift */; };
 		C002329B1FA34BF70019D328 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = C002329A1FA34BF70019D328 /* Event.swift */; };
@@ -63,6 +64,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3272FF23988E47B40EA9BE81 /* Pods-Glancer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Glancer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Glancer/Pods-Glancer.release.xcconfig"; sourceTree = "<group>"; };
+		5AB979089EAD429A4648A763 /* Pods_Glancer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Glancer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B55DC2C1B27B21500D55EB9 /* Glancer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Glancer.entitlements; sourceTree = "<group>"; };
 		5BD072471C74AEB40074B56D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		5BD285D71B03CF29007A0472 /* Glancer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Glancer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,6 +73,7 @@
 		5BD285DC1B03CF29007A0472 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BD285E31B03CF29007A0472 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		740756CB1C33720A0039844B /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		B61D64CD0A9F7D2A64793BDC /* Pods-Glancer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Glancer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Glancer/Pods-Glancer.debug.xcconfig"; sourceTree = "<group>"; };
 		C00232931FA3489A0019D328 /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		C00232981FA34B610019D328 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		C002329A1FA34BF70019D328 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
@@ -113,17 +117,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A136D0EB43B90703297222B9 /* Pods_Glancer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A04002873FBB3929F9A9397 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B61D64CD0A9F7D2A64793BDC /* Pods-Glancer.debug.xcconfig */,
+				3272FF23988E47B40EA9BE81 /* Pods-Glancer.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		5BD285CE1B03CF29007A0472 = {
 			isa = PBXGroup;
 			children = (
 				5BD285D91B03CF29007A0472 /* Glancer */,
 				5BD285D81B03CF29007A0472 /* Products */,
+				1A04002873FBB3929F9A9397 /* Pods */,
+				73D817ED4CC7B6536DDF2CFD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -167,6 +183,14 @@
 				5BD285DB1B03CF29007A0472 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		73D817ED4CC7B6536DDF2CFD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5AB979089EAD429A4648A763 /* Pods_Glancer.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		C00232951FA34AB70019D328 /* Event */ = {
@@ -295,10 +319,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5BD285F61B03CF29007A0472 /* Build configuration list for PBXNativeTarget "Glancer" */;
 			buildPhases = (
+				8826781C28E8B0A52ED38239 /* [CP] Check Pods Manifest.lock */,
 				5BD285D31B03CF29007A0472 /* Sources */,
 				5BD285D41B03CF29007A0472 /* Frameworks */,
 				5BD285D51B03CF29007A0472 /* Resources */,
 				5BC261901B0EA7D700AEBAC1 /* Embed App Extensions */,
+				59335FE54B8CFBF2EE93DE12 /* [CP] Embed Pods Frameworks */,
+				A473441372BA428113112FC7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -372,6 +399,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		59335FE54B8CFBF2EE93DE12 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Glancer/Pods-Glancer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8826781C28E8B0A52ED38239 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A473441372BA428113112FC7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Glancer/Pods-Glancer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5BD285D31B03CF29007A0472 /* Sources */ = {
@@ -528,6 +603,7 @@
 		};
 		5BD285F71B03CF29007A0472 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B61D64CD0A9F7D2A64793BDC /* Pods-Glancer.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -562,6 +638,7 @@
 		};
 		5BD285F81B03CF29007A0472 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3272FF23988E47B40EA9BE81 /* Pods-Glancer.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

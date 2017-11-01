@@ -73,15 +73,10 @@ NSTimeInterval const PFEventuallyQueueDefaultTimeoutRetryInterval = 600.0f;
     _commandEnqueueTaskQueue = [[PFTaskQueue alloc] init];
 
     _taskCompletionSources = [NSMutableDictionary dictionary];
-    _testHelper = [[PFEventuallyQueueTestHelper alloc] init];
 
     [self _startMonitoringNetworkReachability];
 
     return self;
-}
-
-- (void)dealloc {
-    [self _stopMonitoringNetworkReachability];
 }
 
 ///--------------------------------------
@@ -107,14 +102,11 @@ NSTimeInterval const PFEventuallyQueueDefaultTimeoutRetryInterval = 600.0f;
                                                 object:object
                                             identifier:identifier] continueWithBlock:^id(BFTask *task) {
                 if (task.faulted || task.cancelled) {
-                    [self.testHelper notify:PFEventuallyQueueEventCommandNotEnqueued];
                     if (task.error) {
                         taskCompletionSource.error = task.error;
                     } else if (task.cancelled) {
                         [taskCompletionSource cancel];
                     }
-                } else {
-                    [self.testHelper notify:PFEventuallyQueueEventCommandEnqueued];
                 }
 
                 return task;
@@ -197,7 +189,8 @@ NSTimeInterval const PFEventuallyQueueDefaultTimeoutRetryInterval = 600.0f;
     dispatch_suspend(_processingQueueSource);
 }
 
-- (void)stop {
+- (void)terminate {
+    [self _stopMonitoringNetworkReachability];
     dispatch_source_cancel(_processingQueueSource);
 }
 
@@ -340,12 +333,6 @@ NSTimeInterval const PFEventuallyQueueDefaultTimeoutRetryInterval = 600.0f;
         [_taskCompletionSources removeObjectForKey:identifier];
     });
 
-    if (resultTask.faulted || resultTask.cancelled) {
-        [self.testHelper notify:PFEventuallyQueueEventCommandFailed];
-    } else {
-        [self.testHelper notify:PFEventuallyQueueEventCommandSucceded];
-    }
-
     return resultTask;
 }
 
@@ -383,7 +370,6 @@ NSTimeInterval const PFEventuallyQueueDefaultTimeoutRetryInterval = 600.0f;
     [[PFReachability sharedParseReachability] removeListener:self];
 
     self.monitorsReachability = NO;
-    self.connected = YES;
 #endif
 }
 
@@ -393,9 +379,11 @@ NSTimeInterval const PFEventuallyQueueDefaultTimeoutRetryInterval = 600.0f;
 
 /** Manually sets the network connection status. */
 - (void)setConnected:(BOOL)connected {
+    @weakify(self);
     BFTaskCompletionSource *barrier = [BFTaskCompletionSource taskCompletionSource];
     dispatch_async(_processingQueue, ^{
         dispatch_sync(_synchronizationQueue, ^{
+            @strongify(self);
             if (self.connected != connected) {
                 _connected = connected;
                 if (connected) {
@@ -439,11 +427,6 @@ NSTimeInterval const PFEventuallyQueueDefaultTimeoutRetryInterval = 600.0f;
     return (int)_taskCompletionSources.count;
 }
 
-/** Called by PFObject whenever an object has been updated after a saveEventually. */
-- (void)_notifyTestHelperObjectUpdated {
-    [self.testHelper notify:PFEventuallyQueueEventObjectUpdated];
-}
-
 - (void)_setMaxAttemptsCount:(NSUInteger)attemptsCount {
     _maxAttemptsCount = attemptsCount;
 }
@@ -465,35 +448,5 @@ NSTimeInterval const PFEventuallyQueueDefaultTimeoutRetryInterval = 600.0f;
 }
 
 #endif
-
-@end
-
-// PFEventuallyQueueTestHelper gets notifications of various events happening in the command cache,
-// so that tests can be synchronized. See CommandTests.m for examples of how to use this.
-
-@implementation PFEventuallyQueueTestHelper
-
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        [self clear];
-    }
-    return self;
-}
-
-- (void)clear {
-    for (int i = 0; i < PFEventuallyQueueEventCount; ++i) {
-        events[i] = dispatch_semaphore_create(0);
-    }
-}
-
-- (void)notify:(PFEventuallyQueueTestHelperEvent)event {
-    dispatch_semaphore_signal(events[event]);
-}
-
-- (BOOL)waitFor:(PFEventuallyQueueTestHelperEvent)event {
-    // Wait 1 second for a permit from the semaphore.
-    return (dispatch_semaphore_wait(events[event], dispatch_time(DISPATCH_TIME_NOW, 10LL * NSEC_PER_SEC)) == 0);
-}
 
 @end
