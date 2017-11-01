@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     }
 	
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data)
-	{        
+	{
         let tokenChars = (deviceToken as NSData).bytes.bindMemory(to: CChar.self, capacity: deviceToken.count)
         var tokenString = ""
         
@@ -48,6 +48,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         }
         
         print("Device Token:", tokenString)
+		
+		Device.ID = tokenString
 		
 		var savedInDB: Bool = false
 		if Storage.DB_SAVED.exists()

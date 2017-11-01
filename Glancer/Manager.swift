@@ -10,6 +10,7 @@ import Foundation
 
 class Manager: EventHandler
 {
+	static let defaults = UserDefaults.standard // File saving
     let name: String
     
 	init(name: String, registerEvents: Bool = true)
@@ -38,5 +39,20 @@ class Manager: EventHandler
 	func eventHandler(event: Event)
 	{
 		
+	}
+	
+	func saveData(key: String, data: Any)
+	{
+		Manager.defaults.set(data, forKey: "\(self.name).\(key)")
+	}
+	
+	func loadData(key: String) -> Any?
+	{
+		return Manager.defaults.object(forKey: key)
+	}
+	
+	func hasData(key: String) -> Bool
+	{
+		return loadData(key: key) != nil
 	}
 }
