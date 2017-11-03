@@ -8,7 +8,14 @@
 
 import Foundation
 
-class TimeDuration
+struct TimeDuration
 {
+	let startTime: EnscribedTime
+	let endTime: EnscribedTime
 	
+	init(startTime: EnscribedTime, endTime: EnscribedTime)
+	{
+		self.startTime = startTime
+		self.endTime = endTime
+	}
 }

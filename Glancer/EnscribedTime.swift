@@ -8,12 +8,50 @@
 
 import Foundation
 
-class EnscribedTime
+struct EnscribedTime
 {
-	let time: String
+	let hour: Int
+	let minute: Int
 	
-	init(time: String)
+	var valid: Bool
 	{
-		self.time = time
+		get
+		{
+			return self.hour != -1 && self.minute != -1
+		}
+	}
+	
+	init(hour: Int, minute: Int)
+	{
+		self.hour = hour
+		self.minute = minute
+	}
+	
+	init(raw: String = "")
+	{
+		let result = TimeUtils.unwrapRawTime(raw: raw)
+		
+		self.hour = result.hour
+		self.minute = result.minute
+	}
+}
+
+extension EnscribedTime: Hashable
+{
+	static func ==(lhs: EnscribedTime, rhs: EnscribedTime) -> Bool
+	{
+		return
+			lhs.hour == rhs.hour
+			&& lhs.minute == rhs.minute
+	}
+	
+	var hashValue: Int
+	{
+		return self.hour ^ self.minute
+	}
+	
+	func toDate(enscribedDate: EnscribedDate = TimeUtils.todayEnscribed) -> Date?
+	{
+		return TimeUtils.dateFromEnscribed(enscribedDate: enscribedDate, enscribedTime: self)
 	}
 }

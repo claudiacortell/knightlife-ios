@@ -1,5 +1,5 @@
 //
-//  ScheduleManage.swift
+//  GetScheduleResponseContainer.swift
 //  Glancer
 //
 //  Created by Dylan Hanson on 11/3/17.
@@ -8,12 +8,7 @@
 
 import Foundation
 
-class ScheduleManager: Manager
+struct GetScheduleResponseContainer
 {
-	init()
-	{
-		super.init(name: "Schedule Manager")
-	}
-	
-	
+	let meme = "Test"
 }

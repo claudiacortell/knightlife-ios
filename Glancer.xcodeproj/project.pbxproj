@@ -24,12 +24,20 @@
 		C019C1611F7D3CED00FC4EED /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C019C1601F7D3CED00FC4EED /* Launch.storyboard */; };
 		C020061E1FA904380050F864 /* UserPrefsUpdateEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C020061D1FA904380050F864 /* UserPrefsUpdateEvent.swift */; };
 		C02006201FA904B10050F864 /* BlockMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = C020061F1FA904B10050F864 /* BlockMeta.swift */; };
+		C03636681FACF4C0008FC9A9 /* WebCallHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03636671FACF4C0008FC9A9 /* WebCallHandler.swift */; };
+		C036366B1FACF7EA008FC9A9 /* ScheduleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C036366A1FACF7EA008FC9A9 /* ScheduleManager.swift */; };
+		C036366D1FACF864008FC9A9 /* GetScheduleWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C036366C1FACF864008FC9A9 /* GetScheduleWebCall.swift */; };
+		C036366F1FACF962008FC9A9 /* WebDataResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C036366E1FACF962008FC9A9 /* WebDataResponseHandler.swift */; };
+		C03636711FACFC4E008FC9A9 /* GetScheduleCallHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03636701FACFC4E008FC9A9 /* GetScheduleCallHandler.swift */; };
+		C03636741FACFC85008FC9A9 /* GetScheduleResponseContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03636731FACFC85008FC9A9 /* GetScheduleResponseContainer.swift */; };
 		C03D148B1F79479C00211D28 /* HomeViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03D148A1F79479C00211D28 /* HomeViewManager.swift */; };
 		C03FB1271FA120E20041BD99 /* ActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03FB1261FA120E20041BD99 /* ActivityManager.swift */; };
 		C06220E51F74A8930032A2EC /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06220E41F74A8930032A2EC /* Debug.swift */; };
 		C069CF771F6B697E001FE527 /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C069CF761F6B697E001FE527 /* NotificationsManager.swift */; };
-		C0707FBE1F69720800C7D2ED /* ScheduleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0707FBD1F69720800C7D2ED /* ScheduleManager.swift */; };
+		C0707FBE1F69720800C7D2ED /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0707FBD1F69720800C7D2ED /* Schedule.swift */; };
 		C0707FC01F69753100C7D2ED /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0707FBF1F69753100C7D2ED /* Storage.swift */; };
+		C079C2311FACA9CB009067DE /* BlocksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C079C2301FACA9CB009067DE /* BlocksTableViewController.swift */; };
+		C079C2341FACABB7009067DE /* BlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C079C2331FACABB7009067DE /* BlockTableViewCell.swift */; };
 		C09343431FAA1A4800629A84 /* ScheduleUpdatedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09343421FAA1A4800629A84 /* ScheduleUpdatedEvent.swift */; };
 		C09343451FAA1B0100629A84 /* BlockAnalyst.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09343441FAA1B0100629A84 /* BlockAnalyst.swift */; };
 		C09343471FAA1B3C00629A84 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09343461FAA1B3C00629A84 /* Block.swift */; };
@@ -42,11 +50,14 @@
 		C0ADDF341F831A9000775AF2 /* SettingsViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ADDF331F831A9000775AF2 /* SettingsViewManager.swift */; };
 		C0C176521FAA39E50059E956 /* SportsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C176511FAA39E50059E956 /* SportsManager.swift */; };
 		C0C176551FAA5CB90059E956 /* WebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C176541FAA5CB90059E956 /* WebCall.swift */; };
-		C0C176571FAA5D080059E956 /* WebCallResponseToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C176561FAA5D080059E956 /* WebCallResponseToken.swift */; };
 		C0C176591FAA5F450059E956 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C176581FAA5F450059E956 /* Device.swift */; };
 		C0C1765B1FAA60C10059E956 /* Sport.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1765A1FAA60C10059E956 /* Sport.swift */; };
 		C0C1765E1FAA61000059E956 /* TimeDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1765D1FAA61000059E956 /* TimeDuration.swift */; };
 		C0C176601FAA61AE0059E956 /* EnscribedTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1765F1FAA61AE0059E956 /* EnscribedTime.swift */; };
+		C0C7767F1FACAD3C003EE125 /* BlocksActivityTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C7767E1FACAD3C003EE125 /* BlocksActivityTableController.swift */; };
+		C0C776821FACB10A003EE125 /* DayBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C776811FACB10A003EE125 /* DayBlock.swift */; };
+		C0C776841FACDDB6003EE125 /* EnscribedDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C776831FACDDB6003EE125 /* EnscribedDate.swift */; };
+		C0C776861FACDE89003EE125 /* TimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C776851FACDE89003EE125 /* TimeUtils.swift */; };
 		C0CD2BC51F86F776001600C2 /* TabBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD2BC41F86F776001600C2 /* TabBarManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -86,12 +97,20 @@
 		C019C1601F7D3CED00FC4EED /* Launch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
 		C020061D1FA904380050F864 /* UserPrefsUpdateEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPrefsUpdateEvent.swift; sourceTree = "<group>"; };
 		C020061F1FA904B10050F864 /* BlockMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockMeta.swift; sourceTree = "<group>"; };
+		C03636671FACF4C0008FC9A9 /* WebCallHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCallHandler.swift; sourceTree = "<group>"; };
+		C036366A1FACF7EA008FC9A9 /* ScheduleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleManager.swift; sourceTree = "<group>"; };
+		C036366C1FACF864008FC9A9 /* GetScheduleWebCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetScheduleWebCall.swift; sourceTree = "<group>"; };
+		C036366E1FACF962008FC9A9 /* WebDataResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebDataResponseHandler.swift; sourceTree = "<group>"; };
+		C03636701FACFC4E008FC9A9 /* GetScheduleCallHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetScheduleCallHandler.swift; sourceTree = "<group>"; };
+		C03636731FACFC85008FC9A9 /* GetScheduleResponseContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetScheduleResponseContainer.swift; sourceTree = "<group>"; };
 		C03D148A1F79479C00211D28 /* HomeViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewManager.swift; sourceTree = "<group>"; };
 		C03FB1261FA120E20041BD99 /* ActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityManager.swift; sourceTree = "<group>"; };
 		C06220E41F74A8930032A2EC /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		C069CF761F6B697E001FE527 /* NotificationsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
-		C0707FBD1F69720800C7D2ED /* ScheduleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleManager.swift; sourceTree = "<group>"; };
+		C0707FBD1F69720800C7D2ED /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		C0707FBF1F69753100C7D2ED /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		C079C2301FACA9CB009067DE /* BlocksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocksTableViewController.swift; sourceTree = "<group>"; };
+		C079C2331FACABB7009067DE /* BlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTableViewCell.swift; sourceTree = "<group>"; };
 		C09343421FAA1A4800629A84 /* ScheduleUpdatedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleUpdatedEvent.swift; sourceTree = "<group>"; };
 		C09343441FAA1B0100629A84 /* BlockAnalyst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockAnalyst.swift; sourceTree = "<group>"; };
 		C09343461FAA1B3C00629A84 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
@@ -104,11 +123,14 @@
 		C0ADDF331F831A9000775AF2 /* SettingsViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewManager.swift; sourceTree = "<group>"; };
 		C0C176511FAA39E50059E956 /* SportsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsManager.swift; sourceTree = "<group>"; };
 		C0C176541FAA5CB90059E956 /* WebCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCall.swift; sourceTree = "<group>"; };
-		C0C176561FAA5D080059E956 /* WebCallResponseToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCallResponseToken.swift; sourceTree = "<group>"; };
 		C0C176581FAA5F450059E956 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		C0C1765A1FAA60C10059E956 /* Sport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sport.swift; sourceTree = "<group>"; };
 		C0C1765D1FAA61000059E956 /* TimeDuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDuration.swift; sourceTree = "<group>"; };
 		C0C1765F1FAA61AE0059E956 /* EnscribedTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnscribedTime.swift; sourceTree = "<group>"; };
+		C0C7767E1FACAD3C003EE125 /* BlocksActivityTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocksActivityTableController.swift; sourceTree = "<group>"; };
+		C0C776811FACB10A003EE125 /* DayBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayBlock.swift; sourceTree = "<group>"; };
+		C0C776831FACDDB6003EE125 /* EnscribedDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnscribedDate.swift; sourceTree = "<group>"; };
+		C0C776851FACDE89003EE125 /* TimeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUtils.swift; sourceTree = "<group>"; };
 		C0CD2BC41F86F776001600C2 /* TabBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,18 +176,17 @@
 		5BD285D91B03CF29007A0472 /* Glancer */ = {
 			isa = PBXGroup;
 			children = (
+				C0C7768A1FACE17B003EE125 /* Utils */,
+				C079C22E1FACA96F009067DE /* Storyboard */,
 				C0C1765C1FAA60E80059E956 /* Time */,
 				C0C176531FAA5BF20059E956 /* Web */,
 				C00232971FA34B290019D328 /* Management */,
 				5B55DC2C1B27B21500D55EB9 /* Glancer.entitlements */,
 				5BD285DC1B03CF29007A0472 /* AppDelegate.swift */,
-				5BD072471C74AEB40074B56D /* Main.storyboard */,
 				740756CB1C33720A0039844B /* Label.swift */,
 				5BD285E31B03CF29007A0472 /* Images.xcassets */,
-				C019C1601F7D3CED00FC4EED /* Launch.storyboard */,
 				5BD285DA1B03CF29007A0472 /* Supporting Files */,
 				C0707FBF1F69753100C7D2ED /* Storage.swift */,
-				C0A5D3BF1F6A07D500DBDCAD /* Utils.swift */,
 				C069CF761F6B697E001FE527 /* NotificationsManager.swift */,
 				C06220E41F74A8930032A2EC /* Debug.swift */,
 				C0A908C51F76C8BF008AAB3F /* WeekViewManager.swift */,
@@ -214,6 +235,7 @@
 		C00232971FA34B290019D328 /* Management */ = {
 			isa = PBXGroup;
 			children = (
+				C0C776801FACB090003EE125 /* Schedule */,
 				C0C176501FAA31010059E956 /* Sports */,
 				C020061B1FA903D30050F864 /* Preferences */,
 				C0134A181FA7E1D5009B4399 /* Schedule */,
@@ -248,11 +270,11 @@
 			isa = PBXGroup;
 			children = (
 				C0134A191FA7E1F6009B4399 /* Events */,
-				C0707FBD1F69720800C7D2ED /* ScheduleManager.swift */,
+				C0707FBD1F69720800C7D2ED /* Schedule.swift */,
+				C093434A1FAA1B7A00629A84 /* BlockID.swift */,
 				C09343441FAA1B0100629A84 /* BlockAnalyst.swift */,
 				C09343461FAA1B3C00629A84 /* Block.swift */,
 				C09343481FAA1B5E00629A84 /* TimeContainer.swift */,
-				C093434A1FAA1B7A00629A84 /* BlockID.swift */,
 				C093434C1FAA1B9E00629A84 /* DayID.swift */,
 			);
 			name = Schedule;
@@ -285,6 +307,51 @@
 			name = Events;
 			sourceTree = "<group>";
 		};
+		C03636691FACF78F008FC9A9 /* WebCall */ = {
+			isa = PBXGroup;
+			children = (
+				C036366C1FACF864008FC9A9 /* GetScheduleWebCall.swift */,
+				C03636701FACFC4E008FC9A9 /* GetScheduleCallHandler.swift */,
+			);
+			name = WebCall;
+			sourceTree = "<group>";
+		};
+		C03636721FACFC59008FC9A9 /* Token */ = {
+			isa = PBXGroup;
+			children = (
+				C03636731FACFC85008FC9A9 /* GetScheduleResponseContainer.swift */,
+			);
+			name = Token;
+			sourceTree = "<group>";
+		};
+		C079C22E1FACA96F009067DE /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				C079C22F1FACA97D009067DE /* Controllers */,
+				5BD072471C74AEB40074B56D /* Main.storyboard */,
+				C019C1601F7D3CED00FC4EED /* Launch.storyboard */,
+			);
+			name = Storyboard;
+			sourceTree = "<group>";
+		};
+		C079C22F1FACA97D009067DE /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C079C2321FACAB82009067DE /* Blocks */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		C079C2321FACAB82009067DE /* Blocks */ = {
+			isa = PBXGroup;
+			children = (
+				C0C7767D1FACAD1A003EE125 /* Activities */,
+				C079C2301FACA9CB009067DE /* BlocksTableViewController.swift */,
+				C079C2331FACABB7009067DE /* BlockTableViewCell.swift */,
+			);
+			name = Blocks;
+			sourceTree = "<group>";
+		};
 		C0C176501FAA31010059E956 /* Sports */ = {
 			isa = PBXGroup;
 			children = (
@@ -298,7 +365,8 @@
 			isa = PBXGroup;
 			children = (
 				C0C176541FAA5CB90059E956 /* WebCall.swift */,
-				C0C176561FAA5D080059E956 /* WebCallResponseToken.swift */,
+				C03636671FACF4C0008FC9A9 /* WebCallHandler.swift */,
+				C036366E1FACF962008FC9A9 /* WebDataResponseHandler.swift */,
 			);
 			name = Web;
 			sourceTree = "<group>";
@@ -308,8 +376,37 @@
 			children = (
 				C0C1765D1FAA61000059E956 /* TimeDuration.swift */,
 				C0C1765F1FAA61AE0059E956 /* EnscribedTime.swift */,
+				C0C776831FACDDB6003EE125 /* EnscribedDate.swift */,
 			);
 			name = Time;
+			sourceTree = "<group>";
+		};
+		C0C7767D1FACAD1A003EE125 /* Activities */ = {
+			isa = PBXGroup;
+			children = (
+				C0C7767E1FACAD3C003EE125 /* BlocksActivityTableController.swift */,
+			);
+			name = Activities;
+			sourceTree = "<group>";
+		};
+		C0C776801FACB090003EE125 /* Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				C03636721FACFC59008FC9A9 /* Token */,
+				C03636691FACF78F008FC9A9 /* WebCall */,
+				C0C776811FACB10A003EE125 /* DayBlock.swift */,
+				C036366A1FACF7EA008FC9A9 /* ScheduleManager.swift */,
+			);
+			name = Schedule;
+			sourceTree = "<group>";
+		};
+		C0C7768A1FACE17B003EE125 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C0A5D3BF1F6A07D500DBDCAD /* Utils.swift */,
+				C0C776851FACDE89003EE125 /* TimeUtils.swift */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -455,6 +552,7 @@
 			files = (
 				C0C1765B1FAA60C10059E956 /* Sport.swift in Sources */,
 				C00232A71FA37EFC0019D328 /* MeetingSchedule.swift in Sources */,
+				C036366F1FACF962008FC9A9 /* WebDataResponseHandler.swift in Sources */,
 				C00232941FA3489A0019D328 /* EventManager.swift in Sources */,
 				C0C176551FAA5CB90059E956 /* WebCall.swift in Sources */,
 				C0C176591FAA5F450059E956 /* Device.swift in Sources */,
@@ -462,25 +560,33 @@
 				C0C176521FAA39E50059E956 /* SportsManager.swift in Sources */,
 				C06220E51F74A8930032A2EC /* Debug.swift in Sources */,
 				C0134A1B1FA7E446009B4399 /* ScheduleAttemptedLoadEvent.swift in Sources */,
+				C036366B1FACF7EA008FC9A9 /* ScheduleManager.swift in Sources */,
 				C00232991FA34B610019D328 /* Manager.swift in Sources */,
 				C09343431FAA1A4800629A84 /* ScheduleUpdatedEvent.swift in Sources */,
 				C0A908C61F76C8BF008AAB3F /* WeekViewManager.swift in Sources */,
 				C09343451FAA1B0100629A84 /* BlockAnalyst.swift in Sources */,
 				C00232A11FA37E100019D328 /* CourseActivity.swift in Sources */,
-				C0707FBE1F69720800C7D2ED /* ScheduleManager.swift in Sources */,
+				C0707FBE1F69720800C7D2ED /* Schedule.swift in Sources */,
 				C03FB1271FA120E20041BD99 /* ActivityManager.swift in Sources */,
 				C0A5D3C01F6A07D500DBDCAD /* Utils.swift in Sources */,
 				C00232A51FA37E760019D328 /* Activity.swift in Sources */,
 				C002329B1FA34BF70019D328 /* Event.swift in Sources */,
+				C0C776841FACDDB6003EE125 /* EnscribedDate.swift in Sources */,
 				C0ADDF341F831A9000775AF2 /* SettingsViewManager.swift in Sources */,
 				C093434D1FAA1B9E00629A84 /* DayID.swift in Sources */,
 				740756CC1C33720A0039844B /* Label.swift in Sources */,
+				C03636681FACF4C0008FC9A9 /* WebCallHandler.swift in Sources */,
 				C09343471FAA1B3C00629A84 /* Block.swift in Sources */,
 				C069CF771F6B697E001FE527 /* NotificationsManager.swift in Sources */,
+				C079C2341FACABB7009067DE /* BlockTableViewCell.swift in Sources */,
 				C0C176601FAA61AE0059E956 /* EnscribedTime.swift in Sources */,
 				C093434B1FAA1B7A00629A84 /* BlockID.swift in Sources */,
+				C0C776821FACB10A003EE125 /* DayBlock.swift in Sources */,
 				C0A5D3BC1F69E07500DBDCAD /* UserPrefsManager.swift in Sources */,
-				C0C176571FAA5D080059E956 /* WebCallResponseToken.swift in Sources */,
+				C036366D1FACF864008FC9A9 /* GetScheduleWebCall.swift in Sources */,
+				C0C776861FACDE89003EE125 /* TimeUtils.swift in Sources */,
+				C03636711FACFC4E008FC9A9 /* GetScheduleCallHandler.swift in Sources */,
+				C0C7767F1FACAD3C003EE125 /* BlocksActivityTableController.swift in Sources */,
 				C02006201FA904B10050F864 /* BlockMeta.swift in Sources */,
 				C002329E1FA37D8D0019D328 /* EventHandler.swift in Sources */,
 				C03D148B1F79479C00211D28 /* HomeViewManager.swift in Sources */,
@@ -488,7 +594,9 @@
 				C020061E1FA904380050F864 /* UserPrefsUpdateEvent.swift in Sources */,
 				C0CD2BC51F86F776001600C2 /* TabBarManager.swift in Sources */,
 				C09343491FAA1B5E00629A84 /* TimeContainer.swift in Sources */,
+				C03636741FACFC85008FC9A9 /* GetScheduleResponseContainer.swift in Sources */,
 				C0C1765E1FAA61000059E956 /* TimeDuration.swift in Sources */,
+				C079C2311FACA9CB009067DE /* BlocksTableViewController.swift in Sources */,
 				C0707FC01F69753100C7D2ED /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
