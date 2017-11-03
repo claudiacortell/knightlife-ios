@@ -10,8 +10,18 @@ import Foundation
 
 class GetScheduleCallHandler: WebCallHandler<GetScheduleResponseContainer>
 {
-	override func handleCall(url: String, call: String, completeCall: String, success: Bool, error: String?, dataHandler: WebDataResponseHandler<GetScheduleResponseContainer>?)
+	let manager: ScheduleManager
+	
+	init(_ manager: ScheduleManager)
 	{
-
+		self.manager = manager
+	}
+	
+	override func handleCall(url: String, call: String, completeCall: String, success: Bool, error: String?, data: GetScheduleResponseContainer?)
+	{
+		if success
+		{
+			// TODO: Manager.readSchedule(data)
+		}
 	}
 }

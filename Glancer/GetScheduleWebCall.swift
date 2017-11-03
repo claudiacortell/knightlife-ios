@@ -18,6 +18,6 @@ class GetScheduleWebCall: WebCall<GetScheduleResponseContainer>
 	
 	override func handleData(data: Data) -> GetScheduleResponseContainer?
 	{
-		return nil
+		
 	}
 }
