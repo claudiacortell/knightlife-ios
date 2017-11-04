@@ -1,0 +1,30 @@
+//
+//  ScheduleBlock.swift
+//  Glancer
+//
+//  Created by Dylan Hanson on 11/3/17.
+//  Copyright © 2017 BB&N. All rights reserved.
+//
+
+import Foundation
+
+struct ScheduleBlock
+{
+	let blockId: BlockID
+	let time: TimeDuration
+}
+
+extension ScheduleBlock: Equatable
+{
+	static func ==(lhs: ScheduleBlock, rhs: ScheduleBlock) -> Bool
+	{
+		return
+			lhs.blockId == rhs.blockId &&
+			lhs.time == rhs.time
+	}
+	
+	var hashValue: Int
+	{
+		return self.blockId.hashValue ^ self.time.hashValue
+	}
+}

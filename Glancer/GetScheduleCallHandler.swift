@@ -8,7 +8,7 @@
 
 import Foundation
 
-class GetScheduleCallHandler: WebCallHandler<GetScheduleResponseContainer>
+class GetScheduleCallHandler: WebCallHandler<GetScheduleResponse>
 {
 	let manager: ScheduleManager
 	
@@ -17,11 +17,15 @@ class GetScheduleCallHandler: WebCallHandler<GetScheduleResponseContainer>
 		self.manager = manager
 	}
 	
-	override func handleCall(url: String, call: String, completeCall: String, success: Bool, error: String?, data: GetScheduleResponseContainer?)
+	override func handleCall(url: String, call: String, completeCall: String, success: Bool, error: String?, data: GetScheduleResponse?)
 	{
-		if success
+		if success && data != nil
 		{
-			// TODO: Manager.readSchedule(data)
+			manager.templateResponded(response: data!)
+		} else
+		{
+			manager.out("Schedule handling error: \(error!)")
+			manager.lastTemplateFetch = .failure
 		}
 	}
 }

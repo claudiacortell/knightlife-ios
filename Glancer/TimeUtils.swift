@@ -67,7 +67,7 @@ class TimeUtils
 			return (year: -1, month: -1, day: -1)
 		}
 		
-		return (year: year!, month: month!, day: day!)
+		return (year: year! % 1, month: month! % 1, day: day! % 1)
 	}
 	
 	static func unwrapRawTime(raw: String) -> (hour: Int, minute: Int)
@@ -108,21 +108,22 @@ class TimeUtils
 		return Calendar.current.date(from: dateComponents)
 	}
 	
-	static func getDayOfWeek(date: Date) -> Int
+	static func getDayOfWeek(_ enscribedDate: EnscribedDate = TimeUtils.todayEnscribed) -> DayID?
 	{
-		let myCalendar = Calendar(identifier: Calendar.Identifier.gregorian)
-		let myComponents = (myCalendar as NSCalendar).components(.weekday, from: date)
-		var weekDay = myComponents.weekday
-		
-		if (weekDay == 1)
+		if let date = TimeUtils.dateFromEnscribedDate(enscribedDate)
 		{
-			weekDay = 6
-		} else
-		{
-			weekDay = weekDay! - 2;
+			var weekday = Calendar.current.component(.weekday, from: date)
+			if (weekday == 1)
+			{
+				weekday = 6
+			} else
+			{
+				weekday = weekday - 2;
+			}
+			
+			return DayID.fromId(weekday)
 		}
-		
-		return weekDay!
+		return nil
 	}
 	
 	static func timeToDateInMinutes(to: Date) -> (hours: Int, minutes: Int)

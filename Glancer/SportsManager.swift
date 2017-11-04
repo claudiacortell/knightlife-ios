@@ -10,10 +10,14 @@ import Foundation
 
 class SportsManager: Manager
 {
+	static let instance = SportsManager()
 	
+	var meetings: [EnscribedDate: DailySportsList]
 	
 	init()
 	{
+		self.meetings = [:]
+		
 		super.init(name: "Sports Manager")
 	}
 }

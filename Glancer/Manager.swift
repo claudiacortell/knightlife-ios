@@ -18,8 +18,13 @@ class Manager: EventHandler
         self.name = name
 		
 		if registerEvents { EventManager.instance.registerHandler(handler: self) }
-        print("Loaded \(self.name) and registered as an EventHandler.")
+        out("Loaded and registered as an EventHandler.")
     }
+	
+	func out(_ msg: String)
+	{
+		print("\(self.name): \(msg)")
+	}
 	
 	func callEvent(_ event: Event)
 	{

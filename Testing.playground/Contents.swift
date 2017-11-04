@@ -2,11 +2,26 @@
 
 import UIKit
 
-let now = Date()
-let calendar = Calendar.current
+var dateComponents = DateComponents()
 
-let year = calendar.component(.year, from: now)
-let month = calendar.component(.month, from: now)
-let day = calendar.component(.day, from: now)
+dateComponents.year = 2017
+dateComponents.month = 11
+dateComponents.day = 3
+dateComponents.timeZone = TimeZone(abbreviation: "EST")
 
-print(year, month, day)
+let date = Calendar.current.date(from: dateComponents)
+
+if date != nil
+{
+	var weekday = Calendar.current.component(.weekday, from: date!)
+	
+	if (weekday == 1)
+	{
+		weekday = 6
+	} else
+	{
+		weekday = weekday - 2;
+	}
+	
+	print(weekday)
+}
