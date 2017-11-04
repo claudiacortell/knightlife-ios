@@ -53,11 +53,11 @@ class Manager: EventHandler
 	
 	func loadData(key: String) -> Any?
 	{
-		return Manager.defaults.object(forKey: key)
+		return Manager.defaults.object(forKey: "\(self.name).\(key)")
 	}
 	
 	func hasData(key: String) -> Bool
 	{
-		return loadData(key: key) != nil
+		return loadData(key: "\(self.name).\(key)") != nil
 	}
 }

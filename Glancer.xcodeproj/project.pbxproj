@@ -38,6 +38,9 @@
 		C03D148B1F79479C00211D28 /* HomeViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03D148A1F79479C00211D28 /* HomeViewManager.swift */; };
 		C03FB1271FA120E20041BD99 /* ActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03FB1261FA120E20041BD99 /* ActivityManager.swift */; };
 		C04DE4651FAE6AF9000D4DA6 /* DailySportsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04DE4641FAE6AF9000D4DA6 /* DailySportsList.swift */; };
+		C04DE46A1FAE6E09000D4DA6 /* GetSportsMeetingsWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04DE4691FAE6E09000D4DA6 /* GetSportsMeetingsWebCall.swift */; };
+		C04DE46D1FAE6E74000D4DA6 /* GetSportsMeetingsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04DE46C1FAE6E74000D4DA6 /* GetSportsMeetingsResponse.swift */; };
+		C04DE46F1FAE6F31000D4DA6 /* GetSportsMeetingsCallHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04DE46E1FAE6F31000D4DA6 /* GetSportsMeetingsCallHandler.swift */; };
 		C05F5E801FAE4ACA00724F42 /* SportMeeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05F5E7F1FAE4ACA00724F42 /* SportMeeting.swift */; };
 		C05F5E821FAE51AB00724F42 /* SportTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05F5E811FAE51AB00724F42 /* SportTeam.swift */; };
 		C05F5E851FAE542D00724F42 /* SportSeason.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05F5E841FAE542D00724F42 /* SportSeason.swift */; };
@@ -123,6 +126,9 @@
 		C03D148A1F79479C00211D28 /* HomeViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewManager.swift; sourceTree = "<group>"; };
 		C03FB1261FA120E20041BD99 /* ActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityManager.swift; sourceTree = "<group>"; };
 		C04DE4641FAE6AF9000D4DA6 /* DailySportsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySportsList.swift; sourceTree = "<group>"; };
+		C04DE4691FAE6E09000D4DA6 /* GetSportsMeetingsWebCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSportsMeetingsWebCall.swift; sourceTree = "<group>"; };
+		C04DE46C1FAE6E74000D4DA6 /* GetSportsMeetingsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSportsMeetingsResponse.swift; sourceTree = "<group>"; };
+		C04DE46E1FAE6F31000D4DA6 /* GetSportsMeetingsCallHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSportsMeetingsCallHandler.swift; sourceTree = "<group>"; };
 		C05F5E7F1FAE4ACA00724F42 /* SportMeeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportMeeting.swift; sourceTree = "<group>"; };
 		C05F5E811FAE51AB00724F42 /* SportTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportTeam.swift; sourceTree = "<group>"; };
 		C05F5E841FAE542D00724F42 /* SportSeason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportSeason.swift; sourceTree = "<group>"; };
@@ -295,11 +301,9 @@
 			children = (
 				C0134A191FA7E1F6009B4399 /* Events */,
 				C0707FBD1F69720800C7D2ED /* Schedule.swift */,
-				C093434A1FAA1B7A00629A84 /* BlockID.swift */,
 				C09343441FAA1B0100629A84 /* BlockAnalyst.swift */,
 				C09343461FAA1B3C00629A84 /* Block.swift */,
 				C09343481FAA1B5E00629A84 /* TimeContainer.swift */,
-				C093434C1FAA1B9E00629A84 /* DayID.swift */,
 			);
 			name = Schedule;
 			sourceTree = "<group>";
@@ -397,8 +401,27 @@
 		C04DE4671FAE6D19000D4DA6 /* WebCall */ = {
 			isa = PBXGroup;
 			children = (
+				C04DE4681FAE6DB5000D4DA6 /* GetMeetings */,
 			);
 			name = WebCall;
+			sourceTree = "<group>";
+		};
+		C04DE4681FAE6DB5000D4DA6 /* GetMeetings */ = {
+			isa = PBXGroup;
+			children = (
+				C04DE46B1FAE6E63000D4DA6 /* Response */,
+				C04DE4691FAE6E09000D4DA6 /* GetSportsMeetingsWebCall.swift */,
+				C04DE46E1FAE6F31000D4DA6 /* GetSportsMeetingsCallHandler.swift */,
+			);
+			name = GetMeetings;
+			sourceTree = "<group>";
+		};
+		C04DE46B1FAE6E63000D4DA6 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				C04DE46C1FAE6E74000D4DA6 /* GetSportsMeetingsResponse.swift */,
+			);
+			name = Response;
 			sourceTree = "<group>";
 		};
 		C05F5E831FAE53C700724F42 /* Declarations */ = {
@@ -496,6 +519,8 @@
 				C02A2B151FAD52CE00D3A9CD /* Elements */,
 				C03636691FACF78F008FC9A9 /* WebCall */,
 				C036366A1FACF7EA008FC9A9 /* ScheduleManager.swift */,
+				C093434A1FAA1B7A00629A84 /* BlockID.swift */,
+				C093434C1FAA1B9E00629A84 /* DayID.swift */,
 			);
 			name = Schedule;
 			sourceTree = "<group>";
@@ -664,6 +689,7 @@
 				C0C176521FAA39E50059E956 /* SportsManager.swift in Sources */,
 				C06220E51F74A8930032A2EC /* Debug.swift in Sources */,
 				C0134A1B1FA7E446009B4399 /* ScheduleAttemptedLoadEvent.swift in Sources */,
+				C04DE46D1FAE6E74000D4DA6 /* GetSportsMeetingsResponse.swift in Sources */,
 				C036366B1FACF7EA008FC9A9 /* ScheduleManager.swift in Sources */,
 				C00232991FA34B610019D328 /* Manager.swift in Sources */,
 				C09343431FAA1A4800629A84 /* ScheduleUpdatedEvent.swift in Sources */,
@@ -682,6 +708,7 @@
 				C0ADDF341F831A9000775AF2 /* SettingsViewManager.swift in Sources */,
 				C093434D1FAA1B9E00629A84 /* DayID.swift in Sources */,
 				740756CC1C33720A0039844B /* Label.swift in Sources */,
+				C04DE46A1FAE6E09000D4DA6 /* GetSportsMeetingsWebCall.swift in Sources */,
 				C03636681FACF4C0008FC9A9 /* WebCallHandler.swift in Sources */,
 				C09343471FAA1B3C00629A84 /* Block.swift in Sources */,
 				C069CF771F6B697E001FE527 /* NotificationsManager.swift in Sources */,
@@ -696,6 +723,7 @@
 				C0C7767F1FACAD3C003EE125 /* BlocksActivityTableController.swift in Sources */,
 				C02006201FA904B10050F864 /* BlockMeta.swift in Sources */,
 				C02A2B121FAD4A1C00D3A9CD /* GetPatchesCallHandler.swift in Sources */,
+				C04DE46F1FAE6F31000D4DA6 /* GetSportsMeetingsCallHandler.swift in Sources */,
 				C002329E1FA37D8D0019D328 /* EventHandler.swift in Sources */,
 				C05F5E851FAE542D00724F42 /* SportSeason.swift in Sources */,
 				C03D148B1F79479C00211D28 /* HomeViewManager.swift in Sources */,

@@ -12,12 +12,26 @@ class SportsManager: Manager
 {
 	static let instance = SportsManager()
 	
+	var userAdded: [SportTeam]
 	var meetings: [EnscribedDate: DailySportsList]
 	
 	init()
 	{
+		self.userAdded = []
 		self.meetings = [:]
 		
 		super.init(name: "Sports Manager")
 	}
+	
+	func loadUserAdded()
+	{
+		
+	}
+	
+	func saveUserAdded()
+	{
+		
+	}
+	
+	
 }

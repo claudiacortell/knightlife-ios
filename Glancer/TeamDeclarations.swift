@@ -10,6 +10,68 @@ import Foundation
 
 class TeamDeclarations
 {
+	static let values =
+	[
+		HEALTH_FITNESS,
+		INSTRUCTIONAL_TENNIS,
+		STRENGTH_CONDITIONING,
+		STRENGTH_CONDITIONING_YOGA,
+		YOGA,
+		
+		CROSS_COUNTRY_B_V,
+		CROSS_COUNTRY_B_JV,
+		CROSS_COUNTRY_G_V,
+		CROSS_COUNTRY_G_JV,
+		FIELD_HOCKEY_G_V,
+		FIELD_HOCKEY_G_JV,
+		FOOTBALL_B_V,
+		FOOTBALL_B_JV,
+		SOCCER_B_V,
+		SOCCER_B_JV,
+		SOCCER_B_3,
+		SOCCER_G_V,
+		SOCCER_G_JV,
+		SOCCER_G_3,
+		VOLLEYBALL_G_V,
+		VOLLEYBALL_G_JV,
+		
+		BASKETBALL_B_V,
+		BASKETBALL_B_JV,
+		BASKETBALL_B_3,
+		BASKETBALL_G_V,
+		BASKETBALL_G_JV,
+		FENCING_V,
+		HOCKEY_B_V,
+		HOCKEY_B_JV,
+		HOCKEY_G_V,
+		HOCKEY_G_JV,
+		SQUASH_B_V,
+		SQUASH_B_JV,
+		SQUASH_G_V,
+		SQUASH_G_JV,
+		WRESTLING,
+		
+		BASEBALL_B_V,
+		BASEBALL_B_JV,
+		CREW_B_V,
+		CREW_B_JV,
+		CREW_G_V,
+		CREW_G_JV,
+		GOLF_C_V,
+		GOLF_C_JV,
+		LACROSSE_B_V,
+		LACROSSE_G_V,
+		LACROSSE_G_JV,
+		SAILING,
+		SOFTBALL_G_V,
+		SOFTBALL_G_JV,
+		TENNIS_B_V,
+		TENNIS_B_JV,
+		TENNIS_G_V,
+		TENNIS_G_JV,
+		TRACK_FIELD
+	]
+	
 	//	ALL YEAR
 	
 	static let HEALTH_FITNESS = SportTeam(id: [206, 204], .health_fitness, .year, .coed, .none)
@@ -70,7 +132,7 @@ class TeamDeclarations
 	// SPRING
 	
 	static let BASEBALL_B_V = SportTeam(id: 112, .baseball, .spring, .male, .first)
-	static let BASEBALL_B_jV = SportTeam(id: 113, .baseball, .spring, .male, .second)
+	static let BASEBALL_B_JV = SportTeam(id: 113, .baseball, .spring, .male, .second)
 	
 	static let CREW_B_V = SportTeam(id: 115, .crew, .spring, .male, .first)
 	static let CREW_B_JV = SportTeam(id: 196, .crew, .spring, .male, .second)

@@ -92,15 +92,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 			
             task.resume()
         }
-        
-        if let currentInstallation = PFInstallation.current()
-        {
-            currentInstallation.setDeviceTokenFrom(deviceToken)
-            currentInstallation.saveInBackground
-            {
-                (succeeded, e) -> Void in
-            }
-        }
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error)
@@ -122,8 +113,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate
                 }
             }
         }
-        
-        PFPush.handle(userInfo)
     }
 	
     func applicationWillResignActive(_ application: UIApplication)
