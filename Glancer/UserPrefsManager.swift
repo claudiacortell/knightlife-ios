@@ -28,6 +28,8 @@ class UserPrefsManager: Manager
 		.lab: BlockMeta(.lab, "999999")
 	]
 	
+	
+	
 	private class AccessKeys
 	{
 		fileprivate static let NAME = "name"

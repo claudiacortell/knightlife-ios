@@ -9,44 +9,72 @@
 import Foundation
 import UIKit
 
-class BlocksTableViewController: UITableViewController
+class BlocksTableViewController: UITableViewController, Storyboardable
 {
-	func viewDidLoad()
+	var storyboardContainer: StoryboardContainer?
+	
+	override func viewDidLoad()
 	{
 		super.viewDidLoad()
 	}
 	
-	func viewWillAppear(_ animated: Bool)
+	func generateContainer()
+	{
+		var container = StoryboardContainer()
+		
+		if let blocks = ScheduleManager.instance.retrieveBlockList()
+		{
+			if blocks.blocks.isEmpty
+			{
+				
+			}
+			
+			for block in blocks.blocks
+			{
+				
+			}
+		} else
+		{
+//			ERROR
+		}
+		
+		for sport in SportsManager.instance.retrieveMeetings()
+		{
+			
+		}
+	}
+	
+	override func viewWillAppear(_ animated: Bool)
 	{
 		super.viewWillAppear(animated)
 	}
 	
-	func numberOfSections(in tableView: UITableView) -> Int
+	override func numberOfSections(in tableView: UITableView) -> Int
+	{
+		return 2 // Blocks + Sports
+	}
+	
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
 		
 	}
 	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
 	{
 		
 	}
 	
-	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
 	{
 		
 	}
 	
-	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
 		
 	}
 	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-	{
-		
-	}
-	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
 		
 	}
