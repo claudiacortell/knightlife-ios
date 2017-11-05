@@ -8,7 +8,7 @@
 
 import Foundation
 
-class GetPatchesCallHandler: WebCallHandler<GetPatchesResponse>
+class GetPatchesCallHandler: WebCallHandler<GetSportsMeetingsResponse>
 {
 	let manager: ScheduleManager
 	

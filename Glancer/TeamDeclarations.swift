@@ -74,7 +74,7 @@ class TeamDeclarations
 	
 	//	ALL YEAR
 	
-	static let HEALTH_FITNESS = SportTeam(id: [206, 204], .health_fitness, .year, .coed, .none)
+	static let HEALTH_FITNESS = SportTeam(id: 206, .health_fitness, .year, .coed, .none)
 	static let INSTRUCTIONAL_TENNIS = SportTeam(id: 207, .instructional_tennis, .year, .coed, .none)
 	static let STRENGTH_CONDITIONING = SportTeam(id: 208, .strength_conditioning, .year, .coed, .none)
 	static let STRENGTH_CONDITIONING_YOGA = SportTeam(id: 209, .strength_conditioning_yoga, .year, .coed, .none)

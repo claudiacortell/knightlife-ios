@@ -16,7 +16,7 @@ class GetScheduleWebCall: WebCall<GetScheduleResponse>
 		self.token()
 	}
 	
-	override func handleData(data: Data) -> GetScheduleResponse?
+	func handleData(data: Data) -> GetScheduleResponse?
 	{
 		if let json = try? JSONSerialization.jsonObject(with: data, options: [])
 		{

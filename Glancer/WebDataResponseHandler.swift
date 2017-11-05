@@ -10,5 +10,5 @@ import Foundation
 
 class WebDataResponseHandler<DataContainer>
 {
-	func handleData(data: Data) -> DataContainer? { /* Override point */ return nil }
+	func handleData(data: Data) -> DataContainer? { return nil }
 }

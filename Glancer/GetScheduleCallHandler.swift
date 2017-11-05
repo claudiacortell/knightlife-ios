@@ -8,7 +8,7 @@
 
 import Foundation
 
-class GetScheduleCallHandler: WebCallHandler<GetScheduleResponse>
+class GetScheduleCallHandler: WebCallHandler
 {
 	let manager: ScheduleManager
 	
@@ -17,7 +17,7 @@ class GetScheduleCallHandler: WebCallHandler<GetScheduleResponse>
 		self.manager = manager
 	}
 	
-	override func handleCall(url: String, call: String, completeCall: String, success: Bool, error: String?, data: GetScheduleResponse?)
+	func handleCall(url: String, call: String, completeCall: String, success: Bool, error: String?, data: GetScheduleResponse?)
 	{
 		if success && data != nil
 		{

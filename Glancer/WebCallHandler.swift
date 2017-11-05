@@ -10,5 +10,5 @@ import Foundation
 
 class WebCallHandler<DataContainer>
 {
-	func handleCall(url: String, call: String, completeCall: String, success: Bool, error: String?, data: DataContainer?) { /* Override point */ }
+	func handleCall(url: String, call: String, completeCall: String, success: Bool, error: String?, data: DataContainer?) {  }
 }

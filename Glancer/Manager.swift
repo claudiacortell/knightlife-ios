@@ -45,19 +45,4 @@ class Manager: EventHandler
 	{
 		
 	}
-	
-	func saveData(key: String, data: Any)
-	{
-		Manager.defaults.set(data, forKey: "\(self.name).\(key)")
-	}
-	
-	func loadData(key: String) -> Any?
-	{
-		return Manager.defaults.object(forKey: "\(self.name).\(key)")
-	}
-	
-	func hasData(key: String) -> Bool
-	{
-		return loadData(key: "\(self.name).\(key)") != nil
-	}
 }

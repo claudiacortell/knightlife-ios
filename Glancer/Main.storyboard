@@ -318,7 +318,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XNR-T3-E5n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="91" y="-1776"/>
+            <point key="canvasLocation" x="89.855072463768124" y="-1776.358695652174"/>
         </scene>
         <!--Blocks Table View Controller-->
         <scene sceneID="mdP-G3-QT5">
@@ -329,18 +329,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell_block" rowHeight="129" id="bFY-G6-dUU" customClass="BlockTableViewCell" customModule="Glancer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="129"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell_block" rowHeight="259" id="bFY-G6-dUU" customClass="BlockTableViewCell" customModule="Glancer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="259"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bFY-G6-dUU" id="0XW-o2-aXm" userLabel="Cell Constraints">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="129"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="259"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zPZ-Fy-mQX" userLabel="Background Container">
-                                            <rect key="frame" x="6" y="2" width="402" height="125"/>
+                                            <rect key="frame" x="6" y="2" width="402" height="255"/>
                                             <subviews>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Vw-Kb-Eak" userLabel="Content Container">
-                                                    <rect key="frame" x="0.0" y="0.0" width="402" height="125"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="402" height="255"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2u0-mM-UVk" userLabel="Block Head">
                                                             <rect key="frame" x="0.0" y="0.0" width="402" height="40"/>
@@ -369,7 +369,7 @@
                                                             </constraints>
                                                         </view>
                                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rtl-Ls-zBJ" customClass="BlockActivityTableController" customModule="Glancer" customModuleProvider="target">
-                                                            <rect key="frame" x="10" y="40" width="382" height="46"/>
+                                                            <rect key="frame" x="10" y="40" width="382" height="176"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <prototypes>
                                                                 <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell_class" rowHeight="45" id="ePN-lD-4ZT">
@@ -446,7 +446,7 @@
                                                             <sections/>
                                                         </tableView>
                                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zCw-SS-Zul" userLabel="Stack View Container">
-                                                            <rect key="frame" x="0.0" y="89" width="402" height="33"/>
+                                                            <rect key="frame" x="0.0" y="219" width="402" height="33"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="6Ke-KZ-2C6">
                                                                     <rect key="frame" x="0.0" y="0.0" width="402" height="33"/>
@@ -564,8 +564,8 @@
                                     <outlet property="blockTime" destination="Iko-b2-asa" id="6gA-Sd-g39"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell_block" rowHeight="50" id="Tp7-IB-Jfh" customClass="BlockTableViewCell" customModule="Glancer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="157" width="414" height="50"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell_sports" rowHeight="50" id="Tp7-IB-Jfh" customClass="BlockTableViewCell" customModule="Glancer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="287" width="414" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Tp7-IB-Jfh" id="ZEB-Mh-oQp" userLabel="Cell Constraints">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -643,7 +643,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bHi-C7-WEQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="90" y="-1082"/>
+            <point key="canvasLocation" x="89.855072463768124" y="-1082.608695652174"/>
         </scene>
         <!--Week Controller-->
         <scene sceneID="Hgl-6b-Ycz">
