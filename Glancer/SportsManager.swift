@@ -11,7 +11,6 @@ import Foundation
 class SportsManager: DataManager<SportsPrefModule>
 {
 	static let instance = SportsManager()
-	private static let dataKey = "useradded"
 	
 	private(set) var userAdded: [SportTeam]
 	private(set) var meetings: [EnscribedDate: DailySportsList]
@@ -25,6 +24,8 @@ class SportsManager: DataManager<SportsPrefModule>
 
 		self.loadDataModule()
 	}
+	
+	
 	
 	func retrieveMeetings(_ date: EnscribedDate = TimeUtils.todayEnscribed, onlyAdded: Bool = true) -> [SportsMeetingWrapper]
 	{

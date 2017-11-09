@@ -37,6 +37,8 @@
 		C03636741FACFC85008FC9A9 /* GetScheduleResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03636731FACFC85008FC9A9 /* GetScheduleResponse.swift */; };
 		C03D148B1F79479C00211D28 /* HomeViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03D148A1F79479C00211D28 /* HomeViewManager.swift */; };
 		C03FB1271FA120E20041BD99 /* ActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03FB1261FA120E20041BD99 /* ActivityManager.swift */; };
+		C04937B81FB405880036C890 /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04937B71FB405880036C890 /* Module.swift */; };
+		C04937BB1FB40EB10036C890 /* CollectionModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04937BA1FB40EB10036C890 /* CollectionModule.swift */; };
 		C04DE4651FAE6AF9000D4DA6 /* DailySportsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04DE4641FAE6AF9000D4DA6 /* DailySportsList.swift */; };
 		C04DE46A1FAE6E09000D4DA6 /* GetSportsMeetingsWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04DE4691FAE6E09000D4DA6 /* GetSportsMeetingsWebCall.swift */; };
 		C04DE46D1FAE6E74000D4DA6 /* GetSportsMeetingsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04DE46C1FAE6E74000D4DA6 /* GetSportsMeetingsResponse.swift */; };
@@ -135,6 +137,8 @@
 		C03636731FACFC85008FC9A9 /* GetScheduleResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetScheduleResponse.swift; sourceTree = "<group>"; };
 		C03D148A1F79479C00211D28 /* HomeViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewManager.swift; sourceTree = "<group>"; };
 		C03FB1261FA120E20041BD99 /* ActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityManager.swift; sourceTree = "<group>"; };
+		C04937B71FB405880036C890 /* Module.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Module.swift; sourceTree = "<group>"; };
+		C04937BA1FB40EB10036C890 /* CollectionModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionModule.swift; sourceTree = "<group>"; };
 		C04DE4641FAE6AF9000D4DA6 /* DailySportsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySportsList.swift; sourceTree = "<group>"; };
 		C04DE4691FAE6E09000D4DA6 /* GetSportsMeetingsWebCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSportsMeetingsWebCall.swift; sourceTree = "<group>"; };
 		C04DE46C1FAE6E74000D4DA6 /* GetSportsMeetingsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSportsMeetingsResponse.swift; sourceTree = "<group>"; };
@@ -285,6 +289,7 @@
 		C00232971FA34B290019D328 /* Management */ = {
 			isa = PBXGroup;
 			children = (
+				C04937B91FB408980036C890 /* Module */,
 				C0C776801FACB090003EE125 /* Schedule */,
 				C0C176501FAA31010059E956 /* Sports */,
 				C020061B1FA903D30050F864 /* Preferences */,
@@ -409,6 +414,15 @@
 				C03636731FACFC85008FC9A9 /* GetScheduleResponse.swift */,
 			);
 			name = Response;
+			sourceTree = "<group>";
+		};
+		C04937B91FB408980036C890 /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				C04937B71FB405880036C890 /* Module.swift */,
+				C04937BA1FB40EB10036C890 /* CollectionModule.swift */,
+			);
+			name = Module;
 			sourceTree = "<group>";
 		};
 		C04DE4661FAE6C41000D4DA6 /* Elements */ = {
@@ -737,6 +751,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C04937BB1FB40EB10036C890 /* CollectionModule.swift in Sources */,
 				C07463341FAFAAC300D183E7 /* Storyboardable.swift in Sources */,
 				C0C1765B1FAA60C10059E956 /* SportType.swift in Sources */,
 				C05F5E871FAE54AA00724F42 /* SportTier.swift in Sources */,
@@ -782,6 +797,7 @@
 				C069CF771F6B697E001FE527 /* NotificationsManager.swift in Sources */,
 				C079C2341FACABB7009067DE /* BlockTableViewCell.swift in Sources */,
 				C0C176601FAA61AE0059E956 /* EnscribedTime.swift in Sources */,
+				C04937B81FB405880036C890 /* Module.swift in Sources */,
 				C093434B1FAA1B7A00629A84 /* BlockID.swift in Sources */,
 				C0A5D3BC1F69E07500DBDCAD /* UserPrefsManager.swift in Sources */,
 				C036366D1FACF864008FC9A9 /* GetScheduleWebCall.swift in Sources */,

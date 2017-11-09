@@ -12,10 +12,13 @@ class Manager: EventHandler
 {
 	static let defaults = UserDefaults.standard // File saving
     let name: String
-    
+	
+	private(set) var modules: [Module]
+	
 	init(name: String, registerEvents: Bool = true)
     {
         self.name = name
+		self.modules = []
 		
 		if registerEvents { EventManager.instance.registerHandler(handler: self) }
         out("Loaded and registered as an EventHandler.")
@@ -45,4 +48,11 @@ class Manager: EventHandler
 	{
 		
 	}
+	
+	func registerModule(_ module: Module)
+	{
+		self.modules.append(module)
+	}
+	
+	
 }
