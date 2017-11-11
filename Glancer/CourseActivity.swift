@@ -8,13 +8,14 @@
 
 import Foundation
 
-class CourseActivity: Activity
+struct CourseActivity: Activity
 {
+	var type: ActivityType = .course
+	
+	var name: String
+	
+	var meetingSchedule: MeetingSchedule?
+	
     var room: String? // Room #
     var teacher: String? // Teacher name.
-    
-    init(name: String)
-    {
-        super.init(type: .course, name: name)
-    }
 }

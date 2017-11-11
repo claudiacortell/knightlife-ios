@@ -16,16 +16,10 @@ enum ActivityType
     other
 }
 
-class Activity
+protocol Activity
 {
-    let type: ActivityType
-    var name: String // Course name
+	var type: ActivityType { get }
+	var name: String { get set } // Course name
     
-    var meetingSchedule: MeetingSchedule?
-    
-    init(type: ActivityType, name: String)
-    {
-        self.type = type
-        self.name = name
-    }
+	var meetingSchedule: MeetingSchedule? { get set }
 }

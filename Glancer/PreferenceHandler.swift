@@ -1,5 +1,5 @@
 //
-//  PrefsModule.swift
+//  PreferenceHandler.swift
 //  Glancer
 //
 //  Created by Dylan Hanson on 11/5/17.
@@ -8,13 +8,9 @@
 
 import Foundation
 
-protocol PrefsModule
+protocol PreferenceHandler
 {
-	associatedtype Target
-	associatedtype PrefsManager: Manager
-
 	var storageKey: String { get }
-	var manager: PrefsManager { get set }
 	
 	func getStorageValues() -> Any?
 	func readStorageValues(data: Any)

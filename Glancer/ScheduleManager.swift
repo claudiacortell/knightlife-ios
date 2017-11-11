@@ -94,7 +94,12 @@ class ScheduleManager: Manager
 		self.lastTemplateFetch = result
 		self.scheduleTemplate = dayList
 	}
-	
+//
+//	func patchesListResponded(response: GetPatchesListResponse)
+//	{
+//
+//	}
+//
 	func patchesResponded(response: GetPatchesResponse)
 	{
 		let patchDate = EnscribedDate(raw: response.dayId)

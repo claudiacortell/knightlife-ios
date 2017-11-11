@@ -8,24 +8,26 @@
 
 import Foundation
 
-class SportsManager: DataManager<SportsPrefModule>
+class SportsManager: Manager
 {
 	static let instance = SportsManager()
 	
-	private(set) var userAdded: [SportTeam]
 	private(set) var meetings: [EnscribedDate: DailySportsList]
+	
+	var sportsPrefModule: SportsPrefModule
+	{
+		return self.getModule("addedTeams") as! SportsPrefModule
+	}
 	
 	init()
 	{
-		self.userAdded = []
 		self.meetings = [:]
 		
-		super.init(name: "Sports Manager", module: SportsPrefModule(self))
+		super.init(name: "Sports Manager")
 
-		self.loadDataModule()
-	}
-	
-	
+		self.registerModule(SportsPrefModule(self, name: "addedTeams")) // Register preference module
+        self.loadAllPrefHandlers()
+    }
 	
 	func retrieveMeetings(_ date: EnscribedDate = TimeUtils.todayEnscribed, onlyAdded: Bool = true) -> [SportsMeetingWrapper]
 	{
@@ -34,7 +36,7 @@ class SportsManager: DataManager<SportsPrefModule>
 		{
 			for (team, meeting) in sportsList.sports
 			{
-				if self.userAdded.contains(team)
+				if self.sportsPrefModule.containsItem(team)
 				{
 					let wrapper = SportsMeetingWrapper(team: team, date: date, duration: meeting.duration)
 					wrapperList.append(wrapper)

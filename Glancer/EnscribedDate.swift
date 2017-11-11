@@ -41,6 +41,26 @@ struct EnscribedDate
 
 extension EnscribedDate: Hashable
 {
+	static func <(lhs: EnscribedDate, rhs: EnscribedDate) -> Bool
+	{
+		
+	}
+	
+	static func <=(lhs: EnscribedDate, rhs: EnscribedDate) -> Bool
+	{
+		
+	}
+	
+	static func >(lhs: EnscribedDate, rhs: EnscribedDate) -> Bool
+	{
+		
+	}
+	
+	static func >=(lhs: EnscribedDate, rhs: EnscribedDate) -> Bool
+	{
+		
+	}
+	
 	static func ==(lhs: EnscribedDate, rhs: EnscribedDate) -> Bool
 	{
 		return

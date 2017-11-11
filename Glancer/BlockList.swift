@@ -15,6 +15,28 @@ struct BlockList
 
 extension BlockList: Equatable
 {
+	func hasBlock(id: BlockID) -> Bool
+	{
+		return getBlock(id: id) != nil
+	}
+	
+	func hasBlock(block: ScheduleBlock) -> Bool
+	{
+		return self.blocks.contains(block)
+	}
+	
+	func getBlock(id: BlockID) -> ScheduleBlock?
+	{
+		for block in self.blocks
+		{
+			if block.blockId == id
+			{
+				return block
+			}
+		}
+		return nil
+	}
+	
 	static func ==(lhs: BlockList, rhs: BlockList) -> Bool
 	{
 		if lhs.blocks.count != rhs.blocks.count

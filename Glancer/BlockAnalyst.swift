@@ -45,7 +45,7 @@ class BlockAnalyst
 		{
 			if let previous = block.analyst.getPreviousBlock() // If it's a lab return the previous block letter + L
 			{
-				return Utils.substring(previous.analyst.getDisplayLetter(), StartIndex: 0, EndIndex: 1) + "L" // Return the first two letters. This should only return the first letter if it's a 1 letter string.
+				return Utils.substring(previous.analyst.getDisplayLetter(), start: 0, distance: 1) + "L" // Return the first two letters. This should only return the first letter if it's a 1 letter string.
 			}
 		}
 		
@@ -75,7 +75,7 @@ class BlockAnalyst
 				}
 			}
 			
-			return Utils.substring(displayName, StartIndex: 0, EndIndex: 2)
+			return Utils.substring(displayName, start: 0, distance: 2)
 		}
 		
 		let id = self.block.blockId.rawValue // Return the first two letters. This should only return the first letter if it's a 1 letter string.
@@ -86,7 +86,7 @@ class BlockAnalyst
 		
 		if id.count > 2
 		{
-			return Utils.substring(id, StartIndex: 0, EndIndex: 2)
+			return Utils.substring(id, start: 0, distance: 2)
 		}
 		
 		return id
@@ -170,19 +170,21 @@ class BlockAnalyst
 	{
 		if isLastBlock() { return nil }
 		
-		if let blocks = ScheduleManager.instance.blockList(id: self.block.weekday)
-		{
-			var found = false // If the block has been found return the next one in series
-			for block in blocks
-			{
-				if found { return block }
-				if block == self.block { found = true } // Identify the current iterator block as this one.
-			}
-			return nil
-		} else
-		{
-			return nil
-		}
+//		if let blocks = ScheduleManager.instance.blockList(id: self.block.weekday)
+//		{
+//			var found = false // If the block has been found return the next one in series
+//			for block in blocks
+//			{
+//				if found { return block }
+//				if block == self.block { found = true } // Identify the current iterator block as this one.
+//			}
+//			return nil
+//		} else
+//		{
+//			return nil
+//		}
+
+		return nil
 	}
 	
 	func getPreviousBlock() -> Block?
@@ -192,21 +194,22 @@ class BlockAnalyst
 		
 		//		Debug.out("Not previous block")
 		
-		if let blocks = ScheduleManager.instance.blockList(id: self.block.weekday)
-		{
-			//			Debug.out("Block list")
-			
-			var found = false // If the block has been found return the next one in series
-			for block in blocks.reversed()
-			{
-				if found { return block  }
-				if block == self.block { found = true } // Identify the current iterator block as this one.
-			}
-			return nil
-		} else
-		{
-			return nil
-		}
+//		if let blocks = ScheduleManager.instance.blockList(id: self.block.weekday)
+//		{
+//			//			Debug.out("Block list")
+//
+//			var found = false // If the block has been found return the next one in series
+//			for block in blocks.reversed()
+//			{
+//				if found { return block  }
+//				if block == self.block { found = true } // Identify the current iterator block as this one.
+//			}
+//			return nil
+//		} else
+//		{
+//			return nil
+//		}
+		return nil
 	}
 	
 	func hasPassed() -> Bool

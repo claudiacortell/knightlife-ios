@@ -27,11 +27,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate
             application.registerForRemoteNotifications()
         }
 		
-		_ = UserPrefsManager.instance
-		_ = ScheduleManager.instance
-		_ = NotificationsManager.instance
+//		_ = UserPrefsManager.instance
+//		_ = ScheduleManager.instance
+//		_ = NotificationsManager.instance
 		
-		ScheduleManager.instance.loadBlocks()
+//		ScheduleManager.instance.loadBlocks()
 		
         return true
     }
@@ -106,10 +106,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate
             
             if (message == "Auto-Updating...")
 			{
-                if (ScheduleManager.instance.loadBlocks())
-				{
-                    completionHandler(UIBackgroundFetchResult.newData)
-                }
+//                if (ScheduleManager.instance.loadBlocks())
+//				{
+//                    completionHandler(UIBackgroundFetchResult.newData)
+//                }
             }
         }
     }
@@ -143,12 +143,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void)
 	{
-        if (ScheduleManager.instance.loadBlocks())
-		{
-            completionHandler(.newData)
-        } else
-		{
-            completionHandler(.failed)
-        }
+//        if (ScheduleManager.instance.loadBlocks())
+//		{
+//            completionHandler(.newData)
+//        } else
+//		{
+//            completionHandler(.failed)
+//        }
     }
 }

@@ -8,14 +8,21 @@
 
 import Foundation
 
-class Module<ModuleManager: Manager>
-{
-	let manager: ModuleManager
-	let name: String
+class Module<ModuleManager: Manager>: IModule
+{	
+	private(set) var nameAbs: String
 	
-	init(manager: ModuleManager, name: String)
+	let manager: ModuleManager
+	var nameComplete: String { return "\(manager.name)-\(nameAbs)" }
+	
+	init(_ manager: ModuleManager, name: String)
 	{
 		self.manager = manager
-		self.name = name
+		self.nameAbs = name
 	}
+    
+    func out(_ text: String)
+    {
+        self.manager.out("\(self.nameAbs) - \(text)")
+    }
 }

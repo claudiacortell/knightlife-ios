@@ -12,12 +12,15 @@ enum MeetingFrequency
 {
     case
     everyDay,
-    specificDays
+    specificDays,
+	oneTime
 }
 
 struct MeetingSchedule
 {
-    var frequency: MeetingFrequency
     var block: BlockID
-    var meetingDays: [DayID]
+	var frequency: MeetingFrequency
+	
+    var meetingDays: [DayID] // Only used for specific day meetings
+	var meetingDate: EnscribedDate // Only used for oneTime meetings.
 }

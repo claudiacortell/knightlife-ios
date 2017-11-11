@@ -13,21 +13,21 @@ class PrefsOverlord // All hail
 	static let instance = PrefsOverlord()
 	private let defaults = UserDefaults.standard
 	
-	func save<M: PrefsModule>(_ module: M)
+    private init()
+    {
+        
+    }
+    
+	func saveMod(_ module: PreferenceHandler)
 	{
-		defaults.set(module.getStorageValues(), forKey: key(module))
+		defaults.set(module.getStorageValues(), forKey: module.storageKey)
 	}
 	
-	func load<M: PrefsModule>(_ module: M)
+	func loadMod(_ module: PreferenceHandler)
 	{
-		if let object = defaults.object(forKey: key(module))
+		if let object = defaults.object(forKey: module.storageKey)
 		{
 			module.readStorageValues(data: object)
 		}
-	}
-	
-	private func key<M: PrefsModule>(_ module: M) -> String
-	{
-		return "\(module.manager.name).\(module.storageKey)"
 	}
 }
