@@ -16,8 +16,8 @@ enum DayID: String // DO NOT EVER CHANGE ANYTHING IN THIS CLASS I SWEAR TO GOD I
 	wednesday = "W",
 	thursday = "Th",
 	friday = "F",
-	saturday = "Sat",
-	sunday = "Sun"
+	saturday = "Sa",
+	sunday = "Su"
 	
 	var displayName: String
 	{

@@ -17,22 +17,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 	{
         UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
                 
-        // register for Push Notitications, if running iOS 8
-        if application.responds(to: #selector(UIApplication.registerUserNotificationSettings(_:)))
-		{
-            let types: UIUserNotificationType = ([.alert, .badge, .sound])
-            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: types, categories: nil)
-            
-            application.registerUserNotificationSettings(settings)
-            application.registerForRemoteNotifications()
-        }
+//        if application.responds(to: #selector(UIApplication.registerUserNotificationSettings(_:)))
+//		{
+//            let types: UIUserNotificationType = ([.alert, .badge, .sound])
+//            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: types, categories: nil)
+//
+//            application.registerUserNotificationSettings(settings)
+//            application.registerForRemoteNotifications()
+//        }
 		
-//		_ = UserPrefsManager.instance
-//		_ = ScheduleManager.instance
-//		_ = NotificationsManager.instance
+		ScheduleManager.instance.retrieveBlockList(date: EnscribedDate(raw: "2017-11-13"), execute: { response in
+
+		})
+//		print(result.response)
 		
-//		ScheduleManager.instance.loadBlocks()
-		
+
         return true
     }
 	

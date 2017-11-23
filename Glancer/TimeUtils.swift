@@ -44,11 +44,11 @@ class TimeUtils
 	{
 		var success = true
 
-		let dayString = Utils.substring(raw, start: 0, distance: 2)
-		let monthString = Utils.substring(raw, start: 2, distance: 2)
-		let yearString = Utils.substring(raw, start: 4, distance: 4)
+		let yearString = Utils.substring(raw, start: 0, distance: 4)
+		let monthString = Utils.substring(raw, start: 5, distance: 2)
+		let dayString = Utils.substring(raw, start: 8, distance: 2)
 		
-		if (dayString.count != 2 && dayString.count != 1) || (monthString.count != 2 || monthString.count != 1) || yearString.count != 4
+		if dayString.count != 2 || monthString.count != 2 || yearString.count != 4
 		{
 			success = false
 		}
@@ -67,7 +67,7 @@ class TimeUtils
 			return (year: -1, month: -1, day: -1)
 		}
 		
-		return (year: year! % 1, month: month! % 1, day: day! % 1)
+		return (year: year!, month: month!, day: day!)
 	}
 	
 	static func unwrapRawTime(raw: String) -> (hour: Int, minute: Int)

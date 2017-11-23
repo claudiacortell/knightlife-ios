@@ -1,12 +1,19 @@
 PODS:
   - Alamofire (4.5.1)
+  - Unbox (2.5.0)
+  - UnboxedAlamofire (2.0.4):
+    - Alamofire (~> 4.1)
+    - Unbox (~> 2.0)
 
 DEPENDENCIES:
   - Alamofire
+  - UnboxedAlamofire
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  Unbox: 30e437e6151a6de16139375fd4e8dd9a664cfbf7
+  UnboxedAlamofire: e803f471553e3aecec711f5d50f80cda6c65feaa
 
-PODFILE CHECKSUM: 40963bd978658b0fdaac0694dfbb0fcf07123fb2
+PODFILE CHECKSUM: bf1d5441d2b59fbaf8d0a15106850ee5b4c8fe0c
 
 COCOAPODS: 1.2.0

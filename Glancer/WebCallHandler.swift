@@ -7,8 +7,16 @@
 //
 
 import Foundation
+import Unbox
 
-class WebCallHandler<DataContainer>
+class WebCallHandler<WebCallManager: Manager, DataContainer: WebCallResult, Result>
 {
-	func handleCall(url: String, call: String, completeCall: String, success: Bool, error: String?, data: DataContainer?) {  }
+	let manager: WebCallManager
+	
+	init(manager: WebCallManager)
+	{
+		self.manager = manager
+	}
+	
+	func handleCall(url: String, call: String, completeCall: String, success: Bool, error: String?, data: Result?) { }
 }

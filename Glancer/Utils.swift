@@ -53,7 +53,7 @@ class Utils
 	
 	static func getUIColorFromHex (_ hex: String) -> UIColor
 	{
-		let cString = Utils.substring(hex, StartIndex: 0, EndIndex: 6)
+		let cString = Utils.substring(hex, start: 0, distance: 6)
 		
 		var rgbValue:UInt32 = 0
 		Scanner(string: cString).scanHexInt32(&rgbValue)
@@ -68,18 +68,9 @@ class Utils
 	
 	static func substring(_ string: String, start: Int, distance: Int) -> String
 	{
-		var count = 0
-		var subString = ""
-		
-		for char in string.characters
-		{
-			if (start <= count && count < distance)
-			{
-				subString += String(char)
-			}
-			count += 1
-		}
-		
-		return subString
+        let startIndex = string.index(string.startIndex, offsetBy: start)
+        let endIndex = string.index(startIndex, offsetBy: distance)
+        
+        return String(string[startIndex..<endIndex])
 	}
 }

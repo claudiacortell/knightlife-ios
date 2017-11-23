@@ -41,26 +41,6 @@ struct EnscribedDate
 
 extension EnscribedDate: Hashable
 {
-	static func <(lhs: EnscribedDate, rhs: EnscribedDate) -> Bool
-	{
-		
-	}
-	
-	static func <=(lhs: EnscribedDate, rhs: EnscribedDate) -> Bool
-	{
-		
-	}
-	
-	static func >(lhs: EnscribedDate, rhs: EnscribedDate) -> Bool
-	{
-		
-	}
-	
-	static func >=(lhs: EnscribedDate, rhs: EnscribedDate) -> Bool
-	{
-		
-	}
-	
 	static func ==(lhs: EnscribedDate, rhs: EnscribedDate) -> Bool
 	{
 		return
@@ -77,5 +57,13 @@ extension EnscribedDate: Hashable
 	func toDate() -> Date?
 	{
 		return TimeUtils.dateFromEnscribedDate(self)
+	}
+	
+	func toString() -> String
+	{
+		let month = self.month < 10 ? "0\(self.month)" : String(self.month)
+		let day = self.day < 10 ? "0\(self.day)" : String(self.day)
+		
+		return "\(self.year)-\(month)-\(day)"
 	}
 }

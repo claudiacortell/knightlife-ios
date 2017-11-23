@@ -1,5 +1,5 @@
 //
-//  ScheduleManage.swift
+//  ScheduleManager.swift
 //  Glancer
 //
 //  Created by Dylan Hanson on 11/3/17.
@@ -9,134 +9,122 @@
 import Foundation
 
 class ScheduleManager: Manager
-{
+{	
 	static let instance = ScheduleManager()
 	
-	var scheduleTemplate: [DayID: BlockList]
-	var schedulePatches: [EnscribedDate: BlockList]
+	var templateStatus: FetchContainer<[DayID: DaySchedule]> = FetchContainer(fetch: ResourceFetchToken(.none))
+	var scheduleTemplate: [DayID: DaySchedule]
+
+	var schedulePatches: [EnscribedDate: DaySchedule]
 	
-	var lastTemplateFetch: CallResult? = nil
-	var lastPatchFetch: CallResult? = nil
+	var associatedSchedules: [EnscribedDate: DaySchedule] // Used for quick reference.
 	
 	init()
 	{
 		self.scheduleTemplate = [:]
 		self.schedulePatches = [:]
 		
+		self.associatedSchedules = [:]
+		
 		super.init(name: "Schedule Manager")
 	}
 	
-	func retrieveBlockList(date: EnscribedDate = TimeUtils.todayEnscribed) -> BlockList?
+	func reloadScheduleTemplate()
 	{
+		getTemplateCall().execute()
+	}
+	
+	private func getTemplateCall() -> GetScheduleWebCall
+	{
+		let curFetch = ResourceFetchToken(.localFetch)
+		self.templateStatus = FetchContainer<[DayID: DaySchedule]>(fetch: curFetch)
+		
+		self.callEvent(ScheduleTemplateAttemptLoadEvent())
+
+		return GetScheduleWebCall(self, fetchToken: curFetch, callback: { fetch in
+			if fetch.hasData && fetch.result == .success // Successful fetch
+			{
+				self.scheduleTemplate = fetch.data!
+				self.templateStatus.setResult(ResourceFetch(curFetch, .success, fetch.data!))
+				
+				self.callEvent(ScheduleTemplateLoadEvent(successful: true))
+			} else
+			{
+				self.scheduleTemplate = [:] // Clear data.
+				self.templateStatus.setResult(ResourceFetch(curFetch, .failure, nil))
+				
+				self.callEvent(ScheduleTemplateLoadEvent(successful: false))
+			}
+		})
+	}
+	
+	@discardableResult
+	func retrieveBlockList(hard: Bool = false, date: EnscribedDate = TimeUtils.todayEnscribed, execute: @escaping (ResourceFetch<DaySchedule>) -> Void = {fetch in}) -> ResourceFetchToken
+	{
+		if !hard && self.associatedSchedules[date] != nil
+		{
+			let schedule = self.associatedSchedules[date]!
+			let fetchToken = ResourceFetchToken(.localFetch)
+			let fetch = ResourceFetch(fetchToken, .success, schedule)
+			execute(fetch)
+			return fetchToken
+		}
+		
 		// Search for patches
 		if let patchBlockList = schedulePatches[date]
 		{
-			return patchBlockList
+			let fetchToken = ResourceFetchToken(.localFetch)
+			let fetch = ResourceFetch(fetchToken, .success, patchBlockList)
+			self.associatedSchedules[date] = patchBlockList
+			
+			execute(fetch)
+			return fetchToken // If we have a locally downloaded patch, return it.
 		}
 		
-		// Get the loaded template for its day ID.
-		if let day = TimeUtils.getDayOfWeek(date)
-		{
-			return scheduleTemplate[day]
-		}
-		return nil
-	}
-	
-	func templateResponded(response: GetScheduleResponse)
-	{
-		var result: CallResult = .success
+		self.callEvent(SchedulePatchAttemptLoadEvent(date: date))
 		
-		var dayList: [DayID: BlockList] = [:]
-		for day in response.days
-		{
-			if let dayId = DayID.fromRaw(raw: day.dayId)
+		let fetchToken = ResourceFetchToken(.remoteFetch)
+		let patchCall = GetPatchWebCall(self, day: date, fetchToken: fetchToken, callback: { fetch in
+			if fetch.result != .success // No patches retrieved.
 			{
-				var blockList: [ScheduleBlock] = []
-				for block in day.blocks
+				let event = SchedulePatchLoadEvent(successful: false, date: date, patch: nil)
+				if let dayId = TimeUtils.getDayOfWeek(date), let templateSchedule = self.scheduleTemplate[dayId]
 				{
-					if let blockId = BlockID.fromRaw(raw: block.blockId)
-					{
-						let startTime = EnscribedTime(raw: block.startTime)
-						let endTime = EnscribedTime(raw: block.endTime)
-						
-						if !startTime.valid || !endTime.valid || startTime.toDate() == nil || endTime.toDate() == nil
-						{
-							out("Recieved an invalid start/end time: \(block.startTime), \(block.endTime)")
-							result = .error
-						} else
-						{
-							let scheduleBlock = ScheduleBlock(blockId: blockId, time: TimeDuration(startTime: startTime, endTime: endTime))
-							blockList.append(scheduleBlock)
-						}
-					} else
-					{
-						out("Recieved an invalid block id: \(block.blockId)")
-						result = .error
-					}
-				}
-				
-				if dayList[dayId] != nil
-				{
-					out("Already set information for day: \(dayId.rawValue)")
-					result = .error
-				} else
-				{
-					let blocks = BlockList(blocks: blockList)
-					dayList[dayId] = blocks
-				}
-			} else
-			{
-				out("Recieved an invalid day id: \(day.dayId)")
-				result = .error
-			}
-		}
-		
-		self.lastTemplateFetch = result
-		self.scheduleTemplate = dayList
-	}
-//
-//	func patchesListResponded(response: GetPatchesListResponse)
-//	{
-//
-//	}
-//
-	func patchesResponded(response: GetPatchesResponse)
-	{
-		let patchDate = EnscribedDate(raw: response.dayId)
-		if patchDate.valid && patchDate.toDate() != nil
-		{
-			var result: CallResult = .success
-
-			var blockList: [ScheduleBlock] = []
-			for block in response.blocks
-			{
-				if let blockId = BlockID.fromRaw(raw: block.blockId)
-				{
-					let startTime = EnscribedTime(raw: block.startTime)
-					let endTime = EnscribedTime(raw: block.endTime)
+					self.associatedSchedules[date] = templateSchedule
+					execute(ResourceFetch(fetchToken, .success, templateSchedule))
 					
-					if !startTime.valid || !endTime.valid || startTime.toDate() == nil || endTime.toDate() == nil
-					{
-						out("Recieved an invalid start/end time: \(block.startTime), \(block.endTime)")
-						result = .error
-					} else
-					{
-						let scheduleBlock = ScheduleBlock(blockId: blockId, time: TimeDuration(startTime: startTime, endTime: endTime))
-						blockList.append(scheduleBlock)
-					}
-				} else
-				{
-					out("Recieved an invalid block id: \(block.blockId)")
-					result = .error
+					self.callEvent(event)
+					return
 				}
+				print("Failed to load patches, no template schedule found.")
+				execute(ResourceFetch(fetchToken, .failure, nil))
+				
+				self.callEvent(event)
+				return
+			} else if fetch.hasData // Succesful w/ Data
+			{
+				self.schedulePatches[date] = fetch.data!
+				self.associatedSchedules[date] = fetch.data!
+				execute(fetch)
+				
+				self.callEvent(SchedulePatchLoadEvent(successful: true, date: date, patch: fetch.data!))
+				return
 			}
 			
-			self.schedulePatches[patchDate] = BlockList(blocks: blockList)
-			self.lastPatchFetch = result
+			execute(ResourceFetch(fetchToken, .failure, nil))
+			self.callEvent(SchedulePatchLoadEvent(successful: false, date: date, patch: nil))
+		})
+		
+		if !self.templateStatus.successful // If there is no status or the previous fetch failed
+		{
+			let templateCall = self.getTemplateCall()
+			templateCall.next(patchCall)
+			templateCall.execute()
 		} else
 		{
-			out("Recieved an invalid date: \(response.dayId)")
-			self.lastPatchFetch = .failure
+			patchCall.execute()
 		}
+		
+		return fetchToken
 	}
 }

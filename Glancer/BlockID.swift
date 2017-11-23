@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum BlockID: String // Don't touch this either for good measure unless like we add more blocks or something
+enum BlockID: String
 {
 	case
 	a = "A",
@@ -19,6 +19,7 @@ enum BlockID: String // Don't touch this either for good measure unless like we 
 	f = "F",
 	g = "G",
 	x = "X",
+    lunch = "Lunch",
 	activities = "Activities",
 	lab = "Lab",
 	custom = "Custom"
@@ -52,7 +53,7 @@ enum BlockID: String // Don't touch this either for good measure unless like we 
 		return nil
 	}
 	
-	static func values() -> [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x, .custom, .activities, .lab] }
-	static func regularBlocks() -> [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x] }
+	static func values() -> [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x, .custom, .activities, .lab, .lunch] }
+	static func regularBlocks() -> [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x, .lunch] }
 	static func academicBlocks() -> [BlockID] { return [.a, .b, .c, .d, .e, .f, .g] }
 }

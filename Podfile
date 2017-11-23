@@ -10,5 +10,6 @@ target 'Glancer' do
   # Pods for Glancer
 #  pod 'Parse'
   pod 'Alamofire'
+  pod 'UnboxedAlamofire'
 
 end
