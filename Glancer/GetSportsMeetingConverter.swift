@@ -12,6 +12,8 @@ class GetSportsMeetingConverter: WebCallResultConverter<SportsManager, GetSports
 {
 	override func convert(_ data: GetSportsMeetingResponse) -> SportMeeting?
 	{
+		
+		
 		return nil
 	}
 }

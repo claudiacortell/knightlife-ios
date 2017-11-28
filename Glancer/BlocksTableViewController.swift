@@ -11,55 +11,18 @@ import UIKit
 
 class BlocksTableViewController: UITableViewController, ITable
 {
-	var storyboardContainer: TableContainer?
-	var date: EnscribedDate?
-	{
-		didSet
-		{
-//			self.generateContainer() // Generate container when the current date is changed.
-		}
-	}
+	var storyboardContainer: TableContainer!
+	var date: EnscribedDate = TimeUtils.todayEnscribed
+	var daySchedule: DaySchedule!
 	
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
+		navigationController!.navigationBar.prefersLargeTitles = true
+
+		self.storyboardContainer = TableContainer()
 		
-		self.date = TimeUtils.todayEnscribed
-	}
-	
-	func generateContainer()
-	{
-//		var container = TableContainer()
-//
-//        if self.date != nil
-//        {
-//            if let blocks = ScheduleManager.instance.retrieveBlockList(date: self.date!)
-//            {
-//                var section = TableSection()
-//
-//                if blocks.blocks.isEmpty
-//                {
-//
-//                } else
-//                {
-//                    for block in blocks.blocks
-//                    {
-//                        section.cells.append(TableCell(reuseId: "", id: block.hashValue))
-//                    }
-//                }
-//                container.sections.append(section)
-//            }
-//
-//            var sportsSection = TableSection()
-//            sportsSection.title = "Sports"
-//
-//            for sport in SportsManager.instance.retrieveMeetings(self.date!)
-//            {
-//
-//            }
-//            container.sections.append(sportsSection)
-//        }
-//		self.storyboardContainer = container
+		self.reload()
 	}
 	
 	override func viewWillAppear(_ animated: Bool)
@@ -67,47 +30,89 @@ class BlocksTableViewController: UITableViewController, ITable
 		super.viewWillAppear(animated)
 	}
 	
+	private func reload(_ hard: Bool = false)
+	{
+		self.showLoadingSymbol(true)
+		ScheduleManager.instance.retrieveBlockList(hard: hard, date: self.date, execute:
+			{ fetch in
+				self.scheduleDidLoad(fetch.data != nil, schedule: fetch.data)
+		})
+	}
+	
+	private func scheduleDidLoad(_ success: Bool, schedule: DaySchedule?)
+	{
+		if success
+		{
+			self.daySchedule = nil
+			self.daySchedule = schedule!
+			
+			self.generateContainer()
+			
+			self.showLoadingSymbol(false)
+			self.tableView.reloadData()
+		} else
+		{
+			//			Display error message
+		}
+	}
+	
+	func generateContainer()
+	{
+		var container = TableContainer()
+
+		var blockSection = TableSection() // Blocks
+		blockSection.title = "Blocks"
+		blockSection.cells.append(TableCell(reuseId: "cell_header", id: 0))
+		
+		for block in self.daySchedule.blocks
+		{
+			blockSection.cells.append(TableCell(reuseId: "cell_class", id: block.hashValue))
+		}
+		
+		container.sections.append(blockSection)
+		
+		self.storyboardContainer = nil
+		self.storyboardContainer = container
+	}
+	
+	private func showLoadingSymbol(_ val: Bool)
+	{
+		//		TODO: This
+	}
+	
 	override func numberOfSections(in tableView: UITableView) -> Int
 	{
-        if let count = self.storyboardContainer?.sections.count
-        {
-            return count
-        }
-        return -1
+		return self.storyboardContainer.sectionCount
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
-        if let count = self.storyboardContainer?.getSection(id: section)?.cellCount
-        {
-            return count
-        }
-        return -1
+		if let section = self.storyboardContainer.getSection(section)
+		{
+			return section.cellCount
+		}
+        return 0
     }
 	
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-//    {
-//
-//    }
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+		let template = self.storyboardContainer.getSection(indexPath.section)!.getCell(indexPath.row)!
+		return self.tableView.dequeueReusableCell(withIdentifier: template.reuseId)!
+    }
 	
-	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+	override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
 	{
-        if let title = self.storyboardContainer?.getSection(id: section)?.title
-        {
-            return title
-        }
-        return nil
-    }
-	
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-//    {
-//        if let cell = self.storyboardContainer?.getSection(id: indexPath.section)?.getCell(id: indexPath.row)
-//        {
-//            if let val = self.tableView.dequeueReusableCell(withIdentifier: cell.reuseId)
-//            {
-//                return val
-//            }
-//        }
-////        Blank cell
-//    }
+		if let classCell = cell as? BlockTableClassViewCell, let tableCell = self.storyboardContainer.getSection(indexPath.section)?.getCell(indexPath.row)
+		{
+			if let block = self.daySchedule.getBlockByHash(tableCell.id)
+			{
+				classCell.block = block.blockId
+				classCell.className = "Class!!!!"
+				classCell.startTime = block.time.startTime
+				classCell.endTime = block.time.endTime
+				classCell.homework = "No Homework my dude"
+				classCell.more = false
+			}
+		}
+	}
 }

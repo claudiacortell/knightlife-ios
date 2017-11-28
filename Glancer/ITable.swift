@@ -10,6 +10,6 @@ import Foundation
 
 protocol ITable
 {
-	var storyboardContainer: TableContainer? { get set }
+	var storyboardContainer: TableContainer! { get set }
 	func generateContainer()
 }

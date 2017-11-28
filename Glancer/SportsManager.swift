@@ -26,25 +26,24 @@ class SportsManager: Manager
 		super.init(name: "Sports Manager")
 
 		self.registerModule(SportsPrefModule(self, name: "addedTeams")) // Register preference module
-        self.loadAllPrefHandlers()
     }
 	
-	func retrieveMeetings(_ date: EnscribedDate = TimeUtils.todayEnscribed, onlyAdded: Bool = true) -> [SportsMeetingWrapper]
-	{
-		var wrapperList: [SportsMeetingWrapper] = []
-		if let sportsList = self.meetings[date]
-		{
-			for (team, meeting) in sportsList.sports
-			{
-				if self.sportsPrefModule.containsItem(team)
-				{
-					let wrapper = SportsMeetingWrapper(team: team, date: date, duration: meeting.duration)
-					wrapperList.append(wrapper)
-				}
-			}
-		}
-		return wrapperList
-	}
+//	func retrieveMeetings(_ date: EnscribedDate = TimeUtils.todayEnscribed, onlyAdded: Bool = true) -> [SportsMeetingWrapper]
+//	{
+//		var wrapperList: [SportsMeetingWrapper] = []
+//		if let sportsList = self.meetings[date]
+//		{
+//			for (team, meeting) in sportsList.sports
+//			{
+//				if self.sportsPrefModule.containsItem(team)
+//				{
+//					let wrapper = SportsMeetingWrapper(team: team, date: date, duration: meeting.duration)
+//					wrapperList.append(wrapper)
+//				}
+//			}
+//		}
+//		return wrapperList
+//	}
 	
 	func getTeamById(id: Int) -> SportTeam?
 	{

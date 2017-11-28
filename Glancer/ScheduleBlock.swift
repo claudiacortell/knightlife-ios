@@ -26,6 +26,11 @@ extension ScheduleBlock: Equatable
 	
 	var hashValue: Int
 	{
-		return self.blockId.hashValue ^ self.time.hashValue
+		var id = self.blockId.hashValue ^ self.time.hashValue
+		if self.variation != nil
+		{
+			id ^= self.variation!
+		}
+		return id
 	}
 }

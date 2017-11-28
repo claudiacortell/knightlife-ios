@@ -49,9 +49,14 @@ class Manager: EventHandler
 		
 	}
 	
-    func registerModule(_ module: IModule)
+	func registerModule(_ module: IModule, registerPrefs: Bool = true)
 	{
 		self.modules[module.nameAbs] = module
+		
+		if registerPrefs && module is PreferenceHandler
+		{
+			self.loadPrefsHandler(handler: module as! PreferenceHandler)
+		}
 	}
 	
 	func hasModule(_ name: String) -> Bool

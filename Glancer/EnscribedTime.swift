@@ -54,4 +54,10 @@ extension EnscribedTime: Hashable
 	{
 		return TimeUtils.dateFromEnscribed(enscribedDate: enscribedDate, enscribedTime: self)
 	}
+	
+	func toString() -> String
+	{
+		let hour = self.hour > 12 ? self.hour % 12 + 1 : self.hour
+		return "\(hour):\(minute)"
+	}
 }

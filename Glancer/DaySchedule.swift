@@ -15,6 +15,18 @@ struct DaySchedule
 
 extension DaySchedule: Equatable
 {
+	func getBlockByHash(_ hash: Int) -> ScheduleBlock?
+	{
+		for block in self.blocks
+		{
+			if block.hashValue == hash
+			{
+				return block
+			}
+		}
+		return nil
+	}
+	
 	func hasBlock(id: BlockID) -> Bool
 	{
 		return getBlock(id: id) != nil

@@ -18,7 +18,7 @@ struct TableSection
 
 extension TableSection
 {
-    func getCell(id: Int) -> TableCell?
+    func getCell(_ id: Int) -> TableCell?
     {
         return self.cells[id]
     }

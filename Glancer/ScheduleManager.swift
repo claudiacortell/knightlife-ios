@@ -71,7 +71,7 @@ class ScheduleManager: Manager
 		}
 		
 		// Search for patches
-		if let patchBlockList = schedulePatches[date]
+		if !hard, let patchBlockList = schedulePatches[date]
 		{
 			let fetchToken = ResourceFetchToken(.localFetch)
 			let fetch = ResourceFetch(fetchToken, .success, patchBlockList)

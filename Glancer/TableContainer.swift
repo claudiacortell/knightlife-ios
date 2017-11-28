@@ -16,7 +16,7 @@ struct TableContainer
 
 extension TableContainer
 {
-    func getSection(id: Int) -> TableSection?
+    func getSection(_ id: Int) -> TableSection?
     {
         return self.sections[id]
     }

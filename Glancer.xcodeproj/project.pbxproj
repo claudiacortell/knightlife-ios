@@ -24,6 +24,7 @@
 		C018671C1FC73CEC002027B8 /* SchedulePatchLoadEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C018671B1FC73CEC002027B8 /* SchedulePatchLoadEvent.swift */; };
 		C018671E1FC7412D002027B8 /* ScheduleTemplateAttemptLoadEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C018671D1FC7412D002027B8 /* ScheduleTemplateAttemptLoadEvent.swift */; };
 		C01867201FC74168002027B8 /* SchedulePatchAttemptLoadEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C018671F1FC74168002027B8 /* SchedulePatchAttemptLoadEvent.swift */; };
+		C01867241FC7A82F002027B8 /* EXT_UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01867231FC7A82F002027B8 /* EXT_UIView.swift */; };
 		C019C1611F7D3CED00FC4EED /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C019C1601F7D3CED00FC4EED /* Launch.storyboard */; };
 		C020061E1FA904380050F864 /* UserPrefsUpdateEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C020061D1FA904380050F864 /* UserPrefsUpdateEvent.swift */; };
 		C02006201FA904B10050F864 /* BlockMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = C020061F1FA904B10050F864 /* BlockMeta.swift */; };
@@ -67,7 +68,7 @@
 		C07463321FAFA93100D183E7 /* TableContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07463311FAFA93100D183E7 /* TableContainer.swift */; };
 		C07463341FAFAAC300D183E7 /* ITable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07463331FAFAAC300D183E7 /* ITable.swift */; };
 		C079C2311FACA9CB009067DE /* BlocksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C079C2301FACA9CB009067DE /* BlocksTableViewController.swift */; };
-		C079C2341FACABB7009067DE /* BlockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C079C2331FACABB7009067DE /* BlockTableViewCell.swift */; };
+		C079C2341FACABB7009067DE /* BlockTableClassViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C079C2331FACABB7009067DE /* BlockTableClassViewCell.swift */; };
 		C09343431FAA1A4800629A84 /* ScheduleUpdatedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09343421FAA1A4800629A84 /* ScheduleUpdatedEvent.swift */; };
 		C09343471FAA1B3C00629A84 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09343461FAA1B3C00629A84 /* Block.swift */; };
 		C09343491FAA1B5E00629A84 /* TimeContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09343481FAA1B5E00629A84 /* TimeContainer.swift */; };
@@ -85,7 +86,6 @@
 		C0C1765B1FAA60C10059E956 /* SportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1765A1FAA60C10059E956 /* SportType.swift */; };
 		C0C1765E1FAA61000059E956 /* TimeDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1765D1FAA61000059E956 /* TimeDuration.swift */; };
 		C0C176601FAA61AE0059E956 /* EnscribedTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1765F1FAA61AE0059E956 /* EnscribedTime.swift */; };
-		C0C7767F1FACAD3C003EE125 /* BlocksActivityTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C7767E1FACAD3C003EE125 /* BlocksActivityTableController.swift */; };
 		C0C776841FACDDB6003EE125 /* EnscribedDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C776831FACDDB6003EE125 /* EnscribedDate.swift */; };
 		C0C776861FACDE89003EE125 /* TimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C776851FACDE89003EE125 /* TimeUtils.swift */; };
 /* End PBXBuildFile section */
@@ -126,6 +126,7 @@
 		C018671B1FC73CEC002027B8 /* SchedulePatchLoadEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePatchLoadEvent.swift; sourceTree = "<group>"; };
 		C018671D1FC7412D002027B8 /* ScheduleTemplateAttemptLoadEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTemplateAttemptLoadEvent.swift; sourceTree = "<group>"; };
 		C018671F1FC74168002027B8 /* SchedulePatchAttemptLoadEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePatchAttemptLoadEvent.swift; sourceTree = "<group>"; };
+		C01867231FC7A82F002027B8 /* EXT_UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EXT_UIView.swift; sourceTree = "<group>"; };
 		C019C1601F7D3CED00FC4EED /* Launch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
 		C020061D1FA904380050F864 /* UserPrefsUpdateEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPrefsUpdateEvent.swift; sourceTree = "<group>"; };
 		C020061F1FA904B10050F864 /* BlockMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockMeta.swift; sourceTree = "<group>"; };
@@ -169,7 +170,7 @@
 		C07463311FAFA93100D183E7 /* TableContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableContainer.swift; sourceTree = "<group>"; };
 		C07463331FAFAAC300D183E7 /* ITable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITable.swift; sourceTree = "<group>"; };
 		C079C2301FACA9CB009067DE /* BlocksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocksTableViewController.swift; sourceTree = "<group>"; };
-		C079C2331FACABB7009067DE /* BlockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTableViewCell.swift; sourceTree = "<group>"; };
+		C079C2331FACABB7009067DE /* BlockTableClassViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTableClassViewCell.swift; sourceTree = "<group>"; };
 		C09343421FAA1A4800629A84 /* ScheduleUpdatedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleUpdatedEvent.swift; sourceTree = "<group>"; };
 		C09343461FAA1B3C00629A84 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		C09343481FAA1B5E00629A84 /* TimeContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeContainer.swift; sourceTree = "<group>"; };
@@ -187,7 +188,6 @@
 		C0C1765A1FAA60C10059E956 /* SportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportType.swift; sourceTree = "<group>"; };
 		C0C1765D1FAA61000059E956 /* TimeDuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDuration.swift; sourceTree = "<group>"; };
 		C0C1765F1FAA61AE0059E956 /* EnscribedTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnscribedTime.swift; sourceTree = "<group>"; };
-		C0C7767E1FACAD3C003EE125 /* BlocksActivityTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocksActivityTableController.swift; sourceTree = "<group>"; };
 		C0C776831FACDDB6003EE125 /* EnscribedDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnscribedDate.swift; sourceTree = "<group>"; };
 		C0C776851FACDE89003EE125 /* TimeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -292,8 +292,6 @@
 		C00232971FA34B290019D328 /* Management */ = {
 			isa = PBXGroup;
 			children = (
-				5BD072471C74AEB40074B56D /* Main.storyboard */,
-				C019C1601F7D3CED00FC4EED /* Launch.storyboard */,
 				C01867211FC75EFE002027B8 /* Storyboard */,
 				C04937B91FB408980036C890 /* Module */,
 				C0C776801FACB090003EE125 /* Schedule */,
@@ -361,9 +359,19 @@
 		C01867211FC75EFE002027B8 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
+				5BD072471C74AEB40074B56D /* Main.storyboard */,
+				C019C1601F7D3CED00FC4EED /* Launch.storyboard */,
 				C079C22F1FACA97D009067DE /* Controllers */,
 			);
 			name = Storyboard;
+			sourceTree = "<group>";
+		};
+		C01867221FC7A81F002027B8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C01867231FC7A82F002027B8 /* EXT_UIView.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		C01A25761FB7E7D900026BEF /* Table */ = {
@@ -516,18 +524,10 @@
 			name = Team;
 			sourceTree = "<group>";
 		};
-		C074632C1FAFA87700D183E7 /* Form */ = {
-			isa = PBXGroup;
-			children = (
-				C01A25761FB7E7D900026BEF /* Table */,
-			);
-			name = Form;
-			sourceTree = "<group>";
-		};
 		C079C22E1FACA96F009067DE /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
-				C074632C1FAFA87700D183E7 /* Form */,
+				C01A25761FB7E7D900026BEF /* Table */,
 			);
 			name = Storyboard;
 			sourceTree = "<group>";
@@ -535,19 +535,18 @@
 		C079C22F1FACA97D009067DE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C079C2321FACAB82009067DE /* Main */,
+				C079C2321FACAB82009067DE /* BlocksList */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		C079C2321FACAB82009067DE /* Main */ = {
+		C079C2321FACAB82009067DE /* BlocksList */ = {
 			isa = PBXGroup;
 			children = (
-				C0C7767D1FACAD1A003EE125 /* Activities */,
 				C079C2301FACA9CB009067DE /* BlocksTableViewController.swift */,
-				C079C2331FACABB7009067DE /* BlockTableViewCell.swift */,
+				C079C2331FACABB7009067DE /* BlockTableClassViewCell.swift */,
 			);
-			name = Main;
+			name = BlocksList;
 			sourceTree = "<group>";
 		};
 		C0A26FB41FAF6F7B0060DC23 /* Legacy */ = {
@@ -602,14 +601,6 @@
 			name = Time;
 			sourceTree = "<group>";
 		};
-		C0C7767D1FACAD1A003EE125 /* Activities */ = {
-			isa = PBXGroup;
-			children = (
-				C0C7767E1FACAD3C003EE125 /* BlocksActivityTableController.swift */,
-			);
-			name = Activities;
-			sourceTree = "<group>";
-		};
 		C0C776801FACB090003EE125 /* Schedule */ = {
 			isa = PBXGroup;
 			children = (
@@ -626,6 +617,7 @@
 		C0C7768A1FACE17B003EE125 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				C01867221FC7A81F002027B8 /* Extensions */,
 				C0A5D3BF1F6A07D500DBDCAD /* Utils.swift */,
 				C0C776851FACDE89003EE125 /* TimeUtils.swift */,
 			);
@@ -781,6 +773,7 @@
 				C00232A71FA37EFC0019D328 /* MeetingSchedule.swift in Sources */,
 				C05F5E821FAE51AB00724F42 /* SportTeam.swift in Sources */,
 				C00232941FA3489A0019D328 /* EventManager.swift in Sources */,
+				C01867241FC7A82F002027B8 /* EXT_UIView.swift in Sources */,
 				C0C176551FAA5CB90059E956 /* WebCall.swift in Sources */,
 				C05B54801FC5D9D300A47490 /* WebCallResult.swift in Sources */,
 				C01867201FC74168002027B8 /* SchedulePatchAttemptLoadEvent.swift in Sources */,
@@ -823,7 +816,7 @@
 				C09343471FAA1B3C00629A84 /* Block.swift in Sources */,
 				C07463321FAFA93100D183E7 /* TableContainer.swift in Sources */,
 				C069CF771F6B697E001FE527 /* NotificationsManager.swift in Sources */,
-				C079C2341FACABB7009067DE /* BlockTableViewCell.swift in Sources */,
+				C079C2341FACABB7009067DE /* BlockTableClassViewCell.swift in Sources */,
 				C0C176601FAA61AE0059E956 /* EnscribedTime.swift in Sources */,
 				C04937B81FB405880036C890 /* Module.swift in Sources */,
 				C093434B1FAA1B7A00629A84 /* BlockID.swift in Sources */,
@@ -832,7 +825,6 @@
 				C02A2B0D1FAD47E400D3A9CD /* GetPatchWebCall.swift in Sources */,
 				C0C776861FACDE89003EE125 /* TimeUtils.swift in Sources */,
 				C0A26FB61FAF70ED0060DC23 /* PrefsOverlord.swift in Sources */,
-				C0C7767F1FACAD3C003EE125 /* BlocksActivityTableController.swift in Sources */,
 				C02006201FA904B10050F864 /* BlockMeta.swift in Sources */,
 				C07463301FAFA91200D183E7 /* TableCell.swift in Sources */,
 				C002329E1FA37D8D0019D328 /* EventHandler.swift in Sources */,
@@ -979,7 +971,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				INFOPLIST_FILE = Glancer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1014,7 +1006,7 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				INFOPLIST_FILE = Glancer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

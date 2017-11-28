@@ -26,12 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 //            application.registerForRemoteNotifications()
 //        }
 		
-		ScheduleManager.instance.retrieveBlockList(date: EnscribedDate(raw: "2017-11-13"), execute: { response in
-
-		})
-//		print(result.response)
-		
-
         return true
     }
 	
