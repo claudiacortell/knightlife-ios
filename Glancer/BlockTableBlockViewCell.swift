@@ -1,21 +1,18 @@
 //
-//  BlockTableClassViewCell.swift
+//  BlockTableBlockViewCell.swift
 //  Glancer
 //
-//  Created by Dylan Hanson on 11/3/17.
-//  Copyright © 2017 BB&N. All rights reserved.
+//  Created by Dylan Hanson on 11/28/17.
+//  Copyright © 2017 Dylan Hanson. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class BlockTableClassViewCell: UITableViewCell
+class BlockTableBlockViewCell: UITableViewCell
 {
 	@IBOutlet weak private var colorView: UIView!
-	@IBOutlet weak private var iconView: UIImageView!
-	
-	@IBOutlet weak private var classNameLabel: UILabel!
-	@IBOutlet weak private var homeworkLabel: UILabel!
+	@IBOutlet weak private var blockLetterLabel: UILabel!
 	
 	@IBOutlet weak private var blockLabel: UILabel!
 	
@@ -24,27 +21,12 @@ class BlockTableClassViewCell: UITableViewCell
 	
 	@IBOutlet weak private var moreIcon: UIView!
 	
-	var className: String?
-	{
-		didSet
-		{
-			self.classNameLabel.text = className
-		}
-	}
-	
-	var homework: String?
-	{
-		didSet
-		{
-			self.homeworkLabel.text = homework
-		}
-	}
-	
 	var block: BlockID?
 	{
 		didSet
 		{
 			self.blockLabel.text = block?.displayName
+			self.blockLetterLabel.text = block?.rawValue
 		}
 	}
 	

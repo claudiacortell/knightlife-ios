@@ -9,9 +9,15 @@
 import Foundation
 import UIKit
 
-class BlocksTableViewController: UITableViewController, ITable
+class BlocksTableViewController: ITableController
 {
-	var storyboardContainer: TableContainer!
+	class BlocksCell
+	{
+		static let CELL_CLASS = "cell_class"
+		static let CELL_BLOCK = "cell_block"
+		static let CELL_BLOCK_HEADER = "cell_header"
+	}
+	
 	var date: EnscribedDate = TimeUtils.todayEnscribed
 	var daySchedule: DaySchedule!
 	
@@ -19,15 +25,30 @@ class BlocksTableViewController: UITableViewController, ITable
 	{
 		super.viewDidLoad()
 		navigationController!.navigationBar.prefersLargeTitles = true
-
-		self.storyboardContainer = TableContainer()
 		
 		self.reload()
 	}
 	
-	override func viewWillAppear(_ animated: Bool)
+	@IBAction func buttonReload(_ sender: Any)
 	{
-		super.viewWillAppear(animated)
+		self.reload(true)
+	}
+	
+	override func registerCellHandlers()
+	{
+		self.registerHandler(BlocksCell.CELL_CLASS, handler:
+			{ id, cell in
+				if let classCell = cell as? BlockTableClassViewCell, let block = self.daySchedule.getBlockByHash(id)
+				{
+					classCell.block = block.blockId
+					classCell.className = "Class!!!!"
+					classCell.startTime = block.time.startTime
+					classCell.endTime = block.time.endTime
+					classCell.homework = "No Homework my dude"
+				}
+		})
+		
+		
 	}
 	
 	private func reload(_ hard: Bool = false)
@@ -56,63 +77,30 @@ class BlocksTableViewController: UITableViewController, ITable
 		}
 	}
 	
-	func generateContainer()
+	let variation = 1
+
+	override func generateContainer()
 	{
 		var container = TableContainer()
 
 		var blockSection = TableSection() // Blocks
 		blockSection.title = "Blocks"
-		blockSection.cells.append(TableCell(reuseId: "cell_header", id: 0))
+		blockSection.cells.append(TableCell(reuseId: BlocksCell.CELL_BLOCK_HEADER, id: 0))
 		
-		for block in self.daySchedule.blocks
+		for block in self.daySchedule.getScheduleVariation(variation) // Testing variations
 		{
-			blockSection.cells.append(TableCell(reuseId: "cell_class", id: block.hashValue))
+			blockSection.cells.append(TableCell(reuseId: BlocksCell.CELL_BLOCK, id: block.hashValue))
 		}
 		
 		container.sections.append(blockSection)
 		
-		self.storyboardContainer = nil
 		self.storyboardContainer = container
 	}
 	
 	private func showLoadingSymbol(_ val: Bool)
 	{
+		
+		
 		//		TODO: This
-	}
-	
-	override func numberOfSections(in tableView: UITableView) -> Int
-	{
-		return self.storyboardContainer.sectionCount
-	}
-	
-	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-	{
-		if let section = self.storyboardContainer.getSection(section)
-		{
-			return section.cellCount
-		}
-        return 0
-    }
-	
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
-		let template = self.storyboardContainer.getSection(indexPath.section)!.getCell(indexPath.row)!
-		return self.tableView.dequeueReusableCell(withIdentifier: template.reuseId)!
-    }
-	
-	override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
-	{
-		if let classCell = cell as? BlockTableClassViewCell, let tableCell = self.storyboardContainer.getSection(indexPath.section)?.getCell(indexPath.row)
-		{
-			if let block = self.daySchedule.getBlockByHash(tableCell.id)
-			{
-				classCell.block = block.blockId
-				classCell.className = "Class!!!!"
-				classCell.startTime = block.time.startTime
-				classCell.endTime = block.time.endTime
-				classCell.homework = "No Homework my dude"
-				classCell.more = false
-			}
-		}
 	}
 }

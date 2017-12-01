@@ -57,7 +57,10 @@ extension EnscribedTime: Hashable
 	
 	func toString() -> String
 	{
-		let hour = self.hour > 12 ? self.hour % 12 + 1 : self.hour
+		let hour = self.hour > 12 ? self.hour % 12 : self.hour
+		var minute = String(self.minute)
+		if minute.count == 1 { minute = "0\(minute)" }
+		
 		return "\(hour):\(minute)"
 	}
 }

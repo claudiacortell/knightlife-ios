@@ -18,7 +18,7 @@ enum MeetingFrequency
 
 struct MeetingSchedule
 {
-    var block: BlockID
+    var block: BlockID? //Null = all day
 	var frequency: MeetingFrequency
 	
     var meetingDays: [DayID] // Only used for specific day meetings

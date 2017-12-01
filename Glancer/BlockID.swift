@@ -29,6 +29,15 @@ enum BlockID: String
 		return BlockID.values().index(of: self)!
 	}
 	
+	var displayName: String
+	{
+		if BlockID.regularBlocks().contains(self)
+		{
+			return "\(self.rawValue) Block"
+		}
+		return self.rawValue
+	}
+	
 	static func fromRaw(raw: String) -> BlockID?
 	{
 		for block in BlockID.values()
@@ -54,6 +63,8 @@ enum BlockID: String
 	}
 	
 	static func values() -> [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x, .custom, .activities, .lab, .lunch] }
-	static func regularBlocks() -> [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x, .lunch] }
+	static func regularBlocks() -> [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x] }
 	static func academicBlocks() -> [BlockID] { return [.a, .b, .c, .d, .e, .f, .g] }
+	
+	
 }

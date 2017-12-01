@@ -59,6 +59,11 @@ extension EnscribedDate: Hashable
 		return TimeUtils.dateFromEnscribedDate(self)
 	}
 	
+	var dayOfWeek: DayID?
+	{
+		return TimeUtils.getDayOfWeek(self)
+	}
+	
 	func toString() -> String
 	{
 		let month = self.month < 10 ? "0\(self.month)" : String(self.month)

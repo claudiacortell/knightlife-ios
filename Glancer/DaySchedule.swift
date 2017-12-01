@@ -15,6 +15,19 @@ struct DaySchedule
 
 extension DaySchedule: Equatable
 {
+	func getScheduleVariation(_ variation: Int, exclusive: Bool = false) -> [ScheduleBlock]
+	{
+		var blocks: [ScheduleBlock] = []
+		for block in self.blocks
+		{
+			if (block.variation == nil && !exclusive) || (block.variation != nil && block.variation! == variation)
+			{
+				blocks.append(block)
+			}
+		}
+		return blocks
+	}
+	
 	func getBlockByHash(_ hash: Int) -> ScheduleBlock?
 	{
 		for block in self.blocks
