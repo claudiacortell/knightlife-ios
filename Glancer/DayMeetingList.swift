@@ -46,4 +46,16 @@ extension DayMeetingList
 		}
 		return list
 	}
+	
+	func fromId(_ id: Int) -> Meeting?
+	{
+		for meeting in self.meetings
+		{
+			if meeting.hashValue == id
+			{
+				return meeting
+			}
+		}
+		return nil
+	}
 }

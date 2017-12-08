@@ -38,6 +38,17 @@ enum BlockID: String
 		return self.rawValue
 	}
 	
+	var displayLetter: String
+	{
+		if BlockID.regularBlocks().contains(self) || self.rawValue.count <= 1
+		{
+			return self.rawValue
+		} else
+		{
+			return Utils.substring(self.rawValue, start: 0, distance: 2)
+		}
+	}
+	
 	static func fromRaw(raw: String) -> BlockID?
 	{
 		for block in BlockID.values()

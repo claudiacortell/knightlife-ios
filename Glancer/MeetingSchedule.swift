@@ -21,6 +21,11 @@ struct MeetingSchedule
     var block: BlockID? //Null = all day
 	var frequency: MeetingFrequency
 	
-    var meetingDays: [DayID] // Only used for specific day meetings
-	var meetingDate: EnscribedDate // Only used for oneTime meetings.
+    var meetingDays: [DayID]? // Only used for specific day meetings
+	var meetingDate: EnscribedDate? // Only used for oneTime meetings.
+
+	init(frequency: MeetingFrequency)
+	{
+		self.frequency = frequency
+	}
 }

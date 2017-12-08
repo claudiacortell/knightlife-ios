@@ -40,7 +40,6 @@
 		C036366D1FACF864008FC9A9 /* GetScheduleWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C036366C1FACF864008FC9A9 /* GetScheduleWebCall.swift */; };
 		C03636741FACFC85008FC9A9 /* GetScheduleResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03636731FACFC85008FC9A9 /* GetScheduleResponse.swift */; };
 		C03D148B1F79479C00211D28 /* HomeViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03D148A1F79479C00211D28 /* HomeViewManager.swift */; };
-		C03FB1271FA120E20041BD99 /* MeetingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03FB1261FA120E20041BD99 /* MeetingManager.swift */; };
 		C04937B81FB405880036C890 /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04937B71FB405880036C890 /* Module.swift */; };
 		C04937BB1FB40EB10036C890 /* CollectionModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04937BA1FB40EB10036C890 /* CollectionModule.swift */; };
 		C04DE4651FAE6AF9000D4DA6 /* DailySportsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04DE4641FAE6AF9000D4DA6 /* DailySportsList.swift */; };
@@ -52,7 +51,6 @@
 		C05B54801FC5D9D300A47490 /* WebCallResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05B547F1FC5D9D300A47490 /* WebCallResult.swift */; };
 		C05B54821FC5F6A000A47490 /* GetPatchConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05B54811FC5F6A000A47490 /* GetPatchConverter.swift */; };
 		C05B54841FC5F7A400A47490 /* GetScheduleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05B54831FC5F7A400A47490 /* GetScheduleConverter.swift */; };
-		C05B54871FC6158200A47490 /* GetSportsMeetingConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05B54861FC6158200A47490 /* GetSportsMeetingConverter.swift */; };
 		C05B548A1FC632EF00A47490 /* FetchContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05B54891FC632EF00A47490 /* FetchContainer.swift */; };
 		C05B7A111FCE0C71007C735C /* BlockMeetingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05B7A101FCE0C71007C735C /* BlockMeetingList.swift */; };
 		C05F5E801FAE4ACA00724F42 /* SportMeeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05F5E7F1FAE4ACA00724F42 /* SportMeeting.swift */; };
@@ -68,7 +66,7 @@
 		C074632E1FAFA8EB00D183E7 /* TableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C074632D1FAFA8EB00D183E7 /* TableSection.swift */; };
 		C07463301FAFA91200D183E7 /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C074632F1FAFA91200D183E7 /* TableCell.swift */; };
 		C07463321FAFA93100D183E7 /* TableContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07463311FAFA93100D183E7 /* TableContainer.swift */; };
-		C079C2311FACA9CB009067DE /* BlocksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C079C2301FACA9CB009067DE /* BlocksTableViewController.swift */; };
+		C079C2311FACA9CB009067DE /* BlockTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C079C2301FACA9CB009067DE /* BlockTableViewController.swift */; };
 		C079C2341FACABB7009067DE /* BlockTableClassViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C079C2331FACABB7009067DE /* BlockTableClassViewCell.swift */; };
 		C09343431FAA1A4800629A84 /* ScheduleUpdatedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09343421FAA1A4800629A84 /* ScheduleUpdatedEvent.swift */; };
 		C09343471FAA1B3C00629A84 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09343461FAA1B3C00629A84 /* Block.swift */; };
@@ -80,6 +78,7 @@
 		C0A5D3BC1F69E07500DBDCAD /* UserPrefsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A5D3BB1F69E07500DBDCAD /* UserPrefsManager.swift */; };
 		C0A5D3C01F6A07D500DBDCAD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A5D3BF1F6A07D500DBDCAD /* Utils.swift */; };
 		C0A908C61F76C8BF008AAB3F /* WeekViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A908C51F76C8BF008AAB3F /* WeekViewManager.swift */; };
+		C0AC4DC31FD21F680094449C /* BlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AC4DC21FD21F680094449C /* BlockViewController.swift */; };
 		C0B04F461FD177EC00F5D116 /* MeetingPrefModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B04F451FD177EC00F5D116 /* MeetingPrefModule.swift */; };
 		C0B163A41FCDF1CB0011BCF4 /* BlockTableBlockViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B163A31FCDF1CB0011BCF4 /* BlockTableBlockViewCell.swift */; };
 		C0B4A4D71FD0AC88002CBB1B /* MeetingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B4A4D61FD0AC88002CBB1B /* MeetingList.swift */; };
@@ -92,6 +91,8 @@
 		C0C176601FAA61AE0059E956 /* EnscribedTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1765F1FAA61AE0059E956 /* EnscribedTime.swift */; };
 		C0C776841FACDDB6003EE125 /* EnscribedDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C776831FACDDB6003EE125 /* EnscribedDate.swift */; };
 		C0C776861FACDE89003EE125 /* TimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C776851FACDE89003EE125 /* TimeUtils.swift */; };
+		C0D1053E1FDA398B0030A0DC /* MeetingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D1053D1FDA398A0030A0DC /* MeetingManager.swift */; };
+		C0FD3D4F1FDA0DC4003E064F /* SportsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FD3D4E1FDA0DC4003E064F /* SportsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -146,7 +147,6 @@
 		C036366C1FACF864008FC9A9 /* GetScheduleWebCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetScheduleWebCall.swift; sourceTree = "<group>"; };
 		C03636731FACFC85008FC9A9 /* GetScheduleResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetScheduleResponse.swift; sourceTree = "<group>"; };
 		C03D148A1F79479C00211D28 /* HomeViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewManager.swift; sourceTree = "<group>"; };
-		C03FB1261FA120E20041BD99 /* MeetingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingManager.swift; sourceTree = "<group>"; };
 		C04937B71FB405880036C890 /* Module.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Module.swift; sourceTree = "<group>"; };
 		C04937BA1FB40EB10036C890 /* CollectionModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionModule.swift; sourceTree = "<group>"; };
 		C04DE4641FAE6AF9000D4DA6 /* DailySportsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySportsList.swift; sourceTree = "<group>"; };
@@ -158,7 +158,6 @@
 		C05B547F1FC5D9D300A47490 /* WebCallResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCallResult.swift; sourceTree = "<group>"; };
 		C05B54811FC5F6A000A47490 /* GetPatchConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPatchConverter.swift; sourceTree = "<group>"; };
 		C05B54831FC5F7A400A47490 /* GetScheduleConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetScheduleConverter.swift; sourceTree = "<group>"; };
-		C05B54861FC6158200A47490 /* GetSportsMeetingConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSportsMeetingConverter.swift; sourceTree = "<group>"; };
 		C05B54891FC632EF00A47490 /* FetchContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchContainer.swift; sourceTree = "<group>"; };
 		C05B7A101FCE0C71007C735C /* BlockMeetingList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockMeetingList.swift; sourceTree = "<group>"; };
 		C05F5E7F1FAE4ACA00724F42 /* SportMeeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportMeeting.swift; sourceTree = "<group>"; };
@@ -174,7 +173,7 @@
 		C074632D1FAFA8EB00D183E7 /* TableSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableSection.swift; sourceTree = "<group>"; };
 		C074632F1FAFA91200D183E7 /* TableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
 		C07463311FAFA93100D183E7 /* TableContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableContainer.swift; sourceTree = "<group>"; };
-		C079C2301FACA9CB009067DE /* BlocksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocksTableViewController.swift; sourceTree = "<group>"; };
+		C079C2301FACA9CB009067DE /* BlockTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTableViewController.swift; sourceTree = "<group>"; };
 		C079C2331FACABB7009067DE /* BlockTableClassViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTableClassViewCell.swift; sourceTree = "<group>"; };
 		C09343421FAA1A4800629A84 /* ScheduleUpdatedEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleUpdatedEvent.swift; sourceTree = "<group>"; };
 		C09343461FAA1B3C00629A84 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
@@ -186,6 +185,7 @@
 		C0A5D3BB1F69E07500DBDCAD /* UserPrefsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPrefsManager.swift; sourceTree = "<group>"; };
 		C0A5D3BF1F6A07D500DBDCAD /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		C0A908C51F76C8BF008AAB3F /* WeekViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewManager.swift; sourceTree = "<group>"; };
+		C0AC4DC21FD21F680094449C /* BlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockViewController.swift; sourceTree = "<group>"; };
 		C0B04F451FD177EC00F5D116 /* MeetingPrefModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingPrefModule.swift; sourceTree = "<group>"; };
 		C0B163A31FCDF1CB0011BCF4 /* BlockTableBlockViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTableBlockViewCell.swift; sourceTree = "<group>"; };
 		C0B4A4D61FD0AC88002CBB1B /* MeetingList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingList.swift; sourceTree = "<group>"; };
@@ -198,6 +198,8 @@
 		C0C1765F1FAA61AE0059E956 /* EnscribedTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnscribedTime.swift; sourceTree = "<group>"; };
 		C0C776831FACDDB6003EE125 /* EnscribedDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnscribedDate.swift; sourceTree = "<group>"; };
 		C0C776851FACDE89003EE125 /* TimeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUtils.swift; sourceTree = "<group>"; };
+		C0D1053D1FDA398A0030A0DC /* MeetingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeetingManager.swift; path = ../../../../../.Trash/MeetingManager.swift; sourceTree = "<group>"; };
+		C0FD3D4E1FDA0DC4003E064F /* SportsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -305,7 +307,7 @@
 				C0C776801FACB090003EE125 /* Schedule */,
 				C0C176501FAA31010059E956 /* Sports */,
 				C020061B1FA903D30050F864 /* Preferences */,
-				C0134A181FA7E1D5009B4399 /* Schedule */,
+				C0134A181FA7E1D5009B4399 /* OLD Schedule */,
 				C002329C1FA37D700019D328 /* Meetings */,
 				C00232951FA34AB70019D328 /* Event */,
 				C00232981FA34B610019D328 /* Manager.swift */,
@@ -318,7 +320,7 @@
 			children = (
 				C02B91C91FB68860004E0D5D /* Elements */,
 				C02B91C81FB68754004E0D5D /* Prefs */,
-				C03FB1261FA120E20041BD99 /* MeetingManager.swift */,
+				C0D1053D1FDA398A0030A0DC /* MeetingManager.swift */,
 			);
 			name = Meetings;
 			sourceTree = "<group>";
@@ -332,7 +334,7 @@
 			name = Meeting;
 			sourceTree = "<group>";
 		};
-		C0134A181FA7E1D5009B4399 /* Schedule */ = {
+		C0134A181FA7E1D5009B4399 /* OLD Schedule */ = {
 			isa = PBXGroup;
 			children = (
 				C0134A191FA7E1F6009B4399 /* Events */,
@@ -340,7 +342,7 @@
 				C09343461FAA1B3C00629A84 /* Block.swift */,
 				C09343481FAA1B5E00629A84 /* TimeContainer.swift */,
 			);
-			name = Schedule;
+			name = "OLD Schedule";
 			sourceTree = "<group>";
 		};
 		C0134A191FA7E1F6009B4399 /* Events */ = {
@@ -501,7 +503,6 @@
 			children = (
 				C04DE46C1FAE6E74000D4DA6 /* GetSportsMeetingResponse.swift */,
 				C04DE4691FAE6E09000D4DA6 /* GetSportsMeetingWebCall.swift */,
-				C05B54861FC6158200A47490 /* GetSportsMeetingConverter.swift */,
 			);
 			name = GetMeeting;
 			sourceTree = "<group>";
@@ -546,6 +547,7 @@
 		C079C22F1FACA97D009067DE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C0FD3D4D1FDA0DAE003E064F /* SportsList */,
 				C079C2321FACAB82009067DE /* BlocksList */,
 			);
 			name = Controllers;
@@ -554,9 +556,10 @@
 		C079C2321FACAB82009067DE /* BlocksList */ = {
 			isa = PBXGroup;
 			children = (
-				C079C2301FACA9CB009067DE /* BlocksTableViewController.swift */,
+				C079C2301FACA9CB009067DE /* BlockTableViewController.swift */,
 				C079C2331FACABB7009067DE /* BlockTableClassViewCell.swift */,
 				C0B163A31FCDF1CB0011BCF4 /* BlockTableBlockViewCell.swift */,
+				C0AC4DC21FD21F680094449C /* BlockViewController.swift */,
 			);
 			name = BlocksList;
 			sourceTree = "<group>";
@@ -634,6 +637,14 @@
 				C0C776851FACDE89003EE125 /* TimeUtils.swift */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		C0FD3D4D1FDA0DAE003E064F /* SportsList */ = {
+			isa = PBXGroup;
+			children = (
+				C0FD3D4E1FDA0DC4003E064F /* SportsViewController.swift */,
+			);
+			name = SportsList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -794,6 +805,7 @@
 				C02A2B101FAD487800D3A9CD /* GetPatchResponse.swift in Sources */,
 				5BD285DD1B03CF29007A0472 /* AppDelegate.swift in Sources */,
 				C0C176521FAA39E50059E956 /* SportsManager.swift in Sources */,
+				C0FD3D4F1FDA0DC4003E064F /* SportsViewController.swift in Sources */,
 				C06220E51F74A8930032A2EC /* Debug.swift in Sources */,
 				C0134A1B1FA7E446009B4399 /* ScheduleAttemptedLoadEvent.swift in Sources */,
 				C04DE46D1FAE6E74000D4DA6 /* GetSportsMeetingResponse.swift in Sources */,
@@ -805,6 +817,7 @@
 				C09343431FAA1A4800629A84 /* ScheduleUpdatedEvent.swift in Sources */,
 				C05F5E891FAE561400724F42 /* SportGender.swift in Sources */,
 				C0A908C61F76C8BF008AAB3F /* WeekViewManager.swift in Sources */,
+				C0AC4DC31FD21F680094449C /* BlockViewController.swift in Sources */,
 				C05B548A1FC632EF00A47490 /* FetchContainer.swift in Sources */,
 				C00232A11FA37E100019D328 /* ClassMeeting.swift in Sources */,
 				C0707FBE1F69720800C7D2ED /* Schedule.swift in Sources */,
@@ -812,7 +825,6 @@
 				C02A2B141FAD527600D3A9CD /* ScheduleBlock.swift in Sources */,
 				C0B04F461FD177EC00F5D116 /* MeetingPrefModule.swift in Sources */,
 				C0B4A4D71FD0AC88002CBB1B /* MeetingList.swift in Sources */,
-				C03FB1271FA120E20041BD99 /* MeetingManager.swift in Sources */,
 				C0B590B31FC34F3100CDF964 /* ResourceFetch.swift in Sources */,
 				C054B7CB1FAF6D9E0041BA03 /* PreferenceHandler.swift in Sources */,
 				C054B7C71FAF65080041BA03 /* SportsMeetingWrapper.swift in Sources */,
@@ -845,7 +857,7 @@
 				C07463301FAFA91200D183E7 /* TableCell.swift in Sources */,
 				C002329E1FA37D8D0019D328 /* EventHandler.swift in Sources */,
 				C05F5E851FAE542D00724F42 /* SportSeason.swift in Sources */,
-				C05B54871FC6158200A47490 /* GetSportsMeetingConverter.swift in Sources */,
+				C0D1053E1FDA398B0030A0DC /* MeetingManager.swift in Sources */,
 				C03D148B1F79479C00211D28 /* HomeViewManager.swift in Sources */,
 				C018671A1FC73C37002027B8 /* ScheduleTemplateLoadEvent.swift in Sources */,
 				C020061E1FA904380050F864 /* UserPrefsUpdateEvent.swift in Sources */,
@@ -854,7 +866,7 @@
 				C074632E1FAFA8EB00D183E7 /* TableSection.swift in Sources */,
 				C05B547E1FC5D7B900A47490 /* WebCallResultConverter.swift in Sources */,
 				C0C1765E1FAA61000059E956 /* TimeDuration.swift in Sources */,
-				C079C2311FACA9CB009067DE /* BlocksTableViewController.swift in Sources */,
+				C079C2311FACA9CB009067DE /* BlockTableViewController.swift in Sources */,
 				C05F5E8B1FAE56CC00724F42 /* TeamDeclarations.swift in Sources */,
 				C04DE4651FAE6AF9000D4DA6 /* DailySportsList.swift in Sources */,
 				C0707FC01F69753100C7D2ED /* Storage.swift in Sources */,

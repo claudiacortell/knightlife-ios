@@ -19,14 +19,16 @@ class GetPatchConverter: WebCallResultConverter<ScheduleManager, GetPatchRespons
 			{
 				let startTime = EnscribedTime(raw: block.startTime)
 				let endTime = EnscribedTime(raw: block.endTime)
+				
 				let variation = block.variation
+				let associatedBlock: BlockID? = block.associatedBlock == nil ? nil : BlockID.fromRaw(raw: block.associatedBlock!)
 				
 				if !startTime.valid || !endTime.valid || startTime.toDate() == nil || endTime.toDate() == nil
 				{
 					manager.out("Recieved an invalid start/end time: \(block.startTime), \(block.endTime)")
 				} else
 				{
-					let scheduleBlock = ScheduleBlock(blockId: blockId, time: TimeDuration(startTime: startTime, endTime: endTime), variation: variation)
+					let scheduleBlock = ScheduleBlock(blockId: blockId, time: TimeDuration(startTime: startTime, endTime: endTime), variation: variation, associatedBlock: associatedBlock)
 					daySchedule.blocks.append(scheduleBlock)
 				}
 			} else

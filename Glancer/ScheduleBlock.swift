@@ -13,6 +13,7 @@ struct ScheduleBlock
 	let blockId: BlockID
 	let time: TimeDuration
 	let variation: Int?
+	let associatedBlock: BlockID?
 }
 
 extension ScheduleBlock: Equatable

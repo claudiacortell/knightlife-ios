@@ -39,23 +39,21 @@ class ScheduleManager: Manager
 		let curFetch = ResourceFetchToken(.localFetch)
 		self.templateStatus = FetchContainer<[DayID: DaySchedule]>(fetch: curFetch)
 		
-		self.callEvent(ScheduleTemplateAttemptLoadEvent())
-
-		return GetScheduleWebCall(self, fetchToken: curFetch, callback: { fetch in
+		let call = GetScheduleWebCall(self, fetchToken: curFetch)
+		call.addCallback(
+		{ fetch in
 			if fetch.hasData && fetch.result == .success // Successful fetch
 			{
 				self.scheduleTemplate = fetch.data!
-				self.templateStatus.setResult(ResourceFetch(curFetch, .success, fetch.data!))
-				
-				self.callEvent(ScheduleTemplateLoadEvent(successful: true))
+				self.templateStatus.setResult(ResourceFetch(curFetch, .success, fetch.data!, true))
 			} else
 			{
 				self.scheduleTemplate = [:] // Clear data.
-				self.templateStatus.setResult(ResourceFetch(curFetch, .failure, nil))
-				
-				self.callEvent(ScheduleTemplateLoadEvent(successful: false))
+				self.templateStatus.setResult(ResourceFetch(curFetch, .failure, nil, fetch.result == .success))
 			}
 		})
+		
+		return call
 	}
 	
 	@discardableResult
@@ -66,6 +64,7 @@ class ScheduleManager: Manager
 			let schedule = self.associatedSchedules[date]!
 			let fetchToken = ResourceFetchToken(.localFetch)
 			let fetch = ResourceFetch(fetchToken, .success, schedule)
+			
 			execute(fetch)
 			return fetchToken
 		}
@@ -81,25 +80,28 @@ class ScheduleManager: Manager
 			return fetchToken // If we have a locally downloaded patch, return it.
 		}
 		
-		self.callEvent(SchedulePatchAttemptLoadEvent(date: date))
-		
 		let fetchToken = ResourceFetchToken(.remoteFetch)
-		let patchCall = GetPatchWebCall(self, day: date, fetchToken: fetchToken, callback: { fetch in
+		let patchCall = GetPatchWebCall(self, day: date, fetchToken: fetchToken)
+		patchCall.addCallback(
+		{ fetch in
 			if fetch.result != .success // No patches retrieved.
 			{
-				let event = SchedulePatchLoadEvent(successful: false, date: date, patch: nil)
+				self.schedulePatches[date] = nil // Clear previously loaded
+				
+				if let connected = fetch.madeConnection, !connected
+				{
+					execute(ResourceFetch(fetchToken, .failure, nil))
+					return
+				}
+				
 				if let dayId = TimeUtils.getDayOfWeek(date), let templateSchedule = self.scheduleTemplate[dayId]
 				{
 					self.associatedSchedules[date] = templateSchedule
 					execute(ResourceFetch(fetchToken, .success, templateSchedule))
-					
-					self.callEvent(event)
 					return
 				}
-				print("Failed to load patches, no template schedule found.")
+				self.out("Failed to load patches, no template schedule found.")
 				execute(ResourceFetch(fetchToken, .failure, nil))
-				
-				self.callEvent(event)
 				return
 			} else if fetch.hasData // Succesful w/ Data
 			{
@@ -107,22 +109,29 @@ class ScheduleManager: Manager
 				self.associatedSchedules[date] = fetch.data!
 				execute(fetch)
 				
-				self.callEvent(SchedulePatchLoadEvent(successful: true, date: date, patch: fetch.data!))
 				return
 			}
 			
 			execute(ResourceFetch(fetchToken, .failure, nil))
-			self.callEvent(SchedulePatchLoadEvent(successful: false, date: date, patch: nil))
 		})
 		
 		if !self.templateStatus.successful // If there is no status or the previous fetch failed
 		{
 			let templateCall = self.getTemplateCall()
-			templateCall.next(patchCall)
+			templateCall.addCallback(
+			{ fetch in
+				if fetch.result != .success // Failed to get template schedule so we're going to cancel this all
+				{
+					execute(ResourceFetch(fetchToken, fetch.result, nil))
+					return
+				}
+				
+				patchCall.execute() // Execute the patch call after the template's done loading.
+			})
 			templateCall.execute()
 		} else
 		{
-			patchCall.execute()
+			patchCall.execute() // only check for patches since the schedule's already loaded.
 		}
 		
 		return fetchToken

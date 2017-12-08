@@ -35,6 +35,15 @@ class ITableController: UITableViewController
 //		Override point
 	}
 	
+	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+	{
+		if let section = self.storyboardContainer.getSection(section)
+		{
+			return section.title
+		}
+		return nil
+	}
+	
 	override func numberOfSections(in tableView: UITableView) -> Int
 	{
 		return self.storyboardContainer.sectionCount

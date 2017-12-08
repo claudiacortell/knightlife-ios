@@ -18,6 +18,11 @@ struct TableSection
 
 extension TableSection
 {
+	init(_ title: String)
+	{
+		self.title = title
+	}
+	
     func getCell(_ id: Int) -> TableCell?
     {
         return self.cells[id]

@@ -28,15 +28,17 @@ class ResourceFetch<Object> // Used for callback data
 {
 	let token: ResourceFetchToken
 	let result: ResourceFetchResult
+	let madeConnection: Bool?
 	let data: Object?
 	
 	var hasData: Bool { return data != nil }
 	
-	init(_ token: ResourceFetchToken, _ result: ResourceFetchResult, _ data: Object?)
+	init(_ token: ResourceFetchToken, _ result: ResourceFetchResult, _ data: Object?, _ madeConnection: Bool? = nil)
 	{
 		self.token = token
 		self.result = result
 		self.data = data
+		self.madeConnection = madeConnection
 	}
 }
 

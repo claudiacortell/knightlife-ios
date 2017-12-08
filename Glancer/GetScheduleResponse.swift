@@ -38,6 +38,7 @@ struct GetScheduleResponseBlock: WebCallResult
 	var endTime: String
 
 	var variation: Int?
+	var associatedBlock: String?
 	
 	init(unboxer: Unboxer) throws
 	{
@@ -46,5 +47,6 @@ struct GetScheduleResponseBlock: WebCallResult
 		self.endTime = try unboxer.unbox(key: "endTime")
 		
 		self.variation = unboxer.unbox(key: "variation")
+		self.associatedBlock = unboxer.unbox(key: "associatedBlock")
 	}
 }

@@ -26,7 +26,7 @@ class BlockTableBlockViewCell: UITableViewCell
 		didSet
 		{
 			self.blockLabel.text = block?.displayName
-			self.blockLetterLabel.text = block?.rawValue
+			self.blockLetterLabel.text = block?.displayLetter
 		}
 	}
 	

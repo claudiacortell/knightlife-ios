@@ -28,6 +28,8 @@ class SportsManager: Manager
 		self.registerModule(SportsPrefModule(self, name: "addedTeams")) // Register preference module
     }
 	
+	
+	
 //	func retrieveMeetings(_ date: EnscribedDate = TimeUtils.todayEnscribed, onlyAdded: Bool = true) -> [SportsMeetingWrapper]
 //	{
 //		var wrapperList: [SportsMeetingWrapper] = []

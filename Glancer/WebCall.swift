@@ -22,23 +22,19 @@ class WebCall<WebCallManager: Manager, DataContainer: WebCallResult, Result>: We
 	private let converter: WebCallResultConverter<WebCallManager, DataContainer, Result>?
 	
 	private let fetchToken: ResourceFetchToken?
-	private let callback: (ResourceFetch<Result>) -> Void
-	
-	private var executeCallback = true // Used to override callback calling through handle
+	private var callbacks: [(ResourceFetch<Result>) -> Void]
 	
 	let url: String
 	let call: String
 	
-	private var next: WebCallExecutable?
-	
 	private(set) var parameters: [String: String]
 	
-	init(manager: WebCallManager, handler: WebCallHandler<WebCallManager, DataContainer, Result>? = nil, converter: WebCallResultConverter<WebCallManager, DataContainer, Result>? = nil, fetchToken: ResourceFetchToken? = nil, callback: @escaping (ResourceFetch<Result>) -> Void = {_ in}, url: String = "https://bbn-knightlife.herokuapp.com/api/", call: String)
+	init(manager: WebCallManager, handler: WebCallHandler<WebCallManager, DataContainer, Result>? = nil, converter: WebCallResultConverter<WebCallManager, DataContainer, Result>? = nil, fetchToken: ResourceFetchToken? = nil, url: String = "https://bbn-knightlife.herokuapp.com/api/", call: String)
 	{
 		self.converter = converter
 		
 		self.fetchToken = fetchToken
-		self.callback = callback
+		self.callbacks = []
 		
 		self.url = url
 		self.call = call
@@ -61,6 +57,11 @@ class WebCall<WebCallManager: Manager, DataContainer: WebCallResult, Result>: We
 		}
 		manager.out("It appears you tried to convert a webcall result without a converter!")
 		return nil
+	}
+	
+	final func addCallback(_ callback: @escaping (ResourceFetch<Result>) -> Void)
+	{
+		self.callbacks.append(callback)
 	}
 	
 	@discardableResult
@@ -89,17 +90,20 @@ class WebCall<WebCallManager: Manager, DataContainer: WebCallResult, Result>: We
         Alamofire.request(call, method: .get).responseObject() { (response: DataResponse<DataContainer>) in
             if let error = response.error
             {
+				var madeConnection = false
 				var errorBody: String = error.localizedDescription
 				if error is UnboxError
 				{
 					errorBody = (error as! UnboxError).description
+					madeConnection = true
 				} else if error is UnboxedAlamofireError
 				{
 					errorBody = (error as! UnboxedAlamofireError).description
+					madeConnection = true
 				}
 				
                 self.handler.handleCall(url: self.url, call: self.call, completeCall: call, success: false, error: errorBody, data: nil)
-				self.doCallback(result: nil, .error)
+				self.doCallbacks(nil, fetch: .error, madeConnection: madeConnection)
                 return
             }
             
@@ -108,7 +112,7 @@ class WebCall<WebCallManager: Manager, DataContainer: WebCallResult, Result>: We
                 if code < 200 || code >= 300 // Invalid response
                 {
                     self.handler.handleCall(url: self.url, call: self.call, completeCall: call, success: false, error: "Invalid HTTP response: \(code)", data: nil)
-					self.doCallback(result: nil, .failure)
+					self.doCallbacks(nil, fetch: .failure, madeConnection: false)
                     return
                 }
             }
@@ -117,25 +121,31 @@ class WebCall<WebCallManager: Manager, DataContainer: WebCallResult, Result>: We
             {
 				let result = self.convert(data)
                 self.handler.handleCall(url: self.url, call: self.call, completeCall: call, success: true, error: nil, data: result)
-				self.doCallback(result: result, .success)
-				
-				if self.next != nil
-				{
-					self.next!.execute()
-				}
+				self.doCallbacks(result, fetch: .success, madeConnection: true)
                 return
             }
             
             self.handler.handleCall(url: self.url, call: self.call, completeCall: call, success: false, error: "Unknown error", data: nil)
-			self.doCallback(result: nil, .error)
+			self.doCallbacks(nil, fetch: .error, madeConnection: false)
         }
 	}
 	
-	private func doCallback(result: Result?, _ fetchResult: ResourceFetchResult)
+	private func doCallbacks(_ result: Result?, fetch: ResourceFetchResult, madeConnection: Bool)
 	{
-		if self.executeCallback && self.fetchToken != nil
+		if !self.callbacks.isEmpty
 		{
-			self.callback(ResourceFetch(self.fetchToken!, fetchResult, result))
+			if self.fetchToken == nil
+			{
+				self.manager.out("Attempted to perform a WebCall callback without a fetch token set!")
+				return
+			}
+			
+			let fetch = ResourceFetch(self.fetchToken!, fetch, result, madeConnection)
+			
+			for callback in self.callbacks
+			{
+				callback(fetch)
+			}
 		}
 	}
 	
@@ -153,10 +163,5 @@ class WebCall<WebCallManager: Manager, DataContainer: WebCallResult, Result>: We
 			name = String(name.dropLast())
 		}
 		return name
-	}
-	
-	func next(_ call: WebCallExecutable)
-	{
-		self.next = call
 	}
 }

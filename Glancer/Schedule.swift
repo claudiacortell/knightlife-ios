@@ -368,9 +368,10 @@ class ScheduleMan: Manager
 //    }
 }
 
-struct Weekday
-{
-	var dayId: DayID! // M, T, W, Th, F
-	var blocks: [Block]! // Class ID to Block MAJOR ISSUE THIS WON'T PRESERVE ORDER.
-	var secondLunchStart: TimeContainer? // I hate having this here but I can't really think of a better way to do it rn
-}
+//struct Weekday
+//{
+//	var dayId: DayID! // M, T, W, Th, F
+//	var blocks: [Block]! // Class ID to Block MAJOR ISSUE THIS WON'T PRESERVE ORDER.
+//	var secondLunchStart: TimeContainer? // I hate having this here but I can't really think of a better way to do it rn
+//}
+

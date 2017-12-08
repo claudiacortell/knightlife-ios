@@ -16,6 +16,18 @@ struct BlockMeetingList
 
 extension BlockMeetingList
 {
+	func fromId(_ id: Int) -> Meeting?
+	{
+		for meeting in self.meetings
+		{
+			if meeting.hashValue == id
+			{
+				return meeting
+			}
+		}
+		return nil
+	}
+	
 	func getClass() -> ClassMeeting?
 	{
 		for activity in self.meetings

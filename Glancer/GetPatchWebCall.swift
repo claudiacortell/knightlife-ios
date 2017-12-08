@@ -12,10 +12,10 @@ class GetPatchWebCall: WebCall<ScheduleManager, GetPatchResponse, DaySchedule>
 {
 	let date: EnscribedDate
 	
-	init(_ manager: ScheduleManager, day: EnscribedDate, fetchToken: ResourceFetchToken, callback: @escaping (ResourceFetch<DaySchedule>) -> Void)
+	init(_ manager: ScheduleManager, day: EnscribedDate, fetchToken: ResourceFetchToken)
 	{
 		self.date = day
-		super.init(manager: manager, converter: GetPatchConverter(), fetchToken: fetchToken, callback: callback, call: "request/schedule.php")
+		super.init(manager: manager, converter: GetPatchConverter(), fetchToken: fetchToken, call: "request/schedule.php")
 				
 		self.parameter("date", val: day.toString())
 	}
