@@ -32,12 +32,13 @@ class BlockTableViewController: ITableController
 		
 		self.refreshControl?.addTarget(self, action: #selector(BlockTableViewController.doRefresh(_:)), for: .valueChanged)
 		self.refreshControl?.layer.zPosition = -1
+		
+		self.reload(hard: false, refresh: false)
 	}
 	
 	override func viewWillAppear(_ animated: Bool)
 	{
 		super.viewWillAppear(animated)
-		self.reload(false, refresh: false)
 	}
 	
 	@objc private func doRefresh(_ sender: Any)
@@ -79,17 +80,30 @@ class BlockTableViewController: ITableController
 		})
 	}
 	
-	private func reload(_ hard: Bool = true, refresh: Bool = true)
+	private func reload(hard: Bool = true, refresh: Bool = true)
 	{
 		if refresh
 		{
 			self.refreshControl?.beginRefreshing()
 		}
-
-		ScheduleManager.instance.retrieveBlockList(hard: hard, date: self.date, execute:
-		{ fetch in
-			self.scheduleDidLoad(fetch.data != nil, schedule: fetch.data)
-		})
+		
+		if hard
+		{
+			ScheduleManager.instance.fetchDaySchedule(self.date,
+			{ fetch in
+				self.scheduleDidLoad(fetch.hasData, schedule: fetch.data)
+			})
+		} else
+		{
+			let status = ScheduleManager.instance.getSchedule(self.date)
+			if status.status == .dead
+			{
+				self.reload(hard: true, refresh: refresh)
+			} else
+			{
+				self.scheduleDidLoad(status.hasData, schedule: status.data)
+			}
+		}
 	}
 	
 	private func scheduleDidLoad(_ success: Bool, schedule: DaySchedule?)

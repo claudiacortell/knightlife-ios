@@ -68,8 +68,8 @@ class UserPrefsManager: Manager
 		self.lunchSwitches[id] = val
 		if save { self.saveLunch() }
 
-		let event = UserPrefsUpdateEvent(type: .lunch)
-		self.callEvent(event)
+//		let event = UserPrefsUpdateEvent(type: .lunch)
+//		self.callEvent(event)
 	}
 	
 	func getMeta(id: BlockID) -> BlockMeta?
@@ -105,8 +105,8 @@ class UserPrefsManager: Manager
 			self.blockMeta[id] = meta
 			if save { self.saveMeta() }
 			
-			let event = UserPrefsUpdateEvent(type: .meta)
-			self.callEvent(event)
+//			let event = UserPrefsUpdateEvent(type: .meta)
+//			self.callEvent(event)
 		}
 	}
 	
@@ -206,8 +206,8 @@ class UserPrefsManager: Manager
 			Storage.deleteOldMethodRemnants() // Enable when we're ok getting rid of the old storage data.
 		}
 		
-		let event = UserPrefsUpdateEvent(type: .load)
-		self.callEvent(event)
+//		let event = UserPrefsUpdateEvent(type: .load)
+//		self.callEvent(event)
 	}
 	
 	private func saveLunch()

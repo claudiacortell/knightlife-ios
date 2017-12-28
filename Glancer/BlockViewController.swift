@@ -29,13 +29,15 @@ class BlockViewController: UIViewController
 				break
 			}
 		}
+		
+		self.setLoading()
 	}
 	
 	@objc func sportsClicked(_ sender: Any)
 	{
-		if let controller = self.storyboard?.instantiateViewController(withIdentifier: "controller_sports")
+		if let controller = self.storyboard?.instantiateViewController(withIdentifier: "controller_sports") as? SportsViewController
 		{
-			self.present(controller, animated: false, completion: nil)
+			self.navigationController?.pushViewController(controller, animated: false)
 		}
 	}
 
@@ -46,19 +48,11 @@ class BlockViewController: UIViewController
 		button.layer.cornerRadius = 6.0
 		button.contentEdgeInsets = UIEdgeInsetsMake(4, 4, 4, 4)
 		button.setImage(#imageLiteral(resourceName: "icon_sports"), for: .normal)
-//		button.layer.backgroundColor = UIColor(red: 14.0 / 255, green: 122.0 / 255, blue: 254.0 / 255, alpha: 1.0).cgColor
-//		button.tintColor = UIColor.white
 		
 		button.addTarget(self, action: #selector(BlockViewController.sportsClicked(_:)), for: .touchUpInside)
 		
 		let barButton = UIBarButtonItem(customView: button)
 		return barButton
-	}
-	
-	override func viewWillAppear(_ animated: Bool)
-	{
-		super.viewWillAppear(animated)
-		self.setLoading()
 	}
 	
 	func setLoading()

@@ -12,12 +12,12 @@ class GetPatchWebCall: WebCall<ScheduleManager, GetPatchResponse, DaySchedule>
 {
 	let date: EnscribedDate
 	
-	init(_ manager: ScheduleManager, day: EnscribedDate, fetchToken: ResourceFetchToken)
+	init(_ manager: ScheduleManager, date: EnscribedDate, token: ResourceFetchToken)
 	{
-		self.date = day
-		super.init(manager: manager, converter: GetPatchConverter(), fetchToken: fetchToken, call: "request/schedule.php")
+		self.date = date
+		super.init(manager: manager, converter: GetPatchConverter(), token: token, call: "request/schedule.php")
 				
-		self.parameter("date", val: day.toString())
+		self.parameter("date", val: date.toString())
 	}
 	
 	override func handleCall(url: String, call: String, completeCall: String, success: Bool, error: String?, data: DaySchedule?)

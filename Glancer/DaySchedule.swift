@@ -10,6 +10,7 @@ import Foundation
 
 struct DaySchedule
 {
+	var subtitle: String?
 	var blocks: [ScheduleBlock] = []
 }
 
@@ -69,6 +70,11 @@ extension DaySchedule: Equatable
 			return false
 		}
 		
+		if lhs.subtitle != rhs.subtitle
+		{
+			return false
+		}
+		
 		for i in 0..<lhs.blocks.count
 		{
 			if lhs.blocks[i] != rhs.blocks[i]
@@ -83,6 +89,7 @@ extension DaySchedule: Equatable
 	var hashValue: Int
 	{
 		var val = 123
+		if subtitle != nil { val ^= subtitle!.hashValue }
 		for block in self.blocks
 		{
 			val ^= block.hashValue

@@ -13,32 +13,40 @@ struct FetchContainer<Object>
 	let fetch: ResourceFetchToken
 	private(set) var result: ResourceFetch<Object>?
 	
-	init(fetch: ResourceFetchToken)
+	var status: ResourceStatus
+	{
+		if self.result == nil
+		{
+			return .loading
+		} else
+		{
+			return (self.result!.result == .success) ? .success : .failure
+		}
+	}
+	
+	var data: Object?
+	{
+		return self.hasData ? self.result!.data! : nil
+	}
+	
+	init(_ fetch: ResourceFetchToken)
 	{
 		self.fetch = fetch
 	}
 	
-	var realCall: Bool
-	{
-		get
-		{
-			return self.fetch != .none
-		}
-	}
-	
 	mutating func setResult(_ result: ResourceFetch<Object>)
 	{
-		if fetch == result.token
+		if self.fetch == result.token
 		{
 			self.result = result
 		}
 	}
 	
-	var inProgress: Bool
+	var loading: Bool
 	{
 		get
 		{
-			return self.realCall && !self.completed
+			return self.status == .loading
 		}
 	}
 	
@@ -46,7 +54,7 @@ struct FetchContainer<Object>
 	{
 		get
 		{
-			return result != nil
+			return self.status == .success || self.status == .failure
 		}
 	}
 	
@@ -54,7 +62,15 @@ struct FetchContainer<Object>
 	{
 		get
 		{
-			return self.completed && result!.result == .success
+			return self.status == .success
+		}
+	}
+	
+	var hasData: Bool
+	{
+		get
+		{
+			return self.successful && self.result!.data != nil
 		}
 	}
 }

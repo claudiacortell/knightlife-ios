@@ -10,17 +10,19 @@ import Foundation
 import UIKit
 
 class SportsViewController: UIViewController
-{	
+{
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
 		
 		self.navigationItem.setRightBarButton(self.getSportsButton(), animated: false)
+		
+		self.navigationItem.hidesBackButton = true // REMOVE LATER.
 	}
 	
 	@objc func sportsClicked(_ sender: Any)
 	{
-		self.dismiss(animated: false, completion: nil)
+		self.navigationController?.popViewController(animated: false)
 	}
 
 	private func getSportsButton() -> UIBarButtonItem

@@ -11,10 +11,12 @@ import Unbox
 
 struct GetPatchResponse: WebCallResult
 {
+	var subtitle: String?
 	var blocks: [GetPatchResponseBlock]
 	
 	init(unboxer: Unboxer) throws
 	{
+		self.subtitle = unboxer.unbox(key: "schedule.subtitle")
 		self.blocks = try unboxer.unbox(keyPath: "schedule.blocks", allowInvalidElements: false)
 	}
 }

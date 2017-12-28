@@ -8,19 +8,22 @@
 
 import Foundation
 
-class Manager: EventHandler
+class Manager
+//	: EventHandler
 {
 	static let defaults = UserDefaults.standard // File saving
     let name: String
 	
 	private(set) var modules: [String: IModule]
 	
-	init(name: String, registerEvents: Bool = true)
+	init(name: String
+//		, registerEvents: Bool = true
+		)
     {
         self.name = name
 		self.modules = [:]
 		
-		if registerEvents { EventManager.instance.registerHandler(handler: self) }
+//		if registerEvents { EventManager.instance.registerHandler(handler: self) }
         out("Loaded and registered as an EventHandler.")
     }
 	
@@ -29,25 +32,25 @@ class Manager: EventHandler
 		print("\(self.name): \(msg)")
 	}
 	
-	func callEvent(_ event: Event)
-	{
-		EventManager.instance.callEvent(event: event)
-	}
+//	func callEvent(_ event: Event)
+//	{
+//		EventManager.instance.callEvent(event: event)
+//	}
 	
-	func eventHandlerName() -> String
-	{
-		return self.name
-	}
-	
-	func eventHandlerTriggers() -> [String]
-	{
-		return []
-	}
-	
-	func eventHandler(event: Event)
-	{
-		
-	}
+//	func eventHandlerName() -> String
+//	{
+//		return self.name
+//	}
+//
+//	func eventHandlerTriggers() -> [String]
+//	{
+//		return []
+//	}
+//
+//	func eventHandler(event: Event)
+//	{
+//
+//	}
 	
 	func registerModule(_ module: IModule, registerPrefs: Bool = true)
 	{

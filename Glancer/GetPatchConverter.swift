@@ -13,6 +13,8 @@ class GetPatchConverter: WebCallResultConverter<ScheduleManager, GetPatchRespons
 	override func convert(_ response: GetPatchResponse) -> DaySchedule?
 	{
 		var daySchedule = DaySchedule()
+		daySchedule.subtitle = response.subtitle
+		
 		for block in response.blocks
 		{
 			if let blockId = BlockID.fromRaw(raw: block.blockId)

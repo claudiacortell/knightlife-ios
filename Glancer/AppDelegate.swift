@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
 	{
         UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
-                
+		
 //        if application.responds(to: #selector(UIApplication.registerUserNotificationSettings(_:)))
 //		{
 //            let types: UIUserNotificationType = ([.alert, .badge, .sound])
@@ -25,6 +25,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 //            application.registerUserNotificationSettings(settings)
 //            application.registerForRemoteNotifications()
 //        }
+		
+		_ = ScheduleManager.instance
+		_ = MeetingManager.instance
+		_ = SportsManager.instance
+		_ = LunchManager.instance
+		_ = EventManager.instance
+		
+		EventManager.instance.fetchEvents(TimeUtils.todayEnscribed, {today in print(today.data)})
 		
         return true
     }

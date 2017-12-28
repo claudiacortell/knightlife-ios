@@ -2,57 +2,51 @@
 //  EventManager.swift
 //  Glancer
 //
-//  Created by Dylan Hanson on 10/27/17.
-//  Copyright © 2017 BB&N. All rights reserved.
+//  Created by Dylan Hanson on 12/15/17.
+//  Copyright © 2017 Dylan Hanson. All rights reserved.
 //
 
 import Foundation
 
 class EventManager: Manager
 {
-    static let instance = EventManager()
-    
-    var eventHandlers: [String: EventHandler]
-    
-    required init()
-    {
-        self.eventHandlers = [:]
-        super.init(name: "Event Manager", registerEvents: false)
-    }
-    
-    func registerHandler(handler: EventHandler)
-    {
-        if !self.handlerRegistered(handler: handler)
-        {
-            self.eventHandlers[handler.eventHandlerName()] = handler
-        }
-    }
-    
-    func unregisterHandler(handler: EventHandler) -> Bool
-    {
-        return self.eventHandlers.removeValue(forKey: handler.eventHandlerName()) == nil ? false : true
-    }
-    
-    func handlerRegistered(handler: EventHandler) -> Bool
-    {
-        for handlerName in self.eventHandlers.keys
-        {
-            if handlerName == handler.eventHandlerName()
-            {
-                return true
-            }
-        }
-        return false
-    }
-    
-    func callEvent(event: Event)
-    {
-        for handler in self.eventHandlers.values
-        {
-            if handler.eventHandlerTriggers().contains(event.name)
-            {
-                handler.eventHandler(event: event)
-            }
-        }
-    }
+	static let instance = EventManager()
+	
+	var events: [EnscribedDate: FetchContainer<EventList>]
+	
+	init()
+	{
+		self.events = [:]
+		
+		super.init(name: "Event Manager")
+	}
+	
+	func getEvents(_ date: EnscribedDate) -> LocalResource<EventList>
+	{
+		let status = self.events[date] == nil ? .dead : self.events[date]!.status
+		if status == .success, let eventList = self.events[date]?.data
+		{
+			return LocalResource(status, eventList)
+		}
+		return LocalResource(status, nil)
+	}
+	
+	@discardableResult
+	func fetchEvents(_ date: EnscribedDate, _ callback: @escaping (ResourceFetch<EventList>) -> Void = {_ in}) -> ResourceFetchToken
+	{
+		let token = ResourceFetchToken()
+		self.events[date] = FetchContainer(token)
+		
+		let call = GetEventsWebCall(self, date: date, token: token)
+		call.addCallback(
+		{ fetch in
+			if self.events[date] != nil
+			{
+				self.events[date]!.setResult(fetch)
+			}
+			callback(fetch)
+		})
+		call.execute()
+		return token
+	}
 }
