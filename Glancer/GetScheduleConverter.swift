@@ -8,16 +8,16 @@
 
 import Foundation
 
-class GetScheduleConverter: WebCallResultConverter<ScheduleManager, GetScheduleResponse, [DayID: DaySchedule]>
+class GetScheduleConverter: WebCallResultConverter<ScheduleManager, GetScheduleResponse, [DayID: WeekdaySchedule]>
 {
-	override func convert(_ response: GetScheduleResponse) -> [DayID : DaySchedule]?
+	override func convert(_ response: GetScheduleResponse) -> [DayID : WeekdaySchedule]?
 	{
-		var dayList: [DayID: DaySchedule] = [:]
+		var dayList: [DayID: WeekdaySchedule] = [:]
 		for day in response.days
 		{
 			if let dayId = DayID.fromRaw(raw: day.dayId)
 			{
-				var schedule = DaySchedule()
+				var schedule = WeekdaySchedule(dayId)
 				for block in day.blocks
 				{
 					if let blockId = BlockID.fromRaw(raw: block.blockId)
@@ -32,8 +32,8 @@ class GetScheduleConverter: WebCallResultConverter<ScheduleManager, GetScheduleR
 							manager.out("Recieved an invalid start/end time: \(block.startTime), \(block.endTime)")
 						} else
 						{
-							let scheduleBlock = ScheduleBlock(blockId: blockId, time: TimeDuration(startTime: startTime, endTime: endTime), variation: variation, associatedBlock: associatedBlock)
-							schedule.blocks.append(scheduleBlock)
+							let scheduleBlock = ScheduleBlock(blockId: blockId, time: TimeDuration(startTime: startTime, endTime: endTime), variation: variation, associatedBlock: associatedBlock, customName: nil)
+							schedule.addBlock(scheduleBlock)
 						}
 					} else
 					{

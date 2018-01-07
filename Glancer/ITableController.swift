@@ -25,7 +25,7 @@ class ITableController: UITableViewController
 //		Override point
 	}
 	
-	func registerHandler(_ reuseId: String, handler: @escaping (Int, UITableViewCell) -> Void)
+	func registerCellHandler(_ reuseId: String, handler: @escaping (Int, UITableViewCell) -> Void)
 	{
 		self.cellHandlers[reuseId] = handler
 	}
@@ -41,7 +41,7 @@ class ITableController: UITableViewController
 		{
 			return section.title
 		}
-		return nil
+		return super.tableView(tableView, titleForHeaderInSection: section)
 	}
 	
 	override func numberOfSections(in tableView: UITableView) -> Int
@@ -55,7 +55,7 @@ class ITableController: UITableViewController
 		{
 			return section.cellCount
 		}
-		return 0
+		return super.tableView(tableView, numberOfRowsInSection: section)
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
@@ -69,5 +69,32 @@ class ITableController: UITableViewController
 		}
 		
 		return cell
+	}
+	
+	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+	{
+		if let section = self.storyboardContainer.getSection(indexPath.section), let cell = section.getCell(indexPath.row), let height = cell.height
+		{
+			return CGFloat(height)
+		}
+		return super.tableView(tableView, heightForRowAt: indexPath)
+	}
+	
+	override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
+	{
+		if let section = self.storyboardContainer.getSection(section), let height = section.headerHeight
+		{
+			return CGFloat(height)
+		}
+		return super.tableView(tableView, heightForHeaderInSection: section)
+	}
+	
+	override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat
+	{
+		if let section = self.storyboardContainer.getSection(section), let height = section.footerHeight
+		{
+			return CGFloat(height)
+		}
+		return super.tableView(tableView, heightForFooterInSection: section)
 	}
 }

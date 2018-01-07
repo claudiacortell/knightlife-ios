@@ -7,9 +7,20 @@
 //
 
 import Foundation
+import CoreGraphics
 
 struct TableCell
 {
 	let reuseId: String
 	let id: Int
+	
+	var height: CGFloat?
+	
+	init(_ reuseId: String, id: Int, height: CGFloat? = nil)
+	{
+		self.reuseId = reuseId
+		self.id = id
+		
+		self.height = height
+	}
 }

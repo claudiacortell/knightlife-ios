@@ -8,14 +8,14 @@
 
 import Foundation
 
-class GetScheduleWebCall: WebCall<ScheduleManager, GetScheduleResponse, [DayID: DaySchedule]>
+class GetScheduleWebCall: WebCall<ScheduleManager, GetScheduleResponse, [DayID: WeekdaySchedule]>
 {    
 	init(_ manager: ScheduleManager, token: ResourceFetchToken)
 	{
 		super.init(manager: manager, converter: GetScheduleConverter(), token: token, call: "request/schedule.php")
 	}
     
-	override func handleCall(url: String, call: String, completeCall: String, success: Bool, error: String?, data: [DayID : DaySchedule]?)
+	override func handleCall(url: String, call: String, completeCall: String, success: Bool, error: String?, data: [DayID : WeekdaySchedule]?)
 	{
 		if success
 		{

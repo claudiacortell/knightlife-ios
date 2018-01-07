@@ -21,8 +21,28 @@ class TimeUtils
 			let month = calendar.component(.month, from: now)
 			let day = calendar.component(.day, from: now)
 			
-			return EnscribedDate(year: year, month: month, day: day)
+			return EnscribedDate(year: year, month: month, day: day)!
 		}
+	}
+	
+	static func isToday(_ date: EnscribedDate) -> Bool
+	{
+		return TimeUtils.dayDifference(TimeUtils.todayEnscribed, date) == 0
+	}
+	
+	static func isTomorrow(_ date: EnscribedDate) -> Bool
+	{
+		return TimeUtils.dayDifference(TimeUtils.todayEnscribed, date) == 1
+	}
+	
+	static func daysUntil(_ date: EnscribedDate) -> Int
+	{
+		return TimeUtils.dayDifference(TimeUtils.todayEnscribed, date)
+	}
+	
+	static func dayDifference(_ date1: EnscribedDate, _ date2: EnscribedDate) -> Int
+	{
+		return Calendar.current.dateComponents([.day], from: date1.date, to: date2.date).day!
 	}
 	
 	static func dateFromEnscribed(enscribedDate: EnscribedDate = TimeUtils.todayEnscribed, enscribedTime: EnscribedTime) -> Date?
@@ -97,7 +117,18 @@ class TimeUtils
 		return (hour: hour!, minute: minute!)
 	}
 	
-	static func dateFromEnscribedDate(_ enscribedDate: EnscribedDate) -> Date?
+	static func validEnscribedDate(_ date: EnscribedDate) -> Bool
+	{
+		var dateComponents = DateComponents()
+		dateComponents.year = date.year
+		dateComponents.month = date.month
+		dateComponents.day = date.day
+		dateComponents.timeZone = TimeZone(abbreviation: "EST")
+		
+		return Calendar.current.date(from: dateComponents) != nil
+	}
+	
+	static func dateFromEnscribedDate(_ enscribedDate: EnscribedDate) -> Date
 	{
 		var dateComponents = DateComponents()
 		dateComponents.year = enscribedDate.year
@@ -105,25 +136,23 @@ class TimeUtils
 		dateComponents.day = enscribedDate.day
 		dateComponents.timeZone = TimeZone(abbreviation: "EST")
 		
-		return Calendar.current.date(from: dateComponents)
+		return Calendar.current.date(from: dateComponents)!
 	}
 	
-	static func getDayOfWeek(_ enscribedDate: EnscribedDate = TimeUtils.todayEnscribed) -> DayID?
+	static func getDayOfWeek(_ enscribedDate: EnscribedDate = TimeUtils.todayEnscribed) -> DayID
 	{
-		if let date = TimeUtils.dateFromEnscribedDate(enscribedDate)
+		let date = TimeUtils.dateFromEnscribedDate(enscribedDate)
+		
+		var weekday = Calendar.current.component(.weekday, from: date)
+		if (weekday == 1)
 		{
-			var weekday = Calendar.current.component(.weekday, from: date)
-			if (weekday == 1)
-			{
-				weekday = 6
-			} else
-			{
-				weekday = weekday - 2;
-			}
-			
-			return DayID.fromId(weekday)
+			weekday = 6
+		} else
+		{
+			weekday = weekday - 2;
 		}
-		return nil
+		
+		return DayID.fromId(weekday)!
 	}
 	
 	static func timeToDateInMinutes(to: Date) -> (hours: Int, minutes: Int)

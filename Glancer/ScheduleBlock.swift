@@ -14,6 +14,7 @@ struct ScheduleBlock
 	let time: TimeDuration
 	let variation: Int?
 	let associatedBlock: BlockID?
+	let customName: String? // Only used when the block ID is Custom
 }
 
 extension ScheduleBlock: Equatable

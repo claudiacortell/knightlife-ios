@@ -11,71 +11,111 @@ import UIKit
 
 class BlockTableViewController: ITableController
 {
-	class BlocksCell
-	{
-		static let CELL_CLASS = "cell_class"
-		static let CELL_BLOCK = "cell_block"
-		static let CELL_BLOCK_HEADER = "cell_header"
-		static let CELL_NOCLASS = "cell_noClass"
-	}
+	var date: EnscribedDate = EnscribedDate(year: 2018, month: 1, day: 11)!
 	
-	var blockViewController: BlockViewController!
+	var daySchedule: DateSchedule?
+	var meetings: DayCourseList!
 	
-	var date: EnscribedDate = TimeUtils.todayEnscribed
-	
-	var daySchedule: DaySchedule!
-	var meetings: DayMeetingList!
+	var hasLoadedForTheFirstTime = false
 	
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
-		
-		self.refreshControl?.addTarget(self, action: #selector(BlockTableViewController.doRefresh(_:)), for: .valueChanged)
-		self.refreshControl?.layer.zPosition = -1
-		
+	
 		self.reload(hard: false, refresh: false)
 	}
 	
 	override func viewWillAppear(_ animated: Bool)
 	{
 		super.viewWillAppear(animated)
+		
+		self.setLoading()
 	}
 	
-	@objc private func doRefresh(_ sender: Any)
+	private func setLoading()
 	{
+		if self.hasLoadedForTheFirstTime
+		{
+			return
+		}
+
+		var container = TableContainer()
+		var blockSection = TableSection() // Blocks
+		
+		blockSection.cells.append(TableCell("loading", id: 15, height: self.view.frame.height))
+		container.sections.append(blockSection)
+		
+		self.storyboardContainer = container
+		self.tableView.reloadData()
+	}
+	
+	private func buildRefreshControl()
+	{
+		if self.hasLoadedForTheFirstTime
+		{
+			return
+		}
+		
+		self.refreshControl = UIRefreshControl()
+		self.refreshControl?.addTarget(self, action: #selector(BlockTableViewController.doRefresh), for: .valueChanged)
+		
+		self.refreshControl?.layer.zPosition = -1
+		self.refreshControl?.layer.backgroundColor = UIColor("FFB53D").cgColor
+		self.refreshControl?.tintColor = UIColor.white
+		
+		self.hasLoadedForTheFirstTime = true
+	}
+	
+	@objc private func doRefresh()
+	{
+		HapticUtils.IMPACT.impactOccurred()
 		self.reload()
 	}
 	
 	override func registerCellHandlers()
 	{
-		self.registerHandler(BlocksCell.CELL_BLOCK, handler:
+		self.registerCellHandler("block", handler:
 		{ id, cell in
-			if let blockCell = cell as? BlockTableBlockViewCell, let block = self.daySchedule.getBlockByHash(id)
+			if let blockCell = cell as? BlockTableBlockViewCell, let block = self.daySchedule?.getBlockByHash(id)
 			{
-				blockCell.block = block.blockId
+				let analyst = BlockAnalyst(block, schedule: self.daySchedule!)
+				blockCell.blockName = analyst.getDisplayName()
+				blockCell.blockLetter = analyst.getDisplayLetter()
+				blockCell.color = analyst.getColor()
+				
 				blockCell.startTime = block.time.startTime
 				blockCell.endTime = block.time.endTime
-				
-				if self.meetings.fromBlock(block.blockId).meetings.count > 0
-				{
-					blockCell.more = true
-				}
 			}
 		})
 		
-		self.registerHandler(BlocksCell.CELL_CLASS, handler:
+		self.registerCellHandler("masthead", handler:
 		{ id, cell in
-			if let classCell = cell as? BlockTableClassViewCell, let block = self.daySchedule.getBlockByHash(id), let classMeeting = self.meetings.fromBlock(block.blockId).getClass()
+			if let blockCell = cell as? BlockTableMastheadViewCell, var templateCell = self.storyboardContainer.getCell(id)
 			{
-				classCell.block = block.blockId
-				classCell.startTime = block.time.startTime
-				classCell.endTime = block.time.endTime
-				classCell.className = classMeeting.name
-				
-				if self.meetings.fromBlock(block.blockId).meetings.count > 1
+				blockCell.date = self.date.prettyString
+
+				if TimeUtils.isToday(self.date)
 				{
-					classCell.more = true
+					blockCell.scope = "TODAY"
+				} else if TimeUtils.isTomorrow(self.date)
+				{
+					blockCell.scope = "TOMORROW";
+				} else
+				{
+					blockCell.scope = "\(TimeUtils.daysUntil(self.date)) DAYS AWAY"
 				}
+				
+				blockCell.clearSubtitles()
+				if self.daySchedule != nil
+				{
+					if let first = self.daySchedule!.getFirstBlock(), let last = self.daySchedule!.getLastBlock()
+					{
+						blockCell.addSubtitle("\(first.time.startTime.toString()) - \(last.time.endTime.toString())")
+						blockCell.addSubtitle("\(self.daySchedule!.getBlocks().count) Blocks")
+					}
+				}
+				
+				self.storyboardContainer.setHeight(templateCell, height: blockCell.height)
 			}
 		})
 	}
@@ -106,61 +146,61 @@ class BlockTableViewController: ITableController
 		}
 	}
 	
-	private func scheduleDidLoad(_ success: Bool, schedule: DaySchedule?)
+	private func scheduleDidLoad(_ success: Bool, schedule: DateSchedule?)
 	{
-		if success
+		DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1)
 		{
-			self.meetings = MeetingManager.instance.getMeetings(date: self.date, schedule: schedule!) // Retrieve meetings for today
+			HapticUtils.IMPACT.impactOccurred()
+			if success
+			{
+				self.daySchedule = schedule!
+				
+				self.generateContainer()
+				self.tableView.reloadData()
+			} else
+			{
+				self.daySchedule = nil
+				
+				self.generateContainer()
+				self.tableView.reloadData()
+				
+			}
 			
-			self.blockViewController.setTable()
-
-			self.daySchedule = nil
-			self.daySchedule = schedule!
-			
-			self.generateContainer()
-			self.tableView.reloadData()
-		} else
-		{
-			self.blockViewController.setError()
-			
-			self.daySchedule = nil
-			
-			self.storyboardContainer = TableContainer()
-			self.tableView.reloadData()
+			self.buildRefreshControl()
+			self.refreshControl?.endRefreshing()
 		}
-		self.refreshControl?.endRefreshing()
 	}
-	
-	let variation = 1
 
 	override func generateContainer()
 	{
 		var container = TableContainer()
 
-		var blockSection = TableSection() // Blocks
-		
-		if self.daySchedule.blocks.isEmpty // No blocks today
+		if self.daySchedule == nil
 		{
-			blockSection.cells.append(TableCell(reuseId: BlocksCell.CELL_NOCLASS, id: 0))
+			var blockSection = TableSection() // Blocks
+			blockSection.cells.append(TableCell("error", id: 0, height: self.view.frame.height))
+			container.sections.append(blockSection)
+		} else if self.daySchedule!.isEmpty // No blocks today
+		{
+			var blockSection = TableSection()
+			blockSection.cells.append(TableCell("masthead", id: 294))
+			blockSection.cells.append(TableCell("noClass", id: 0))
+			container.sections.append(blockSection)
 		} else
 		{
-			blockSection.cells.append(TableCell(reuseId: BlocksCell.CELL_BLOCK_HEADER, id: 0))
-			
-			for block in self.daySchedule.getScheduleVariation(variation) // Testing variations
+			var blockSection = TableSection()
+			blockSection.cells.append(TableCell("masthead", id: 294))
+			container.sections.append(blockSection)
+
+			for block in self.daySchedule!.getBlocks() // Testing variations
 			{
-				let meetingList = self.meetings.fromBlock(block.blockId)
-				
-				if meetingList.hasClass()
-				{
-					blockSection.cells.append(TableCell(reuseId: BlocksCell.CELL_CLASS, id: block.hashValue))
-				} else
-				{
-					blockSection.cells.append(TableCell(reuseId: BlocksCell.CELL_BLOCK, id: block.hashValue))
-				}
+				var itemSection = TableSection()
+				itemSection.headerHeight = 1
+				itemSection.footerHeight = 1
+				itemSection.cells.append(TableCell("block", id: block.hashValue, height: 65))
+				container.sections.append(itemSection)
 			}
 		}
-		
-		container.sections.append(blockSection)
 		
 		self.storyboardContainer = container
 	}

@@ -18,6 +18,6 @@ class GetEventsWebCall: WebCall<EventManager, GetEventsResponse, EventList>
 		
 		super.init(manager: manager, converter: GetEventsConverter(), token: token, call: "request/events.php")
 		
-		self.parameter("date", val: date.toString())
+		self.parameter("date", val: date.string)
 	}
 }

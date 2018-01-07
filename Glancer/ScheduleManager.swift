@@ -12,8 +12,13 @@ class ScheduleManager: Manager
 {	
 	static let instance = ScheduleManager()
 	
-	var template: FetchContainer<[DayID: DaySchedule]>!
-	var schedulePatches: [EnscribedDate: FetchContainer<DaySchedule>]
+	var template: FetchContainer<[DayID: WeekdaySchedule]>!
+	var schedulePatches: [EnscribedDate: FetchContainer<DateSchedule>]
+	
+	var variationModule: ScheduleVariationPrefsModule
+	{
+		return self.getModule("variation") as! ScheduleVariationPrefsModule
+	}
 	
 	init()
 	{
@@ -22,60 +27,84 @@ class ScheduleManager: Manager
 		
 		super.init(name: "Schedule Manager")
 		
+		self.registerModule(ScheduleVariationPrefsModule(self, name: "variation"))
+		
 		self.fetchTemplate()
 	}
 	
-	func getTemplate() -> LocalResource<[DayID: DaySchedule]>
+	func getVariation(_ day: DayID) -> Int
 	{
-		return LocalResource(self.template.status, self.template.data)
+		return self.variationModule.getItem(day) ?? 0
 	}
 	
-	func getSchedule(_ day: DayID) -> LocalResource<DaySchedule>
+	func getVariation(_ date: EnscribedDate) -> Int
 	{
-		return LocalResource(self.template.status, self.template.data![day])
+		return self.variationModule.getItem(date.dayOfWeek) ?? 0
 	}
 	
-	func getSchedule(_ date: EnscribedDate) -> LocalResource<DaySchedule>
+	func getTemplate() -> RemoteResource<[DayID: WeekdaySchedule]>
+	{
+		return RemoteResource(self.template.status, self.template.data)
+	}
+	
+	func getSchedule(_ day: DayID) -> RemoteResource<WeekdaySchedule>
+	{
+		return RemoteResource(self.template.status, self.template.data![day])
+	}
+	
+	func getSchedule(_ date: EnscribedDate) -> RemoteResource<DateSchedule>
 	{
 		let status = self.schedulePatches[date] == nil ? .dead : self.schedulePatches[date]!.status
-		if status == .success, let schedule = self.schedulePatches[date]?.data
+		if status == .loaded, let schedule = self.schedulePatches[date]?.data
 		{
-			return LocalResource(status, schedule)
+			return RemoteResource(status, schedule)
 		}
-		return LocalResource(status, nil)
+		return RemoteResource(status, nil)
 	}
 	
 	@discardableResult
-	func fetchTemplate(_ callback: @escaping (ResourceFetch<[DayID: DaySchedule]>) -> Void = {_ in}) -> ResourceFetchToken
+	func fetchTemplate(_ callback: @escaping (ResourceFetch<[DayID: WeekdaySchedule]>) -> Void = {_ in}) -> ResourceFetchToken
 	{
 		let token = ResourceFetchToken()
 		self.template = FetchContainer(token)
 
 		let call = GetScheduleWebCall(self, token: token)
+		
 		call.addCallback(
 		{ fetch in
 			self.template.setResult(fetch)
+		})
+		
+		call.addCallback(
+		{ fetch in
 			callback(fetch)
 		})
+		
 		call.execute()
 		return token
 	}
 	
 	@discardableResult
-	func fetchDaySchedule(_ date: EnscribedDate, _ callback: @escaping (ResourceFetch<DaySchedule>) -> Void = {_ in}) -> ResourceFetchToken
+	func fetchDaySchedule(_ date: EnscribedDate, _ callback: @escaping (ResourceFetch<DateSchedule>) -> Void = {_ in}) -> ResourceFetchToken
 	{
 		let token = ResourceFetchToken()
 		self.schedulePatches[date] = FetchContainer(token)
 		
 		let call = GetPatchWebCall(self, date: date, token: token)
+		
 		call.addCallback(
 		{ fetch in
 			if self.schedulePatches[date] != nil
 			{
 				self.schedulePatches[date]!.setResult(fetch)
 			}
+		})
+		
+		call.addCallback(
+		{ fetch in
 			callback(fetch)
 		})
+		
 		call.execute()
 		return token
 	}

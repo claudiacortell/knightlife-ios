@@ -21,14 +21,14 @@ class LunchManager: Manager
 		super.init(name: "Lunch Manager")
 	}
 	
-	func getMenu(_ date: EnscribedDate) -> LocalResource<LunchMenu>
+	func getMenu(_ date: EnscribedDate) -> RemoteResource<LunchMenu>
 	{
 		let status = self.lunchMenus[date] == nil ? .dead : self.lunchMenus[date]!.status
-		if status == .success, let menu = self.lunchMenus[date]?.data
+		if status == .loaded, let menu = self.lunchMenus[date]?.data
 		{
-			return LocalResource(status, menu)
+			return RemoteResource(status, menu)
 		}
-		return LocalResource(status, nil)
+		return RemoteResource(status, nil)
 	}
 	
 	@discardableResult

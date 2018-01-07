@@ -11,9 +11,12 @@ import Foundation
 struct TableSection
 {
     var cells: [TableCell] = []
+	
 	var title: String?
-    
-    var cellCount: Int { get { return cells.count } }
+	var headerHeight: Int?
+	var footerHeight: Int?
+	
+    var cellCount: Int { return cells.count }
 }
 
 extension TableSection
@@ -23,8 +26,21 @@ extension TableSection
 		self.title = title
 	}
 	
-    func getCell(_ id: Int) -> TableCell?
+	func getCell(_ id: Int) -> TableCell?
+	{
+		return self.cells[id]
+	}
+	
+    func getCellByID(_ id: Int) -> TableCell?
     {
-        return self.cells[id]
-    }
+		for cell in self.cells
+		{
+			if cell.id == id
+			{
+				return cell
+			}
+		}
+		
+		return nil
+	}
 }

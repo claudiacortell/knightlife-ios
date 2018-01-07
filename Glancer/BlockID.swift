@@ -22,7 +22,8 @@ enum BlockID: String
     lunch = "Lunch",
 	activities = "Activities",
 	lab = "Lab",
-	custom = "Custom"
+	custom = "Custom",
+	advisory = "Advisory"
 	
 	var id: Int
 	{
@@ -73,9 +74,6 @@ enum BlockID: String
 		return nil
 	}
 	
-	static func values() -> [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x, .custom, .activities, .lab, .lunch] }
+	static func values() -> [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x, .custom, .activities, .lab, .lunch, .advisory] }
 	static func regularBlocks() -> [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x] }
-	static func academicBlocks() -> [BlockID] { return [.a, .b, .c, .d, .e, .f, .g] }
-	
-	
 }

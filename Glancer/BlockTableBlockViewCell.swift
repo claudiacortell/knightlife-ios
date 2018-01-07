@@ -19,14 +19,27 @@ class BlockTableBlockViewCell: UITableViewCell
 	@IBOutlet weak private var timeFromLabel: UILabel!
 	@IBOutlet weak private var timeToLabel: UILabel!
 	
-	@IBOutlet weak private var moreIcon: UIView!
-	
-	var block: BlockID?
+	var blockLetter: String?
 	{
 		didSet
 		{
-			self.blockLabel.text = block?.displayName
-			self.blockLetterLabel.text = block?.displayLetter
+			self.blockLetterLabel.text = blockLetter
+		}
+	}
+	
+	var color: String?
+	{
+		didSet
+		{
+			self.colorView.backgroundColor = color == nil ? nil : UIColor(color!)
+		}
+	}
+	
+	var blockName: String?
+	{
+		didSet
+		{
+			self.blockLabel.text = blockName
 		}
 	}
 	
@@ -43,14 +56,6 @@ class BlockTableBlockViewCell: UITableViewCell
 		didSet
 		{
 			self.timeToLabel.text = endTime?.toString()
-		}
-	}
-	
-	var more: Bool = false
-	{
-		didSet
-		{
-			self.moreIcon.isHidden = !more
 		}
 	}
 }

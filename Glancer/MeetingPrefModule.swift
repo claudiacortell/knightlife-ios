@@ -22,7 +22,7 @@ class MeetingPrefModule: Module<MeetingManager>, PreferenceHandler
 	
 	func readStorageValues(data: Any)
 	{
-		if let list = data as? [Meeting]
+		if let list = data as? [Course]
 		{
 			for meeting in list
 			{

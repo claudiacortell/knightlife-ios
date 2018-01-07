@@ -30,6 +30,8 @@ struct GetPatchResponseBlock: WebCallResult
 	var variation: Int?
 	var associatedBlock: String?
 	
+	var customName: String?
+	
 	init(unboxer: Unboxer) throws
 	{
 		self.blockId = try unboxer.unbox(key: "blockId")
@@ -38,5 +40,7 @@ struct GetPatchResponseBlock: WebCallResult
 		
 		self.variation = unboxer.unbox(key: "variation")
 		self.associatedBlock = unboxer.unbox(key: "associatedBlock")
+		
+		self.customName = unboxer.unbox(key: "customName")
 	}
 }

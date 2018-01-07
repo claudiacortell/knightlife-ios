@@ -21,14 +21,14 @@ class EventManager: Manager
 		super.init(name: "Event Manager")
 	}
 	
-	func getEvents(_ date: EnscribedDate) -> LocalResource<EventList>
+	func getEvents(_ date: EnscribedDate) -> RemoteResource<EventList>
 	{
 		let status = self.events[date] == nil ? .dead : self.events[date]!.status
-		if status == .success, let eventList = self.events[date]?.data
+		if status == .loaded, let eventList = self.events[date]?.data
 		{
-			return LocalResource(status, eventList)
+			return RemoteResource(status, eventList)
 		}
-		return LocalResource(status, nil)
+		return RemoteResource(status, nil)
 	}
 	
 	@discardableResult

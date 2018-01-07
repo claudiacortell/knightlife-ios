@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreGraphics
 
 struct TableContainer
 {
@@ -20,4 +21,29 @@ extension TableContainer
     {
         return self.sections[id]
     }
+	
+	func getCell(_ id: Int) -> TableCell?
+	{
+		for section in self.sections
+		{
+			if let cell = section.getCellByID(id)
+			{
+				return cell
+			}
+		}
+		return nil
+	}
+	
+	func setHeight(_ cell: TableCell, height: CGFloat)
+	{
+		setHeight(cell.id, height: height)
+	}
+	
+	func setHeight(_ id: Int, height: CGFloat)
+	{
+		if var cell = getCell(id)
+		{
+			cell.height = CGFloat(height)
+		}
+	}
 }

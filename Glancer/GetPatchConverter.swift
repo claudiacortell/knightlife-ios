@@ -8,11 +8,18 @@
 
 import Foundation
 
-class GetPatchConverter: WebCallResultConverter<ScheduleManager, GetPatchResponse, DaySchedule>
+class GetPatchConverter: WebCallResultConverter<ScheduleManager, GetPatchResponse, DateSchedule>
 {
-	override func convert(_ response: GetPatchResponse) -> DaySchedule?
+	let date: EnscribedDate
+	
+	init(_ date: EnscribedDate)
 	{
-		var daySchedule = DaySchedule()
+		self.date = date
+	}
+	
+	override func convert(_ response: GetPatchResponse) -> DateSchedule?
+	{
+		var daySchedule = DateSchedule(date)
 		daySchedule.subtitle = response.subtitle
 		
 		for block in response.blocks
@@ -25,13 +32,15 @@ class GetPatchConverter: WebCallResultConverter<ScheduleManager, GetPatchRespons
 				let variation = block.variation
 				let associatedBlock: BlockID? = block.associatedBlock == nil ? nil : BlockID.fromRaw(raw: block.associatedBlock!)
 				
+				let customName = block.customName
+				
 				if !startTime.valid || !endTime.valid || startTime.toDate() == nil || endTime.toDate() == nil
 				{
 					manager.out("Recieved an invalid start/end time: \(block.startTime), \(block.endTime)")
 				} else
 				{
-					let scheduleBlock = ScheduleBlock(blockId: blockId, time: TimeDuration(startTime: startTime, endTime: endTime), variation: variation, associatedBlock: associatedBlock)
-					daySchedule.blocks.append(scheduleBlock)
+					let scheduleBlock = ScheduleBlock(blockId: blockId, time: TimeDuration(startTime: startTime, endTime: endTime), variation: variation, associatedBlock: associatedBlock, customName: customName)
+					daySchedule.addBlock(scheduleBlock)
 				}
 			} else
 			{

@@ -20,7 +20,7 @@ struct FetchContainer<Object>
 			return .loading
 		} else
 		{
-			return (self.result!.result == .success) ? .success : .failure
+			return (self.result!.result == .success) ? .loaded : .failed
 		}
 	}
 	
@@ -54,7 +54,7 @@ struct FetchContainer<Object>
 	{
 		get
 		{
-			return self.status == .success || self.status == .failure
+			return self.status == .loaded || self.status == .failed
 		}
 	}
 	
@@ -62,7 +62,7 @@ struct FetchContainer<Object>
 	{
 		get
 		{
-			return self.status == .success
+			return self.status == .loaded
 		}
 	}
 	

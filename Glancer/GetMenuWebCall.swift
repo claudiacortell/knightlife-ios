@@ -18,7 +18,7 @@ class GetMenuWebCall: WebCall<LunchManager, GetMenuResponse, LunchMenu>
 		
 		super.init(manager: manager, converter: GetMenuConverter(), token: token, call: "request/lunch.php")
 		
-		self.parameter("date", val: date.toString())
+		self.parameter("date", val: date.string)
 	}
 	
 	override func handleCall(url: String, call: String, completeCall: String, success: Bool, error: String?, data: LunchMenu?)

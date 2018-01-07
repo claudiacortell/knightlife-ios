@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate
@@ -27,12 +28,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 //        }
 		
 		_ = ScheduleManager.instance
-		_ = MeetingManager.instance
-		_ = SportsManager.instance
-		_ = LunchManager.instance
-		_ = EventManager.instance
+//		_ = MeetingManager.instance
+//		_ = SportsManager.instance
+//		_ = LunchManager.instance
+//		_ = EventManager.instance
 		
-		EventManager.instance.fetchEvents(TimeUtils.todayEnscribed, {today in print(today.data)})
+//		EventManager.instance.fetchEvents(TimeUtils.todayEnscribed, {today in print(today.data)})
+		
+		let mainStoryboardIpad = UIStoryboard(name: "Main", bundle: nil)
+		let initialViewControlleripad = mainStoryboardIpad.instantiateViewController(withIdentifier: "initial")
+		
+		self.window = UIWindow(frame: UIScreen.main.bounds)
+		self.window?.rootViewController = initialViewControlleripad
+		
+		self.window?.makeKeyAndVisible()
+		
+		initialViewControlleripad.childViewControllers.first!.navigationController?.pushViewController(mainStoryboardIpad.instantiateViewController(withIdentifier: "home"), animated: false)
 		
         return true
     }
@@ -48,50 +59,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         }
         
         print("Device Token:", tokenString)
-		
 		Device.ID = tokenString
 		
-		var savedInDB: Bool = false
-		if Storage.DB_SAVED.exists()
-		{
-			savedInDB = Storage.DB_SAVED.getValue() as! Bool
-		} else
-		{
-			Storage.DB_SAVED.set(data: false)
+		Alamofire.request("https://bbnknightlife.herokuapp.com/api/deviceTokens/?deviceToken=\(tokenString)", method: .post).responseString
+		{ response in
+			guard let data = response.data, response.error == nil else
+			{                                                 // check for fundamental networking error
+				print("error=\(response.error!)")
+				return
+			}
+			
+			if let httpStatus = response.response, httpStatus.statusCode != 200
+			{           // check for http errors
+				print("statusCode should be 200, but is \(httpStatus.statusCode)")
+				print("response = \(response.response!)")
+				
+			}
 		}
-
-        let tokenStringPub = tokenString
-		
-//        if (!savedInDB)
-//		{
-//			Storage.DB_SAVED.set(data: true)
-//
-//            var request = URLRequest(url: URL(string: "https://bbnknightlife.herokuapp.com/api/deviceTokens/")!)
-//            request.httpMethod = "POST"
-//            // let postString = "deviceToken=13234323"
-//            let postString = "deviceToken=" + tokenStringPub
-//            request.httpBody = postString.data(using: .utf8)
-//            let task = URLSession.shared.dataTask(with: request) { data, response, error in
-//                guard let data = data, error == nil else
-//				{                                                 // check for fundamental networking error
-//                    print("error=\(error!)")
-//                    return
-//                }
-//
-//                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200
-//				{           // check for http errors
-//                    print("statusCode should be 200, but is \(httpStatus.statusCode)")
-//                    print("response = \(response!)")
-//
-//                }
-//
-////                let responseString = String(data: data, encoding: .utf8)
-////                print("responseString = \(responseString!)")
-//
-//            }
-//
-//            task.resume()
-//        }
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error)
@@ -101,18 +85,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void)
 	{
-        if let aps = userInfo["aps"] as? NSDictionary
+		if let aps = userInfo as? [String: Any], let type = aps["type"] as? Int
 		{
-            let message: String = aps["alert"] as! String
-            
-            if (message == "Auto-Updating...")
+			if type == 0 // Update local schedule
 			{
-//                if (ScheduleManager.instance.loadBlocks())
-//				{
-//                    completionHandler(UIBackgroundFetchResult.newData)
-//                }
-            }
-        }
+//				UPDATE SCHEDULE
+			}
+		}
     }
 	
     func applicationWillResignActive(_ application: UIApplication)
@@ -144,12 +123,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void)
 	{
-//        if (ScheduleManager.instance.loadBlocks())
-//		{
-//            completionHandler(.newData)
-//        } else
-//		{
-//            completionHandler(.failed)
-//        }
+//		LOAD BLOCKS
     }
 }

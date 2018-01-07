@@ -24,7 +24,7 @@ class Manager
 		self.modules = [:]
 		
 //		if registerEvents { EventManager.instance.registerHandler(handler: self) }
-        out("Loaded and registered as an EventHandler.")
+//        out("Loaded and registered as an EventHandler.")
     }
 	
 	func out(_ msg: String)

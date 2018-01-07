@@ -14,28 +14,22 @@ struct EnscribedDate
 	let month: Int
 	let day: Int
 	
-	var valid: Bool
-	{
-		get
-		{
-			return self.year != -1 && self.month != -1 && self.day != -1
-		}
-	}
-	
-	init(year: Int, month: Int, day: Int)
+	init?(year: Int, month: Int, day: Int)
 	{
 		self.year = year
 		self.month = month
 		self.day = day
+		
+		if !TimeUtils.validEnscribedDate(self)
+		{
+			return nil
+		}
 	}
 	
-	init(raw: String = "")
+	init?(raw: String = "")
 	{
 		let result = TimeUtils.unwrapRawDate(raw: raw)
-		
-		self.year = result.year
-		self.month = result.month
-		self.day = result.day
+		self.init(year: result.year, month: result.month, day: result.day)
 	}
 }
 
@@ -54,21 +48,28 @@ extension EnscribedDate: Hashable
 		return self.day ^ self.month ^ self.year
 	}
 	
-	func toDate() -> Date?
+	var date: Date
 	{
 		return TimeUtils.dateFromEnscribedDate(self)
 	}
 	
-	var dayOfWeek: DayID?
+	var dayOfWeek: DayID
 	{
 		return TimeUtils.getDayOfWeek(self)
 	}
 	
-	func toString() -> String
+	var string: String
 	{
 		let month = self.month < 10 ? "0\(self.month)" : String(self.month)
 		let day = self.day < 10 ? "0\(self.day)" : String(self.day)
 		
 		return "\(self.year)-\(month)-\(day)"
+	}
+	
+	var prettyString: String
+	{
+		let formatter = DateFormatter()
+		formatter.dateFormat = "MMMM"
+		return "\(dayOfWeek.displayName), \(formatter.string(from: self.date)) \(self.day)"
 	}
 }
