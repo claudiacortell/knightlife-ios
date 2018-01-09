@@ -11,7 +11,7 @@ import UIKit
 
 class BlockTableViewController: ITableController
 {
-	var date: EnscribedDate = EnscribedDate(year: 2018, month: 1, day: 11)!
+	var date: EnscribedDate = TimeUtils.todayEnscribed
 	
 	var daySchedule: DateSchedule?
 	var meetings: DayCourseList!
@@ -21,15 +21,18 @@ class BlockTableViewController: ITableController
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
-	
-		self.reload(hard: false, refresh: false)
-	}
-	
-	override func viewWillAppear(_ animated: Bool)
-	{
-		super.viewWillAppear(animated)
 		
 		self.setLoading()
+		self.reload(hard: false, refresh: false, delay: false)
+	}
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+	{
+		if let detail = segue.destination as? BlockDetailTableViewController, let cell = sender as? BlockTableBlockViewCell
+		{
+			detail.schedule = self.daySchedule!
+			detail.block = cell.block
+		}
 	}
 	
 	private func setLoading()
@@ -42,7 +45,7 @@ class BlockTableViewController: ITableController
 		var container = TableContainer()
 		var blockSection = TableSection() // Blocks
 		
-		blockSection.cells.append(TableCell("loading", id: 15, height: self.view.frame.height))
+		blockSection.cells.append(TableCell("loading", id: 15, height: CGFloat(510)))
 		container.sections.append(blockSection)
 		
 		self.storyboardContainer = container
@@ -78,20 +81,22 @@ class BlockTableViewController: ITableController
 		{ id, cell in
 			if let blockCell = cell as? BlockTableBlockViewCell, let block = self.daySchedule?.getBlockByHash(id)
 			{
+				blockCell.block = block
+				
 				let analyst = BlockAnalyst(block, schedule: self.daySchedule!)
 				blockCell.blockName = analyst.getDisplayName()
 				blockCell.blockLetter = analyst.getDisplayLetter()
 				blockCell.color = analyst.getColor()
 				
-				blockCell.startTime = block.time.startTime
-				blockCell.endTime = block.time.endTime
+				blockCell.time = block.time
 			}
 		})
 		
 		self.registerCellHandler("masthead", handler:
 		{ id, cell in
-			if let blockCell = cell as? BlockTableMastheadViewCell, var templateCell = self.storyboardContainer.getCell(id)
+			if let blockCell = cell as? BlockTableMastheadViewCell, let templateCell = self.storyboardContainer.getCell(id)
 			{
+				blockCell.clearSubtitles()
 				blockCell.date = self.date.prettyString
 
 				if TimeUtils.isToday(self.date)
@@ -105,13 +110,23 @@ class BlockTableViewController: ITableController
 					blockCell.scope = "\(TimeUtils.daysUntil(self.date)) DAYS AWAY"
 				}
 				
-				blockCell.clearSubtitles()
 				if self.daySchedule != nil
 				{
+					if let subtitle = self.daySchedule?.subtitle
+					{
+						blockCell.addEmphasizedSubtitle(subtitle)
+						blockCell.addEmphasizedSubtitle("")
+					}
+					
 					if let first = self.daySchedule!.getFirstBlock(), let last = self.daySchedule!.getLastBlock()
 					{
 						blockCell.addSubtitle("\(first.time.startTime.toString()) - \(last.time.endTime.toString())")
-						blockCell.addSubtitle("\(self.daySchedule!.getBlocks().count) Blocks")
+						blockCell.addSubtitle("\(self.daySchedule!.getBlocks().count) Blocks")						
+					}
+					
+					if self.daySchedule!.changed
+					{
+						blockCell.setScheduleChanged()
 					}
 				}
 				
@@ -120,7 +135,7 @@ class BlockTableViewController: ITableController
 		})
 	}
 	
-	private func reload(hard: Bool = true, refresh: Bool = true)
+	private func reload(hard: Bool = true, refresh: Bool = true, delay: Bool = true)
 	{
 		if refresh
 		{
@@ -131,7 +146,7 @@ class BlockTableViewController: ITableController
 		{
 			ScheduleManager.instance.fetchDaySchedule(self.date,
 			{ fetch in
-				self.scheduleDidLoad(fetch.hasData, schedule: fetch.data)
+				self.scheduleDidLoad(fetch.hasData, schedule: fetch.data, delay: delay)
 			})
 		} else
 		{
@@ -141,34 +156,45 @@ class BlockTableViewController: ITableController
 				self.reload(hard: true, refresh: refresh)
 			} else
 			{
-				self.scheduleDidLoad(status.hasData, schedule: status.data)
+				self.scheduleDidLoad(status.hasData, schedule: status.data, delay: delay)
 			}
 		}
 	}
 	
-	private func scheduleDidLoad(_ success: Bool, schedule: DateSchedule?)
+	private func scheduleDidLoad(_ success: Bool, schedule: DateSchedule?, delay: Bool)
 	{
-		DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1)
+		if delay
 		{
-			HapticUtils.IMPACT.impactOccurred()
-			if success
+			DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1)
 			{
-				self.daySchedule = schedule!
-				
-				self.generateContainer()
-				self.tableView.reloadData()
-			} else
-			{
-				self.daySchedule = nil
-				
-				self.generateContainer()
-				self.tableView.reloadData()
-				
+				HapticUtils.IMPACT.impactOccurred()
+				self.executeLoaded(success, schedule: schedule)
 			}
-			
-			self.buildRefreshControl()
-			self.refreshControl?.endRefreshing()
+		} else
+		{
+			self.executeLoaded(success, schedule: schedule)
 		}
+	}
+	
+	private func executeLoaded(_ success: Bool, schedule: DateSchedule?)
+	{
+		if success
+		{
+			self.daySchedule = schedule!
+			
+			self.generateContainer()
+			self.tableView.reloadData()
+		} else
+		{
+			self.daySchedule = nil
+			
+			self.generateContainer()
+			self.tableView.reloadData()
+			
+		}
+		
+		self.buildRefreshControl()
+		self.refreshControl?.endRefreshing()
 	}
 
 	override func generateContainer()
@@ -196,7 +222,6 @@ class BlockTableViewController: ITableController
 			{
 				var itemSection = TableSection()
 				itemSection.headerHeight = 1
-				itemSection.footerHeight = 1
 				itemSection.cells.append(TableCell("block", id: block.hashValue, height: 65))
 				container.sections.append(itemSection)
 			}

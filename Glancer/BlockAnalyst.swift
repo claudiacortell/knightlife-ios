@@ -64,8 +64,19 @@ class BlockAnalyst
 		let courses = self.getCourses()
 		if courses.isEmpty
 		{
+			if self.block.blockId == .lab, let previous = self.schedule.getBlockBefore(self.block)
+			{
+				let analyst = BlockAnalyst(previous, schedule: self.schedule)
+				if !analyst.getCourses().isEmpty
+				{
+					return analyst.getColor()
+				}
+			}
+			
+//			return self.getColor
+//			TODO: IMPLEMENT BLOCK COLORS
+
 			return "999999"
-//			IMPLEMENT BLOCK COLORS
 		}
 		
 		return courses.courses.first!.color ?? "999999"

@@ -12,7 +12,7 @@ import UIKit
 class BlockTableMastheadViewCell: UITableViewCell
 {
 	private let originalHeight = 92
-	
+		
 	@IBOutlet private weak var scopeLabel: UILabel!
 	@IBOutlet private weak var dateLabel: UILabel!
 	
@@ -54,12 +54,42 @@ class BlockTableMastheadViewCell: UITableViewCell
 		
 		label.text = title
 		label.font.withSize(CGFloat(18))
+		label.textColor = UIColor.gray
+		
+		addTitle(label)
+	}
+	
+	func addEmphasizedSubtitle(_ title: String)
+	{
+		let label = UILabel()
+		
+		label.text = title
+		label.font = UIFont(name: "GillSans-Italic", size: 16)
 		label.textColor = UIColor.darkGray
 		
+		addTitle(label)
+	}
+	
+	func setScheduleChanged()
+	{
+		if self.stackView.arrangedSubviews.count > 0
+		{
+			self.addSubtitle("")
+		}
+		
+		let label = UILabel()
+		
+		label.text = "SCHEDULE CHANGED"
+		label.font = UIFont(name:"GillSans-Bold", size: 16.0)
+		label.textColor = UIColor.red
+		
+		addTitle(label)
+	}
+	
+	private func addTitle(_ label: UILabel)
+	{
 		label.frame = CGRect(x: 0, y: 0, width: 0, height: 20.0)
-		
 		label.addConstraint(NSLayoutConstraint(item: label, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 20.0))
-		
 		self.stackView.addArrangedSubview(label)
 	}
 }

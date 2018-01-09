@@ -13,10 +13,14 @@ struct GetPatchResponse: WebCallResult
 {
 	var subtitle: String?
 	var blocks: [GetPatchResponseBlock]
+	var changed: Bool?
 	
 	init(unboxer: Unboxer) throws
 	{
+		print(unboxer.dictionary)
+		
 		self.subtitle = unboxer.unbox(key: "schedule.subtitle")
+		self.changed = unboxer.unbox(key: "schedule.changed")
 		self.blocks = try unboxer.unbox(keyPath: "schedule.blocks", allowInvalidElements: false)
 	}
 }

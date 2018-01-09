@@ -11,13 +11,14 @@ import UIKit
 
 class BlockTableBlockViewCell: UITableViewCell
 {
+	var block: ScheduleBlock!
+
 	@IBOutlet weak private var colorView: UIView!
 	@IBOutlet weak private var blockLetterLabel: UILabel!
 	
 	@IBOutlet weak private var blockLabel: UILabel!
 	
-	@IBOutlet weak private var timeFromLabel: UILabel!
-	@IBOutlet weak private var timeToLabel: UILabel!
+	@IBOutlet weak private var timeLabel: UILabel!
 	
 	var blockLetter: String?
 	{
@@ -43,19 +44,11 @@ class BlockTableBlockViewCell: UITableViewCell
 		}
 	}
 	
-	var startTime: EnscribedTime?
+	var time: TimeDuration?
 	{
 		didSet
 		{
-			self.timeFromLabel.text = startTime?.toString()
-		}
-	}
-	
-	var endTime: EnscribedTime?
-	{
-		didSet
-		{
-			self.timeToLabel.text = endTime?.toString()
+			self.timeLabel.text = time == nil ? nil : "\(time!.startTime.toString()) - \(time!.endTime.toString())"
 		}
 	}
 }

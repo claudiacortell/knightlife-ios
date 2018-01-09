@@ -12,12 +12,14 @@ struct DateSchedule
 {
 	let date: EnscribedDate
 	private var blocks: [ScheduleBlock] = []
-	var subtitle: String?
+	let subtitle: String?
+	let changed: Bool
 
-	init(_ date: EnscribedDate, subtitle: String? = nil)
+	init(_ date: EnscribedDate, subtitle: String? = nil, changed: Bool = false)
 	{
 		self.date = date
 		self.subtitle = subtitle
+		self.changed = changed
 	}
 }
 

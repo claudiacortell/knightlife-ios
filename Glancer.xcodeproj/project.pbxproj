@@ -102,6 +102,7 @@
 		C0CB9C1D1FE4690800437C5D /* GetEventsConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CB9C1C1FE4690800437C5D /* GetEventsConverter.swift */; };
 		C0CB9C201FE4698000437C5D /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CB9C1F1FE4698000437C5D /* EventList.swift */; };
 		C0D1053E1FDA398B0030A0DC /* MeetingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D1053D1FDA398A0030A0DC /* MeetingManager.swift */; };
+		C0F7781E200437D900FB90D8 /* BlockDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F7781D200437D900FB90D8 /* BlockDetailTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -218,6 +219,7 @@
 		C0CB9C1C1FE4690800437C5D /* GetEventsConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventsConverter.swift; sourceTree = "<group>"; };
 		C0CB9C1F1FE4698000437C5D /* EventList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventList.swift; sourceTree = "<group>"; };
 		C0D1053D1FDA398A0030A0DC /* MeetingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeetingManager.swift; path = ../../../../../.Trash/MeetingManager.swift; sourceTree = "<group>"; };
+		C0F7781D200437D900FB90D8 /* BlockDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockDetailTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -528,19 +530,20 @@
 			isa = PBXGroup;
 			children = (
 				C0A1FB1B2001E240004146CE /* Navigation */,
-				C079C2321FACAB82009067DE /* BlocksList */,
+				C079C2321FACAB82009067DE /* DateBlocks */,
+				C0F7781C200437A500FB90D8 /* BlockDetail */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		C079C2321FACAB82009067DE /* BlocksList */ = {
+		C079C2321FACAB82009067DE /* DateBlocks */ = {
 			isa = PBXGroup;
 			children = (
 				C079C2301FACA9CB009067DE /* BlockTableViewController.swift */,
 				C0B163A31FCDF1CB0011BCF4 /* BlockTableBlockViewCell.swift */,
 				C0809E372002988F00E0E59C /* BlockTableMastheadViewCell.swift */,
 			);
-			name = BlocksList;
+			name = DateBlocks;
 			sourceTree = "<group>";
 		};
 		C081C2E61FE4509F008073F3 /* Lunch */ = {
@@ -696,6 +699,14 @@
 				C0CB9C1F1FE4698000437C5D /* EventList.swift */,
 			);
 			name = Elements;
+			sourceTree = "<group>";
+		};
+		C0F7781C200437A500FB90D8 /* BlockDetail */ = {
+			isa = PBXGroup;
+			children = (
+				C0F7781D200437D900FB90D8 /* BlockDetailTableViewController.swift */,
+			);
+			name = BlockDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -867,6 +878,7 @@
 				C05B54821FC5F6A000A47490 /* GetPatchConverter.swift in Sources */,
 				C00232991FA34B610019D328 /* Manager.swift in Sources */,
 				C05F5E891FAE561400724F42 /* SportGender.swift in Sources */,
+				C0F7781E200437D900FB90D8 /* BlockDetailTableViewController.swift in Sources */,
 				C0A908C61F76C8BF008AAB3F /* WeekViewManager.swift in Sources */,
 				C05B548A1FC632EF00A47490 /* FetchContainer.swift in Sources */,
 				C0707FBE1F69720800C7D2ED /* Schedule.swift in Sources */,

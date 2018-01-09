@@ -19,8 +19,11 @@ class GetPatchConverter: WebCallResultConverter<ScheduleManager, GetPatchRespons
 	
 	override func convert(_ response: GetPatchResponse) -> DateSchedule?
 	{
-		var daySchedule = DateSchedule(date)
-		daySchedule.subtitle = response.subtitle
+		print(response.changed)
+		
+		var daySchedule = DateSchedule(date, subtitle: response.subtitle, changed: response.changed ?? false)
+		
+		print(daySchedule)
 		
 		for block in response.blocks
 		{

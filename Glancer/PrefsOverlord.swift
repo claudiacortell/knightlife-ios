@@ -11,7 +11,7 @@ import Foundation
 class PrefsOverlord // All hail
 {
 	static let instance = PrefsOverlord()
-	private let defaults = UserDefaults.standard
+	private let defaults = UserDefaults(suiteName: "MAD.BBN.KnightLife.Group")!
 	
     private init()
     {
