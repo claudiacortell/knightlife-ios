@@ -17,6 +17,13 @@ enum ResourceStatus
 	dead // No action is being taken right now
 }
 
+enum ResourceOrigin
+{
+	case
+	remote,
+	local
+}
+
 class RemoteResource<Data>
 {
 	let status: ResourceStatus

@@ -19,12 +19,8 @@ class GetPatchConverter: WebCallResultConverter<ScheduleManager, GetPatchRespons
 	
 	override func convert(_ response: GetPatchResponse) -> DateSchedule?
 	{
-		print(response.changed)
-		
 		var daySchedule = DateSchedule(date, subtitle: response.subtitle, changed: response.changed ?? false)
-		
-		print(daySchedule)
-		
+				
 		for block in response.blocks
 		{
 			if let blockId = BlockID.fromRaw(raw: block.blockId)
@@ -37,12 +33,18 @@ class GetPatchConverter: WebCallResultConverter<ScheduleManager, GetPatchRespons
 				
 				let customName = block.customName
 				
+				var color = block.overrideColor
+				if color != nil && color!.count != 6
+				{
+					color = nil
+				}
+				
 				if !startTime.valid || !endTime.valid || startTime.toDate() == nil || endTime.toDate() == nil
 				{
 					manager.out("Recieved an invalid start/end time: \(block.startTime), \(block.endTime)")
 				} else
 				{
-					let scheduleBlock = ScheduleBlock(blockId: blockId, time: TimeDuration(startTime: startTime, endTime: endTime), variation: variation, associatedBlock: associatedBlock, customName: customName)
+					let scheduleBlock = ScheduleBlock(blockId: blockId, time: TimeDuration(startTime: startTime, endTime: endTime), variation: variation, associatedBlock: associatedBlock, customName: customName, color: color)
 					daySchedule.addBlock(scheduleBlock)
 				}
 			} else

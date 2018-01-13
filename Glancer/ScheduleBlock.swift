@@ -15,24 +15,27 @@ struct ScheduleBlock
 	let variation: Int?
 	let associatedBlock: BlockID?
 	let customName: String? // Only used when the block ID is Custom
+	let color: String?
 }
 
 extension ScheduleBlock: Equatable
 {
 	static func ==(lhs: ScheduleBlock, rhs: ScheduleBlock) -> Bool
 	{
-		return
-			lhs.blockId == rhs.blockId &&
-			lhs.time == rhs.time
+		return lhs.hashValue == rhs.hashValue
 	}
 	
 	var hashValue: Int
 	{
-		var id = self.blockId.hashValue ^ self.time.hashValue
-		if self.variation != nil
-		{
-			id ^= self.variation!
-		}
+		var id = 1
+		
+		id ^= self.blockId.hashValue
+		id ^= self.time.hashValue
+		id ^= self.variation ?? 1
+		id ^= self.associatedBlock?.hashValue ?? 1
+		id ^= self.customName?.hashValue ?? 1
+		id ^= self.color?.hashValue ?? 1
+		
 		return id
 	}
 }

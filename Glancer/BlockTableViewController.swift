@@ -11,222 +11,125 @@ import UIKit
 
 class BlockTableViewController: ITableController
 {
+	var controller: BlockViewController!
+
 	var date: EnscribedDate = TimeUtils.todayEnscribed
 	
 	var daySchedule: DateSchedule?
-	var meetings: DayCourseList!
-	
-	var hasLoadedForTheFirstTime = false
 	
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
-		
-		self.setLoading()
-		self.reload(hard: false, refresh: false, delay: false)
+				
+		self.buildRefreshControl()
+		self.reload(hard: false, delayResult: false, useRefreshControl: false, hapticFeedback: false)
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?)
 	{
-		if let detail = segue.destination as? BlockDetailTableViewController, let cell = sender as? BlockTableBlockViewCell
-		{
-			detail.schedule = self.daySchedule!
-			detail.block = cell.block
+		if let container = segue.destination as? BlockDetailViewController, (segue.identifier != nil && segue.identifier! == "detail")
+		{			
+			if let cell = sender as? BlockTableBlockViewCell
+			{
+				container.daySchedule = self.daySchedule!
+				container.block = cell.block
+				container.date = self.date
+			}
 		}
-	}
-	
-	private func setLoading()
-	{
-		if self.hasLoadedForTheFirstTime
-		{
-			return
-		}
-
-		var container = TableContainer()
-		var blockSection = TableSection() // Blocks
-		
-		blockSection.cells.append(TableCell("loading", id: 15, height: CGFloat(510)))
-		container.sections.append(blockSection)
-		
-		self.storyboardContainer = container
-		self.tableView.reloadData()
 	}
 	
 	private func buildRefreshControl()
 	{
-		if self.hasLoadedForTheFirstTime
-		{
-			return
-		}
-		
 		self.refreshControl = UIRefreshControl()
-		self.refreshControl?.addTarget(self, action: #selector(BlockTableViewController.doRefresh), for: .valueChanged)
+		self.refreshControl?.addTarget(self, action: #selector(forceReload), for: .valueChanged)
 		
 		self.refreshControl?.layer.zPosition = -1
 		self.refreshControl?.layer.backgroundColor = UIColor("FFB53D").cgColor
 		self.refreshControl?.tintColor = UIColor.white
-		
-		self.hasLoadedForTheFirstTime = true
 	}
 	
-	@objc private func doRefresh()
+	@objc private func forceReload()
 	{
-		HapticUtils.IMPACT.impactOccurred()
-		self.reload()
+		self.reload(hard: true, delayResult: true, useRefreshControl: true, hapticFeedback: true)
 	}
 	
-	override func registerCellHandlers()
+	private func reload(hard: Bool, delayResult: Bool, useRefreshControl: Bool, hapticFeedback: Bool)
 	{
-		self.registerCellHandler("block", handler:
-		{ id, cell in
-			if let blockCell = cell as? BlockTableBlockViewCell, let block = self.daySchedule?.getBlockByHash(id)
-			{
-				blockCell.block = block
-				
-				let analyst = BlockAnalyst(block, schedule: self.daySchedule!)
-				blockCell.blockName = analyst.getDisplayName()
-				blockCell.blockLetter = analyst.getDisplayLetter()
-				blockCell.color = analyst.getColor()
-				
-				blockCell.time = block.time
-			}
-		})
-		
-		self.registerCellHandler("masthead", handler:
-		{ id, cell in
-			if let blockCell = cell as? BlockTableMastheadViewCell, let templateCell = self.storyboardContainer.getCell(id)
-			{
-				blockCell.clearSubtitles()
-				blockCell.date = self.date.prettyString
-
-				if TimeUtils.isToday(self.date)
-				{
-					blockCell.scope = "TODAY"
-				} else if TimeUtils.isTomorrow(self.date)
-				{
-					blockCell.scope = "TOMORROW";
-				} else
-				{
-					blockCell.scope = "\(TimeUtils.daysUntil(self.date)) DAYS AWAY"
-				}
-				
-				if self.daySchedule != nil
-				{
-					if let subtitle = self.daySchedule?.subtitle
-					{
-						blockCell.addEmphasizedSubtitle(subtitle)
-						blockCell.addEmphasizedSubtitle("")
-					}
-					
-					if let first = self.daySchedule!.getFirstBlock(), let last = self.daySchedule!.getLastBlock()
-					{
-						blockCell.addSubtitle("\(first.time.startTime.toString()) - \(last.time.endTime.toString())")
-						blockCell.addSubtitle("\(self.daySchedule!.getBlocks().count) Blocks")						
-					}
-					
-					if self.daySchedule!.changed
-					{
-						blockCell.setScheduleChanged()
-					}
-				}
-				
-				self.storyboardContainer.setHeight(templateCell, height: blockCell.height)
-			}
-		})
-	}
-	
-	private func reload(hard: Bool = true, refresh: Bool = true, delay: Bool = true)
-	{
-		if refresh
+		if useRefreshControl
 		{
-			self.refreshControl?.beginRefreshing()
+			self.refreshControl!.beginRefreshing()
 		}
 		
-		if hard
+		if hapticFeedback
+		{
+			HapticUtils.IMPACT.impactOccurred()
+		}
+		
+		let loadedSchedule = ScheduleManager.instance.getSchedule(self.date)
+		if hard || loadedSchedule.status == .dead
 		{
 			ScheduleManager.instance.fetchDaySchedule(self.date,
 			{ fetch in
-				self.scheduleDidLoad(fetch.hasData, schedule: fetch.data, delay: delay)
+				self.delayScheduleResult(fetch.data, delayResult: delayResult, hapticFeedback: hapticFeedback)
 			})
 		} else
 		{
-			let status = ScheduleManager.instance.getSchedule(self.date)
-			if status.status == .dead
-			{
-				self.reload(hard: true, refresh: refresh)
-			} else
-			{
-				self.scheduleDidLoad(status.hasData, schedule: status.data, delay: delay)
-			}
+			self.delayScheduleResult(loadedSchedule.data, delayResult: delayResult, hapticFeedback: hapticFeedback)
 		}
 	}
 	
-	private func scheduleDidLoad(_ success: Bool, schedule: DateSchedule?, delay: Bool)
+	private func delayScheduleResult(_ schedule: DateSchedule?, delayResult: Bool, hapticFeedback: Bool)
 	{
-		if delay
+		if delayResult
 		{
 			DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1)
 			{
-				HapticUtils.IMPACT.impactOccurred()
-				self.executeLoaded(success, schedule: schedule)
+				self.scheduleDidLoad(schedule, hapticFeedback: hapticFeedback)
 			}
 		} else
 		{
-			self.executeLoaded(success, schedule: schedule)
+			self.scheduleDidLoad(schedule, hapticFeedback: hapticFeedback)
 		}
 	}
 	
-	private func executeLoaded(_ success: Bool, schedule: DateSchedule?)
+	private func scheduleDidLoad(_ schedule: DateSchedule?, hapticFeedback: Bool)
 	{
-		if success
+		if hapticFeedback
 		{
-			self.daySchedule = schedule!
-			
-			self.generateContainer()
-			self.tableView.reloadData()
-		} else
-		{
-			self.daySchedule = nil
-			
-			self.generateContainer()
-			self.tableView.reloadData()
-			
+			HapticUtils.IMPACT.impactOccurred()
 		}
 		
-		self.buildRefreshControl()
+		self.daySchedule = schedule
+
+		self.controller.stopRefreshing()
 		self.refreshControl?.endRefreshing()
+		
+		self.view.isHidden = false
+		self.reloadTable()
 	}
-
-	override func generateContainer()
+	
+	override func generateSections()
 	{
-		var container = TableContainer()
-
 		if self.daySchedule == nil
 		{
-			var blockSection = TableSection() // Blocks
-			blockSection.cells.append(TableCell("error", id: 0, height: self.view.frame.height))
-			container.sections.append(blockSection)
-		} else if self.daySchedule!.isEmpty // No blocks today
+			var section = TableSection()
+			var errorCell = TableCell("error")
+			errorCell.setHeight(self.view.frame.height)
+			section.addCell(errorCell)
+			self.addTableSection(section)
+		} else if self.daySchedule!.isEmpty
 		{
-			var blockSection = TableSection()
-			blockSection.cells.append(TableCell("masthead", id: 294))
-			blockSection.cells.append(TableCell("noClass", id: 0))
-			container.sections.append(blockSection)
+			self.addTableModule(BlockTableModuleMasthead(controller: self))
+			
+			var section = TableSection()
+			var classCell = TableCell("noClass")
+			classCell.setHeight(self.view.frame.height)
+			section.addCell(classCell)
+			self.addTableSection(section)
 		} else
 		{
-			var blockSection = TableSection()
-			blockSection.cells.append(TableCell("masthead", id: 294))
-			container.sections.append(blockSection)
-
-			for block in self.daySchedule!.getBlocks() // Testing variations
-			{
-				var itemSection = TableSection()
-				itemSection.headerHeight = 1
-				itemSection.cells.append(TableCell("block", id: block.hashValue, height: 65))
-				container.sections.append(itemSection)
-			}
+			self.addTableModule(BlockTableModuleMasthead(controller: self))
+			self.addTableModule(BlockTableModuleBlocks(controller: self))
 		}
-		
-		self.storyboardContainer = container
 	}
 }

@@ -26,6 +26,11 @@ class BlockAnalyst
 	
 	func getDisplayName() -> String
 	{
+		if self.block.blockId == .custom
+		{
+			return self.block.customName ?? self.block.blockId.displayName
+		}
+		
 		let courses = self.getCourses()
 		if courses.isEmpty
 		{
@@ -50,6 +55,11 @@ class BlockAnalyst
 	
 	func getDisplayLetter() -> String
 	{
+		if self.block.blockId == .custom
+		{
+			return "!!"
+		}
+		
 		if self.block.blockId == .lab, let previous = self.schedule.getBlockBefore(self.block) // If it's a lab and there's a previous block
 		{
 			return "\(previous.blockId.displayLetter.first!)L" // E.G. AL
@@ -61,6 +71,11 @@ class BlockAnalyst
 	
 	func getColor() -> String
 	{
+		if self.block.blockId == .custom, let color = self.block.color
+		{
+			return color
+		}
+		
 		let courses = self.getCourses()
 		if courses.isEmpty
 		{

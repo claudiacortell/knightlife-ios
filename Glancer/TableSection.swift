@@ -10,7 +10,7 @@ import Foundation
 
 struct TableSection
 {
-    var cells: [TableCell] = []
+	private(set) var cells: [TableCell] = []
 	
 	var title: String?
 	var headerHeight: Int?
@@ -26,21 +26,13 @@ extension TableSection
 		self.title = title
 	}
 	
-	func getCell(_ id: Int) -> TableCell?
+	mutating func addCell(_ cell: TableCell)
 	{
-		return self.cells[id]
+		self.cells.append(cell)
 	}
 	
-    func getCellByID(_ id: Int) -> TableCell?
-    {
-		for cell in self.cells
-		{
-			if cell.id == id
-			{
-				return cell
-			}
-		}
-		
-		return nil
+	func getCellByIndex(_ id: Int) -> TableCell?
+	{
+		return self.cells[id]
 	}
 }

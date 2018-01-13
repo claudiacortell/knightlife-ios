@@ -21,32 +21,36 @@ class LunchManager: Manager
 		super.init(name: "Lunch Manager")
 	}
 	
-	func getMenu(_ date: EnscribedDate) -> RemoteResource<LunchMenu>
+	func getMenu(_ date: EnscribedDate, forceRefresh: Bool, allowRemoteFetch: Bool, success: @escaping ((remote: Bool, menu: LunchMenu)) -> Void, failure: @escaping (FetchError) -> Void)
 	{
-		let status = self.lunchMenus[date] == nil ? .dead : self.lunchMenus[date]!.status
-		if status == .loaded, let menu = self.lunchMenus[date]?.data
+		if (forceRefresh || self.lunchMenus[date] == nil || !self.lunchMenus[date]!.hasData) && allowRemoteFetch
 		{
-			return RemoteResource(status, menu)
-		}
-		return RemoteResource(status, nil)
-	}
-	
-	@discardableResult
-	func fetchMenu(_ date: EnscribedDate, _ callback: @escaping (ResourceFetch<LunchMenu>) -> Void = {_ in}) -> ResourceFetchToken
-	{
-		let token = ResourceFetchToken()
-		self.lunchMenus[date] = FetchContainer(token)
-		
-		let call = GetMenuWebCall(self, date: date, token: token)
-		call.addCallback(
+			let token = ResourceFetchToken()
+			self.lunchMenus[date] = FetchContainer(token)
+			
+			let call = GetMenuWebCall(self, date: date, token: token)
+			call.addCallback(
 			{ fetch in
 				if self.lunchMenus[date] != nil
 				{
 					self.lunchMenus[date]!.setResult(fetch)
 				}
-				callback(fetch)
-		})
-		call.execute()
-		return token
+
+				if fetch.hasData
+				{
+					success((remote: true, menu: fetch.data!))
+				} else
+				{
+					failure(.callError)
+				}
+			})
+			call.execute()
+		} else if let container = self.lunchMenus[date], container.hasData
+		{
+			success((remote: false, menu: container.data!))
+		} else
+		{
+			failure(.refreshRestricted)
+		}
 	}
 }

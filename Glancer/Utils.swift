@@ -73,4 +73,9 @@ class Utils
         
         return String(string[startIndex..<endIndex])
 	}
+	
+	static func cast<T>(value: Any, to type: T) -> T?
+	{
+		return value as? T
+	}
 }

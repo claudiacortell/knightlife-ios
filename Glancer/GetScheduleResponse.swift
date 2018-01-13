@@ -15,7 +15,7 @@ struct GetScheduleResponse: WebCallResult
 	
 	init(unboxer: Unboxer) throws
 	{
-		self.days = try unboxer.unbox(keyPath: "schedule_template.days", allowInvalidElements: false)
+		self.days = try unboxer.unbox(keyPath: "days", allowInvalidElements: false)
 	}
 }
 

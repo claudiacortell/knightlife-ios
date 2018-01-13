@@ -32,7 +32,7 @@ class GetScheduleConverter: WebCallResultConverter<ScheduleManager, GetScheduleR
 							manager.out("Recieved an invalid start/end time: \(block.startTime), \(block.endTime)")
 						} else
 						{
-							let scheduleBlock = ScheduleBlock(blockId: blockId, time: TimeDuration(startTime: startTime, endTime: endTime), variation: variation, associatedBlock: associatedBlock, customName: nil)
+							let scheduleBlock = ScheduleBlock(blockId: blockId, time: TimeDuration(startTime: startTime, endTime: endTime), variation: variation, associatedBlock: associatedBlock, customName: nil, color: nil)
 							schedule.addBlock(scheduleBlock)
 						}
 					} else

@@ -82,17 +82,17 @@ extension DateSchedule: Equatable
 		return nil
 	}
 	
-	func hasBlock(id: BlockID) -> Bool
+	func hasBlock(_ id: BlockID) -> Bool
 	{
-		return getBlock(id: id) != nil
+		return getBlock(id) != nil
 	}
 	
-	func hasBlock(block: ScheduleBlock) -> Bool
+	func hasBlock(_ block: ScheduleBlock) -> Bool
 	{
 		return self.blocks.contains(block)
 	}
 	
-	func getBlock(id: BlockID) -> ScheduleBlock?
+	func getBlock(_ id: BlockID) -> ScheduleBlock?
 	{
 		for block in self.blocks
 		{
@@ -106,7 +106,7 @@ extension DateSchedule: Equatable
 	
 	func getBlockBefore(_ block: ScheduleBlock) -> ScheduleBlock?
 	{
-		if !self.hasBlock(block: block)
+		if !self.hasBlock(block)
 		{
 			return nil
 		}
@@ -148,8 +148,12 @@ extension DateSchedule: Equatable
 	
 	var hashValue: Int
 	{
-		var val = 123
-		if subtitle != nil { val ^= subtitle!.hashValue }
+		var val = 1
+		
+		val ^= date.hashValue
+		val ^= self.changed.hashValue
+		val ^= self.subtitle?.hashValue ?? 1
+		
 		for block in self.blocks
 		{
 			val ^= block.hashValue

@@ -22,12 +22,16 @@
 		C019C1611F7D3CED00FC4EED /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C019C1601F7D3CED00FC4EED /* Launch.storyboard */; };
 		C01FED851FCD1AEE0095F8A1 /* ITableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01FED841FCD1AEE0095F8A1 /* ITableController.swift */; };
 		C02006201FA904B10050F864 /* BlockMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = C020061F1FA904B10050F864 /* BlockMeta.swift */; };
+		C02031992009469400F976D5 /* BlockDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02031982009469400F976D5 /* BlockDetailViewController.swift */; };
 		C02A2B0D1FAD47E400D3A9CD /* GetPatchWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02A2B0C1FAD47E400D3A9CD /* GetPatchWebCall.swift */; };
 		C02A2B101FAD487800D3A9CD /* GetPatchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02A2B0F1FAD487800D3A9CD /* GetPatchResponse.swift */; };
 		C02A2B141FAD527600D3A9CD /* ScheduleBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02A2B131FAD527600D3A9CD /* ScheduleBlock.swift */; };
 		C02A2B171FAD539E00D3A9CD /* WeekdaySchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02A2B161FAD539E00D3A9CD /* WeekdaySchedule.swift */; };
 		C02B91C71FB67D3B004E0D5D /* IModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02B91C61FB67D3B004E0D5D /* IModule.swift */; };
 		C02B91CB1FB6886E004E0D5D /* DayCourseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02B91CA1FB6886E004E0D5D /* DayCourseList.swift */; };
+		C02C5C5A2006FD5E00A14C55 /* BlockTableTextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02C5C592006FD5E00A14C55 /* BlockTableTextViewCell.swift */; };
+		C0311C7E20065B05005FB154 /* BlockTableModuleMasthead.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0311C7D20065B05005FB154 /* BlockTableModuleMasthead.swift */; };
+		C0311C80200663B9005FB154 /* BlockTableModuleBlocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0311C7F200663B9005FB154 /* BlockTableModuleBlocks.swift */; };
 		C03636681FACF4C0008FC9A9 /* WebCallHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03636671FACF4C0008FC9A9 /* WebCallHandler.swift */; };
 		C036366B1FACF7EA008FC9A9 /* ScheduleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C036366A1FACF7EA008FC9A9 /* ScheduleManager.swift */; };
 		C036366D1FACF864008FC9A9 /* GetScheduleWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C036366C1FACF864008FC9A9 /* GetScheduleWebCall.swift */; };
@@ -61,7 +65,6 @@
 		C07463301FAFA91200D183E7 /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C074632F1FAFA91200D183E7 /* TableCell.swift */; };
 		C07463321FAFA93100D183E7 /* TableContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07463311FAFA93100D183E7 /* TableContainer.swift */; };
 		C079C2311FACA9CB009067DE /* BlockTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C079C2301FACA9CB009067DE /* BlockTableViewController.swift */; };
-		C0809E382002988F00E0E59C /* BlockTableMastheadViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0809E372002988F00E0E59C /* BlockTableMastheadViewCell.swift */; };
 		C081C2E81FE450F0008073F3 /* LunchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081C2E71FE450F0008073F3 /* LunchManager.swift */; };
 		C081C2EA1FE45108008073F3 /* LunchMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081C2E91FE45108008073F3 /* LunchMenu.swift */; };
 		C081C2ED1FE45120008073F3 /* GetMenuWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081C2EC1FE45120008073F3 /* GetMenuWebCall.swift */; };
@@ -83,6 +86,7 @@
 		C0A5D3BC1F69E07500DBDCAD /* UserPrefsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A5D3BB1F69E07500DBDCAD /* UserPrefsManager.swift */; };
 		C0A5D3C01F6A07D500DBDCAD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A5D3BF1F6A07D500DBDCAD /* Utils.swift */; };
 		C0A908C61F76C8BF008AAB3F /* WeekViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A908C51F76C8BF008AAB3F /* WeekViewManager.swift */; };
+		C0AF797B2007943300A9A342 /* ResourceFetchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AF797A2007943300A9A342 /* ResourceFetchError.swift */; };
 		C0B04F461FD177EC00F5D116 /* MeetingPrefModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B04F451FD177EC00F5D116 /* MeetingPrefModule.swift */; };
 		C0B163A41FCDF1CB0011BCF4 /* BlockTableBlockViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B163A31FCDF1CB0011BCF4 /* BlockTableBlockViewCell.swift */; };
 		C0B590B31FC34F3100CDF964 /* ResourceFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B590B21FC34F3100CDF964 /* ResourceFetch.swift */; };
@@ -103,6 +107,8 @@
 		C0CB9C201FE4698000437C5D /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CB9C1F1FE4698000437C5D /* EventList.swift */; };
 		C0D1053E1FDA398B0030A0DC /* MeetingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D1053D1FDA398A0030A0DC /* MeetingManager.swift */; };
 		C0F7781E200437D900FB90D8 /* BlockDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F7781D200437D900FB90D8 /* BlockDetailTableViewController.swift */; };
+		C0F9E15D20059FF1001E7026 /* BlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F9E15C20059FF1001E7026 /* BlockViewController.swift */; };
+		C0F9E1612005AC71001E7026 /* TableModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F9E1602005AC71001E7026 /* TableModule.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -139,12 +145,16 @@
 		C019C1601F7D3CED00FC4EED /* Launch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
 		C01FED841FCD1AEE0095F8A1 /* ITableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITableController.swift; sourceTree = "<group>"; };
 		C020061F1FA904B10050F864 /* BlockMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockMeta.swift; sourceTree = "<group>"; };
+		C02031982009469400F976D5 /* BlockDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockDetailViewController.swift; sourceTree = "<group>"; };
 		C02A2B0C1FAD47E400D3A9CD /* GetPatchWebCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPatchWebCall.swift; sourceTree = "<group>"; };
 		C02A2B0F1FAD487800D3A9CD /* GetPatchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPatchResponse.swift; sourceTree = "<group>"; };
 		C02A2B131FAD527600D3A9CD /* ScheduleBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleBlock.swift; sourceTree = "<group>"; };
 		C02A2B161FAD539E00D3A9CD /* WeekdaySchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaySchedule.swift; sourceTree = "<group>"; };
 		C02B91C61FB67D3B004E0D5D /* IModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IModule.swift; sourceTree = "<group>"; };
 		C02B91CA1FB6886E004E0D5D /* DayCourseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCourseList.swift; sourceTree = "<group>"; };
+		C02C5C592006FD5E00A14C55 /* BlockTableTextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTableTextViewCell.swift; sourceTree = "<group>"; };
+		C0311C7D20065B05005FB154 /* BlockTableModuleMasthead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTableModuleMasthead.swift; sourceTree = "<group>"; };
+		C0311C7F200663B9005FB154 /* BlockTableModuleBlocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTableModuleBlocks.swift; sourceTree = "<group>"; };
 		C03636671FACF4C0008FC9A9 /* WebCallHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebCallHandler.swift; sourceTree = "<group>"; };
 		C036366A1FACF7EA008FC9A9 /* ScheduleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleManager.swift; sourceTree = "<group>"; };
 		C036366C1FACF864008FC9A9 /* GetScheduleWebCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetScheduleWebCall.swift; sourceTree = "<group>"; };
@@ -178,7 +188,6 @@
 		C074632F1FAFA91200D183E7 /* TableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
 		C07463311FAFA93100D183E7 /* TableContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableContainer.swift; sourceTree = "<group>"; };
 		C079C2301FACA9CB009067DE /* BlockTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTableViewController.swift; sourceTree = "<group>"; };
-		C0809E372002988F00E0E59C /* BlockTableMastheadViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTableMastheadViewCell.swift; sourceTree = "<group>"; };
 		C081C2E71FE450F0008073F3 /* LunchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchManager.swift; sourceTree = "<group>"; };
 		C081C2E91FE45108008073F3 /* LunchMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchMenu.swift; sourceTree = "<group>"; };
 		C081C2EC1FE45120008073F3 /* GetMenuWebCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMenuWebCall.swift; sourceTree = "<group>"; };
@@ -200,6 +209,7 @@
 		C0A5D3BB1F69E07500DBDCAD /* UserPrefsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPrefsManager.swift; sourceTree = "<group>"; };
 		C0A5D3BF1F6A07D500DBDCAD /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		C0A908C51F76C8BF008AAB3F /* WeekViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewManager.swift; sourceTree = "<group>"; };
+		C0AF797A2007943300A9A342 /* ResourceFetchError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceFetchError.swift; sourceTree = "<group>"; };
 		C0B04F451FD177EC00F5D116 /* MeetingPrefModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingPrefModule.swift; sourceTree = "<group>"; };
 		C0B163A31FCDF1CB0011BCF4 /* BlockTableBlockViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTableBlockViewCell.swift; sourceTree = "<group>"; };
 		C0B590B21FC34F3100CDF964 /* ResourceFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceFetch.swift; sourceTree = "<group>"; };
@@ -220,6 +230,8 @@
 		C0CB9C1F1FE4698000437C5D /* EventList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventList.swift; sourceTree = "<group>"; };
 		C0D1053D1FDA398A0030A0DC /* MeetingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeetingManager.swift; path = ../../../../../.Trash/MeetingManager.swift; sourceTree = "<group>"; };
 		C0F7781D200437D900FB90D8 /* BlockDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockDetailTableViewController.swift; sourceTree = "<group>"; };
+		C0F9E15C20059FF1001E7026 /* BlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockViewController.swift; sourceTree = "<group>"; };
+		C0F9E1602005AC71001E7026 /* TableModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableModule.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -372,6 +384,7 @@
 				C074632D1FAFA8EB00D183E7 /* TableSection.swift */,
 				C074632F1FAFA91200D183E7 /* TableCell.swift */,
 				C01FED841FCD1AEE0095F8A1 /* ITableController.swift */,
+				C0F9E1602005AC71001E7026 /* TableModule.swift */,
 			);
 			name = Table;
 			sourceTree = "<group>";
@@ -390,8 +403,8 @@
 			isa = PBXGroup;
 			children = (
 				C03636731FACFC85008FC9A9 /* GetScheduleResponse.swift */,
-				C036366C1FACF864008FC9A9 /* GetScheduleWebCall.swift */,
 				C05B54831FC5F7A400A47490 /* GetScheduleConverter.swift */,
+				C036366C1FACF864008FC9A9 /* GetScheduleWebCall.swift */,
 			);
 			name = GetSchedule;
 			sourceTree = "<group>";
@@ -431,6 +444,15 @@
 				C00232A61FA37EFC0019D328 /* CourseSchedule.swift */,
 			);
 			name = Elements;
+			sourceTree = "<group>";
+		};
+		C0311C7C20065955005FB154 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				C0311C7D20065B05005FB154 /* BlockTableModuleMasthead.swift */,
+				C0311C7F200663B9005FB154 /* BlockTableModuleBlocks.swift */,
+			);
+			name = Modules;
 			sourceTree = "<group>";
 		};
 		C03636691FACF78F008FC9A9 /* WebCall */ = {
@@ -494,6 +516,7 @@
 				C0B590B21FC34F3100CDF964 /* ResourceFetch.swift */,
 				C05B54891FC632EF00A47490 /* FetchContainer.swift */,
 				C09451861FE1C299001E0080 /* RemoteResource.swift */,
+				C0AF797A2007943300A9A342 /* ResourceFetchError.swift */,
 			);
 			name = Resource;
 			sourceTree = "<group>";
@@ -530,20 +553,18 @@
 			isa = PBXGroup;
 			children = (
 				C0A1FB1B2001E240004146CE /* Navigation */,
-				C079C2321FACAB82009067DE /* DateBlocks */,
-				C0F7781C200437A500FB90D8 /* BlockDetail */,
+				C079C2321FACAB82009067DE /* Blocks */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		C079C2321FACAB82009067DE /* DateBlocks */ = {
+		C079C2321FACAB82009067DE /* Blocks */ = {
 			isa = PBXGroup;
 			children = (
-				C079C2301FACA9CB009067DE /* BlockTableViewController.swift */,
-				C0B163A31FCDF1CB0011BCF4 /* BlockTableBlockViewCell.swift */,
-				C0809E372002988F00E0E59C /* BlockTableMastheadViewCell.swift */,
+				C0F9E15E2005ABB0001E7026 /* Table */,
+				C0F9E15F2005ABC0001E7026 /* Detail */,
 			);
-			name = DateBlocks;
+			name = Blocks;
 			sourceTree = "<group>";
 		};
 		C081C2E61FE4509F008073F3 /* Lunch */ = {
@@ -701,12 +722,25 @@
 			name = Elements;
 			sourceTree = "<group>";
 		};
-		C0F7781C200437A500FB90D8 /* BlockDetail */ = {
+		C0F9E15E2005ABB0001E7026 /* Table */ = {
 			isa = PBXGroup;
 			children = (
+				C0311C7C20065955005FB154 /* Modules */,
+				C0F9E15C20059FF1001E7026 /* BlockViewController.swift */,
+				C079C2301FACA9CB009067DE /* BlockTableViewController.swift */,
+				C0B163A31FCDF1CB0011BCF4 /* BlockTableBlockViewCell.swift */,
+				C02C5C592006FD5E00A14C55 /* BlockTableTextViewCell.swift */,
+			);
+			name = Table;
+			sourceTree = "<group>";
+		};
+		C0F9E15F2005ABC0001E7026 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				C02031982009469400F976D5 /* BlockDetailViewController.swift */,
 				C0F7781D200437D900FB90D8 /* BlockDetailTableViewController.swift */,
 			);
-			name = BlockDetail;
+			name = Detail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -864,6 +898,8 @@
 				C01867241FC7A82F002027B8 /* EXT_UIView.swift in Sources */,
 				C0C176551FAA5CB90059E956 /* WebCall.swift in Sources */,
 				C05B54801FC5D9D300A47490 /* WebCallResult.swift in Sources */,
+				C02C5C5A2006FD5E00A14C55 /* BlockTableTextViewCell.swift in Sources */,
+				C0311C80200663B9005FB154 /* BlockTableModuleBlocks.swift in Sources */,
 				C02A2B171FAD539E00D3A9CD /* WeekdaySchedule.swift in Sources */,
 				C0C176591FAA5F450059E956 /* Device.swift in Sources */,
 				C02A2B101FAD487800D3A9CD /* GetPatchResponse.swift in Sources */,
@@ -884,6 +920,7 @@
 				C0707FBE1F69720800C7D2ED /* Schedule.swift in Sources */,
 				C0A1FB1A2001D705004146CE /* DateSchedule.swift in Sources */,
 				C02B91C71FB67D3B004E0D5D /* IModule.swift in Sources */,
+				C0AF797B2007943300A9A342 /* ResourceFetchError.swift in Sources */,
 				C0CB9C151FE4668B00437C5D /* EventAudience.swift in Sources */,
 				C02A2B141FAD527600D3A9CD /* ScheduleBlock.swift in Sources */,
 				C0B04F461FD177EC00F5D116 /* MeetingPrefModule.swift in Sources */,
@@ -899,8 +936,10 @@
 				C04926A32000A92E00926082 /* EXT_UIColor.swift in Sources */,
 				C0CB9C131FE464D900437C5D /* Event.swift in Sources */,
 				C0A26FBC1FAF76620060DC23 /* SportsPrefModule.swift in Sources */,
+				C0311C7E20065B05005FB154 /* BlockTableModuleMasthead.swift in Sources */,
 				C0A1FB1D2001E253004146CE /* SeparatedBarItem.swift in Sources */,
 				C093434D1FAA1B9E00629A84 /* DayID.swift in Sources */,
+				C02031992009469400F976D5 /* BlockDetailViewController.swift in Sources */,
 				740756CC1C33720A0039844B /* Label.swift in Sources */,
 				C04DE46A1FAE6E09000D4DA6 /* GetSportsMeetingWebCall.swift in Sources */,
 				C03636681FACF4C0008FC9A9 /* WebCallHandler.swift in Sources */,
@@ -908,6 +947,7 @@
 				C09451871FE1C299001E0080 /* RemoteResource.swift in Sources */,
 				C05B54841FC5F7A400A47490 /* GetScheduleConverter.swift in Sources */,
 				C09343471FAA1B3C00629A84 /* Block.swift in Sources */,
+				C0F9E15D20059FF1001E7026 /* BlockViewController.swift in Sources */,
 				C07463321FAFA93100D183E7 /* TableContainer.swift in Sources */,
 				C069CF771F6B697E001FE527 /* NotificationsManager.swift in Sources */,
 				C01FED851FCD1AEE0095F8A1 /* ITableController.swift in Sources */,
@@ -915,10 +955,10 @@
 				C04937B81FB405880036C890 /* Module.swift in Sources */,
 				C0CB9C1D1FE4690800437C5D /* GetEventsConverter.swift in Sources */,
 				C093434B1FAA1B7A00629A84 /* BlockID.swift in Sources */,
+				C0F9E1612005AC71001E7026 /* TableModule.swift in Sources */,
 				C0A5D3BC1F69E07500DBDCAD /* UserPrefsManager.swift in Sources */,
 				C036366D1FACF864008FC9A9 /* GetScheduleWebCall.swift in Sources */,
 				C02A2B0D1FAD47E400D3A9CD /* GetPatchWebCall.swift in Sources */,
-				C0809E382002988F00E0E59C /* BlockTableMastheadViewCell.swift in Sources */,
 				C0C776861FACDE89003EE125 /* TimeUtils.swift in Sources */,
 				C081C2EF1FE4512C008073F3 /* GetMenuResponse.swift in Sources */,
 				C0A26FB61FAF70ED0060DC23 /* PrefsOverlord.swift in Sources */,

@@ -12,27 +12,38 @@ import UIKit
 class ITableController: UITableViewController
 {
 	var storyboardContainer: TableContainer = TableContainer()
-	private var cellHandlers: [String: (Int, UITableViewCell) -> Void] = [:]
+	private(set) var modules: [TableModule] = []
 	
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
-		self.registerCellHandlers()
 	}
 	
-	func registerCellHandlers()
+	func reloadTable()
 	{
-//		Override point
+		self.storyboardContainer = TableContainer()
+		self.modules.removeAll()
+
+		self.generateSections()
+
+		for module in self.modules // Modules
+		{
+			module.generateSections(container: &self.storyboardContainer)
+		}
+		
+		self.tableView.reloadData()
 	}
 	
-	func registerCellHandler(_ reuseId: String, handler: @escaping (Int, UITableViewCell) -> Void)
+	func generateSections() { }
+	
+	func addTableModule(_ module: TableModule)
 	{
-		self.cellHandlers[reuseId] = handler
+		self.modules.append(module)
 	}
 	
-	func generateContainer()
+	func addTableSection(_ section: TableSection)
 	{
-//		Override point
+		self.storyboardContainer.addSection(section)
 	}
 	
 	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
@@ -60,20 +71,17 @@ class ITableController: UITableViewController
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
-		let template = self.storyboardContainer.getSection(indexPath.section)!.getCell(indexPath.row)!
-		let cell = self.tableView.dequeueReusableCell(withIdentifier: template.reuseId)!
+		let templateCell = self.storyboardContainer.getSection(indexPath.section)!.getCellByIndex(indexPath.row)!
+		let cell = self.tableView.dequeueReusableCell(withIdentifier: templateCell.reuseId)!
 		
-		if let handler = self.cellHandlers[template.reuseId]
-		{
-			handler(template.id, cell)
-		}
-		
+		templateCell.callback(templateCell, cell)
+	
 		return cell
 	}
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
 	{
-		if let section = self.storyboardContainer.getSection(indexPath.section), let cell = section.getCell(indexPath.row), let height = cell.height
+		if let section = self.storyboardContainer.getSection(indexPath.section), let cell = section.getCellByIndex(indexPath.row), let height = cell.height
 		{
 			return CGFloat(height)
 		}

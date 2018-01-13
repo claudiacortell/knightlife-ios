@@ -16,12 +16,10 @@ struct GetPatchResponse: WebCallResult
 	var changed: Bool?
 	
 	init(unboxer: Unboxer) throws
-	{
-		print(unboxer.dictionary)
-		
-		self.subtitle = unboxer.unbox(key: "schedule.subtitle")
-		self.changed = unboxer.unbox(key: "schedule.changed")
-		self.blocks = try unboxer.unbox(keyPath: "schedule.blocks", allowInvalidElements: false)
+	{		
+		self.subtitle = unboxer.unbox(key: "subtitle")
+		self.changed = unboxer.unbox(key: "changed")
+		self.blocks = try unboxer.unbox(keyPath: "blocks", allowInvalidElements: false)
 	}
 }
 
@@ -30,6 +28,8 @@ struct GetPatchResponseBlock: WebCallResult
 	var blockId: String
 	var startTime: String
 	var endTime: String
+	
+	var overrideColor: String?
 	
 	var variation: Int?
 	var associatedBlock: String?
@@ -42,9 +42,11 @@ struct GetPatchResponseBlock: WebCallResult
 		self.startTime = try unboxer.unbox(key: "startTime")
 		self.endTime = try unboxer.unbox(key: "endTime")
 		
+		self.overrideColor = unboxer.unbox(key: "color")
+		
 		self.variation = unboxer.unbox(key: "variation")
 		self.associatedBlock = unboxer.unbox(key: "associatedBlock")
 		
-		self.customName = unboxer.unbox(key: "customName")
+		self.customName = unboxer.unbox(key: "name")
 	}
 }
