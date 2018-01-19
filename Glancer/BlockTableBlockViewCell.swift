@@ -50,5 +50,5 @@ class BlockTableBlockViewCell: UITableViewCell
 		{
 			self.timeLabel.text = time == nil ? nil : "\(time!.startTime.toString()) - \(time!.endTime.toString())"
 		}
-	}
+	}	
 }

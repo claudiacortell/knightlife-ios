@@ -105,4 +105,12 @@ class ITableController: UITableViewController
 		}
 		return super.tableView(tableView, heightForFooterInSection: section)
 	}
+	
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+	{
+		if self.clearsSelectionOnViewWillAppear
+		{
+			self.tableView.deselectRow(at: indexPath, animated: true)
+		}
+	}
 }

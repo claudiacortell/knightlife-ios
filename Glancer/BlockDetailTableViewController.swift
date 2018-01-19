@@ -14,12 +14,7 @@ class BlockDetailTableViewController: ITableController
 	var controller: BlockDetailViewController!
 	
 	var date: EnscribedDate!
-	{
-		didSet(newValue)
-		{
-			print(newValue)
-		}
-	}
+	
 	var block: ScheduleBlock!
 	var daySchedule: DateSchedule!
 
