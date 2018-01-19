@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate
 {
@@ -38,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     }
 	
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data)
-	{        
+	{
         let tokenChars = (deviceToken as NSData).bytes.bindMemory(to: CChar.self, capacity: deviceToken.count)
         var tokenString = ""
         
@@ -46,58 +45,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 		{
             tokenString += String(format: "%02.2hhx", arguments: [tokenChars[i]])
         }
-        
+		        
         print("Device Token:", tokenString)
 		
-		var savedInDB: Bool = false
-		if Storage.DB_SAVED.exists()
-		{
-			savedInDB = Storage.DB_SAVED.getValue() as! Bool
-		} else
-		{
-			Storage.DB_SAVED.set(data: false)
-		}
+		var request = URLRequest(url: URL(string: "https://bbnknightlife.herokuapp.com/api/deviceTokens/")!)
+		request.httpMethod = "POST"
+		request.httpBody = "deviceToken=\(tokenString)".data(using: .utf8)
 
-        let tokenStringPub = tokenString
+		let task = URLSession.shared.dataTask(with: request)
+		{ data, response, error in
+			guard let data = data, error == nil else
+			{                                                 // check for fundamental networking error
+				print("error=\(error!)")
+				return
+			}
+			
+			if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200
+			{           // check for http errors
+				print("statusCode should be 200, but is \(httpStatus.statusCode)")
+				print("response = \(response!)")
+			}
+			
+			Debug.out("Recieved a response to token insert")
+			print(String(data: data, encoding: .utf8))
+		}
 		
-        if (!savedInDB)
-		{
-			Storage.DB_SAVED.set(data: true)
-			
-            var request = URLRequest(url: URL(string: "https://bbnknightlife.herokuapp.com/api/deviceTokens/")!)
-            request.httpMethod = "POST"
-            // let postString = "deviceToken=13234323"
-            let postString = "deviceToken=" + tokenStringPub
-            request.httpBody = postString.data(using: .utf8)
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                guard let data = data, error == nil else
-				{                                                 // check for fundamental networking error
-                    print("error=\(error!)")
-                    return
-                }
-				
-                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200
-				{           // check for http errors
-                    print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                    print("response = \(response!)")
-                    
-                }
-                
-                let responseString = String(data: data, encoding: .utf8)
-//                print("responseString = \(responseString!)")
-				
-            }
-			
-            task.resume()
-        }
-        
-        let currentInstallation = PFInstallation.current()
-        
-        currentInstallation.setDeviceTokenFrom(deviceToken)
-        currentInstallation.saveInBackground { (succeeded, e) -> Void in
-            // TODO: implement?
-        }
-    }
+		task.resume()
+	}
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error)
 	{
@@ -106,20 +80,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void)
 	{
-        if let aps = userInfo["aps"] as? NSDictionary
+		if let aps = userInfo as? [String: Any]
 		{
-            let message: String = aps["alert"] as! String;
-            
-            if (message == "Auto-Updating...")
+			if let data = aps["aps"] as? [String: Any]
 			{
-                if (ScheduleManager.instance.loadBlocks())
+				if let alert = data["alert"] as? String, alert == "Auto-Updating..."
 				{
-                    completionHandler(UIBackgroundFetchResult.newData);
-                }
-            }
-        }
-        
-        PFPush.handle(userInfo)
+					ScheduleManager.instance.loadBlocks()
+					return
+				}
+			}
+			
+			if let type = aps["type"] as? Int
+			{
+				if type == 0 // Update local schedule
+				{
+					ScheduleManager.instance.loadBlocks()
+					return
+				}
+			}
+		}
     }
 	
     func applicationWillResignActive(_ application: UIApplication)
@@ -148,16 +128,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 	{
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-    
+	
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void)
 	{
-        if (ScheduleManager.instance.loadBlocks())
-		{
-            completionHandler(.newData)
-        } else
-		{
-            completionHandler(.failed)
-        }
+        ScheduleManager.instance.loadBlocks()
     }
-    
 }

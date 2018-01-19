@@ -38,7 +38,7 @@ class ScheduleManager: PrefsUpdateHandler
 	
 	func dayLoaded(id: DayID) -> Bool
 	{
-		return self.weekSchedule[id] != nil
+		return self.weekSchedule[id] != nil && self.weekSchedule[id]!.blocks.count > 0
 	}
 	
 	func blockList(id: DayID) -> [Block]?

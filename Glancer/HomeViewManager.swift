@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandler
 {
@@ -28,6 +29,10 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 	
 	@IBOutlet weak var nextLabel: UILabel!
 	
+	@IBOutlet weak var refreshButton: UIButton!
+	@IBOutlet weak var refreshingIndicator: UIActivityIndicatorView!
+	var canRefresh = true
+	
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
@@ -37,6 +42,8 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 		
 		ScheduleManager.instance.addHandler(self)
 		UserPrefsManager.instance.addHandler(self)
+		
+		setRefreshing(false)
 	}
 	
 	override func 
@@ -57,6 +64,32 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 		self.timer.invalidate()
 	}
 	
+	private func setRefreshing(_ refreshing: Bool)
+	{
+		if refreshing
+		{
+			self.refreshButton.isHidden = true
+			self.refreshingIndicator.startAnimating()
+		} else
+		{
+			self.refreshingIndicator.stopAnimating()
+			self.refreshButton.isHidden = false
+		}
+	}
+	
+	@IBAction func refreshButtonClicked(_ sender: Any)
+	{
+		if !self.canRefresh
+		{
+			return
+		}
+		
+		self.setRefreshing(true)
+		self.canRefresh = false
+
+		ScheduleManager.instance.loadBlocks()
+	}
+	
 	@objc func updateTime()
 	{
 		if !ScheduleManager.instance.scheduleLoaded
@@ -70,7 +103,21 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 	
 	func scheduleDidUpdate(didUpdateSuccessfully: Bool)
 	{
-		self.updateViews()
+		if self.canRefresh // Foreign call
+		{
+			self.updateViews()
+			self.tableView.setWeekData()
+			return
+		}
+		
+		DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5)
+		{
+			self.updateViews()
+			self.tableView.setWeekData()
+			
+			self.canRefresh = true
+			self.setRefreshing(false)
+		}
 	}
 	
 	func prefsDidUpdate(_ type: UserPrefsManager.PrefsUpdateType)
@@ -85,14 +132,14 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 		self.nextLabel.text = "Next"
 		
 		let state = ScheduleManager.instance.getCurrentScheduleInfo()
-
+		
 		self.tableOverrideId = nil // Reset it. It'll get changed below if we really want it overriden.
 		self.tableView.showExpiredBlocks = true
 		
 		if state.scheduleState == .inClass
 		{
 			self.headerBlockLabel.text = state.curBlock!.analyst.getDisplayName()
-			self.headerMinutesLabel.text = "for \(state.minutesRemaining) min"
+			self.headerMinutesLabel.text = "for \(TimeUtils.formatMinutesToString(state.minutesRemaining))"
 			
 			self.blockLabel.text = state.curBlock!.analyst.getDisplayName()
 			if state.nextBlock != nil
@@ -105,21 +152,21 @@ class HomeViewManager: UIViewController, ScheduleUpdateHandler, PrefsUpdateHandl
 		} else if state.scheduleState == .getToClass
 		{
 			self.headerBlockLabel.text = state.nextBlock!.analyst.getDisplayName()
-			self.headerMinutesLabel.text = "in \(state.minutesRemaining) min"
+			self.headerMinutesLabel.text = "in \(TimeUtils.formatMinutesToString(state.minutesRemaining))"
 			
 			self.blockLabel.text = "Get to Class"
 			self.nextBlockLabel.text = state.nextBlock!.analyst.getDisplayName()
 		} else if state.scheduleState == .beforeSchool
 		{
 			self.headerBlockLabel.text = "School Start"
-			self.headerMinutesLabel.text = "in \(state.minutesRemaining) min"
+			self.headerMinutesLabel.text = "in \(TimeUtils.formatMinutesToString(state.minutesRemaining))"
 			
 			self.blockLabel.text = "Before School"
 			self.nextBlockLabel.text = state.nextBlock!.analyst.getDisplayName()
 		} else if state.scheduleState == .beforeSchoolGetToClass
 		{
 			self.headerBlockLabel.text = state.nextBlock!.analyst.getDisplayName()
-			self.headerMinutesLabel.text = "in \(state.minutesRemaining) min"
+			self.headerMinutesLabel.text = "in \(TimeUtils.formatMinutesToString(state.minutesRemaining))"
 			
 			self.blockLabel.text = "Get to Class"
 			self.nextBlockLabel.text = state.nextBlock!.analyst.getDisplayName()

@@ -7,9 +7,43 @@
 //
 
 import Foundation
+import CoreGraphics
+import UIKit
 
 class TimeUtils
 {
+	static func formatMinutesToString(_ minutes: Int) -> String
+	{
+		if minutes < 60
+		{
+			return "\(minutes) min"
+		} else
+		{
+			let hours = minutes / 60
+			let minutesLeft = minutes % 60
+			
+			if hours == 1
+			{
+				if minutesLeft > 0
+				{
+					return "\(hours) hr \(minutesLeft) min"
+				} else
+				{
+					return "\(hours) hr"
+				}
+			} else
+			{
+				if minutesLeft > 0
+				{
+					return "\(hours) hrs \(minutesLeft) min"
+				} else
+				{
+					return "\(hours) hrs"
+				}
+			}
+		}
+	}
+	
 	static func currentDateAsString() -> String
 	{
 		let date = Date()
@@ -74,11 +108,12 @@ class TimeUtils
 	static func timeToNSDate(_ time: String) -> Date
 	{
 		var currentDate = TimeUtils.currentDateAsString()
+		currentDate += time;
 		
 		let formatter  = DateFormatter()
 		formatter.timeZone = TimeZone.autoupdatingCurrent
+		formatter.locale = Locale(identifier: "en_US_POSIX")
 		formatter.dateFormat = "yyyy-MM-dd-HH-mm"
-		currentDate += time;
 		
 		let outDate = formatter.date(from: currentDate)!
 		return outDate;

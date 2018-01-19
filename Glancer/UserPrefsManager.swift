@@ -134,98 +134,64 @@ class UserPrefsManager
 	
 	func loadPrefs()
 	{
-		// get/set values for class names
-		if Storage.storageMethodUpdated // Account for old storage method to keep legacy data
+		if Storage.hasUpdatedDirectories
 		{
-			// Load lunches
-			if let switches = Storage.USER_SWITCHES.getValue() as? [String: Bool]
+			Debug.out("System has already transfered data to Suite")
+			Storage.setToSuiteDefaults()
+		}
+		
+		// Load lunches
+		if let switches = Storage.USER_SWITCHES.getValue() as? [String: Bool]
+		{
+			for (rawDayId, val) in switches
 			{
-				for (rawDayId, val) in switches
+				if let dayId = DayID.fromRaw(raw: rawDayId)
 				{
-					if let dayId = DayID.fromRaw(raw: rawDayId)
-					{
-						self.setSwitch(id: dayId, val: val, save: false)
-					}
+					self.setSwitch(id: dayId, val: val, save: false)
 				}
 			}
-			
-			if let meta = Storage.USER_META.getValue() as? [String:[String:String?]]
+		}
+		
+		if let meta = Storage.USER_META.getValue() as? [String:[String:String?]]
+		{
+			for (rawBlockId, keyPairs) in meta
 			{
-				for (rawBlockId, keyPairs) in meta
+				if let blockId = BlockID.fromRaw(raw: rawBlockId)
 				{
-					if let blockId = BlockID.fromRaw(raw: rawBlockId)
+					if self.allowMetaChanges.contains(blockId)
 					{
-						if self.allowMetaChanges.contains(blockId)
+						if var defaultMeta = self.getMeta(id: blockId)
 						{
-							if var defaultMeta = self.getMeta(id: blockId)
+							for (key, val) in keyPairs
 							{
-								for (key, val) in keyPairs
+								switch key
 								{
-									switch key
-									{
-									case AccessKeys.NAME:
-										if val != nil { defaultMeta.customName = val! }
-										break
-									case AccessKeys.COLOR:
-										if val != nil { defaultMeta.customColor = val! }
-										break
-									case AccessKeys.ROOM:
-										if val != nil { defaultMeta.roomNumber = val! }
-									default:
-										break
-									}
+								case AccessKeys.NAME:
+									if val != nil { defaultMeta.customName = val! }
+									break
+								case AccessKeys.COLOR:
+									if val != nil { defaultMeta.customColor = val! }
+									break
+								case AccessKeys.ROOM:
+									if val != nil { defaultMeta.roomNumber = val! }
+								default:
+									break
 								}
-								
-								self.setMeta(id: blockId, meta: &defaultMeta, save: false)
 							}
+							
+							self.setMeta(id: blockId, meta: &defaultMeta, save: false)
 						}
 					}
 				}
 			}
-		} else
+		}
+		
+		if !Storage.hasUpdatedDirectories
 		{
-			Debug.out("Method not updated.")
+			Debug.out("System is attempting to save meta to Suite")
 
-			// get/set values for custom class names
-			var classNames = [String]() // 7 of these (7 class blocks)
-			if Storage.OLD_CLASS_NAMES.exists()
-			{
-				classNames = Storage.OLD_CLASS_NAMES.getValue() as! [String]
-			}
-			
-			// get/set values for lunch boolean settings
-			var firstLunches = [Bool]() // 5 of these (5 weekdays)
-			if Storage.OLD_FIRSTLUNCH_VALUES.exists()
-			{
-				firstLunches = Storage.OLD_FIRSTLUNCH_VALUES.getValue() as! [Bool]
-			}
-			
-			// get/set values for class color selection
-			var classColors = [String]() // 7 of these (7 class blocks)
-			if Storage.OLD_COLOR_IDS.exists()
-			{
-				classColors = Storage.OLD_COLOR_IDS.getValue() as! [String]
-			}
-			
-			for i in 0..<8
-			{
-				let id = BlockID.fromId(i)!
-				if var meta = self.getMeta(id: id)
-				{
-					if classColors.count > i { meta.customColor = classColors[i] }
-					if classNames.count > i { meta.customName = classNames[i] }
-					
-					self.setMeta(id: id, meta: &meta)
-				}
-			}
-			
-			for i in 0..<5
-			{
-				let day: DayID = DayID.fromId(i)!
-				if lunchSwitches.count > i { lunchSwitches[day] = firstLunches[i] }
-			}
-			
-			Storage.deleteOldMethodRemnants() // Enable when we're ok getting rid of the old storage data.
+			Storage.setToSuiteDefaults()
+			self.saveMeta()
 		}
 		
 		self.notifyHandlers(.load)

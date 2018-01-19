@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 {
@@ -60,15 +61,17 @@ class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 	
 	func updateNotifications(block: Block)
 	{
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone.autoupdatingCurrent
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        
 		let analyst = block.analyst
 		var date: Date = analyst.getStartTime().asDate()
 		
 		let blockStartDateId: Int = block.weekday.id
 		let todayId: Int = TimeUtils.getDayOfWeek(date: Date())
 		
-		var dayMultiplier: Int = blockStartDateId - todayId
-		if dayMultiplier < 0 { dayMultiplier += 7 }
-		dayMultiplier -= 7 // Start schedule on the previous week
+		let dayMultiplier: Int = blockStartDateId - todayId
 		
 		var alertBody = ""
 		
@@ -85,10 +88,6 @@ class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 			date = date.addingTimeInterval(TimeInterval(60 * 60 * 24 * dayMultiplier)) // Register for the previous week so it for sure works this week
 		}
 		
-		let dateFormatter = DateFormatter()
-		dateFormatter.timeZone = TimeZone.autoupdatingCurrent
-		dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-		
 		Debug.out("Adding notification with alert: '\(alertBody)' on date: \(dateFormatter.string(from: date))")
 		self.scheduleNotification(text: alertBody, fireDate: date)
 	}
@@ -97,10 +96,11 @@ class NotificationsManager: ScheduleUpdateHandler, PrefsUpdateHandler
 	{
 		let notification: UILocalNotification = UILocalNotification()
 		notification.alertAction = "Knight Life"
-		notification.repeatInterval = NSCalendar.Unit.weekOfYear
-		notification.soundName = UILocalNotificationDefaultSoundName
 		notification.alertBody = text
 		notification.fireDate = fireDate
+
+		notification.soundName = UILocalNotificationDefaultSoundName
+		notification.repeatInterval = .weekOfYear
 		UIApplication.shared.scheduleLocalNotification(notification)
 	}
 }
