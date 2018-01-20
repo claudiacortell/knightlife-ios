@@ -72,11 +72,17 @@ class ITableController: UITableViewController
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
 		let templateCell = self.storyboardContainer.getSection(indexPath.section)!.getCellByIndex(indexPath.row)!
-		let cell = self.tableView.dequeueReusableCell(withIdentifier: templateCell.reuseId)!
-		
-		templateCell.callback(templateCell, cell)
-	
-		return cell
+		if templateCell.reuseId == "spacer"
+		{
+			let cell = UITableViewCell()
+			cell.selectionStyle = .none
+			return cell
+		} else
+		{
+			let cell = self.tableView.dequeueReusableCell(withIdentifier: templateCell.reuseId)!
+			templateCell.callback(templateCell, cell)
+			return cell
+		}
 	}
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat

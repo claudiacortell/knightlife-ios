@@ -115,7 +115,6 @@
                                         <constraint firstItem="nbR-co-s12" firstAttribute="top" secondItem="lx1-5M-FVG" secondAttribute="top" id="hhx-UC-rt2"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="textBoxLabel" destination="nbR-co-s12" id="qyk-3s-rSE"/>
                                 </connections>
@@ -147,7 +146,6 @@
                                         <constraint firstItem="ZKp-kG-saC" firstAttribute="top" secondItem="F9P-jD-PlS" secondAttribute="top" id="S6N-kB-wta"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="textBoxLabel" destination="ZKp-kG-saC" id="PyM-mX-Be1"/>
                                 </connections>
@@ -174,7 +172,6 @@
                                         <constraint firstAttribute="trailing" secondItem="bot-Xd-6yB" secondAttribute="trailing" constant="15" id="i3q-ZB-PSt"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="textBoxLabel" destination="bot-Xd-6yB" id="cRc-CX-6fd"/>
                                 </connections>
@@ -201,7 +198,6 @@
                                         <constraint firstAttribute="bottom" secondItem="ZHZ-dT-7nq" secondAttribute="bottom" id="rIN-Ox-Und"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="textBoxLabel" destination="ZHZ-dT-7nq" id="PKk-az-zC7"/>
                                 </connections>
@@ -228,10 +224,17 @@
                                         <constraint firstAttribute="bottom" secondItem="7yk-FG-XOq" secondAttribute="bottom" id="egp-Ud-tcv"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Hhj-Ax-WzT">
+                                <rect key="frame" x="0.0" y="127" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hhj-Ax-WzT" id="oMa-TA-rME">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="block" rowHeight="65" id="Z7N-cr-MqK" customClass="BlockTableBlockViewCell" customModule="Glancer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="127" width="375" height="65"/>
+                                <rect key="frame" x="0.0" y="171" width="375" height="65"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Z7N-cr-MqK" id="hL5-As-YZQ">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
@@ -245,7 +248,7 @@
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ty0-sp-VBO">
                                                             <rect key="frame" x="0.0" y="-9.5" width="45" height="65"/>
-                                                            <fontDescription key="fontDescription" type="system" weight="black" pointSize="24"/>
+                                                            <fontDescription key="fontDescription" name="GillSans-Bold" family="Gill Sans" pointSize="24"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -277,7 +280,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1:20 - 2:30" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Fe-a4-NtQ">
-                                                    <rect key="frame" x="271" y="22" width="89" height="21.5"/>
+                                                    <rect key="frame" x="271" y="22.5" width="89" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -314,7 +317,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="noClass" rowHeight="50" id="mD5-FX-zON">
-                                <rect key="frame" x="0.0" y="192" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="236" width="375" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mD5-FX-zON" id="4RF-Ke-Nk0">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -342,7 +345,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="error" rowHeight="50" id="5mO-5F-ngv">
-                                <rect key="frame" x="0.0" y="242" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="286" width="375" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5mO-5F-ngv" id="ImN-aB-E03">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -376,6 +379,8 @@
                             <outlet property="delegate" destination="V6D-yz-qBL" id="QEA-1E-dpa"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ar9-cD-Qxd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

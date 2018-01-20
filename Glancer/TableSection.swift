@@ -35,4 +35,11 @@ extension TableSection
 	{
 		return self.cells[id]
 	}
+	
+	mutating func addSpacerCell(_ height: Int)
+	{
+		var cell = TableCell("spacer")
+		cell.setHeight(height)
+		self.addCell(cell)
+	}
 }
