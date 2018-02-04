@@ -12,8 +12,13 @@ class ScheduleManager: Manager
 {	
 	static let instance = ScheduleManager()
 	
-	var template: FetchContainer<[DayID: WeekdaySchedule]>!
-	var schedulePatches: [EnscribedDate: FetchContainer<DateSchedule>]
+	private var schedule: WeekdaySchedule?
+	private var patches: [EnscribedDate: DateSchedule] = [:]
+	
+	private var scheduleSuccessCallbacks: [(WeekdaySchedule) -> Void]
+	private var scheduleFailureCallbacks: [(FetchError) -> Void]
+	
+	//success: @escaping ((remote: Bool, menu: LunchMenu)) -> Void, failure: @escaping (FetchError) -> Void
 	
 	var variationModule: ScheduleVariationPrefsModule
 	{
@@ -22,14 +27,9 @@ class ScheduleManager: Manager
 	
 	init()
 	{
-		self.template = FetchContainer(ResourceFetchToken())
-		self.schedulePatches = [:]
-		
 		super.init(name: "Schedule Manager")
 		
 		self.registerModule(ScheduleVariationPrefsModule(self, name: "variation"))
-		
-		self.fetchTemplate()
 	}
 	
 	func getVariation(_ day: DayID) -> Int
