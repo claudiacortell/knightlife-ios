@@ -38,14 +38,14 @@ struct GetPatchResponseBlock: WebCallResult
 	
 	init(unboxer: Unboxer) throws
 	{
-		self.blockId = try unboxer.unbox(key: "blockId")
-		self.startTime = try unboxer.unbox(key: "startTime")
-		self.endTime = try unboxer.unbox(key: "endTime")
+		self.blockId = try unboxer.unbox(key: "id")
+		self.startTime = try unboxer.unbox(key: "start")
+		self.endTime = try unboxer.unbox(key: "end")
 		
 		self.overrideColor = unboxer.unbox(key: "color")
 		
 		self.variation = unboxer.unbox(key: "variation")
-		self.associatedBlock = unboxer.unbox(key: "associatedBlock")
+		self.associatedBlock = unboxer.unbox(key: "association")
 		
 		self.customName = unboxer.unbox(key: "name")
 	}

@@ -8,24 +8,38 @@
 
 import Foundation
 
-class GetMenuWebCall: WebCall<LunchManager, GetMenuResponse, LunchMenu>
+class GetMenuWebCall: WebCall<GetMenuResponse, LunchMenu>
 {
+	let manager: LunchManager
 	let date: EnscribedDate
 	
-	init(_ manager: LunchManager, date: EnscribedDate, token: ResourceFetchToken)
+	init(_ manager: LunchManager, date: EnscribedDate)
 	{
+		self.manager = manager
 		self.date = date
 		
-		super.init(manager: manager, converter: GetMenuConverter(), token: token, call: "request/lunch.php")
+		super.init(call: "request/lunch")
 		
-		self.parameter("date", val: date.string)
+		self.parameter("dt", val: date.string)
 	}
 	
-	override func handleCall(url: String, call: String, completeCall: String, success: Bool, error: String?, data: LunchMenu?)
+	override func handleTokenConversion(_ data: GetMenuResponse) -> LunchMenu?
 	{
-		if error != nil
+		var items: [LunchMenuItem] = []
+		for item in data.items
 		{
-			self.manager.out(error!)
+			if let type = LunchMenuItemType.fromString(item.type)
+			{
+				let item = LunchMenuItem(type, name: item.name, allergy: item.allergy)
+				items.append(item)
+			}
 		}
+		
+		return LunchMenu(self.date, title: data.caption, items: items)
+	}
+	
+	override func handleCall(error: FetchError?, data: LunchMenu?)
+	{
+		
 	}
 }

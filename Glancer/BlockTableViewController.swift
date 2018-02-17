@@ -65,16 +65,12 @@ class BlockTableViewController: ITableController
 			HapticUtils.IMPACT.impactOccurred()
 		}
 		
-		let loadedSchedule = ScheduleManager.instance.getSchedule(self.date)
-		if hard || loadedSchedule.status == .dead
+		if let schedule = ScheduleManager.instance.patchHandler.getSchedule(self.date, hard: hard, callback: // Pass both our callback and our sync method to the schedule handler to interpret.
+		{ error, result in
+			self.delayScheduleResult(result, delayResult: delayResult, hapticFeedback: hapticFeedback)
+		})
 		{
-			ScheduleManager.instance.fetchDaySchedule(self.date,
-			{ fetch in
-				self.delayScheduleResult(fetch.data, delayResult: delayResult, hapticFeedback: hapticFeedback)
-			})
-		} else
-		{
-			self.delayScheduleResult(loadedSchedule.data, delayResult: delayResult, hapticFeedback: hapticFeedback)
+			self.delayScheduleResult(schedule, delayResult: delayResult, hapticFeedback: hapticFeedback)
 		}
 	}
 	
@@ -112,19 +108,23 @@ class BlockTableViewController: ITableController
 	{
 		if self.daySchedule == nil
 		{
-			var section = TableSection()
-			var errorCell = TableCell("error")
+			let section = TableSection()
+			let errorCell = TableCell("error")
+			
 			errorCell.setHeight(self.view.frame.height)
 			section.addCell(errorCell)
+			
 			self.addTableSection(section)
 		} else if self.daySchedule!.isEmpty
 		{
 			self.addTableModule(BlockTableModuleMasthead(controller: self))
 			
-			var section = TableSection()
-			var classCell = TableCell("noClass")
+			let section = TableSection()
+			let classCell = TableCell("noClass")
+			
 			classCell.setHeight(self.view.frame.height)
 			section.addCell(classCell)
+			
 			self.addTableSection(section)
 		} else
 		{

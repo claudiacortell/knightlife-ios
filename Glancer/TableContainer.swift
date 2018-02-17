@@ -9,21 +9,22 @@
 import Foundation
 import CoreGraphics
 
-struct TableContainer
+class TableContainer
 {
 	private(set) var sections: [TableSection] = []
-	var sectionCount: Int { get { return sections.count } }
 }
 
 extension TableContainer
 {
-	mutating func addSection(_ section: TableSection)
-	{
-		self.sections.append(section)
-	}
-	
+	var sectionCount: Int { get { return sections.count } }
+
     func getSection(_ id: Int) -> TableSection?
     {
         return self.sections[id]
     }
+	
+	func addSection(_ section: TableSection)
+	{
+		self.sections.append(section)
+	}
 }

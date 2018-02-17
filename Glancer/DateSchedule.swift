@@ -11,13 +11,14 @@ import Foundation
 struct DateSchedule
 {
 	let date: EnscribedDate
-	private var blocks: [ScheduleBlock] = []
+	let blocks: [ScheduleBlock]
 	let subtitle: String?
 	let changed: Bool
 
-	init(_ date: EnscribedDate, subtitle: String? = nil, changed: Bool = false)
+	init(_ date: EnscribedDate, blocks: [ScheduleBlock], subtitle: String? = nil, changed: Bool = false)
 	{
 		self.date = date
+		self.blocks = blocks
 		self.subtitle = subtitle
 		self.changed = changed
 	}
@@ -28,11 +29,6 @@ extension DateSchedule: Equatable
 	var isEmpty: Bool
 	{
 		return self.blocks.isEmpty
-	}
-	
-	mutating func addBlock(_ block: ScheduleBlock)
-	{
-		self.blocks.append(block)
 	}
 	
 	func getFirstBlock() -> ScheduleBlock?

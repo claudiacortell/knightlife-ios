@@ -18,14 +18,14 @@ class BlockTableModuleBlocks: TableModule
 		self.controller = controller
 	}
 	
-	func generateSections(container: inout TableContainer)
+	func generateSections(container: TableContainer)
 	{
 		for block in self.controller.daySchedule!.getBlocks() // Testing variations
 		{
-			var itemSection = TableSection()
+			let itemSection = TableSection()
 			
 			itemSection.headerHeight = 1
-			var cell = TableCell("block", callback:
+			let cell = TableCell("block", callback:
 			{ templateCell, cell in
 				if self.controller.daySchedule != nil, self.controller.daySchedule!.hasBlock(block), let viewCell = cell as? BlockTableBlockViewCell, let block = templateCell.getData("block") as? ScheduleBlock
 				{

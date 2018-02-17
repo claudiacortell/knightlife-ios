@@ -10,13 +10,14 @@ import Foundation
 import CoreGraphics
 import UIKit
 
-struct TableCell
+class TableCell
 {
 	let reuseId: String
 	let callback: (TableCell, UITableViewCell) -> Void
+	
 	private(set) var data: [String: Any] = [:]
 
-	private(set) var height: CGFloat?
+	var height: CGFloat?
 	
 	init(_ reuseId: String, callback: @escaping (TableCell, UITableViewCell) -> Void = {_,_ in})
 	{
@@ -24,7 +25,7 @@ struct TableCell
 		self.callback = callback
 	}
 	
-	mutating func setData(_ key: String, data: Any?)
+	func setData(_ key: String, data: Any?)
 	{
 		self.data[key] = data
 	}
@@ -34,13 +35,13 @@ struct TableCell
 		return self.data[key]
 	}
 	
-	mutating func setHeight(_ height: Int)
+	func setHeight(_ float: CGFloat)
 	{
-		self.height = CGFloat(height)
+		self.height = float
 	}
 	
-	mutating func setHeight(_ height: CGFloat)
+	func setHeight(_ int: Int)
 	{
-		self.height = height
+		self.height = CGFloat(int)
 	}
 }

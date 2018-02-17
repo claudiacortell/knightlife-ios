@@ -18,14 +18,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 	{
         UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
 		
-//        if application.responds(to: #selector(UIApplication.registerUserNotificationSettings(_:)))
-//		{
-//            let types: UIUserNotificationType = ([.alert, .badge, .sound])
-//            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: types, categories: nil)
-//
-//            application.registerUserNotificationSettings(settings)
-//            application.registerForRemoteNotifications()
-//        }
+        if application.responds(to: #selector(UIApplication.registerUserNotificationSettings(_:)))
+		{
+            let types: UIUserNotificationType = ([.alert, .badge, .sound])
+            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: types, categories: nil)
+
+            application.registerUserNotificationSettings(settings)
+            application.registerForRemoteNotifications()
+        }
 		
 		_ = ScheduleManager.instance
 //		_ = MeetingManager.instance
@@ -34,16 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 //		_ = EventManager.instance
 		
 //		EventManager.instance.fetchEvents(TimeUtils.todayEnscribed, {today in print(today.data)})
-		
-		let mainStoryboardIpad = UIStoryboard(name: "Main", bundle: nil)
-		let initialViewControlleripad = mainStoryboardIpad.instantiateViewController(withIdentifier: "initial")
-		
-		self.window = UIWindow(frame: UIScreen.main.bounds)
-		self.window?.rootViewController = initialViewControlleripad
-		
-		self.window?.makeKeyAndVisible()
-		
-		initialViewControlleripad.childViewControllers.first!.navigationController?.pushViewController(mainStoryboardIpad.instantiateViewController(withIdentifier: "home"), animated: false)
 		
         return true
     }
@@ -61,19 +51,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         print("Device Token:", tokenString)
 		Device.ID = tokenString
 		
-		Alamofire.request("https://bbnknightlife.herokuapp.com/api/deviceTokens/?deviceToken=\(tokenString)", method: .post).responseString
-		{ response in
-			guard let data = response.data, response.error == nil else
-			{                                                 // check for fundamental networking error
-				print("error=\(response.error!)")
-				return
-			}
-			
-			if let httpStatus = response.response, httpStatus.statusCode != 200
-			{           // check for http errors
-				print("statusCode should be 200, but is \(httpStatus.statusCode)")
-				print("response = \(response.response!)")
-				
+		let call = RegistrationWebCall()
+		call.callback = { error, result in
+			if error != nil
+			{
+				print("\(error!.cause): \(error!.message!)")
+			} else
+			{
+				print("No errors in registering device!")
 			}
 		}
     }
@@ -89,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 		{
 			if type == 0 // Update local schedule
 			{
-//				UPDATE SCHEDULE
+				ScheduleManager.instance.reloadAllSchedules()
 			}
 		}
     }

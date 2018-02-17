@@ -10,6 +10,8 @@ import Foundation
 
 struct ScheduleBlock
 {
+	let ID: UUID = UUID()
+	
 	let blockId: BlockID
 	let time: TimeDuration
 	let variation: Int?
@@ -22,20 +24,11 @@ extension ScheduleBlock: Equatable
 {
 	static func ==(lhs: ScheduleBlock, rhs: ScheduleBlock) -> Bool
 	{
-		return lhs.hashValue == rhs.hashValue
+		return lhs.ID == rhs.ID
 	}
 	
 	var hashValue: Int
 	{
-		var id = 1
-		
-		id ^= self.blockId.hashValue
-		id ^= self.time.hashValue
-		id ^= self.variation ?? 1
-		id ^= self.associatedBlock?.hashValue ?? 1
-		id ^= self.customName?.hashValue ?? 1
-		id ^= self.color?.hashValue ?? 1
-		
-		return id
+		return self.ID.hashValue
 	}
 }

@@ -11,21 +11,17 @@ import Foundation
 struct WeekdaySchedule
 {
 	let dayId: DayID
-	private var blocks: [ScheduleBlock] = []
+	let blocks: [ScheduleBlock]
 	
-	init(_ day: DayID)
+	init(_ day: DayID, blocks: [ScheduleBlock])
 	{
 		self.dayId = day
+		self.blocks = blocks
 	}
 }
 
 extension WeekdaySchedule: Equatable
 {
-	mutating func addBlock(_ block: ScheduleBlock)
-	{
-		self.blocks.append(block)
-	}
-	
 	func getBlocks(_ allVariations: Bool = false, variation: Int? = nil) -> [ScheduleBlock]
 	{
 		var blocks: [ScheduleBlock] = []
@@ -41,11 +37,11 @@ extension WeekdaySchedule: Equatable
 		return blocks
 	}
 	
-	func getBlockByHash(_ hash: Int) -> ScheduleBlock?
+	func getBlockByID(_ id: UUID) -> ScheduleBlock?
 	{
 		for block in self.blocks
 		{
-			if block.hashValue == hash
+			if block.ID == id
 			{
 				return block
 			}

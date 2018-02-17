@@ -28,7 +28,7 @@ class ITableController: UITableViewController
 
 		for module in self.modules // Modules
 		{
-			module.generateSections(container: &self.storyboardContainer)
+			module.generateSections(container: self.storyboardContainer)
 		}
 		
 		self.tableView.reloadData()

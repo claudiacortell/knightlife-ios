@@ -8,29 +8,62 @@
 
 import Foundation
 
-class GetPatchWebCall: WebCall<ScheduleManager, GetPatchResponse, DateSchedule>
+class GetPatchWebCall: WebCall<GetPatchResponse, DateSchedule>
 {
+	let manager: ScheduleManager
 	let date: EnscribedDate
 	
-	init(_ manager: ScheduleManager, date: EnscribedDate, token: ResourceFetchToken)
+	init(_ manager: ScheduleManager, date: EnscribedDate)
 	{
+		self.manager = manager
 		self.date = date
-		super.init(manager: manager, converter: GetPatchConverter(date), token: token, call: "request/schedule.php")
-				
-		self.parameter("date", val: date.string)
+		
+		super.init(call: "request/schedule.php")
+		
+		self.parameter("dt", val: date.string)
 	}
 	
-	override func handleCall(url: String, call: String, completeCall: String, success: Bool, error: String?, data: DateSchedule?)
+	override func handleTokenConversion(_ response: GetPatchResponse) -> DateSchedule?
 	{
-		if success
+		var blocks: [ScheduleBlock] = []
+		for block in response.blocks
 		{
-			manager.out("Successfully retrieved patch for date: \(self.date.string)")
-		} else if error! == "Invalid data."
-		{
-			manager.out("No patch schedule for date: \(self.date.string)")
-		} else
-		{
-			manager.out("An error occured during web call: \(call): \(error!)")
+			if let blockId = BlockID.fromRaw(raw: block.blockId)
+			{
+				let startTime = EnscribedTime(raw: block.startTime)
+				let endTime = EnscribedTime(raw: block.endTime)
+				
+				let variation = block.variation
+				let associatedBlock: BlockID? = block.associatedBlock == nil ? nil : BlockID.fromRaw(raw: block.associatedBlock!)
+				
+				let customName = block.customName
+				
+				var color = block.overrideColor
+				if color != nil && color!.count != 6
+				{
+					color = nil
+				}
+				
+				if !startTime.valid || !endTime.valid || startTime.toDate() == nil || endTime.toDate() == nil
+				{
+					manager.out("Recieved an invalid start/end time: \(block.startTime), \(block.endTime)")
+				} else
+				{
+					let scheduleBlock = ScheduleBlock(blockId: blockId, time: TimeDuration(startTime: startTime, endTime: endTime), variation: variation, associatedBlock: associatedBlock, customName: customName, color: color)
+					blocks.append(scheduleBlock)
+				}
+			} else
+			{
+				manager.out("Recieved an invalid block id: \(block.blockId)")
+			}
 		}
+		
+		let daySchedule = DateSchedule(date, blocks: blocks, subtitle: response.subtitle, changed: response.changed ?? false)
+		return daySchedule
+	}
+	
+	override func handleCall(error: FetchError?, data: DateSchedule?)
+	{
+		
 	}
 }

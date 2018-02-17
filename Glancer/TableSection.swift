@@ -8,38 +8,33 @@
 
 import Foundation
 
-struct TableSection
+class TableSection
 {
 	private(set) var cells: [TableCell] = []
 	
 	var title: String?
 	var headerHeight: Int?
 	var footerHeight: Int?
-	
-    var cellCount: Int { return cells.count }
 }
 
 extension TableSection
 {
-	init(_ title: String)
-	{
-		self.title = title
-	}
-	
-	mutating func addCell(_ cell: TableCell)
-	{
-		self.cells.append(cell)
-	}
-	
+	var cellCount: Int { return cells.count }
+
 	func getCellByIndex(_ id: Int) -> TableCell?
 	{
 		return self.cells[id]
 	}
 	
-	mutating func addSpacerCell(_ height: Int)
+	func addSpacerCell(_ height: Int)
 	{
-		var cell = TableCell("spacer")
+		let cell = TableCell("spacer")
 		cell.setHeight(height)
 		self.addCell(cell)
+	}
+	
+	func addCell(_ cell: TableCell)
+	{
+		self.cells.append(cell)
 	}
 }

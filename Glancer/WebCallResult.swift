@@ -13,3 +13,11 @@ protocol WebCallResult: Unboxable
 {
 	
 }
+
+class DummyResult: WebCallResult
+{
+	required init(unboxer: Unboxer) throws
+	{
+		
+	}
+}

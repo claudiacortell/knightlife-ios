@@ -17,9 +17,9 @@ class BlockTableModuleMasthead: TableModule
 		self.controller = controller
 	}
 	
-	func generateSections(container: inout TableContainer)
+	func generateSections(container: TableContainer)
 	{
-		var mainSection = TableSection()
+		let mainSection = TableSection()
 		mainSection.addSpacerCell(20) // Header.
 		
 		mainSection.addCell(TableCell("masthead.scope", callback:
@@ -59,7 +59,7 @@ class BlockTableModuleMasthead: TableModule
 			
 			if let first = self.controller.daySchedule!.getFirstBlock(), let last = self.controller.daySchedule!.getLastBlock()
 			{
-				var subtitleSection = TableSection()
+				let subtitleSection = TableSection()
 
 				subtitleSection.addCell(TableCell("masthead.subtitle", callback:
 				{ viewCell, cell in
@@ -77,7 +77,7 @@ class BlockTableModuleMasthead: TableModule
 			
 			if self.controller.daySchedule!.changed
 			{
-				var changedSection = TableSection()
+				let changedSection = TableSection()
 				changedSection.addCell(TableCell("masthead.changed"))
 				changedSection.addSpacerCell(15)
 				container.addSection(changedSection)

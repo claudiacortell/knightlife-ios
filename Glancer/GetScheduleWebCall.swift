@@ -8,21 +8,66 @@
 
 import Foundation
 
-class GetScheduleWebCall: WebCall<ScheduleManager, GetScheduleResponse, [DayID: WeekdaySchedule]>
-{    
-	init(_ manager: ScheduleManager, token: ResourceFetchToken)
+class GetScheduleWebCall: WebCall<GetScheduleResponse, [DayID: WeekdaySchedule]>
+{
+	let manager: ScheduleManager
+	
+	init(_ manager: ScheduleManager)
 	{
-		super.init(manager: manager, converter: GetScheduleConverter(), token: token, call: "request/schedule.php")
+		self.manager = manager
+		super.init(call: "request/schedule.php")
 	}
-    
-	override func handleCall(url: String, call: String, completeCall: String, success: Bool, error: String?, data: [DayID : WeekdaySchedule]?)
+	
+	override func handleTokenConversion(_ response: GetScheduleResponse) -> [DayID : WeekdaySchedule]?
 	{
-		if success
+		var dayList: [DayID: WeekdaySchedule] = [:]
+		for day in response.days
 		{
-			manager.out("Successfully downloaded template schedule")
-		} else
-		{
-			manager.out("An error occured during web call: \(call): \(error!)")
+			if let dayId = DayID.fromRaw(raw: day.dayId)
+			{
+				var blocks: [ScheduleBlock] = []
+				for block in day.blocks
+				{
+					if let blockId = BlockID.fromRaw(raw: block.blockId)
+					{
+						let startTime = EnscribedTime(raw: block.startTime)
+						let endTime = EnscribedTime(raw: block.endTime)
+						let variation = block.variation
+						let associatedBlock: BlockID? = block.associatedBlock == nil ? nil : BlockID.fromRaw(raw: block.associatedBlock!)
+						
+						if !startTime.valid || !endTime.valid || startTime.toDate() == nil || endTime.toDate() == nil
+						{
+							manager.out("Recieved an invalid start/end time: \(block.startTime), \(block.endTime)")
+						} else
+						{
+							let scheduleBlock = ScheduleBlock(blockId: blockId, time: TimeDuration(startTime: startTime, endTime: endTime), variation: variation, associatedBlock: associatedBlock, customName: nil, color: nil)
+							blocks.append(scheduleBlock)
+						}
+					} else
+					{
+						manager.out("Recieved an invalid block id: \(block.blockId)")
+					}
+				}
+				
+				let schedule = WeekdaySchedule(dayId, blocks: blocks)
+
+				if dayList[dayId] != nil
+				{
+					manager.out("Already set information for day: \(dayId.rawValue)")
+				} else
+				{
+					dayList[dayId] = schedule
+				}
+			} else
+			{
+				manager.out("Recieved an invalid day id: \(day.dayId)")
+			}
 		}
+		return dayList
+	}
+	
+	override func handleCall(error: FetchError?, data: [DayID : WeekdaySchedule]?)
+	{
+		
 	}
 }

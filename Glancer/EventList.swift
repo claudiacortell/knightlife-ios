@@ -10,5 +10,12 @@ import Foundation
 
 struct EventList
 {
-	var events: [Event] = []
+	let date: EnscribedDate
+	let events: [Event]
+	
+	init(_ date: EnscribedDate, events: [Event])
+	{
+		self.date = date
+		self.events = events
+	}
 }

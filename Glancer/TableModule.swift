@@ -10,5 +10,5 @@ import Foundation
 
 protocol TableModule
 {
-	func generateSections(container: inout TableContainer)
+	func generateSections(container: TableContainer)
 }

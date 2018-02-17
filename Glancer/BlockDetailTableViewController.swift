@@ -66,17 +66,21 @@ class BlockDetailTableViewController: ITableController
 		{
 			self.chainedResourceFetches.append
 			{
-				LunchManager.instance.getMenu(self.date, forceRefresh: hard, allowRemoteFetch: true, success:
-				{ result in
-//					self.delayResult(result.menu, delayResult: delayResult, hapticFeedback: hapticFeedback)
-//					{ args in
-//						self.lunch = result.menu
-//						self.nextChainLink()
-//					}
-				}, failure:
-				{ error in
-					self.dataFailedToLoad()
+				if let menu = LunchManager.instance.menuHandler.getMenu(self.date, hard: hard, callback:
+				{ error, data in
+					if let result = data
+					{
+						self.lunch = result
+						self.nextChainLink()
+					} else
+					{
+						self.dataFailedToLoad()
+					}
 				})
+				{
+					self.lunch = menu
+					self.nextChainLink()
+				}
 			}
 		}
 		
@@ -124,19 +128,23 @@ class BlockDetailTableViewController: ITableController
 	{
 		if self.daySchedule == nil
 		{
-			var section = TableSection()
-			var errorCell = TableCell("error")
+			let section = TableSection()
+			let errorCell = TableCell("error")
+			
 			errorCell.setHeight(self.view.frame.height)
 			section.addCell(errorCell)
+			
 			self.addTableSection(section)
 		} else if self.daySchedule!.isEmpty
 		{
 //			self.addTableModule(BlockTableModuleMasthead(controller: self))
 			
-			var section = TableSection()
-			var classCell = TableCell("noClass")
+			let section = TableSection()
+			let classCell = TableCell("noClass")
+			
 			classCell.setHeight(self.view.frame.height)
 			section.addCell(classCell)
+			
 			self.addTableSection(section)
 		} else
 		{

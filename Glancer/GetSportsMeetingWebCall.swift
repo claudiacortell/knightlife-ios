@@ -8,21 +8,30 @@
 
 import Foundation
 
-class GetMeetingWebCall: WebCall<SportsManager, GetSportsMeetingResponse, SportMeeting>
+class GetMeetingWebCall: WebCall<GetSportsMeetingResponse, SportMeeting>
 {
+	let manager: SportsManager
 	let sport: SportTeam
 	let date: EnscribedDate
 	
 	init(manager: SportsManager, sport: SportTeam, date: EnscribedDate)
 	{
+		self.manager = manager
 		self.sport = sport
 		self.date = date
-		super.init(manager: manager, call: "request/sports.php")
 		
-		self.parameter("team", val: String(sport.id)).parameter("date", val: date.string)
+		super.init(call: "request/sports.php")
+		
+		self.parameter("tm", val: String(sport.id))
+		self.parameter("dt", val: date.string)
 	}
 	
-	override func handleCall(url: String, call: String, completeCall: String, success: Bool, error: String?, data: SportMeeting?)
+	override func handleTokenConversion(_ data: GetSportsMeetingResponse) -> SportMeeting?
+	{
+		return nil
+	}
+	
+	override func handleCall(error: FetchError?, data: SportMeeting?)
 	{
 		
 	}

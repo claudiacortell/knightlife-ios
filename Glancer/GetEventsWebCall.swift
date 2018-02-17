@@ -8,16 +8,46 @@
 
 import Foundation
 
-class GetEventsWebCall: WebCall<EventManager, GetEventsResponse, EventList>
+class GetEventsWebCall: WebCall<GetEventsResponse, EventList>
 {
+	let manager: EventManager
 	let date: EnscribedDate
 	
-	init(_ manager: EventManager, date: EnscribedDate, token: ResourceFetchToken)
+	init(_ manager: EventManager, date: EnscribedDate)
 	{
+		self.manager = manager
 		self.date = date
 		
-		super.init(manager: manager, converter: GetEventsConverter(), token: token, call: "request/events.php")
+		super.init(call: "request/events")
 		
 		self.parameter("date", val: date.string)
+	}
+	
+	override func handleTokenConversion(_ data: GetEventsResponse) -> EventList?
+	{
+		var events: [Event] = []
+		for event in data.events
+		{
+			if let blockId = BlockID.fromRaw(raw: event.blockId)
+			{
+				var audience: [EventAudience] = []
+				for group in event.audience
+				{
+					if let val = EventAudience.fromId(group)
+					{
+						audience.append(val)
+					}
+				}
+				
+				let item = Event(blockId: blockId, mandatory: event.mandatory, audience: audience, name: event.name, description: event.description)
+				events.append(item)
+			}
+		}
+		return EventList(self.date, events: events)
+	}
+	
+	override func handleCall(error: FetchError?, data: EventList?)
+	{
+		
 	}
 }

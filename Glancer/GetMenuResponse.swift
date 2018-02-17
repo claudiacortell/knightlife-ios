@@ -11,10 +11,12 @@ import Unbox
 
 class GetMenuResponse: WebCallResult
 {
+	let caption: String?
 	let items: [GetMenuResponseItem]
 	
 	required init(unboxer: Unboxer) throws
 	{
+		self.caption = unboxer.unbox(key: "menu.caption")
 		self.items = try unboxer.unbox(keyPath: "menu.items", allowInvalidElements: false)
 	}
 }
