@@ -18,7 +18,7 @@ class GetPatchWebCall: WebCall<GetPatchResponse, DateSchedule>
 		self.manager = manager
 		self.date = date
 		
-		super.init(call: "request/schedule.php")
+		super.init(call: "schedule")
 		
 		self.parameter("dt", val: date.string)
 	}
@@ -34,7 +34,7 @@ class GetPatchWebCall: WebCall<GetPatchResponse, DateSchedule>
 				let endTime = EnscribedTime(raw: block.endTime)
 				
 				let variation = block.variation
-				let associatedBlock: BlockID? = block.associatedBlock == nil ? nil : BlockID.fromRaw(raw: block.associatedBlock!)
+//				let associatedBlock: BlockID? = block.associatedBlock == nil ? nil : BlockID.fromRaw(raw: block.associatedBlock!)
 				
 				let customName = block.customName
 				
@@ -49,7 +49,7 @@ class GetPatchWebCall: WebCall<GetPatchResponse, DateSchedule>
 					manager.out("Recieved an invalid start/end time: \(block.startTime), \(block.endTime)")
 				} else
 				{
-					let scheduleBlock = ScheduleBlock(blockId: blockId, time: TimeDuration(startTime: startTime, endTime: endTime), variation: variation, associatedBlock: associatedBlock, customName: customName, color: color)
+					let scheduleBlock = ScheduleBlock(blockId: blockId, time: TimeDuration(startTime: startTime, endTime: endTime), variation: variation, customName: customName, color: color)
 					blocks.append(scheduleBlock)
 				}
 			} else

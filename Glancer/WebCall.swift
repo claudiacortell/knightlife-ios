@@ -19,7 +19,7 @@ class WebCall<DataContainer: WebCallResult, Result>
 	
 	var callback: (FetchError?, Result?) -> Void = {_,_ in}
 	
-	init(url: String = "https://bbn-knightlife.herokuapp.com/api/", call: String)
+	init(url: String = "https://kl-api.herokuapp.com/", call: String)
 	{
 		self.url = url
 		self.call = call

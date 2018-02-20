@@ -16,14 +16,4 @@ class RegistrationWebCall: WebCall<DummyResult, Any>
 		super.init(call: "device/register")
 		self.deviceParam()
 	}
-	
-	override func handleTokenConversion(_ data: DummyResult) -> Any?
-	{
-		return nil
-	}
-	
-	override func handleCall(error: FetchError?, data: Any?)
-	{
-		
-	}
 }

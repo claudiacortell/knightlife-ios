@@ -63,6 +63,9 @@ class BlockAnalyst
 		if self.block.blockId == .lab, let previous = self.schedule.getBlockBefore(self.block) // If it's a lab and there's a previous block
 		{
 			return "\(previous.blockId.displayLetter.first!)L" // E.G. AL
+		} else if let variation = self.block.variation, self.block.blockId != .lunch
+		{
+			return "\(block.blockId.displayLetter.first!)\(variation + 1)" // E.G. A1
 		} else
 		{
 			return self.block.blockId.displayLetter

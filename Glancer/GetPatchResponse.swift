@@ -32,7 +32,7 @@ struct GetPatchResponseBlock: WebCallResult
 	var overrideColor: String?
 	
 	var variation: Int?
-	var associatedBlock: String?
+//	var associatedBlock: String?
 	
 	var customName: String?
 	
@@ -45,7 +45,7 @@ struct GetPatchResponseBlock: WebCallResult
 		self.overrideColor = unboxer.unbox(key: "color")
 		
 		self.variation = unboxer.unbox(key: "variation")
-		self.associatedBlock = unboxer.unbox(key: "association")
+//		self.associatedBlock = unboxer.unbox(key: "association")
 		
 		self.customName = unboxer.unbox(key: "name")
 	}

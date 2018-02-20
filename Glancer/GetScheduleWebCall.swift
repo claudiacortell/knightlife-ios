@@ -15,7 +15,7 @@ class GetScheduleWebCall: WebCall<GetScheduleResponse, [DayID: WeekdaySchedule]>
 	init(_ manager: ScheduleManager)
 	{
 		self.manager = manager
-		super.init(call: "request/schedule.php")
+		super.init(call: "schedule/template")
 	}
 	
 	override func handleTokenConversion(_ response: GetScheduleResponse) -> [DayID : WeekdaySchedule]?
@@ -40,7 +40,7 @@ class GetScheduleWebCall: WebCall<GetScheduleResponse, [DayID: WeekdaySchedule]>
 							manager.out("Recieved an invalid start/end time: \(block.startTime), \(block.endTime)")
 						} else
 						{
-							let scheduleBlock = ScheduleBlock(blockId: blockId, time: TimeDuration(startTime: startTime, endTime: endTime), variation: variation, associatedBlock: associatedBlock, customName: nil, color: nil)
+							let scheduleBlock = ScheduleBlock(blockId: blockId, time: TimeDuration(startTime: startTime, endTime: endTime), variation: variation, customName: nil, color: nil)
 							blocks.append(scheduleBlock)
 						}
 					} else

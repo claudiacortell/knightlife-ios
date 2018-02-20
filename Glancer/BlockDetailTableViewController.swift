@@ -22,7 +22,7 @@ class BlockDetailTableViewController: ITableController
 	var meetings: BlockCourseList?
 
 	var chainedResourceFetches: [() -> Void] = []
-	var processing = false
+	var error = false
 	
 	override func viewDidLoad()
 	{
@@ -60,7 +60,6 @@ class BlockDetailTableViewController: ITableController
 		}
 		
 		self.chainedResourceFetches.removeAll()
-		self.processing = true
 		
 		if self.block.blockId == .lunch
 		{
@@ -71,51 +70,51 @@ class BlockDetailTableViewController: ITableController
 					if let result = data
 					{
 						self.lunch = result
-						self.nextChainLink()
+						self.nextChainLink(hapticFeedback)
 					} else
 					{
-						self.dataFailedToLoad()
+						self.dataFailedToLoad(hapticFeedback)
 					}
 				})
 				{
 					self.lunch = menu
-					self.nextChainLink()
+					self.nextChainLink(hapticFeedback)
 				}
 			}
 		}
 		
-		self.nextChainLink()
+		self.nextChainLink(hapticFeedback)
 	}
 	
-	private func nextChainLink()
+	private func nextChainLink(_ hapticFeedback: Bool)
 	{
 		if !self.chainedResourceFetches.isEmpty
 		{
 			self.chainedResourceFetches.removeFirst()()
 		} else
 		{
-			self.dataDidLoad()
+			self.dataDidLoad(hapticFeedback)
 		}
 	}
 	
-	private func dataFailedToLoad()
+	private func dataFailedToLoad(_ hapticFeedback: Bool)
 	{
-		
+		self.error = true
+		self.dataFinishedLoading(hapticFeedback: hapticFeedback)
 	}
 	
-	private func dataDidLoad()
+	private func dataDidLoad(_ hapticFeedback: Bool)
 	{
-		
+		self.error = false
+		self.dataFinishedLoading(hapticFeedback: hapticFeedback)
 	}
 	
-	private func scheduleDidLoad(_ schedule: DateSchedule?, hapticFeedback: Bool)
+	private func dataFinishedLoading(hapticFeedback: Bool)
 	{
 		if hapticFeedback
 		{
 			HapticUtils.IMPACT.impactOccurred()
 		}
-		
-		self.daySchedule = schedule
 		
 		self.controller.stopRefreshing()
 		self.refreshControl?.endRefreshing()
@@ -126,30 +125,22 @@ class BlockDetailTableViewController: ITableController
 	
 	override func generateSections()
 	{
-		if self.daySchedule == nil
-		{
-			let section = TableSection()
-			let errorCell = TableCell("error")
-			
-			errorCell.setHeight(self.view.frame.height)
-			section.addCell(errorCell)
-			
-			self.addTableSection(section)
-		} else if self.daySchedule!.isEmpty
-		{
-//			self.addTableModule(BlockTableModuleMasthead(controller: self))
-			
-			let section = TableSection()
-			let classCell = TableCell("noClass")
-			
-			classCell.setHeight(self.view.frame.height)
-			section.addCell(classCell)
-			
-			self.addTableSection(section)
-		} else
-		{
-//			self.addTableModule(BlockTableModuleMasthead(controller: self))
-//			self.addTableModule(BlockTableModuleBlocks(controller: self))
-		}
+//		if self.error
+//		{
+//			let section = TableSection()
+//			let errorCell = TableCell("error")
+//
+//			errorCell.setHeight(self.view.frame.height)
+//			section.addCell(errorCell)
+//
+//			self.addTableSection(section)
+//		} else
+//		{
+		var section = TableSection()
+		section.addCell(TableCell("popup"))
+		self.addTableSection(section)
+		
+//			self.addTableModule(BlockDetailModuleMasthead(self))
+//		}
 	}
 }
