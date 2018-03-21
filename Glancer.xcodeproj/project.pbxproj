@@ -18,6 +18,7 @@
 		C002329E1FA37D8D0019D328 /* AnEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C002329D1FA37D8D0019D328 /* AnEventHandler.swift */; };
 		C00232A51FA37E760019D328 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00232A41FA37E760019D328 /* Course.swift */; };
 		C00232A71FA37EFC0019D328 /* CourseSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00232A61FA37EFC0019D328 /* CourseSchedule.swift */; };
+		C006137F20600233008F6D92 /* BlockTableModuleToday.swift in Sources */ = {isa = PBXBuildFile; fileRef = C006137E20600233008F6D92 /* BlockTableModuleToday.swift */; };
 		C01867241FC7A82F002027B8 /* EXT_UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01867231FC7A82F002027B8 /* EXT_UIView.swift */; };
 		C019C1611F7D3CED00FC4EED /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C019C1601F7D3CED00FC4EED /* Launch.storyboard */; };
 		C01FED851FCD1AEE0095F8A1 /* ITableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01FED841FCD1AEE0095F8A1 /* ITableController.swift */; };
@@ -37,6 +38,7 @@
 		C036366D1FACF864008FC9A9 /* GetScheduleWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C036366C1FACF864008FC9A9 /* GetScheduleWebCall.swift */; };
 		C03636741FACFC85008FC9A9 /* GetScheduleResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03636731FACFC85008FC9A9 /* GetScheduleResponse.swift */; };
 		C03D148B1F79479C00211D28 /* HomeViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03D148A1F79479C00211D28 /* HomeViewManager.swift */; };
+		C03F670C205F729300F10B6C /* ResourceChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03F670B205F729300F10B6C /* ResourceChain.swift */; };
 		C04926A32000A92E00926082 /* EXT_UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04926A22000A92E00926082 /* EXT_UIColor.swift */; };
 		C04937B81FB405880036C890 /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04937B71FB405880036C890 /* Module.swift */; };
 		C04937BB1FB40EB10036C890 /* CollectionModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04937BA1FB40EB10036C890 /* CollectionModule.swift */; };
@@ -77,7 +79,6 @@
 		C0A1FB162001B36C004146CE /* ScheduleVariationPrefsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A1FB152001B36C004146CE /* ScheduleVariationPrefsModule.swift */; };
 		C0A1FB182001B4EF004146CE /* MapModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A1FB172001B4EF004146CE /* MapModule.swift */; };
 		C0A1FB1A2001D705004146CE /* DateSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A1FB192001D705004146CE /* DateSchedule.swift */; };
-		C0A1FB1D2001E253004146CE /* SeparatedBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A1FB1C2001E253004146CE /* SeparatedBarItem.swift */; };
 		C0A26FB61FAF70ED0060DC23 /* PrefsOverlord.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A26FB51FAF70ED0060DC23 /* PrefsOverlord.swift */; };
 		C0A26FBC1FAF76620060DC23 /* SportsPrefModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A26FBB1FAF76620060DC23 /* SportsPrefModule.swift */; };
 		C0A5D3BC1F69E07500DBDCAD /* UserPrefsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A5D3BB1F69E07500DBDCAD /* UserPrefsManager.swift */; };
@@ -104,6 +105,8 @@
 		C0CB9C1B1FE468FF00437C5D /* GetEventsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CB9C1A1FE468FF00437C5D /* GetEventsResponse.swift */; };
 		C0CB9C201FE4698000437C5D /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CB9C1F1FE4698000437C5D /* EventList.swift */; };
 		C0D1053E1FDA398B0030A0DC /* MeetingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D1053D1FDA398A0030A0DC /* MeetingManager.swift */; };
+		C0D1A6F1206221B70000D448 /* LunchViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D1A6F0206221B70000D448 /* LunchViewManager.swift */; };
+		C0F1797320620237009415D2 /* LunchMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F1797220620237009415D2 /* LunchMenuViewController.swift */; };
 		C0F7781E200437D900FB90D8 /* BlockDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F7781D200437D900FB90D8 /* BlockDetailTableViewController.swift */; };
 		C0F9E15D20059FF1001E7026 /* BlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F9E15C20059FF1001E7026 /* BlockViewController.swift */; };
 		C0F9E1612005AC71001E7026 /* TableModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F9E1602005AC71001E7026 /* TableModule.swift */; };
@@ -141,6 +144,7 @@
 		C002329D1FA37D8D0019D328 /* AnEventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnEventHandler.swift; sourceTree = "<group>"; };
 		C00232A41FA37E760019D328 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		C00232A61FA37EFC0019D328 /* CourseSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseSchedule.swift; sourceTree = "<group>"; };
+		C006137E20600233008F6D92 /* BlockTableModuleToday.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTableModuleToday.swift; sourceTree = "<group>"; };
 		C01867231FC7A82F002027B8 /* EXT_UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EXT_UIView.swift; sourceTree = "<group>"; };
 		C019C1601F7D3CED00FC4EED /* Launch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
 		C01FED841FCD1AEE0095F8A1 /* ITableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITableController.swift; sourceTree = "<group>"; };
@@ -160,6 +164,7 @@
 		C036366C1FACF864008FC9A9 /* GetScheduleWebCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetScheduleWebCall.swift; sourceTree = "<group>"; };
 		C03636731FACFC85008FC9A9 /* GetScheduleResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetScheduleResponse.swift; sourceTree = "<group>"; };
 		C03D148A1F79479C00211D28 /* HomeViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewManager.swift; sourceTree = "<group>"; };
+		C03F670B205F729300F10B6C /* ResourceChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceChain.swift; sourceTree = "<group>"; };
 		C04926A22000A92E00926082 /* EXT_UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EXT_UIColor.swift; sourceTree = "<group>"; };
 		C04937B71FB405880036C890 /* Module.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Module.swift; sourceTree = "<group>"; };
 		C04937BA1FB40EB10036C890 /* CollectionModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionModule.swift; sourceTree = "<group>"; };
@@ -200,7 +205,6 @@
 		C0A1FB152001B36C004146CE /* ScheduleVariationPrefsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleVariationPrefsModule.swift; sourceTree = "<group>"; };
 		C0A1FB172001B4EF004146CE /* MapModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModule.swift; sourceTree = "<group>"; };
 		C0A1FB192001D705004146CE /* DateSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSchedule.swift; sourceTree = "<group>"; };
-		C0A1FB1C2001E253004146CE /* SeparatedBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatedBarItem.swift; sourceTree = "<group>"; };
 		C0A26FB51FAF70ED0060DC23 /* PrefsOverlord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsOverlord.swift; sourceTree = "<group>"; };
 		C0A26FBB1FAF76620060DC23 /* SportsPrefModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsPrefModule.swift; sourceTree = "<group>"; };
 		C0A5D3BB1F69E07500DBDCAD /* UserPrefsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPrefsManager.swift; sourceTree = "<group>"; };
@@ -227,6 +231,8 @@
 		C0CB9C1A1FE468FF00437C5D /* GetEventsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventsResponse.swift; sourceTree = "<group>"; };
 		C0CB9C1F1FE4698000437C5D /* EventList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventList.swift; sourceTree = "<group>"; };
 		C0D1053D1FDA398A0030A0DC /* MeetingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeetingManager.swift; path = ../../../../../.Trash/MeetingManager.swift; sourceTree = "<group>"; };
+		C0D1A6F0206221B70000D448 /* LunchViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchViewManager.swift; sourceTree = "<group>"; };
+		C0F1797220620237009415D2 /* LunchMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchMenuViewController.swift; sourceTree = "<group>"; };
 		C0F7781D200437D900FB90D8 /* BlockDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockDetailTableViewController.swift; sourceTree = "<group>"; };
 		C0F9E15C20059FF1001E7026 /* BlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockViewController.swift; sourceTree = "<group>"; };
 		C0F9E1602005AC71001E7026 /* TableModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableModule.swift; sourceTree = "<group>"; };
@@ -451,6 +457,7 @@
 			children = (
 				C0311C7D20065B05005FB154 /* BlockTableModuleMasthead.swift */,
 				C0311C7F200663B9005FB154 /* BlockTableModuleBlocks.swift */,
+				C006137E20600233008F6D92 /* BlockTableModuleToday.swift */,
 			);
 			name = Modules;
 			sourceTree = "<group>";
@@ -516,6 +523,7 @@
 				C0AC0B9F203362220008081B /* ResourceHandler.swift */,
 				C0B590B21FC34F3100CDF964 /* ResourceFetch.swift */,
 				C0AF797A2007943300A9A342 /* FetchError.swift */,
+				C03F670B205F729300F10B6C /* ResourceChain.swift */,
 			);
 			name = Resource;
 			sourceTree = "<group>";
@@ -559,19 +567,11 @@
 		C079C22F1FACA97D009067DE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C0A1FB1B2001E240004146CE /* Navigation */,
-				C079C2321FACAB82009067DE /* Blocks */,
+				C0F9E15E2005ABB0001E7026 /* BlockList */,
+				C0F1797120620223009415D2 /* LunchMenu */,
+				C0F9E15F2005ABC0001E7026 /* BlockDetail */,
 			);
 			name = Controllers;
-			sourceTree = "<group>";
-		};
-		C079C2321FACAB82009067DE /* Blocks */ = {
-			isa = PBXGroup;
-			children = (
-				C0F9E15E2005ABB0001E7026 /* Table */,
-				C0F9E15F2005ABC0001E7026 /* Detail */,
-			);
-			name = Blocks;
 			sourceTree = "<group>";
 		};
 		C081C2E61FE4509F008073F3 /* Lunch */ = {
@@ -608,14 +608,6 @@
 				C0A1FB152001B36C004146CE /* ScheduleVariationPrefsModule.swift */,
 			);
 			name = Prefs;
-			sourceTree = "<group>";
-		};
-		C0A1FB1B2001E240004146CE /* Navigation */ = {
-			isa = PBXGroup;
-			children = (
-				C0A1FB1C2001E253004146CE /* SeparatedBarItem.swift */,
-			);
-			name = Navigation;
 			sourceTree = "<group>";
 		};
 		C0A26FB41FAF6F7B0060DC23 /* Legacy */ = {
@@ -745,7 +737,16 @@
 			name = Elements;
 			sourceTree = "<group>";
 		};
-		C0F9E15E2005ABB0001E7026 /* Table */ = {
+		C0F1797120620223009415D2 /* LunchMenu */ = {
+			isa = PBXGroup;
+			children = (
+				C0F1797220620237009415D2 /* LunchMenuViewController.swift */,
+				C0D1A6F0206221B70000D448 /* LunchViewManager.swift */,
+			);
+			name = LunchMenu;
+			sourceTree = "<group>";
+		};
+		C0F9E15E2005ABB0001E7026 /* BlockList */ = {
 			isa = PBXGroup;
 			children = (
 				C0311C7C20065955005FB154 /* Modules */,
@@ -754,17 +755,17 @@
 				C0B163A31FCDF1CB0011BCF4 /* BlockTableBlockViewCell.swift */,
 				C02C5C592006FD5E00A14C55 /* BlockTableTextViewCell.swift */,
 			);
-			name = Table;
+			name = BlockList;
 			sourceTree = "<group>";
 		};
-		C0F9E15F2005ABC0001E7026 /* Detail */ = {
+		C0F9E15F2005ABC0001E7026 /* BlockDetail */ = {
 			isa = PBXGroup;
 			children = (
 				C064CC692037D94B00A44415 /* Modules */,
 				C02031982009469400F976D5 /* BlockDetailViewController.swift */,
 				C0F7781D200437D900FB90D8 /* BlockDetailTableViewController.swift */,
 			);
-			name = Detail;
+			name = BlockDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -922,6 +923,7 @@
 				C00232941FA3489A0019D328 /* AnEventManager.swift in Sources */,
 				C01867241FC7A82F002027B8 /* EXT_UIView.swift in Sources */,
 				C0C176551FAA5CB90059E956 /* WebCall.swift in Sources */,
+				C006137F20600233008F6D92 /* BlockTableModuleToday.swift in Sources */,
 				C05B54801FC5D9D300A47490 /* WebCallResult.swift in Sources */,
 				C02C5C5A2006FD5E00A14C55 /* BlockTableTextViewCell.swift in Sources */,
 				C0311C80200663B9005FB154 /* BlockTableModuleBlocks.swift in Sources */,
@@ -964,7 +966,6 @@
 				C0A26FBC1FAF76620060DC23 /* SportsPrefModule.swift in Sources */,
 				C06C465E203602E00091172D /* GetEventsResourceHandler.swift in Sources */,
 				C0311C7E20065B05005FB154 /* BlockTableModuleMasthead.swift in Sources */,
-				C0A1FB1D2001E253004146CE /* SeparatedBarItem.swift in Sources */,
 				C093434D1FAA1B9E00629A84 /* DayID.swift in Sources */,
 				C02031992009469400F976D5 /* BlockDetailViewController.swift in Sources */,
 				740756CC1C33720A0039844B /* Label.swift in Sources */,
@@ -972,15 +973,18 @@
 				C081C2EA1FE45108008073F3 /* LunchMenu.swift in Sources */,
 				C09343471FAA1B3C00629A84 /* Block.swift in Sources */,
 				C0F9E15D20059FF1001E7026 /* BlockViewController.swift in Sources */,
+				C03F670C205F729300F10B6C /* ResourceChain.swift in Sources */,
 				C07463321FAFA93100D183E7 /* TableContainer.swift in Sources */,
 				C069CF771F6B697E001FE527 /* NotificationsManager.swift in Sources */,
 				C01FED851FCD1AEE0095F8A1 /* ITableController.swift in Sources */,
+				C0D1A6F1206221B70000D448 /* LunchViewManager.swift in Sources */,
 				C0C176601FAA61AE0059E956 /* EnscribedTime.swift in Sources */,
 				C04937B81FB405880036C890 /* Module.swift in Sources */,
 				C093434B1FAA1B7A00629A84 /* BlockID.swift in Sources */,
 				C0F9E1612005AC71001E7026 /* TableModule.swift in Sources */,
 				C0A5D3BC1F69E07500DBDCAD /* UserPrefsManager.swift in Sources */,
 				C036366D1FACF864008FC9A9 /* GetScheduleWebCall.swift in Sources */,
+				C0F1797320620237009415D2 /* LunchMenuViewController.swift in Sources */,
 				C02A2B0D1FAD47E400D3A9CD /* GetPatchWebCall.swift in Sources */,
 				C0C776861FACDE89003EE125 /* TimeUtils.swift in Sources */,
 				C081C2EF1FE4512C008073F3 /* GetMenuResponse.swift in Sources */,

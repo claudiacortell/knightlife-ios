@@ -26,6 +26,8 @@ class GetMenuResourceHandler: ResourceHandler<(EnscribedDate, LunchMenu?)>
 			let call = GetMenuWebCall(manager, date: date)
 			call.callback =
 			{ error, result in
+				callback(error, result)
+
 				if let success = result
 				{
 					self.menus[date] = success

@@ -27,4 +27,11 @@ extension TableContainer
 	{
 		self.sections.append(section)
 	}
+	
+	func newSection() -> TableSection
+	{
+		let section = TableSection()
+		self.sections.append(section)
+		return section
+	}
 }

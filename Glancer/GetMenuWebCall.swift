@@ -18,7 +18,7 @@ class GetMenuWebCall: WebCall<GetMenuResponse, LunchMenu>
 		self.manager = manager
 		self.date = date
 		
-		super.init(call: "request/lunch")
+		super.init(call: "lunch")
 		
 		self.parameter("dt", val: date.string)
 	}

@@ -16,8 +16,8 @@ class GetMenuResponse: WebCallResult
 	
 	required init(unboxer: Unboxer) throws
 	{
-		self.caption = unboxer.unbox(key: "menu.caption")
-		self.items = try unboxer.unbox(keyPath: "menu.items", allowInvalidElements: false)
+		self.caption = unboxer.unbox(key: "caption")
+		self.items = try unboxer.unbox(keyPath: "items", allowInvalidElements: false)
 	}
 }
 

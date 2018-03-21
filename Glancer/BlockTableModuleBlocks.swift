@@ -20,11 +20,11 @@ class BlockTableModuleBlocks: TableModule
 	
 	func generateSections(container: TableContainer)
 	{
+		let section = container.newSection()
+		section.headerHeight = 1
+		
 		for block in self.controller.daySchedule!.getBlocks() // Testing variations
 		{
-			let itemSection = TableSection()
-			
-			itemSection.headerHeight = 1
 			let cell = TableCell("block", callback:
 			{ templateCell, cell in
 				if self.controller.daySchedule != nil, self.controller.daySchedule!.hasBlock(block), let viewCell = cell as? BlockTableBlockViewCell, let block = templateCell.getData("block") as? ScheduleBlock
@@ -41,9 +41,7 @@ class BlockTableModuleBlocks: TableModule
 			})
 			cell.setData("block", data: block)
 			cell.setHeight(65)
-			
-			itemSection.addCell(cell)
-			container.addSection(itemSection)
+			section.addCell(cell)
 		}
 	}
 }

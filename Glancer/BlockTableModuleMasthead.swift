@@ -19,73 +19,57 @@ class BlockTableModuleMasthead: TableModule
 	
 	func generateSections(container: TableContainer)
 	{
-		let mainSection = TableSection()
-		mainSection.addSpacerCell(20) // Header.
+		let section = container.newSection()
+		section.addSpacerCell(15)
+
+		if self.controller.daySchedule != nil
+		{
+			if self.controller.daySchedule!.changed
+			{
+				section.addCell("masthead_changed")
+				section.addSpacerCell(5)
+			}
+		}
 		
-		mainSection.addCell(TableCell("masthead.scope", callback:
+		section.addCell(TableCell("masthead_date", callback:
 		{ viewCell, cell in
 			if let blockCell = cell as? BlockTableTextViewCell
 			{
 				if TimeUtils.isToday(self.controller.date)
 				{
-					blockCell.textBox = "TODAY"
+					blockCell.textBox = "Today"
 				} else if TimeUtils.isTomorrow(self.controller.date)
 				{
-					blockCell.textBox = "TOMORROW"
+					blockCell.textBox = "Tomorrow"
+				} else if TimeUtils.wasYesterday(self.controller.date)
+				{
+					blockCell.textBox = "Yesterday"
 				} else
 				{
-					blockCell.textBox = "\(TimeUtils.daysUntil(self.controller.date)) DAYS AWAY"
+					blockCell.textBox = self.controller.date.prettyString
 				}
 			}
-		}))
-		
-		mainSection.addCell(TableCell("masthead.date", callback:
-		{ viewCell, cell in
-			(cell as! BlockTableTextViewCell).textBox = self.controller.date.prettyString
 		}))
 		
 		if self.controller.daySchedule != nil
 		{
 			if let subtitle = self.controller.daySchedule?.subtitle
 			{
-				mainSection.addCell(TableCell("masthead.emphasis", callback:
+				section.addCell(TableCell("masthead_subtitle", callback:
 				{ viewCell, cell in
 					(cell as! BlockTableTextViewCell).textBox = subtitle
 				}))
 			}
-			
-			mainSection.addSpacerCell(10)
-			container.addSection(mainSection)
-			
-			if let first = self.controller.daySchedule!.getFirstBlock(), let last = self.controller.daySchedule!.getLastBlock()
-			{
-				let subtitleSection = TableSection()
-
-				subtitleSection.addCell(TableCell("masthead.subtitle", callback:
-				{ viewCell, cell in
-					(cell as! BlockTableTextViewCell).textBox = "\(first.time.startTime.toString()) - \(last.time.endTime.toString())"
-				}))
-				
-				subtitleSection.addCell(TableCell("masthead.subtitle", callback:
-				{ viewCell, cell in
-					(cell as! BlockTableTextViewCell).textBox = "\(self.controller.daySchedule!.getBlocks().count) Blocks"
-				}))
-				
-				subtitleSection.addSpacerCell(15)
-				container.addSection(subtitleSection)
-			}
-			
-			if self.controller.daySchedule!.changed
-			{
-				let changedSection = TableSection()
-				changedSection.addCell(TableCell("masthead.changed"))
-				changedSection.addSpacerCell(15)
-				container.addSection(changedSection)
-			}
-		} else
+		}
+		
+		section.addSpacerCell(15)
+		
+		if let _ = self.controller.lunchMenu
 		{
-			mainSection.addSpacerCell(10)
-			container.addSection(mainSection)
+			let cell = TableCell("masthead_lunch")
+			cell.height = 40;
+			section.addCell(cell)
+			section.addSpacerCell(10)
 		}
 	}
 }

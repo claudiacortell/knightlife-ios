@@ -8,8 +8,8 @@ target 'Glancer' do
   use_frameworks!
 
   # Pods for Glancer
-#  pod 'Parse'
   pod 'Alamofire'
   pod 'UnboxedAlamofire'
+  pod 'Presentr'
 
 end

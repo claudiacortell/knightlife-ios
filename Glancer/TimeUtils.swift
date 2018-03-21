@@ -35,6 +35,11 @@ class TimeUtils
 		return TimeUtils.dayDifference(TimeUtils.todayEnscribed, date) == 1
 	}
 	
+	static func wasYesterday(_ date: EnscribedDate) -> Bool
+	{
+		return TimeUtils.dayDifference(TimeUtils.todayEnscribed, date) == -1
+	}
+	
 	static func daysUntil(_ date: EnscribedDate) -> Int
 	{
 		return TimeUtils.dayDifference(TimeUtils.todayEnscribed, date)

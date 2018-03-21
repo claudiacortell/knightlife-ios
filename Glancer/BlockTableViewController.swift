@@ -10,12 +10,13 @@ import Foundation
 import UIKit
 
 class BlockTableViewController: ITableController
-{
+{	
 	var controller: BlockViewController!
 
 	var date: EnscribedDate = TimeUtils.todayEnscribed
 	
 	var daySchedule: DateSchedule?
+	var lunchMenu: LunchMenu?
 	
 	override func viewDidLoad()
 	{
@@ -65,38 +66,68 @@ class BlockTableViewController: ITableController
 			HapticUtils.IMPACT.impactOccurred()
 		}
 		
-		if let schedule = ScheduleManager.instance.patchHandler.getSchedule(self.date, hard: hard, callback: // Pass both our callback and our sync method to the schedule handler to interpret.
-		{ error, result in
-			self.delayScheduleResult(result, delayResult: delayResult, hapticFeedback: hapticFeedback)
-		})
+		let chain = ResourceChain(success:
 		{
-			self.delayScheduleResult(schedule, delayResult: delayResult, hapticFeedback: hapticFeedback)
+			self.delayResult(delayResult, hapticFeedback: hapticFeedback)
+		}, failure: {
+			self.daySchedule = nil
+			self.lunchMenu = nil
+			
+			self.delayResult(delayResult, hapticFeedback: hapticFeedback)
+		})
+		
+		chain.addLink()
+		{ parent in
+			if let schedule = ScheduleManager.instance.patchHandler.getSchedule(self.date, hard: hard, callback: // Pass both our callback and our sync method to the schedule handler to interpret.
+			{ error, result in
+				self.daySchedule = result
+				parent.nextLink(result != nil)
+			})
+			{
+				self.daySchedule = schedule
+				parent.nextLink(true)
+			}
 		}
+		
+		chain.addLink()
+		{
+			parent in
+			if let lunch = LunchManager.instance.menuHandler.getMenu(self.date, hard: hard, callback:
+			{
+				error, result in
+				self.lunchMenu = result
+				parent.nextLink(true) // Ignore any errors and continue; it's just a lunch menu. Being null is fine.
+			})
+			{
+				self.lunchMenu = lunch
+				parent.nextLink(true)
+			}
+		}
+		
+		chain.start()
 	}
 	
-	private func delayScheduleResult(_ schedule: DateSchedule?, delayResult: Bool, hapticFeedback: Bool)
+	private func delayResult(_ delay: Bool, hapticFeedback: Bool)
 	{
-		if delayResult
+		if delay
 		{
 			DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1)
 			{
-				self.scheduleDidLoad(schedule, hapticFeedback: hapticFeedback)
+				self.closeLoop(hapticFeedback: hapticFeedback)
 			}
 		} else
 		{
-			self.scheduleDidLoad(schedule, hapticFeedback: hapticFeedback)
+			self.closeLoop(hapticFeedback: hapticFeedback)
 		}
 	}
 	
-	private func scheduleDidLoad(_ schedule: DateSchedule?, hapticFeedback: Bool)
+	private func closeLoop(hapticFeedback: Bool)
 	{
 		if hapticFeedback
 		{
 			HapticUtils.IMPACT.impactOccurred()
 		}
 		
-		self.daySchedule = schedule
-
 		self.controller.stopRefreshing()
 		self.refreshControl?.endRefreshing()
 		
@@ -120,7 +151,7 @@ class BlockTableViewController: ITableController
 			self.addTableModule(BlockTableModuleMasthead(controller: self))
 			
 			let section = TableSection()
-			let classCell = TableCell("noClass")
+			let classCell = TableCell("no_class")
 			
 			classCell.setHeight(self.view.frame.height)
 			section.addCell(classCell)
@@ -129,7 +160,18 @@ class BlockTableViewController: ITableController
 		} else
 		{
 			self.addTableModule(BlockTableModuleMasthead(controller: self))
+
+			if TimeUtils.isToday(self.date)
+			{
+				self.addTableModule(BlockTableModuleToday(controller: self))
+			}
+			
 			self.addTableModule(BlockTableModuleBlocks(controller: self))
 		}
+	}
+	
+	@IBAction func openLunchMenu(_ sender: Any)
+	{
+		self.controller.openLunchMenu()
 	}
 }

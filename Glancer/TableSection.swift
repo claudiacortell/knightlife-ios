@@ -37,4 +37,12 @@ extension TableSection
 	{
 		self.cells.append(cell)
 	}
+	
+	@discardableResult
+	func addCell(_ id: String) -> TableCell
+	{
+		let cell = TableCell(id)
+		self.addCell(cell)
+		return cell
+	}
 }

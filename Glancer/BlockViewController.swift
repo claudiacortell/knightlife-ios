@@ -14,6 +14,8 @@ class BlockViewController: UIViewController
 	@IBOutlet private weak var refreshControl: UIActivityIndicatorView!
 	var childView: BlockTableViewController!
 
+	let lunchViewContainer = LunchViewManager()
+
 	func stopRefreshing()
 	{
 		self.refreshControl.stopAnimating()
@@ -27,6 +29,17 @@ class BlockViewController: UIViewController
 			
 			self.childView.controller = self
 			self.childView.view.isHidden = true
+		}
+	}
+	
+	func openLunchMenu()
+	{
+		if let controller = self.storyboard?.instantiateViewController(withIdentifier: "LunchViewController") as? LunchMenuViewController
+		{
+//			self.lunchViewContainer.presentr.viewControllerForContext = self
+			self.lunchViewContainer.presentr.shouldIgnoreTapOutsideContext = true
+			
+			self.customPresentViewController(self.lunchViewContainer.presentr, viewController: controller, animated: true, completion: nil)
 		}
 	}
 }
