@@ -10,9 +10,9 @@ import Foundation
 
 class BlockTableModuleToday: TableModule
 {
-	let controller: BlockTableViewController
+	let controller: BlockViewController
 	
-	init(controller: BlockTableViewController)
+	init(controller: BlockViewController)
 	{
 		self.controller = controller
 	}
@@ -20,10 +20,8 @@ class BlockTableModuleToday: TableModule
 	func generateSections(container: TableContainer)
 	{
 		let section = container.newSection()
-		
-		section.headerHeight = 1
-		
-		section.addSpacerCell(15)
+				
+		section.addSpacerCell(10)
 		
 		section.addCell("today_now").setHeight(35)
 		section.addCell("today_next").setHeight(25)
@@ -33,7 +31,6 @@ class BlockTableModuleToday: TableModule
 		section.addCell("today_now_label").setHeight(20)
 		section.addCell("today_progress").setHeight(3)
 	
-		
 		section.addSpacerCell(15)
 	}
 }

@@ -15,7 +15,9 @@ enum LunchMenuItemType: String
 	accompaniment = "accompaniment",
 	side = "side",
 	pasta = "pasta",
-	soup = "soup"
+	salad = "salad",
+	soup = "soup",
+	other = "other"
 	
 	static let values: [LunchMenuItemType] = [.main, .accompaniment, .side, .pasta, .soup]
 	

@@ -18,7 +18,7 @@ extension TableContainer
 {
 	var sectionCount: Int { get { return sections.count } }
 
-    func getSection(_ id: Int) -> TableSection?
+    func getSectionByIndex(_ id: Int) -> TableSection?
     {
         return self.sections[id]
     }

@@ -11,9 +11,9 @@ import UIKit
 
 class BlockTableModuleBlocks: TableModule
 {
-	let controller: BlockTableViewController
+	let controller: BlockViewController
 	
-	init(controller: BlockTableViewController)
+	init(controller: BlockViewController)
 	{
 		self.controller = controller
 	}

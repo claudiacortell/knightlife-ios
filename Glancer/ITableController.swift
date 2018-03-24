@@ -10,13 +10,13 @@ import Foundation
 import UIKit
 
 class ITableController: UITableViewController
-{
+{	
 	var storyboardContainer: TableContainer = TableContainer()
 	private(set) var modules: [TableModule] = []
 	
 	override func viewDidLoad()
 	{
-		super.viewDidLoad()
+		super.viewDidLoad()		
 	}
 	
 	func reloadTable()
@@ -36,6 +36,20 @@ class ITableController: UITableViewController
 	
 	func generateSections() { }
 	
+	func reloadEachRowIndividually(_ animation: UITableViewRowAnimation = .automatic)
+	{
+		var indices: [IndexPath] = []
+		for x in 0..<self.storyboardContainer.sectionCount
+		{
+			for y in 0..<self.storyboardContainer.getSectionByIndex(x)!.cellCount
+			{
+				indices.append(IndexPath(row: y, section: x))
+			}
+		}
+		
+		self.tableView.reloadRows(at: indices, with: animation)
+	}
+	
 	func addTableModule(_ module: TableModule)
 	{
 		self.modules.append(module)
@@ -48,7 +62,7 @@ class ITableController: UITableViewController
 	
 	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
 	{
-		if let section = self.storyboardContainer.getSection(section)
+		if let section = self.storyboardContainer.getSectionByIndex(section)
 		{
 			return section.title
 		}
@@ -62,7 +76,7 @@ class ITableController: UITableViewController
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
 	{
-		if let section = self.storyboardContainer.getSection(section)
+		if let section = self.storyboardContainer.getSectionByIndex(section)
 		{
 			return section.cellCount
 		}
@@ -71,7 +85,7 @@ class ITableController: UITableViewController
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 	{
-		let templateCell = self.storyboardContainer.getSection(indexPath.section)!.getCellByIndex(indexPath.row)!
+		let templateCell = self.storyboardContainer.getSectionByIndex(indexPath.section)!.getCellByIndex(indexPath.row)!
 		if templateCell.reuseId == "spacer"
 		{
 			let cell = UITableViewCell()
@@ -87,7 +101,7 @@ class ITableController: UITableViewController
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
 	{
-		if let section = self.storyboardContainer.getSection(indexPath.section), let cell = section.getCellByIndex(indexPath.row), let height = cell.height
+		if let section = self.storyboardContainer.getSectionByIndex(indexPath.section), let cell = section.getCellByIndex(indexPath.row), let height = cell.height
 		{
 			return CGFloat(height)
 		}
@@ -96,7 +110,7 @@ class ITableController: UITableViewController
 	
 	override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
 	{
-		if let section = self.storyboardContainer.getSection(section), let height = section.headerHeight
+		if let section = self.storyboardContainer.getSectionByIndex(section), let height = section.headerHeight
 		{
 			return CGFloat(height)
 		}
@@ -105,7 +119,7 @@ class ITableController: UITableViewController
 	
 	override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat
 	{
-		if let section = self.storyboardContainer.getSection(section), let height = section.footerHeight
+		if let section = self.storyboardContainer.getSectionByIndex(section), let height = section.footerHeight
 		{
 			return CGFloat(height)
 		}
