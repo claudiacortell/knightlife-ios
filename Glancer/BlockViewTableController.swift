@@ -38,28 +38,22 @@ class BlockViewTableController: ITableController
 	{
 		if self.controller.daySchedule == nil
 		{
-			let section = TableSection()
-			let errorCell = TableCell("error")
-			
-			errorCell.setHeight(self.view.frame.height - (self.navigationController?.navigationBar.frame.height)!)
-			section.addCell(errorCell)
-			
-			self.addTableSection(section)
-			
-			self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-			self.tableView.contentOffset = CGPoint(x: 0.0, y: 0)
+//			let section = TableSection()
+//			let errorCell = TableCell("error")
+//
+//			errorCell.setHeight(max(20, self.view.frame.height - 70.0))
+//			section.addCell(errorCell)
+//
+//			self.addTableSection(section)
 		} else if self.controller.daySchedule!.isEmpty
 		{
-			let section = TableSection()
-			let classCell = TableCell("no_class")
-			
-			classCell.setHeight(self.view.frame.height - (self.navigationController?.navigationBar.frame.height)!)
-			section.addCell(classCell)
-			
-			self.addTableSection(section)
-			
-			self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-			self.tableView.contentOffset = CGPoint(x: 0.0, y: 0)
+//			let section = TableSection()
+//			let classCell = TableCell("no_class")
+//
+//			classCell.setHeight(max(20, self.view.frame.height - 70.0))
+//			section.addCell(classCell)
+//
+//			self.addTableSection(section)
 		} else
 		{
 			if TimeUtils.isToday(self.controller.date)
@@ -68,9 +62,9 @@ class BlockViewTableController: ITableController
 			}
 			
 			self.addTableModule(BlockTableModuleBlocks(controller: self.controller))
-			
-			self.tableView.contentInset = UIEdgeInsets(top: self.controller.headerView.isHidden ? 0 : self.controller.actualHeaderHeight, left: 0, bottom: 0, right: 0)
-			self.tableView.contentOffset = CGPoint(x: 0.0, y: -self.tableView.contentInset.top)
 		}
+
+		self.tableView.contentInset = UIEdgeInsets(top: self.controller.headerView.isHidden ? 0 : self.controller.actualHeaderHeight, left: 0, bottom: 0, right: 0)
+		self.tableView.contentOffset = CGPoint(x: 0.0, y: -self.tableView.contentInset.top)
 	}
 }

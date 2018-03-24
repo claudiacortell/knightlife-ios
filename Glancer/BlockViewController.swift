@@ -22,6 +22,7 @@ class BlockViewController: UIViewController
 	@IBOutlet weak var headerLunchWrapper: UIView!
 	
 	@IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+	@IBOutlet weak var errorLabel: UILabel!
 	
 	var actualHeaderHeight: CGFloat { return self.stackView.frame.height }
 	var visualHeaderHeight: CGFloat { return self.headerView.frame.height }
@@ -50,10 +51,15 @@ class BlockViewController: UIViewController
 	{
 		super.viewDidLoad()
 		
-		self.headerView.isHidden = true
-		self.reload(hard: false, delayResult: false, useRefreshControl: false, hapticFeedback: false)
+		self.loadingIndicator.startAnimating()
+		self.errorLabel.text = nil
 		
+		self.headerView.isHidden = true
+		self.tableController.view.isHidden = true
+
 		self.navigationItem.title = nil
+
+		self.reload(hard: false, delayResult: false, useRefreshControl: false, hapticFeedback: false)
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -79,8 +85,13 @@ class BlockViewController: UIViewController
 	
 	func didScroll(_ scroll: CGFloat)
 	{
+		if self.daySchedule == nil || self.daySchedule!.isEmpty
+		{
+			return
+		}
+		
 		if !self.headerView.isHidden
-		{			
+		{
 			self.headerHeightConstraint.constant = -1 * scroll // -1 because the content insets mean that the content offset is (-1)*(header height)
 			self.stackView.layer.opacity = (Float(min(1, max(0, self.headerHeightConstraint.constant / self.stackView.frame.height))))
 			self.stackView.setNeedsDisplay()
@@ -182,6 +193,19 @@ class BlockViewController: UIViewController
 		
 		self.updateHeader()
 		self.tableController.reloadTable()
+		
+		self.tableController.view.isHidden = false
+		
+		if self.daySchedule == nil
+		{
+			self.errorLabel.text = "An Error Occured"
+		} else if self.daySchedule!.isEmpty
+		{
+			self.errorLabel.text = "No Classes"
+		} else
+		{
+			self.errorLabel.text = nil
+		}
 	}
 	
 	private func updateHeader()

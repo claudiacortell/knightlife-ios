@@ -13,11 +13,11 @@ class LunchMenuTableCell: UITableViewCell
 {
 	@IBOutlet weak private var stackView: UIStackView!
 	
-	@IBOutlet weak private var categoryLabel: UILabel!
 	@IBOutlet weak private var nameLabel: UILabel!
-	
-	@IBOutlet weak var allergenWrapper: UIView!
 	@IBOutlet weak private var allergenLabel: UILabel!
+	
+	@IBOutlet weak private var disclosureIndicator: UIImageView!
+	private var rotated = false
 	
 	override func layoutSubviews()
 	{
@@ -37,15 +37,6 @@ class LunchMenuTableCell: UITableViewCell
 		}
 	}
 	
-	var category: LunchMenuItemType?
-	{
-		didSet
-		{
-			self.categoryLabel.text = (self.category ?? LunchMenuItemType.other
-			).rawValue.uppercased()
-		}
-	}
-	
 	var allergen: String?
 	{
 		didSet
@@ -58,11 +49,38 @@ class LunchMenuTableCell: UITableViewCell
 	{
 		didSet
 		{
-			self.allergenWrapper.isHidden = !self.showAllergen
-		
-			self.allergenWrapper.setNeedsLayout()
-			self.allergenWrapper.layoutIfNeeded()
+			self.allergenLabel.isHidden = !self.showAllergen
 			self.stackView.layoutSubviews()
+		}
+	}
+	
+	var showsDisclosure: Bool = true
+	{
+		didSet
+		{
+			self.disclosureIndicator.isHidden = !showsDisclosure
+		}
+	}
+	
+	var rotateDisclosure: Bool = false
+	{
+		didSet
+		{
+			if self.rotateDisclosure
+			{
+				if !self.rotated
+				{
+					self.disclosureIndicator.transform = self.disclosureIndicator.transform.rotated(by: CGFloat(Double.pi))
+					self.rotated = true
+				}
+			} else
+			{
+				if self.rotated
+				{
+					self.disclosureIndicator.transform = self.disclosureIndicator.transform.rotated(by: CGFloat(-Double.pi))
+					self.rotated = false
+				}
+			}
 		}
 	}
 }

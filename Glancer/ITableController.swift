@@ -69,6 +69,27 @@ class ITableController: UITableViewController
 		return super.tableView(tableView, titleForHeaderInSection: section)
 	}
 	
+	override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+	{
+		if let section = self.storyboardContainer.getSectionByIndex(section)
+		{
+			let headerView = UIView()
+			headerView.backgroundColor = section.headerColor
+			
+			let headerLabel = UILabel(frame: CGRect(x: section.headerIndent ?? 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
+			headerLabel.font = section.headerFont
+			headerLabel.textColor = section.headerTextColor
+			headerLabel.text = section.title
+			
+			headerLabel.sizeToFit()
+			headerView.addSubview(headerLabel)
+			
+			return headerView
+		}
+		
+		return super.tableView(tableView, viewForHeaderInSection: section)
+	}
+	
 	override func numberOfSections(in tableView: UITableView) -> Int
 	{
 		return self.storyboardContainer.sectionCount

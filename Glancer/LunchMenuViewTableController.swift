@@ -25,25 +25,59 @@ class LunchMenuViewTableController: ITableController
 	
 	override func generateSections()
 	{
-		let section = TableSection()
-		section.addSpacerCell(5)
-		for item in self.controller.controller.lunchMenu!.items
+		for type in LunchMenuItemType.values
 		{
-			section.addCell(TableCell("item", callback:
+			var items: [LunchMenuItem] = []
+			for item in self.controller.controller.lunchMenu!.items
 			{
-				template, object in
-				if let cell = object as? LunchMenuTableCell
+				if item.type == type
 				{
-					cell.name = item.name
-					cell.category = item.type
-					cell.allergen = item.allergy
-					
-					cell.showAllergen = template.getData("show-allergen") as? Bool ?? false
+					items.append(item)
 				}
-			}))
+			}
+			
+			if !items.isEmpty
+			{
+				let section = TableSection()
+				section.title = type.rawValue.uppercased()
+				section.headerHeight = 14
+				
+				section.headerColor = UIColor("FFB53D")
+				section.headerFont = UIFont.systemFont(ofSize: 12.0, weight: .medium)
+				section.headerTextColor = UIColor.white
+				section.headerIndent = 15.0
+				
+				for item in items
+				{
+					let cell = TableCell("item", callback:
+					{
+						template, object in
+						if let cell = object as? LunchMenuTableCell
+						{
+							cell.name = item.name
+							cell.allergen = item.allergy
+							
+							if item.allergy == nil
+							{
+								cell.showsDisclosure = false
+								cell.selectionStyle = UITableViewCellSelectionStyle.none
+							} else
+							{
+								cell.showsDisclosure = true
+							}
+							
+							let showAllergen = template.getData("show-allergen") as? Bool ?? false
+							cell.showAllergen = showAllergen
+							cell.rotateDisclosure = showAllergen
+						}
+					})
+					cell.setData("item", data: item)
+					section.addCell(cell)
+				}
+				
+				self.addTableSection(section)
+			}
 		}
-		
-		self.addTableSection(section)
 	}
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
@@ -52,9 +86,19 @@ class LunchMenuViewTableController: ITableController
 		
 		if let template = self.storyboardContainer.getSectionByIndex(indexPath.section)?.getCellByIndex(indexPath.row)
 		{
+			if let item = template.getData("item") as? LunchMenuItem
+			{
+				if item.allergy == nil
+				{
+					return
+				}
+			}
+			
 			let curVal = template.getData("show-allergen") as? Bool ?? false
 			template.setData("show-allergen", data: !curVal)
 		}
+		
+		HapticUtils.SELECTION.selectionChanged()
 		
 		tableView.beginUpdates()
 		tableView.reloadRows(at: [indexPath], with: .automatic)

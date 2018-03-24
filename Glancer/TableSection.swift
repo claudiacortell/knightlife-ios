@@ -7,14 +7,21 @@
 //
 
 import Foundation
+import UIKit
 
 class TableSection
 {
 	private(set) var cells: [TableCell] = []
 	
 	var title: String?
+	
 	var headerHeight: Int?
 	var footerHeight: Int?
+	
+	var headerColor: UIColor?
+	var headerFont: UIFont?
+	var headerTextColor: UIColor?
+	var headerIndent: CGFloat?
 }
 
 extension TableSection
