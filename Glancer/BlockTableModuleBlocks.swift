@@ -22,6 +22,7 @@ class BlockTableModuleBlocks: TableModule
 	{
 		let section = container.newSection()
 		section.headerHeight = 1
+		section.addSpacerCell(3)
 		
 		for block in self.controller.daySchedule!.getBlocks() // Testing variations
 		{
@@ -43,5 +44,7 @@ class BlockTableModuleBlocks: TableModule
 			cell.setHeight(65)
 			section.addCell(cell)
 		}
+		
+		section.addSpacerCell(10)
 	}
 }

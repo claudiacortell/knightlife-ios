@@ -42,7 +42,7 @@ class BlockViewController: UIViewController
 		return newObject
 	}()
 	
-	var date: EnscribedDate = TimeUtils.todayEnscribed
+	var date: EnscribedDate = EnscribedDate(year: 2018, month: 2, day: 26)!
 	
 	var daySchedule: DateSchedule?
 	var lunchMenu: LunchMenu?
