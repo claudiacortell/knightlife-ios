@@ -199,7 +199,7 @@ class UserPrefsManager: Manager
 			
 			for i in 0..<5
 			{
-				let day: DayID = DayID.fromId(i)!
+				let day: DayID = DayID.fromId(i)
 				if lunchSwitches.count > i { lunchSwitches[day] = firstLunches[i] }
 			}
 			

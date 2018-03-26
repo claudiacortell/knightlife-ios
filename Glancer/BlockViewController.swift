@@ -37,7 +37,7 @@ class BlockViewController: UIViewController
 		newObject.roundCorners = true
 		newObject.cornerRadius = 12
 		
-		newObject.dismissOnSwipe = true
+		newObject.dismissOnTap = true
 		
 		return newObject
 	}()
@@ -54,11 +54,10 @@ class BlockViewController: UIViewController
 		self.loadingIndicator.startAnimating()
 		self.errorLabel.text = nil
 		
-		self.headerView.isHidden = true
 		self.tableController.view.isHidden = true
-
 		self.navigationItem.title = nil
 
+		self.updateHeader()
 		self.reload(hard: false, delayResult: false, useRefreshControl: false, hapticFeedback: false)
 	}
 	
@@ -90,19 +89,13 @@ class BlockViewController: UIViewController
 			return
 		}
 		
-		if !self.headerView.isHidden
+		self.headerHeightConstraint.constant = -1 * scroll // -1 because the content insets mean that the content offset is (-1)*(header height)
+		self.stackView.layer.opacity = (Float(min(1, max(0, self.headerHeightConstraint.constant / self.stackView.frame.height))))
+		self.stackView.setNeedsDisplay()
+		
+		if self.visualHeaderHeight <= 0
 		{
-			self.headerHeightConstraint.constant = -1 * scroll // -1 because the content insets mean that the content offset is (-1)*(header height)
-			self.stackView.layer.opacity = (Float(min(1, max(0, self.headerHeightConstraint.constant / self.stackView.frame.height))))
-			self.stackView.setNeedsDisplay()
-			
-			if self.visualHeaderHeight <= 0
-			{
-				self.navigationItem.title = self.headerTitle.text
-			} else
-			{
-				self.navigationItem.title = nil
-			}
+			self.navigationItem.title = self.headerTitle.text
 		} else
 		{
 			self.navigationItem.title = nil
@@ -210,19 +203,26 @@ class BlockViewController: UIViewController
 	
 	private func updateHeader()
 	{
-		if self.daySchedule == nil
-		{
-			self.headerView.isHidden = true
-			return
-		}
-		
 		self.headerTitle.text =
 		{
 			if TimeUtils.isToday(self.date) { return "Today" }
 			if TimeUtils.isTomorrow(self.date) { return "Tomorrow" }
 			if TimeUtils.wasYesterday(self.date) { return "Yesterday" }
+			if TimeUtils.isThisWeek(self.date) { return self.date.dayOfWeek.displayName }
 			return self.date.prettyString
 		}()
+		
+		if self.daySchedule == nil
+		{
+			self.headerLunchWrapper.isHidden = true
+			self.headerSubtitle.isHidden = true
+			
+			self.view.setNeedsLayout()
+			self.view.layoutIfNeeded()
+			
+			self.headerHeightConstraint.constant = self.actualHeaderHeight
+			return
+		}
 		
 		if let subtitle = self.daySchedule?.subtitle
 		{
@@ -235,10 +235,15 @@ class BlockViewController: UIViewController
 
 		self.headerLunchWrapper.isHidden = self.lunchMenu == nil
 
-		self.headerView.isHidden = false
-		self.headerHeightConstraint.constant = self.actualHeaderHeight
-		
 		self.view.setNeedsLayout()
 		self.view.layoutIfNeeded()
+
+		UIView.animate(withDuration: 0.1, animations:
+		{
+			self.headerHeightConstraint.constant = self.actualHeaderHeight
+			
+			self.view.setNeedsLayout()
+			self.view.layoutIfNeeded()
+		})
 	}
 }

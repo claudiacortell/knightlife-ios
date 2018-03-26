@@ -14,13 +14,15 @@ struct DateSchedule
 	let blocks: [ScheduleBlock]
 	let subtitle: String?
 	let changed: Bool
+	let standinDayId: DayID? // Used if this is say, a Tuesday with a Monday schedule. The actual date is a tuesday, but the standin DayID is DayID.monday
 
-	init(_ date: EnscribedDate, blocks: [ScheduleBlock], subtitle: String? = nil, changed: Bool = false)
+	init(_ date: EnscribedDate, blocks: [ScheduleBlock], subtitle: String? = nil, changed: Bool = false, standinDayId: DayID? = nil)
 	{
 		self.date = date
 		self.blocks = blocks
 		self.subtitle = subtitle
 		self.changed = changed
+		self.standinDayId = standinDayId
 	}
 }
 

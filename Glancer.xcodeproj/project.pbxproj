@@ -107,7 +107,8 @@
 		C0CB9C191FE468F500437C5D /* GetEventsWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CB9C181FE468F500437C5D /* GetEventsWebCall.swift */; };
 		C0CB9C1B1FE468FF00437C5D /* GetEventsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CB9C1A1FE468FF00437C5D /* GetEventsResponse.swift */; };
 		C0CB9C201FE4698000437C5D /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CB9C1F1FE4698000437C5D /* EventList.swift */; };
-		C0D1053E1FDA398B0030A0DC /* MeetingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D1053D1FDA398A0030A0DC /* MeetingManager.swift */; };
+		C0D2110D2069463200D5D2B2 /* MeetingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D2110C2069463200D5D2B2 /* MeetingManager.swift */; };
+		C0F0F79D2067113B006D84C9 /* CalendarViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F0F79C2067113B006D84C9 /* CalendarViewManager.swift */; };
 		C0F1797320620237009415D2 /* LunchMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F1797220620237009415D2 /* LunchMenuViewController.swift */; };
 		C0F7781E200437D900FB90D8 /* BlockDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F7781D200437D900FB90D8 /* BlockDetailTableViewController.swift */; };
 		C0F9E1612005AC71001E7026 /* TableModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F9E1602005AC71001E7026 /* TableModule.swift */; };
@@ -234,7 +235,8 @@
 		C0CB9C181FE468F500437C5D /* GetEventsWebCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventsWebCall.swift; sourceTree = "<group>"; };
 		C0CB9C1A1FE468FF00437C5D /* GetEventsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventsResponse.swift; sourceTree = "<group>"; };
 		C0CB9C1F1FE4698000437C5D /* EventList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventList.swift; sourceTree = "<group>"; };
-		C0D1053D1FDA398A0030A0DC /* MeetingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeetingManager.swift; path = ../../../../../.Trash/MeetingManager.swift; sourceTree = "<group>"; };
+		C0D2110C2069463200D5D2B2 /* MeetingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingManager.swift; sourceTree = "<group>"; };
+		C0F0F79C2067113B006D84C9 /* CalendarViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewManager.swift; sourceTree = "<group>"; };
 		C0F1797220620237009415D2 /* LunchMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchMenuViewController.swift; sourceTree = "<group>"; };
 		C0F7781D200437D900FB90D8 /* BlockDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockDetailTableViewController.swift; sourceTree = "<group>"; };
 		C0F9E1602005AC71001E7026 /* TableModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableModule.swift; sourceTree = "<group>"; };
@@ -351,7 +353,7 @@
 				C049269F20009ACA00926082 /* Lists */,
 				C02B91C91FB68860004E0D5D /* Elements */,
 				C02B91C81FB68754004E0D5D /* Prefs */,
-				C0D1053D1FDA398A0030A0DC /* MeetingManager.swift */,
+				C0D2110C2069463200D5D2B2 /* MeetingManager.swift */,
 			);
 			name = Meetings;
 			sourceTree = "<group>";
@@ -369,9 +371,9 @@
 		C01867211FC75EFE002027B8 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
-				C0BC64B92062DD5B00322BA0 /* Navigation */,
 				5BD072471C74AEB40074B56D /* Main.storyboard */,
 				C019C1601F7D3CED00FC4EED /* Launch.storyboard */,
+				C0BC64B92062DD5B00322BA0 /* Navigation */,
 				C079C22F1FACA97D009067DE /* Controllers */,
 			);
 			name = Storyboard;
@@ -569,6 +571,7 @@
 		C079C22F1FACA97D009067DE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C0F0F79B2067112F006D84C9 /* Calendar */,
 				C0F9E15E2005ABB0001E7026 /* BlockList */,
 				C0F1797120620223009415D2 /* LunchMenu */,
 				C0F9E15F2005ABC0001E7026 /* BlockDetail */,
@@ -764,6 +767,14 @@
 			name = Elements;
 			sourceTree = "<group>";
 		};
+		C0F0F79B2067112F006D84C9 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				C0F0F79C2067113B006D84C9 /* CalendarViewManager.swift */,
+			);
+			name = Calendar;
+			sourceTree = "<group>";
+		};
 		C0F1797120620223009415D2 /* LunchMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -890,9 +901,20 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Glancer/Pods-Glancer-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
+				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
+				"${BUILT_PRODUCTS_DIR}/Unbox/Unbox.framework",
+				"${BUILT_PRODUCTS_DIR}/UnboxedAlamofire/UnboxedAlamofire.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Unbox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UnboxedAlamofire.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -905,13 +927,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Glancer-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A473441372BA428113112FC7 /* [CP] Copy Pods Resources */ = {
@@ -948,6 +973,7 @@
 				C0A1FB0E200140FF004146CE /* HapticUtils.swift in Sources */,
 				C05F5E821FAE51AB00724F42 /* SportTeam.swift in Sources */,
 				C0CB9C201FE4698000437C5D /* EventList.swift in Sources */,
+				C0D2110D2069463200D5D2B2 /* MeetingManager.swift in Sources */,
 				C00232941FA3489A0019D328 /* AnEventManager.swift in Sources */,
 				C01867241FC7A82F002027B8 /* EXT_UIView.swift in Sources */,
 				C0C176551FAA5CB90059E956 /* WebCall.swift in Sources */,
@@ -1018,13 +1044,13 @@
 				C0A26FB61FAF70ED0060DC23 /* PrefsOverlord.swift in Sources */,
 				C02006201FA904B10050F864 /* BlockMeta.swift in Sources */,
 				C0A1FB162001B36C004146CE /* ScheduleVariationPrefsModule.swift in Sources */,
+				C0F0F79D2067113B006D84C9 /* CalendarViewManager.swift in Sources */,
 				C07463301FAFA91200D183E7 /* TableCell.swift in Sources */,
 				C0FC777C2033CCE800E9C8EF /* GetPatchResourceHandler.swift in Sources */,
 				C002329E1FA37D8D0019D328 /* AnEventHandler.swift in Sources */,
 				C05F5E851FAE542D00724F42 /* SportSeason.swift in Sources */,
 				C0CB9C191FE468F500437C5D /* GetEventsWebCall.swift in Sources */,
 				C025C5B52035C22000ED0FAD /* GetMenuResourceHandler.swift in Sources */,
-				C0D1053E1FDA398B0030A0DC /* MeetingManager.swift in Sources */,
 				C039D5BA20640A3E000974BD /* BlockViewController.swift in Sources */,
 				C0AC0B9C20335E4B0008081B /* Identifiable.swift in Sources */,
 				C081C2ED1FE45120008073F3 /* GetMenuWebCall.swift in Sources */,

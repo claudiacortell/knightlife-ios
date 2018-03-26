@@ -21,7 +21,7 @@ class BlockAnalyst
 	
 	func getCourses() -> BlockCourseList
 	{
-		return MeetingManager.instance.getMeetings(self.schedule, block: block.blockId)
+		return CourseManager.instance.getCourses(schedule: self.schedule, block: block.blockId)
 	}
 	
 	func getDisplayName() -> String

@@ -68,15 +68,14 @@ enum DayID: String // DO NOT EVER CHANGE ANYTHING IN THIS CLASS I SWEAR TO GOD I
 		return nil
 	}
 	
-	static func fromId(_ id: Int) -> DayID?
+	static func fromId(_ id: Int) -> DayID
 	{
-		for day in DayID.values()
-		{
-			if day.id == id
-			{
-				return day
-			}
-		}
-		return nil
+		return DayID.values()[id]
+		
+//		if let day = DayID.values()[id]
+//		{
+//			return day
+//		}
+//		return nil
 	}
 }

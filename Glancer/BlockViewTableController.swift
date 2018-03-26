@@ -64,7 +64,7 @@ class BlockViewTableController: ITableController
 			self.addTableModule(BlockTableModuleBlocks(controller: self.controller))
 		}
 
-		self.tableView.contentInset = UIEdgeInsets(top: self.controller.headerView.isHidden ? 0 : self.controller.actualHeaderHeight, left: 0, bottom: 0, right: 0)
+		self.tableView.contentInset = UIEdgeInsets(top: self.controller.actualHeaderHeight, left: 0, bottom: 0, right: 0)
 		self.tableView.contentOffset = CGPoint(x: 0.0, y: -self.tableView.contentInset.top)
 	}
 }

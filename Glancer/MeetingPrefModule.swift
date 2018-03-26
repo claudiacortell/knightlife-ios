@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MeetingPrefModule: Module<MeetingManager>, PreferenceHandler
+class MeetingPrefModule: Module<CourseManager>, PreferenceHandler
 {
 	var storageKey: String
 	{
@@ -17,7 +17,7 @@ class MeetingPrefModule: Module<MeetingManager>, PreferenceHandler
 	
 	func getStorageValues() -> Any?
 	{
-		return self.manager.meetings
+		return self.manager.meetings.values
 	}
 	
 	func readStorageValues(data: Any)
@@ -26,7 +26,7 @@ class MeetingPrefModule: Module<MeetingManager>, PreferenceHandler
 		{
 			for meeting in list
 			{
-				self.manager.addMeeting(meeting)
+				self.manager.addCourse(meeting)
 			}
 		}
 	}

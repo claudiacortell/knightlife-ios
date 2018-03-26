@@ -10,16 +10,21 @@ import Foundation
 
 struct DayCourseList
 {
-	var date: EnscribedDate!
-	var meetings: [Course] = []
+	var date: EnscribedDate
+	var meetings: [Course]
+	
+	init(_ date: EnscribedDate, _ courses: [Course])
+	{
+		self.date = date
+		self.meetings = courses
+	}
 }
 
 extension DayCourseList
 {
 	func fromBlock(_ block: BlockID) -> BlockCourseList
 	{
-		var list = BlockCourseList()
-		list.block = block
+		var list: [Course] = []
 		
 		for activity in self.meetings
 		{
@@ -27,11 +32,11 @@ extension DayCourseList
 			{
 				if activity.courseSchedule!.block == block
 				{
-					list.courses.append(activity)
+					list.append(activity)
 				}
 			}
 		}
-		return list
+		return BlockCourseList(block, list)
 	}
 	
 	func fromId(_ id: Int) -> Course?

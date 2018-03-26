@@ -10,12 +10,25 @@ import Foundation
 
 class TimeUtils
 {
+	static let calender: Calendar =
+	{
+		var cal = Calendar(identifier: Calendar.Identifier.gregorian)
+		return cal
+	}()
+	
+	static let calenderTimeZoned: Calendar =
+	{
+		var cal = Calendar(identifier: Calendar.Identifier.gregorian)
+		cal.timeZone = TimeZone(abbreviation: "EST")!
+		return cal
+	}()
+	
 	static var todayEnscribed: EnscribedDate
 	{
 		get
 		{
 			let now = Date()
-			let calendar = Calendar.current
+			let calendar = TimeUtils.calender
 			
 			let year = calendar.component(.year, from: now)
 			let month = calendar.component(.month, from: now)
@@ -23,6 +36,13 @@ class TimeUtils
 			
 			return EnscribedDate(year: year, month: month, day: day)!
 		}
+	}
+	
+	static func dayOfWeek(_ date: Date = Date()) -> Int
+	{
+		var raw = TimeUtils.calender.component(.weekday, from: date)
+		if (raw == 1) { raw = 6 } else { raw -= 2; }
+		return raw
 	}
 	
 	static func isToday(_ date: EnscribedDate) -> Bool
@@ -47,12 +67,33 @@ class TimeUtils
 	
 	static func dayDifference(_ date1: EnscribedDate, _ date2: EnscribedDate) -> Int
 	{
-		return Calendar.current.dateComponents([.day], from: date1.date, to: date2.date).day!
+		return TimeUtils.dayDifference(date1.date, date2.date)
+	}
+	
+	static func dayDifference(_ date1: Date, _ date2: Date) -> Int
+	{
+		return TimeUtils.calender.dateComponents([.day], from: date1, to: date2).day!
+	}
+	
+	static func isThisWeek(_ date: EnscribedDate) -> Bool
+	{
+		return TimeUtils.isThisWeek(date.date)
+	}
+	
+	static func isThisWeek(_ date: Date) -> Bool
+	{
+		if let startOfThisWeek = TimeUtils.getDayInRelation(Date(), offset: -TimeUtils.dayOfWeek())
+		{
+			let diff = TimeUtils.dayDifference(startOfThisWeek, date)
+			return diff >= 0 && diff < 6
+		}
+		return false
 	}
 	
 	static func dateFromEnscribed(enscribedDate: EnscribedDate = TimeUtils.todayEnscribed, enscribedTime: EnscribedTime) -> Date?
 	{
 		var dateComponents = DateComponents()
+		
 		dateComponents.year = enscribedDate.year
 		dateComponents.month = enscribedDate.month
 		dateComponents.day = enscribedDate.day
@@ -60,9 +101,7 @@ class TimeUtils
 		dateComponents.hour = enscribedTime.hour
 		dateComponents.minute = enscribedTime.minute
 		
-		dateComponents.timeZone = TimeZone(abbreviation: "EST")
-		
-		return Calendar.current.date(from: dateComponents)
+		return TimeUtils.calender.date(from: dateComponents)
 	}
 	
 	static func unwrapRawDate(raw: String) -> (year: Int, month: Int, day: Int)
@@ -125,49 +164,58 @@ class TimeUtils
 	static func validEnscribedDate(_ date: EnscribedDate) -> Bool
 	{
 		var dateComponents = DateComponents()
+		
 		dateComponents.year = date.year
 		dateComponents.month = date.month
 		dateComponents.day = date.day
-		dateComponents.timeZone = TimeZone(abbreviation: "EST")
 		
-		return Calendar.current.date(from: dateComponents) != nil
+		return TimeUtils.calender.date(from: dateComponents) != nil
 	}
 	
 	static func dateFromEnscribedDate(_ enscribedDate: EnscribedDate) -> Date
 	{
 		var dateComponents = DateComponents()
+		
 		dateComponents.year = enscribedDate.year
 		dateComponents.month = enscribedDate.month
 		dateComponents.day = enscribedDate.day
-		dateComponents.timeZone = TimeZone(abbreviation: "EST")
 		
-		return Calendar.current.date(from: dateComponents)!
+		return TimeUtils.calender.date(from: dateComponents)!
 	}
 	
 	static func getDayOfWeek(_ enscribedDate: EnscribedDate = TimeUtils.todayEnscribed) -> DayID
 	{
 		let date = TimeUtils.dateFromEnscribedDate(enscribedDate)
-		
-		var weekday = Calendar.current.component(.weekday, from: date)
-		if (weekday == 1)
-		{
-			weekday = 6
-		} else
-		{
-			weekday = weekday - 2;
-		}
-		
-		return DayID.fromId(weekday)!
+		print(TimeUtils.dayOfWeek(date))
+		return DayID.fromId(TimeUtils.dayOfWeek(date))
 	}
 	
 	static func timeToDateInMinutes(to: Date) -> (hours: Int, minutes: Int)
 	{
 		let cur = Date()
-		var components = Calendar.autoupdatingCurrent.dateComponents([.hour, .minute], from: cur, to: to)
+		var components = TimeUtils.calender.dateComponents([.hour, .minute], from: cur, to: to)
 		
 		let hours = components.hour!
 		let minutes = components.minute!
 		
 		return (hours: hours, minutes: minutes + 1) //Add one to account for seconds difference that's ignored.
+	}
+	
+	static func getDayInRelation(_ to: EnscribedDate, offset: Int) -> EnscribedDate?
+	{
+		if let date = TimeUtils.getDayInRelation(to.date, offset: offset)
+		{
+			return EnscribedDate(date)
+		}
+		return nil
+	}
+	
+	static func getDayInRelation(_ date: Date, offset: Int) -> Date?
+	{
+		if let newDate = TimeUtils.calender.date(byAdding: .day, value: offset, to: date)
+		{
+			return newDate
+		}
+		return nil
 	}
 }

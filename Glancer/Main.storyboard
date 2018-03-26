@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="lrU-Kp-Cy5">
-    <device id="retina4_0" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -13,20 +14,20 @@
             <objects>
                 <tableViewController title="Home" id="V6D-yz-qBL" customClass="BlockViewTableController" customModule="Glancer" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" estimatedSectionHeaderHeight="1" sectionFooterHeight="1" estimatedSectionFooterHeight="1" id="Jrq-Hc-OvP">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="734"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="today_now" rowHeight="35" id="Bnt-Du-vrs" customClass="BlockTableTextViewCell" customModule="Glancer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="1" width="320" height="35"/>
+                                <rect key="frame" x="0.0" y="1" width="375" height="35"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bnt-Du-vrs" id="1mr-zI-UQr">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="35"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chemistry" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GaE-oI-Fnm">
-                                            <rect key="frame" x="15" y="0.0" width="290" height="35"/>
+                                            <rect key="frame" x="15" y="0.0" width="345" height="35"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -45,14 +46,14 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="today_next" rowHeight="20" id="PGm-Tu-h2a" customClass="BlockTableTextViewCell" customModule="Glancer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="36" width="320" height="20"/>
+                                <rect key="frame" x="0.0" y="36" width="375" height="20"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PGm-Tu-h2a" id="cgh-O0-GXR">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next: Geometry" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nF4-HV-zay">
-                                            <rect key="frame" x="15" y="0.0" width="290" height="20"/>
+                                            <rect key="frame" x="15" y="0.0" width="345" height="20"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -71,14 +72,14 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="today_now_label" rowHeight="25" id="7wG-i1-gfn" customClass="BlockTableTextViewCell" customModule="Glancer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="56" width="320" height="25"/>
+                                <rect key="frame" x="0.0" y="56" width="375" height="25"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7wG-i1-gfn" id="VFH-wO-lDp">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="25"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="25"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13 MIN LEFT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJo-dQ-5wd">
-                                            <rect key="frame" x="15" y="0.0" width="290" height="25"/>
+                                            <rect key="frame" x="15" y="0.0" width="345" height="25"/>
                                             <fontDescription key="fontDescription" type="system" weight="black" pointSize="16"/>
                                             <color key="textColor" red="1" green="0.61960784310000006" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -97,14 +98,14 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="today_progress" rowHeight="3" id="Vjg-yr-tPY">
-                                <rect key="frame" x="0.0" y="81" width="320" height="3"/>
+                                <rect key="frame" x="0.0" y="81" width="375" height="3"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Vjg-yr-tPY" id="jmY-lk-hI5">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="3"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="3"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gxt-R5-08M">
-                                            <rect key="frame" x="15" y="0.5" width="290" height="2"/>
+                                            <rect key="frame" x="15" y="0.66666666666666652" width="345" height="2"/>
                                             <color key="tintColor" red="1" green="0.61960784310000006" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="progressTintColor" red="1" green="0.61960784310000006" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="trackTintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -118,20 +119,20 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="block" rowHeight="65" id="Z7N-cr-MqK" customClass="BlockTableBlockViewCell" customModule="Glancer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="84" width="320" height="65"/>
+                                <rect key="frame" x="0.0" y="84" width="375" height="65"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Z7N-cr-MqK" id="hL5-As-YZQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GVU-dI-jmz" userLabel="Padding">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cVt-Sz-Te0" userLabel="Block">
-                                                    <rect key="frame" x="15" y="9.5" width="45" height="45"/>
+                                                    <rect key="frame" x="15" y="9.6666666666666643" width="45" height="45"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ty0-sp-VBO">
-                                                            <rect key="frame" x="0.0" y="-9.5" width="45" height="65"/>
+                                                            <rect key="frame" x="0.0" y="-9.6666666666666643" width="45" height="65"/>
                                                             <fontDescription key="fontDescription" type="system" weight="black" pointSize="25"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -151,13 +152,13 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pKU-Zd-0tP">
-                                                    <rect key="frame" x="70" y="21" width="146" height="24"/>
+                                                    <rect key="frame" x="70" y="21" width="201" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="1:20 - 2:30" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Fe-a4-NtQ">
-                                                    <rect key="frame" x="216" y="22.5" width="89" height="21.5"/>
+                                                    <rect key="frame" x="271" y="22.666666666666671" width="89" height="21.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -216,23 +217,23 @@
                         <viewControllerLayoutGuide type="bottom" id="qET-Wr-LMs"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tJO-uQ-9XN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="p2w-nB-4r2">
-                                <rect key="frame" x="0.0" y="20" width="320" height="89.5"/>
+                                <rect key="frame" x="0.0" y="43.999999999999993" width="375" height="89.333333333333314"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="L1u-q9-6fZ">
-                                        <rect key="frame" x="15" y="10" width="290" height="69.5"/>
+                                        <rect key="frame" x="15" y="10" width="345" height="69.333333333333329"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Menu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xxu-zj-ilg">
-                                                <rect key="frame" x="0.0" y="0.0" width="290" height="26.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="345" height="26.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Yum! This is a good one boys. Breakfast for lunch. Testetestst" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OIO-WB-A0H">
-                                                <rect key="frame" x="0.0" y="26.5" width="290" height="43"/>
+                                                <rect key="frame" x="0.0" y="26.333333333333329" width="345" height="43"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -249,7 +250,7 @@
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="8Vc-p2-eNs">
-                                <rect key="frame" x="0.0" y="109.5" width="320" height="443.5"/>
+                                <rect key="frame" x="0.0" y="133.33333333333331" width="375" height="629.66666666666674"/>
                                 <connections>
                                     <segue destination="uGh-HK-Rxh" kind="embed" id="biR-4N-EOt"/>
                                 </connections>
@@ -280,28 +281,28 @@
             <objects>
                 <tableViewController id="uGh-HK-Rxh" customClass="LunchMenuViewTableController" customModule="Glancer" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Qr5-Ck-5l3">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="443.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="629.66666666666674"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="item" rowHeight="62" id="arW-M4-ZNS" customClass="LunchMenuTableCell" customModule="Glancer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="320" height="62"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="62"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="arW-M4-ZNS" id="D5Z-Y7-7iD">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="62"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="oF2-J3-TbV">
-                                            <rect key="frame" x="15" y="10" width="265" height="42"/>
+                                            <rect key="frame" x="15" y="10" width="320" height="42"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" text="Title" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6fv-0P-CRg">
-                                                    <rect key="frame" x="0.0" y="0.0" width="265" height="25"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="25"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="Allergens" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWC-IF-bF4">
-                                                    <rect key="frame" x="0.0" y="25" width="265" height="17"/>
+                                                    <rect key="frame" x="0.0" y="25" width="320" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -310,7 +311,7 @@
                                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         </stackView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_collapse" translatesAutoresizingMaskIntoConstraints="NO" id="reL-N5-xql">
-                                            <rect key="frame" x="290" y="15" width="15" height="15"/>
+                                            <rect key="frame" x="345" y="15" width="15" height="15"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="15" id="a0T-dE-NtY"/>
                                                 <constraint firstAttribute="height" constant="15" id="wLY-Xr-b91"/>
@@ -349,7 +350,7 @@
             <objects>
                 <navigationController id="lrU-Kp-Cy5" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="gue-rt-4Dy" customClass="ShadowlessNavigationBar" customModule="Glancer" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" red="0.3411764706" green="0.58039215690000001" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -379,74 +380,397 @@
                         <viewControllerLayoutGuide type="bottom" id="crP-qQ-qYp"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="AgH-U0-tv4">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zwf-c7-JSv">
-                                <rect key="frame" x="121" y="228" width="78" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Today"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gbG-iz-Hd6">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="51"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Calendar" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xUQ-Lk-6pa">
+                                        <rect key="frame" x="15" y="0.0" width="345" height="39"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.3411764706" green="0.58039215690000001" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstItem="xUQ-Lk-6pa" firstAttribute="top" secondItem="gbG-iz-Hd6" secondAttribute="top" id="IHy-DD-O8K"/>
+                                    <constraint firstItem="xUQ-Lk-6pa" firstAttribute="leading" secondItem="gbG-iz-Hd6" secondAttribute="leading" constant="15" id="W3z-ii-BMW"/>
+                                    <constraint firstAttribute="bottom" secondItem="xUQ-Lk-6pa" secondAttribute="bottom" constant="12" id="b0D-Xe-Zsy"/>
+                                    <constraint firstAttribute="trailing" secondItem="xUQ-Lk-6pa" secondAttribute="trailing" constant="15" id="hyh-1h-0qA"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="blueHeader"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BJg-9y-xLn">
+                                <rect key="frame" x="0.0" y="51" width="375" height="639"/>
                                 <connections>
-                                    <segue destination="Px0-KV-dPT" kind="show" id="t39-4r-X0A"/>
+                                    <segue destination="I83-g2-VzX" kind="embed" id="W7p-5k-biA"/>
                                 </connections>
-                            </button>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Zwf-c7-JSv" firstAttribute="centerY" secondItem="AgH-U0-tv4" secondAttribute="centerY" id="EoV-o6-BoK"/>
-                            <constraint firstItem="Zwf-c7-JSv" firstAttribute="centerX" secondItem="AgH-U0-tv4" secondAttribute="centerX" id="W4O-jo-4fj"/>
+                            <constraint firstItem="gbG-iz-Hd6" firstAttribute="top" secondItem="Xft-mI-JtM" secondAttribute="bottom" id="EwK-qg-PB4"/>
+                            <constraint firstItem="crP-qQ-qYp" firstAttribute="top" secondItem="BJg-9y-xLn" secondAttribute="bottom" id="FLu-jJ-RRm"/>
+                            <constraint firstItem="BJg-9y-xLn" firstAttribute="leading" secondItem="AgH-U0-tv4" secondAttribute="leading" id="FSu-us-Da1"/>
+                            <constraint firstItem="gbG-iz-Hd6" firstAttribute="leading" secondItem="AgH-U0-tv4" secondAttribute="leading" id="J4J-mo-1FC"/>
+                            <constraint firstAttribute="trailing" secondItem="gbG-iz-Hd6" secondAttribute="trailing" id="Ze9-3X-f90"/>
+                            <constraint firstAttribute="trailing" secondItem="BJg-9y-xLn" secondAttribute="trailing" id="mTA-Ap-8ot"/>
+                            <constraint firstItem="BJg-9y-xLn" firstAttribute="top" secondItem="gbG-iz-Hd6" secondAttribute="bottom" id="nwj-Mf-Yh4"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="day_header"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
-                    <navigationItem key="navigationItem" title="Calendar" id="xnH-2Q-tnY">
+                    <navigationItem key="navigationItem" id="xnH-2Q-tnY">
                         <barButtonItem key="backBarButtonItem" title=" " id="7It-sZ-SEe"/>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tF9-Fl-Kfx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5870" y="-1759"/>
+            <point key="canvasLocation" x="-5870.625" y="-1759.8591549295775"/>
+        </scene>
+        <!--Calendar View Manager-->
+        <scene sceneID="d34-ly-b4b">
+            <objects>
+                <viewController id="I83-g2-VzX" customClass="CalendarViewManager" customModule="Glancer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5Si-XX-RI7"/>
+                        <viewControllerLayoutGuide type="bottom" id="v5u-Mc-rxO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9eb-WE-mSh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="639"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EPi-uL-jfO" userLabel="Quicklink Wrapper">
+                                <rect key="frame" x="0.0" y="44" width="375" height="140.66666666666666"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="eQh-3E-u44" userLabel="Quicklink">
+                                        <rect key="frame" x="15" y="20" width="345" height="45"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QDN-hW-AKY" userLabel="Yesterday">
+                                                <rect key="frame" x="0.0" y="2.6666666666666714" width="108.33333333333333" height="40"/>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="Sjg-DI-Mil"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                                <state key="normal" title="Yesterday">
+                                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="openYesterday:" destination="I83-g2-VzX" eventType="touchUpInside" id="EMv-Jj-Cyj"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vlh-ws-kG2" userLabel="Today">
+                                                <rect key="frame" x="118.33333333333334" y="0.0" width="108.33333333333334" height="45"/>
+                                                <color key="backgroundColor" red="1" green="0.70980392160000005" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="45" id="jL1-dH-7CP"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                                <state key="normal" title="Today">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="openToday:" destination="I83-g2-VzX" eventType="touchUpInside" id="cH1-8J-lw5"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jS1-9v-IMx" userLabel="Tomorrow">
+                                                <rect key="frame" x="236.66666666666666" y="2.6666666666666714" width="108.33333333333334" height="40"/>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="4eo-0T-rqP"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                                <state key="normal" title="Tomorrow">
+                                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="openTomorrow:" destination="I83-g2-VzX" eventType="touchUpInside" id="ecc-m0-vGB"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="t3g-7m-97I" userLabel="Quick Week">
+                                        <rect key="frame" x="15" y="80" width="345" height="40.666666666666657"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sQH-nE-fdk" userLabel="Yesterday">
+                                                <rect key="frame" x="0.0" y="0.0" width="40.666666666666664" height="40.666666666666664"/>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="sQH-nE-fdk" secondAttribute="height" multiplier="1:1" id="XfF-qr-ZBr"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                                <state key="normal" title="M">
+                                                    <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="openWeekday:" destination="I83-g2-VzX" eventType="touchUpInside" id="xkJ-Vf-5GZ"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TgD-wU-yIu" userLabel="Tomorrow">
+                                                <rect key="frame" x="50.666666666666671" y="0.0" width="40.666666666666671" height="40.666666666666664"/>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="TgD-wU-yIu" secondAttribute="height" multiplier="1:1" id="f3y-LS-y7t"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                                <state key="normal" title="T">
+                                                    <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="openWeekday:" destination="I83-g2-VzX" eventType="touchUpInside" id="b4Y-TU-3Xb"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u5s-3C-hEI" userLabel="Tomorrow">
+                                                <rect key="frame" x="101.33333333333333" y="0.0" width="40.666666666666671" height="40.666666666666664"/>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="u5s-3C-hEI" secondAttribute="height" multiplier="1:1" id="W8Q-pW-plb"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                                <state key="normal" title="W">
+                                                    <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="openWeekday:" destination="I83-g2-VzX" eventType="touchUpInside" id="xSb-ub-v4D"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QZr-TS-336" userLabel="Tomorrow">
+                                                <rect key="frame" x="152" y="0.0" width="41" height="40.666666666666664"/>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="QZr-TS-336" secondAttribute="height" multiplier="1:1" id="En6-ZO-h2s"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                                <state key="normal" title="Th">
+                                                    <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="openWeekday:" destination="I83-g2-VzX" eventType="touchUpInside" id="wUJ-a0-iHI"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Zr-Eg-wq8" userLabel="Tomorrow">
+                                                <rect key="frame" x="203" y="0.0" width="40.666666666666657" height="40.666666666666664"/>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="2Zr-Eg-wq8" secondAttribute="height" multiplier="1:1" id="koq-fO-dOm"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                                <state key="normal" title="F">
+                                                    <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="openWeekday:" destination="I83-g2-VzX" eventType="touchUpInside" id="iJg-cQ-K3D"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lk8-An-mdL" userLabel="Tomorrow">
+                                                <rect key="frame" x="253.66666666666666" y="0.0" width="40.666666666666657" height="40.666666666666664"/>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="Lk8-An-mdL" secondAttribute="height" multiplier="1:1" id="Xh7-Nx-cwJ"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                                <state key="normal" title="Sa">
+                                                    <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="openWeekday:" destination="I83-g2-VzX" eventType="touchUpInside" id="dtK-p7-T2a"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fNh-Y5-A46" userLabel="Tomorrow">
+                                                <rect key="frame" x="304.33333333333331" y="0.0" width="40.666666666666686" height="40.666666666666664"/>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="fNh-Y5-A46" secondAttribute="height" multiplier="1:1" id="FWc-dS-pLU"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                                <state key="normal" title="Su">
+                                                    <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="openWeekday:" destination="I83-g2-VzX" eventType="touchUpInside" id="p4F-lv-xb3"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="t3g-7m-97I" firstAttribute="leading" secondItem="EPi-uL-jfO" secondAttribute="leading" constant="15" id="0AY-2h-fxr"/>
+                                    <constraint firstItem="eQh-3E-u44" firstAttribute="top" secondItem="EPi-uL-jfO" secondAttribute="top" constant="20" id="8Ss-7J-ozJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="eQh-3E-u44" secondAttribute="trailing" constant="15" id="KeR-Z7-P5L"/>
+                                    <constraint firstAttribute="bottom" secondItem="t3g-7m-97I" secondAttribute="bottom" constant="20" id="OAV-9G-CfB"/>
+                                    <constraint firstItem="t3g-7m-97I" firstAttribute="top" secondItem="eQh-3E-u44" secondAttribute="bottom" constant="15" id="WJ9-st-AKs"/>
+                                    <constraint firstItem="eQh-3E-u44" firstAttribute="leading" secondItem="EPi-uL-jfO" secondAttribute="leading" constant="15" id="Wmt-uZ-OHD"/>
+                                    <constraint firstAttribute="trailing" secondItem="t3g-7m-97I" secondAttribute="trailing" constant="15" id="t2Y-2V-lgW"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UYp-RG-iBf" customClass="FSCalendar">
+                                <rect key="frame" x="15" y="184.66666666666666" width="345" height="420.33333333333337"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="todayColor">
+                                        <color key="value" red="1" green="0.70980392160000005" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="allowsSelection" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="allowsMultipleSelection" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showsScopeHandle" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="titleTextSize">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="pagingEnabled" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="scrollEnabled" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="useVeryShortWeekdaySymbols" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="fakeSubtitles" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="fakeEventDots" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showsPlaceholders" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="weekdayTextColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="fakedSelectedDay">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="headerTitleColor">
+                                        <color key="value" red="0.3411764706" green="0.58039215690000001" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="headerMinimumDissolvedAlpha">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="todaySelectionColor">
+                                        <color key="value" red="1" green="0.70980392160000005" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectionColor">
+                                        <color key="value" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="titleDefaultColor">
+                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="titleSelectionColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="titleTodayColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="UYp-RG-iBf" firstAttribute="top" secondItem="EPi-uL-jfO" secondAttribute="bottom" id="4dc-qe-bOO"/>
+                            <constraint firstItem="UYp-RG-iBf" firstAttribute="leading" secondItem="9eb-WE-mSh" secondAttribute="leading" constant="15" id="BdY-xo-vfc"/>
+                            <constraint firstItem="EPi-uL-jfO" firstAttribute="leading" secondItem="9eb-WE-mSh" secondAttribute="leading" id="EHJ-4I-rZl"/>
+                            <constraint firstItem="v5u-Mc-rxO" firstAttribute="top" secondItem="UYp-RG-iBf" secondAttribute="bottom" id="bx5-Lm-Tv2"/>
+                            <constraint firstAttribute="trailing" secondItem="UYp-RG-iBf" secondAttribute="trailing" constant="15" id="lzZ-sh-DF5"/>
+                            <constraint firstItem="EPi-uL-jfO" firstAttribute="top" secondItem="5Si-XX-RI7" secondAttribute="bottom" id="sdQ-DM-b1C"/>
+                            <constraint firstAttribute="trailing" secondItem="EPi-uL-jfO" secondAttribute="trailing" id="th3-6b-Hyf"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="calendarView" destination="UYp-RG-iBf" id="am1-6m-1cY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wyr-6k-zuJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5871.1999999999998" y="-1035.2216748768474"/>
         </scene>
         <!--Today-->
         <scene sceneID="yEh-cv-DES">
             <objects>
-                <viewController id="Px0-KV-dPT" customClass="BlockViewController" customModule="Glancer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DayViewController" id="Px0-KV-dPT" customClass="BlockViewController" customModule="Glancer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="F3e-v6-kEb"/>
                         <viewControllerLayoutGuide type="bottom" id="dvr-Hu-9DO"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8qF-G5-r5C" userLabel="Background">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JAw-A5-959">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <segue destination="V6D-yz-qBL" kind="embed" id="e6I-Cp-qxC"/>
                                 </connections>
                             </containerView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="kpU-Jl-Cxz" userLabel="Header" customClass="BlockViewHeaderUpdater" customModule="Glancer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="131"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="130.66666666666666"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="qzc-i1-4aU">
-                                        <rect key="frame" x="15" y="0.0" width="290" height="131"/>
+                                        <rect key="frame" x="15" y="0.0" width="345" height="130.66666666666666"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="XXX" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZSJ-6Z-Qba">
-                                                <rect key="frame" x="0.0" y="0.0" width="290" height="38.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="345" height="38.333333333333336"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="XXX XXX XXX" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VK8-tq-I9H">
-                                                <rect key="frame" x="0.0" y="40.5" width="290" height="26.5"/>
+                                                <rect key="frame" x="0.0" y="40.333333333333329" width="345" height="26.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CvA-Rk-DI7" userLabel="Button Wrapper">
-                                                <rect key="frame" x="0.0" y="69" width="290" height="50"/>
+                                                <rect key="frame" x="0.0" y="68.666666666666671" width="345" height="50"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="073-Rl-ShH">
-                                                        <rect key="frame" x="0.0" y="10" width="290" height="40"/>
+                                                        <rect key="frame" x="0.0" y="10" width="345" height="40"/>
                                                         <color key="backgroundColor" red="0.49019607840000001" green="0.68235294120000001" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="VWH-C8-lYJ"/>
@@ -475,7 +799,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DGp-Ob-dgx" userLabel="Spacer">
-                                                <rect key="frame" x="0.0" y="121" width="290" height="10"/>
+                                                <rect key="frame" x="0.0" y="120.66666666666666" width="345" height="10"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="10" id="vnn-ro-AW3"/>
@@ -494,17 +818,17 @@
                                 </constraints>
                             </view>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="DlD-dB-YAN">
-                                <rect key="frame" x="141.5" y="198.5" width="37" height="37"/>
+                                <rect key="frame" x="169" y="352.66666666666669" width="37" height="37"/>
                                 <color key="color" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Classes" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xwx-hD-otb" userLabel="No Classes">
-                                <rect key="frame" x="115" y="204.5" width="90.5" height="21.5"/>
+                                <rect key="frame" x="142.33333333333334" y="358.33333333333331" width="90.666666666666657" height="21.666666666666686"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.3411764706" green="0.58039215690000001" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="JAw-A5-959" secondAttribute="trailing" id="0bf-f1-0jS"/>
                             <constraint firstItem="JAw-A5-959" firstAttribute="leading" secondItem="8qF-G5-r5C" secondAttribute="leading" id="KfM-hb-qjY"/>

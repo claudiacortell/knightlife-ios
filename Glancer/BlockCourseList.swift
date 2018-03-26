@@ -10,8 +10,14 @@ import Foundation
 
 struct BlockCourseList
 {
-	var block: BlockID!
-	var courses: [Course] = []
+	var block: BlockID
+	var courses: [Course]
+	
+	init(_ block: BlockID, _ courses: [Course])
+	{
+		self.block = block
+		self.courses = courses
+	}
 }
 
 extension BlockCourseList

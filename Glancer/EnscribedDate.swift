@@ -14,6 +14,18 @@ struct EnscribedDate
 	let month: Int
 	let day: Int
 	
+	init?(_ date: Date)
+	{
+		let components = Calendar.current.dateComponents([.year, .month, .day], from: date)
+		if let year = components.year, let month = components.month, let day = components.day
+		{
+			self.init(year: year, month: month, day: day)
+		} else
+		{
+			return nil
+		}
+	}
+	
 	init?(year: Int, month: Int, day: Int)
 	{
 		self.year = year

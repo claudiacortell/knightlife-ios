@@ -27,4 +27,6 @@ class ScheduleVariationPrefsModule: MapModule<ScheduleManager, DayID, Int>, Pref
 			self.items = items
 		}
 	}
+	
+	//	TODO: Integrate legacy data
 }
