@@ -42,10 +42,17 @@ class BlockViewController: UIViewController
 		return newObject
 	}()
 	
-	var date: EnscribedDate = EnscribedDate(year: 2018, month: 2, day: 26)!
+	var todayView: Bool = false
+	var date: EnscribedDate!
 	
 	var daySchedule: DateSchedule?
 	var lunchMenu: LunchMenu?
+	
+	private var registeredScheduleHandler = false
+	private var fetchName: String
+	{
+		return "block view: \(self.date.string)"
+	}
 	
 	override func viewDidLoad()
 	{
@@ -59,6 +66,35 @@ class BlockViewController: UIViewController
 
 		self.updateHeader()
 		self.reload(hard: false, delayResult: false, useRefreshControl: false, hapticFeedback: false)
+		
+		if !self.registeredScheduleHandler
+		{
+			self.registeredScheduleHandler = true
+			ScheduleManager.instance.patchHandler.registerSuccessCallback(self.fetchName,
+			{
+				o in
+				if let res = o
+				{
+					let date = res.0
+					if let schedule = res.1
+					{
+						if date == self.date
+						{
+							self.daySchedule = schedule
+							self.closeLoop(hapticFeedback: false)
+						}
+					}
+				}
+			})
+		}
+	}
+	
+	deinit
+	{
+		if self.registeredScheduleHandler
+		{
+			ScheduleManager.instance.patchHandler.removeSuccessCallback(self.fetchName)
+		}
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?)

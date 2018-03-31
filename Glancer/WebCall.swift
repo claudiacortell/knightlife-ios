@@ -38,7 +38,7 @@ class WebCall<DataContainer: WebCallResult, Result>
 	
 	func deviceParam() // Specify the device token
 	{
-		return self.parameter("dv", val: Device.ID)
+		return self.parameter("dv", val: Globals.DeviceID)
 	}
 	
 	func execute()

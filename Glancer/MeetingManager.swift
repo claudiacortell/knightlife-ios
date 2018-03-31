@@ -12,25 +12,27 @@ class CourseManager: Manager
 {
 	static let instance = CourseManager()
 	
-	private(set) var meetings: [String: Course] // All added meetings including one time ones.
+	private(set) var meetings: [Course] // All added meetings including one time ones.
 	
 	init()
 	{
-		self.meetings = [:]
+		self.meetings = []
 		super.init(name: "Meetings Manager")
 		
 		self.registerModule(MeetingPrefModule(self, name: "courses"))
 	}
 	
-	func addCourse(_ meeting: Course)
+	func getCourses() -> [Course]
 	{
-		self.meetings[meeting.id] = meeting
+		return self.meetings
 	}
 	
-	func getCourse(id: String) -> Course?
+	func addCourse(_ meeting: Course)
 	{
-		return self.meetings[id]
+		self.meetings.append(meeting)
 	}
+	
+	//	TODO: Implement a callback system for courses changed.
 	
 	func getCourses(schedule: DateSchedule, block: BlockID) -> BlockCourseList
 	{
@@ -41,7 +43,7 @@ class CourseManager: Manager
 	{
 		var list: [Course] = []
 		
-		for activity in self.meetings.values
+		for activity in self.meetings
 		{
 			if self.doesMeetOnDate(activity, date: date, schedule: schedule)
 			{

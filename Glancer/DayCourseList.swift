@@ -38,16 +38,4 @@ extension DayCourseList
 		}
 		return BlockCourseList(block, list)
 	}
-	
-	func fromId(_ id: Int) -> Course?
-	{
-		for meeting in self.meetings
-		{
-			if meeting.hashValue == id
-			{
-				return meeting
-			}
-		}
-		return nil
-	}
 }

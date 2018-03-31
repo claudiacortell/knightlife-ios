@@ -8,7 +8,8 @@
 
 import Foundation
 
-class Device
+class Globals
 {
-	static var ID: String = ""
+	static var DeviceID: String = ""
+	static var DidPushToToday = false
 }

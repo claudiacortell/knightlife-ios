@@ -14,4 +14,5 @@ protocol PreferenceHandler
 	
 	func getStorageValues() -> Any?
 	func readStorageValues(data: Any)
+	func loadDefaultValues()
 }

@@ -56,6 +56,7 @@ class CalendarViewManager: UIViewController, FSCalendarDelegate, FSCalendarDataS
 		if let controller = self.newController()
 		{
 			controller.date = TimeUtils.todayEnscribed
+			controller.todayView = true
 			self.navigationController?.pushViewController(controller, animated: true)
 		}
 	}

@@ -26,16 +26,4 @@ extension BlockCourseList
 	{
 		return self.courses.isEmpty
 	}
-	
-	func fromId(_ id: Int) -> Course?
-	{
-		for course in self.courses
-		{
-			if course.hashValue == id
-			{
-				return course
-			}
-		}
-		return nil
-	}
 }

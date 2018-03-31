@@ -28,9 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         }
 		
 		_ = ScheduleManager.instance
-//		_ = MeetingManager.instance
+		_ = CourseManager.instance
+		_ = LunchManager.instance
 //		_ = SportsManager.instance
-//		_ = LunchManager.instance
 //		_ = EventManager.instance
 		
 //		EventManager.instance.fetchEvents(TimeUtils.todayEnscribed, {today in print(today.data)})
@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         }
         
         print("Device Token:", tokenString)
-		Device.ID = tokenString
+		Globals.DeviceID = tokenString
 		
 		let call = RegistrationWebCall()
 		call.callback = { error, result in

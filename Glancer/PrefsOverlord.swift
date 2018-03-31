@@ -28,6 +28,9 @@ class PrefsOverlord // All hail
 		if let object = defaults.object(forKey: module.storageKey)
 		{
 			module.readStorageValues(data: object)
+		} else
+		{
+			module.loadDefaultValues()
 		}
 	}
 }

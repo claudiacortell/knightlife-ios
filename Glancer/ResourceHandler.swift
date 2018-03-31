@@ -10,22 +10,32 @@ import Foundation
 
 class ResourceHandler<Payload>
 {
-	private var successCallbacks: [(Payload?) -> Void] = []
-	private var failureCallbacks: [(FetchError) -> Void] = []
+	private var successCallbacks: [String: (Payload?) -> Void] = [:]
+	private var failureCallbacks: [String: (FetchError) -> Void] = [:]
 	
-	func registerSuccessCallback(_ callback: @escaping (Payload?) -> Void)
+	func registerSuccessCallback(_ id: String, _ callback: @escaping (Payload?) -> Void)
 	{
-		self.successCallbacks.append(callback)
+		self.successCallbacks[id] = callback
 	}
 	
-	func registerFailureCallback(_ callback: @escaping (FetchError) -> Void)
+	func registerFailureCallback(_ id: String, _ callback: @escaping (FetchError) -> Void)
 	{
-		self.failureCallbacks.append(callback)
+		self.failureCallbacks[id] = callback
 	}
 	
+	func removeSuccessCallback(_ id: String)
+	{
+		self.successCallbacks.removeValue(forKey: id)
+	}
+	
+	func removeFailureCallback(_ id: String)
+	{
+		self.failureCallbacks.removeValue(forKey: id)
+	}
+
 	func success(_ data: Payload?)
 	{
-		for callback in self.successCallbacks
+		for callback in self.successCallbacks.values
 		{
 			callback(data)
 		}
@@ -33,7 +43,7 @@ class ResourceHandler<Payload>
 	
 	func failure(_ error: FetchError)
 	{
-		for callback in self.failureCallbacks
+		for callback in self.failureCallbacks.values
 		{
 			callback(error)
 		}

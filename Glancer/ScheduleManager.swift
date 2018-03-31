@@ -34,7 +34,7 @@ class ScheduleManager: Manager
 	
 	func getVariation(_ date: EnscribedDate) -> Int
 	{
-		return self.variationModule.getItem(date.dayOfWeek) ?? 0
+		return self.variationModule.getItem(date.dayOfWeek) ?? 1
 	}
 	
 	func reloadAllSchedules()

@@ -58,7 +58,13 @@ class GetPatchWebCall: WebCall<GetPatchResponse, DateSchedule>
 			}
 		}
 		
-		let daySchedule = DateSchedule(date, blocks: blocks, subtitle: response.subtitle, changed: response.changed ?? false)
+		var standinDayId: DayID?
+		if response.replaceDayId != nil
+		{
+			standinDayId = DayID.fromId(response.replaceDayId!)
+		}
+		
+		let daySchedule = DateSchedule(date, blocks: blocks, subtitle: response.subtitle, changed: response.changed ?? false, standinDayId: standinDayId)
 		return daySchedule
 	}
 	

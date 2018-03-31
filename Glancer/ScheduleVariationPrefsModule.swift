@@ -28,5 +28,22 @@ class ScheduleVariationPrefsModule: MapModule<ScheduleManager, DayID, Int>, Pref
 		}
 	}
 	
-	//	TODO: Integrate legacy data
+	func loadDefaultValues()
+	{
+		loadLegacyData()
+	}
+	
+	private func loadLegacyData()
+	{
+		if let switches = Storage.USER_SWITCHES.getValue() as? [String: Bool]
+		{
+			for (rawDayId, val) in switches
+			{
+				if let dayId = DayID.fromRaw(raw: rawDayId)
+				{
+					self.addItem(dayId, val ? 1 : 0)
+				}
+			}
+		}
+	}
 }

@@ -14,12 +14,14 @@ struct GetPatchResponse: WebCallResult
 	var subtitle: String?
 	var blocks: [GetPatchResponseBlock]
 	var changed: Bool?
+	var replaceDayId: Int?
 	
 	init(unboxer: Unboxer) throws
 	{		
 		self.subtitle = unboxer.unbox(key: "subtitle")
 		self.changed = unboxer.unbox(key: "changed")
 		self.blocks = try unboxer.unbox(keyPath: "blocks", allowInvalidElements: false)
+		self.replaceDayId = unboxer.unbox(key: "standinDayId")
 	}
 }
 

@@ -39,4 +39,9 @@ class SportsPrefModule: CollectionModule<SportsManager, SportTeam>, PreferenceHa
 			}
 		}
 	}
+	
+	func loadDefaultValues()
+	{
+		
+	}
 }

@@ -8,31 +8,17 @@
 
 import Foundation
 
-struct Course: Hashable
+class Course
 {
-	var id: String = UUID().uuidString
-	
 	var name: String // Course name
 	var courseSchedule: CourseSchedule?
 	
 	var color: String?
+	var location: String?
 	
 	init(name: String, schedule: CourseSchedule? = nil)
 	{
 		self.name = name
 		self.courseSchedule = schedule
-	}
-}
-
-extension Course
-{
-	var hashValue: Int
-	{
-		return self.id.hashValue
-	}
-	
-	static func ==(lhs: Course, rhs: Course) -> Bool
-	{
-		return lhs.id == rhs.id // This should be adequate since the ID's should always be unique
 	}
 }

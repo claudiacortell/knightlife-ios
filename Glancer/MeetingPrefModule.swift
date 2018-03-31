@@ -17,7 +17,8 @@ class MeetingPrefModule: Module<CourseManager>, PreferenceHandler
 	
 	func getStorageValues() -> Any?
 	{
-		return self.manager.meetings.values
+		return nil
+//		return self.manager.meetings
 	}
 	
 	func readStorageValues(data: Any)
@@ -27,6 +28,37 @@ class MeetingPrefModule: Module<CourseManager>, PreferenceHandler
 			for meeting in list
 			{
 				self.manager.addCourse(meeting)
+			}
+		}
+	}
+	
+	func loadDefaultValues()
+	{
+		self.loadLegacyData()
+	}
+	
+	private func loadLegacyData()
+	{
+		if let meta = Storage.USER_META.getValue() as? [String:[String:String?]]
+		{
+			for (rawBlockId, keyPairs) in meta
+			{
+				if let blockId = BlockID.fromRaw(raw: rawBlockId)
+				{
+					if [ BlockID.a, .b, .c, .d, .e, .f, .g, .x, .custom ].contains(blockId)
+					{
+						let name: String = { if keyPairs["name"] != nil { if keyPairs["name"]! != nil { return keyPairs["name"]!! } }; return "Unknown" }()
+						let color: String? = { if keyPairs["color"] != nil { if keyPairs["color"]! != nil { return keyPairs["color"]!! } }; return nil }()
+						let room: String? = { if keyPairs["room"] != nil { if keyPairs["room"]! != nil { return keyPairs["room"]!! } }; return nil }()
+
+						let schedule = CourseSchedule(block: blockId, frequency: .everyDay)
+						let course = Course(name: name, schedule: schedule)
+						course.color = color
+						course.location = room
+						
+						self.manager.addCourse(course)
+					}
+				}
 			}
 		}
 	}
