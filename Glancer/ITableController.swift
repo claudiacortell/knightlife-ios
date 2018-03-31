@@ -9,14 +9,29 @@
 import Foundation
 import UIKit
 
-class ITableController: UITableViewController
-{	
+class ITableController: UITableViewController, ITableControllerDelegate
+{
+	var delegate: ITableControllerDelegate!
+	
 	var storyboardContainer: TableContainer = TableContainer()
 	private(set) var modules: [TableModule] = []
 	
-	override func viewDidLoad()
+	override init(style: UITableViewStyle)
 	{
-		super.viewDidLoad()		
+		super.init(style: style)
+		self.delegate = self
+	}
+	
+	required init?(coder aDecoder: NSCoder)
+	{
+		super.init(coder: aDecoder)
+		self.delegate = self
+	}
+	
+	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+	{
+		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+		self.delegate = self
 	}
 	
 	func reloadTable()
@@ -24,7 +39,7 @@ class ITableController: UITableViewController
 		self.storyboardContainer = TableContainer()
 		self.modules.removeAll()
 
-		self.generateSections()
+		self.delegate.generateSections()
 
 		for module in self.modules // Modules
 		{

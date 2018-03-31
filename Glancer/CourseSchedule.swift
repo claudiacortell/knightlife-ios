@@ -15,7 +15,7 @@ enum CourseFrequency
     specificDays
 }
 
-struct CourseSchedule
+class CourseSchedule
 {
     var block: BlockID //Null = all day
 	var frequency: CourseFrequency

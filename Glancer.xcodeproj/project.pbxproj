@@ -110,6 +110,9 @@
 		C0CB9C201FE4698000437C5D /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CB9C1F1FE4698000437C5D /* EventList.swift */; };
 		C0D2110D2069463200D5D2B2 /* MeetingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D2110C2069463200D5D2B2 /* MeetingManager.swift */; };
 		C0D7DA11206BA52000F7B8AA /* CalendarForewardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7DA10206BA52000F7B8AA /* CalendarForewardingController.swift */; };
+		C0EE97BA206F2EE000685788 /* CourseDetailControlWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EE97B9206F2EE000685788 /* CourseDetailControlWrapper.swift */; };
+		C0EE97BC206F376B00685788 /* ITableControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EE97BB206F376B00685788 /* ITableControllerDelegate.swift */; };
+		C0EE97BE206F383C00685788 /* SelectBlockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EE97BD206F383C00685788 /* SelectBlockController.swift */; };
 		C0EF692D206ED9E50000C528 /* EnterTextController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EF692C206ED9E50000C528 /* EnterTextController.swift */; };
 		C0F0F79D2067113B006D84C9 /* CalendarViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F0F79C2067113B006D84C9 /* CalendarViewManager.swift */; };
 		C0F1797320620237009415D2 /* LunchMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F1797220620237009415D2 /* LunchMenuViewController.swift */; };
@@ -241,11 +244,14 @@
 		C0CB9C1F1FE4698000437C5D /* EventList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventList.swift; sourceTree = "<group>"; };
 		C0D2110C2069463200D5D2B2 /* MeetingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingManager.swift; sourceTree = "<group>"; };
 		C0D7DA10206BA52000F7B8AA /* CalendarForewardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarForewardingController.swift; sourceTree = "<group>"; };
+		C0EE97B9206F2EE000685788 /* CourseDetailControlWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailControlWrapper.swift; sourceTree = "<group>"; };
+		C0EE97BB206F376B00685788 /* ITableControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITableControllerDelegate.swift; sourceTree = "<group>"; };
+		C0EE97BD206F383C00685788 /* SelectBlockController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBlockController.swift; sourceTree = "<group>"; };
 		C0EF692C206ED9E50000C528 /* EnterTextController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterTextController.swift; sourceTree = "<group>"; };
 		C0F0F79C2067113B006D84C9 /* CalendarViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewManager.swift; sourceTree = "<group>"; };
 		C0F1797220620237009415D2 /* LunchMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchMenuViewController.swift; sourceTree = "<group>"; };
 		C0F9E1602005AC71001E7026 /* TableModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableModule.swift; sourceTree = "<group>"; };
-		C0FC3AC4206C17A700102B27 /* CourseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailViewController.swift; sourceTree = "<group>"; };
+		C0FC3AC4206C17A700102B27 /* CourseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		C0FC777B2033CCE800E9C8EF /* GetPatchResourceHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPatchResourceHandler.swift; sourceTree = "<group>"; };
 		C0FC777D2034E2B700E9C8EF /* GetTemplateResourceHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTemplateResourceHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -401,6 +407,7 @@
 				C074632D1FAFA8EB00D183E7 /* TableSection.swift */,
 				C074632F1FAFA91200D183E7 /* TableCell.swift */,
 				C01FED841FCD1AEE0095F8A1 /* ITableController.swift */,
+				C0EE97BB206F376B00685788 /* ITableControllerDelegate.swift */,
 				C0F9E1602005AC71001E7026 /* TableModule.swift */,
 			);
 			name = Table;
@@ -788,6 +795,7 @@
 			isa = PBXGroup;
 			children = (
 				C0EF692C206ED9E50000C528 /* EnterTextController.swift */,
+				C0EE97BD206F383C00685788 /* SelectBlockController.swift */,
 			);
 			name = Input;
 			sourceTree = "<group>";
@@ -827,6 +835,7 @@
 			isa = PBXGroup;
 			children = (
 				C0FC3AC4206C17A700102B27 /* CourseDetailViewController.swift */,
+				C0EE97B9206F2EE000685788 /* CourseDetailControlWrapper.swift */,
 			);
 			name = CourseDetail;
 			sourceTree = "<group>";
@@ -929,6 +938,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Glancer/Pods-Glancer-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
+				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
 				"${BUILT_PRODUCTS_DIR}/Unbox/Unbox.framework",
 				"${BUILT_PRODUCTS_DIR}/UnboxedAlamofire/UnboxedAlamofire.framework",
@@ -937,6 +947,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Unbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UnboxedAlamofire.framework",
@@ -1041,6 +1052,7 @@
 				C002329B1FA34BF70019D328 /* AnEvent.swift in Sources */,
 				C0C776841FACDDB6003EE125 /* EnscribedDate.swift in Sources */,
 				C04926A32000A92E00926082 /* EXT_UIColor.swift in Sources */,
+				C0EE97BE206F383C00685788 /* SelectBlockController.swift in Sources */,
 				C0FC3AC5206C17A700102B27 /* CourseDetailViewController.swift in Sources */,
 				C0CB9C131FE464D900437C5D /* Event.swift in Sources */,
 				C0A26FBC1FAF76620060DC23 /* SportsPrefModule.swift in Sources */,
@@ -1075,6 +1087,7 @@
 				C07463301FAFA91200D183E7 /* TableCell.swift in Sources */,
 				C0FC777C2033CCE800E9C8EF /* GetPatchResourceHandler.swift in Sources */,
 				C002329E1FA37D8D0019D328 /* AnEventHandler.swift in Sources */,
+				C0EE97BA206F2EE000685788 /* CourseDetailControlWrapper.swift in Sources */,
 				C05F5E851FAE542D00724F42 /* SportSeason.swift in Sources */,
 				C0CB9C191FE468F500437C5D /* GetEventsWebCall.swift in Sources */,
 				C025C5B52035C22000ED0FAD /* GetMenuResourceHandler.swift in Sources */,
@@ -1086,6 +1099,7 @@
 				C09343491FAA1B5E00629A84 /* TimeContainer.swift in Sources */,
 				C03636741FACFC85008FC9A9 /* GetScheduleResponse.swift in Sources */,
 				C074632E1FAFA8EB00D183E7 /* TableSection.swift in Sources */,
+				C0EE97BC206F376B00685788 /* ITableControllerDelegate.swift in Sources */,
 				C0C1765E1FAA61000059E956 /* TimeDuration.swift in Sources */,
 				C079C2311FACA9CB009067DE /* BlockViewTableController.swift in Sources */,
 				C05F5E8B1FAE56CC00724F42 /* TeamDeclarations.swift in Sources */,

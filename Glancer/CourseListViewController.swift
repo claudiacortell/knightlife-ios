@@ -42,7 +42,7 @@ class CourseListViewController: ITableController
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?)
 	{
-		if let from = sender as? CourseListCell, let controller = segue.destination as? CourseDetailViewController
+		if let from = sender as? CourseListCell, let controller = segue.destination as? CourseDetailControlWrapper
 		{
 			controller.course = from.course
 		}

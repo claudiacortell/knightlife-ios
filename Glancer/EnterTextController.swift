@@ -56,6 +56,9 @@ class EnterTextController: UIViewController, UITextFieldDelegate
 		self.textField.endEditing(true)
 		self.dismiss(animated: true, completion: nil)
 		
-		self.didChangeText(self.textField.text)
+		var text: String? = self.textField.text
+		if text == "" { text = nil }
+		
+		self.didChangeText(text)
 	}
 }

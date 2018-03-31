@@ -76,4 +76,5 @@ enum BlockID: String
 	
 	static func values() -> [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x, .custom, .activities, .lab, .lunch, .advisory] }
 	static func regularBlocks() -> [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x] }
+	static func academicBlocks() -> [BlockID] { return [.a, .b, .c, .d, .e, .f, .g] }
 }

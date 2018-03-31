@@ -26,6 +26,14 @@ class CourseDetailViewController: UITableViewController
 		return presentr
 	}()
 	
+	let listPresentr: Presentr =
+	{
+		let presentr = Presentr(presentationType: .popup)
+		presentr.roundCorners = true
+		presentr.cornerRadius = 12.0
+		return presentr
+	}()
+	
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
@@ -88,7 +96,22 @@ class CourseDetailViewController: UITableViewController
 	
 	@IBAction func changeBlock(_ sender: UIButton)
 	{
-		
+		if let controller = self.storyboard?.instantiateViewController(withIdentifier: "SelectBlockController") as? SelectBlockController
+		{
+			if let schedule = self.course.courseSchedule
+			{
+				controller.presentr = self.listPresentr
+				controller.selected = schedule.block
+				
+				controller.updatedCallback = {
+					block in
+					schedule.block = block
+					self.reload()
+				}
+				
+				self.customPresentViewController(self.listPresentr, viewController: controller, animated: true, completion: nil)
+			}
+		}
 	}
 	
 	@IBAction func deleteCourse(_ sender: UIButton)

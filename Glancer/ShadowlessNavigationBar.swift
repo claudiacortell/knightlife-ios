@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Presentr
+import Hero
 
 class NavigationBarController: UINavigationController, UINavigationControllerDelegate
 {
@@ -18,28 +19,66 @@ class NavigationBarController: UINavigationController, UINavigationControllerDel
 		
 		self.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
 		self.navigationBar.shadowImage = UIImage()
-				
-		self.buildTitle()
-	}
-	
-	private func buildTitle()
-	{
-		var label = UILabel()
-		label.text = "TESTSETSETSE"
-		label.setContentHuggingPriority(.required, for: .vertical)
-		label.setContentCompressionResistancePriority(.required, for: .vertical)
-//
-//		label.addConstraint(NSLayoutConstraint(item: label, attribute: .leading, relatedBy: .equal, toItem: self.navigationBar, attribute: .leading, multiplier: 1.0, constant: 15.0))
-//		label.addConstraint(NSLayoutConstraint(item: label, attribute: .bottom, relatedBy: .equal, toItem: self.navigationBar, attribute: .bottom, multiplier: 1.0, constant: 12.0))
-//		label.addConstraint(NSLayoutConstraint(item: label, attribute: .trailing, relatedBy: .equal, toItem: self.navigationBar, attribute: .trailing, multiplier: 1.0, constant: 15.0))
-//
-		self.navigationBar.insertSubview(label, at: 0)
 		
-		for view in navigationBar.subviews
-		{
-			print(view)
-		}
-
-//		navigationBar.subview
+		self.isHeroEnabled = true
+		
+		self.interactivePopGestureRecognizer?.delegate = nil		
 	}
 }
+
+//class HeroHelper: NSObject {
+//
+//	func configureHero(in navigationController: UINavigationController) {
+//		guard let topViewController = navigationController.topViewController else { return }
+//
+//		topViewController.isHeroEnabled = true
+//		navigationController.isHeroEnabled = true
+//		navigationController.delegate = self
+//	}
+//}
+//
+////Navigation Popping
+//private extension HeroHelper {
+//	private func addEdgePanGesture(to view: UIView) {
+//		let pan = UIScreenEdgePanGestureRecognizer(target: self, action:#selector(popViewController(_:)))
+//		pan.edges = .left
+//		view.addGestureRecognizer(pan)
+//	}
+//
+//	@objc private func popViewController(_ gesture: UIScreenEdgePanGestureRecognizer) {
+//		guard let view = gesture.view else { return }
+//		let translation = gesture.translation(in: nil)
+//		let progress = translation.x / 2 / view.bounds.width
+//
+//		switch gesture.state {
+//		case .began:
+//			print("test")
+////			UIViewController.con.firhero_dismissViewController()
+//		case .changed:
+//			Hero.shared.update(progress)
+//		default:
+//			if progress + gesture.velocity(in: nil).x / view.bounds.width > 0.3 {
+//				Hero.shared.finish()
+//			} else {
+//				Hero.shared.cancel()
+//			}
+//		}
+//	}
+//}
+//
+//
+////Navigation Controller Delegate
+//extension HeroHelper: UINavigationControllerDelegate {
+//
+//	func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+//		return Hero.shared.navigationController(navigationController, interactionControllerFor: animationController)
+//	}
+//
+//	func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//		if operation == .push {
+//			addEdgePanGesture(to: toVC.view)
+//		}
+//		return Hero.shared.navigationController(navigationController, animationControllerFor: operation, from: fromVC, to: toVC)
+//	}
+//}
+

@@ -12,5 +12,6 @@ target 'Glancer' do
   pod 'UnboxedAlamofire'
   pod 'Presentr'
   pod 'FSCalendar'
+  pod 'Hero'
 
 end
