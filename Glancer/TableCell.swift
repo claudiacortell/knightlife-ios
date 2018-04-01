@@ -25,9 +25,11 @@ class TableCell
 		self.callback = callback
 	}
 	
-	func setData(_ key: String, data: Any?)
+	@discardableResult
+	func setData(_ key: String, data: Any?) -> TableCell
 	{
 		self.data[key] = data
+		return self
 	}
 	
 	func getData(_ key: String) -> Any?
@@ -35,13 +37,17 @@ class TableCell
 		return self.data[key]
 	}
 	
-	func setHeight(_ float: CGFloat)
+	@discardableResult
+	func setHeight(_ float: CGFloat) -> TableCell
 	{
 		self.height = float
+		return self
 	}
 	
-	func setHeight(_ int: Int)
+	@discardableResult
+	func setHeight(_ int: Int) -> TableCell
 	{
 		self.height = CGFloat(int)
+		return self
 	}
 }

@@ -27,6 +27,21 @@ class CourseManager: Manager
 		return self.meetings
 	}
 	
+	func removeCourse(_ meeting: Course)
+	{
+		while self.meetings.contains(meeting)
+		{
+			for i in 0..<self.meetings.count
+			{
+				if self.meetings[i] === meeting
+				{
+					self.meetings.remove(at: i)
+					break
+				}
+			}
+		}
+	}
+	
 	func addCourse(_ meeting: Course)
 	{
 		self.meetings.append(meeting)

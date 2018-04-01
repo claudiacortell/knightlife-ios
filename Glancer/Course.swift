@@ -22,3 +22,11 @@ class Course
 		self.courseSchedule = schedule
 	}
 }
+
+extension Course: Equatable
+{
+	static func ==(lhs: Course, rhs: Course) -> Bool
+	{
+		return lhs === rhs
+	}
+}

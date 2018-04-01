@@ -186,7 +186,6 @@ class TimeUtils
 	static func getDayOfWeek(_ enscribedDate: EnscribedDate = TimeUtils.todayEnscribed) -> DayID
 	{
 		let date = TimeUtils.dateFromEnscribedDate(enscribedDate)
-		print(TimeUtils.dayOfWeek(date))
 		return DayID.fromId(TimeUtils.dayOfWeek(date))
 	}
 	

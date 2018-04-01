@@ -624,7 +624,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QZr-TS-336" userLabel="Tomorrow">
-                                                <rect key="frame" x="152" y="0.3333333333333286" width="41" height="40"/>
+                                                <rect key="frame" x="152" y="0.3333333333333286" width="41" height="40.333333333333336"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="QZr-TS-336" secondAttribute="height" multiplier="1:1" id="En6-ZO-h2s"/>
@@ -1028,24 +1028,49 @@
             </objects>
             <point key="canvasLocation" x="-4959" y="-338"/>
         </scene>
-        <!--Course List View Controller-->
+        <!--Settings Menu Controller-->
         <scene sceneID="fnO-EH-hLu">
             <objects>
-                <tableViewController id="XW4-9c-fmQ" customClass="CourseListViewController" customModule="Glancer" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="XW4-9c-fmQ" customClass="SettingsMenuController" customModule="Glancer" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" id="9j4-hO-HHJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="590"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" rowHeight="80" id="pS6-B0-lI7" customClass="CourseListCell" customModule="Glancer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="1" width="375" height="80"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" rowHeight="45" id="Oin-wp-KAb" userLabel="header" customClass="SettingsHeaderCell" customModule="Glancer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="1" width="375" height="45"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Oin-wp-KAb" id="UR6-f8-Ob6">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="gK" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f71-hA-2GS">
+                                            <rect key="frame" x="15" y="0.0" width="345" height="45"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="f71-hA-2GS" firstAttribute="leading" secondItem="UR6-f8-Ob6" secondAttribute="leading" constant="15" id="4Kv-4F-QyC"/>
+                                        <constraint firstItem="f71-hA-2GS" firstAttribute="top" secondItem="UR6-f8-Ob6" secondAttribute="top" id="9bO-kV-S6I"/>
+                                        <constraint firstAttribute="bottom" secondItem="f71-hA-2GS" secondAttribute="bottom" id="Jem-wW-L1f"/>
+                                        <constraint firstAttribute="trailing" secondItem="f71-hA-2GS" secondAttribute="trailing" constant="15" id="yYD-Yg-DMt"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="titleLabel" destination="f71-hA-2GS" id="fdU-QL-pkv"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="course-list" rowHeight="60" id="pS6-B0-lI7" customClass="CourseListCell" customModule="Glancer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="46" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pS6-B0-lI7" id="w8y-TL-VxO">
-                                    <rect key="frame" x="0.0" y="0.0" width="341" height="80"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="60"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="51U-Wa-Yo4">
-                                            <rect key="frame" x="25" y="32" width="16" height="16"/>
+                                            <rect key="frame" x="25" y="22" width="16" height="16"/>
                                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="16" id="sXg-AH-tNF"/>
@@ -1058,7 +1083,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chemistry" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1zi-w4-v9Y">
-                                            <rect key="frame" x="61" y="28" width="270" height="24"/>
+                                            <rect key="frame" x="61" y="18" width="270" height="24"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -1077,6 +1102,35 @@
                                     <outlet property="courseLabel" destination="1zi-w4-v9Y" id="X6X-Lv-Kts"/>
                                     <segue destination="yFp-Ao-XQO" kind="show" id="tkW-GY-rbE"/>
                                 </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="course-add" rowHeight="50" id="kpV-gO-Zhd">
+                                <rect key="frame" x="0.0" y="106" width="375" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kpV-gO-Zhd" id="LAB-zX-SIb">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KXb-W6-Yyy">
+                                            <rect key="frame" x="15" y="5" width="345" height="40"/>
+                                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                            <state key="normal" title="New Course">
+                                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="12"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="KXb-W6-Yyy" secondAttribute="bottom" constant="5" id="Pcv-w2-Hqq"/>
+                                        <constraint firstItem="KXb-W6-Yyy" firstAttribute="leading" secondItem="LAB-zX-SIb" secondAttribute="leading" constant="15" id="dOM-uC-H1r"/>
+                                        <constraint firstItem="KXb-W6-Yyy" firstAttribute="top" secondItem="LAB-zX-SIb" secondAttribute="top" constant="5" id="tRL-pX-Sxp"/>
+                                        <constraint firstAttribute="trailing" secondItem="KXb-W6-Yyy" secondAttribute="trailing" constant="15" id="ujh-TZ-NKR"/>
+                                    </constraints>
+                                </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -1691,7 +1745,100 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="20V-t0-r0q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3634" y="-338"/>
+            <point key="canvasLocation" x="-3634" y="-345"/>
+        </scene>
+        <!--Text Field-->
+        <scene sceneID="bZC-gs-ehu">
+            <objects>
+                <viewController storyboardIdentifier="ConfirmController" title="Text Field" id="Sxg-5g-3JC" customClass="ConfirmController" customModule="Glancer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lzS-rR-OvM"/>
+                        <viewControllerLayoutGuide type="bottom" id="xZQ-vQ-P0V"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JQn-Cp-Eaf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R4O-EB-68V">
+                                <rect key="frame" x="15" y="364.33333333333331" width="345" height="84"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uLm-qD-g6V">
+                                        <rect key="frame" x="0.0" y="0.0" width="345" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="x7y-A5-hJT">
+                                        <rect key="frame" x="0.0" y="44" width="345" height="40"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yA2-aD-Cmg">
+                                                <rect key="frame" x="0.0" y="0.0" width="167.66666666666666" height="40"/>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                                <state key="normal" title="Cancel">
+                                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="cancelClicked" destination="Sxg-5g-3JC" eventType="touchUpInside" id="7No-yp-m9z"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8AZ-qs-GN2">
+                                                <rect key="frame" x="177.66666666666663" y="0.0" width="167.33333333333337" height="40"/>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                                <state key="normal" title="Accept">
+                                                    <color key="titleColor" red="1" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="acceptClicked" destination="Sxg-5g-3JC" eventType="touchUpInside" id="bQj-tE-48L"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="PPo-gM-pfD"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="x7y-A5-hJT" firstAttribute="leading" secondItem="R4O-EB-68V" secondAttribute="leading" id="27x-fC-1Ds"/>
+                                    <constraint firstAttribute="trailing" secondItem="uLm-qD-g6V" secondAttribute="trailing" id="BtH-1s-aYL"/>
+                                    <constraint firstAttribute="bottom" secondItem="x7y-A5-hJT" secondAttribute="bottom" id="DRy-IS-vDX"/>
+                                    <constraint firstItem="uLm-qD-g6V" firstAttribute="top" secondItem="R4O-EB-68V" secondAttribute="top" id="RgJ-Z1-Ty1"/>
+                                    <constraint firstAttribute="trailing" secondItem="x7y-A5-hJT" secondAttribute="trailing" id="lBZ-Fm-nGw"/>
+                                    <constraint firstItem="uLm-qD-g6V" firstAttribute="leading" secondItem="R4O-EB-68V" secondAttribute="leading" id="mg7-Cr-Oe7"/>
+                                    <constraint firstItem="uLm-qD-g6V" firstAttribute="bottom" secondItem="x7y-A5-hJT" secondAttribute="top" constant="-20" id="q5O-sl-2zF"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="R4O-EB-68V" firstAttribute="leading" secondItem="JQn-Cp-Eaf" secondAttribute="leading" constant="15" id="EUu-xx-MJ6"/>
+                            <constraint firstItem="R4O-EB-68V" firstAttribute="centerY" secondItem="JQn-Cp-Eaf" secondAttribute="centerY" id="amU-ZG-xva"/>
+                            <constraint firstAttribute="trailing" secondItem="R4O-EB-68V" secondAttribute="trailing" constant="15" id="knP-Rz-Myk"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Edit Title" id="a6L-3i-tE4">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="8q5-7A-d4p"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="fSz-wz-2W6"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="questionLabel" destination="uLm-qD-g6V" id="gZW-sm-CDU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vQY-Wv-vYj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3634" y="1116"/>
         </scene>
         <!--Select Block-->
         <scene sceneID="Yas-K0-qDF">

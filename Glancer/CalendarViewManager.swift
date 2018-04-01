@@ -77,9 +77,6 @@ class CalendarViewManager: UIViewController, FSCalendarDelegate, FSCalendarDataS
 	{
 		let tag = sender.tag
 
-		print("tag: \(tag)")
-		print("dayof week: \(TimeUtils.dayOfWeek())")
-		
 		if let newDay = TimeUtils.getDayInRelation(Date(), offset: -TimeUtils.dayOfWeek() + tag) // We get the desired day of week from the tag (2 for wednesday) then subtract the current offset to get the actual amount to offset
 		{
 			if let enscribed = EnscribedDate(newDay)

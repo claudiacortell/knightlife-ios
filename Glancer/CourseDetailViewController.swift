@@ -24,7 +24,7 @@ class CourseDetailViewController: UITableViewController
 	
 	@IBOutlet weak var segmentControl: UISegmentedControl!
 	
-	let textPresentr: Presentr =
+	let alertPresenter: Presentr =
 	{
 		let presentr = Presentr(presentationType: .alert)
 		presentr.roundCorners = true
@@ -32,7 +32,7 @@ class CourseDetailViewController: UITableViewController
 		return presentr
 	}()
 	
-	let listPresentr: Presentr =
+	let popupPresenter: Presentr =
 	{
 		let presentr = Presentr(presentationType: .popup)
 		presentr.roundCorners = true
@@ -58,6 +58,8 @@ class CourseDetailViewController: UITableViewController
 		self.blockLabel.text = self.course.courseSchedule.block.displayName
 		self.locationLabel.text = self.course.location ?? "-"
 		
+		self.segmentControl.selectedSegmentIndex = self.course.courseSchedule.frequency == .everyDay ? 0 : 1
+		
 		for subview in self.buttonContainer.subviews
 		{
 			if let button = subview as? UIButton
@@ -71,7 +73,7 @@ class CourseDetailViewController: UITableViewController
 	{
 		if let controller = self.storyboard?.instantiateViewController(withIdentifier: "EnterTextController") as? EnterTextController
 		{
-			controller.presentr = self.textPresentr
+			controller.presentr = self.alertPresenter
 			controller.allowNullValues = false
 			controller.nullMessage = "You must enter a name"
 			controller.prepopulate = self.course.name
@@ -80,7 +82,7 @@ class CourseDetailViewController: UITableViewController
 				self.course.name = text!
 				self.reload()
 			}
-			self.customPresentViewController(self.textPresentr, viewController: controller, animated: true, completion: nil)
+			self.customPresentViewController(self.alertPresenter, viewController: controller, animated: true, completion: nil)
 		}
 	}
 	
@@ -88,7 +90,7 @@ class CourseDetailViewController: UITableViewController
 	{
 		if let controller = self.storyboard?.instantiateViewController(withIdentifier: "EnterTextController") as? EnterTextController
 		{
-			controller.presentr = self.textPresentr
+			controller.presentr = self.alertPresenter
 			controller.allowNullValues = true
 			controller.prepopulate = self.course.location
 			controller.didChangeText =
@@ -96,7 +98,7 @@ class CourseDetailViewController: UITableViewController
 				self.course.location = text
 				self.reload()
 			}
-			self.customPresentViewController(self.textPresentr, viewController: controller, animated: true, completion: nil)
+			self.customPresentViewController(self.alertPresenter, viewController: controller, animated: true, completion: nil)
 		}
 	}
 	
@@ -106,14 +108,14 @@ class CourseDetailViewController: UITableViewController
 		{
 			let schedule = self.course.courseSchedule
 
-			controller.presentr = self.listPresentr
+			controller.presentr = self.popupPresenter
 			controller.selected = schedule.block
 			controller.updatedCallback = {
 				block in
 				schedule.block = block
 				self.reload()
 			}
-			self.customPresentViewController(self.listPresentr, viewController: controller, animated: true, completion: nil)
+			self.customPresentViewController(self.popupPresenter, viewController: controller, animated: true, completion: nil)
 		}
 	}
 	
@@ -151,7 +153,16 @@ class CourseDetailViewController: UITableViewController
 	
 	@IBAction func deleteCourse(_ sender: UIButton)
 	{
-		
+		if let abc = self.storyboard?.instantiateViewController(withIdentifier: "ConfirmController"), let controller = abc as? ConfirmController
+		{
+			controller.question = "Delete course \(self.course.name)?"
+			controller.presentr = self.alertPresenter
+			controller.acceptCallback = {
+				CourseManager.instance.removeCourse(self.course)
+				self.navigationController?.popViewController(animated: true)
+			}
+			self.customPresentViewController(self.alertPresenter, viewController: controller, animated: true, completion: {})
+		}
 	}
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
