@@ -42,7 +42,7 @@ class LunchMenuViewTableController: ITableController
 				section.title = type.rawValue.uppercased()
 				section.headerHeight = 14
 				
-				section.headerColor = UIColor("FFB53D")
+				section.headerColor = Scheme.ColorOrange
 				section.headerFont = UIFont.systemFont(ofSize: 12.0, weight: .medium)
 				section.headerTextColor = UIColor.white
 				section.headerIndent = 15.0

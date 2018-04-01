@@ -45,7 +45,7 @@ class MeetingPrefModule: Module<CourseManager>, PreferenceHandler
 			{
 				if let blockId = BlockID.fromRaw(raw: rawBlockId)
 				{
-					if [ BlockID.a, .b, .c, .d, .e, .f, .g, .x, .custom ].contains(blockId)
+					if [ BlockID.a, .b, .c, .d, .e, .f, .g ].contains(blockId)
 					{
 						let name: String = { if keyPairs["name"] != nil { if keyPairs["name"]! != nil { return keyPairs["name"]!! } }; return "Unknown" }()
 						let color: String? = { if keyPairs["color"] != nil { if keyPairs["color"]! != nil { return keyPairs["color"]!! } }; return nil }()

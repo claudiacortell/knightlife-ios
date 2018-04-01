@@ -11,8 +11,9 @@ import UIKit
 
 class CourseListViewController: ITableController
 {
-	override func viewDidLoad()
+	override func viewWillAppear(_ animated: Bool)
 	{
+		super.viewWillAppear(animated)
 		self.reloadTable()
 	}
 	

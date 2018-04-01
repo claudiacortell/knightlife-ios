@@ -56,29 +56,24 @@ class CourseManager: Manager
 	
 	private func doesMeetOnDate(_ meeting: Course, date: EnscribedDate, schedule: DateSchedule) -> Bool
 	{
-		if let meetingSchedule = meeting.courseSchedule
+		let meetingSchedule = meeting.courseSchedule
+		switch meetingSchedule.frequency
 		{
-			switch meetingSchedule.frequency
+		case .everyDay:
+			if schedule.hasBlock(meetingSchedule.block)
 			{
-			case .everyDay:
+				return true
+			}
+			break
+		case .specificDays:
+			if meetingSchedule.meetingDaysContains(date.dayOfWeek)
+			{
 				if schedule.hasBlock(meetingSchedule.block)
 				{
 					return true
 				}
-				break
-			case .specificDays:
-				if let meetingDays = meetingSchedule.meetingDays
-				{
-					if meetingDays.contains(date.dayOfWeek)
-					{
-						if schedule.hasBlock(meetingSchedule.block)
-						{
-							return true
-						}
-					}
-				}
-				break
 			}
+			break
 		}
 		return false
 	}

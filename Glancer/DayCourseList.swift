@@ -28,12 +28,9 @@ extension DayCourseList
 		
 		for activity in self.meetings
 		{
-			if activity.courseSchedule != nil
+			if activity.courseSchedule.block == block
 			{
-				if activity.courseSchedule!.block == block
-				{
-					list.append(activity)
-				}
+				list.append(activity)
 			}
 		}
 		return BlockCourseList(block, list)

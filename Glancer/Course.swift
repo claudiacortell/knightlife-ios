@@ -11,12 +11,12 @@ import Foundation
 class Course
 {
 	var name: String // Course name
-	var courseSchedule: CourseSchedule?
+	var courseSchedule: CourseSchedule
 	
 	var color: String?
 	var location: String?
 	
-	init(name: String, schedule: CourseSchedule? = nil)
+	init(name: String, schedule: CourseSchedule)
 	{
 		self.name = name
 		self.courseSchedule = schedule

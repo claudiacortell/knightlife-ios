@@ -63,9 +63,6 @@ class BlockViewController: UIViewController
 		
 		self.tableController.view.isHidden = true
 		self.navigationItem.title = nil
-
-		self.updateHeader()
-		self.reload(hard: false, delayResult: false, useRefreshControl: false, hapticFeedback: false)
 		
 		if !self.registeredScheduleHandler
 		{
@@ -87,6 +84,12 @@ class BlockViewController: UIViewController
 				}
 			})
 		}
+	}
+	
+	override func viewWillAppear(_ animated: Bool)
+	{
+		self.updateHeader()
+		self.reload(hard: false, delayResult: false, useRefreshControl: false, hapticFeedback: false)
 	}
 	
 	deinit

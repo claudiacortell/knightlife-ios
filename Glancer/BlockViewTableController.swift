@@ -25,7 +25,7 @@ class BlockViewTableController: ITableController
 		self.tableView.refreshControl = UIRefreshControl()
 		
 		self.tableView.refreshControl?.layer.zPosition = -1
-		self.tableView.refreshControl?.layer.backgroundColor = UIColor("FFB53D").cgColor
+		self.tableView.refreshControl?.layer.backgroundColor = Scheme.ColorOrange.cgColor
 		self.tableView.refreshControl?.tintColor = UIColor.white
 	}
 	
@@ -38,22 +38,8 @@ class BlockViewTableController: ITableController
 	{
 		if self.controller.daySchedule == nil
 		{
-//			let section = TableSection()
-//			let errorCell = TableCell("error")
-//
-//			errorCell.setHeight(max(20, self.view.frame.height - 70.0))
-//			section.addCell(errorCell)
-//
-//			self.addTableSection(section)
 		} else if self.controller.daySchedule!.isEmpty
 		{
-//			let section = TableSection()
-//			let classCell = TableCell("no_class")
-//
-//			classCell.setHeight(max(20, self.view.frame.height - 70.0))
-//			section.addCell(classCell)
-//
-//			self.addTableSection(section)
 		} else
 		{
 			if TimeUtils.isToday(self.controller.date)

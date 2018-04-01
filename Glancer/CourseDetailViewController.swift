@@ -18,6 +18,12 @@ class CourseDetailViewController: UITableViewController
 	@IBOutlet weak var blockLabel: UILabel!
 	@IBOutlet weak var locationLabel: UILabel!
 	
+	@IBOutlet weak var dateSelectCell: UITableViewCell!
+	@IBOutlet weak var buttonContainer: UIStackView!
+	private var defaultDateIndex: IndexPath?
+	
+	@IBOutlet weak var segmentControl: UISegmentedControl!
+	
 	let textPresentr: Presentr =
 	{
 		let presentr = Presentr(presentationType: .alert)
@@ -37,22 +43,28 @@ class CourseDetailViewController: UITableViewController
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
+		
+		self.tableView.rowHeight = UITableViewAutomaticDimension
+		self.tableView.estimatedRowHeight = 60.0
+		
 		self.reload()
 	}
 	
 	private func reload()
 	{
+		self.tableView.reloadData()
+		
 		self.titleLabel.text = self.course.name
-		
-		if let schedule = self.course.courseSchedule
-		{
-			self.blockLabel.text = schedule.block.displayName
-		} else
-		{
-			self.blockLabel.text = "-"
-		}
-		
+		self.blockLabel.text = self.course.courseSchedule.block.displayName
 		self.locationLabel.text = self.course.location ?? "-"
+		
+		for subview in self.buttonContainer.subviews
+		{
+			if let button = subview as? UIButton
+			{
+				self.setEnabled(button, self.course.courseSchedule.meetingDaysContains(DayID.weekdays()[button.tag]))
+			}
+		}
 	}
 	
 	@IBAction func editTitle(_ sender: UIButton)
@@ -60,12 +72,9 @@ class CourseDetailViewController: UITableViewController
 		if let controller = self.storyboard?.instantiateViewController(withIdentifier: "EnterTextController") as? EnterTextController
 		{
 			controller.presentr = self.textPresentr
-			
 			controller.allowNullValues = false
 			controller.nullMessage = "You must enter a name"
-			
 			controller.prepopulate = self.course.name
-			
 			controller.didChangeText =
 			{ text in
 				self.course.name = text!
@@ -80,11 +89,8 @@ class CourseDetailViewController: UITableViewController
 		if let controller = self.storyboard?.instantiateViewController(withIdentifier: "EnterTextController") as? EnterTextController
 		{
 			controller.presentr = self.textPresentr
-			
 			controller.allowNullValues = true
-			
 			controller.prepopulate = self.course.location
-			
 			controller.didChangeText =
 			{ text in
 				self.course.location = text
@@ -98,24 +104,63 @@ class CourseDetailViewController: UITableViewController
 	{
 		if let controller = self.storyboard?.instantiateViewController(withIdentifier: "SelectBlockController") as? SelectBlockController
 		{
-			if let schedule = self.course.courseSchedule
-			{
-				controller.presentr = self.listPresentr
-				controller.selected = schedule.block
-				
-				controller.updatedCallback = {
-					block in
-					schedule.block = block
-					self.reload()
-				}
-				
-				self.customPresentViewController(self.listPresentr, viewController: controller, animated: true, completion: nil)
+			let schedule = self.course.courseSchedule
+
+			controller.presentr = self.listPresentr
+			controller.selected = schedule.block
+			controller.updatedCallback = {
+				block in
+				schedule.block = block
+				self.reload()
 			}
+			self.customPresentViewController(self.listPresentr, viewController: controller, animated: true, completion: nil)
 		}
+	}
+	
+	@IBAction func meetingDaysChanged(_ sender: UISegmentedControl)
+	{
+		if sender.selectedSegmentIndex == 0 // Every day
+		{
+			self.course.courseSchedule.frequency = .everyDay
+		} else // Specific days
+		{
+			self.course.courseSchedule.frequency = .specificDays
+		}
+		self.reload()
+	}
+	
+	@IBAction func selectDay(_ sender: UIButton)
+	{
+		let day = DayID.weekdays()[sender.tag]
+		if self.course.courseSchedule.meetingDaysContains(day)
+		{
+			self.course.courseSchedule.removeMeetingDay(day)
+		} else
+		{
+			self.course.courseSchedule.addMeetingDay(day)
+		}
+		self.reload()
+	}
+	
+	private func setEnabled(_ button: UIButton, _ bool: Bool)
+	{
+		button.layer.borderColor = bool ? Scheme.ColorOrange.cgColor : UIColor.groupTableViewBackground.cgColor
+		button.layer.backgroundColor = bool ? Scheme.ColorOrange.cgColor : UIColor.groupTableViewBackground.cgColor
+		button.setTitleColor(bool ? UIColor.white : UIColor.lightGray, for: .normal)
 	}
 	
 	@IBAction func deleteCourse(_ sender: UIButton)
 	{
 		
+	}
+	
+	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+	{
+		if indexPath == (self.defaultDateIndex ?? self.tableView.indexPath(for: self.dateSelectCell))
+		{
+			if self.defaultDateIndex == nil { self.defaultDateIndex = self.tableView.indexPath(for: self.dateSelectCell) }
+			return self.course.courseSchedule.frequency == .everyDay ? 0.0 : UITableViewAutomaticDimension
+		}
+		return super.tableView(tableView, heightForRowAt: indexPath)
 	}
 }
