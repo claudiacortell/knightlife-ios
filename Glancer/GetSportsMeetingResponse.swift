@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import Charcore
 import Unbox
 
-struct GetSportsMeetingResponse: WebCallResult
+struct GetSportsMeetingResponse: WebCallPayload
 {
 	var type: Int
 	

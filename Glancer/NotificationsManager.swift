@@ -45,7 +45,7 @@ class NotificationsManager
 //			return
 //		}
 //
-//		for dayId in DayID.values()
+//		for dayId in Day.values()
 //		{
 //			Debug.out("------------------\(dayId.rawValue)")
 //			if let blocks = ScheduleManager.instance.blockList(id: dayId)

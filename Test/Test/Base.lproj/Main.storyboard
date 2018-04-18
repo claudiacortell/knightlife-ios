@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="j8h-bi-8ug">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="n5v-g9-a2U">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -70,6 +70,95 @@
             </objects>
             <point key="canvasLocation" x="-3561" y="102"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="SeR-UN-Cis">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="n5v-g9-a2U" sceneMemberID="viewController">
+                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xwY-d7-4qL">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="XGx-Ot-QCE" kind="relationship" relationship="rootViewController" id="HUa-nE-Skv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P1a-tg-qr8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4397" y="936"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="D4G-zR-jcd">
+            <objects>
+                <viewController id="XGx-Ot-QCE" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="R63-PX-XMe">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="692"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hwN-h4-1CN">
+                                <rect key="frame" x="0.0" y="20" width="414" height="672"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e46-Qu-mMf">
+                                <rect key="frame" x="0.0" y="20" width="414" height="100"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TUESDAY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BJK-I0-m4Z">
+                                        <rect key="frame" x="14.999999999999993" y="20" width="123.33333333333331" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" weight="black" pointSize="26"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="APRIL 10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DIH-we-IHB">
+                                        <rect key="frame" x="14.999999999999993" y="47" width="123.33333333333331" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" weight="black" pointSize="24"/>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FyB-g5-kFr">
+                                        <rect key="frame" x="374" y="38" width="25" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="25" id="Ui4-WZ-Dgn"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="icon_activities"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="FyB-g5-kFr" secondAttribute="trailing" constant="15" id="6fH-ih-ocC"/>
+                                    <constraint firstItem="BJK-I0-m4Z" firstAttribute="top" secondItem="e46-Qu-mMf" secondAttribute="top" constant="20" id="80w-2k-qH1"/>
+                                    <constraint firstItem="DIH-we-IHB" firstAttribute="top" secondItem="BJK-I0-m4Z" secondAttribute="bottom" constant="-5" id="YDM-r0-7Dx"/>
+                                    <constraint firstItem="FyB-g5-kFr" firstAttribute="centerY" secondItem="e46-Qu-mMf" secondAttribute="centerY" id="aId-pf-G7O"/>
+                                    <constraint firstAttribute="height" constant="100" id="bEc-hH-gKJ"/>
+                                    <constraint firstItem="DIH-we-IHB" firstAttribute="leading" secondItem="BJK-I0-m4Z" secondAttribute="leading" id="cf1-Zi-UoY"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="BJK-I0-m4Z" secondAttribute="trailing" constant="15" id="fVK-7x-EQX"/>
+                                    <constraint firstItem="DIH-we-IHB" firstAttribute="trailing" secondItem="BJK-I0-m4Z" secondAttribute="trailing" id="hVB-N7-MBT"/>
+                                    <constraint firstItem="BJK-I0-m4Z" firstAttribute="leading" secondItem="e46-Qu-mMf" secondAttribute="leading" constant="15" id="wqv-xF-hNc"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="hwN-h4-1CN" firstAttribute="leading" secondItem="K9M-bQ-E7G" secondAttribute="leading" id="2R6-BJ-mfo"/>
+                            <constraint firstItem="K9M-bQ-E7G" firstAttribute="top" secondItem="hwN-h4-1CN" secondAttribute="top" id="8er-xy-gIo"/>
+                            <constraint firstItem="K9M-bQ-E7G" firstAttribute="top" secondItem="e46-Qu-mMf" secondAttribute="top" id="Olk-fB-VkI"/>
+                            <constraint firstItem="K9M-bQ-E7G" firstAttribute="bottom" secondItem="hwN-h4-1CN" secondAttribute="bottom" id="dwa-tr-PBY"/>
+                            <constraint firstItem="e46-Qu-mMf" firstAttribute="leading" secondItem="K9M-bQ-E7G" secondAttribute="leading" id="eCj-sF-HJF"/>
+                            <constraint firstItem="K9M-bQ-E7G" firstAttribute="trailing" secondItem="hwN-h4-1CN" secondAttribute="trailing" id="jmX-jZ-aQg"/>
+                            <constraint firstItem="K9M-bQ-E7G" firstAttribute="trailing" secondItem="e46-Qu-mMf" secondAttribute="trailing" id="qc6-Ql-hkX"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="K9M-bQ-E7G"/>
+                    </view>
+                    <toolbarItems>
+                        <barButtonItem title="Item" image="icon_food" style="plain" id="M97-N9-dpc"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="dI7-DZ-dGP"/>
+                        <barButtonItem systemItem="fastForward" id="m7G-Br-ySq"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="Qk1-5c-zed"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yks-3t-GTy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3597.1014492753625" y="935.86956521739137"/>
+        </scene>
         <!--View Controller2-->
         <scene sceneID="IP5-Ay-SBP">
             <objects>
@@ -105,4 +194,8 @@
             <point key="canvasLocation" x="-2687" y="102"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon_activities" width="25" height="25"/>
+        <image name="icon_food" width="26" height="26"/>
+    </resources>
 </document>

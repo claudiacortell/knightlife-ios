@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Charcore
 
 class SportsManager: Manager
 {
@@ -23,7 +24,7 @@ class SportsManager: Manager
 	{
 		self.meetings = [:]
 		
-		super.init(name: "Sports Manager")
+		super.init("Sports Manager")
 
 		self.registerModule(SportsPrefModule(self, name: "addedTeams")) // Register preference module
     }

@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import Charcore
 import Unbox
 
-struct GetScheduleResponse: WebCallResult
+struct GetScheduleResponse: WebCallPayload
 {
 	var days: [GetScheduleResponseDay]
 	
@@ -19,7 +20,7 @@ struct GetScheduleResponse: WebCallResult
 	}
 }
 
-struct GetScheduleResponseDay: WebCallResult
+struct GetScheduleResponseDay: WebCallPayload
 {
 	var dayId: String
 	var blocks: [GetScheduleResponseBlock]
@@ -31,7 +32,7 @@ struct GetScheduleResponseDay: WebCallResult
 	}
 }
 
-struct GetScheduleResponseBlock: WebCallResult
+struct GetScheduleResponseBlock: WebCallPayload
 {
 	var blockId: String
 	var startTime: String

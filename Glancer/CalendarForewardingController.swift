@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Charcore
 
 class CalendarForewardingController: UIViewController
 {
@@ -15,9 +16,9 @@ class CalendarForewardingController: UIViewController
 	{
 		super.viewDidLoad()
 		
-		if !Globals.DidPushToToday
+		if Globals.getData("push today") == nil
 		{
-			Globals.DidPushToToday = true
+			Globals.setData("push today", data: true)
 			if let controller = self.storyboard?.instantiateViewController(withIdentifier: "DayViewController") as? BlockViewController
 			{
 				controller.date = TimeUtils.todayEnscribed

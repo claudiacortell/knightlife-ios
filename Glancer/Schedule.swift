@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Charcore
 
 class ScheduleMan: Manager
 {
@@ -31,16 +32,16 @@ class ScheduleMan: Manager
 //
 //    private(set) var onVacation = false
 //
-//    private var weekSchedule: [DayID: Weekday] = [:]
+//    private var weekSchedule: [Day: Weekday] = [:]
 //    var scheduleLoaded = false
 //    var attemptedLoad = false
 //
-//    func dayLoaded(id: DayID) -> Bool
+//    func dayLoaded(id: Day) -> Bool
 //    {
 //        return self.weekSchedule[id] != nil
 //    }
 //
-//    func blockList(id: DayID) -> [Block]?
+//    func blockList(id: Day) -> [Block]?
 //    {
 //        if let day = self.weekSchedule[id]
 //        {
@@ -88,7 +89,7 @@ class ScheduleMan: Manager
 //            {
 //                self.onVacation = !(data[CallKeys.PUSH] as! Bool)
 //
-//                var newSchedule: [DayID: Weekday] = [:]
+//                var newSchedule: [Day: Weekday] = [:]
 //
 ////                var endTimes: [String]! = data[CallKeys.SCHOOL_END] != nil ? data[CallKeys.SCHOOL_END] as! [String] : []
 //                var secondLunchStarts: [String]! = data[CallKeys.SECONDLUNCH_START] != nil ? data[CallKeys.SECONDLUNCH_START] as! [String] : []
@@ -96,11 +97,11 @@ class ScheduleMan: Manager
 ////                Debug.out("About to go through days")
 //
 //                var i = -1
-//                for dayId in DayID.weekdays() // Only retrieve schedules for weekdays
+//                for dayId in Day.weekdays() // Only retrieve schedules for weekdays
 //                {
 //                    i+=1
 //
-////                    Debug.out("In DayID: \(dayId)")
+////                    Debug.out("In Day: \(dayId)")
 //
 ////                    let endTime: String? = endTimes.count > i ? endTimes[i] : nil // Required
 //                    let secondLunch: String? = secondLunchStarts.count > i ? secondLunchStarts[i] : nil // Not required.
@@ -271,19 +272,19 @@ class ScheduleMan: Manager
 //        }
 //    }
 //
-//    func currentDayOfWeek() -> DayID
+//    func currentDayOfWeek() -> Day
 //    {
 //        let today = TimeUtils.getDayOfWeekFromString(TimeUtils.currentDateAsString()) // 0 to 6 for Monday - Sunday
-//        return DayID.fromId(today)!
+//        return Day.fromId(today)!
 //    }
 //
-//    func getNextSchoolday() -> DayID?
+//    func getNextSchoolday() -> Day?
 //    {
-//        for i in 0..<DayID.values().count
+//        for i in 0..<Day.values().count
 //        {
-//            let day = (i+self.currentDayOfWeek().id + 1) % DayID.values().count
+//            let day = (i+self.currentDayOfWeek().id + 1) % Day.values().count
 //
-//            let nextDay = DayID.fromId(day)
+//            let nextDay = Day.fromId(day)
 //            if let schedule = self.blockList(id: nextDay!)
 //            {
 //                if schedule.count > 0
@@ -370,7 +371,7 @@ class ScheduleMan: Manager
 
 //struct Weekday
 //{
-//	var dayId: DayID! // M, T, W, Th, F
+//	var dayId: Day! // M, T, W, Th, F
 //	var blocks: [Block]! // Class ID to Block MAJOR ISSUE THIS WON'T PRESERVE ORDER.
 //	var secondLunchStart: TimeContainer? // I hate having this here but I can't really think of a better way to do it rn
 //}

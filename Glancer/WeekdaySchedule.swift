@@ -7,13 +7,14 @@
 //
 
 import Foundation
+import Charcore
 
 struct WeekdaySchedule
 {
-	let dayId: DayID
+	let dayId: Day
 	let blocks: [ScheduleBlock]
 	
-	init(_ day: DayID, blocks: [ScheduleBlock])
+	init(_ day: Day, blocks: [ScheduleBlock])
 	{
 		self.dayId = day
 		self.blocks = blocks

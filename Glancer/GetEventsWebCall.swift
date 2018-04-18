@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Charcore
 
 class GetEventsWebCall: WebCall<GetEventsResponse, EventList>
 {
@@ -46,7 +47,7 @@ class GetEventsWebCall: WebCall<GetEventsResponse, EventList>
 		return EventList(self.date, events: events)
 	}
 	
-	override func handleCall(error: FetchError?, data: EventList?)
+	override func handleCall(error: ResourceFetchError?, data: EventList?)
 	{
 		
 	}

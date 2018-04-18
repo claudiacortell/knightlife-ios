@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Charcore
 
 class GetEventsResourceHandler: ResourceHandler<(EnscribedDate, EventList?)>
 {
@@ -19,7 +20,7 @@ class GetEventsResourceHandler: ResourceHandler<(EnscribedDate, EventList?)>
 	}
 	
 	@discardableResult
-	func getMenu(_ date: EnscribedDate, hard: Bool = false, callback: @escaping (FetchError?, EventList?) -> Void = {_,_ in}) -> EventList?
+	func getMenu(_ date: EnscribedDate, hard: Bool = false, callback: @escaping (ResourceFetchError?, EventList?) -> Void = {_,_ in}) -> EventList?
 	{
 		if hard || self.menus[date] == nil // Requires reload
 		{

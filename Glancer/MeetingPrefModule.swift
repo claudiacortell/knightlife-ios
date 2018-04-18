@@ -7,33 +7,28 @@
 //
 
 import Foundation
+import Charcore
 
-class MeetingPrefModule: Module<CourseManager>, PreferenceHandler
+class MeetingPrefModule: Module<CourseManager>, PrefsHandler
 {
-	var storageKey: String
-	{
+	var storageKey: String {
 		return self.nameComplete
 	}
 	
-	func getStorageValues() -> Any?
-	{
+	func saveData() -> Any? {
 		return nil
 //		return self.manager.meetings
 	}
 	
-	func readStorageValues(data: Any)
-	{
-		if let list = data as? [Course]
-		{
-			for meeting in list
-			{
+	func loadData(data: Any) {
+		if let list = data as? [Course] {
+			for meeting in list {
 				self.manager.addCourse(meeting)
 			}
 		}
 	}
 	
-	func loadDefaultValues()
-	{
+	func loadDefaults() {
 		self.loadLegacyData()
 	}
 	

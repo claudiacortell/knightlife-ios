@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Charcore
 
 class GetMenuWebCall: WebCall<GetMenuResponse, LunchMenu>
 {
@@ -38,7 +39,7 @@ class GetMenuWebCall: WebCall<GetMenuResponse, LunchMenu>
 		return LunchMenu(self.date, title: data.caption, items: items)
 	}
 	
-	override func handleCall(error: FetchError?, data: LunchMenu?)
+	override func handleCall(error: ResourceFetchError?, data: LunchMenu?)
 	{
 		
 	}

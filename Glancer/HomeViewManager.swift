@@ -12,8 +12,8 @@ import UIKit
 class HomeViewManager: UIViewController
 //	, ScheduleUpdateHandler, PrefsUpdateHandler
 {
-//	private var dayId: DayID = .monday
-//	private var tableOverrideId: DayID? = nil
+//	private var dayId: Day = .monday
+//	private var tableOverrideId: Day? = nil
 //
 //	private var previousState: ScheduleManager.ScheduleState?
 //
@@ -66,7 +66,7 @@ class HomeViewManager: UIViewController
 //			return
 //		}
 //
-//		self.dayId = DayID.fromId(TimeUtils.getDayOfWeek(date: Date()))!
+//		self.dayId = Day.fromId(TimeUtils.getDayOfWeek(date: Date()))!
 //		self.updateViews()
 //	}
 //
@@ -172,7 +172,7 @@ class HomeViewManager: UIViewController
 //
 //class HomeBlockTableController: UITableView, UITableViewDataSource, UITableViewDelegate
 //{
-//	var dayId: DayID?
+//	var dayId: Day?
 //
 //	var labels: [Label] = []
 //
@@ -192,7 +192,7 @@ class HomeViewManager: UIViewController
 //	}
 //
 //	@discardableResult
-//	func dayIndexChanged(new: DayID) -> Bool // Whether or not the schedule was updated.
+//	func dayIndexChanged(new: Day) -> Bool // Whether or not the schedule was updated.
 //	{
 //		if self.dayId != new
 //		{

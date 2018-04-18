@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Charcore
 
 class EventManager: Manager
 {
@@ -16,7 +17,7 @@ class EventManager: Manager
 	
 	init()
 	{
-		super.init(name: "Event Manager")
+		super.init("Event Manager")
 		
 		self.eventHandler = GetEventsResourceHandler(self)
 	}

@@ -7,43 +7,34 @@
 //
 
 import Foundation
+import Charcore
 
-class ScheduleVariationPrefsModule: MapModule<ScheduleManager, DayID, Int>, PreferenceHandler
-{
-	var storageKey: String
-	{
+class ScheduleVariationPrefsModule: MapModule<ScheduleManager, Day, Int>, PrefsHandler {
+	
+	var storageKey: String {
 		return self.nameComplete
 	}
-
-	func getStorageValues() -> Any?
-	{
+	
+	func saveData() -> Any? {
 		return self.items
 	}
 	
-	func readStorageValues(data: Any)
-	{
-		if let items = data as? [DayID: Int]
-		{
-			self.items = items
+	func loadData(data: Any) {
+		if let items = data as? [Day: Int] {
+			for (day, val) in items {
+				self.addItem(day, val)
+			}
 		}
 	}
 	
-	func loadDefaultValues()
-	{
-		loadLegacyData()
-	}
-	
-	private func loadLegacyData()
-	{
-		if let switches = Storage.USER_SWITCHES.getValue() as? [String: Bool]
-		{
-			for (rawDayId, val) in switches
-			{
-				if let dayId = DayID.fromRaw(raw: rawDayId)
-				{
+	func loadDefaults() {
+		if let switches = Storage.USER_SWITCHES.getValue() as? [String: Bool] {
+			for (rawDayId, val) in switches {
+				if let dayId = Day.fromRaw(raw: rawDayId) {
 					self.addItem(dayId, val ? 1 : 0)
 				}
 			}
 		}
 	}
+
 }

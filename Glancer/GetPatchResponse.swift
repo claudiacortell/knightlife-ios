@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import Charcore
 import Unbox
 
-struct GetPatchResponse: WebCallResult
+struct GetPatchResponse: WebCallPayload
 {
 	var subtitle: String?
 	var blocks: [GetPatchResponseBlock]
@@ -25,7 +26,7 @@ struct GetPatchResponse: WebCallResult
 	}
 }
 
-struct GetPatchResponseBlock: WebCallResult
+struct GetPatchResponseBlock: WebCallPayload
 {
 	var blockId: String
 	var startTime: String

@@ -8,8 +8,9 @@
 
 import Foundation
 import Unbox
+import Charcore
 
-class GetMenuResponse: WebCallResult
+class GetMenuResponse: WebCallPayload
 {
 	let caption: String?
 	let items: [GetMenuResponseItem]
@@ -21,7 +22,7 @@ class GetMenuResponse: WebCallResult
 	}
 }
 
-class GetMenuResponseItem: WebCallResult
+class GetMenuResponseItem: WebCallPayload
 {
 	let type: String
 	let name: String

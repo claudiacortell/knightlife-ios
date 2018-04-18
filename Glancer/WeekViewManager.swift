@@ -54,7 +54,7 @@ class WeekViewController: UIViewController
 //
 //	func updateLabel()
 //	{
-//		let day = DayID.fromId(segControl.selectedSegmentIndex)!
+//		let day = Day.fromId(segControl.selectedSegmentIndex)!
 //
 //		self.dayLabel.text = day.displayName
 //
@@ -72,7 +72,7 @@ class WeekViewController: UIViewController
 //{
 //	var labels: [Label] = []
 //
-//	private var dayId: DayID = .monday
+//	private var dayId: Day = .monday
 //
 //	func setWeekData()
 //	{
@@ -89,7 +89,7 @@ class WeekViewController: UIViewController
 //
 //	func dayIndexChanged(new: Int)
 //	{
-//		self.dayId = DayID.fromId(new)!
+//		self.dayId = Day.fromId(new)!
 //		self.setWeekData()
 //	}
 //

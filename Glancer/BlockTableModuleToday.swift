@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Charcore
 
 class BlockTableModuleToday: TableModule
 {
@@ -17,20 +18,20 @@ class BlockTableModuleToday: TableModule
 		self.controller = controller
 	}
 	
-	func generateSections(container: TableContainer)
+	func loadCells(form: TableForm)
 	{
-		let section = container.newSection()
-				
-		section.addSpacerCell(10)
+		let section = form.addSection()
+		
+		section.addSpacerCell().setHeight(10)
 		
 		section.addCell("today_now").setHeight(35)
 		section.addCell("today_next").setHeight(25)
 
-		section.addSpacerCell(10)
+		section.addSpacerCell().setHeight(10)
 
 		section.addCell("today_now_label").setHeight(20)
 		section.addCell("today_progress").setHeight(3)
 	
-		section.addSpacerCell(15)
+		section.addSpacerCell().setHeight(15)
 	}
 }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Charcore
 
 class GetPatchWebCall: WebCall<GetPatchResponse, DateSchedule>
 {
@@ -58,17 +59,17 @@ class GetPatchWebCall: WebCall<GetPatchResponse, DateSchedule>
 			}
 		}
 		
-		var standinDayId: DayID?
+		var standinDayId: Day?
 		if response.replaceDayId != nil
 		{
-			standinDayId = DayID.fromId(response.replaceDayId!)
+			standinDayId = Day.fromId(response.replaceDayId!)
 		}
 		
 		let daySchedule = DateSchedule(date, blocks: blocks, subtitle: response.subtitle, changed: response.changed ?? false, standinDayId: standinDayId)
 		return daySchedule
 	}
 	
-	override func handleCall(error: FetchError?, data: DateSchedule?)
+	override func handleCall(error: ResourceFetchError?, data: DateSchedule?)
 	{
 		
 	}

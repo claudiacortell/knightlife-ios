@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Charcore
 
 class GetMeetingWebCall: WebCall<GetSportsMeetingResponse, SportMeeting>
 {
@@ -31,7 +32,7 @@ class GetMeetingWebCall: WebCall<GetSportsMeetingResponse, SportMeeting>
 		return nil
 	}
 	
-	override func handleCall(error: FetchError?, data: SportMeeting?)
+	override func handleCall(error: ResourceFetchError?, data: SportMeeting?)
 	{
 		
 	}

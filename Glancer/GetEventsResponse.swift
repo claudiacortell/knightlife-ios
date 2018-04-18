@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import Charcore
 import Unbox
 
-class GetEventsResponse: WebCallResult
+class GetEventsResponse: WebCallPayload
 {
 	let events: [GetEventsResponseEvent]
 	
@@ -19,7 +20,7 @@ class GetEventsResponse: WebCallResult
 	}
 }
 
-class GetEventsResponseEvent: WebCallResult
+class GetEventsResponseEvent: WebCallPayload
 {
 	let blockId: String
 	let mandatory: Bool

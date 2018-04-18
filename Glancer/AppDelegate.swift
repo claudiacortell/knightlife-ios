@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import Charcore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate
@@ -16,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 	
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
 	{
+		Globals.UrlBase = "https://kl-api.herokuapp.com/"
+		
         UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
 		
         if application.responds(to: #selector(UIApplication.registerUserNotificationSettings(_:)))

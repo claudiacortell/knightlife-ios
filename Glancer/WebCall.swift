@@ -12,32 +12,28 @@ import UnboxedAlamofire
 import Unbox
 
 class WebCall<DataContainer: WebCallResult, Result>
-{
+{	
 	let url: String
 	let call: String
 	private(set) var parameters: [String: Any]
 	
 	var callback: (FetchError?, Result?) -> Void = {_,_ in}
 	
-	init(url: String = "https://kl-api.herokuapp.com/", call: String)
-	{
-		self.url = url
+	init(url: String? = nil, call: String) {
+		self.url = url ?? WebCall.baseUrl
 		self.call = call
 		self.parameters = [:]
 	}
 	
-	func parameter(_ key: String, val: String) // Return self for easy chaining
-	{
+	func parameter(_ key: String, val: String) {
 		self.parameters[key] = val
 	}
 	
-	func passwordParam(val: String) // Fill a call password
-	{
+	func passwordParam(val: String) {
 		self.parameter("pw", val: val)
 	}
 	
-	func deviceParam() // Specify the device token
-	{
+	func deviceParam() {
 		return self.parameter("dv", val: Globals.DeviceID)
 	}
 	

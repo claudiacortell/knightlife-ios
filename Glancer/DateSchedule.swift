@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Charcore
 
 struct DateSchedule
 {
@@ -14,9 +15,9 @@ struct DateSchedule
 	let blocks: [ScheduleBlock]
 	let subtitle: String?
 	let changed: Bool
-	let standinDayId: DayID? // Used if this is say, a Tuesday with a Monday schedule. The actual date is a tuesday, but the standin DayID is DayID.monday
+	let standinDayId: Day? // Used if this is say, a Tuesday with a Monday schedule. The actual date is a tuesday, but the standin Day is Day.monday
 
-	init(_ date: EnscribedDate, blocks: [ScheduleBlock], subtitle: String? = nil, changed: Bool = false, standinDayId: DayID? = nil)
+	init(_ date: EnscribedDate, blocks: [ScheduleBlock], subtitle: String? = nil, changed: Bool = false, standinDayId: Day? = nil)
 	{
 		self.date = date
 		self.blocks = blocks

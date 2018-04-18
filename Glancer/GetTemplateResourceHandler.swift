@@ -7,20 +7,25 @@
 //
 
 import Foundation
+import Charcore
 
-class GetTemplateResourceHandler: ResourceHandler<[DayID : WeekdaySchedule]>
+class GetTemplateResourceHandler: ResourceHandler<[Day : WeekdaySchedule]>
 {
 	let manager: ScheduleManager
-	private var template: [DayID : WeekdaySchedule] = [:]
+	private var template: [Day : WeekdaySchedule] = [:]
 	
 	init(_ manager: ScheduleManager)
 	{
 		self.manager = manager
+		super.init()
 	}
 	
-	func reloadTemplate(callback: @escaping (FetchError?, [DayID: WeekdaySchedule]) -> Void = {_,_ in})
+	func reloadTemplate(callback: @escaping (ResourceFetchError?, [Day: WeekdaySchedule]) -> Void = {_,_ in})
 	{
 		let call = GetScheduleWebCall(self.manager)
+		
+		
+		
 		call.callback =
 		{ error, result in
 			self.template = result ?? [:]
@@ -41,7 +46,7 @@ class GetTemplateResourceHandler: ResourceHandler<[DayID : WeekdaySchedule]>
 	}
 	
 	@discardableResult
-	func getTemplate(_ day: DayID, hard: Bool = false, callback: @escaping (FetchError?, WeekdaySchedule?) -> Void = {_,_ in}) -> WeekdaySchedule?
+	func getTemplate(_ day: Day, hard: Bool = false, callback: @escaping (ResourceFetchError?, WeekdaySchedule?) -> Void = {_,_ in}) -> WeekdaySchedule?
 	{
 		if hard || self.template.isEmpty // Requires reload
 		{

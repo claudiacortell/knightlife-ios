@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Charcore
 
 class GetPatchResourceHandler: ResourceHandler<(EnscribedDate, DateSchedule?)>
 {
@@ -16,9 +17,10 @@ class GetPatchResourceHandler: ResourceHandler<(EnscribedDate, DateSchedule?)>
 	init(_ manager: ScheduleManager)
 	{
 		self.manager = manager
+		super.init()
 	}
 	
-	func reloadLocalPatches(callback: @escaping (FetchError?, (EnscribedDate, DateSchedule?)) -> Void = {_,_ in})
+	func reloadLocalPatches(callback: @escaping (ResourceFetchError?, (EnscribedDate, DateSchedule?)) -> Void = {_,_ in})
 	{
 		for date in self.schedules.keys
 		{
@@ -30,7 +32,7 @@ class GetPatchResourceHandler: ResourceHandler<(EnscribedDate, DateSchedule?)>
 	}
 	
 	@discardableResult
-	func getSchedule(_ date: EnscribedDate, hard: Bool = false, callback: @escaping (FetchError?, DateSchedule?) -> Void = {_,_ in}) -> DateSchedule?
+	func getSchedule(_ date: EnscribedDate, hard: Bool = false, callback: @escaping (ResourceFetchError?, DateSchedule?) -> Void = {_,_ in}) -> DateSchedule?
 	{
 		if hard || self.schedules[date] == nil // Requires reload
 		{

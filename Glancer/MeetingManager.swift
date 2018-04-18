@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Charcore
 
 class CourseManager: Manager
 {
@@ -17,7 +18,7 @@ class CourseManager: Manager
 	init()
 	{
 		self.meetings = []
-		super.init(name: "Meetings Manager")
+		super.init("Meetings Manager")
 		
 		self.registerModule(MeetingPrefModule(self, name: "courses"))
 	}

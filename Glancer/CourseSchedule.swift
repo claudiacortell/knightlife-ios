@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Charcore
 
 enum CourseFrequency
 {
@@ -20,7 +21,7 @@ class CourseSchedule
     var block: BlockID //Null = all day
 	var frequency: CourseFrequency
 	
-    private var meetingDays: [DayID]? // Only used for specific day meetings
+    private var meetingDays: [Day]? // Only used for specific day meetings
 
 	init(block: BlockID, frequency: CourseFrequency)
 	{
@@ -28,7 +29,7 @@ class CourseSchedule
 		self.frequency = frequency
 	}
 	
-	func meetingDaysContains(_ day: DayID) -> Bool
+	func meetingDaysContains(_ day: Day) -> Bool
 	{
 		if let days = self.meetingDays
 		{
@@ -37,7 +38,7 @@ class CourseSchedule
 		return false
 	}
 	
-	func addMeetingDay(_ day: DayID)
+	func addMeetingDay(_ day: Day)
 	{
 		if !self.meetingDaysContains(day)
 		{
@@ -46,7 +47,7 @@ class CourseSchedule
 		}
 	}
 	
-	func removeMeetingDay(_ day: DayID)
+	func removeMeetingDay(_ day: Day)
 	{
 		while self.meetingDaysContains(day)
 		{

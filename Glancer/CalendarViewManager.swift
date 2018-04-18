@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import FSCalendar
+import Charcore
 
 class CalendarViewManager: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance
 {

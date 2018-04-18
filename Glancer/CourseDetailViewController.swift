@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Presentr
+import Charcore
 
 class CourseDetailViewController: UITableViewController
 {
@@ -64,7 +65,7 @@ class CourseDetailViewController: UITableViewController
 		{
 			if let button = subview as? UIButton
 			{
-				self.setEnabled(button, self.course.courseSchedule.meetingDaysContains(DayID.weekdays()[button.tag]))
+				self.setEnabled(button, self.course.courseSchedule.meetingDaysContains(Day.weekdays()[button.tag]))
 			}
 		}
 	}
@@ -133,7 +134,7 @@ class CourseDetailViewController: UITableViewController
 	
 	@IBAction func selectDay(_ sender: UIButton)
 	{
-		let day = DayID.weekdays()[sender.tag]
+		let day = Day.weekdays()[sender.tag]
 		if self.course.courseSchedule.meetingDaysContains(day)
 		{
 			self.course.courseSchedule.removeMeetingDay(day)

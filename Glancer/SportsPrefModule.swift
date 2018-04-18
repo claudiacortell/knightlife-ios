@@ -7,41 +7,35 @@
 //
 
 import Foundation
+import Charcore
 
-class SportsPrefModule: CollectionModule<SportsManager, SportTeam>, PreferenceHandler
-{
-	var storageKey: String { return self.nameComplete }
+class SportsPrefModule: CollectionModule<SportsManager, SportTeam>, PrefsHandler {
 	
-	func getStorageValues() -> Any?
-	{
+	var storageKey: String { return self.nameComplete }
+
+	func saveData() -> Any? {
 		var list: [Int] = []
-		for team in self.items
-		{
-			if !list.contains(team.id)
-			{
+		for team in self.items {
+			if !list.contains(team.id) {
 				list.append(team.id)
 			}
 		}
 		return list
 	}
 	
-	func readStorageValues(data: Any)
-	{
-		if let list = data as? [Int]
-		{
-			for id in list
-			{
-				if let team = manager.getTeamById(id: id)
-				{
-                    self.addItem(team, ignoreDuplicates: true)
-                    out("Loaded user added: \(team)")
+	func loadData(data: Any) {
+		if let list = data as? [Int] {
+			for id in list {
+				if let team = manager.getTeamById(id: id) {
+					self.addItem(team, ignoreDuplicates: true)
+					out("Loaded user added: \(team)")
 				}
 			}
 		}
 	}
 	
-	func loadDefaultValues()
-	{
+	func loadDefaults() {
 		
 	}
+	
 }

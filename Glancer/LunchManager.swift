@@ -7,17 +7,18 @@
 //
 
 import Foundation
+import Charcore
 
-class LunchManager: Manager
-{
+class LunchManager: Manager {
+	
 	static let instance = LunchManager()
 	
 	var menuHandler: GetMenuResourceHandler!
 	
-	init()
-	{
-		super.init(name: "Lunch Manager")
+	init() {
+		super.init("Lunch Manager")
 		
 		self.menuHandler = GetMenuResourceHandler(self)
 	}
+	
 }

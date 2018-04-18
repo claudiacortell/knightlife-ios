@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Charcore
 
 class GetMenuResourceHandler: ResourceHandler<(EnscribedDate, LunchMenu?)>
 {
@@ -16,10 +17,11 @@ class GetMenuResourceHandler: ResourceHandler<(EnscribedDate, LunchMenu?)>
 	init(_ manager: LunchManager)
 	{
 		self.manager = manager
+		super.init()
 	}
 	
 	@discardableResult
-	func getMenu(_ date: EnscribedDate, hard: Bool = false, callback: @escaping (FetchError?, LunchMenu?) -> Void = {_,_ in}) -> LunchMenu?
+	func getMenu(_ date: EnscribedDate, hard: Bool = false, callback: @escaping (ResourceFetchError?, LunchMenu?) -> Void = {_,_ in}) -> LunchMenu?
 	{
 		if hard || self.menus[date] == nil // Requires reload
 		{

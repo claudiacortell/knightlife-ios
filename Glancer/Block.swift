@@ -19,7 +19,7 @@ struct Block
 //    }
 //
 //    var blockId: BlockID! // E.G. A, B, C, D, E
-//    var weekday: DayID!
+//    var weekday: Day!
 //
 //    var overrideDisplayName: String? // Only used for overriding the default meta's name
 //

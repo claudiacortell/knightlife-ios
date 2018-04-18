@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Charcore
 
 class ScheduleManager: Manager
 {	
@@ -18,7 +19,7 @@ class ScheduleManager: Manager
 	
 	init()
 	{
-		super.init(name: "Schedule Manager")
+		super.init("Schedule Manager")
 
 		self.patchHandler = GetPatchResourceHandler(self)
 		self.templateHandler = GetTemplateResourceHandler(self)
@@ -27,7 +28,7 @@ class ScheduleManager: Manager
 		self.registerModule(self.variationModule)
 	}
 	
-	func getVariation(_ day: DayID) -> Int
+	func getVariation(_ day: Day) -> Int
 	{
 		return self.variationModule.getItem(day) ?? 0
 	}

@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import Charcore
 
-class GetScheduleWebCall: WebCall<GetScheduleResponse, [DayID: WeekdaySchedule]>
+class GetScheduleWebCall: WebCall<GetScheduleResponse, [Day: WeekdaySchedule]>
 {
 	let manager: ScheduleManager
 	
@@ -18,12 +19,12 @@ class GetScheduleWebCall: WebCall<GetScheduleResponse, [DayID: WeekdaySchedule]>
 		super.init(call: "schedule/template")
 	}
 	
-	override func handleTokenConversion(_ response: GetScheduleResponse) -> [DayID : WeekdaySchedule]?
+	override func handleTokenConversion(_ response: GetScheduleResponse) -> [Day : WeekdaySchedule]?
 	{
-		var dayList: [DayID: WeekdaySchedule] = [:]
+		var dayList: [Day: WeekdaySchedule] = [:]
 		for day in response.days
 		{
-			if let dayId = DayID.fromRaw(raw: day.dayId)
+			if let dayId = Day.fromRaw(raw: day.dayId)
 			{
 				var blocks: [ScheduleBlock] = []
 				for block in day.blocks
@@ -64,10 +65,5 @@ class GetScheduleWebCall: WebCall<GetScheduleResponse, [DayID: WeekdaySchedule]>
 			}
 		}
 		return dayList
-	}
-	
-	override func handleCall(error: FetchError?, data: [DayID : WeekdaySchedule]?)
-	{
-		
 	}
 }

@@ -1,5 +1,5 @@
 //
-//  Device.swift
+//  Scheme.swift
 //  Glancer
 //
 //  Created by Dylan Hanson on 11/1/17.
@@ -8,12 +8,6 @@
 
 import Foundation
 import UIKit
-
-class Globals
-{
-	static var DeviceID: String = ""
-	static var DidPushToToday = false
-}
 
 class Scheme
 {
