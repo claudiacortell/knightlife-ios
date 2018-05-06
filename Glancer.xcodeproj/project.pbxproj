@@ -79,6 +79,9 @@
 		C0CB9C201FE4698000437C5D /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CB9C1F1FE4698000437C5D /* EventList.swift */; };
 		C0D2110D2069463200D5D2B2 /* MeetingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D2110C2069463200D5D2B2 /* MeetingManager.swift */; };
 		C0D7DA11206BA52000F7B8AA /* CalendarForewardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7DA10206BA52000F7B8AA /* CalendarForewardingController.swift */; };
+		C0E57B232093D0970028E3EC /* Redesign.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0E57B222093D0970028E3EC /* Redesign.storyboard */; };
+		C0E57B252093D2630028E3EC /* Legacy.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0E57B242093D2630028E3EC /* Legacy.storyboard */; };
+		C0E57B2B2093D33A0028E3EC /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E57B2A2093D33A0028E3EC /* TodayViewController.swift */; };
 		C0EE97BA206F2EE000685788 /* CourseDetailControlWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EE97B9206F2EE000685788 /* CourseDetailControlWrapper.swift */; };
 		C0EE97BE206F383C00685788 /* SelectBlockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EE97BD206F383C00685788 /* SelectBlockController.swift */; };
 		C0EF692D206ED9E50000C528 /* EnterTextController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EF692C206ED9E50000C528 /* EnterTextController.swift */; };
@@ -183,6 +186,9 @@
 		C0CB9C1F1FE4698000437C5D /* EventList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventList.swift; sourceTree = "<group>"; };
 		C0D2110C2069463200D5D2B2 /* MeetingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingManager.swift; sourceTree = "<group>"; };
 		C0D7DA10206BA52000F7B8AA /* CalendarForewardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarForewardingController.swift; sourceTree = "<group>"; };
+		C0E57B222093D0970028E3EC /* Redesign.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Redesign.storyboard; sourceTree = "<group>"; };
+		C0E57B242093D2630028E3EC /* Legacy.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Legacy.storyboard; sourceTree = "<group>"; };
+		C0E57B2A2093D33A0028E3EC /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		C0EE97B9206F2EE000685788 /* CourseDetailControlWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailControlWrapper.swift; sourceTree = "<group>"; };
 		C0EE97BD206F383C00685788 /* SelectBlockController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBlockController.swift; sourceTree = "<group>"; };
 		C0EF692C206ED9E50000C528 /* EnterTextController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterTextController.swift; sourceTree = "<group>"; };
@@ -297,6 +303,8 @@
 			isa = PBXGroup;
 			children = (
 				5BD072471C74AEB40074B56D /* Main.storyboard */,
+				C0E57B242093D2630028E3EC /* Legacy.storyboard */,
+				C0E57B222093D0970028E3EC /* Redesign.storyboard */,
 				C019C1601F7D3CED00FC4EED /* Launch.storyboard */,
 				C079C22F1FACA97D009067DE /* Controllers */,
 			);
@@ -466,10 +474,9 @@
 		C079C22F1FACA97D009067DE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C0BC64B92062DD5B00322BA0 /* Navigation */,
-				C0F0F79B2067112F006D84C9 /* Calendar */,
-				C02B424D2070640400B8F54F /* Day */,
-				C02B424C207063CD00B8F54F /* Settings */,
+				C0E57B272093D2F00028E3EC /* Scenes */,
+				C0E57B282093D2FF0028E3EC /* Legacy */,
+				C0E57B292093D30D0028E3EC /* Utility */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -606,6 +613,40 @@
 			name = Elements;
 			sourceTree = "<group>";
 		};
+		C0E57B262093D2E80028E3EC /* Today */ = {
+			isa = PBXGroup;
+			children = (
+				C0E57B2A2093D33A0028E3EC /* TodayViewController.swift */,
+			);
+			name = Today;
+			sourceTree = "<group>";
+		};
+		C0E57B272093D2F00028E3EC /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				C0E57B262093D2E80028E3EC /* Today */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		C0E57B282093D2FF0028E3EC /* Legacy */ = {
+			isa = PBXGroup;
+			children = (
+				C0F0F79B2067112F006D84C9 /* Calendar */,
+				C02B424D2070640400B8F54F /* Day */,
+				C02B424C207063CD00B8F54F /* Settings */,
+			);
+			name = Legacy;
+			sourceTree = "<group>";
+		};
+		C0E57B292093D30D0028E3EC /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				C0BC64B92062DD5B00322BA0 /* Navigation */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
 		C0EF692B206ED9C80000C528 /* Input */ = {
 			isa = PBXGroup;
 			children = (
@@ -726,6 +767,8 @@
 				5BD072481C74AEB40074B56D /* Main.storyboard in Resources */,
 				5BD285E41B03CF29007A0472 /* Images.xcassets in Resources */,
 				C019C1611F7D3CED00FC4EED /* Launch.storyboard in Resources */,
+				C0E57B232093D0970028E3EC /* Redesign.storyboard in Resources */,
+				C0E57B252093D2630028E3EC /* Legacy.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -858,6 +901,7 @@
 				C036366D1FACF864008FC9A9 /* GetScheduleWebCall.swift in Sources */,
 				C0F1797320620237009415D2 /* LunchMenuViewController.swift in Sources */,
 				C02A2B0D1FAD47E400D3A9CD /* GetPatchWebCall.swift in Sources */,
+				C0E57B2B2093D33A0028E3EC /* TodayViewController.swift in Sources */,
 				C081C2EF1FE4512C008073F3 /* GetMenuResponse.swift in Sources */,
 				C0A1FB162001B36C004146CE /* ScheduleVariationPrefsModule.swift in Sources */,
 				C0F0F79D2067113B006D84C9 /* CalendarViewManager.swift in Sources */,
