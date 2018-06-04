@@ -10,18 +10,11 @@ import Foundation
 import Charcore
 
 class TodayViewController: TableHandler {
-	
+//	UNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSED
 	@IBOutlet weak var tableReference: UITableView!
-
+	@IBOutlet weak var toolbarReference: ToolbarView!
+	
 	@IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
-	
-	@IBOutlet weak var headerView: UIView!
-	@IBOutlet weak var dateLabel: UILabel!
-	
-	@IBOutlet weak var subtitleLabel: UILabel!
-	@IBOutlet weak var subtitleConstraint: NSLayoutConstraint!
-	
-	private var subtitleConstraintDefault: CGFloat!
 	
 	private var loading = false // Lock
 	private var schedule: DateSchedule?
@@ -30,23 +23,18 @@ class TodayViewController: TableHandler {
 		super.viewDidLoad()
 		
 		self.link(self.tableReference)
-		self.tableView.refreshControl = UIRefreshControl()		
+		self.tableView.refreshControl = UIRefreshControl()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		
 		self.reloadTable()
-				
 		self.reloadSchedule(force: false, visual: true, haptic: false)
 	}
 	
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
-		let scroll = scrollView.contentOffset.y
-		
-//		self.subtitleConstraint.constant = self.subtitleConstraintDefault + -1 * scroll // -1 because the content insets mean that the content offset is (-1)*(header height)
-		
-//		let percent = max(0.0, min(1.0, self.subtitleConstraint.constant / self.subtitleConstraintDefault))
-//		self.subtitleLabel.layer.opacity = Float(percent)
+		self.toolbarReference.didScroll(scrollView.contentOffset.y)
 	}
 	
 	override func loadCells() {
@@ -55,44 +43,13 @@ class TodayViewController: TableHandler {
 		}
 
 		if self.schedule == nil {
-//			ERROR DISPLAY
+//			ERROR
 			return
 		}
 		
 		let schedule = self.schedule!
-		
-		if let subtitle = schedule.subtitle {
-			self.subtitleLabel.text = subtitle
-			
-			self.subtitleConstraintDefault = self.subtitleLabel.frame.height
-		} else {
-			
-		}
-		
-		self.tableView.contentInset = UIEdgeInsets(top: self.headerView.frame.height, left: 0, bottom: 0, right: 0)
-		self.tableView.contentOffset = CGPoint(x: 0.0, y: -self.tableView.contentInset.top)
-		
-		let currentSection = self.tableForm.addSection()
 
-		currentSection.addCell("current").setHeight(100)
-
-		let cellSection = self.tableForm.addSection()
-		cellSection.setHeaderFont(UIFont.systemFont(ofSize: 22, weight: .bold)).setTitle("Upcoming").setHeaderHeight(24).setHeaderColor(UIColor.white).setHeaderTextColor(UIColor.darkGray).setHeaderIndent(15.0)
-
-		
-		for _ in 0..<10 {
-			cellSection.addCell("block").setHeight(60.0)
-		}
-		
-//		for block in self.schedule!.blocks {
-//			cellSection.addCell("block").setCallback() {
-//				template, cell in
-//
-////				CONFIGURE BLOCK
-//			}
-//		}
-		
-//		Set SUBTITLE
+		self.toolbarReference.subtitle = schedule.subtitle
 	}
 	
 	private func reloadSchedule(force: Bool, visual: Bool, haptic: Bool) {

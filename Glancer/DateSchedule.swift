@@ -31,7 +31,7 @@ extension DateSchedule: Equatable
 {
 	var isEmpty: Bool
 	{
-		return self.blocks.isEmpty
+		return self.getBlocks().isEmpty
 	}
 	
 	func getFirstBlock() -> ScheduleBlock?
@@ -88,12 +88,12 @@ extension DateSchedule: Equatable
 	
 	func hasBlock(_ block: ScheduleBlock) -> Bool
 	{
-		return self.blocks.contains(block)
+		return self.getBlocks().contains(block)
 	}
 	
 	func getBlock(_ id: BlockID) -> ScheduleBlock?
 	{
-		for block in self.blocks
+		for block in self.getBlocks()
 		{
 			if block.blockId == id
 			{
@@ -111,7 +111,7 @@ extension DateSchedule: Equatable
 		}
 		
 		var previous: ScheduleBlock? = nil
-		for cur in self.blocks
+		for cur in self.getBlocks()
 		{
 			if cur == block
 			{
@@ -120,6 +120,66 @@ extension DateSchedule: Equatable
 			previous = cur
 		}
 		return nil
+	}
+	
+	func getBlockAfter(_ block: ScheduleBlock) -> ScheduleBlock?
+	{
+		if !self.hasBlock(block)
+		{
+			return nil
+		}
+		
+		var getNext = false
+		for nextBlock in self.getBlocks() {
+			if getNext {
+				return nextBlock
+			}
+			
+			if nextBlock == block {
+				getNext = true
+			}
+		}
+		return nil
+	}
+	
+	func getBlocksAfter(_ block: ScheduleBlock) -> [ScheduleBlock] {
+		
+		if !self.hasBlock(block) {
+			return []
+		}
+		
+		var found = false
+		var list: [ScheduleBlock] = []
+		for block in self.getBlocks() {
+			if found {
+				list.append(block)
+				continue
+			}
+			
+			if block == block {
+				found = true
+			}
+		}
+		
+		return list
+	}
+	
+	func getBlocksBefore(_ block: ScheduleBlock) -> [ScheduleBlock] {
+		
+		if !self.hasBlock(block) {
+			return []
+		}
+		
+		var list: [ScheduleBlock] = []
+		for block in self.getBlocks() {
+			if block == block {
+				return list
+			}
+			
+			list.append(block)
+		}
+		
+		return list
 	}
 	
 	static func ==(lhs: DateSchedule, rhs: DateSchedule) -> Bool

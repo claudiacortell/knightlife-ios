@@ -1,6 +1,6 @@
 PODS:
   - Alamofire (4.7.2)
-  - Charcore (0.0.13):
+  - Charcore (0.0.23):
     - Alamofire
     - Unbox
     - UnboxedAlamofire
@@ -18,9 +18,20 @@ DEPENDENCIES:
   - Hero
   - Presentr
 
+SPEC REPOS:
+  https://github.com/cdh-dev/Pod-Repo.git:
+    - Charcore
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - FSCalendar
+    - Hero
+    - Presentr
+    - Unbox
+    - UnboxedAlamofire
+
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
-  Charcore: a27f561aa4c38004350eb7f4ed7fe9d9a56836f7
+  Charcore: b4c4050aa5ff849d4511b8227ab54b364200330e
   FSCalendar: a04b09f16f811bc92e82f3cf852a15225233b9d5
   Hero: 33dadf2cd1c98af71e213dcbc2902e6e03622a4e
   Presentr: 797ae6ec8904eaba4ec58a4c2065bd66e31569ea
@@ -29,4 +40,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 34702480d7632f8c685694c3f9ae1c2e7719f890
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.2
