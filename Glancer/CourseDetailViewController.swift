@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import Presentr
-import Charcore
+import AddictiveLib
 
 class CourseDetailViewController: UITableViewController
 {

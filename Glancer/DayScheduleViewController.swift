@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Charcore
+import AddictiveLib
 
 class DayScheduleViewController: TableHandler {
 	
@@ -20,6 +20,7 @@ class DayScheduleViewController: TableHandler {
 	
 	private var loading = false // Lock
 	private var schedule: DateSchedule?
+	private var lunchMenu: LunchMenu?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -51,7 +52,7 @@ class DayScheduleViewController: TableHandler {
 		self.parentController.toolbarView.didScroll(scrollView.contentOffset.y + self.parentController.toolbarView.originalHeight)
 	}
 	
-	override func loadCells() {
+	override func refresh() {
 		self.noSchoolLabel.isHidden = true
 		self.failedLabel.isHidden = true
 		
@@ -77,71 +78,75 @@ class DayScheduleViewController: TableHandler {
 			var block: ScheduleBlock?
 			var header = ""
 			var subtitle = ""
+			var showFooter = false
 			
 			let status = TodayManager.instance.getCurrentScheduleInfo(self.schedule!)
 			if status.scheduleState == .BEFORE_SCHOOL {
 				block = status.nextBlock!
 				header = "Before School"
-				subtitle = TimeUtils.timeToString(hours: status.minutesRemaining.hours, min: status.minutesRemaining.minutes)
+				subtitle = TimeUtils.timeToString(years: 0, days: 0, hours: status.minutesRemaining.hours, min: status.minutesRemaining.minutes, sec: 0)
 			} else if status.scheduleState == .BETWEEN_CLASS {
 				block = status.nextBlock!
 				header = "Next Class"
-				subtitle = "in \(TimeUtils.timeToString(hours: status.minutesRemaining.hours, min: status.minutesRemaining.minutes))"
+				subtitle = "in \(TimeUtils.timeToString(years: 0, days: 0, hours: status.minutesRemaining.hours, min: status.minutesRemaining.minutes, sec: 0))"
+				showFooter = true
 			} else if status.scheduleState == .IN_CLASS {
 				block = status.curBlock!
 				header = "In Class"
-				subtitle = "for \(TimeUtils.timeToString(hours: status.minutesRemaining.hours, min: status.minutesRemaining.minutes))"
+				subtitle = "for \(TimeUtils.timeToString(years: 0, days: 0, hours: status.minutesRemaining.hours, min: status.minutesRemaining.minutes, sec: 0))"
+				showFooter = true
 			}
 			
 			if block != nil {
 				blockSection.addCell(HeaderCell(header: header, subtitle: subtitle, more: nil))
-				blockSection.addDividerCell(left: 15, right: 15, backgroundColor: UIColor.white, insetColor: UIColor("F5F5F8"))
+				blockSection.addDividerCell(left: 15, right: 15, backgroundColor: UIColor.white, insetColor: UIColor(hex: "F5F5F8")!)
 				
-				blockSection.addCell("block").setHeight(75).setCallback() {
-					template, cell in
-					
-					if let blockCell = cell as? BlockTableViewCell {
-						let analyst = BlockAnalyst(block!, schedule: schedule)
-						
-						blockCell.timeRange = block!.time
-						blockCell.title = analyst.getDisplayName()
-						blockCell.letter = analyst.getDisplayLetter()
-						blockCell.color = analyst.getColor()
-					}
+				self.addBlockCell(block!, schedule: schedule, section: blockSection)
+				
+				if showFooter {
+					blockSection.addDividerCell(left: 15, right: 15, backgroundColor: UIColor.white, insetColor: UIColor(hex: "F5F5F8")!)
+					blockSection.addCell("footer").setHeight(30).setSelectionStyle(.none)
 				}
 				
-				blockSection.addDividerCell(left: 15, right: 15, backgroundColor: UIColor.white, insetColor: UIColor("F5F5F8"))
-				blockSection.addCell("footer").setHeight(30).setSelection(.none)
-				blockSection.addSpacerCell().setBackgroundColor(UIColor("F5F5F8")).setHeight(7)
+				blockSection.addSpacerCell().setBackgroundColor(UIColor(hex: "F5F5F8")!).setHeight(7)
 			}
 			
 			blockSection.addCell(HeaderCell(header: "Upcoming", subtitle: nil, more: nil))
-			blockSection.addDividerCell(left: 15, right: 15, backgroundColor: .white, insetColor: UIColor("F5F5F8"))
+			blockSection.addDividerCell(left: 15, right: 15, backgroundColor: .white, insetColor: UIColor(hex: "F5F5F8")!)
 			
 			if block != nil {
 				blocks.append(contentsOf: schedule.getBlocksAfter(block!))
 			}
 		} else {
 			blockSection.addCell(HeaderCell(header: "Blocks", subtitle: nil, more: nil))
-			blockSection.addDividerCell(left: 15, right: 15, backgroundColor: .white, insetColor: UIColor("F5F5F8"))
+			blockSection.addDividerCell(left: 15, right: 15, backgroundColor: .white, insetColor: UIColor(hex: "F5F5F8")!)
 			blocks.append(contentsOf: schedule.getBlocks())
 		}
 		
 		for block in blocks {
-			blockSection.addCell("block").setHeight(75).setCallback() {
-				template, cell in
+			self.addBlockCell(block, schedule: schedule, section: blockSection)
+			blockSection.addDividerCell(left: 75, right: 15, backgroundColor: .white, insetColor: UIColor(hex: "F5F5F8")!)
+		}
+	}
+	
+	private func addBlockCell(_ block: ScheduleBlock, schedule: DateSchedule, section: TableSection) {
+		section.addCell("block").setHeight(75).setCallback() {
+			template, cell in
+			
+			if let blockCell = cell as? BlockTableViewCell {
+				let analyst = BlockAnalyst(block, schedule: schedule)
 				
-				if let blockCell = cell as? BlockTableViewCell {
-					let analyst = BlockAnalyst(block, schedule: schedule)
-					
-					blockCell.timeRange = block.time
-					blockCell.title = analyst.getDisplayName()
-					blockCell.letter = analyst.getDisplayLetter()
-					blockCell.color = analyst.getColor()
+				blockCell.timeRange = block.time
+				blockCell.title = analyst.getDisplayName()
+				blockCell.letter = analyst.getDisplayLetter()
+				blockCell.color = analyst.getColor()
+				
+				if block.blockId == .lunch {
+					if self.lunchMenu != nil {
+						blockCell.moreLabel = "Menu"
+					}
 				}
 			}
-			
-			blockSection.addDividerCell(left: 75, right: 15, backgroundColor: .white, insetColor: UIColor("F5F5F8"))
 		}
 	}
 	
@@ -164,23 +169,39 @@ class DayScheduleViewController: TableHandler {
 			self.loadingIndicator.startAnimating()
 		}
 		
-		ScheduleManager.instance.patchHandler.getSchedule(self.parentController.date, hard: force) {
-			error, schedule in
+		ProcessChain().link() {
+			chain in
+			
+			ScheduleManager.instance.patchHandler.getSchedule(self.parentController.date, hard: force) {
+				error, schedule in
+				
+				self.schedule = schedule
+				chain.next()
+			}
+		}.link() {
+			chain in
+			
+			LunchManager.instance.menuHandler.getMenu(self.parentController.date, hard: force) {
+				error, menu in
+				
+				self.lunchMenu = menu
+				chain.next()
+			}
+		}.success() {
+			chain in
 			
 			if haptic {
 				HapticUtils.IMPACT.impactOccurred()
 			}
 			
 			self.loading = false
-			self.schedule = schedule
-			
-			self.tableView.refreshControl!.endRefreshing()
+			//				self.tableView.refreshControl!.endRefreshing()
 			
 			if visual {
 				self.loadingIndicator.stopAnimating()
 				self.reloadTable()
 			}
-		}
+		}.start()
 	}
 	
 }

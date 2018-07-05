@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import Charcore
+import AddictiveLib
 
 class BlockViewTableController: TableHandler
 {

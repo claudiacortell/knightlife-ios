@@ -8,7 +8,7 @@
 
 import UIKit
 import Alamofire
-import Charcore
+import AddictiveLib
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate
@@ -17,7 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 	
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
 	{
-		Globals.UrlBase = "https://kl-api.herokuapp.com/"
+		Globals.BundleID = "MAD.BBN.KnightLife"
+		Globals.StorageID = "MAD.BBN.KnightLife.Storage"
+		
+		Globals.storeUrlBase(url: "https://kl-api.herokuapp.com/")
 		
         UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
 		
@@ -54,8 +57,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         print("Device Token:", tokenString)
 		Globals.DeviceID = tokenString
 		
-		let call = RegistrationWebCall()
-		call.callback = { error, result in
+		RegistrationWebCall().callback() {
+			error, result in
+			
 			if error != nil
 			{
 				print("\(error!.cause): \(error!.message!)")
@@ -63,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 			{
 				print("No errors in registering device!")
 			}
-		}
+		}.execute()
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error)

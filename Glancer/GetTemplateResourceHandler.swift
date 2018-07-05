@@ -7,57 +7,49 @@
 //
 
 import Foundation
-import Charcore
+import AddictiveLib
 
-class GetTemplateResourceHandler: ResourceHandler<[Day : WeekdaySchedule]>
-{
-	let manager: ScheduleManager
-	private var template: [Day : WeekdaySchedule] = [:]
+class GetTemplateResourceHandler: ResourceWatcher<[Day : WeekdaySchedule]> {
 	
-	init(_ manager: ScheduleManager)
-	{
+	let manager: ScheduleManager
+	private var template: [Day: WeekdaySchedule]
+	
+	init(_ manager: ScheduleManager) {
 		self.manager = manager
+		self.template = [:]
+		
 		super.init()
 	}
 	
-	func reloadTemplate(callback: @escaping (ResourceFetchError?, [Day: WeekdaySchedule]) -> Void = {_,_ in})
-	{
-		let call = GetScheduleWebCall(self.manager)
-		
-		
-		
-		call.callback =
-		{ error, result in
+	func reloadTemplate(callback: @escaping (ResourceWatcherError?, [Day: WeekdaySchedule]) -> Void = {_,_ in}) {
+		GetScheduleWebCall(self.manager).callback() {
+			error, result in
+			
 			self.template = result ?? [:]
 			callback(error, self.template)
 			
-			if let success = result
-			{
-				self.success(success)
-			} else if error == nil
-			{
-				self.success(result)
-			} else
-			{
-				self.failure(error!)
+			if let success = result {
+				self.handle(nil, success)
+			} else if error == nil {
+				self.handle(nil, result)
+			} else {
+				self.handle(error!, nil)
 			}
-		}
-		call.execute()
+		}.execute()
 	}
 	
 	@discardableResult
-	func getTemplate(_ day: Day, hard: Bool = false, callback: @escaping (ResourceFetchError?, WeekdaySchedule?) -> Void = {_,_ in}) -> WeekdaySchedule?
-	{
-		if hard || self.template.isEmpty // Requires reload
-		{
-			self.reloadTemplate(callback:
-			{ error, result in
+	func getTemplate(_ day: Day, hard: Bool = false, callback: @escaping (ResourceWatcherError?, WeekdaySchedule?) -> Void = {_,_ in}) -> WeekdaySchedule? {
+		if hard || self.template.isEmpty {
+			self.reloadTemplate() {
+				error, result in
+				
 				callback(error, self.template[day])
-			})
+			}
 			return nil
-		} else
-		{
+		} else {
 			return template[day]
 		}
 	}
+	
 }

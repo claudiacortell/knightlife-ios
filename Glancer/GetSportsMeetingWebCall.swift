@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import Charcore
+import AddictiveLib
 
-class GetMeetingWebCall: WebCall<GetSportsMeetingResponse, SportMeeting>
+class GetMeetingWebCall: UnboxWebCall<GetSportsMeetingResponse, SportMeeting>
 {
 	let manager: SportsManager
 	let sport: SportTeam
@@ -27,12 +27,12 @@ class GetMeetingWebCall: WebCall<GetSportsMeetingResponse, SportMeeting>
 		self.parameter("dt", val: date.string)
 	}
 	
-	override func handleTokenConversion(_ data: GetSportsMeetingResponse) -> SportMeeting?
+	override func convertToken(_ data: GetSportsMeetingResponse) -> SportMeeting?
 	{
 		return nil
 	}
 	
-	override func handleCall(error: ResourceFetchError?, data: SportMeeting?)
+	override func handleCall(error: ResourceWatcherError?, data: SportMeeting?)
 	{
 		
 	}

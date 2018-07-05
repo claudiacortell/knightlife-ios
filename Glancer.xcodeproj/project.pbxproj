@@ -55,6 +55,11 @@
 		C06E887920866D57000D7F1B /* SettingsViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06E887820866D57000D7F1B /* SettingsViewManager.swift */; };
 		C0707FBE1F69720800C7D2ED /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0707FBD1F69720800C7D2ED /* Schedule.swift */; };
 		C0707FC01F69753100C7D2ED /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0707FBF1F69753100C7D2ED /* Storage.swift */; };
+		C0711AFA20DAC2DB009243CC /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0711AF920DAC2DB009243CC /* Day.swift */; };
+		C0711AFD20DAC31C009243CC /* EnscribedDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0711AFC20DAC31C009243CC /* EnscribedDate.swift */; };
+		C0711AFF20DAC33C009243CC /* EnscribedTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0711AFE20DAC33C009243CC /* EnscribedTime.swift */; };
+		C0711B0120DAC36C009243CC /* TimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0711B0020DAC36C009243CC /* TimeUtils.swift */; };
+		C0711B0320DAC3BE009243CC /* TimeDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0711B0220DAC3BE009243CC /* TimeDuration.swift */; };
 		C079C2311FACA9CB009067DE /* BlockViewTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C079C2301FACA9CB009067DE /* BlockViewTableController.swift */; };
 		C081C2E81FE450F0008073F3 /* LunchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081C2E71FE450F0008073F3 /* LunchManager.swift */; };
 		C081C2EA1FE45108008073F3 /* LunchMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081C2E91FE45108008073F3 /* LunchMenu.swift */; };
@@ -175,6 +180,11 @@
 		C06E887820866D57000D7F1B /* SettingsViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewManager.swift; sourceTree = "<group>"; };
 		C0707FBD1F69720800C7D2ED /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		C0707FBF1F69753100C7D2ED /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		C0711AF920DAC2DB009243CC /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
+		C0711AFC20DAC31C009243CC /* EnscribedDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnscribedDate.swift; sourceTree = "<group>"; };
+		C0711AFE20DAC33C009243CC /* EnscribedTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnscribedTime.swift; sourceTree = "<group>"; };
+		C0711B0020DAC36C009243CC /* TimeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUtils.swift; sourceTree = "<group>"; };
+		C0711B0220DAC3BE009243CC /* TimeDuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDuration.swift; sourceTree = "<group>"; };
 		C079C2301FACA9CB009067DE /* BlockViewTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockViewTableController.swift; sourceTree = "<group>"; };
 		C081C2E71FE450F0008073F3 /* LunchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchManager.swift; sourceTree = "<group>"; };
 		C081C2E91FE45108008073F3 /* LunchMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchMenu.swift; sourceTree = "<group>"; };
@@ -264,6 +274,7 @@
 				5BD285E31B03CF29007A0472 /* Images.xcassets */,
 				5BD285DC1B03CF29007A0472 /* AppDelegate.swift */,
 				C0C176581FAA5F450059E956 /* Scheme.swift */,
+				C0711AF820DAC2CD009243CC /* Core */,
 				C0CB9C0D1FE4610C00437C5D /* Components */,
 				C01867211FC75EFE002027B8 /* Storyboard */,
 				C0707FBF1F69753100C7D2ED /* Storage.swift */,
@@ -523,6 +534,26 @@
 				C05F5E8A1FAE56CC00724F42 /* TeamDeclarations.swift */,
 			);
 			name = Team;
+			sourceTree = "<group>";
+		};
+		C0711AF820DAC2CD009243CC /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				C0711AFB20DAC2F9009243CC /* Time */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		C0711AFB20DAC2F9009243CC /* Time */ = {
+			isa = PBXGroup;
+			children = (
+				C0711AF920DAC2DB009243CC /* Day.swift */,
+				C0711AFC20DAC31C009243CC /* EnscribedDate.swift */,
+				C0711AFE20DAC33C009243CC /* EnscribedTime.swift */,
+				C0711B0020DAC36C009243CC /* TimeUtils.swift */,
+				C0711B0220DAC3BE009243CC /* TimeDuration.swift */,
+			);
+			name = Time;
 			sourceTree = "<group>";
 		};
 		C079C22F1FACA97D009067DE /* Controllers */ = {
@@ -878,8 +909,8 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Glancer/Pods-Glancer-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AddictiveLib/AddictiveLib.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Charcore/Charcore.framework",
 				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
@@ -888,8 +919,8 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AddictiveLib.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charcore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
@@ -932,6 +963,7 @@
 				C0A0327F2037A5B20046575C /* RegistrationWebCall.swift in Sources */,
 				C0C1765B1FAA60C10059E956 /* SportType.swift in Sources */,
 				C0B163A41FCDF1CB0011BCF4 /* BlockTableBlockViewCell.swift in Sources */,
+				C0711B0120DAC36C009243CC /* TimeUtils.swift in Sources */,
 				C05F5E871FAE54AA00724F42 /* SportTier.swift in Sources */,
 				C00232A71FA37EFC0019D328 /* CourseSchedule.swift in Sources */,
 				C05F5E821FAE51AB00724F42 /* SportTeam.swift in Sources */,
@@ -946,6 +978,7 @@
 				C0E5FCC220B2DA0400E0B049 /* DaySportsViewController.swift in Sources */,
 				C02A2B171FAD539E00D3A9CD /* WeekdaySchedule.swift in Sources */,
 				C0C176591FAA5F450059E956 /* Scheme.swift in Sources */,
+				C0711B0320DAC3BE009243CC /* TimeDuration.swift in Sources */,
 				C02A2B101FAD487800D3A9CD /* GetPatchResponse.swift in Sources */,
 				C02009A220A8EE4800EA6E7E /* BlockTableViewCell.swift in Sources */,
 				5BD285DD1B03CF29007A0472 /* AppDelegate.swift in Sources */,
@@ -993,6 +1026,7 @@
 				C0F1797320620237009415D2 /* LunchMenuViewController.swift in Sources */,
 				C02A2B0D1FAD47E400D3A9CD /* GetPatchWebCall.swift in Sources */,
 				C0E57B2B2093D33A0028E3EC /* TodayViewController.swift in Sources */,
+				C0711AFD20DAC31C009243CC /* EnscribedDate.swift in Sources */,
 				C081C2EF1FE4512C008073F3 /* GetMenuResponse.swift in Sources */,
 				C0A1FB162001B36C004146CE /* ScheduleVariationPrefsModule.swift in Sources */,
 				C0F0F79D2067113B006D84C9 /* CalendarViewManager.swift in Sources */,
@@ -1010,9 +1044,11 @@
 				C091CDC220B5FE2B0071667C /* TestDividerCell.swift in Sources */,
 				C03636741FACFC85008FC9A9 /* GetScheduleResponse.swift in Sources */,
 				C0CA2A5720707A8100272F64 /* ConfirmController.swift in Sources */,
+				C0711AFA20DAC2DB009243CC /* Day.swift in Sources */,
 				C06E887920866D57000D7F1B /* SettingsViewManager.swift in Sources */,
 				C079C2311FACA9CB009067DE /* BlockViewTableController.swift in Sources */,
 				C05F5E8B1FAE56CC00724F42 /* TeamDeclarations.swift in Sources */,
+				C0711AFF20DAC33C009243CC /* EnscribedTime.swift in Sources */,
 				C04DE4651FAE6AF9000D4DA6 /* DailySportsList.swift in Sources */,
 				C0707FC01F69753100C7D2ED /* Storage.swift in Sources */,
 				C0EF692D206ED9E50000C528 /* EnterTextController.swift in Sources */,

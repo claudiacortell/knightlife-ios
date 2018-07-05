@@ -7,40 +7,37 @@
 //
 
 import Foundation
-import Charcore
+import AddictiveLib
 
-class ScheduleManager: Manager
-{	
+class ScheduleManager: Manager {
+	
 	static let instance = ScheduleManager()
 	
 	private(set) var patchHandler: GetPatchResourceHandler!
 	private(set) var templateHandler: GetTemplateResourceHandler!
 	private(set) var variationModule: ScheduleVariationPrefsModule!
 	
-	init()
-	{
+	init() {
 		super.init("Schedule Manager")
 
 		self.patchHandler = GetPatchResourceHandler(self)
 		self.templateHandler = GetTemplateResourceHandler(self)
-		self.variationModule = ScheduleVariationPrefsModule(self, name: "variation")
+		self.variationModule = ScheduleVariationPrefsModule()
 		
-		self.registerModule(self.variationModule)
+		self.registerStorage(self.variationModule)
 	}
 	
-	func getVariation(_ day: Day) -> Int
-	{
-		return self.variationModule.getItem(day) ?? 0
+	func getVariation(_ day: Day) -> Int {
+		return self.variationModule.items[day] ?? 0
 	}
 	
-	func getVariation(_ date: EnscribedDate) -> Int
-	{
-		return self.variationModule.getItem(date.dayOfWeek) ?? 1
+	func getVariation(_ date: EnscribedDate) -> Int {
+		return self.variationModule.items[date.dayOfWeek] ?? 0
 	}
 	
-	func reloadAllSchedules()
-	{
+	func reloadAllSchedules() {
 		self.templateHandler.reloadTemplate()
 		self.patchHandler.reloadLocalPatches()
 	}
+	
 }

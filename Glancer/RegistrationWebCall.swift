@@ -7,13 +7,14 @@
 //
 
 import Foundation
-import Charcore
+import AddictiveLib
 
-class RegistrationWebCall: WebCall<DummyResult, Any>
-{
-	init()
-	{		
+class RegistrationWebCall: WebCall<Any> {
+	
+	init() {
 		super.init(call: "device/register")
-		self.deviceParam()
+		
+		self.parameter("dv", val: Globals.DeviceID)
 	}
+	
 }

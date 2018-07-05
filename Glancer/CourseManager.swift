@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Charcore
+import AddictiveLib
 
 class CourseManager: Manager
 {
@@ -20,7 +20,7 @@ class CourseManager: Manager
 		self.meetings = []
 		super.init("Meetings Manager")
 		
-		self.registerModule(MeetingPrefModule(self, name: "courses"))
+		self.registerStorage(MeetingPrefModule(self))
 	}
 	
 	func getCourses() -> [Course]

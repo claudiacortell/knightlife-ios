@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Charcore
+import AddictiveLib
 
 class TodayManager: Manager {
 	
@@ -36,13 +36,13 @@ class TodayManager: Manager {
 		return nil
 	}
 
-	func getCurrentScheduleInfo(_ schedule: DateSchedule) -> (minutesRemaining: (hours: Int, minutes: Int), curBlock: ScheduleBlock?, nextBlock: ScheduleBlock?, scheduleState: ScheduleState) {
+	func getCurrentScheduleInfo(_ schedule: DateSchedule) -> (minutesRemaining: (years: Int, days: Int, hours: Int, minutes: Int, seconds: Int), curBlock: ScheduleBlock?, nextBlock: ScheduleBlock?, scheduleState: ScheduleState) {
 		if schedule.date != TimeUtils.todayEnscribed {
-			return ((-1, -1), nil, nil, .ERROR)
+			return ((-1, -1, -1, -1, -1), nil, nil, .ERROR)
 		}
 		
 		if schedule.getBlocks().isEmpty {
-			return ((-1, -1), nil, nil, .NO_CLASS)
+			return ((-1, -1, -1, -1, -1), nil, nil, .NO_CLASS)
 		}
 		
 		let curBlock = self.getCurrentBlock(schedule)
@@ -57,11 +57,11 @@ class TodayManager: Manager {
 				
 				if schedule.getFirstBlock() == block && curDate < block.time.startTime.toDate()! { // Before school
 					let timeToSchoolStart = TimeUtils.timeToDateInMinutes(to: block.time.startTime.toDate()!)
-					return (timeToSchoolStart, nil, nil, .BEFORE_SCHOOL)
+					return (timeToSchoolStart, nil, schedule.getFirstBlock()!, .BEFORE_SCHOOL)
 				}
 				
 				if schedule.getLastBlock() == block && curDate >= block.time.endTime.toDate()! { // After school
-					return ((-1, -1), nil, nil, .AFTER_SCHOOL)
+					return ((-1, -1, -1, -1, -1), nil, nil, .AFTER_SCHOOL)
 				}
 				
 				let nextBlock = schedule.getBlockAfter(block)
@@ -73,7 +73,7 @@ class TodayManager: Manager {
 				}
 			}
 		}
-		return ((-1, -1), nil, nil, .ERROR)
+		return ((-1, -1, -1, -1, -1), nil, nil, .ERROR)
 	}
 	
 }

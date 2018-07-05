@@ -7,59 +7,54 @@
 //
 
 import Foundation
-import Charcore
+import AddictiveLib
 
-class GetPatchResourceHandler: ResourceHandler<(EnscribedDate, DateSchedule?)>
-{
-	let manager: ScheduleManager
-	private var schedules: [EnscribedDate: DateSchedule] = [:]
+class GetPatchResourceHandler: ResourceWatcher<(EnscribedDate, DateSchedule?)> {
 	
-	init(_ manager: ScheduleManager)
-	{
+	let manager: ScheduleManager
+	private var schedules: [EnscribedDate: DateSchedule]
+	
+	init(_ manager: ScheduleManager) {
 		self.manager = manager
+		self.schedules = [:]
+		
 		super.init()
 	}
 	
-	func reloadLocalPatches(callback: @escaping (ResourceFetchError?, (EnscribedDate, DateSchedule?)) -> Void = {_,_ in})
-	{
-		for date in self.schedules.keys
-		{
-			getSchedule(date, hard: true, callback:
-			{ error, data in
+	func reloadLocalPatches(callback: @escaping (ResourceWatcherError?, (EnscribedDate, DateSchedule?)) -> Void = {_,_ in}) {
+		for date in self.schedules.keys {
+			getSchedule(date, hard: true) {
+				error, data in
+				
 				callback(error, (date, data))
-			})
+			}
 		}
 	}
 	
 	@discardableResult
-	func getSchedule(_ date: EnscribedDate, hard: Bool = false, callback: @escaping (ResourceFetchError?, DateSchedule?) -> Void = {_,_ in}) -> DateSchedule?
-	{
-		if hard || self.schedules[date] == nil // Requires reload
-		{
-			let call = GetPatchWebCall(manager, date: date)
-			call.callback =
-			{ error, result in
+	func getSchedule(_ date: EnscribedDate, hard: Bool = false, callback: @escaping (ResourceWatcherError?, DateSchedule?) -> Void = {_,_ in}) -> DateSchedule? {
+		if hard || self.schedules[date] == nil {
+			GetPatchWebCall(manager, date: date).callback() {
+				error, result in
+				
 				callback(error, result)
 				
-				if let success = result
-				{
+				if let success = result {
 					self.schedules[date] = success
-					self.success((date, success))
-				} else if error == nil
-				{
+					self.handle(nil, (date, success))
+				} else if error == nil {
 					self.schedules[date] = nil
-					self.success((date, nil))
-				} else
-				{
+					self.handle(nil, (date, nil))
+				} else {
 					self.schedules[date] = nil
-					self.failure(error!)
+					self.handle(error!, nil)
 				}
-			}
-			call.execute()
+			}.execute()
 			return nil
 		} else
 		{
 			return schedules[date]
 		}
 	}
+	
 }

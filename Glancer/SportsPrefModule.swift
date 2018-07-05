@@ -7,11 +7,18 @@
 //
 
 import Foundation
-import Charcore
+import AddictiveLib
 
-class SportsPrefModule: CollectionModule<SportsManager, SportTeam>, PrefsHandler {
+class SportsPrefModule: StorageHandler {
 	
-	var storageKey: String { return self.nameComplete }
+	let manager: SportsManager
+	var storageKey: String { return "sports" }
+	
+	var items: [SportTeam] = []
+	
+	init(_ manager: SportsManager) {
+		self.manager = manager
+	}
 
 	func saveData() -> Any? {
 		var list: [Int] = []
@@ -26,9 +33,9 @@ class SportsPrefModule: CollectionModule<SportsManager, SportTeam>, PrefsHandler
 	func loadData(data: Any) {
 		if let list = data as? [Int] {
 			for id in list {
-				if let team = manager.getTeamById(id: id) {
-					self.addItem(team, ignoreDuplicates: true)
-					out("Loaded user added: \(team)")
+				if let team = self.manager.getTeamById(id: id) {
+					self.items.append(team)
+					self.manager.out("Loaded user added: \(team)")
 				}
 			}
 		}

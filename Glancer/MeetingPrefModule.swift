@@ -7,12 +7,16 @@
 //
 
 import Foundation
-import Charcore
+import AddictiveLib
 
-class MeetingPrefModule: Module<CourseManager>, PrefsHandler
-{
-	var storageKey: String {
-		return self.nameComplete
+class MeetingPrefModule: StorageHandler {
+	
+	var storageKey: String = "courses"
+	
+	let manager: CourseManager
+	
+	init(_ manager: CourseManager) {
+		self.manager = manager
 	}
 	
 	func saveData() -> Any? {

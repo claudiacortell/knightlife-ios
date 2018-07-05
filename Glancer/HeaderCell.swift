@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Charcore
+import AddictiveLib
 import UIKit
 
 class HeaderCell: TableCell {
@@ -18,9 +18,9 @@ class HeaderCell: TableCell {
 	var moreLabel: String = "More..."
 	
 	init(header: String, subtitle: String?, more: String?) {
-		super.init("headerCell", nib: "HeaderCell", bundle: Bundle(identifier: "MAD.BBN.KnightLife"))
+		super.init("headerCell", nib: "HeaderCell")
 		
-		self.setSelection(.none)
+		self.setSelectionStyle(.none)
 		
 		self.header = header
 		self.subtitle = subtitle
@@ -33,7 +33,7 @@ class HeaderCell: TableCell {
 			
 			cell.selectionStyle = .none
 			
-			if let headerCell = cell as? HeaderCell {
+			if let headerCell = cell as? UIHeaderCell {
 				headerCell.header = self.header
 				headerCell.subtitle = self.subtitle
 				headerCell.showMore = self.showMore

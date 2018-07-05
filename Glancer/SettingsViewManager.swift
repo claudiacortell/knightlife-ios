@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Charcore
+import AddictiveLib
 
 class SettingsViewManager: TableHandler {
 	
@@ -27,7 +27,7 @@ class SettingsViewManager: TableHandler {
 		self.reloadTable()
 	}
 	
-	override func loadCells() {
+	override func refresh() {
 		let section = self.tableForm.addSection()
 		section.addSpacerCell().setHeight(10)
 		
@@ -45,7 +45,7 @@ class SettingsViewManager: TableHandler {
 				template, cell in
 				
 				if let courseCell = cell as? CourseListCell {
-					courseCell.color = UIColor(course.color ?? "777777")
+					courseCell.color = UIColor(hex: course.color ?? "777777")
 					courseCell.name = course.name
 					courseCell.course = course
 				}

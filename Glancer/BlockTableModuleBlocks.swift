@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import Charcore
+import AddictiveLib
 
 class BlockTableModuleBlocks: TableModule
 {
@@ -27,11 +27,10 @@ class BlockTableModuleBlocks: TableModule
 		{
 			let cell = section.addCell("block")
 			cell.setHeight(65)
-			cell.setMetadata("block", value: block)
 			cell.setCallback({
 				template, cell in
 				
-				if self.controller.daySchedule != nil, self.controller.daySchedule!.hasBlock(block), let viewCell = cell as? BlockTableBlockViewCell, let block = template.getMetadata("block") as? ScheduleBlock {
+				if self.controller.daySchedule != nil, self.controller.daySchedule!.hasBlock(block), let viewCell = cell as? BlockTableBlockViewCell {
 					viewCell.block = block
 					
 					let analyst = BlockAnalyst(block, schedule: self.controller.daySchedule!)

@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import Charcore
+import AddictiveLib
 
 class BlockTableBlockViewCell: UITableViewCell
 {
@@ -33,7 +33,7 @@ class BlockTableBlockViewCell: UITableViewCell
 	{
 		didSet
 		{
-			self.colorView.backgroundColor = color == nil ? nil : UIColor(color!)
+			self.colorView.backgroundColor = color == nil ? nil : UIColor(hex: color!)
 		}
 	}
 	

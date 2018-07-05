@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import Presentr
-import Charcore
+import AddictiveLib
 
 class LunchMenuViewController: TableHandler
 {
@@ -37,7 +37,7 @@ class LunchMenuViewController: TableHandler
 		self.tableView.reloadData()
 	}
 	
-	override func loadCells() {
+	override func refresh() {
 		for type in LunchMenuItemType.values {
 			var items: [LunchMenuItem] = []
 			for item in self.controller.lunchMenu!.items {
@@ -71,13 +71,13 @@ class LunchMenuViewController: TableHandler
 							} else {
 								cell.showsDisclosure = true
 							}
-							
-							let showAllergen = template.getMetadata("show-allergen") as? Bool ?? false
+														
+							let showAllergen: Bool = template.getMetadata("show-allergen") ?? false
 							cell.showAllergen = showAllergen
 							cell.rotateDisclosure = showAllergen
 						}
 					}
-					cell.setMetadata("item", value: item)
+					cell.setMetadata("item", data: item)
 				}
 			}
 		}
@@ -87,14 +87,13 @@ class LunchMenuViewController: TableHandler
 		tableView.deselectRow(at: indexPath, animated: true)
 		
 		if let template = self.tableForm.getSection(indexPath)?.getCell(indexPath) {
-			if let item = template.getMetadata("item") as? LunchMenuItem {
+			if let item: LunchMenuItem = template.getMetadata("item") {
 				if item.allergy == nil {
 					return
 				}
 			}
 			
-			let curVal = template.getMetadata("show-allergen") as? Bool ?? false
-			template.setMetadata("show-allergen", value: !curVal)
+			template.setMetadata("show-allergen", data: !(template.getMetadata("show-allergen") ?? false))
 		}
 		
 		HapticUtils.SELECTION.selectionChanged()

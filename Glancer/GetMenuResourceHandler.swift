@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import Charcore
+import AddictiveLib
 
-class GetMenuResourceHandler: ResourceHandler<(EnscribedDate, LunchMenu?)>
+class GetMenuResourceHandler: ResourceWatcher<(EnscribedDate, LunchMenu?)>
 {
 	private var manager: LunchManager
 	var menus: [EnscribedDate: LunchMenu] = [:]
@@ -21,30 +21,29 @@ class GetMenuResourceHandler: ResourceHandler<(EnscribedDate, LunchMenu?)>
 	}
 	
 	@discardableResult
-	func getMenu(_ date: EnscribedDate, hard: Bool = false, callback: @escaping (ResourceFetchError?, LunchMenu?) -> Void = {_,_ in}) -> LunchMenu?
+	func getMenu(_ date: EnscribedDate, hard: Bool = false, callback: @escaping (ResourceWatcherError?, LunchMenu?) -> Void = {_,_ in}) -> LunchMenu?
 	{
 		if hard || self.menus[date] == nil // Requires reload
 		{
-			let call = GetMenuWebCall(manager, date: date)
-			call.callback =
-			{ error, result in
+			GetMenuWebCall(manager, date: date).callback() {
+				error, result in
+				
 				callback(error, result)
 
 				if let success = result
 				{
 					self.menus[date] = success
-					self.success((date, success))
+					self.handle(nil, (date, success))
 				} else if error == nil
 				{
 					self.menus[date] = nil
-					self.success((date, nil))
+					self.handle(nil, (date, nil))
 				} else
 				{
 					self.menus[date] = nil
-					self.failure(error!)
+					self.handle(error!, nil)
 				}
-			}
-			call.execute()
+			}.execute()
 			return nil
 		} else
 		{

@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import Charcore
+import AddictiveLib
 
-class GetMenuWebCall: WebCall<GetMenuResponse, LunchMenu>
+class GetMenuWebCall: UnboxWebCall<GetMenuResponse, LunchMenu>
 {
 	let manager: LunchManager
 	let date: EnscribedDate
@@ -24,7 +24,7 @@ class GetMenuWebCall: WebCall<GetMenuResponse, LunchMenu>
 		self.parameter("dt", val: date.string)
 	}
 	
-	override func handleTokenConversion(_ data: GetMenuResponse) -> LunchMenu?
+	override func convertToken(_ data: GetMenuResponse) -> LunchMenu?
 	{
 		var items: [LunchMenuItem] = []
 		for item in data.items
@@ -39,7 +39,7 @@ class GetMenuWebCall: WebCall<GetMenuResponse, LunchMenu>
 		return LunchMenu(self.date, title: data.caption, items: items)
 	}
 	
-	override func handleCall(error: ResourceFetchError?, data: LunchMenu?)
+	override func handleCall(error: ResourceWatcherError?, data: LunchMenu?)
 	{
 		
 	}

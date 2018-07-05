@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import Presentr
-import Charcore
+import AddictiveLib
 
 class BlockViewController: TableHandler
 {
@@ -72,22 +72,19 @@ class BlockViewController: TableHandler
 		if !self.registeredScheduleHandler
 		{
 			self.registeredScheduleHandler = true
-			ScheduleManager.instance.patchHandler.registerSuccessCallback(self.fetchName,
-			{
+			ScheduleManager.instance.patchHandler.onSuccess(self) {
 				o in
-				if let res = o
-				{
+				
+				if let res = o {
 					let date = res.0
-					if let schedule = res.1
-					{
-						if date == self.date
-						{
+					if let schedule = res.1 {
+						if date == self.date {
 							self.daySchedule = schedule
 							self.closeLoop(hapticFeedback: false)
 						}
 					}
 				}
-			})
+			}
 		}
 	}
 	
@@ -98,7 +95,7 @@ class BlockViewController: TableHandler
 	
 	deinit {
 		if self.registeredScheduleHandler {
-			ScheduleManager.instance.patchHandler.removeSuccessCallback(self.fetchName)
+			ScheduleManager.instance.patchHandler.unregisterSuccess(self)
 		}
 	}
 	
@@ -128,7 +125,7 @@ class BlockViewController: TableHandler
 		}
 	}
 	
-	override func loadCells() {
+	override func refresh() {
 		if self.daySchedule == nil {
 			//
 		} else if self.daySchedule!.isEmpty {
@@ -165,42 +162,43 @@ class BlockViewController: TableHandler
 			HapticUtils.IMPACT.impactOccurred()
 		}
 		
-		let chain = ProcessChain(success: {
-			self.delayResult(delayResult, hapticFeedback: hapticFeedback)
-		}, failure: {
-			self.daySchedule = nil
-			self.lunchMenu = nil
+		ProcessChain()
+		.link() {
+			chain in
 			
-			self.delayResult(delayResult, hapticFeedback: hapticFeedback)
-		})
-		
-		chain.addLink() {
-			parent in
 			if let schedule = ScheduleManager.instance.patchHandler.getSchedule(self.date, hard: hard, callback: {
 				error, result in
 				
 				self.daySchedule = result
-				parent.nextLink(result != nil)
+				chain.next(result != nil)
 			}) {
 				self.daySchedule = schedule
-				parent.nextLink(true)
+				chain.next()
 			}
-		}
-		
-		chain.addLink() {
-			parent in
+		}.link() {
+			chain in
+			
 			if let lunch = LunchManager.instance.menuHandler.getMenu(self.date, hard: hard, callback: {
 				error, result in
 				
 				self.lunchMenu = result
-				parent.nextLink(true) // Ignore any errors and continue; it's just a lunch menu. Being null is fine.
+				chain.next() // Ignore any errors and continue; it's just a lunch menu. Being null is fine.
 			}) {
 				self.lunchMenu = lunch
-				parent.nextLink(true)
+				chain.next()
 			}
-		}
-		
-		chain.start()
+		}.success() {
+			chain in
+			
+			self.delayResult(delayResult, hapticFeedback: hapticFeedback)
+		}.failure() {
+			chain in
+			
+			self.daySchedule = nil
+			self.lunchMenu = nil
+			
+			self.delayResult(delayResult, hapticFeedback: hapticFeedback)
+		}.start()
 	}
 	
 	private func delayResult(_ delay: Bool, hapticFeedback: Bool) {

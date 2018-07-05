@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Charcore
+import AddictiveLib
 
 class TodayViewController: TableHandler {
 //	UNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSED
@@ -37,7 +37,7 @@ class TodayViewController: TableHandler {
 		self.toolbarReference.didScroll(scrollView.contentOffset.y)
 	}
 	
-	override func loadCells() {
+	override func refresh() {
 		if self.loading {
 			return
 		}

@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import Charcore
+import AddictiveLib
 
-class GetEventsWebCall: WebCall<GetEventsResponse, EventList>
+class GetEventsWebCall: UnboxWebCall<GetEventsResponse, EventList>
 {
 	let manager: EventManager
 	let date: EnscribedDate
@@ -24,7 +24,7 @@ class GetEventsWebCall: WebCall<GetEventsResponse, EventList>
 		self.parameter("date", val: date.string)
 	}
 	
-	override func handleTokenConversion(_ data: GetEventsResponse) -> EventList?
+	override func convertToken(_ data: GetEventsResponse) -> EventList?
 	{
 		var events: [Event] = []
 		for event in data.events
@@ -47,7 +47,7 @@ class GetEventsWebCall: WebCall<GetEventsResponse, EventList>
 		return EventList(self.date, events: events)
 	}
 	
-	override func handleCall(error: ResourceFetchError?, data: EventList?)
+	override func handleCall(error: ResourceWatcherError?, data: EventList?)
 	{
 		
 	}

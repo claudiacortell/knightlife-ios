@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Charcore
+import AddictiveLib
 import Unbox
 
 struct GetSportsMeetingResponse: WebCallPayload

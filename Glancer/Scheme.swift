@@ -9,8 +9,9 @@
 import Foundation
 import UIKit
 
-class Scheme
-{
-	static let ColorOrange = UIColor("FFB53D")
-	static let ColorBlue = UIColor("5794DC")
+class Scheme {
+	
+	static let ColorOrange = UIColor(hex: "FFB53D")!
+	static let ColorBlue = UIColor(hex: "5794DC")!
+	
 }

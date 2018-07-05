@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Charcore
+import AddictiveLib
 
 class DayViewController: UIViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
 	
@@ -36,7 +36,7 @@ class DayViewController: UIViewController, UIPageViewControllerDelegate, UIPageV
 	}
 	
 	deinit {
-		ScheduleManager.instance.patchHandler.removeSuccessCallback("DayViewController")
+		ScheduleManager.instance.patchHandler.unregisterSuccess(self)
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -65,8 +65,9 @@ class DayViewController: UIViewController, UIPageViewControllerDelegate, UIPageV
 	}
 	
 	private func setupSchedule() { // Used to get day subtitles and information
-		ScheduleManager.instance.patchHandler.registerSuccessCallback("DayViewController") {
+		ScheduleManager.instance.patchHandler.onSuccess(self) {
 			package in
+			
 			if package != nil {
 				let date = package!.0
 				let schedule = package!.1

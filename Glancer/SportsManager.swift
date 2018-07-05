@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Charcore
+import AddictiveLib
 
 class SportsManager: Manager
 {
@@ -15,10 +15,7 @@ class SportsManager: Manager
 	
 	private(set) var meetings: [EnscribedDate: DailySportsList]
 	
-	var sportsPrefModule: SportsPrefModule
-	{
-		return self.getModule("addedTeams") as! SportsPrefModule
-	}
+	var sportsPrefModule: SportsPrefModule!
 	
 	init()
 	{
@@ -26,27 +23,9 @@ class SportsManager: Manager
 		
 		super.init("Sports Manager")
 
-		self.registerModule(SportsPrefModule(self, name: "addedTeams")) // Register preference module
+		self.sportsPrefModule = SportsPrefModule(self)
+		self.registerStorage(self.sportsPrefModule)
     }
-	
-	
-	
-//	func retrieveMeetings(_ date: EnscribedDate = TimeUtils.todayEnscribed, onlyAdded: Bool = true) -> [SportsMeetingWrapper]
-//	{
-//		var wrapperList: [SportsMeetingWrapper] = []
-//		if let sportsList = self.meetings[date]
-//		{
-//			for (team, meeting) in sportsList.sports
-//			{
-//				if self.sportsPrefModule.containsItem(team)
-//				{
-//					let wrapper = SportsMeetingWrapper(team: team, date: date, duration: meeting.duration)
-//					wrapperList.append(wrapper)
-//				}
-//			}
-//		}
-//		return wrapperList
-//	}
 	
 	func getTeamById(id: Int) -> SportTeam?
 	{

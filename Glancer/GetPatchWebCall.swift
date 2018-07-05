@@ -7,15 +7,14 @@
 //
 
 import Foundation
-import Charcore
+import AddictiveLib
 
-class GetPatchWebCall: WebCall<GetPatchResponse, DateSchedule>
-{
+class GetPatchWebCall: UnboxWebCall<GetPatchResponse, DateSchedule> {
+	
 	let manager: ScheduleManager
 	let date: EnscribedDate
 	
-	init(_ manager: ScheduleManager, date: EnscribedDate)
-	{
+	init(_ manager: ScheduleManager, date: EnscribedDate) {
 		self.manager = manager
 		self.date = date
 		
@@ -24,13 +23,12 @@ class GetPatchWebCall: WebCall<GetPatchResponse, DateSchedule>
 		self.parameter("dt", val: date.string)
 	}
 	
-	override func handleTokenConversion(_ response: GetPatchResponse) -> DateSchedule?
-	{
+	override func convertToken(_ response: GetPatchResponse) -> DateSchedule? {
 		var blocks: [ScheduleBlock] = []
-		for block in response.blocks
-		{
-			if let blockId = BlockID.fromRaw(raw: block.blockId)
-			{
+		
+		for block in response.blocks {
+			if let blockId = BlockID.fromRaw(raw: block.blockId) {
+				
 				let startTime = EnscribedTime(raw: block.startTime)
 				let endTime = EnscribedTime(raw: block.endTime)
 				
@@ -40,37 +38,28 @@ class GetPatchWebCall: WebCall<GetPatchResponse, DateSchedule>
 				let customName = block.customName
 				
 				var color = block.overrideColor
-				if color != nil && color!.count != 6
-				{
+				if color != nil && color!.count != 6 {
 					color = nil
 				}
 				
-				if !startTime.valid || !endTime.valid || startTime.toDate() == nil || endTime.toDate() == nil
-				{
+				if !startTime.valid || !endTime.valid || startTime.toDate() == nil || endTime.toDate() == nil {
 					manager.out("Recieved an invalid start/end time: \(block.startTime), \(block.endTime)")
-				} else
-				{
+				} else {
 					let scheduleBlock = ScheduleBlock(blockId: blockId, time: TimeDuration(startTime: startTime, endTime: endTime), variation: variation, customName: customName, color: color)
 					blocks.append(scheduleBlock)
 				}
-			} else
-			{
+			} else {
 				manager.out("Recieved an invalid block id: \(block.blockId)")
 			}
 		}
 		
 		var standinDayId: Day?
-		if response.replaceDayId != nil
-		{
+		if response.replaceDayId != nil {
 			standinDayId = Day.fromId(response.replaceDayId!)
 		}
 		
 		let daySchedule = DateSchedule(date, blocks: blocks, subtitle: response.subtitle, changed: response.changed ?? false, standinDayId: standinDayId)
 		return daySchedule
 	}
-	
-	override func handleCall(error: ResourceFetchError?, data: DateSchedule?)
-	{
-		
-	}
+
 }

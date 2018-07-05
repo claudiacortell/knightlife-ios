@@ -7,13 +7,15 @@
 //
 
 import Foundation
-import Charcore
+import AddictiveLib
 
-class ScheduleVariationPrefsModule: MapModule<ScheduleManager, Day, Int>, PrefsHandler {
+class ScheduleVariationPrefsModule: StorageHandler {
 	
 	var storageKey: String {
-		return self.nameComplete
+		return "variations"
 	}
+	
+	var items: [Day: Int] = [:]
 	
 	func saveData() -> Any? {
 		return self.items
@@ -22,7 +24,7 @@ class ScheduleVariationPrefsModule: MapModule<ScheduleManager, Day, Int>, PrefsH
 	func loadData(data: Any) {
 		if let items = data as? [Day: Int] {
 			for (day, val) in items {
-				self.addItem(day, val)
+				self.items[day] = val
 			}
 		}
 	}
@@ -31,7 +33,7 @@ class ScheduleVariationPrefsModule: MapModule<ScheduleManager, Day, Int>, PrefsH
 		if let switches = Storage.USER_SWITCHES.getValue() as? [String: Bool] {
 			for (rawDayId, val) in switches {
 				if let dayId = Day.fromRaw(raw: rawDayId) {
-					self.addItem(dayId, val ? 1 : 0)
+					self.items[dayId] = val ? 1 : 0
 				}
 			}
 		}

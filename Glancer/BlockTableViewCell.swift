@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Charcore
+import AddictiveLib
 
 class BlockTableViewCell: UITableViewCell {
 
@@ -40,8 +40,25 @@ class BlockTableViewCell: UITableViewCell {
 	
 	var color: String = "777777" {
 		didSet {
-			self.markerBackground.backgroundColor = UIColor(self.color)
-			self.titleLabel.textColor = UIColor(self.color)
+			self.markerBackground.backgroundColor = UIColor(hex: self.color)
+			self.titleLabel.textColor = UIColor(hex: self.color)
 		}
+	}
+	
+	var moreLabel: String? {
+		didSet {
+			self.moreButton.isHidden = self.moreLabel == nil
+			self.moreButton.setTitle(self.moreLabel, for: .normal)
+		}
+	}
+	
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		
+		self.title = nil
+		self.timeRange = nil
+		self.letter = nil
+		self.color = "777777"
+		self.moreLabel = nil
 	}
 }
