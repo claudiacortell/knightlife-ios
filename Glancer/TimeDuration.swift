@@ -12,11 +12,6 @@ struct TimeDuration {
 	let start: Date
 	let end: Date
 	
-	public init(start: Date, end: Date) {
-		self.start = start
-		self.end = end
-	}
-	
 }
 
 

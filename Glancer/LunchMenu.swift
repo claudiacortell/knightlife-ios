@@ -20,6 +20,8 @@ enum LunchMenuItemType: String {
 	soup = "soup",
 	other = "other"
 
+	static var values: [LunchMenuItemType] = [.main, .accompaniment, .side, .pasta, .salad, .soup, .other]
+	
 }
 
 struct LunchMenu {

@@ -12,7 +12,7 @@ import AddictiveLib
 
 class LunchMenuViewController: UIViewController, TableBuilder
 {
-	var controller: BlockViewController!
+//	var controller: BlockViewController!
 	@IBOutlet weak var tableRef: UITableView!
 	private var tableHandler: TableHandler!
 	
@@ -25,14 +25,14 @@ class LunchMenuViewController: UIViewController, TableBuilder
 		self.tableHandler = TableHandler(table: self.tableRef)
 		self.tableHandler.builder = self
 		
-		if let lunch = self.controller.lunchMenu {
-			if let title = lunch.title {
-				self.menuSubtitle.text = title
-				self.menuSubtitle.isHidden = false
-			} else {
-				self.menuSubtitle.isHidden = true
-			}
-		}
+//		if let lunch = self.controller.lunchMenu {
+//			if let title = lunch.title {
+//				self.menuSubtitle.text = title
+//				self.menuSubtitle.isHidden = false
+//			} else {
+//				self.menuSubtitle.isHidden = true
+//			}
+//		}
 		
 		self.tableRef.rowHeight = UITableViewAutomaticDimension
 		self.tableRef.estimatedRowHeight = 40.0
@@ -43,11 +43,11 @@ class LunchMenuViewController: UIViewController, TableBuilder
 	func buildCells(layout: TableLayout) {
 		for type in LunchMenuItemType.values {
 			var items: [LunchMenuItem] = []
-			for item in self.controller.lunchMenu!.items {
-				if item.type == type {
-					items.append(item)
-				}
-			}
+//			for item in self.controller.lunchMenu!.items {
+//				if item.type == type {
+//					items.append(item)
+//				}
+//			}
 			
 			if !items.isEmpty {
 				let section = layout.addSection()

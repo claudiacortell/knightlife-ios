@@ -20,7 +20,7 @@ class BlockAnalyst {
 	}
 	
 	func getCourses() -> BlockCourseList {
-		return CourseManager.instance.getCourses(schedule: self.schedule, block: block.blockId)
+		return CourseManager.instance.getCourses(schedule: self.schedule, block: block.id)
 	}
 	
 	func getDisplayName() -> String {
@@ -54,16 +54,16 @@ class BlockAnalyst {
 		let courses = self.getCourses()
 		if courses.isEmpty {
 			if self.block.id == .lab, let previous = self.schedule.getBlockBefore(self.block) {
-				let previousAnalyst = BlockAnalyst(schedule: self.schedule, block: self.block)
+				let previousAnalyst = BlockAnalyst(schedule: self.schedule, block: previous)
 				return previousAnalyst.getColor()
 			}
 			
 //			return self.getColor
 //			TODO: IMPLEMENT BLOCK COLORS
 
-			return "999999"
+			return UIColor(hex: "999999")!
 		}
 		
-		return courses.courses.first!.color
+		return courses.courses.first!.color ?? UIColor(hex: "999999")!
 	}
 }

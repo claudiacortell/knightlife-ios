@@ -11,6 +11,6 @@ import AddictiveLib
 
 struct DailySportsList
 {
-	let day: EnscribedDate
+	let day: Date
 	let sports: [SportTeam: SportMeeting]
 }

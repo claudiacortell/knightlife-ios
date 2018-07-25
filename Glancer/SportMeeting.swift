@@ -35,7 +35,7 @@ struct GameSportMeeting: SportMeeting
 	let type: SportMeetingType
 	let team: SportTeam
 	
-	let start: EnscribedTime
+	let start: Date
 	
 	let home: Bool?
 	let opponent: String?

@@ -13,9 +13,9 @@ class GetMeetingWebCall: UnboxWebCall<GetSportsMeetingResponse, SportMeeting>
 {
 	let manager: SportsManager
 	let sport: SportTeam
-	let date: EnscribedDate
+	let date: Date
 	
-	init(manager: SportsManager, sport: SportTeam, date: EnscribedDate)
+	init(manager: SportsManager, sport: SportTeam, date: Date)
 	{
 		self.manager = manager
 		self.sport = sport
@@ -24,16 +24,7 @@ class GetMeetingWebCall: UnboxWebCall<GetSportsMeetingResponse, SportMeeting>
 		super.init(call: "request/sports.php")
 		
 		self.parameter("tm", val: String(sport.id))
-		self.parameter("dt", val: date.string)
+		self.parameter("dt", val: date.webSafeDate)
 	}
 	
-	override func convertToken(_ data: GetSportsMeetingResponse) -> SportMeeting?
-	{
-		return nil
-	}
-	
-	override func handleCall(error: ResourceWatcherError?, data: SportMeeting?)
-	{
-		
-	}
 }

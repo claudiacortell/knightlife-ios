@@ -9,9 +9,10 @@
 import Foundation
 import AddictiveLib
 
-struct SportsMeetingWrapper
-{
+struct SportsMeetingWrapper {
+	
 	let team: SportTeam
-	let date: EnscribedDate
+	let date: Date
 	let duration: TimeDuration
+
 }

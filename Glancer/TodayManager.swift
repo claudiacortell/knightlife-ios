@@ -11,18 +11,71 @@ import AddictiveLib
 
 class TodayManager: Manager {
 	
-	enum ScheduleState
-	{
-		case ERROR, NO_CLASS, BEFORE_SCHOOL, BETWEEN_CLASS, IN_CLASS, AFTER_SCHOOL
+	enum ScheduleState {
+		case ERROR
+		case NULL
+		
+		case NO_CLASS
+		
+		case BEFORE_SCHOOL
+		case BETWEEN_CLASS
+		case IN_CLASS
+		
+		case AFTER_SCHOOL
 	}
 	
 	static let instance = TodayManager()
 	
+	private(set) var today: Date
+	
+	private(set) var todaySchedule: DateSchedule?
+	private(set) var fetchError: Error?
+	
 	init() {
+		self.today = Date.today
 		super.init("Today")
+		
+		self.registerListeners()
+		ScheduleManager.instance.loadSchedule(date: self.today)
 	}
 	
-	func getCurrentBlock(_ schedule: DateSchedule) -> ScheduleBlock? {
+	private func registerListeners() {
+		ScheduleManager.instance.getPatchWatcher(date: self.today).onSuccess(self) {
+			schedule in
+			self.patchDidLoad(schedule: schedule)
+		}
+		
+		ScheduleManager.instance.getPatchWatcher(date: self.today).onFailure(self) {
+			error in
+			self.patchDidFailLoad(error: error)
+		}
+	}
+	
+	private func patchDidLoad(schedule: DateSchedule) {
+		self.todaySchedule = schedule
+	}
+	
+	private func patchDidFailLoad(error: Error) {
+		self.todaySchedule = nil
+	}
+	
+	func getCurrentBlock() -> Block? {
+		if self.todaySchedule == nil {
+			return nil
+		}
+		
+		let current = Date()
+		let schedule = self.todaySchedule!
+		
+		for block in schedule.blocks {
+			let blockStart = Calendar.normalizedCalendar.date block.time.start
+			let blockEnd = block.time.end
+			
+			blockStart.
+		}
+	}
+	
+	func getCurrentBlock(_ schedule: DateSchedule) -> Block? {
 		if schedule.date != TimeUtils.todayEnscribed {
 			return nil
 		}
@@ -36,7 +89,7 @@ class TodayManager: Manager {
 		return nil
 	}
 
-	func getCurrentScheduleInfo(_ schedule: DateSchedule) -> (minutesRemaining: (years: Int, days: Int, hours: Int, minutes: Int, seconds: Int), curBlock: ScheduleBlock?, nextBlock: ScheduleBlock?, scheduleState: ScheduleState) {
+	func getCurrentScheduleInfo(_ schedule: DateSchedule) -> (minutesRemaining: (years: Int, days: Int, hours: Int, minutes: Int, seconds: Int), curBlock: Block?, nextBlock: Block?, scheduleState: ScheduleState) {
 		if schedule.date != TimeUtils.todayEnscribed {
 			return ((-1, -1, -1, -1, -1), nil, nil, .ERROR)
 		}

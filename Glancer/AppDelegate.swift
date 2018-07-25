@@ -32,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerForRemoteNotifications()
         }
 		
+		_ = TodayManager.instance
 		_ = ScheduleManager.instance
 		_ = CourseManager.instance
 		_ = LunchManager.instance
@@ -44,8 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tokenChars = (deviceToken as NSData).bytes.bindMemory(to: CChar.self, capacity: deviceToken.count)
         var tokenString = ""
         
-        for i in 0..<deviceToken.count
-		{
+        for i in 0..<deviceToken.count {
             tokenString += String(format: "%02.2hhx", arguments: [tokenChars[i]])
         }
         
@@ -53,28 +53,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		Globals.DeviceID = tokenString
 		
 		RegistrationWebCall().callback() {
-			error, result in
+			result in
 			
-			if error != nil
-			{
-				print("\(error!.cause): \(error!.message!)")
-			} else
-			{
-				print("No errors in registering device!")
+			switch result {
+			case .failure(let error):
+				print(error)
+			case .success(_):
+				break
 			}
 		}.execute()
     }
     
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error)
-	{
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("failed to register for remote notifications: \(error)")
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
 		if let aps = userInfo as? [String: Any], let type = aps["type"] as? Int {
-			if type == 0 // Update local schedule
-			{
-				ScheduleManager.instance.reloadAllSchedules()
+			if type == 0 {
+//				ScheduleManager.instance.reloadAllSchedules()
 			}
 		}
     }
