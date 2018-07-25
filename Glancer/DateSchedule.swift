@@ -9,147 +9,108 @@
 import Foundation
 import AddictiveLib
 
-struct DateSchedule
-{
-	let date: EnscribedDate
-	let blocks: [ScheduleBlock]
+struct DateSchedule {
+	
+	fileprivate let uuid = UUID()
+	
+	let date: Date
+
 	let subtitle: String?
 	let changed: Bool
-	let standinDayId: Day? // Used if this is say, a Tuesday with a Monday schedule. The actual date is a tuesday, but the standin Day is Day.monday
 
-	init(_ date: EnscribedDate, blocks: [ScheduleBlock], subtitle: String? = nil, changed: Bool = false, standinDayId: Day? = nil)
-	{
-		self.date = date
-		self.blocks = blocks
-		self.subtitle = subtitle
-		self.changed = changed
-		self.standinDayId = standinDayId
-	}
+	let standinDayId: DayOfWeek? // Used if this is say, a Tuesday with a Monday schedule. The actual date is a tuesday, but the standin Day is Day.monday
+
+	let blocks: [Block]
+	
 }
 
-extension DateSchedule: Equatable
-{
-	var isEmpty: Bool
-	{
+extension DateSchedule: Equatable {
+	
+	var isEmpty: Bool {
 		return self.getBlocks().isEmpty
 	}
 	
-	func getFirstBlock() -> ScheduleBlock?
-	{
-		let blocks = self.getBlocks()
-		if blocks.count > 0
-		{
-			return blocks.first!
-		}
-		return nil
+	func getFirstBlock() -> Block? {
+		return self.getBlocks().first
 	}
 	
-	func getLastBlock() -> ScheduleBlock?
-	{
-		let blocks = self.getBlocks()
-		if blocks.count > 0
-		{
-			return blocks.last!
-		}
-		return nil
+	func getLastBlock() -> Block? {
+		return self.getBlocks().last
 	}
 	
-	func getBlocks(_ allVariations: Bool = false, variation: Int? = nil) -> [ScheduleBlock]
-	{
-		var blocks: [ScheduleBlock] = []
+	func getBlocks(_ allVariations: Bool = false, variation: Int? = nil) -> [Block] {
+		var blocks: [Block] = []
 		
-		let newVariation = variation ?? ScheduleManager.instance.getVariation(self.date)
-		for block in self.blocks
-		{
-			if block.variation == nil || allVariations || block.variation == newVariation
-			{
+		let filterVariation = variation ?? ScheduleManager.instance.getVariation(self.date)
+		for block in self.blocks {
+			if block.variation == nil || allVariations || block.variation == filterVariation {
 				blocks.append(block)
 			}
 		}
+		
 		return blocks
 	}
 	
-	func getBlockByHash(_ hash: Int) -> ScheduleBlock?
-	{
-		for block in self.blocks
-		{
-			if block.hashValue == hash
-			{
-				return block
-			}
-		}
-		return nil
-	}
-	
-	func hasBlock(_ id: BlockID) -> Bool
-	{
+	func hasBlock(_ id: BlockID) -> Bool {
 		return getBlock(id) != nil
 	}
 	
-	func hasBlock(_ block: ScheduleBlock) -> Bool
-	{
+	func hasBlock(_ block: Block) -> Bool {
 		return self.getBlocks().contains(block)
 	}
 	
-	func getBlock(_ id: BlockID) -> ScheduleBlock?
-	{
-		for block in self.getBlocks()
-		{
-			if block.blockId == id
-			{
+	func getBlock(_ id: BlockID) -> Block? {
+		for block in self.getBlocks() {
+			if block.id == id {
 				return block
 			}
 		}
 		return nil
 	}
 	
-	func getBlockBefore(_ block: ScheduleBlock) -> ScheduleBlock?
-	{
-		if !self.hasBlock(block)
-		{
+	func getBlockBefore(_ block: Block) -> Block? {
+		if !self.hasBlock(block) {
 			return nil
 		}
 		
-		var previous: ScheduleBlock? = nil
-		for cur in self.getBlocks()
-		{
-			if cur == block
-			{
-				return previous
-			}
-			previous = cur
-		}
-		return nil
-	}
-	
-	func getBlockAfter(_ block: ScheduleBlock) -> ScheduleBlock?
-	{
-		if !self.hasBlock(block)
-		{
-			return nil
-		}
-		
-		var getNext = false
-		for nextBlock in self.getBlocks() {
-			if getNext {
-				return nextBlock
+		var found = false
+		for cur in self.getBlocks().reversed() {
+			if found {
+				return cur
 			}
 			
-			if nextBlock == block {
-				getNext = true
+			if cur == block {
+				found = true
 			}
 		}
 		return nil
 	}
 	
-	func getBlocksAfter(_ block: ScheduleBlock) -> [ScheduleBlock] {
+	func getBlockAfter(_ block: Block) -> Block? {
+		if !self.hasBlock(block) {
+			return nil
+		}
 		
+		var found = false
+		for cur in self.getBlocks() {
+			if found {
+				return cur
+			}
+			
+			if cur == block {
+				found = true
+			}
+		}
+		return nil
+	}
+	
+	func getBlocksAfter(_ block: Block) -> [Block] {
 		if !self.hasBlock(block) {
 			return []
 		}
 		
 		var found = false
-		var list: [ScheduleBlock] = []
+		var list: [Block] = []
 		for block in self.getBlocks() {
 			if found {
 				list.append(block)
@@ -160,63 +121,32 @@ extension DateSchedule: Equatable
 				found = true
 			}
 		}
-		
 		return list
 	}
 	
-	func getBlocksBefore(_ block: ScheduleBlock) -> [ScheduleBlock] {
-		
+	func getBlocksBefore(_ block: Block) -> [Block] {
 		if !self.hasBlock(block) {
 			return []
 		}
 		
-		var list: [ScheduleBlock] = []
-		for block in self.getBlocks() {
-			if block == block {
+		var list: [Block] = []
+		for cur in self.getBlocks() {
+			if cur == block {
 				return list
 			}
 			
-			list.append(block)
+			list.append(cur)
 		}
 		
 		return list
 	}
 	
-	static func ==(lhs: DateSchedule, rhs: DateSchedule) -> Bool
-	{
-		if lhs.blocks.count != rhs.blocks.count
-		{
-			return false
-		}
-		
-		if lhs.subtitle != rhs.subtitle
-		{
-			return false
-		}
-		
-		for i in 0..<lhs.blocks.count
-		{
-			if lhs.blocks[i] != rhs.blocks[i]
-			{
-				return false
-			}
-		}
-		
-		return true
+	static func ==(lhs: DateSchedule, rhs: DateSchedule) -> Bool {
+		return lhs.uuid == rhs.uuid
 	}
 	
-	var hashValue: Int
-	{
-		var val = 1
-		
-		val ^= date.hashValue
-		val ^= self.changed.hashValue
-		val ^= self.subtitle?.hashValue ?? 1
-		
-		for block in self.blocks
-		{
-			val ^= block.hashValue
-		}
-		return val
+	var hashValue: Int {
+		return self.uuid.hashValue
 	}
+	
 }

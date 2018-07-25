@@ -9,84 +9,76 @@
 import Foundation
 import AddictiveLib
 
-class CourseManager: Manager
-{
+class CourseManager: Manager {
+	
 	static let instance = CourseManager()
 	
-	private(set) var meetings: [Course] // All added meetings including one time ones.
+	private(set) var meetings: [Course] = [] // All added meetings including one time ones.
 	
-	init()
-	{
-		self.meetings = []
-		super.init("Meetings Manager")
+	init() {
+		super.init("Meetings")
 		
 		self.registerStorage(MeetingPrefModule(self))
 	}
 	
-	func getCourses() -> [Course]
-	{
-		return self.meetings
+	func loadedCourse(course: Course) {
+		self.meetings.append(course)
 	}
 	
-	func removeCourse(_ meeting: Course)
-	{
-		while self.meetings.contains(meeting)
-		{
-			for i in 0..<self.meetings.count
-			{
-				if self.meetings[i] === meeting
-				{
+	func removeCourse(_ meeting: Course) {
+		while self.meetings.contains(meeting) {
+			for i in 0..<self.meetings.count {
+				if self.meetings[i] == meeting {
 					self.meetings.remove(at: i)
+					
+					self.saveStorage()
 					break
 				}
 			}
 		}
 	}
 	
-	func addCourse(_ meeting: Course)
-	{
+	func addCourse(_ meeting: Course) {
 		self.meetings.append(meeting)
+		self.saveStorage()
 	}
 	
-	//	TODO: Implement a callback system for courses changed.
-	
-	func getCourses(schedule: DateSchedule, block: BlockID) -> BlockCourseList
-	{
+	func getCourses(schedule: DateSchedule, block: BlockID) -> BlockCourseList {
 		return self.getCourses(date: schedule.date, schedule: schedule).fromBlock(block)
 	}
 	
-	func getCourses(date: EnscribedDate, schedule: DateSchedule) -> DayCourseList // You have to supply your own schedule. I don't wanna have to deal with calling it and dealing with the web call
-	{
+	func getCourses(date: Date, schedule: DateSchedule) -> DayCourseList {
 		var list: [Course] = []
 		
-		for activity in self.meetings
-		{
-			if self.doesMeetOnDate(activity, date: date, schedule: schedule)
-			{
+		for activity in self.meetings {
+			if self.doesMeetOnDate(activity, date: date, schedule: schedule) {
 				list.append(activity)
 			}
 		}
 		
-		return DayCourseList(date, list)
+		return DayCourseList(date: date, meetings: list)
 	}
 	
-	private func doesMeetOnDate(_ meeting: Course, date: EnscribedDate, schedule: DateSchedule) -> Bool
-	{
+	private func doesMeetOnDate(_ meeting: Course, date: Date, schedule: DateSchedule) -> Bool {
 		let meetingSchedule = meeting.courseSchedule
-		switch meetingSchedule.frequency
-		{
+		switch meetingSchedule.frequency {
 		case .everyDay:
-			if schedule.hasBlock(meetingSchedule.block)
-			{
+			if schedule.hasBlock(meetingSchedule.block) {
 				return true
 			}
 			break
 		case .specificDays:
-			if meetingSchedule.meetingDaysContains(date.dayOfWeek)
-			{
-				if schedule.hasBlock(meetingSchedule.block)
-				{
-					return true
+			if let daySub = schedule.standinDayId { // Is actually standing in for a different day.
+				if meetingSchedule.meetingDaysContains(daySub) {
+					if schedule.hasBlock(meetingSchedule.block) {
+						return true
+					}
+				}
+			} else {
+				if meetingSchedule.meetingDaysContains(date.weekday) {
+					if schedule.hasBlock(meetingSchedule.block) {
+						return true
+					}
 				}
 			}
 			break

@@ -8,12 +8,12 @@
 
 import Foundation
 import UIKit
-import Presentr
 import AddictiveLib
 
-class BlockViewController: TableHandler
+class BlockViewController: UIViewController, TableBuilder
 {
 	@IBOutlet weak var tableRep: UITableView!
+	private var tableHandler: TableHandler!
 	
 	@IBOutlet weak var headerView: UIView!
 	@IBOutlet weak var stackView: UIStackView!
@@ -59,14 +59,16 @@ class BlockViewController: TableHandler
 	override func viewDidLoad()
 	{
 		super.viewDidLoad()
-		super.link(self.tableRep)
+
+		self.tableHandler = TableHandler(table: self.tableRep)
+		self.tableHandler.builder = self
 		
 		self.buildRefreshControl()
 		
 		self.loadingIndicator.startAnimating()
 		self.errorLabel.text = nil
 		
-		self.tableView.isHidden = true
+		self.tableRep.isHidden = true
 		self.navigationItem.title = nil
 		
 		if !self.registeredScheduleHandler
@@ -100,11 +102,11 @@ class BlockViewController: TableHandler
 	}
 	
 	private func buildRefreshControl() {
-		self.tableView.refreshControl = UIRefreshControl()
+		self.tableRep.refreshControl = UIRefreshControl()
 		
-		self.tableView.refreshControl?.layer.zPosition = -1
-		self.tableView.refreshControl?.layer.backgroundColor = Scheme.ColorOrange.cgColor
-		self.tableView.refreshControl?.tintColor = UIColor.white
+		self.tableRep.refreshControl?.layer.zPosition = -1
+		self.tableRep.refreshControl?.layer.backgroundColor = Scheme.ColorOrange.cgColor
+		self.tableRep.refreshControl?.tintColor = UIColor.white
 	}
 	
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -125,20 +127,20 @@ class BlockViewController: TableHandler
 		}
 	}
 	
-	override func refresh() {
+	func buildCells(layout: TableLayout) {
 		if self.daySchedule == nil {
 			//
 		} else if self.daySchedule!.isEmpty {
 			//
 		} else {
 			if TimeUtils.isToday(self.date) {
-				self.addModule(BlockTableModuleToday(controller: self))
+				self.tableHandler.addModule(BlockTableModuleToday(controller: self))
 			}
-			self.addModule(BlockTableModuleBlocks(controller: self))
+			self.tableHandler.addModule(BlockTableModuleBlocks(controller: self))
 		}
 		
-		self.tableView.contentInset = UIEdgeInsets(top: self.actualHeaderHeight, left: 0, bottom: 0, right: 0)
-		self.tableView.contentOffset = CGPoint(x: 0.0, y: -self.tableView.contentInset.top)
+		self.tableRep.contentInset = UIEdgeInsets(top: self.actualHeaderHeight, left: 0, bottom: 0, right: 0)
+		self.tableRep.contentOffset = CGPoint(x: 0.0, y: -self.tableRep.contentInset.top)
 	}
 	
 	@IBAction func openLunchMenu(_ sender: Any) {
@@ -155,7 +157,7 @@ class BlockViewController: TableHandler
 	
 	private func reload(hard: Bool, delayResult: Bool, useRefreshControl: Bool, hapticFeedback: Bool) {
 		if useRefreshControl {
-			self.tableView.refreshControl!.beginRefreshing()
+			self.tableRep.refreshControl!.beginRefreshing()
 		}
 		
 		if hapticFeedback {
@@ -217,12 +219,12 @@ class BlockViewController: TableHandler
 		}
 		
 		self.loadingIndicator.stopAnimating()
-		self.tableView.refreshControl?.endRefreshing()
+		self.tableRep.refreshControl?.endRefreshing()
 		
 		self.updateHeader()
-		self.reloadTable()
+		self.tableHandler.reload()
 		
-		self.tableView.isHidden = false
+		self.tableRep.isHidden = false
 		
 		if self.daySchedule == nil {
 			self.errorLabel.text = "An Error Occured"

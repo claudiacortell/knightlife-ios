@@ -18,9 +18,9 @@ class BlockTableModuleToday: TableModule
 		self.controller = controller
 	}
 	
-	func loadCells(form: TableForm)
+	func loadCells(layout: TableLayout)
 	{
-		let section = form.addSection()
+		let section = layout.addSection()
 		
 		section.addSpacerCell().setHeight(10)
 		

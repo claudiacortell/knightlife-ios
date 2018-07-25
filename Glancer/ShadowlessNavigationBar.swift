@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import Presentr
 import Hero
 
 class NavigationBarController: UINavigationController, UINavigationControllerDelegate

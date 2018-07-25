@@ -42,7 +42,7 @@ class MeetingPrefModule: StorageHandler {
 		{
 			for (rawBlockId, keyPairs) in meta
 			{
-				if let blockId = BlockID.fromRaw(raw: rawBlockId)
+				if let blockId = BlockID.fromStringValue(name: rawBlockId)
 				{
 					if [ BlockID.a, .b, .c, .d, .e, .f, .g ].contains(blockId)
 					{
@@ -52,7 +52,7 @@ class MeetingPrefModule: StorageHandler {
 
 						let schedule = CourseSchedule(block: blockId, frequency: .everyDay)
 						let course = Course(name: name, schedule: schedule)
-						course.color = color
+						course.color = UIColor(hex: color ?? "")
 						course.location = room
 						
 						self.manager.addCourse(course)

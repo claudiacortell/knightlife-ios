@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import Presentr
 import AddictiveLib
 
 class CourseDetailViewController: UITableViewController

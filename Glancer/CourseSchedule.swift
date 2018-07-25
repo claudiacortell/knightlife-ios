@@ -9,56 +9,56 @@
 import Foundation
 import AddictiveLib
 
-enum CourseFrequency
-{
-    case
-    everyDay,
-    specificDays
+enum CourseFrequency {
+	
+    case everyDay
+	case specificDays([DayOfWeek])
+	
 }
 
-class CourseSchedule
-{
-    var block: BlockID //Null = all day
-	var frequency: CourseFrequency
+struct CourseSchedule {
 	
-    private var meetingDays: [Day]? // Only used for specific day meetings
-
-	init(block: BlockID, frequency: CourseFrequency)
-	{
+    let block: BlockID //Null = all day
+	let frequency: CourseFrequency
+	
+	init(block: BlockID, frequency: CourseFrequency) {
 		self.block = block
 		self.frequency = frequency
 	}
 	
-	func meetingDaysContains(_ day: Day) -> Bool
-	{
-		if let days = self.meetingDays
-		{
+	func meetingDaysContains(_ day: DayOfWeek) -> Bool {
+		switch self.frequency {
+		case .everyDay:
+			return false
+		case .specificDays(let days):
 			return days.contains(day)
+		}
+	}
+	
+	func addMeetingDay(_ day: DayOfWeek) -> Bool {
+		switch self.frequency {
+		case .specificDays(var days):
+			days.append(day)
+			return true
+		default:
+			break
 		}
 		return false
 	}
 	
-	func addMeetingDay(_ day: Day)
-	{
-		if !self.meetingDaysContains(day)
-		{
-			if self.meetingDays == nil { self.meetingDays = [] }
-			self.meetingDays!.append(day)
-		}
-	}
-	
-	func removeMeetingDay(_ day: Day)
-	{
-		while self.meetingDaysContains(day)
-		{
-			for i in 0..<self.meetingDays!.count
-			{
-				if self.meetingDays![i] == day
-				{
-					self.meetingDays!.remove(at: i)
-					break
+	func removeMeetingDay(_ day: DayOfWeek) -> Bool {
+		switch self.frequency {
+		case .specificDays(var days):
+			for i in 0..<days.count {
+				if days[i] == day {
+					days.remove(at: i)
+					return true
 				}
 			}
+		default:
+			break
 		}
+		return false
 	}
+	
 }

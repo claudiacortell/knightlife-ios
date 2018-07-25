@@ -19,8 +19,8 @@ class BlockTableModuleBlocks: TableModule
 		self.controller = controller
 	}
 	
-	func loadCells(form: TableForm) {
-		let section = form.addSection().setHeaderHeight(1)
+	func loadCells(layout: TableLayout) {
+		let section = layout.addSection().setHeaderHeight(1)
 		section.addSpacerCell().setHeight(3)
 		
 		for block in self.controller.daySchedule!.getBlocks() // Testing variations

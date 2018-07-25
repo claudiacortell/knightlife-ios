@@ -8,12 +8,15 @@
 
 import Foundation
 import AddictiveLib
+import UIKit
 
-class DayScheduleViewController: TableHandler {
+class DayScheduleViewController: UIViewController, TableBuilder {
 	
 	var parentController: DayViewController!
 	
 	@IBOutlet weak private var tableReference: UITableView!
+	private var tableHandler: TableHandler!
+	
 	@IBOutlet weak private var loadingIndicator: UIActivityIndicatorView!
 	@IBOutlet weak private var failedLabel: UILabel!
 	@IBOutlet weak private var noSchoolLabel: UILabel!
@@ -25,23 +28,25 @@ class DayScheduleViewController: TableHandler {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		self.link(self.tableReference)		
+		self.tableHandler = TableHandler(table: self.tableReference)
+		self.tableHandler.builder = self
+		
 		self.parentController.toolbarView.addHeightChangedCallback() {
 			height in
 			
-			self.tableView.contentInset = UIEdgeInsets(top: height, left: 0, bottom: 0, right: 0)
+			self.tableReference.contentInset = UIEdgeInsets(top: height, left: 0, bottom: 0, right: 0)
 //			self.tableView.contentOffset = CGPoint(x: 0, y: height)
 		}
 		
 		self.setupRefreshControl()
 		
-		self.reloadTable()
+		self.tableHandler.reload()
 		self.reloadSchedule(force: false, visual: true, haptic: false)
 	}
 	
 	private func setupRefreshControl() {
-		self.tableView.refreshControl = UIRefreshControl()
-		self.tableView.refreshControl!.addTarget(self, action: #selector(DayScheduleViewController.reloadScheduleFromPull), for: UIControlEvents.valueChanged)
+		self.tableReference.refreshControl = UIRefreshControl()
+		self.tableReference.refreshControl!.addTarget(self, action: #selector(DayScheduleViewController.reloadScheduleFromPull), for: UIControlEvents.valueChanged)
 	}
 	
 	func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -52,7 +57,7 @@ class DayScheduleViewController: TableHandler {
 		self.parentController.toolbarView.didScroll(scrollView.contentOffset.y + self.parentController.toolbarView.originalHeight)
 	}
 	
-	override func refresh() {
+	func buildCells(layout: TableLayout) {
 		self.noSchoolLabel.isHidden = true
 		self.failedLabel.isHidden = true
 		
@@ -73,7 +78,7 @@ class DayScheduleViewController: TableHandler {
 		}
 		
 		var blocks: [ScheduleBlock] = []
-		let blockSection = self.tableForm.addSection()
+		let blockSection = layout.addSection()
 		if parentController.date == TimeUtils.todayEnscribed && parentController.isTodayView {
 			var block: ScheduleBlock?
 			var header = ""
@@ -163,7 +168,7 @@ class DayScheduleViewController: TableHandler {
 		}
 		
 		if visual {
-			self.reloadTable()
+			self.tableHandler.reload()
 			
 			self.loadingIndicator.isHidden = false
 			self.loadingIndicator.startAnimating()
@@ -199,7 +204,7 @@ class DayScheduleViewController: TableHandler {
 			
 			if visual {
 				self.loadingIndicator.stopAnimating()
-				self.reloadTable()
+				self.tableHandler.reload()
 			}
 		}.start()
 	}

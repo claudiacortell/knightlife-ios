@@ -11,8 +11,7 @@ target 'Glancer' do
 
   # Pods for Glancer
   pod 'AddictiveLib'
-  pod 'Presentr'
   pod 'Hero'
-  pod 'FSCalendar'
+  pod 'SnapKit'
 
 end

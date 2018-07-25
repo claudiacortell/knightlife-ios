@@ -8,70 +8,82 @@
 
 import Foundation
 
-enum BlockID: String
-{
-	case
-	a = "A",
-	b = "B",
-	c = "C",
-	d = "D",
-	e = "E",
-	f = "F",
-	g = "G",
-	x = "X",
-    lunch = "Lunch",
-	activities = "Activities",
-	lab = "Lab",
-	custom = "Custom",
-	advisory = "Advisory"
+enum BlockID: Int {
 	
-	var id: Int
-	{
-		return BlockID.values().index(of: self)!
+	case a
+	case b
+	case c
+	case d
+	case e
+	case f
+	case g
+	case x
+    case lunch
+	case activities
+	case lab
+	case custom
+	case advisory
+	case classMeeting
+	
+	var stringValue: String {
+		switch self {
+		case .a:
+			return "A"
+		case .b:
+			return "B"
+		case .c:
+			return "C"
+		case .d:
+			return "D"
+		case .e:
+			return "E"
+		case .f:
+			return "F"
+		case .g:
+			return "G"
+		case .x:
+			return "X"
+		case .lunch:
+			return "Lunch"
+		case .activities:
+			return "Activities"
+		case .lab:
+			return "Lab"
+		case .custom:
+			return "Custom"
+		case .advisory:
+			return "Advisory"
+		case .classMeeting:
+			return "Class Meeting"
+		}
 	}
 	
-	var displayName: String
-	{
-		if BlockID.regularBlocks().contains(self)
-		{
-			return "\(self.rawValue) Block"
+	var displayName: String {
+		if BlockID.letterBlocks.contains(self) {
+			return "\(self.stringValue) Block"
 		}
-		return self.rawValue
+		return self.stringValue
 	}
 	
 	var displayLetter: String {
-		if BlockID.regularBlocks().contains(self) || self.rawValue.count <= 1 {
-			return self.rawValue
-		} else {
-			return self.rawValue.substring(start: 0, distance: 2)
+		if BlockID.letterBlocks.contains(self) {
+			return self.stringValue
 		}
+		
+		return self.stringValue.substring(start: 0, distance: 2)
 	}
 	
-	static func fromRaw(raw: String) -> BlockID?
-	{
-		for block in BlockID.values()
-		{
-			if block.rawValue == raw
-			{
-				return block
+	static func fromStringValue(name: String) -> BlockID? {
+		for cur in BlockID.values {
+			if cur.stringValue == name {
+				return cur
 			}
 		}
 		return nil
 	}
 	
-	static func fromId(_ id: Int) -> BlockID?
-	{
-		for block in BlockID.values()
-		{
-			if block.id == id
-			{
-				return block
-			}
-		}
-		return nil
-	}
-	
-	static func values() -> [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x, .custom, .activities, .lab, .lunch, .advisory] }
-	static func regularBlocks() -> [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x] }
-	static func academicBlocks() -> [BlockID] { return [.a, .b, .c, .d, .e, .f, .g] }
+	static var values: [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x, .custom, .activities, .lab, .lunch, .advisory, .classMeeting] }
+	static var letterBlocks: [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x] }
+	static var academicBlocks: [BlockID] { return [.a, .b, .c, .d, .e, .f, .g] }
+
 }

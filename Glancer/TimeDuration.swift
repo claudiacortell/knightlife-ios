@@ -7,31 +7,23 @@
 
 import Foundation
 
-public struct TimeDuration {
+struct TimeDuration {
 	
-	public let startTime: EnscribedTime
-	public let endTime: EnscribedTime
+	let start: Date
+	let end: Date
 	
-	public init(startTime: EnscribedTime, endTime: EnscribedTime) {
-		self.startTime = startTime
-		self.endTime = endTime
+	public init(start: Date, end: Date) {
+		self.start = start
+		self.end = end
 	}
 	
 }
 
 
-extension TimeDuration: Hashable {
-	
-	public static func ==(lhs: TimeDuration, rhs: TimeDuration) -> Bool {
-		return lhs.startTime == rhs.startTime && lhs.endTime == rhs.endTime
-	}
-	
-	public var hashValue: Int {
-		return startTime.hashValue ^ endTime.hashValue
-	}
-	
-	public func duration() -> (hours: Int, minutes: Int) {
-		return (hours: abs(self.endTime.hour - self.startTime.hour), minutes: abs(self.endTime.minute - self.startTime.minute))
+extension TimeDuration {
+
+	public func duration() -> (hours: Int, minutes: Int, seconds: Int) {
+		return (hours: abs(self.start.hour - self.end.hour), minutes: abs(self.start.minute - self.end.minute), seconds: abs(self.start.second - self.end.second))
 	}
 	
 }

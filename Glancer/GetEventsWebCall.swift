@@ -8,47 +8,63 @@
 
 import Foundation
 import AddictiveLib
+import Unbox
 
-class GetEventsWebCall: UnboxWebCall<GetEventsResponse, EventList>
-{
-	let manager: EventManager
-	let date: EnscribedDate
+class GetEventsWebCall: UnboxWebCall<GetEventsResponse, EventList> {
 	
-	init(_ manager: EventManager, date: EnscribedDate)
-	{
-		self.manager = manager
+	let date: Date
+	
+	init(date: Date) {
 		self.date = date
 		
 		super.init(call: "request/events")
 		
-		self.parameter("date", val: date.string)
+		self.parameter("date", val: date.webSafeDate)
 	}
 	
-	override func convertToken(_ data: GetEventsResponse) -> EventList?
-	{
+	override func convertToken(_ data: GetEventsResponse) -> EventList? {
 		var events: [Event] = []
-		for event in data.events
-		{
-			if let blockId = BlockID.fromRaw(raw: event.blockId)
-			{
+		for event in data.events {
+			if let blockId = BlockID.fromStringValue(name: event.blockId) {
 				var audience: [EventAudience] = []
-				for group in event.audience
-				{
-					if let val = EventAudience.fromId(group)
-					{
+				for group in event.audience {
+					if let val = EventAudience(rawValue: group) {
 						audience.append(val)
 					}
 				}
 				
-				let item = Event(blockId: blockId, mandatory: event.mandatory, audience: audience, name: event.name, description: event.description)
+				let item = Event(blockId: blockId, mandatory: event.mandatory, audience: audience, description: event.description)
 				events.append(item)
 			}
 		}
-		return EventList(self.date, events: events)
+		return EventList(date: self.date, events: events)
+	}
+}
+
+class GetEventsResponse: WebCallPayload {
+	
+	let events: [GetEventsResponseEvent]
+	
+	required init(unboxer: Unboxer) throws {
+		self.events = try unboxer.unbox(keyPath: "events", allowInvalidElements: false)
 	}
 	
-	override func handleCall(error: ResourceWatcherError?, data: EventList?)
-	{
+}
+
+class GetEventsResponseEvent: WebCallPayload {
+	
+	let blockId: String
+	let mandatory: Bool
+	let audience: [Int]
+	
+	let description: String
+	
+	required init(unboxer: Unboxer) throws {
+		self.blockId = try unboxer.unbox(key: "blockId")
+		self.mandatory = try unboxer.unbox(key: "mandatory")
+		self.audience = try unboxer.unbox(key: "audience")
 		
+		self.description = try unboxer.unbox(key: "description")
 	}
+	
 }

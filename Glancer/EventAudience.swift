@@ -8,22 +8,13 @@
 
 import Foundation
 
-enum EventAudience: String
-{
-	case
+enum EventAudience: Int {
 	
-	freshman = "Freshmen",
-	sophomore = "Sophomores",
-	junior = "Juniors",
-	senior = "Seniors",
+	case allSchool
+
+	case freshmen
+	case sophomores
+	case juniors
+	case seniors
 	
-	teachers = "Teachers",
-	allSchool = "Everyone"
-	
-	static let values: [EventAudience] = [.freshman, .sophomore, .junior, .senior, .teachers, .allSchool]
-	
-	static func fromId(_ id: Int) -> EventAudience?
-	{
-		return EventAudience.values[id]
-	}
 }

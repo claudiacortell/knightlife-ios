@@ -8,10 +8,13 @@
 
 import Foundation
 import AddictiveLib
+import UIKit
 
-class TodayViewController: TableHandler {
+class TodayViewController: UIViewController, TableBuilder {
 //	UNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSEDUNUSED
 	@IBOutlet weak var tableReference: UITableView!
+	private var tableHandler: TableHandler!
+	
 	@IBOutlet weak var toolbarReference: ToolbarView!
 	
 	@IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
@@ -22,14 +25,16 @@ class TodayViewController: TableHandler {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		self.link(self.tableReference)
-		self.tableView.refreshControl = UIRefreshControl()
+		self.tableHandler = TableHandler(table: self.tableReference)
+		self.tableHandler.builder = self
+		
+		self.tableReference.refreshControl = UIRefreshControl()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		self.reloadTable()
+		self.tableHandler.reload()
 		self.reloadSchedule(force: false, visual: true, haptic: false)
 	}
 	
@@ -37,7 +42,7 @@ class TodayViewController: TableHandler {
 		self.toolbarReference.didScroll(scrollView.contentOffset.y)
 	}
 	
-	override func refresh() {
+	func buildCells(layout: TableLayout) {
 		if self.loading {
 			return
 		}
@@ -61,7 +66,7 @@ class TodayViewController: TableHandler {
 		}
 		
 		if visual {
-			self.reloadTable()
+			self.tableHandler.reload()
 
 			self.loadingIndicator.isHidden = false
 			self.loadingIndicator.startAnimating()
@@ -79,7 +84,7 @@ class TodayViewController: TableHandler {
 			
 			if visual {
 				self.loadingIndicator.stopAnimating()
-				self.reloadTable()
+				self.tableHandler.reload()
 			}
 		}
 	}

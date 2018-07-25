@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct Event
-{
+struct Event {
+	
 	let blockId: BlockID
 	let mandatory: Bool
 	let audience: [EventAudience]
 	
-	let name: String
-	var description: String?
+	let description: String
+	
 }

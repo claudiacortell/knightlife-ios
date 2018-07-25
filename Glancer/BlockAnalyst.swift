@@ -7,88 +7,55 @@
 //
 
 import Foundation
+import UIKit
 
-class BlockAnalyst
-{
-	let block: ScheduleBlock
-	let schedule: DateSchedule
+class BlockAnalyst {
 	
-	init(_ block: ScheduleBlock, schedule: DateSchedule)
-	{
-		self.block = block
+	let schedule: DateSchedule
+	let block: Block
+	
+	init(schedule: DateSchedule, block: Block) {
 		self.schedule = schedule
+		self.block = block
 	}
 	
-	func getCourses() -> BlockCourseList
-	{
+	func getCourses() -> BlockCourseList {
 		return CourseManager.instance.getCourses(schedule: self.schedule, block: block.blockId)
 	}
 	
-	func getDisplayName() -> String
-	{
-		if self.block.blockId == .custom
-		{
-			return self.block.customName ?? self.block.blockId.displayName
+	func getDisplayName() -> String {
+		if self.block.id == .custom {
+			return self.block.customName ?? self.block.id.displayName
 		}
 		
 		let courses = self.getCourses()
-		if courses.isEmpty
-		{
-			if self.block.blockId == .lab, let previous = self.schedule.getBlockBefore(self.block) // If it's a lab and there's a previous block
-			{
-				let previousAnalyst = BlockAnalyst(previous, schedule: self.schedule)
-				if previousAnalyst.getCourses().isEmpty
-				{
-					return "\(previousAnalyst.block.blockId.displayLetter) \(self.block.blockId.displayName)" // E.G. X Lab
-				} else
-				{
-					return "\(previousAnalyst.getDisplayName()) \(self.block.blockId.displayName)" // E.G. Chemistry Lab
-				}
+		if !courses.isEmpty {
+			return courses.courses.first!.name
+		} else {
+			guard self.block.id == .lab, let previous = self.schedule.getBlockBefore(self.block) else {
+				return self.block.id.displayName
 			}
 			
-			return self.block.blockId.displayName
-		} else
-		{
-			return courses.courses.first!.name // Get name of first available course
+//			Logic for if the block is a Lab.
+			let previousAnalyst = BlockAnalyst(schedule: self.schedule, block: previous)
+			if previousAnalyst.getCourses().isEmpty {
+				return "\(previousAnalyst.block.id.displayLetter) \(self.block.id.displayName)"
+			} else {
+				return "\(previousAnalyst.getDisplayName()) \(self.block.id.displayName)"
+			}
 		}
 	}
 	
-	func getDisplayLetter() -> String
-	{
-		if self.block.blockId == .custom
-		{
-			return "!!"
-		}
-		
-		if self.block.blockId == .lab, let previous = self.schedule.getBlockBefore(self.block) // If it's a lab and there's a previous block
-		{
-			return "\(previous.blockId.displayLetter.first!)L" // E.G. AL
-		} else if let variation = self.block.variation, self.block.blockId != .lunch
-		{
-			return "\(block.blockId.displayLetter.first!)\(variation + 1)" // E.G. A1
-		} else
-		{
-			return self.block.blockId.displayLetter
-		}
-	}
-	
-	func getColor() -> String
-	{
-		if self.block.blockId == .custom, let color = self.block.color
-		{
+	func getColor() -> UIColor {
+		if self.block.id == .custom, let color = self.block.color {
 			return color
 		}
 		
 		let courses = self.getCourses()
-		if courses.isEmpty
-		{
-			if self.block.blockId == .lab, let previous = self.schedule.getBlockBefore(self.block)
-			{
-				let analyst = BlockAnalyst(previous, schedule: self.schedule)
-				if !analyst.getCourses().isEmpty
-				{
-					return analyst.getColor()
-				}
+		if courses.isEmpty {
+			if self.block.id == .lab, let previous = self.schedule.getBlockBefore(self.block) {
+				let previousAnalyst = BlockAnalyst(schedule: self.schedule, block: self.block)
+				return previousAnalyst.getColor()
 			}
 			
 //			return self.getColor
@@ -97,6 +64,6 @@ class BlockAnalyst
 			return "999999"
 		}
 		
-		return courses.courses.first!.color ?? "999999"
+		return courses.courses.first!.color
 	}
 }

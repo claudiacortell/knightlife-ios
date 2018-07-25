@@ -8,27 +8,30 @@
 
 import Foundation
 import AddictiveLib
+import UIKit
 
-class SettingsViewManager: TableHandler {
+class SettingsViewManager: UIViewController, TableBuilder {
 	
 	@IBOutlet weak var tableRep: UITableView!
+	private var tableHandler: TableHandler!
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		self.link(self.tableRep)
+		self.tableHandler = TableHandler(table: self.tableRep)
+		self.tableHandler.builder = self
 		
-		self.tableView.rowHeight = UITableViewAutomaticDimension
-		self.tableView.estimatedRowHeight = 70.0
+		self.tableRep.rowHeight = UITableViewAutomaticDimension
+		self.tableRep.estimatedRowHeight = 70.0
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		self.reloadTable()
+		self.tableHandler.reload()
 	}
 	
-	override func refresh() {
-		let section = self.tableForm.addSection()
+	func buildCells(layout: TableLayout) {
+		let section = layout.addSection()
 		section.addSpacerCell().setHeight(10)
 		
 		section.addCell("header").setHeight(40).setCallback() {

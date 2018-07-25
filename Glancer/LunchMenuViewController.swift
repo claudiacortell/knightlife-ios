@@ -8,19 +8,22 @@
 
 import Foundation
 import UIKit
-import Presentr
 import AddictiveLib
 
-class LunchMenuViewController: TableHandler
+class LunchMenuViewController: UIViewController, TableBuilder
 {
 	var controller: BlockViewController!
 	@IBOutlet weak var tableRef: UITableView!
+	private var tableHandler: TableHandler!
 	
 	@IBOutlet weak var menuTitle: UILabel!
 	@IBOutlet weak var menuSubtitle: UILabel!
 
 	override func viewDidLoad() {
-		self.link(self.tableRef)
+		super.viewDidLoad()
+		
+		self.tableHandler = TableHandler(table: self.tableRef)
+		self.tableHandler.builder = self
 		
 		if let lunch = self.controller.lunchMenu {
 			if let title = lunch.title {
@@ -31,13 +34,13 @@ class LunchMenuViewController: TableHandler
 			}
 		}
 		
-		self.tableView.rowHeight = UITableViewAutomaticDimension
-		self.tableView.estimatedRowHeight = 40.0
+		self.tableRef.rowHeight = UITableViewAutomaticDimension
+		self.tableRef.estimatedRowHeight = 40.0
 		
-		self.tableView.reloadData()
+		self.tableRef.reloadData()
 	}
 	
-	override func refresh() {
+	func buildCells(layout: TableLayout) {
 		for type in LunchMenuItemType.values {
 			var items: [LunchMenuItem] = []
 			for item in self.controller.lunchMenu!.items {
@@ -47,7 +50,7 @@ class LunchMenuViewController: TableHandler
 			}
 			
 			if !items.isEmpty {
-				let section = self.tableForm.addSection()
+				let section = layout.addSection()
 				section.setTitle(type.rawValue.uppercased())
 				section.setHeaderHeight(14)
 				section.setHeaderColor(Scheme.ColorOrange)
@@ -83,24 +86,24 @@ class LunchMenuViewController: TableHandler
 		}
 	}
 	
-	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		tableView.deselectRow(at: indexPath, animated: true)
-		
-		if let template = self.tableForm.getSection(indexPath)?.getCell(indexPath) {
-			if let item: LunchMenuItem = template.getMetadata("item") {
-				if item.allergy == nil {
-					return
-				}
-			}
-			
-			template.setMetadata("show-allergen", data: !(template.getMetadata("show-allergen") ?? false))
-		}
-		
-		HapticUtils.SELECTION.selectionChanged()
-		
-		tableView.beginUpdates()
-		tableView.reloadRows(at: [indexPath], with: .automatic)
-		tableView.endUpdates()
-	}
+//	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//		tableView.deselectRow(at: indexPath, animated: true)
+//
+//		if let template = self.tableForm.getSection(indexPath)?.getCell(indexPath) {
+//			if let item: LunchMenuItem = template.getMetadata("item") {
+//				if item.allergy == nil {
+//					return
+//				}
+//			}
+//
+//			template.setMetadata("show-allergen", data: !(template.getMetadata("show-allergen") ?? false))
+//		}
+//
+//		HapticUtils.SELECTION.selectionChanged()
+//		
+//		tableView.beginUpdates()
+//		tableView.reloadRows(at: [indexPath], with: .automatic)
+//		tableView.endUpdates()
+//	}
 	
 }

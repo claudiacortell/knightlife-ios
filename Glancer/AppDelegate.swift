@@ -11,12 +11,11 @@ import Alamofire
 import AddictiveLib
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate
-{
+class AppDelegate: UIResponder, UIApplicationDelegate {
+	
     var window: UIWindow?
 	
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
-	{
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		Globals.BundleID = "MAD.BBN.KnightLife"
 		Globals.StorageID = "MAD.BBN.KnightLife.Storage"
 		
@@ -36,16 +35,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 		_ = ScheduleManager.instance
 		_ = CourseManager.instance
 		_ = LunchManager.instance
-//		_ = SportsManager.instance
-//		_ = EventManager.instance
-		
-//		EventManager.instance.fetchEvents(TimeUtils.todayEnscribed, {today in print(today.data)})
+		_ = EventManager.instance
 		
         return true
     }
 	
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data)
-	{
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let tokenChars = (deviceToken as NSData).bytes.bindMemory(to: CChar.self, capacity: deviceToken.count)
         var tokenString = ""
         
@@ -75,10 +70,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         print("failed to register for remote notifications: \(error)")
     }
     
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void)
-	{
-		if let aps = userInfo as? [String: Any], let type = aps["type"] as? Int
-		{
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+		if let aps = userInfo as? [String: Any], let type = aps["type"] as? Int {
 			if type == 0 // Update local schedule
 			{
 				ScheduleManager.instance.reloadAllSchedules()

@@ -8,53 +8,90 @@
 
 import Foundation
 import AddictiveLib
+import Unbox
 
-class GetScheduleWebCall: UnboxWebCall<GetScheduleResponse, [Day: WeekdaySchedule]> {
+class GetScheduleWebCall: UnboxWebCall<GetScheduleResponse, [DayOfWeek: DaySchedule]> {
 	
-	let manager: ScheduleManager
-	
-	init(_ manager: ScheduleManager) {
-		self.manager = manager
+	init() {
 		super.init(call: "schedule/template")
 	}
 	
-	override func convertToken(_ data: GetScheduleResponse) -> [Day: WeekdaySchedule]? {
-		var dayList: [Day: WeekdaySchedule] = [:]
-		for day in data.days {
+	override func convertToken(_ response: GetScheduleResponse) -> [DayOfWeek: DaySchedule]? {
+		var dayList: [DayOfWeek: DaySchedule] = [:]
+		for responseDay in response.days {
+			guard let dayId = DayOfWeek.fromShortName(shortName: responseDay.dayId) else {
+				print("Recieved an invalid day id: \(responseDay.dayId)")
+				continue
+			}
 			
-			if let dayId = Day.fromRaw(raw: day.dayId) {
-				var blocks: [ScheduleBlock] = []
-				
-				for block in day.blocks {
-					if let blockId = BlockID.fromRaw(raw: block.blockId) {
-						let startTime = EnscribedTime(raw: block.startTime)
-						let endTime = EnscribedTime(raw: block.endTime)
-						let variation = block.variation
-						let associatedBlock: BlockID? = block.associatedBlock == nil ? nil : BlockID.fromRaw(raw: block.associatedBlock!)
-						
-						if !startTime.valid || !endTime.valid || startTime.toDate() == nil || endTime.toDate() == nil {
-							manager.out("Recieved an invalid start/end time: \(block.startTime), \(block.endTime)")
-						} else {
-							let scheduleBlock = ScheduleBlock(blockId: blockId, time: TimeDuration(startTime: startTime, endTime: endTime), variation: variation, customName: nil, color: nil)
-							blocks.append(scheduleBlock)
-						}
-					} else {
-						manager.out("Recieved an invalid block id: \(block.blockId)")
-					}
+			var blocks: [Block] = []
+			
+			for responseBlock in responseDay.blocks {
+				guard let blockId = BlockID.fromStringValue(name: responseBlock.blockId) else {
+					print("Recieved an invalid block id: \(responseBlock.blockId)")
+					continue
 				}
 				
-				let schedule = WeekdaySchedule(dayId, blocks: blocks)
-				
-				if dayList[dayId] != nil {
-					manager.out("Already set information for day: \(dayId.rawValue)")
-				} else {
-					dayList[dayId] = schedule
+				guard let startTime = Date.fromWebTime(string: responseBlock.startTime), let endTime = Date.fromWebTime(string: responseBlock.endTime) else {
+					print("Recieved an invalid start/end time")
+					continue
 				}
+
+				let variation = responseBlock.variation
+				
+				let block = Block(id: blockId, time: TimeDuration(start: startTime, end: endTime), variation: variation, customName: nil, color: nil)
+				blocks.append(block)
+			}
+			
+			let schedule = DaySchedule(day: dayId, blocks: blocks)
+			
+			if dayList[dayId] != nil {
+				print("Already set information for day: \(dayId.rawValue)")
 			} else {
-				manager.out("Recieved an invalid day id: \(day.dayId)")
+				dayList[dayId] = schedule
 			}
 		}
 		return dayList
+	}
+	
+}
+
+struct GetScheduleResponse: WebCallPayload {
+	
+	var days: [GetScheduleResponseDay]
+	
+	init(unboxer: Unboxer) throws {
+		self.days = try unboxer.unbox(keyPath: "days", allowInvalidElements: false)
+	}
+	
+}
+
+struct GetScheduleResponseDay: WebCallPayload {
+	
+	var dayId: String
+	var blocks: [GetScheduleResponseBlock]
+	
+	init(unboxer: Unboxer) throws {
+		self.dayId = try unboxer.unbox(key: "id")
+		self.blocks = try unboxer.unbox(key: "blocks")
+	}
+	
+}
+
+struct GetScheduleResponseBlock: WebCallPayload {
+	
+	var blockId: String
+	var startTime: String
+	var endTime: String
+	
+	var variation: Int?
+	
+	init(unboxer: Unboxer) throws {
+		self.blockId = try unboxer.unbox(key: "id")
+		self.startTime = try unboxer.unbox(key: "start")
+		self.endTime = try unboxer.unbox(key: "end")
+		
+		self.variation = unboxer.unbox(key: "variation")
 	}
 	
 }

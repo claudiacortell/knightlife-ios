@@ -8,58 +8,93 @@
 
 import Foundation
 import AddictiveLib
+import Unbox
 
 class GetPatchWebCall: UnboxWebCall<GetPatchResponse, DateSchedule> {
 	
-	let manager: ScheduleManager
-	let date: EnscribedDate
+	let date: Date
 	
-	init(_ manager: ScheduleManager, date: EnscribedDate) {
-		self.manager = manager
+	init(date: Date) {
 		self.date = date
 		
 		super.init(call: "schedule")
 		
-		self.parameter("dt", val: date.string)
+		self.parameter("date", val: date.webSafeDate)
 	}
 	
 	override func convertToken(_ response: GetPatchResponse) -> DateSchedule? {
-		var blocks: [ScheduleBlock] = []
+		var blocks: [Block] = []
 		
-		for block in response.blocks {
-			if let blockId = BlockID.fromRaw(raw: block.blockId) {
-				
-				let startTime = EnscribedTime(raw: block.startTime)
-				let endTime = EnscribedTime(raw: block.endTime)
-				
-				let variation = block.variation
-//				let associatedBlock: BlockID? = block.associatedBlock == nil ? nil : BlockID.fromRaw(raw: block.associatedBlock!)
-				
-				let customName = block.customName
-				
-				var color = block.overrideColor
-				if color != nil && color!.count != 6 {
-					color = nil
-				}
-				
-				if !startTime.valid || !endTime.valid || startTime.toDate() == nil || endTime.toDate() == nil {
-					manager.out("Recieved an invalid start/end time: \(block.startTime), \(block.endTime)")
-				} else {
-					let scheduleBlock = ScheduleBlock(blockId: blockId, time: TimeDuration(startTime: startTime, endTime: endTime), variation: variation, customName: customName, color: color)
-					blocks.append(scheduleBlock)
-				}
-			} else {
-				manager.out("Recieved an invalid block id: \(block.blockId)")
+		for responseBlock in response.blocks {
+			guard let id = BlockID.fromStringValue(name: responseBlock.blockId) else {
+				print("Recieved an invalid block id: \(responseBlock.blockId)")
+				continue
 			}
+			
+			guard let startTime = Date.fromWebTime(string: responseBlock.startTime), let endTime = Date.fromWebTime(string: responseBlock.endTime) else {
+				print("Failed to parse a date.")
+				continue
+			}
+			
+			let variation = responseBlock.variation
+
+			let customName = responseBlock.customName
+			let color = UIColor(hex: responseBlock.overrideColor ?? "")
+
+			let block = Block(id: id, time: TimeDuration(start: startTime, end: endTime), variation: variation, customName: customName, color: color)
+			blocks.append(block)
 		}
 		
-		var standinDayId: Day?
+		var standinDay: DayOfWeek?
 		if response.replaceDayId != nil {
-			standinDayId = Day.fromId(response.replaceDayId!)
+			standinDay = DayOfWeek(rawValue: response.replaceDayId!)
 		}
 		
-		let daySchedule = DateSchedule(date, blocks: blocks, subtitle: response.subtitle, changed: response.changed ?? false, standinDayId: standinDayId)
+		let daySchedule = DateSchedule(date: self.date, subtitle: response.subtitle, changed: response.changed ?? false, standinDayId: standinDay, blocks: blocks)
 		return daySchedule
 	}
 
+}
+
+struct GetPatchResponse: WebCallPayload
+{
+	var subtitle: String?
+	var blocks: [GetPatchResponseBlock]
+	var changed: Bool?
+	var replaceDayId: Int?
+	
+	init(unboxer: Unboxer) throws
+	{
+		self.subtitle = unboxer.unbox(key: "subtitle")
+		self.changed = unboxer.unbox(key: "changed")
+		self.blocks = try unboxer.unbox(keyPath: "blocks", allowInvalidElements: false)
+		self.replaceDayId = unboxer.unbox(key: "standin-day")
+	}
+}
+
+struct GetPatchResponseBlock: WebCallPayload
+{
+	var blockId: String
+	var startTime: String
+	var endTime: String
+	
+	var overrideColor: String?
+	
+	var variation: Int?
+	//	var associatedBlock: String?
+	
+	var customName: String?
+	
+	init(unboxer: Unboxer) throws
+	{
+		self.blockId = try unboxer.unbox(key: "id")
+		self.startTime = try unboxer.unbox(key: "start")
+		self.endTime = try unboxer.unbox(key: "end")
+		
+		self.overrideColor = unboxer.unbox(key: "color")
+		
+		self.variation = unboxer.unbox(key: "variation")
+		
+		self.customName = unboxer.unbox(key: "name")
+	}
 }

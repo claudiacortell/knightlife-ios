@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import FSCalendar
 import AddictiveLib
 
 class CalendarViewManager: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance

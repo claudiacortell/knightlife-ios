@@ -9,31 +9,24 @@
 import Foundation
 import AddictiveLib
 
-struct DayCourseList
-{
-	var date: EnscribedDate
-	var meetings: [Course]
-	
-	init(_ date: EnscribedDate, _ courses: [Course])
-	{
-		self.date = date
-		self.meetings = courses
-	}
+struct DayCourseList {
+
+	let date: Date
+	let meetings: [Course]
+
 }
 
-extension DayCourseList
-{
-	func fromBlock(_ block: BlockID) -> BlockCourseList
-	{
+extension DayCourseList {
+	
+	func fromBlock(_ block: BlockID) -> BlockCourseList {
 		var list: [Course] = []
 		
-		for activity in self.meetings
-		{
-			if activity.courseSchedule.block == block
-			{
+		for activity in self.meetings {
+			if activity.courseSchedule.block == block {
 				list.append(activity)
 			}
 		}
-		return BlockCourseList(block, list)
+		return BlockCourseList(block: block, courses: list)
 	}
+	
 }

@@ -9,8 +9,8 @@
 import Foundation
 import AddictiveLib
 
-enum LunchMenuItemType: String
-{
+enum LunchMenuItemType: String {
+	
 	case
 	main = "main",
 	accompaniment = "accompaniment",
@@ -19,46 +19,33 @@ enum LunchMenuItemType: String
 	salad = "salad",
 	soup = "soup",
 	other = "other"
-	
-	static let values: [LunchMenuItemType] = [.main, .accompaniment, .side, .pasta, .soup]
-	
-	static func fromString(_ val: String) -> LunchMenuItemType?
-	{
-		for value in LunchMenuItemType.values
-		{
-			if value.rawValue == val
-			{
-				return value
-			}
-		}
-		return nil
-	}
+
 }
 
-struct LunchMenu
-{
-	let date: EnscribedDate
+struct LunchMenu {
+	
+	let date: Date
 	let title: String?
 	let items: [LunchMenuItem]
 	
-	init(_ date: EnscribedDate, title: String?, items: [LunchMenuItem])
-	{
+	init(_ date: Date, title: String?, items: [LunchMenuItem]) {
 		self.date = date
 		self.title = title
 		self.items = items
 	}
+	
 }
 
-struct LunchMenuItem
-{
+struct LunchMenuItem {
+	
 	let type: LunchMenuItemType
 	let name: String
 	let allergy: String?
 	
-	init(_ type: LunchMenuItemType, name: String, allergy: String?)
-	{
+	init(_ type: LunchMenuItemType, name: String, allergy: String?) {
 		self.type = type
 		self.name = name
 		self.allergy = allergy
 	}
+	
 }

@@ -9,14 +9,9 @@
 import Foundation
 import AddictiveLib
 
-struct EventList
-{
-	let date: EnscribedDate
+struct EventList {
+	
+	let date: Date
 	let events: [Event]
 	
-	init(_ date: EnscribedDate, events: [Event])
-	{
-		self.date = date
-		self.events = events
-	}
 }

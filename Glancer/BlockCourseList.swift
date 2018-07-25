@@ -8,22 +8,17 @@
 
 import Foundation
 
-struct BlockCourseList
-{
-	var block: BlockID
-	var courses: [Course]
+struct BlockCourseList {
 	
-	init(_ block: BlockID, _ courses: [Course])
-	{
-		self.block = block
-		self.courses = courses
-	}
+	let block: BlockID
+	let courses: [Course]
+	
 }
 
-extension BlockCourseList
-{
-	var isEmpty: Bool
-	{
+extension BlockCourseList {
+	
+	var isEmpty: Bool {
 		return self.courses.isEmpty
 	}
+	
 }
