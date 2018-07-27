@@ -39,7 +39,7 @@ class BlockAnalyst {
 //			Logic for if the block is a Lab.
 			let previousAnalyst = BlockAnalyst(schedule: self.schedule, block: previous)
 			if previousAnalyst.getCourses().isEmpty {
-				return "\(previousAnalyst.block.id.displayLetter) \(self.block.id.displayName)"
+				return self.block.id.displayName
 			} else {
 				return "\(previousAnalyst.getDisplayName()) \(self.block.id.displayName)"
 			}

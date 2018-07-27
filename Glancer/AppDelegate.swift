@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		Globals.BundleID = "MAD.BBN.KnightLife"
 		Globals.StorageID = "MAD.BBN.KnightLife.Storage"
 		
-		Globals.storeUrlBase(url: "https://kl-api.herokuapp.com/")
+		Globals.storeUrlBase(url: "https://knightlife-server.herokuapp.com/api/")
 		
         UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
 		

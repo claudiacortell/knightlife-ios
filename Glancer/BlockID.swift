@@ -24,6 +24,7 @@ enum BlockID: Int {
 	case custom
 	case advisory
 	case classMeeting
+	case assembly
 	
 	var stringValue: String {
 		switch self {
@@ -55,6 +56,8 @@ enum BlockID: Int {
 			return "Advisory"
 		case .classMeeting:
 			return "Class Meeting"
+		case .assembly:
+			return "Assembly"
 		}
 	}
 	
@@ -63,14 +66,6 @@ enum BlockID: Int {
 			return "\(self.stringValue) Block"
 		}
 		return self.stringValue
-	}
-	
-	var displayLetter: String {
-		if BlockID.letterBlocks.contains(self) {
-			return self.stringValue
-		}
-		
-		return self.stringValue.substring(start: 0, distance: 2)
 	}
 	
 	static func fromStringValue(name: String) -> BlockID? {
@@ -82,7 +77,7 @@ enum BlockID: Int {
 		return nil
 	}
 	
-	static var values: [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x, .custom, .activities, .lab, .lunch, .advisory, .classMeeting] }
+	static var values: [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x, .custom, .activities, .lab, .lunch, .advisory, .classMeeting, .assembly] }
 	static var letterBlocks: [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x] }
 	static var academicBlocks: [BlockID] { return [.a, .b, .c, .d, .e, .f, .g] }
 

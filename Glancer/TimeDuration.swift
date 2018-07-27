@@ -21,4 +21,8 @@ extension TimeDuration {
 		return (hours: abs(self.start.hour - self.end.hour), minutes: abs(self.start.minute - self.end.minute), seconds: abs(self.start.second - self.end.second))
 	}
 	
+	public func contains(date: Date) -> Bool {
+		return date >= self.start && date < self.end
+	}
+	
 }

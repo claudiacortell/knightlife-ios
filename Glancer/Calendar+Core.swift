@@ -19,7 +19,7 @@ extension Calendar {
 		return calendar
 	}()
 	
-	static let locale_us = Locale(identifier: "en_us")
-	static let timezone = TimeZone(abbreviation: "EST")!
+	static let locale_us = Locale(identifier: "en_US_POSIX")
+	static let timezone = TimeZone(identifier: "America/New_York")!
 	
 }

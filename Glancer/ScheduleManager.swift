@@ -89,7 +89,7 @@ class ScheduleManager: Manager {
 				error = fail
 				break
 			}
-			
+						
 			self.patches[date.webSafeDate] = schedule
 			self.getPatchWatcher(date: date).handle(error, schedule)
 		}.execute()

@@ -13,7 +13,7 @@ class SportsManager: Manager
 {
 	static let instance = SportsManager()
 	
-	private(set) var meetings: [EnscribedDate: DailySportsList]
+	private(set) var meetings: [Date: DailySportsList]
 	
 	var sportsPrefModule: SportsPrefModule!
 	

@@ -30,9 +30,14 @@ class GetPatchWebCall: UnboxWebCall<GetPatchResponse, DateSchedule> {
 				print("Recieved an invalid block id: \(responseBlock.blockId)")
 				continue
 			}
-			
+						
 			guard let startTime = Date.fromWebTime(string: responseBlock.startTime), let endTime = Date.fromWebTime(string: responseBlock.endTime) else {
 				print("Failed to parse a date.")
+				continue
+			}
+			
+			guard let adjustedStart = Date.mergeDateAndTime(date: self.date, time: startTime), let adjustedEnd = Date.mergeDateAndTime(date: self.date, time: endTime) else {
+				print("Failed to join date and time.")
 				continue
 			}
 			
@@ -41,7 +46,7 @@ class GetPatchWebCall: UnboxWebCall<GetPatchResponse, DateSchedule> {
 			let customName = responseBlock.customName
 			let color = UIColor(hex: responseBlock.overrideColor ?? "")
 
-			let block = Block(id: id, time: TimeDuration(start: startTime, end: endTime), variation: variation, customName: customName, color: color)
+			let block = Block(id: id, time: TimeDuration(start: adjustedStart, end: adjustedEnd), variation: variation, customName: customName, color: color)
 			blocks.append(block)
 		}
 		
