@@ -25,7 +25,11 @@ class BlockAnalyst {
 	
 	func getDisplayName() -> String {
 		if self.block.id == .custom {
-			return self.block.customName ?? self.block.id.displayName
+			if let custom = self.block.custom {
+				return custom.name
+			} else {
+				return block.id.displayName
+			}
 		}
 		
 		let courses = self.getCourses()
@@ -47,8 +51,8 @@ class BlockAnalyst {
 	}
 	
 	func getColor() -> UIColor {
-		if self.block.id == .custom, let color = self.block.color {
-			return color
+		if self.block.id == .custom, let custom = self.block.custom {
+			return custom.color
 		}
 		
 		let courses = self.getCourses()

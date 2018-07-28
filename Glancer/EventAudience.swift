@@ -8,7 +8,14 @@
 
 import Foundation
 
-enum EventAudience: Int {
+struct EventAudience {
+	
+	let grade: Grade
+	let mandatory: Bool
+	
+}
+
+enum Grade: Int {
 	
 	case allSchool
 

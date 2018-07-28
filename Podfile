@@ -13,5 +13,6 @@ target 'Glancer' do
   pod 'AddictiveLib'
   pod 'Hero'
   pod 'SnapKit'
+  pod 'JTCalendar'
 
 end

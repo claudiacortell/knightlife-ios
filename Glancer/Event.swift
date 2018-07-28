@@ -10,10 +10,9 @@ import Foundation
 
 struct Event {
 	
-	let blockId: BlockID
-	let mandatory: Bool
-	let audience: [EventAudience]
-	
+	let block: BlockID
 	let description: String
 	
+	let audience: [EventAudience]
+
 }

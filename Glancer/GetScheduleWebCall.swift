@@ -17,81 +17,60 @@ class GetScheduleWebCall: UnboxWebCall<GetScheduleResponse, [DayOfWeek: DaySched
 	}
 	
 	override func convertToken(_ response: GetScheduleResponse) -> [DayOfWeek: DaySchedule]? {
-		var dayList: [DayOfWeek: DaySchedule] = [:]
-		for responseDay in response.days {
-			guard let dayId = DayOfWeek.fromShortName(shortName: responseDay.dayId) else {
-				print("Recieved an invalid day id: \(responseDay.dayId)")
+		var days: [DayOfWeek: DaySchedule] = [:]
+		for item in response.items {
+			guard let dayId = DayOfWeek.fromShortName(shortName: item.day) else {
+				print("Recieved an invalid day id: \(item.day)")
 				continue
 			}
 			
 			var blocks: [Block] = []
 			
-			for responseBlock in responseDay.blocks {
-				guard let blockId = BlockID.fromStringValue(name: responseBlock.blockId) else {
-					print("Recieved an invalid block id: \(responseBlock.blockId)")
+			for block in item.blocks {
+				guard let blockId = BlockID.fromStringValue(name: block.id) else {
+					print("Recieved an invalid block id: \(block.id)")
 					continue
 				}
 				
-				guard let startTime = Date.fromWebTime(string: responseBlock.startTime), let endTime = Date.fromWebTime(string: responseBlock.endTime) else {
-					print("Recieved an invalid start/end time")
+				guard let start = Date.fromWebTime(string: block.start), let end = Date.fromWebTime(string: block.end) else {
+					print("Failed to parse a date.")
 					continue
 				}
-
-				let variation = responseBlock.variation
 				
-				let block = Block(id: blockId, time: TimeDuration(start: startTime, end: endTime), variation: variation, customName: nil, color: nil)
-				blocks.append(block)
+				let duration = TimeDuration(start: start, end: end)
+				blocks.append(Block(id: blockId, variation: block.variation, time: duration, custom: nil))
 			}
 			
 			let schedule = DaySchedule(day: dayId, blocks: blocks)
 			
-			if dayList[dayId] != nil {
+			if days[dayId] != nil {
 				print("Already set information for day: \(dayId.rawValue)")
 			} else {
-				dayList[dayId] = schedule
+				days[dayId] = schedule
 			}
 		}
-		return dayList
+		return days
 	}
 	
 }
 
 struct GetScheduleResponse: WebCallPayload {
 	
-	var days: [GetScheduleResponseDay]
+	let items: [GetScheduleResponseDay]
 	
 	init(unboxer: Unboxer) throws {
-		self.days = try unboxer.unbox(keyPath: "days", allowInvalidElements: false)
+		self.items = try unboxer.unbox(key: "items")
 	}
 	
 }
 
-struct GetScheduleResponseDay: WebCallPayload {
+class GetScheduleResponseDay: DayPayload {
 	
-	var dayId: String
-	var blocks: [GetScheduleResponseBlock]
+	let day: String
 	
-	init(unboxer: Unboxer) throws {
-		self.dayId = try unboxer.unbox(key: "id")
-		self.blocks = try unboxer.unbox(key: "blocks")
-	}
-	
-}
-
-struct GetScheduleResponseBlock: WebCallPayload {
-	
-	var blockId: String
-	var startTime: String
-	var endTime: String
-	
-	var variation: Int?
-	
-	init(unboxer: Unboxer) throws {
-		self.blockId = try unboxer.unbox(key: "id")
-		self.startTime = try unboxer.unbox(key: "start")
-		self.endTime = try unboxer.unbox(key: "end")
-		
-		self.variation = unboxer.unbox(key: "variation")
+	required init(unboxer: Unboxer) throws {
+		self.day = try unboxer.unbox(key: "id")
+		try super.init(unboxer: unboxer)
 	}
 	
 }

@@ -68,7 +68,7 @@ class CourseManager: Manager {
 			}
 			break
 		case .specificDays:
-			if let daySub = schedule.standinDayId { // Is actually standing in for a different day.
+			if let daySub = schedule.day { // Is actually standing in for a different day.
 				if meetingSchedule.meetingDaysContains(daySub) {
 					if schedule.hasBlock(meetingSchedule.block) {
 						return true

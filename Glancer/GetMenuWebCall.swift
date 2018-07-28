@@ -25,31 +25,41 @@ class GetMenuWebCall: UnboxWebCall<GetMenuResponse, LunchMenu> {
 	override func convertToken(_ data: GetMenuResponse) -> LunchMenu? {
 		var items: [LunchMenuItem] = []
 		
-		for item in data.items {
+		for item in data.menu.items {
 			if let type = LunchMenuItemType(rawValue: item.type) {
 				let item = LunchMenuItem(type, name: item.name, allergy: item.allergy)
 				items.append(item)
 			}
 		}
 		
-		return LunchMenu(self.date, title: data.caption, items: items)
+		return LunchMenu(self.date, title: data.menu.description, items: items)
 	}
 	
 }
 
 class GetMenuResponse: WebCallPayload {
 	
-	let caption: String?
-	let items: [GetMenuResponseItem]
+	let menu: MenuPayload
 	
 	required init(unboxer: Unboxer) throws {
-		self.caption = unboxer.unbox(key: "caption")
-		self.items = try unboxer.unbox(keyPath: "items", allowInvalidElements: false)
+		self.menu = try unboxer.unbox(key: "item")
 	}
 	
 }
 
-class GetMenuResponseItem: WebCallPayload {
+class MenuPayload: WebCallPayload {
+	
+	let description: String?
+	let items: [MenuItemPayload]
+	
+	required init(unboxer: Unboxer) throws {
+		self.description = unboxer.unbox(key: "description")
+		self.items = try unboxer.unbox(key: "items", allowInvalidElements: true)
+	}
+	
+}
+
+class MenuItemPayload: WebCallPayload {
 	
 	let type: String
 	let name: String

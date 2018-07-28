@@ -11,20 +11,18 @@ import AddictiveLib
 
 class BlockListModule: TableModule {
 	
-	let schedule: DateSchedule
-	let blocks: [Block]
+	let composites: [CompositeBlock]
 	
-	init(schedule: DateSchedule, blocks: [Block]) {
-		self.schedule = schedule
-		self.blocks = blocks
+	init(composites: [CompositeBlock]) {
+		self.composites = composites
 	}
 	
 	func loadCells(layout: TableLayout) {
 		let section = layout.addSection()
 		section.addDividerCell(left: 0, right: 0, backgroundColor: UIColor.clear, insetColor: UIColor(hex: "E1E1E6")!)
 		
-		for block in self.blocks {
-			section.addCell(BlockCell(schedule: self.schedule, block: block))
+		for composite in self.composites {
+			section.addCell(BlockCell(composite: composite))
 			section.addDividerCell(left: 0, right: 0, backgroundColor: UIColor.clear, insetColor: UIColor(hex: "E1E1E6")!)
 		}
 	}

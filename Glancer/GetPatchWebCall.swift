@@ -25,81 +25,73 @@ class GetPatchWebCall: UnboxWebCall<GetPatchResponse, DateSchedule> {
 	override func convertToken(_ response: GetPatchResponse) -> DateSchedule? {
 		var blocks: [Block] = []
 		
-		for responseBlock in response.blocks {
-			guard let id = BlockID.fromStringValue(name: responseBlock.blockId) else {
-				print("Recieved an invalid block id: \(responseBlock.blockId)")
+		let item = response.item
+		for responseBlock in item.blocks {
+			guard let id = BlockID.fromStringValue(name: responseBlock.id) else {
+				print("Invalid block id: \(responseBlock.id)")
 				continue
 			}
-						
-			guard let startTime = Date.fromWebTime(string: responseBlock.startTime), let endTime = Date.fromWebTime(string: responseBlock.endTime) else {
+			
+			guard let start = Date.fromWebTime(string: responseBlock.start), let end = Date.fromWebTime(string: responseBlock.end) else {
 				print("Failed to parse a date.")
 				continue
 			}
 			
-			guard let adjustedStart = Date.mergeDateAndTime(date: self.date, time: startTime), let adjustedEnd = Date.mergeDateAndTime(date: self.date, time: endTime) else {
+			guard let adjustedStart = Date.mergeDateAndTime(date: self.date, time: start), let adjustedEnd = Date.mergeDateAndTime(date: self.date, time: end) else {
 				print("Failed to join date and time.")
 				continue
 			}
 			
-			let variation = responseBlock.variation
-
-			let customName = responseBlock.customName
-			let color = UIColor(hex: responseBlock.overrideColor ?? "")
-
-			let block = Block(id: id, time: TimeDuration(start: adjustedStart, end: adjustedEnd), variation: variation, customName: customName, color: color)
-			blocks.append(block)
+			let duration = TimeDuration(start: adjustedStart, end: adjustedEnd)
+			let custom: CustomBlockMeta? = {
+				if let responseCustom = responseBlock.custom {
+					return CustomBlockMeta(name: responseCustom.name, color: UIColor(hex: responseCustom.color) ?? UIColor.black)
+				}
+				return nil
+			}()
+			
+			blocks.append(Block(id: id, variation: responseBlock.variation, time: duration, custom: custom))
 		}
 		
-		var standinDay: DayOfWeek?
-		if response.replaceDayId != nil {
-			standinDay = DayOfWeek(rawValue: response.replaceDayId!)
-		}
+		let day: DayOfWeek? = {
+			if let responseDay = item.day {
+				return DayOfWeek.fromShortName(shortName: responseDay)
+			}
+			return nil
+		}()
 		
-		let daySchedule = DateSchedule(date: self.date, subtitle: response.subtitle, changed: response.changed ?? false, standinDayId: standinDay, blocks: blocks)
+		let notices: [DateNotice] = item.notices == nil ? [] : {
+			var list: [DateNotice] = []
+			for responseNotice in item.notices! {
+				list.append(DateNotice(priority: responseNotice.priority, message: responseNotice.message))
+			}
+			return list
+		}()
+		
+		let daySchedule = DateSchedule(date: self.date, day: day, changed: item.changed ?? false, notices: notices, blocks: blocks)
 		return daySchedule
 	}
 
 }
 
-struct GetPatchResponse: WebCallPayload
-{
-	var subtitle: String?
-	var blocks: [GetPatchResponseBlock]
-	var changed: Bool?
-	var replaceDayId: Int?
+struct GetPatchResponse: WebCallPayload {
 	
-	init(unboxer: Unboxer) throws
-	{
-		self.subtitle = unboxer.unbox(key: "subtitle")
-		self.changed = unboxer.unbox(key: "changed")
-		self.blocks = try unboxer.unbox(keyPath: "blocks", allowInvalidElements: false)
-		self.replaceDayId = unboxer.unbox(key: "standin-day")
+	let item: PatchDatePayload
+	
+	init(unboxer: Unboxer) throws {
+		self.item = try unboxer.unbox(key: "item")
 	}
+	
 }
 
-struct GetPatchResponseBlock: WebCallPayload
-{
-	var blockId: String
-	var startTime: String
-	var endTime: String
+class PatchDatePayload: DayPayload {
 	
-	var overrideColor: String?
+	let day: String?
 	
-	var variation: Int?
-	//	var associatedBlock: String?
-	
-	var customName: String?
-	
-	init(unboxer: Unboxer) throws
-	{
-		self.blockId = try unboxer.unbox(key: "id")
-		self.startTime = try unboxer.unbox(key: "start")
-		self.endTime = try unboxer.unbox(key: "end")
+	required init(unboxer: Unboxer) throws {
+		self.day = unboxer.unbox(key: "day")
 		
-		self.overrideColor = unboxer.unbox(key: "color")
-		
-		self.variation = unboxer.unbox(key: "variation")
-		
-		self.customName = unboxer.unbox(key: "name")
+		try super.init(unboxer: unboxer)
 	}
+	
 }

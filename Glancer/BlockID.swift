@@ -26,7 +26,42 @@ enum BlockID: Int {
 	case classMeeting
 	case assembly
 	
-	var stringValue: String {
+	var technicalValue: String {
+		switch self {
+		case .a:
+			return "a"
+		case .b:
+			return "b"
+		case .c:
+			return "c"
+		case .d:
+			return "d"
+		case .e:
+			return "e"
+		case .f:
+			return "f"
+		case .g:
+			return "g"
+		case .x:
+			return "x"
+		case .lunch:
+			return "lunch"
+		case .activities:
+			return "activities"
+		case .lab:
+			return "lab"
+		case .custom:
+			return "custom"
+		case .advisory:
+			return "advisory"
+		case .classMeeting:
+			return "class_meeting"
+		case .assembly:
+			return "assembly"
+		}
+	}
+	
+	var shortName: String {
 		switch self {
 		case .a:
 			return "A"
@@ -63,14 +98,14 @@ enum BlockID: Int {
 	
 	var displayName: String {
 		if BlockID.letterBlocks.contains(self) {
-			return "\(self.stringValue) Block"
+			return "\(self.shortName) Block"
 		}
-		return self.stringValue
+		return self.shortName
 	}
 	
 	static func fromStringValue(name: String) -> BlockID? {
 		for cur in BlockID.values {
-			if cur.stringValue == name {
+			if cur.technicalValue == name {
 				return cur
 			}
 		}

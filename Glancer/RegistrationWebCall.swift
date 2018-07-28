@@ -16,4 +16,8 @@ class RegistrationWebCall: WebCall<Any> {
 		self.parameter("device", val: Globals.DeviceID ?? "")
 	}
 	
+	override func convertData(_ data: Data) -> Any? {
+		return true
+	}
+
 }

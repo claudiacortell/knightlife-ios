@@ -10,17 +10,23 @@ import Foundation
 import AddictiveLib
 import UIKit
 
+struct CustomBlockMeta {
+	
+	let name: String
+	let color: UIColor
+	
+}
+
 struct Block {
 	
 	fileprivate let uuid: UUID = UUID()
 	
 	let id: BlockID
-	
-	let time: TimeDuration
 	let variation: Int?
 
-	let customName: String? // Only used when the block ID is Custom
-	let color: UIColor?
+	let time: TimeDuration
+
+	let custom: CustomBlockMeta?
 	
 }
 

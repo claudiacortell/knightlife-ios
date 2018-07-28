@@ -27,7 +27,7 @@ class DayController: UIViewController, TableBuilder {
 	
 	var lunch: LunchMenu?
 	var lunchError: Error?
-	var lunchDidLoad: Bool { return self.lunch != nil || self.lunchError != nil }
+	var lunchDidDownload: Bool { return self.lunch != nil || self.lunchError != nil }
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -129,17 +129,26 @@ class DayController: UIViewController, TableBuilder {
 	}
 	
 	func buildCells(layout: TableLayout) {
-		if !self.scheduleDidDownload || !self.lunchDidLoad || !self.eventsDidDownload {
+		if !self.scheduleDidDownload || !self.lunchDidDownload || !self.eventsDidDownload {
 			print("Loading")
 			return
 		}
 		
-		guard let schedule = self.schedule, let menu = self.lunch, let events = self.events else {
+		guard let schedule = self.schedule, let events = self.events, let lunch = self.lunch else {
 			print("Error")
 			return
 		}
-		AttachmentView()
-		self.tableHandler.addModule(BlockListModule(schedule: schedule, blocks: schedule.getBlocks()))
+
+		let composites = self.generateCompositeList(schedule: schedule, blocks: schedule.getBlocks(), lunch: lunch, events: events)
+		self.tableHandler.addModule(BlockListModule(composites: composites))
+	}
+	
+	func generateCompositeList(schedule: DateSchedule, blocks: [Block], lunch: LunchMenu, events: EventList) -> [CompositeBlock] {
+		var list: [CompositeBlock] = []
+		for block in blocks {
+			list.append(CompositeBlock(schedule: schedule, block: block, lunch: (block.id == .lunch ? lunch : nil), events: events.getEventsByBlock(block: block.id)))
+		}
+		return list
 	}
 	
 }

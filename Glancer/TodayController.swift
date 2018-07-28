@@ -43,13 +43,16 @@ class TodayController: DayController {
 	
 	private func updateNavigationItem(today: Bool) {
 		self.navigationItem.title = today ? "Today" : "Tomorrow"
-		if let item = self.navigationItem as? DatedNavigationItem {
+		if let item = self.navigationItem as? SubtitleNavigationItem {
 			item.subtitle = (today ? Date.today : Date.today.dayInRelation(offset: 1)).prettyDate
 		}
 	}
 	
 	override func buildCells(layout: TableLayout) {
-		var showToday = true
+		guard let events = self.events, let lunch = self.lunch else {
+			print("No supplemental data")
+			return
+		}
 		
 		switch self.state! {
 		case .LOADING:
@@ -68,12 +71,10 @@ class TodayController: DayController {
 			print("In class!")
 		case let .AFTER_SCHOOL(today, tomorrow):
 			print("After school")
-			showToday = false
 			
-			self.tableHandler.addModule(BlockListModule(schedule: today, blocks: today.getBlocks()))
-		}
-		
-		self.updateNavigationItem(today: showToday)
+			let composites = self.generateCompositeList(schedule: today, blocks: today.getBlocks(), lunch: lunch, events: events)
+			self.tableHandler.addModule(BlockListModule(composites: composites))
+		}		
 	}
 	
 }

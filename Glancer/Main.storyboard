@@ -26,7 +26,7 @@
                                 <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="If6-Ps-yMX" firstAttribute="top" secondItem="Ceo-uy-qcQ" secondAttribute="bottom" id="6tF-QO-Ms9"/>
                             <constraint firstItem="If6-Ps-yMX" firstAttribute="leading" secondItem="rLV-jn-zz9" secondAttribute="leading" id="EaK-Di-KxS"/>
@@ -34,7 +34,7 @@
                             <constraint firstAttribute="trailing" secondItem="If6-Ps-yMX" secondAttribute="trailing" id="zie-j5-UFz"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Today" id="YkW-HY-8FQ" customClass="DatedNavigationItem" customModule="Glancer" customModuleProvider="target"/>
+                    <navigationItem key="navigationItem" title="Today" id="YkW-HY-8FQ" customClass="SubtitleNavigationItem" customModule="Glancer" customModuleProvider="target"/>
                     <connections>
                         <outlet property="tableView" destination="If6-Ps-yMX" id="M4q-nH-MQH"/>
                     </connections>
@@ -43,12 +43,72 @@
             </objects>
             <point key="canvasLocation" x="-1228" y="-985"/>
         </scene>
+        <!--Upcoming-->
+        <scene sceneID="Rr5-Ct-Wsk">
+            <objects>
+                <navigationController id="mbO-qq-D65" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Upcoming" image="icon_calendar" id="ddf-qy-9MN"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mRg-JI-ul6">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="2XL-7K-gSm" kind="relationship" relationship="rootViewController" id="aWe-hv-QU7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9T2-dV-QJR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1988" y="-281"/>
+        </scene>
+        <!--Upcoming-->
+        <scene sceneID="ML7-gM-tGa">
+            <objects>
+                <viewController id="2XL-7K-gSm" customClass="CalendarController" customModule="Glancer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="l2Z-WV-viX"/>
+                        <viewControllerLayoutGuide type="bottom" id="kb8-u0-ENq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3tk-Qc-UqO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fQO-lO-qwx">
+                                <rect key="frame" x="0.0" y="264" width="375" height="354"/>
+                                <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7eB-FE-iya">
+                                <rect key="frame" x="0.0" y="64" width="375" height="200"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="7eB-FE-iya" secondAttribute="trailing" id="3R7-y3-rEr"/>
+                            <constraint firstItem="7eB-FE-iya" firstAttribute="height" relation="lessThanOrEqual" secondItem="3tk-Qc-UqO" secondAttribute="height" multiplier="40:100" id="7TJ-AE-L92"/>
+                            <constraint firstItem="kb8-u0-ENq" firstAttribute="top" secondItem="fQO-lO-qwx" secondAttribute="bottom" id="8E6-0p-co4"/>
+                            <constraint firstItem="7eB-FE-iya" firstAttribute="top" secondItem="l2Z-WV-viX" secondAttribute="bottom" id="GUB-5L-leV"/>
+                            <constraint firstItem="7eB-FE-iya" firstAttribute="bottom" secondItem="fQO-lO-qwx" secondAttribute="top" id="h1R-kS-S0a"/>
+                            <constraint firstAttribute="trailing" secondItem="fQO-lO-qwx" secondAttribute="trailing" id="i0T-iN-YK4"/>
+                            <constraint firstItem="fQO-lO-qwx" firstAttribute="leading" secondItem="3tk-Qc-UqO" secondAttribute="leading" id="quB-AL-cOb"/>
+                            <constraint firstItem="7eB-FE-iya" firstAttribute="leading" secondItem="3tk-Qc-UqO" secondAttribute="leading" id="rYb-ku-RzJ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Upcoming" id="ZCy-iG-pqn"/>
+                    <connections>
+                        <outlet property="calendarWrapper" destination="7eB-FE-iya" id="eiB-IY-U32"/>
+                        <outlet property="tableView" destination="fQO-lO-qwx" id="4Le-b8-INI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qhD-rw-Wmh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1228" y="-281"/>
+        </scene>
         <!--Today-->
         <scene sceneID="5S7-eC-QTM">
             <objects>
                 <navigationController id="lfo-vL-leJ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Today" image="icon_today" id="GeO-Uq-eSc"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9yy-aE-SVS" customClass="DatedNavigationBar" customModule="Glancer" customModuleProvider="target">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9yy-aE-SVS">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -71,6 +131,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="lfo-vL-leJ" kind="relationship" relationship="viewControllers" id="yLW-yz-VEO"/>
+                        <segue destination="mbO-qq-D65" kind="relationship" relationship="viewControllers" id="dvn-6C-5mO"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="701-Kb-t5g" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -79,6 +140,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icon_calendar" width="24" height="24"/>
         <image name="icon_today" width="24" height="24"/>
     </resources>
 </document>

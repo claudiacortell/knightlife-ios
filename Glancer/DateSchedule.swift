@@ -9,17 +9,23 @@
 import Foundation
 import AddictiveLib
 
+struct DateNotice {
+	
+	let priority: Int
+	let message: String
+	
+}
+
 struct DateSchedule {
 	
 	fileprivate let uuid = UUID()
 	
 	let date: Date
+	let day: DayOfWeek? // Used if this is say, a Tuesday with a Monday schedule. The actual date is a tuesday, but the standin Day is Day.monday
 
-	let subtitle: String?
 	let changed: Bool
 
-	let standinDayId: DayOfWeek? // Used if this is say, a Tuesday with a Monday schedule. The actual date is a tuesday, but the standin Day is Day.monday
-
+	let notices: [DateNotice]
 	let blocks: [Block]
 	
 }

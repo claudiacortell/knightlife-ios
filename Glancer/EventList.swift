@@ -15,3 +15,17 @@ struct EventList {
 	let events: [Event]
 	
 }
+
+extension EventList {
+	
+	func getEventsByBlock(block: BlockID) -> [Event] {
+		var events: [Event] = []
+		for event in self.events {
+			if event.block == block {
+				events.append(event)
+			}
+		}
+		return events
+	}
+	
+}

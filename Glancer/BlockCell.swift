@@ -12,18 +12,10 @@ import AddictiveLib
 
 class BlockCell: TableCell {
 	
-	private let schedule: DateSchedule
-	private let block: Block
+	private let composite: CompositeBlock
 	
-	private let menu: LunchMenu?
-	private let events: [Event]
-	
-	init(schedule: DateSchedule, block: Block, menu: LunchMenu?, events: [Event]) {
-		self.schedule = schedule
-		self.block = block
-		
-		self.menu = menu
-		self.events = events
+	init(composite: CompositeBlock) {
+		self.composite = composite
 		
 		super.init("block", nib: "BlockCell")
 		
@@ -41,19 +33,20 @@ class BlockCell: TableCell {
 //	Set name label to bold if there's a class or not
 	
 	private func layout(cell: UIBlockCell) {
-		let analyst = BlockAnalyst(schedule: self.schedule, block: self.block)
+		let analyst = BlockAnalyst(schedule: self.composite.schedule, block: self.composite.block)
+		let block = self.composite.block
 		
 //		Setup
 		cell.nameLabel.text = analyst.getDisplayName()
-		cell.blockNameLabel.text = self.block.id.displayName
+		cell.blockNameLabel.text = block.id.displayName
 		
-		cell.fromLabel.text = self.block.time.start.prettyTime
-		cell.toLabel.text = self.block.time.end.prettyTime
+		cell.fromLabel.text = block.time.start.prettyTime
+		cell.toLabel.text = block.time.end.prettyTime
 		
 //		Formatting
 		var heavy = !analyst.getCourses().isEmpty
-		if block.id == .lab, let before = self.schedule.getBlockBefore(self.block) {
-			if !BlockAnalyst(schedule: self.schedule, block: before).getCourses().isEmpty {
+		if block.id == .lab, let before = self.composite.schedule.getBlockBefore(block) {
+			if !BlockAnalyst(schedule: self.composite.schedule, block: before).getCourses().isEmpty {
 				heavy = true
 			}
 		}
@@ -67,13 +60,13 @@ class BlockCell: TableCell {
 //		Attachments
 		for arranged in cell.attachmentsStack.arrangedSubviews { cell.attachmentsStack.removeArrangedSubview(arranged) }
 		
-		if self.block.id == .lunch {
-			if let _ = self.menu {
+		if block.id == .lunch {
+			if let _ = self.composite.lunch {
 				cell.attachmentsStack.addArrangedSubview(LunchAttachmentView())
 			}
 		}
 		
-		for event in self.events {
+		for event in composite.events {
 			let view = EventAttachmentView()
 			view.text = event.description
 			cell.attachmentsStack.addArrangedSubview(view)

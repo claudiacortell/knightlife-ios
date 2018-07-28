@@ -17,7 +17,7 @@ class GetEventsWebCall: UnboxWebCall<GetEventsResponse, EventList> {
 	init(date: Date) {
 		self.date = date
 		
-		super.init(call: "request/events")
+		super.init(call: "events")
 		
 		self.parameter("date", val: date.webSafeDate)
 	}
@@ -25,17 +25,22 @@ class GetEventsWebCall: UnboxWebCall<GetEventsResponse, EventList> {
 	override func convertToken(_ data: GetEventsResponse) -> EventList? {
 		var events: [Event] = []
 		for event in data.events {
-			if let blockId = BlockID.fromStringValue(name: event.blockId) {
-				var audience: [EventAudience] = []
-				for group in event.audience {
-					if let val = EventAudience(rawValue: group) {
-						audience.append(val)
-					}
+			guard let blockId = BlockID.fromStringValue(name: event.block) else {
+				print("Wasn't able to parse event block: \(event.block)")
+				continue
+			}
+			
+			var audience: [EventAudience] = []
+			for group in event.audience {
+				guard let grade = Grade(rawValue: group.id) else {
+					print("Invalid grade supplied: \(group.id)")
+					continue
 				}
 				
-				let item = Event(blockId: blockId, mandatory: event.mandatory, audience: audience, description: event.description)
-				events.append(item)
+				audience.append(EventAudience(grade: grade, mandatory: group.mandatory))
 			}
+			
+			events.append(Event(block: blockId, description: event.description, audience: audience))
 		}
 		return EventList(date: self.date, events: events)
 	}
@@ -43,28 +48,38 @@ class GetEventsWebCall: UnboxWebCall<GetEventsResponse, EventList> {
 
 class GetEventsResponse: WebCallPayload {
 	
-	let events: [GetEventsResponseEvent]
+	let events: [EventPayload]
 	
 	required init(unboxer: Unboxer) throws {
-		self.events = try unboxer.unbox(keyPath: "events", allowInvalidElements: false)
+		self.events = try unboxer.unbox(key: "items", allowInvalidElements: true)
 	}
 	
 }
 
-class GetEventsResponseEvent: WebCallPayload {
+class EventPayload: WebCallPayload {
 	
-	let blockId: String
-	let mandatory: Bool
-	let audience: [Int]
-	
+	let block: String
 	let description: String
+
+	let audience: [EventAudiencePayload]
 	
 	required init(unboxer: Unboxer) throws {
-		self.blockId = try unboxer.unbox(key: "blockId")
-		self.mandatory = try unboxer.unbox(key: "mandatory")
-		self.audience = try unboxer.unbox(key: "audience")
-		
+		self.block = try unboxer.unbox(key: "block")
 		self.description = try unboxer.unbox(key: "description")
+
+		self.audience = try unboxer.unbox(key: "audience")
+	}
+	
+}
+
+class EventAudiencePayload: WebCallPayload {
+	
+	let id: Int
+	let mandatory: Bool
+	
+	required init(unboxer: Unboxer) throws {
+		self.id = try unboxer.unbox(key: "grade")
+		self.mandatory = try unboxer.unbox(key: "mandatory")
 	}
 	
 }
