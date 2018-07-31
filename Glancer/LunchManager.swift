@@ -20,6 +20,10 @@ class LunchManager: Manager {
 		super.init("Lunch Manager")
 	}
 	
+	func getCachedMenu(date: Date) -> LunchMenu? {
+		return self.lunches[date.webSafeDate]
+	}
+	
 	func getLunchWatcher(date: Date) -> ResourceWatcher<LunchMenu> {
 		if self.lunchWatchers[date.webSafeDate] == nil {
 			self.lunchWatchers[date.webSafeDate] = ResourceWatcher<LunchMenu>()
@@ -27,7 +31,7 @@ class LunchManager: Manager {
 		return self.lunchWatchers[date.webSafeDate]!
 	}
 	
-	func fetchLunchMenu(date: Date) {
+	func fetchLunchMenu(date: Date, then: @escaping (WebCallResult<LunchMenu>) -> Void = {_ in}) {
 		GetMenuWebCall(date: date).callback() {
 			result in
 			
@@ -43,6 +47,8 @@ class LunchManager: Manager {
 			
 			self.lunches[date.webSafeDate] = item
 			self.getLunchWatcher(date: date).handle(fail, item)
+			
+			then(result)
 		}.execute()
 	}
 	

@@ -30,6 +30,10 @@ class ScheduleManager: Manager {
 		self.loadTemplate()
 	}
 	
+	func getCachedPatch(date: Date) -> DateSchedule? {
+		return self.patches[date.webSafeDate]
+	}
+	
 	func getPatchWatcher(date: Date) -> ResourceWatcher<DateSchedule> {
 		if self.patchWatchers[date.webSafeDate] == nil {
 			self.patchWatchers[date.webSafeDate] = ResourceWatcher<DateSchedule>()
@@ -74,7 +78,7 @@ class ScheduleManager: Manager {
 		}.execute()
 	}
 	
-	func loadSchedule(date: Date) {
+	func loadSchedule(date: Date, then: @escaping (WebCallResult<DateSchedule>) -> Void = {_ in}) {
 		GetPatchWebCall(date: date).callback() {
 			result in
 			
@@ -89,9 +93,11 @@ class ScheduleManager: Manager {
 				error = fail
 				break
 			}
-						
+			
 			self.patches[date.webSafeDate] = schedule
 			self.getPatchWatcher(date: date).handle(error, schedule)
+			
+			then(result)
 		}.execute()
 	}
 	

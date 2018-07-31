@@ -12,14 +12,17 @@ import AddictiveLib
 
 class BlockCell: TableCell {
 	
+	private let controller: DayController
 	private let composite: CompositeBlock
 	
-	init(composite: CompositeBlock) {
+	init(controller: DayController, composite: CompositeBlock) {
+		self.controller = controller
 		self.composite = composite
 		
 		super.init("block", nib: "BlockCell")
 		
 		self.setEstimatedHeight(70)
+		self.setSelectionStyle(.none)
 		
 		self.setCallback() {
 			template, cell in
@@ -58,11 +61,15 @@ class BlockCell: TableCell {
 		cell.rightIcon.image = cell.rightIcon.image!.withRenderingMode(.alwaysTemplate)
 		
 //		Attachments
-		for arranged in cell.attachmentsStack.arrangedSubviews { cell.attachmentsStack.removeArrangedSubview(arranged) }
+		for arranged in cell.attachmentsStack.arrangedSubviews { cell.attachmentsStack.removeArrangedSubview(arranged) ; arranged.removeFromSuperview() }
 		
 		if block.id == .lunch {
-			if let _ = self.composite.lunch {
-				cell.attachmentsStack.addArrangedSubview(LunchAttachmentView())
+			if let menu = self.composite.lunch {
+				let lunchView = LunchAttachmentView(menuName: menu.title)
+				lunchView.onClick = {
+					self.controller.openLunchMenu(menu: menu)
+				}
+				cell.attachmentsStack.addArrangedSubview(lunchView)
 			}
 		}
 		

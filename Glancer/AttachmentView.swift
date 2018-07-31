@@ -154,6 +154,7 @@ enum AttachmentStyle {
 	
 	case INFO
 	case WARNING
+	case ADDITIONAL
 	
 	var color: UIColor {
 		switch self {
@@ -161,6 +162,8 @@ enum AttachmentStyle {
 			return UIColor(hex: "E4F1FE")!
 		case .WARNING:
 			return UIColor(hex: "FFF0CC")!
+		case .ADDITIONAL:
+			return UIColor(hex: "D9F2EB")!
 		}
 	}
 	

@@ -20,6 +20,10 @@ class EventManager: Manager {
 		super.init("Events")
 	}
 	
+	func getCachedEvents(date: Date) -> EventList? {
+		return self.events[date.webSafeDate]
+	}
+	
 	func getEventWatcher(date: Date) -> ResourceWatcher<EventList> {
 		if self.eventWatchers[date.webSafeDate] == nil {
 			self.eventWatchers[date.webSafeDate] = ResourceWatcher<EventList>()
@@ -27,7 +31,7 @@ class EventManager: Manager {
 		return self.eventWatchers[date.webSafeDate]!
 	}
 	
-	func getEvents(date: Date) {
+	func getEvents(date: Date, then: @escaping (WebCallResult<EventList>) -> Void = {_ in}) {
 		GetEventsWebCall(date: date).callback() {
 			result in
 			
@@ -43,6 +47,8 @@ class EventManager: Manager {
 			
 			self.events[date.webSafeDate] = item
 			self.getEventWatcher(date: date).handle(fail, item)
+			
+			then(result)
 		}.execute()
 	}
 	

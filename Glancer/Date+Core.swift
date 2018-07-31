@@ -110,7 +110,7 @@ extension Date {
 	var prettyDate: String {
 		let formatter = Date.normalizedFormatter
 		formatter.dateFormat = "MMMM dd"
-		return "\(self.weekday.displayName) \(formatter.string(from: self))"
+		return "\(self.weekday.displayName), \(formatter.string(from: self))"
 	}
 	
 }

@@ -18,7 +18,7 @@ class CourseManager: Manager {
 	init() {
 		super.init("Meetings")
 		
-		self.registerStorage(MeetingPrefModule(self))
+		self.registerStorage(MeetingPrefModule(self))		
 	}
 	
 	func loadedCourse(course: Course) {

@@ -86,7 +86,7 @@ enum BlockID: Int {
 		case .lab:
 			return "Lab"
 		case .custom:
-			return "Custom"
+			return "Special"
 		case .advisory:
 			return "Advisory"
 		case .classMeeting:

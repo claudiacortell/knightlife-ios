@@ -14,25 +14,21 @@ class TodayManager: Manager {
 	enum TodayScheduleState: Equatable {
 		
 		case LOADING
-		
 		case ERROR
-		case NULL
 		
-		case NO_CLASS(DateSchedule)
+		case NO_CLASS(DayBundle)
 		
-		case BEFORE_SCHOOL(DateSchedule, Block, Int)
-		case BETWEEN_CLASS(DateSchedule, Block, Int)
-		case IN_CLASS(DateSchedule, Block, Block?, Int)
+		case BEFORE_SCHOOL(DayBundle, Block, Int)
+		case BETWEEN_CLASS(DayBundle, Block, Int)
+		case IN_CLASS(DayBundle, Block, Block?, Int)
 		
-		case AFTER_SCHOOL(DateSchedule, DateSchedule?)
+		case AFTER_SCHOOL(DayBundle)
 		
 		static func ==(lhs: TodayScheduleState, rhs: TodayScheduleState) -> Bool {
 			switch (lhs, rhs) {
 			case (.LOADING, .LOADING):
 				return true
 			case (.ERROR, .ERROR):
-				return true
-			case (.NULL, .NULL):
 				return true
 			case (let .NO_CLASS(todayA), let .NO_CLASS(todayB)):
 				return todayA == todayB
@@ -42,8 +38,8 @@ class TodayManager: Manager {
 				return todayA == todayB && curA == curB && timeA == timeB
 			case (let .IN_CLASS(todayA, curA, nextA, timeA), let .IN_CLASS(todayB, curB, nextB, timeB)):
 				return todayA == todayB && curA == curB && timeA == timeB && nextA == nextB
-			case (let .AFTER_SCHOOL(todayA, scheduleA), let .AFTER_SCHOOL(todayB, scheduleB)):
-				return todayA == todayB && scheduleA == scheduleB
+			case (let .AFTER_SCHOOL(todayA), let .AFTER_SCHOOL(todayB)):
+				return todayA == todayB
 			default:
 				return false
 			}
@@ -52,92 +48,71 @@ class TodayManager: Manager {
 	}
 	
 	static let instance = TodayManager()
-	
 	private var timer: Timer?
 	
-	private(set) var today: Date { didSet { self.tomorrow = self.today.dayInRelation(offset: 1) } }
-	private(set) var tomorrow: Date
+	private(set) var today: Date
+	private(set) var todayBundle: DayBundle?
+	private(set) var todayError: Error?
 	
-	private(set) var todaySchedule: DateSchedule?
-	private(set) var fetchError: Error?
-	
-	private(set) var tomorrowSchedule: DateSchedule?
+	private(set) var nextDay: Date?
+	private(set) var nextDayBundle: DayBundle?
+	private(set) var nextDayError: Error?
 	
 	let statusWatcher = ResourceWatcher<TodayScheduleState>()
 	private(set) var currentState: TodayScheduleState = .LOADING
 	
 	init() {
 		self.today = Date.today
-		self.tomorrow = self.today.dayInRelation(offset: 1)
 
 		super.init("Today")
 
 		self.registerListeners()
 		self.startTimer()
 		
-		ScheduleManager.instance.loadSchedule(date: self.today)
+		self.reloadTodayBundle()
+	}
+	
+	func reloadTodayBundle(then: @escaping (Bool) -> Void = {_ in}) {
+		self.todayBundle = nil
+		self.todayError = nil
+		
+		self.updateState(state: self.getState())
+		DayBundleManager.instance.getDayBundle(date: self.today, then: then)
 	}
 	
 	private func registerListeners() {
 //		Today
 		let localToday = self.today
-		ScheduleManager.instance.getPatchWatcher(date: self.today).onSuccess(self) {
-			schedule in
+		DayBundleManager.instance.getBundleWatcher(date: self.today).onSuccess(self) {
+			bundle in
 			
 			if localToday.webSafeDate != self.today.webSafeDate {
 				return
 			}
 			
-			self.todaySchedule = schedule
-			self.fetchError = nil
+			self.todayBundle = bundle
+			self.todayError = nil
 			
 			self.updateState(state: self.getState())
 		}
 		
-		ScheduleManager.instance.getPatchWatcher(date: self.today).onFailure(self) {
+		DayBundleManager.instance.getBundleWatcher(date: self.today).onFailure(self) {
 			error in
-
+			
 			if localToday.webSafeDate != self.today.webSafeDate {
 				return
 			}
 			
-			self.todaySchedule = nil
-			self.fetchError = error
+			self.todayBundle = nil
+			self.todayError = error
 			
-			self.updateState(state: self.getState())
-		}
-		
-//		Tomorrow
-		let localTomorrow = self.tomorrow
-		ScheduleManager.instance.getPatchWatcher(date: self.tomorrow).onSuccess(self) {
-			schedule in
-			
-			if localTomorrow.webSafeDate != self.tomorrow.webSafeDate { // Safety precaution to make sure we don't accidentally set the wrong things.
-				return
-			}
-			
-			self.tomorrowSchedule = schedule
-			self.updateState(state: self.getState())
-		}
-		
-		ScheduleManager.instance.getPatchWatcher(date: self.tomorrow).onSuccess(self) {
-			error in
-			
-			if localTomorrow.webSafeDate != self.tomorrow.webSafeDate { // Safety precaution to make sure we don't accidentally set the wrong things.
-				return
-			}
-			
-			self.tomorrowSchedule = nil
 			self.updateState(state: self.getState())
 		}
 	}
 	
 	private func unregisterListeners() {
-		ScheduleManager.instance.getPatchWatcher(date: self.today).unregisterSuccess(self)
-		ScheduleManager.instance.getPatchWatcher(date: self.today).unregisterFailure(self)
-		
-		ScheduleManager.instance.getPatchWatcher(date: self.tomorrow).unregisterSuccess(self)
-		ScheduleManager.instance.getPatchWatcher(date: self.tomorrow).unregisterFailure(self)
+		DayBundleManager.instance.getBundleWatcher(date: self.today).unregisterSuccess(self)
+		DayBundleManager.instance.getBundleWatcher(date: self.today).unregisterFailure(self)
 	}
 	
 	func startTimer() {
@@ -150,6 +125,7 @@ class TodayManager: Manager {
 	
 	private func doUpdate() {
 		let state = self.getState()
+		
 		switch state {
 		case .AFTER_SCHOOL(_):
 			self.updateOutsideDayContext(state: state)
@@ -166,23 +142,26 @@ class TodayManager: Manager {
 	
 	private func updateOutsideDayContext(state: TodayScheduleState) {
 		let now = Date.today
-		if now.webSafeDate == self.today.webSafeDate { // If today and the context are the same, we don't have to update everything in the manager, but we have to load tomorrow's schedule and feed it to the handler.
-			if self.tomorrowSchedule == nil {
-				ScheduleManager.instance.loadSchedule(date: self.tomorrow)
-			}
-			self.updateState(state: state)
-		} else { // Not today i.e. it's past midnight.
-			self.unregisterListeners() // Unregister listeners for previous day
+		if now.webSafeDate != self.today.webSafeDate { // If the loaded Date isn't the current date, we load tomorrow's schedule
+			self.unregisterListeners()
 			self.today = now
-			self.registerListeners() // Register listeners for today
-			
-			self.tomorrowSchedule = nil
-			self.todaySchedule = nil
-			self.fetchError = nil
+			self.registerListeners()
 			
 			self.updateState(state: .LOADING)
 			
-			ScheduleManager.instance.loadSchedule(date: self.today)
+			self.nextDay = nil
+			self.nextDayBundle = nil
+			self.nextDayError = nil
+			
+			self.reloadTodayBundle()
+		} else {
+			if self.nextDay == nil {
+				self.nextDay = self.today.dayInRelation(offset: 1)
+				let chain = ProcessChain()
+				
+			}
+			
+			self.updateState(state: state)
 		}
 	}
 	
@@ -196,14 +175,12 @@ class TodayManager: Manager {
 	}
 	
 	func getCurrentBlock() -> Block? {
-		if self.todaySchedule == nil {
+		guard let bundle = self.todayBundle else {
 			return nil
 		}
 		
 		let current = Date()
-		let schedule = self.todaySchedule!
-		
-		for block in schedule.getBlocks() {
+		for block in bundle.schedule.getBlocks() {
 			if block.time.contains(date: current) {
 				return block
 			}
@@ -212,13 +189,13 @@ class TodayManager: Manager {
 	}
 	
 	func getNextBlock() -> Block? {
-		guard let schedule = self.todaySchedule else {
+		guard let bundle = self.todayBundle else {
 			return nil
 		}
 		
 		let now = Date.today
 		
-		for block in schedule.getBlocks() {
+		for block in bundle.schedule.getBlocks() {
 			if block.time.start < now { // Is already in progress or has passed
 				continue
 			}
@@ -229,36 +206,39 @@ class TodayManager: Manager {
 	}
 	
 	func getState() -> TodayScheduleState {
-		if self.fetchError != nil {
+		if self.todayError == nil && self.todayBundle == nil {
+			return TodayScheduleState.LOADING
+		}
+		
+		if let error = self.todayError {
 			return TodayScheduleState.ERROR
 		}
 		
-		guard let schedule = self.todaySchedule else {
-			return TodayScheduleState.NULL
-		}
+		let bundle = self.todayBundle!
+		let schedule = bundle.schedule
 		
 		if schedule.getBlocks().isEmpty {
-			return TodayScheduleState.NO_CLASS(schedule)
+			return TodayScheduleState.NO_CLASS(bundle)
 		}
 		
 		let now = Date.today
 		if now < schedule.getFirstBlock()!.time.start { // Before school
 			let minUntilStart = abs(schedule.getFirstBlock()!.time.start.minuteDifference(date: now))
-			return TodayScheduleState.BEFORE_SCHOOL(schedule, schedule.getFirstBlock()!, minUntilStart)
+			return TodayScheduleState.BEFORE_SCHOOL(bundle, schedule.getFirstBlock()!, minUntilStart)
 		}
 		
 		if now > schedule.getLastBlock()!.time.end { // After school
-			return TodayScheduleState.AFTER_SCHOOL(schedule, self.tomorrowSchedule)
+			return TodayScheduleState.AFTER_SCHOOL(bundle)
 		}
 		
 		if let currentBlock = self.getCurrentBlock() { // In class
 			let minLeft = abs(currentBlock.time.start.minuteDifference(date: now))
 			let nextBlock = schedule.getBlockAfter(currentBlock)
-			return TodayScheduleState.IN_CLASS(schedule, currentBlock, nextBlock, minLeft)
+			return TodayScheduleState.IN_CLASS(bundle, currentBlock, nextBlock, minLeft)
 		} else { // Not in class
 			let nextBlock = self.getNextBlock()!
 			let minTo = abs(nextBlock.time.start.minuteDifference(date: now))
-			return TodayScheduleState.BETWEEN_CLASS(schedule, nextBlock, minTo)
+			return TodayScheduleState.BETWEEN_CLASS(bundle, nextBlock, minTo)
 		}
 	}
 	

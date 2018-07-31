@@ -9,9 +9,19 @@
 import Foundation
 import UIKit
 
-class Scheme {
+enum Scheme {
 	
-	static let ColorOrange = UIColor(hex: "FFB53D")!
-	static let ColorBlue = UIColor(hex: "5794DC")!
+	case blue
+	
+	case defaultGray
+	
+	var color: UIColor {
+		switch self {
+		case .blue:
+			return UIColor(hex: "5794DC")!
+		case .defaultGray:
+			return UIColor(hex: "21262b")!
+		}
+	}
 	
 }

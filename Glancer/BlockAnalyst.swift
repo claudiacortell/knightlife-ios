@@ -65,9 +65,9 @@ class BlockAnalyst {
 //			return self.getColor
 //			TODO: IMPLEMENT BLOCK COLORS
 
-			return UIColor(hex: "999999")!
+			return UIColor.darkText
 		}
 		
-		return courses.courses.first!.color ?? UIColor(hex: "999999")!
+		return courses.courses.first!.color ?? UIColor.darkText
 	}
 }

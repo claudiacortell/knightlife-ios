@@ -117,13 +117,13 @@ extension DateSchedule: Equatable {
 		
 		var found = false
 		var list: [Block] = []
-		for block in self.getBlocks() {
+		for item in self.getBlocks() {
 			if found {
-				list.append(block)
+				list.append(item)
 				continue
 			}
 			
-			if block == block {
+			if block == item {
 				found = true
 			}
 		}

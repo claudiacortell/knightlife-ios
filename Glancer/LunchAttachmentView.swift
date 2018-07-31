@@ -11,8 +11,13 @@ import UIKit
 
 class LunchAttachmentView: AttachmentView {
 	
-	override init() {
+	var onClick: () -> Void = {}
+	private var menuName: String?
+	
+	init(menuName: String? = nil) {
 		super.init()
+		
+		self.menuName = menuName
 		self.setup()
 	}
 	
@@ -30,8 +35,50 @@ class LunchAttachmentView: AttachmentView {
 		self.style = .INFO
 		self.showDisclosure = true
 		
-		self.text = "Lunch menu available"
+		if let name = self.menuName {
+			self.text = "\(name) menu available"
+		} else {
+			self.text = "Lunch menu available"
+		}
+		
 		self.leftImage = UIImage(named: "icon_bell")!
+		
+		let clickRecognizer = LunchGestureRecognizer(target: self, action: #selector(handleClick(_:)))
+		self.addGestureRecognizer(clickRecognizer)
+	}
+	
+	@objc func handleClick(_ recognizer: UIGestureRecognizer) {
+		self.onClick()
+	}
+	
+}
+
+fileprivate class LunchGestureRecognizer: UITapGestureRecognizer {
+	
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
+		super.touchesBegan(touches, with: event)
+		
+		if let view = self.view as? LunchAttachmentView {
+			view.backgroundColor = view.style.color.withAlphaComponent(0.25)
+		}
+	}
+	
+	override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
+		super.touchesEnded(touches, with: event)
+		self.animateEnd()
+	}
+	
+	override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent) {
+		super.touchesCancelled(touches, with: event)
+		self.animateEnd()
+	}
+	
+	private func animateEnd() {
+		if let view = self.view as? LunchAttachmentView {
+			UIView.animate(withDuration: 0.25) {
+				view.backgroundColor = view.style.color
+			}
+		}
 	}
 	
 }

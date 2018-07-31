@@ -80,6 +80,7 @@ class CalendarController: UIViewController, JTCalendarDelegate {
 		self.calendarHandler.setDate(self.today)
 		
 		self.calendarHandler.settings.pageViewNumberOfWeeks = 4
+		self.calendarHandler.settings.pageViewWeekModeNumberOfWeeks = 4
 	}
 	
 	func calendar(_ calendar: JTCalendarManager!, canDisplayPageWith date: Date!) -> Bool {
@@ -118,7 +119,12 @@ class CalendarController: UIViewController, JTCalendarDelegate {
 	}
 	
 	func calendar(_ calendar: JTCalendarManager!, didTouchDayView dayView: (UIView & JTCalendarDay)!) {
+		guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Day") as? DayController else {
+			return
+		}
 		
+		controller.date = dayView.date()
+		self.navigationController?.pushViewController(controller, animated: true)
 	}
 	
 	private func canShowDate(date: Date) -> Bool {

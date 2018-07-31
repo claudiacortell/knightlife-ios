@@ -17,12 +17,14 @@ class SubtitleNavigationItem: UINavigationItem {
 	
 	override var title: String? {
 		didSet {
+			self.titleLabel.isHidden = self.title == nil
 			self.titleLabel.text = self.title
 		}
 	}
 	
 	@IBInspectable var subtitle: String? {
 		didSet {
+			self.subtitleLabel.isHidden = self.subtitle == nil
 			self.subtitleLabel.text = self.subtitle
 		}
 	}
@@ -38,12 +40,9 @@ class SubtitleNavigationItem: UINavigationItem {
 	}
 	
 	private func setup() {
-		let view = UIView()
-		view.snp.makeConstraints() {
-			constrain in
-			
-			constrain.height.equalTo(38)
-		}
+		let stackView = UIStackView()
+		stackView.axis = .vertical
+		stackView.alignment = .center
 		
 		let titleLabel = UILabel()
 		titleLabel.textColor = UIColor.darkText
@@ -58,24 +57,17 @@ class SubtitleNavigationItem: UINavigationItem {
 		self.titleLabel = titleLabel
 		self.subtitleLabel = subtitleLabel
 		
-		view.addSubview(titleLabel)
-		view.addSubview(subtitleLabel)
+		stackView.addArrangedSubview(titleLabel)
+		stackView.addArrangedSubview(subtitleLabel)
 		
-		titleLabel.snp.makeConstraints() {
+		let spacer = UIView()
+		spacer.snp.makeConstraints() {
 			constrain in
-			
-			constrain.centerX.equalToSuperview()
-			constrain.top.equalToSuperview()
+			constrain.height.equalTo(2)
 		}
-		
-		subtitleLabel.snp.makeConstraints() {
-			constrain in
-			
-			constrain.centerX.equalToSuperview()
-			constrain.bottom.equalToSuperview().inset(2)
-		}
-		
-		self.titleView = view
+		stackView.addArrangedSubview(spacer)
+
+		self.titleView = stackView
 	}
 	
 

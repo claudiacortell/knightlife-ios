@@ -53,7 +53,7 @@ class LunchMenuViewController: UIViewController, TableBuilder
 				let section = layout.addSection()
 				section.setTitle(type.rawValue.uppercased())
 				section.setHeaderHeight(14)
-				section.setHeaderColor(Scheme.ColorOrange)
+//				section.setHeaderColor(Scheme.ColorOrange)
 				section.setHeaderFont(UIFont.systemFont(ofSize: 12.0, weight: .medium))
 				section.setHeaderTextColor(UIColor.white)
 				section.setHeaderIndent(15)
