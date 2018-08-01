@@ -63,16 +63,16 @@ class TodayController: DayController {
 			self.showLoading(layout: layout)
 		case .ERROR:
 			self.showError(layout: layout)
-		case .NO_CLASS(_):
-			self.showNone(layout: layout)
+		case let .NO_CLASS(_, nextDay):
+			self.showNoClass(layout: layout, bundle: nextDay)
 		case let .BEFORE_SCHOOL(bundle, firstBlock, minutesUntil):
 			self.showBeforeSchool(layout: layout, bundle: bundle, block: firstBlock, minutes: minutesUntil)
 		case let .BETWEEN_CLASS(bundle, nextBlock, minutesUntil):
 			self.showBetweenClass(layout: layout, bundle: bundle, block: nextBlock, minutes: minutesUntil)
 		case let .IN_CLASS(bundle, current, next, minutesLeft):
 			self.showInClass(layout: layout, bundle: bundle, current: current, next: next, minutes: minutesLeft)
-		case let .AFTER_SCHOOL(bundle):
-			self.showAfterSchool(layout: layout, bundle: bundle)
+		case let .AFTER_SCHOOL(_, nextDay):
+			self.showAfterSchool(layout: layout, bundle: nextDay)
 		}
 	}
 	
@@ -87,37 +87,50 @@ class TodayController: DayController {
 	}
 	
 	private func showBeforeSchool(layout: TableLayout, bundle: DayBundle, block: Block, minutes: Int) {
-//		Add top item
-		
-		print("Before school")
-		
+		layout.addSection().addCell(TodayStatusCell(state: "Before School", minutes: minutes, image: UIImage(named: "icon_clock")!, color: UIColor.black.withAlphaComponent(0.3)))
+
 		let upcomingBlocks = bundle.schedule.getBlocks()
 		self.tableHandler.addModule(BlockListModule(controller: self, composites: self.generateCompositeList(bundle: bundle, blocks: upcomingBlocks)))
 	}
 	
 	private func showBetweenClass(layout: TableLayout, bundle: DayBundle, block: Block, minutes: Int) {
-//		Add top item
+		let analyst = BlockAnalyst(schedule: bundle.schedule, block: block)
 		
-		print("Between class")
+		let section = layout.addSection()
+		section.addCell(TodayStatusCell(state: "Get to \(analyst.getDisplayName())", minutes: minutes, image: UIImage(named: "icon_clock")!, color: analyst.getColor()))
 		
+		section.addCell(BlockCell(controller: self, composite: self.generateCompositeBlock(bundle: bundle, block: block)))
+		
+		section.addSpacerCell().setHeight(30)
+
 		let upcomingBlocks = bundle.schedule.getBlocksAfter(block)
 		self.tableHandler.addModule(BlockListModule(controller: self, composites: self.generateCompositeList(bundle: bundle, blocks: upcomingBlocks)))
 	}
 	
 	private func showInClass(layout: TableLayout, bundle: DayBundle, current: Block, next: Block?, minutes: Int) {
-//		Add top item
+		let analyst = BlockAnalyst(schedule: bundle.schedule, block: current)
 		
-		print("In class")
+		let section = layout.addSection()
+		section.addCell(TodayStatusCell(state: analyst.getDisplayName(), minutes: minutes, image: UIImage(named: "icon_class")!, color: analyst.getColor()))
+		
+		section.addCell(BlockCell(controller: self, composite: self.generateCompositeBlock(bundle: bundle, block: current)))
+		
+		section.addSpacerCell().setHeight(30)
 		
 		let upcomingBlocks = bundle.schedule.getBlocksAfter(current)		
 		self.tableHandler.addModule(BlockListModule(controller: self, composites: self.generateCompositeList(bundle: bundle, blocks: upcomingBlocks)))
 	}
 	
-	private func showAfterSchool(layout: TableLayout, bundle: DayBundle) {
+	private func showAfterSchool(layout: TableLayout, bundle: DayBundle?) {
+		guard let bundle = bundle else {
+			layout.addSection().addCell(TodayDoneCell()).setHeight(self.tableView.bounds.size.height)
+			return
+		}
+		
 		let doneSection = layout.addSection()
 		doneSection.addCell(TodayDoneCell()).setHeight(120)
 		doneSection.addDividerCell(left: 0, right: 0, backgroundColor: UIColor.clear, insetColor: UIColor(hex: "E1E1E6")!)
-
+		
 		self.addNextSchoolday(layout: layout, bundle: bundle)
 	}
 	

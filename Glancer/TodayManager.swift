@@ -188,10 +188,10 @@ class TodayManager: Manager {
 	}
 	
 	func startTimer() {
-		self.timer = Timer(timeInterval: 10.0, repeats: true, block: {
+		self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {
 			timer in
 			self.doUpdate()
-		})
+		}
 	}
 	
 	func stopTimer() {
@@ -301,7 +301,8 @@ class TodayManager: Manager {
 		
 		let now = Date.today
 		if now < schedule.getFirstBlock()!.time.start { // Before school
-			let minUntilStart = abs(schedule.getFirstBlock()!.time.start.minuteDifference(date: now))
+			var minUntilStart = abs(schedule.getFirstBlock()!.time.start.minuteDifference(date: now))
+			minUntilStart += 1
 			return TodayScheduleState.BEFORE_SCHOOL(bundle, schedule.getFirstBlock()!, minUntilStart)
 		}
 		
@@ -310,12 +311,14 @@ class TodayManager: Manager {
 		}
 		
 		if let currentBlock = self.getCurrentBlock() { // In class
-			let minLeft = abs(currentBlock.time.start.minuteDifference(date: now))
+			var minLeft = abs(currentBlock.time.start.minuteDifference(date: now))
+			minLeft += 1
 			let nextBlock = schedule.getBlockAfter(currentBlock)
 			return TodayScheduleState.IN_CLASS(bundle, currentBlock, nextBlock, minLeft)
 		} else { // Not in class
 			let nextBlock = self.getNextBlock()!
-			let minTo = abs(nextBlock.time.start.minuteDifference(date: now))
+			var minTo = abs(nextBlock.time.start.minuteDifference(date: now))
+			minTo += 1
 			return TodayScheduleState.BETWEEN_CLASS(bundle, nextBlock, minTo)
 		}
 	}

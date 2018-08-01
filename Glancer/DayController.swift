@@ -127,9 +127,13 @@ class DayController: UIViewController, TableBuilder, ErrorReloadable {
 	func generateCompositeList(bundle: DayBundle, blocks: [Block]) -> [CompositeBlock] {
 		var list: [CompositeBlock] = []
 		for block in blocks {
-			list.append(CompositeBlock(schedule: bundle.schedule, block: block, lunch: (block.id == .lunch && !bundle.menu.items.isEmpty ? bundle.menu : nil), events: bundle.events.getEventsByBlock(block: block.id)))
+			list.append(self.generateCompositeBlock(bundle: bundle, block: block))
 		}
 		return list
+	}
+	
+	func generateCompositeBlock(bundle: DayBundle, block: Block) -> CompositeBlock {
+		return CompositeBlock(schedule: bundle.schedule, block: block, lunch: (block.id == .lunch && !bundle.menu.items.isEmpty ? bundle.menu : nil), events: bundle.events.getEventsByBlock(block: block.id))
 	}
 	
 	func openLunchMenu(menu: LunchMenu) {

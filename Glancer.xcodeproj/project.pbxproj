@@ -73,6 +73,8 @@
 		C0A3D57F2109355E004F5049 /* DayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A3D57E2109355E004F5049 /* DayController.swift */; };
 		C0A5F023210B9FBA00606ED3 /* BlockPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A5F022210B9FBA00606ED3 /* BlockPayload.swift */; };
 		C0A5F025210BA22200606ED3 /* DayPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A5F024210BA22200606ED3 /* DayPayload.swift */; };
+		C0ACFD1A21116863002886A2 /* TodayStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ACFD1921116863002886A2 /* TodayStatusCell.swift */; };
+		C0ACFD1C2111686D002886A2 /* TodayStatusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0ACFD1B2111686D002886A2 /* TodayStatusCell.xib */; };
 		C0B04F461FD177EC00F5D116 /* MeetingPrefModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B04F451FD177EC00F5D116 /* MeetingPrefModule.swift */; };
 		C0B56A292110F8F3000A8C3F /* AddCourseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B56A282110F8F3000A8C3F /* AddCourseController.swift */; };
 		C0C176521FAA39E50059E956 /* SportsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C176511FAA39E50059E956 /* SportsManager.swift */; };
@@ -188,6 +190,8 @@
 		C0A3D57E2109355E004F5049 /* DayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayController.swift; sourceTree = "<group>"; };
 		C0A5F022210B9FBA00606ED3 /* BlockPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockPayload.swift; sourceTree = "<group>"; };
 		C0A5F024210BA22200606ED3 /* DayPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayPayload.swift; sourceTree = "<group>"; };
+		C0ACFD1921116863002886A2 /* TodayStatusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayStatusCell.swift; sourceTree = "<group>"; };
+		C0ACFD1B2111686D002886A2 /* TodayStatusCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodayStatusCell.xib; sourceTree = "<group>"; };
 		C0B04F451FD177EC00F5D116 /* MeetingPrefModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingPrefModule.swift; sourceTree = "<group>"; };
 		C0B56A282110F8F3000A8C3F /* AddCourseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourseController.swift; sourceTree = "<group>"; };
 		C0C176511FAA39E50059E956 /* SportsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsManager.swift; sourceTree = "<group>"; };
@@ -638,6 +642,7 @@
 		C0A3D57A21093539004F5049 /* Today */ = {
 			isa = PBXGroup;
 			children = (
+				C0ACFD1821116799002886A2 /* Cell */,
 				C0A3D57B21093545004F5049 /* TodayController.swift */,
 			);
 			name = Today;
@@ -651,6 +656,15 @@
 				C09BF04C210ADB390073C217 /* CompositeBlock.swift */,
 			);
 			name = Day;
+			sourceTree = "<group>";
+		};
+		C0ACFD1821116799002886A2 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				C0ACFD1921116863002886A2 /* TodayStatusCell.swift */,
+				C0ACFD1B2111686D002886A2 /* TodayStatusCell.xib */,
+			);
+			name = Cell;
 			sourceTree = "<group>";
 		};
 		C0C176501FAA31010059E956 /* Sports */ = {
@@ -873,6 +887,7 @@
 				C0929F432110C61B004A373B /* PrefsActionCell.xib in Resources */,
 				C0F02CA72110E13400AE9F91 /* VariationPrefCell.xib in Resources */,
 				C04D1EC6210FD7C10001C99C /* LunchItemCell.xib in Resources */,
+				C0ACFD1C2111686D002886A2 /* TodayStatusCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1006,6 +1021,7 @@
 				C0CB9C191FE468F500437C5D /* GetEventsWebCall.swift in Sources */,
 				C081C2ED1FE45120008073F3 /* GetMenuWebCall.swift in Sources */,
 				C0CB9C101FE4634000437C5D /* EventManager.swift in Sources */,
+				C0ACFD1A21116863002886A2 /* TodayStatusCell.swift in Sources */,
 				C0A167B5210E6FB800DB6BC4 /* LoadingCell.swift in Sources */,
 				C006914F210EC55C0099CD57 /* SettingsController.swift in Sources */,
 				C0D6E9422107B8AC004BD0F4 /* Date+Core.swift in Sources */,
