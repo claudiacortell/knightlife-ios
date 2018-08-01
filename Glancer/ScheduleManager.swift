@@ -13,7 +13,9 @@ class ScheduleManager: Manager {
 	
 	static let instance = ScheduleManager()
 	
+	let defaultVariation = 0
 	private(set) var scheduleVariations: [DayOfWeek: Int] = [:]
+	private(set) var scheduleVariationWatchers: [DayOfWeek: ResourceWatcher<Int>] = [:]
 	
 	private(set) var template: [DayOfWeek: DaySchedule]?
 	let templateWatcher: ResourceWatcher<[DayOfWeek: DaySchedule]> = ResourceWatcher<[DayOfWeek: DaySchedule]>()
@@ -28,6 +30,13 @@ class ScheduleManager: Manager {
 		self.registerStorage(ScheduleVariationStorage(manager: self))
 		
 		self.loadTemplate()
+	}
+	
+	func getVariationWatcher(day: DayOfWeek) -> ResourceWatcher<Int> {
+		if self.scheduleVariationWatchers[day] == nil {
+			self.scheduleVariationWatchers[day] = ResourceWatcher<Int>()
+		}
+		return self.scheduleVariationWatchers[day]!
 	}
 	
 	func getCachedPatch(date: Date) -> DateSchedule? {
@@ -48,14 +57,16 @@ class ScheduleManager: Manager {
 	func setVariation(day: DayOfWeek, variation: Int) {
 		self.scheduleVariations[day] = variation
 		self.saveStorage()
+		
+		self.getVariationWatcher(day: day).handle(nil, variation)
 	}
 	
 	func getVariation(_ day: DayOfWeek) -> Int {
-		return self.scheduleVariations[day] ?? 0
+		return self.scheduleVariations[day] ?? self.defaultVariation
 	}
 	
 	func getVariation(_ date: Date) -> Int {
-		return self.scheduleVariations[date.weekday] ?? 0
+		return self.scheduleVariations[date.weekday] ?? self.defaultVariation
 	}
 	
 	func loadTemplate() {

@@ -14,5 +14,6 @@ target 'Glancer' do
   pod 'Hero'
   pod 'SnapKit'
   pod 'JTCalendar'
+  pod 'Color-Picker-for-iOS'
 
 end

@@ -10,8 +10,24 @@ import Foundation
 import UIKit
 import AddictiveLib
 
-class SettingsController: UIViewController {
+class SettingsController: UIViewController, TableBuilder {
 	
+	@IBOutlet weak var tableView: UITableView!
+	private var tableHandler: TableHandler!
 	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		
+		self.tableHandler = TableHandler(table: self.tableView)
+		self.tableHandler.builder = self
+		
+		self.tableHandler.reload()
+	}
+	
+	func buildCells(layout: TableLayout) {
+		self.tableHandler.addModule(CoursesPrefModule(controller: self))
+		self.tableHandler.addModule(VariationPrefsModule())
+		self.tableHandler.addModule(LunchPrefsModule())
+	}
 	
 }

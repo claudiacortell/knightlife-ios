@@ -13,11 +13,27 @@ class LunchManager: Manager {
 	
 	static let instance = LunchManager()
 	
+	private(set) var showAllergens: Bool!
+	let showAllergensWatcher = ResourceWatcher<Bool>()
+	
 	private(set) var lunches: [String: LunchMenu] = [:]
 	private var lunchWatchers: [String: ResourceWatcher<LunchMenu>] = [:]
 	
 	init() {
 		super.init("Lunch Manager")
+		
+		self.registerStorage(ShowAllergyStorage(manager: self))
+	}
+	
+	func loadedShowAllergens(value: Bool) {
+		self.showAllergens = value
+	}
+	
+	func setShowAllergens(value: Bool) {
+		self.showAllergens = value
+		self.saveStorage()
+		
+		self.showAllergensWatcher.handle(nil, self.showAllergens)
 	}
 	
 	func getCachedMenu(date: Date) -> LunchMenu? {

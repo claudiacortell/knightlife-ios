@@ -11,7 +11,7 @@ import AddictiveLib
 
 class MeetingPrefModule: StorageHandler {
 	
-	var storageKey: String = "courses"
+	var storageKey: String = "course.items"
 	
 	let manager: CourseManager
 	

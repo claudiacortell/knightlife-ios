@@ -12,7 +12,7 @@ import AddictiveLib
 
 class LunchItemCell: TableCell {
 	
-	init(item: LunchMenuItem) {
+	init(item: LunchMenuItem, showAllergen: Bool) {
 		super.init("item", nib: "LunchItemCell")
 		
 		self.setEstimatedHeight(45)
@@ -29,7 +29,7 @@ class LunchItemCell: TableCell {
 			
 			for view in lunchCell.attachmentsStack.arrangedSubviews { lunchCell.attachmentsStack.removeArrangedSubview(view) ; view.removeFromSuperview() }
 			
-			if let allergy = item.allergy {
+			if showAllergen, let allergy = item.allergy {
 				let attachment = LunchItemAttachmentView()
 				attachment.text = allergy
 				lunchCell.attachmentsStack.addArrangedSubview(attachment)				

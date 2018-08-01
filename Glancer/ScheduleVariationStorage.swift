@@ -14,7 +14,7 @@ class ScheduleVariationStorage: StorageHandler {
 	let manager: ScheduleManager
 	
 	var storageKey: String {
-		return "variation"
+		return "schedule.variation"
 	}
 	
 	init(manager: ScheduleManager) {
@@ -22,19 +22,31 @@ class ScheduleVariationStorage: StorageHandler {
 	}
 	
 	func saveData() -> Any? {
-		return self.manager.scheduleVariations
+		let variations = self.manager.scheduleVariations
+		
+		var newMap: [String: Int] = [:]
+		for (day, variation) in variations {
+			newMap[day.shortName] = variation
+		}
+		return newMap
 	}
 	
 	func loadData(data: Any) {
-		if let items = data as? [DayOfWeek: Int] {
+		if let items = data as? [String: Int] {
 			for (day, val) in items {
-				self.manager.loadedVariation(day: day, variation: val)
+				guard let dayId = DayOfWeek.fromShortName(shortName: day) else {
+					print("Couldn't parse dayId for variation: \(day)")
+					continue
+				}
+				
+				self.manager.loadedVariation(day: dayId, variation: val)
 			}
 		}
 	}
 	
 	func loadDefaults() {
 		if let switches = Storage.USER_SWITCHES.getValue() as? [String: Bool] {
+			print(switches)
 			for (rawDayId, val) in switches {
 				if let dayId = DayOfWeek.fromShortName(shortName: rawDayId) {
 					self.manager.loadedVariation(day: dayId, variation: val ? 1 : 0)

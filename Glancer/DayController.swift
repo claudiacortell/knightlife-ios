@@ -43,6 +43,7 @@ class DayController: UIViewController, TableBuilder, ErrorReloadable {
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 		
+		//		TODO: UNREGISTER ON UNWIND.
 		self.unregisterListeners()
 	}
 	
@@ -73,11 +74,18 @@ class DayController: UIViewController, TableBuilder, ErrorReloadable {
 			
 			self.tableHandler.reload()
 		}
+		
+		ScheduleManager.instance.getVariationWatcher(day: self.date.weekday).onSuccess(self) {
+			variation in
+			self.tableHandler.reload()
+		}
 	}
 	
 	func unregisterListeners() {
 		DayBundleManager.instance.getBundleWatcher(date: self.date).unregisterFailure(self)
 		DayBundleManager.instance.getBundleWatcher(date: self.date).unregisterSuccess(self)
+		
+		ScheduleManager.instance.getVariationWatcher(day: self.date.weekday).unregisterSuccess(self)
 	}
 	
 	func setupNavigationItem() {

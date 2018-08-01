@@ -24,6 +24,7 @@ class LunchController: UIViewController, TableBuilder {
 		self.tableHandler.builder = self
 		
 		self.navigationItem.title = self.menu.title ?? "Lunch"
+
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -38,7 +39,7 @@ class LunchController: UIViewController, TableBuilder {
 		section.addDividerCell(left: 0, right: 0, backgroundColor: UIColor.clear, insetColor: UIColor(hex: "E1E1E6")!)
 		
 		for item in self.menu.items {
-			section.addCell(LunchItemCell(item: item))
+			section.addCell(LunchItemCell(item: item, showAllergen: LunchManager.instance.showAllergens))
 			section.addDividerCell(left: 0, right: 0, backgroundColor: UIColor.clear, insetColor: UIColor(hex: "E1E1E6")!)
 		}
 	}

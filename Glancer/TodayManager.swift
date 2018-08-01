@@ -16,13 +16,13 @@ class TodayManager: Manager {
 		case LOADING
 		case ERROR
 		
-		case NO_CLASS(DayBundle)
+		case NO_CLASS(DayBundle, DayBundle?)
 		
 		case BEFORE_SCHOOL(DayBundle, Block, Int)
 		case BETWEEN_CLASS(DayBundle, Block, Int)
 		case IN_CLASS(DayBundle, Block, Block?, Int)
 		
-		case AFTER_SCHOOL(DayBundle)
+		case AFTER_SCHOOL(DayBundle, DayBundle?)
 		
 		static func ==(lhs: TodayScheduleState, rhs: TodayScheduleState) -> Bool {
 			switch (lhs, rhs) {
@@ -30,16 +30,16 @@ class TodayManager: Manager {
 				return true
 			case (.ERROR, .ERROR):
 				return true
-			case (let .NO_CLASS(todayA), let .NO_CLASS(todayB)):
-				return todayA == todayB
+			case (let .NO_CLASS(todayA, tomorrowA), let .NO_CLASS(todayB, tomorrowB)):
+				return todayA == todayB && tomorrowA == tomorrowB
 			case (let .BEFORE_SCHOOL(todayA, nextA, timeA), let .BEFORE_SCHOOL(todayB, nextB, timeB)):
 				return todayA == todayB && nextA == nextB && timeA == timeB
 			case (let .BETWEEN_CLASS(todayA, curA, timeA), let .BETWEEN_CLASS(todayB, curB, timeB)):
 				return todayA == todayB && curA == curB && timeA == timeB
 			case (let .IN_CLASS(todayA, curA, nextA, timeA), let .IN_CLASS(todayB, curB, nextB, timeB)):
 				return todayA == todayB && curA == curB && timeA == timeB && nextA == nextB
-			case (let .AFTER_SCHOOL(todayA), let .AFTER_SCHOOL(todayB)):
-				return todayA == todayB
+			case (let .AFTER_SCHOOL(todayA, tomorrowA), let .AFTER_SCHOOL(todayB, tomorrowB)):
+				return todayA == todayB && tomorrowA == tomorrowB
 			default:
 				return false
 			}
@@ -80,6 +80,17 @@ class TodayManager: Manager {
 		DayBundleManager.instance.getDayBundle(date: self.today, then: then)
 	}
 	
+	func reloadNextDayBundle() {
+		self.nextDayBundle = nil
+		self.nextDayError = nil
+		
+		guard let nextDay = self.nextDay else {
+			return
+		}
+		
+		DayBundleManager.instance.getDayBundle(date: nextDay)
+	}
+	
 	private func registerListeners() {
 //		Today
 		let localToday = self.today
@@ -108,15 +119,79 @@ class TodayManager: Manager {
 			
 			self.updateState(state: self.getState())
 		}
+		
+		ScheduleManager.instance.getVariationWatcher(day: self.today.weekday).onSuccess(self) {
+			variation in
+			
+			self.updateState(state: self.getState(), force: true)
+		}
+	}
+	
+	private func registerNextDayListeners() {
+		guard let localNextDay = self.nextDay else {
+			return
+		}
+		
+		DayBundleManager.instance.getBundleWatcher(date: localNextDay).onSuccess(self) {
+			bundle in
+			
+			guard let nextDay = self.nextDay else {
+				return
+			}
+			
+			if localNextDay.webSafeDate != nextDay.webSafeDate {
+				return
+			}
+			
+			self.nextDayBundle = bundle
+			self.nextDayError = nil
+			
+			self.updateState(state: self.getState())
+		}
+		
+		DayBundleManager.instance.getBundleWatcher(date: localNextDay).onFailure(self) {
+			error in
+			
+			guard let nextDay = self.nextDay else {
+				return
+			}
+			
+			if localNextDay.webSafeDate != nextDay.webSafeDate {
+				return
+			}
+			
+			self.nextDayBundle = nil
+			self.nextDayError = error
+			
+			self.updateState(state: self.getState())
+		}
+		
+		ScheduleManager.instance.getVariationWatcher(day: localNextDay.weekday).onSuccess(self) {
+			variation in
+			
+			self.updateState(state: self.getState(), force: true)
+		}
 	}
 	
 	private func unregisterListeners() {
 		DayBundleManager.instance.getBundleWatcher(date: self.today).unregisterSuccess(self)
 		DayBundleManager.instance.getBundleWatcher(date: self.today).unregisterFailure(self)
+		
+		ScheduleManager.instance.getVariationWatcher(day: self.today.weekday).unregisterSuccess(self)
+		
+		if let nextDay = self.nextDay {
+			DayBundleManager.instance.getBundleWatcher(date: nextDay).unregisterSuccess(self)
+			DayBundleManager.instance.getBundleWatcher(date: nextDay).unregisterFailure(self)
+			
+			ScheduleManager.instance.getVariationWatcher(day: nextDay.weekday).unregisterSuccess(self)
+		}
 	}
 	
 	func startTimer() {
-		self.timer = Timer(timeInterval: 10.0, repeats: true, block: { timer in self.doUpdate() })
+		self.timer = Timer(timeInterval: 10.0, repeats: true, block: {
+			timer in
+			self.doUpdate()
+		})
 	}
 	
 	func stopTimer() {
@@ -156,20 +231,23 @@ class TodayManager: Manager {
 			self.reloadTodayBundle()
 		} else {
 			if self.nextDay == nil {
-				self.nextDay = self.today.dayInRelation(offset: 1)
-				let chain = ProcessChain()
+				let nextDay = Date.today // Get this from the web server.
+
+				self.nextDay = nextDay
+				self.registerNextDayListeners()
 				
+				self.reloadNextDayBundle()
 			}
-			
+
 			self.updateState(state: state)
 		}
 	}
 	
-	private func updateState(state: TodayScheduleState, watcher: Bool = true) {
+	private func updateState(state: TodayScheduleState, watcher: Bool = true, force: Bool = false) {
 		let previousState = self.currentState
 		self.currentState = state
 		
-		if watcher && previousState != state {
+		if watcher && (force || previousState != state) {
 			self.statusWatcher.handle(nil, state)
 		}
 	}
@@ -210,7 +288,7 @@ class TodayManager: Manager {
 			return TodayScheduleState.LOADING
 		}
 		
-		if let error = self.todayError {
+		if let _ = self.todayError {
 			return TodayScheduleState.ERROR
 		}
 		
@@ -218,7 +296,7 @@ class TodayManager: Manager {
 		let schedule = bundle.schedule
 		
 		if schedule.getBlocks().isEmpty {
-			return TodayScheduleState.NO_CLASS(bundle)
+			return TodayScheduleState.NO_CLASS(bundle, self.nextDayBundle)
 		}
 		
 		let now = Date.today
@@ -228,7 +306,7 @@ class TodayManager: Manager {
 		}
 		
 		if now > schedule.getLastBlock()!.time.end { // After school
-			return TodayScheduleState.AFTER_SCHOOL(bundle)
+			return TodayScheduleState.AFTER_SCHOOL(bundle, self.nextDayBundle)
 		}
 		
 		if let currentBlock = self.getCurrentBlock() { // In class

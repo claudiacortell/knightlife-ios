@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Nor-cS-Csp" customClass="UILunchPrefsCell" customModule="Glancer" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Allergy Warnings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ob3-Oy-U6A">
+                    <rect key="frame" x="20" y="324" width="286" height="19.5"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k7P-mJ-dnM">
+                    <rect key="frame" x="306" y="318" width="51" height="31"/>
+                    <color key="onTintColor" red="0.25490196079999999" green="0.51372549020000002" blue="0.84313725490000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </switch>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="eAl-8C-IRD" firstAttribute="trailing" secondItem="k7P-mJ-dnM" secondAttribute="trailing" constant="20" id="PhP-xo-dW8"/>
+                <constraint firstItem="k7P-mJ-dnM" firstAttribute="leading" secondItem="Ob3-Oy-U6A" secondAttribute="trailing" id="VHZ-hI-N4p"/>
+                <constraint firstItem="Ob3-Oy-U6A" firstAttribute="centerY" secondItem="Nor-cS-Csp" secondAttribute="centerY" id="WMo-zX-93M"/>
+                <constraint firstItem="k7P-mJ-dnM" firstAttribute="centerY" secondItem="Nor-cS-Csp" secondAttribute="centerY" id="eL7-Ud-wud"/>
+                <constraint firstItem="Ob3-Oy-U6A" firstAttribute="leading" secondItem="eAl-8C-IRD" secondAttribute="leading" constant="20" id="gEM-bR-8Bj"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="eAl-8C-IRD"/>
+            <connections>
+                <outlet property="switch" destination="k7P-mJ-dnM" id="bpw-Bs-XHP"/>
+            </connections>
+            <point key="canvasLocation" x="-73" y="-92"/>
+        </view>
+    </objects>
+</document>

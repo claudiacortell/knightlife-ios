@@ -43,10 +43,10 @@
             </objects>
             <point key="canvasLocation" x="-1228" y="-985"/>
         </scene>
-        <!--Today-->
+        <!--Day-->
         <scene sceneID="Md0-Sw-G8g">
             <objects>
-                <viewController storyboardIdentifier="Day" title="Today" id="qFz-0B-DqY" customClass="DayController" customModule="Glancer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Day" title="Day" id="qFz-0B-DqY" customClass="DayController" customModule="Glancer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9Np-Mr-bXp"/>
                         <viewControllerLayoutGuide type="bottom" id="3Oh-up-C8n"/>
@@ -80,7 +80,7 @@
         <!--Lunch-->
         <scene sceneID="xXv-7q-FW4">
             <objects>
-                <viewController storyboardIdentifier="Lunch" id="AVm-iK-3IR" customClass="LunchController" customModule="Glancer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Lunch" title="Lunch" id="AVm-iK-3IR" customClass="LunchController" customModule="Glancer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="USr-zJ-sYw"/>
                         <viewControllerLayoutGuide type="bottom" id="q6F-f2-qBo"/>
@@ -111,10 +111,10 @@
             </objects>
             <point key="canvasLocation" x="-481" y="-985"/>
         </scene>
-        <!--Upcoming-->
+        <!--Upcoming Navigation-->
         <scene sceneID="Rr5-Ct-Wsk">
             <objects>
-                <navigationController id="mbO-qq-D65" sceneMemberID="viewController">
+                <navigationController title="Upcoming Navigation" id="mbO-qq-D65" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Upcoming" image="icon_calendar" id="ddf-qy-9MN"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mRg-JI-ul6">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -131,7 +131,7 @@
         <!--Upcoming-->
         <scene sceneID="ML7-gM-tGa">
             <objects>
-                <viewController id="2XL-7K-gSm" customClass="CalendarController" customModule="Glancer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Upcoming" id="2XL-7K-gSm" customClass="CalendarController" customModule="Glancer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="l2Z-WV-viX"/>
                         <viewControllerLayoutGuide type="bottom" id="kb8-u0-ENq"/>
@@ -174,10 +174,10 @@
             </objects>
             <point key="canvasLocation" x="-1228" y="-281"/>
         </scene>
-        <!--Settings-->
+        <!--Settings Navigation-->
         <scene sceneID="kJE-VZ-QIz">
             <objects>
-                <navigationController id="2ZX-rT-Jz0" sceneMemberID="viewController">
+                <navigationController title="Settings Navigation" id="2ZX-rT-Jz0" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Settings" image="icon_settings" id="YK6-MI-DpP"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qPp-bt-Ele">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -194,7 +194,7 @@
         <!--Settings-->
         <scene sceneID="jNT-FL-Ori">
             <objects>
-                <viewController id="72g-Bz-APE" customClass="SettingsController" customModule="Glancer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Settings" id="72g-Bz-APE" customClass="SettingsController" customModule="Glancer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mT3-Bg-Tl0"/>
                         <viewControllerLayoutGuide type="bottom" id="Tqp-ei-1Dk"/>
@@ -203,9 +203,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uw6-YG-VqF">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uw6-YG-VqF">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -217,15 +217,102 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="k9v-62-JJ3"/>
+                    <connections>
+                        <outlet property="tableView" destination="uw6-YG-VqF" id="d2c-ZV-wav"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NSM-Fz-ENz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1228" y="445"/>
         </scene>
-        <!--Today-->
+        <!--Add Course Wrapper-->
+        <scene sceneID="mUy-NJ-Lnq">
+            <objects>
+                <viewController storyboardIdentifier="AddCourse" title="Add Course Wrapper" id="gX0-Ti-Ihu" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gte-Qr-s2U"/>
+                        <viewControllerLayoutGuide type="bottom" id="QIh-Uu-owR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DY5-Kn-eMJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ryA-pZ-xdQ">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <connections>
+                                    <segue destination="lGY-Yg-BgA" kind="embed" id="bPB-sQ-cO2"/>
+                                </connections>
+                            </containerView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mws-kV-X2d">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem id="3tc-Zi-Ypg">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Dwg-98-9J4">
+                                            <color key="tintColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="0U8-8V-rfV"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ryA-pZ-xdQ" firstAttribute="leading" secondItem="DY5-Kn-eMJ" secondAttribute="leading" id="9b7-xF-KZm"/>
+                            <constraint firstItem="QIh-Uu-owR" firstAttribute="top" secondItem="ryA-pZ-xdQ" secondAttribute="bottom" id="GZ1-6t-ue7"/>
+                            <constraint firstItem="ryA-pZ-xdQ" firstAttribute="top" secondItem="gte-Qr-s2U" secondAttribute="bottom" id="aIg-0b-zHD"/>
+                            <constraint firstAttribute="trailing" secondItem="ryA-pZ-xdQ" secondAttribute="trailing" id="yCq-Cx-VQM"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="sGu-cu-7mU">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="5YR-wY-EOb">
+                            <color key="tintColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="3re-8c-4kc"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Ei-Ip-EJN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-482" y="1164"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2NL-Ae-pBE">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="lGY-Yg-BgA" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0ea-9D-x70">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Bdq-rT-MQC" kind="relationship" relationship="rootViewController" id="mxp-O7-4we"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8mg-Pc-mwO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="246" y="1164"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="8v6-bZ-Z0c">
+            <objects>
+                <viewController id="Bdq-rT-MQC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Nti-3d-5bp"/>
+                        <viewControllerLayoutGuide type="bottom" id="6dH-oH-lPi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6A8-QP-aqO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="nhM-7B-s3v"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EYa-vI-4UQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="954" y="1164"/>
+        </scene>
+        <!--Today Navigation-->
         <scene sceneID="5S7-eC-QTM">
             <objects>
-                <navigationController id="lfo-vL-leJ" sceneMemberID="viewController">
+                <navigationController title="Today Navigation" id="lfo-vL-leJ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Today" image="icon_today" id="GeO-Uq-eSc"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9yy-aE-SVS">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>

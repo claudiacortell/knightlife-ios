@@ -4,6 +4,7 @@ PODS:
     - Unbox
     - UnboxedAlamofire
   - Alamofire (4.7.3)
+  - Color-Picker-for-iOS (2.0.2)
   - Hero (1.2.0)
   - JTCalendar (2.2.3)
   - SnapKit (4.0.0)
@@ -14,6 +15,7 @@ PODS:
 
 DEPENDENCIES:
   - AddictiveLib
+  - Color-Picker-for-iOS
   - Hero
   - JTCalendar
   - SnapKit
@@ -23,6 +25,7 @@ SPEC REPOS:
     - AddictiveLib
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - Color-Picker-for-iOS
     - Hero
     - JTCalendar
     - SnapKit
@@ -32,12 +35,13 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AddictiveLib: 18be644ea87c1b8bfbf6337bb7bab2f2ba577211
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  Color-Picker-for-iOS: 4980589b3e3cfe7198f227dd50be9adb02d8bc0b
   Hero: 33dadf2cd1c98af71e213dcbc2902e6e03622a4e
   JTCalendar: f54975f1426facc38d112f372f0d3d955aae8d86
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   Unbox: 30e437e6151a6de16139375fd4e8dd9a664cfbf7
   UnboxedAlamofire: e803f471553e3aecec711f5d50f80cda6c65feaa
 
-PODFILE CHECKSUM: 8e0e7c57ac09ef588cf968535d890860cfc0957c
+PODFILE CHECKSUM: ff29d2ca758ee57f8162ccb754a3cadfcfb9f9dc
 
 COCOAPODS: 1.5.2
