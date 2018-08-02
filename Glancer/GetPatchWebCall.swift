@@ -10,7 +10,7 @@ import Foundation
 import AddictiveLib
 import Unbox
 
-class GetPatchWebCall: UnboxWebCall<GetPatchResponse, DateSchedule> {
+class GetPatchWebCall: UnboxWebCall<KnightlifePayload<PatchDatePayload>, DateSchedule> {
 	
 	let date: Date
 	
@@ -22,11 +22,14 @@ class GetPatchWebCall: UnboxWebCall<GetPatchResponse, DateSchedule> {
 		self.parameter("date", val: date.webSafeDate)
 	}
 	
-	override func convertToken(_ response: GetPatchResponse) -> DateSchedule? {
+	override func convertToken(_ response: KnightlifePayload<PatchDatePayload>) -> DateSchedule? {
+		guard let content = response.content else {
+			return nil
+		}
+		
 		var blocks: [Block] = []
 		
-		let item = response.item
-		for responseBlock in item.blocks {
+		for responseBlock in content.blocks {
 			guard let id = BlockID.fromStringValue(name: responseBlock.id) else {
 				print("Invalid block id: \(responseBlock.id)")
 				continue
@@ -45,7 +48,7 @@ class GetPatchWebCall: UnboxWebCall<GetPatchResponse, DateSchedule> {
 			let duration = TimeDuration(start: adjustedStart, end: adjustedEnd)
 			let custom: CustomBlockMeta? = {
 				if let responseCustom = responseBlock.custom {
-					return CustomBlockMeta(name: responseCustom.name, color: UIColor(hex: responseCustom.color) ?? UIColor.black)
+					return CustomBlockMeta(name: responseCustom.name, color: UIColor(hex: responseCustom.color) ?? Scheme.darkText.color)
 				}
 				return nil
 			}()
@@ -54,34 +57,24 @@ class GetPatchWebCall: UnboxWebCall<GetPatchResponse, DateSchedule> {
 		}
 		
 		let day: DayOfWeek? = {
-			if let responseDay = item.day {
+			if let responseDay = content.day {
 				return DayOfWeek.fromShortName(shortName: responseDay)
 			}
 			return nil
 		}()
 		
-		let notices: [DateNotice] = item.notices == nil ? [] : {
+		let notices: [DateNotice] = content.notices == nil ? [] : {
 			var list: [DateNotice] = []
-			for responseNotice in item.notices! {
+			for responseNotice in content.notices! {
 				list.append(DateNotice(priority: responseNotice.priority, message: responseNotice.message))
 			}
 			return list
 		}()
 		
-		let daySchedule = DateSchedule(date: self.date, day: day, changed: item.changed ?? false, notices: notices, blocks: blocks)
+		let daySchedule = DateSchedule(date: self.date, day: day, changed: content.changed ?? false, notices: notices, blocks: blocks)
 		return daySchedule
 	}
 
-}
-
-struct GetPatchResponse: WebCallPayload {
-	
-	let item: PatchDatePayload
-	
-	init(unboxer: Unboxer) throws {
-		self.item = try unboxer.unbox(key: "item")
-	}
-	
 }
 
 class PatchDatePayload: DayPayload {

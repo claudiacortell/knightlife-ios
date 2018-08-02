@@ -10,15 +10,20 @@ import Foundation
 import AddictiveLib
 import Unbox
 
-class GetScheduleWebCall: UnboxWebCall<GetScheduleResponse, [DayOfWeek: DaySchedule]> {
+class GetScheduleWebCall: UnboxWebCall<KnightlifeListPayload<GetScheduleResponseDay>, [DayOfWeek: DaySchedule]> {
 	
 	init() {
 		super.init(call: "schedule/template")
 	}
 	
-	override func convertToken(_ response: GetScheduleResponse) -> [DayOfWeek: DaySchedule]? {
+	override func convertToken(_ response: KnightlifeListPayload<GetScheduleResponseDay>) -> [DayOfWeek: DaySchedule]? {
 		var days: [DayOfWeek: DaySchedule] = [:]
-		for item in response.items {
+		guard let content = response.content else {
+			print(response.error ?? "Unknown error occurred while parsing template payload")
+			return nil
+		}
+		
+		for item in content {
 			guard let dayId = DayOfWeek.fromShortName(shortName: item.day) else {
 				print("Recieved an invalid day id: \(item.day)")
 				continue
@@ -50,16 +55,6 @@ class GetScheduleWebCall: UnboxWebCall<GetScheduleResponse, [DayOfWeek: DaySched
 			}
 		}
 		return days
-	}
-	
-}
-
-struct GetScheduleResponse: WebCallPayload {
-	
-	let items: [GetScheduleResponseDay]
-	
-	init(unboxer: Unboxer) throws {
-		self.items = try unboxer.unbox(key: "items")
 	}
 	
 }

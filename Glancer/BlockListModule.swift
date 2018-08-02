@@ -23,11 +23,14 @@ class BlockListModule: TableModule {
 	
 	func loadCells(layout: TableLayout) {
 		let section = self.section ?? layout.addSection()
-		section.addDividerCell(left: 0, right: 0, backgroundColor: UIColor.clear, insetColor: UIColor(hex: "E1E1E6")!)
+		
+		if !self.composites.isEmpty {
+			section.addDivider()
+		}
 		
 		for composite in self.composites {
 			section.addCell(BlockCell(controller: self.controller, composite: composite))
-			section.addDividerCell(left: 0, right: 0, backgroundColor: UIColor.clear, insetColor: UIColor(hex: "E1E1E6")!)
+			section.addDivider()
 		}
 	}
 	

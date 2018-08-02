@@ -33,7 +33,7 @@ class CoursePrefCell: TableCell {
 
 			
 			let selectedBackground = UIView()
-			selectedBackground.backgroundColor = UIColor(hex: "F8F8FA")!
+			selectedBackground.backgroundColor = Scheme.backgroundMedium.color
 
 			prefCell.blockStack.isHidden = false
 			

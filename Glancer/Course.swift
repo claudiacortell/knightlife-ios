@@ -14,7 +14,7 @@ class Course {
 	var name: String // Course name
 	var courseSchedule: CourseSchedule
 	
-	var color: UIColor?
+	var color: UIColor = Scheme.nullColor.color
 	var location: String?
 	
 	init(name: String, schedule: CourseSchedule) {

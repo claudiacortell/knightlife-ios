@@ -10,7 +10,7 @@ import Foundation
 import AddictiveLib
 import Unbox
 
-class GetEventsWebCall: UnboxWebCall<GetEventsResponse, EventList> {
+class GetEventsWebCall: UnboxWebCall<KnightlifeListPayload<EventPayload>, EventList> {
 	
 	let date: Date
 	
@@ -22,9 +22,13 @@ class GetEventsWebCall: UnboxWebCall<GetEventsResponse, EventList> {
 		self.parameter("date", val: date.webSafeDate)
 	}
 	
-	override func convertToken(_ data: GetEventsResponse) -> EventList? {
+	override func convertToken(_ data: KnightlifeListPayload<EventPayload>) -> EventList? {
+		guard let content = data.content else {
+			return nil
+		}
+		
 		var events: [Event] = []
-		for event in data.events {
+		for event in content {
 			guard let blockId = BlockID.fromStringValue(name: event.block) else {
 				print("Wasn't able to parse event block: \(event.block)")
 				continue
@@ -44,16 +48,6 @@ class GetEventsWebCall: UnboxWebCall<GetEventsResponse, EventList> {
 		}
 		return EventList(date: self.date, events: events)
 	}
-}
-
-class GetEventsResponse: WebCallPayload {
-	
-	let events: [EventPayload]
-	
-	required init(unboxer: Unboxer) throws {
-		self.events = try unboxer.unbox(key: "items", allowInvalidElements: true)
-	}
-	
 }
 
 class EventPayload: WebCallPayload {

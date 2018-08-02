@@ -13,14 +13,42 @@ enum Scheme {
 	
 	case blue
 	
-	case defaultGray
+	case main
+	case backgroundMedium
+	case backgroundColor
+	
+	case darkText
+	case text
+	case lightText
+	
+	case nullColor
+	
+	case hollowText
+	
+	case dividerColor
 	
 	var color: UIColor {
 		switch self {
 		case .blue:
 			return UIColor(hex: "5794DC")!
-		case .defaultGray:
-			return UIColor(hex: "21262b")!
+		case .main:
+			return UIColor.white
+		case .backgroundMedium:
+			return UIColor(hex: "F8F8FA")!
+		case .backgroundColor:
+			return UIColor.groupTableViewBackground
+		case .darkText:
+			return UIColor.darkText
+		case .text:
+			return UIColor.darkGray
+		case .lightText:
+			return UIColor.lightGray
+		case .nullColor:
+			return UIColor(hex: "777777")!
+		case .hollowText:
+			return UIColor(hex: "9F9FAA")!
+		case .dividerColor:
+			return UIColor(hex: "E1E1E6")!
 		}
 	}
 	

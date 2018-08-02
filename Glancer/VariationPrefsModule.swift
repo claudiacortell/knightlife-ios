@@ -13,14 +13,14 @@ class VariationPrefsModule: TableModule {
 	
 	func loadCells(layout: TableLayout) {
 		let section = layout.addSection()
-		section.addDividerCell(left: 0, right: 0, backgroundColor: UIColor.clear, insetColor: UIColor(hex: "E1E1E6")!)
+		section.addDivider()
 		section.addCell(TitleCell(title: "First Lunch"))
-		section.addDividerCell(left: 0, right: 0, backgroundColor: UIColor.clear, insetColor: UIColor(hex: "E1E1E6")!)
+		section.addDivider()
 		
 		for weekday in DayOfWeek.weekdays() {
 			let variation = ScheduleManager.instance.getVariation(weekday)
 			section.addCell(VariationPrefCell(module: self, weekday: weekday, variation: variation))
-			section.addDividerCell(left: 0, right: 0, backgroundColor: UIColor.clear, insetColor: UIColor(hex: "E1E1E6")!)
+			section.addDivider()
 		}
 		
 		section.addSpacerCell().setBackgroundColor(.clear).setHeight(35)

@@ -26,7 +26,7 @@ class TitleCell: TableCell {
 			}
 			
 			titleCell.titleLabel.text = title
-			cell.backgroundColor = UIColor(hex: "F8F8FA")!
+			cell.backgroundColor = Scheme.backgroundMedium.color
 			
 			titleCell.titleLabel.textAlignment = alignment
 		}

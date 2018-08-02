@@ -13,11 +13,11 @@ class LunchPrefsModule: TableModule {
 	
 	func loadCells(layout: TableLayout) {
 		let section = layout.addSection()
-		section.addDividerCell(left: 0, right: 0, backgroundColor: UIColor.clear, insetColor: UIColor(hex: "E1E1E6")!)
+		section.addDivider()
 		section.addCell(TitleCell(title: "Lunch"))
-		section.addDividerCell(left: 0, right: 0, backgroundColor: UIColor.clear, insetColor: UIColor(hex: "E1E1E6")!)
+		section.addDivider()
 		section.addCell(LunchPrefsCell(module: self, show: LunchManager.instance.showAllergens))
-		section.addDividerCell(left: 0, right: 0, backgroundColor: UIColor.clear, insetColor: UIColor(hex: "E1E1E6")!)
+		section.addDivider()
 		section.addSpacerCell().setBackgroundColor(.clear).setHeight(35)
 	}
 	

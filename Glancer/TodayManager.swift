@@ -57,6 +57,7 @@ class TodayManager: Manager {
 	private(set) var nextDay: Date?
 	private(set) var nextDayBundle: DayBundle?
 	private(set) var nextDayError: Error?
+	private(set) var findingNextDay: Bool = false
 	
 	let statusWatcher = ResourceWatcher<TodayScheduleState>()
 	private(set) var currentState: TodayScheduleState = .LOADING
@@ -205,6 +206,9 @@ class TodayManager: Manager {
 		case .AFTER_SCHOOL(_):
 			self.updateOutsideDayContext(state: state)
 			break
+		case .NO_CLASS(_, _):
+			self.updateOutsideDayContext(state: state)
+			break
 		default:
 			self.updateWithinDayContext(state: state)
 			break
@@ -227,16 +231,41 @@ class TodayManager: Manager {
 			self.nextDay = nil
 			self.nextDayBundle = nil
 			self.nextDayError = nil
+			self.findingNextDay = false
 			
 			self.reloadTodayBundle()
 		} else {
-			if self.nextDay == nil {
-				let nextDay = Date.today // Get this from the web server.
-
-				self.nextDay = nextDay
-				self.registerNextDayListeners()
+			if self.nextDay == nil && !self.findingNextDay {
+				self.findingNextDay = true
 				
-				self.reloadNextDayBundle()
+				let localToday = self.today
+				NextSchooldayWebCall(today: self.today).callback() {
+					result in
+					
+					if localToday.webSafeDate != self.today.webSafeDate { // Make sure the web call didn't execute in the previous day
+						return
+					}
+					
+					var date: Date?
+					var error: Error?
+					
+					switch result {
+					case let .success(result):
+						date = result
+					case let .failure(problem):
+						error = problem
+					}
+					
+					self.nextDay = date
+					self.nextDayError = error
+					
+					self.findingNextDay = false
+					
+					if self.nextDay != nil {
+						self.registerNextDayListeners()
+						self.reloadNextDayBundle()
+					}
+				}.execute()
 			}
 
 			self.updateState(state: state)
@@ -311,7 +340,7 @@ class TodayManager: Manager {
 		}
 		
 		if let currentBlock = self.getCurrentBlock() { // In class
-			var minLeft = abs(currentBlock.time.start.minuteDifference(date: now))
+			var minLeft = abs(currentBlock.time.end.minuteDifference(date: now))
 			minLeft += 1
 			let nextBlock = schedule.getBlockAfter(currentBlock)
 			return TodayScheduleState.IN_CLASS(bundle, currentBlock, nextBlock, minLeft)

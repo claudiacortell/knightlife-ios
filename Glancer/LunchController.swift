@@ -36,11 +36,11 @@ class LunchController: UIViewController, TableBuilder {
 	func buildCells(layout: TableLayout) {
 		let section = layout.addSection()
 		
-		section.addDividerCell(left: 0, right: 0, backgroundColor: UIColor.clear, insetColor: UIColor(hex: "E1E1E6")!)
+		section.addDivider()
 		
 		for item in self.menu.items {
 			section.addCell(LunchItemCell(item: item, showAllergen: LunchManager.instance.showAllergens))
-			section.addDividerCell(left: 0, right: 0, backgroundColor: UIColor.clear, insetColor: UIColor(hex: "E1E1E6")!)
+			section.addDivider()
 		}
 	}
 	

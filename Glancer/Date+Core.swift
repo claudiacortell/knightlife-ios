@@ -90,7 +90,7 @@ extension Date {
 	}
 	
 	func dayDifference(date: Date) -> Int {
-		return Calendar.normalizedCalendar.dateComponents([.day], from: self, to: date).day!
+		return Calendar.normalizedCalendar.dateComponents([.day], from: Calendar.normalizedCalendar.startOfDay(for: self), to: Calendar.normalizedCalendar.startOfDay(for: date)).day!
 	}
 	
 	func minuteDifference(date: Date) -> Int {

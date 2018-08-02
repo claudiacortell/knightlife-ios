@@ -16,6 +16,7 @@
 		C01539BB2110EE890059C807 /* ShowAllergyStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01539BA2110EE890059C807 /* ShowAllergyStorage.swift */; };
 		C01573BC20C462ED008CACA5 /* TodayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01573BB20C462ED008CACA5 /* TodayManager.swift */; };
 		C019C1611F7D3CED00FC4EED /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C019C1601F7D3CED00FC4EED /* Launch.storyboard */; };
+		C01F2D0E21138EBE00E461FA /* NextSchooldayWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01F2D0D21138EBE00E461FA /* NextSchooldayWebCall.swift */; };
 		C02A2B0D1FAD47E400D3A9CD /* GetPatchWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02A2B0C1FAD47E400D3A9CD /* GetPatchWebCall.swift */; };
 		C02A2B141FAD527600D3A9CD /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02A2B131FAD527600D3A9CD /* Block.swift */; };
 		C02A2B171FAD539E00D3A9CD /* DaySchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02A2B161FAD539E00D3A9CD /* DaySchedule.swift */; };
@@ -57,6 +58,7 @@
 		C0929F412110C612004A373B /* PrefsActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0929F402110C612004A373B /* PrefsActionCell.swift */; };
 		C0929F432110C61B004A373B /* PrefsActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0929F422110C61B004A373B /* PrefsActionCell.xib */; };
 		C093434B1FAA1B7A00629A84 /* BlockID.swift in Sources */ = {isa = PBXBuildFile; fileRef = C093434A1FAA1B7A00629A84 /* BlockID.swift */; };
+		C09B41D0211378BD00D636D7 /* TableSection+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09B41CF211378BD00D636D7 /* TableSection+Core.swift */; };
 		C09BF04D210ADB390073C217 /* CompositeBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09BF04C210ADB390073C217 /* CompositeBlock.swift */; };
 		C09BF050210AE5370073C217 /* CalendarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09BF04F210AE5370073C217 /* CalendarController.swift */; };
 		C0A0327F2037A5B20046575C /* RegistrationWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A0327E2037A5B20046575C /* RegistrationWebCall.swift */; };
@@ -83,6 +85,7 @@
 		C0C785B0210FD980003A5EB8 /* LunchItemAttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C785AF210FD980003A5EB8 /* LunchItemAttachmentView.swift */; };
 		C0C785B3210FDB88003A5EB8 /* TitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0C785B2210FDB88003A5EB8 /* TitleCell.xib */; };
 		C0C785B5210FDB8E003A5EB8 /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C785B4210FDB8E003A5EB8 /* TitleCell.swift */; };
+		C0C7EA4921135D2400717B53 /* KnightlifePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C7EA4821135D2400717B53 /* KnightlifePayload.swift */; };
 		C0CAF2CE210C223C001A69BF /* LunchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CAF2CD210C223C001A69BF /* LunchController.swift */; };
 		C0CB9C101FE4634000437C5D /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CB9C0F1FE4634000437C5D /* EventManager.swift */; };
 		C0CB9C131FE464D900437C5D /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CB9C121FE464D900437C5D /* Event.swift */; };
@@ -133,6 +136,7 @@
 		C01539BA2110EE890059C807 /* ShowAllergyStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAllergyStorage.swift; sourceTree = "<group>"; };
 		C01573BB20C462ED008CACA5 /* TodayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayManager.swift; sourceTree = "<group>"; };
 		C019C1601F7D3CED00FC4EED /* Launch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
+		C01F2D0D21138EBE00E461FA /* NextSchooldayWebCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextSchooldayWebCall.swift; sourceTree = "<group>"; };
 		C02A2B0C1FAD47E400D3A9CD /* GetPatchWebCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPatchWebCall.swift; sourceTree = "<group>"; };
 		C02A2B131FAD527600D3A9CD /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		C02A2B161FAD539E00D3A9CD /* DaySchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaySchedule.swift; sourceTree = "<group>"; };
@@ -174,6 +178,7 @@
 		C0929F402110C612004A373B /* PrefsActionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsActionCell.swift; sourceTree = "<group>"; };
 		C0929F422110C61B004A373B /* PrefsActionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrefsActionCell.xib; sourceTree = "<group>"; };
 		C093434A1FAA1B7A00629A84 /* BlockID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockID.swift; sourceTree = "<group>"; };
+		C09B41CF211378BD00D636D7 /* TableSection+Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableSection+Core.swift"; sourceTree = "<group>"; };
 		C09BF04C210ADB390073C217 /* CompositeBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeBlock.swift; sourceTree = "<group>"; };
 		C09BF04F210AE5370073C217 /* CalendarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarController.swift; sourceTree = "<group>"; };
 		C0A0327E2037A5B20046575C /* RegistrationWebCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationWebCall.swift; sourceTree = "<group>"; };
@@ -200,6 +205,7 @@
 		C0C785AF210FD980003A5EB8 /* LunchItemAttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchItemAttachmentView.swift; sourceTree = "<group>"; };
 		C0C785B2210FDB88003A5EB8 /* TitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleCell.xib; sourceTree = "<group>"; };
 		C0C785B4210FDB8E003A5EB8 /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
+		C0C7EA4821135D2400717B53 /* KnightlifePayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnightlifePayload.swift; sourceTree = "<group>"; };
 		C0CAF2CD210C223C001A69BF /* LunchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchController.swift; sourceTree = "<group>"; };
 		C0CB9C0F1FE4634000437C5D /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		C0CB9C121FE464D900437C5D /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
@@ -323,6 +329,7 @@
 		C01573BA20C462DC008CACA5 /* Today */ = {
 			isa = PBXGroup;
 			children = (
+				C01F2D0C21138EAC00E461FA /* Web Call */,
 				C01573BB20C462ED008CACA5 /* TodayManager.swift */,
 			);
 			name = Today;
@@ -337,6 +344,14 @@
 				C079C22F1FACA97D009067DE /* Controllers */,
 			);
 			name = Storyboard;
+			sourceTree = "<group>";
+		};
+		C01F2D0C21138EAC00E461FA /* Web Call */ = {
+			isa = PBXGroup;
+			children = (
+				C01F2D0D21138EBE00E461FA /* NextSchooldayWebCall.swift */,
+			);
+			name = "Web Call";
 			sourceTree = "<group>";
 		};
 		C02A2B151FAD52CE00D3A9CD /* Elements */ = {
@@ -495,6 +510,8 @@
 		C0711AF820DAC2CD009243CC /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				C09B41CE211378AB00D636D7 /* Table */,
+				C0C7EA4721135D1200717B53 /* Web Call */,
 				C0711AFB20DAC2F9009243CC /* Time */,
 			);
 			name = Core;
@@ -576,6 +593,14 @@
 				C0929F422110C61B004A373B /* PrefsActionCell.xib */,
 			);
 			name = Action;
+			sourceTree = "<group>";
+		};
+		C09B41CE211378AB00D636D7 /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				C09B41CF211378BD00D636D7 /* TableSection+Core.swift */,
+			);
+			name = Table;
 			sourceTree = "<group>";
 		};
 		C09BF04E210AE36A0073C217 /* Calendar */ = {
@@ -699,6 +724,14 @@
 				C0C785B4210FDB8E003A5EB8 /* TitleCell.swift */,
 			);
 			name = Title;
+			sourceTree = "<group>";
+		};
+		C0C7EA4721135D1200717B53 /* Web Call */ = {
+			isa = PBXGroup;
+			children = (
+				C0C7EA4821135D2400717B53 /* KnightlifePayload.swift */,
+			);
+			name = "Web Call";
 			sourceTree = "<group>";
 		};
 		C0CAF2CC210C2230001A69BF /* Lunch */ = {
@@ -959,6 +992,7 @@
 				C0C1765B1FAA60C10059E956 /* SportType.swift in Sources */,
 				C05F5E871FAE54AA00724F42 /* SportTier.swift in Sources */,
 				C00232A71FA37EFC0019D328 /* CourseSchedule.swift in Sources */,
+				C01F2D0E21138EBE00E461FA /* NextSchooldayWebCall.swift in Sources */,
 				C09BF04D210ADB390073C217 /* CompositeBlock.swift in Sources */,
 				C0A3D57C21093545004F5049 /* TodayController.swift in Sources */,
 				C05BD67D2110EDA200B5B399 /* LunchPrefsModule.swift in Sources */,
@@ -974,6 +1008,7 @@
 				C0CAF2CE210C223C001A69BF /* LunchController.swift in Sources */,
 				C0C176591FAA5F450059E956 /* Scheme.swift in Sources */,
 				C0FCDBCB210A964A0080A883 /* AttachmentView.swift in Sources */,
+				C09B41D0211378BD00D636D7 /* TableSection+Core.swift in Sources */,
 				C0711B0320DAC3BE009243CC /* TimeDuration.swift in Sources */,
 				5BD285DD1B03CF29007A0472 /* AppDelegate.swift in Sources */,
 				C0C176521FAA39E50059E956 /* SportsManager.swift in Sources */,
@@ -990,6 +1025,7 @@
 				C04653C8210936B9004AD09C /* BlockCell.swift in Sources */,
 				C05F5E891FAE561400724F42 /* SportGender.swift in Sources */,
 				C0A1FB1A2001D705004146CE /* DateSchedule.swift in Sources */,
+				C0C7EA4921135D2400717B53 /* KnightlifePayload.swift in Sources */,
 				C0CB9C151FE4668B00437C5D /* EventAudience.swift in Sources */,
 				C0DF4F04210CEB26002A433C /* DayBundle.swift in Sources */,
 				C02A2B141FAD527600D3A9CD /* Block.swift in Sources */,

@@ -82,7 +82,7 @@ class TodayController: DayController {
 			return
 		}
 		
-		layout.addSection().addCell(NoClassCell()).setHeight(120)
+		layout.addSection().addCell(NoClassCell()).setHeight(100)
 		self.addNextSchoolday(layout: layout, bundle: bundle!)
 	}
 	
@@ -97,9 +97,11 @@ class TodayController: DayController {
 		let analyst = BlockAnalyst(schedule: bundle.schedule, block: block)
 		
 		let section = layout.addSection()
-		section.addCell(TodayStatusCell(state: "Get to \(analyst.getDisplayName())", minutes: minutes, image: UIImage(named: "icon_clock")!, color: analyst.getColor()))
+		section.addCell(TodayStatusCell(state: "Get to \(analyst.getDisplayName())", minutes: minutes, image: UIImage(named: "icon_class")!, color: analyst.getColor()))
 		
+		section.addDivider()
 		section.addCell(BlockCell(controller: self, composite: self.generateCompositeBlock(bundle: bundle, block: block)))
+		section.addDivider()
 		
 		section.addSpacerCell().setHeight(30)
 
@@ -111,9 +113,11 @@ class TodayController: DayController {
 		let analyst = BlockAnalyst(schedule: bundle.schedule, block: current)
 		
 		let section = layout.addSection()
-		section.addCell(TodayStatusCell(state: analyst.getDisplayName(), minutes: minutes, image: UIImage(named: "icon_class")!, color: analyst.getColor()))
+		section.addCell(TodayStatusCell(state: analyst.getDisplayName(), minutes: minutes, image: UIImage(named: "icon_clock")!, color: analyst.getColor()))
 		
+		section.addDivider()
 		section.addCell(BlockCell(controller: self, composite: self.generateCompositeBlock(bundle: bundle, block: current)))
+		section.addDivider()
 		
 		section.addSpacerCell().setHeight(30)
 		
@@ -129,8 +133,6 @@ class TodayController: DayController {
 		
 		let doneSection = layout.addSection()
 		doneSection.addCell(TodayDoneCell()).setHeight(120)
-		doneSection.addDividerCell(left: 0, right: 0, backgroundColor: UIColor.clear, insetColor: UIColor(hex: "E1E1E6")!)
-		
 		self.addNextSchoolday(layout: layout, bundle: bundle)
 	}
 	
@@ -155,12 +157,8 @@ class TodayController: DayController {
 		}
 		
 		let section = layout.addSection()
-		section.setTitle("Next School Day (\(label))")
-		section.setHeaderHeight(30)
-		section.setHeaderFont(UIFont.systemFont(ofSize: 14, weight: .medium))
-		section.setHeaderColor(UIColor(hex: "F8F8FA"))
-		section.setHeaderIndent(20)
-		section.setHeaderTextColor(UIColor(hex: "9F9FAA"))
+		section.addDivider()
+		section.addCell(TitleCell(title: "Next School Day (\(label))"))
 		
 		let compiled = self.generateCompositeList(bundle: bundle, blocks: bundle.schedule.getBlocks())
 		self.tableHandler.addModule(BlockListModule(controller: self, composites: compiled, section: section))

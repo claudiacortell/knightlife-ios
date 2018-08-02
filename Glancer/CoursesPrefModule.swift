@@ -21,14 +21,13 @@ class CoursesPrefModule: TableModule {
 	
 	func loadCells(layout: TableLayout) {
 		let section = layout.addSection()
-		section.addDividerCell(left: 0, right: 0, backgroundColor: UIColor.clear, insetColor: UIColor(hex: "E1E1E6")!)
+		section.addDivider()
 		section.addCell(TitleCell(title: CourseManager.instance.meetings.isEmpty ? "No Classes" : "Classes"))
+		section.addDivider()
 		
-		section.addDividerCell(left: 0, right: 0, backgroundColor: UIColor.clear, insetColor: UIColor(hex: "E1E1E6")!)
-
 		for course in CourseManager.instance.meetings {
 			section.addCell(CoursePrefCell(controller: self.controller, course: course))
-			section.addDividerCell(left: 0, right: 0, backgroundColor: UIColor.clear, insetColor: UIColor(hex: "E1E1E6")!)
+			section.addDivider()
 		}
 		
 		section.addSpacerCell().setBackgroundColor(.clear).setHeight(15)

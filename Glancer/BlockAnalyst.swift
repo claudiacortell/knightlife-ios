@@ -62,12 +62,9 @@ class BlockAnalyst {
 				return previousAnalyst.getColor()
 			}
 			
-//			return self.getColor
-//			TODO: IMPLEMENT BLOCK COLORS
-
-			return UIColor.darkText
+			return Scheme.nullColor.color
 		}
 		
-		return courses.courses.first!.color ?? UIColor.darkText
+		return courses.courses.first!.color
 	}
 }

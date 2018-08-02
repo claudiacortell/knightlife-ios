@@ -22,6 +22,7 @@ class DayBundleManager: Manager {
 	}
 	
 	func registerListeners() {
+		
 		//		TODO: Make the bundles auto updating without causing an infinite loop.
 	}
 	

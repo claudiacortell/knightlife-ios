@@ -10,7 +10,7 @@ import Foundation
 import AddictiveLib
 import Unbox
 
-class GetMenuWebCall: UnboxWebCall<GetMenuResponse, LunchMenu> {
+class GetMenuWebCall: UnboxWebCall<KnightlifePayload<MenuPayload>, LunchMenu> {
 	
 	let date: Date
 	
@@ -22,27 +22,21 @@ class GetMenuWebCall: UnboxWebCall<GetMenuResponse, LunchMenu> {
 		self.parameter("date", val: date.webSafeDate)
 	}
 	
-	override func convertToken(_ data: GetMenuResponse) -> LunchMenu? {
+	override func convertToken(_ data: KnightlifePayload<MenuPayload>) -> LunchMenu? {
+		guard let content = data.content else {
+			return nil
+		}
+		
 		var items: [LunchMenuItem] = []
 		
-		for item in data.menu.items {
+		for item in content.items {
 			if let type = LunchMenuItemType(rawValue: item.type) {
 				let item = LunchMenuItem(type, name: item.name, allergy: item.allergy)
 				items.append(item)
 			}
 		}
 		
-		return LunchMenu(self.date, title: data.menu.description, items: items)
-	}
-	
-}
-
-class GetMenuResponse: WebCallPayload {
-	
-	let menu: MenuPayload
-	
-	required init(unboxer: Unboxer) throws {
-		self.menu = try unboxer.unbox(key: "item")
+		return LunchMenu(self.date, title: content.description, items: items)
 	}
 	
 }

@@ -42,21 +42,23 @@ class MeetingPrefModule: StorageHandler {
 		{
 			for (rawBlockId, keyPairs) in meta
 			{
-				if let blockId = BlockID.fromStringValue(name: rawBlockId)
-				{
-					if [ BlockID.a, .b, .c, .d, .e, .f, .g ].contains(blockId)
-					{
-						let name: String = { if keyPairs["name"] != nil { if keyPairs["name"]! != nil { return keyPairs["name"]!! } }; return "Unknown" }()
-						let color: String? = { if keyPairs["color"] != nil { if keyPairs["color"]! != nil { return keyPairs["color"]!! } }; return nil }()
-						let room: String? = { if keyPairs["room"] != nil { if keyPairs["room"]! != nil { return keyPairs["room"]!! } }; return nil }()
-
-						let schedule = CourseSchedule(block: blockId, frequency: .everyDay)
-						let course = Course(name: name, schedule: schedule)
-						course.color = UIColor(hex: color ?? "")
-						course.location = room
-						
-						self.manager.addCourse(course)
+				if let blockId = BlockID(rawValue: ["A", "B", "C", "D", "E", "F", "G"].firstIndex(of: rawBlockId) ?? 99) {
+					let name: String = {
+						if keyPairs["name"] != nil
+						{ if keyPairs["name"]! != nil
+						{ return keyPairs["name"]!! } }; return "Unknown" }()
+					let color: String? = { if keyPairs["color"] != nil { if keyPairs["color"]! != nil { return keyPairs["color"]!! } }; return nil }()
+					let room: String? = { if keyPairs["room"] != nil { if keyPairs["room"]! != nil { return keyPairs["room"]!! } }; return nil }()
+					
+					let schedule = CourseSchedule(block: blockId, frequency: .everyDay)
+					let course = Course(name: name, schedule: schedule)
+					course.location = room
+					
+					if color != nil, let parsedColor = UIColor(hex: color!) {
+						course.color = parsedColor
 					}
+					
+					self.manager.addCourse(course)
 				}
 			}
 		}

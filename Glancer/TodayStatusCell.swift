@@ -16,7 +16,7 @@ class TodayStatusCell: TableCell {
 		super.init("todaystatus", nib: "TodayStatusCell")
 		
 		self.setSelectionStyle(.none)
-		self.setHeight(120)
+		self.setHeight(100)
 		
 		self.setCallback() {
 			template, cell in
