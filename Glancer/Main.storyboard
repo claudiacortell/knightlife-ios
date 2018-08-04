@@ -140,39 +140,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fQO-lO-qwx">
-                                <rect key="frame" x="0.0" y="264" width="375" height="354"/>
-                                <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7eB-FE-iya">
-                                <rect key="frame" x="0.0" y="64" width="375" height="200"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="3fD-6q-I6s"/>
-                                </constraints>
-                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="nx4-rc-gNt">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B1q-ce-OFy" customClass="FSCalendar">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="243"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fQO-lO-qwx">
+                                        <rect key="frame" x="0.0" y="243" width="375" height="311"/>
+                                        <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </tableView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="7eB-FE-iya" secondAttribute="trailing" id="3R7-y3-rEr"/>
-                            <constraint firstItem="7eB-FE-iya" firstAttribute="height" relation="lessThanOrEqual" secondItem="3tk-Qc-UqO" secondAttribute="height" multiplier="40:100" id="7TJ-AE-L92"/>
-                            <constraint firstItem="kb8-u0-ENq" firstAttribute="top" secondItem="fQO-lO-qwx" secondAttribute="bottom" id="8E6-0p-co4"/>
-                            <constraint firstItem="7eB-FE-iya" firstAttribute="top" secondItem="l2Z-WV-viX" secondAttribute="bottom" id="GUB-5L-leV"/>
-                            <constraint firstItem="7eB-FE-iya" firstAttribute="bottom" secondItem="fQO-lO-qwx" secondAttribute="top" id="h1R-kS-S0a"/>
-                            <constraint firstAttribute="trailing" secondItem="fQO-lO-qwx" secondAttribute="trailing" id="i0T-iN-YK4"/>
-                            <constraint firstItem="fQO-lO-qwx" firstAttribute="leading" secondItem="3tk-Qc-UqO" secondAttribute="leading" id="quB-AL-cOb"/>
-                            <constraint firstItem="7eB-FE-iya" firstAttribute="leading" secondItem="3tk-Qc-UqO" secondAttribute="leading" id="rYb-ku-RzJ"/>
+                            <constraint firstItem="nx4-rc-gNt" firstAttribute="leading" secondItem="3tk-Qc-UqO" secondAttribute="leading" id="TDc-xs-FVi"/>
+                            <constraint firstItem="kb8-u0-ENq" firstAttribute="top" secondItem="nx4-rc-gNt" secondAttribute="bottom" id="cVn-M9-7lb"/>
+                            <constraint firstItem="nx4-rc-gNt" firstAttribute="top" secondItem="l2Z-WV-viX" secondAttribute="bottom" id="lQt-Ll-xZ1"/>
+                            <constraint firstAttribute="trailing" secondItem="nx4-rc-gNt" secondAttribute="trailing" id="n8q-N9-jWB"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Upcoming" id="ZCy-iG-pqn"/>
                     <connections>
-                        <outlet property="calendarWrapper" destination="7eB-FE-iya" id="eiB-IY-U32"/>
+                        <outlet property="calendarView" destination="B1q-ce-OFy" id="qeG-qX-LAz"/>
                         <outlet property="tableView" destination="fQO-lO-qwx" id="4Le-b8-INI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qhD-rw-Wmh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1228" y="-281"/>
+            <point key="canvasLocation" x="-1228" y="-281.10944527736132"/>
         </scene>
         <!--Settings Navigation-->
         <scene sceneID="kJE-VZ-QIz">
@@ -224,6 +222,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NSM-Fz-ENz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1228" y="445"/>
+        </scene>
+        <!--Settings Class-->
+        <scene sceneID="ZOM-e3-UwO">
+            <objects>
+                <viewController storyboardIdentifier="SettingsClass" title="Settings Class" id="0t6-bI-XcP" customClass="SettingsClassController" customModule="Glancer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jJs-a8-rxu"/>
+                        <viewControllerLayoutGuide type="bottom" id="g3F-n9-a4f"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UMG-0h-dJv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="M3c-hU-2R5">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="M3c-hU-2R5" firstAttribute="leading" secondItem="UMG-0h-dJv" secondAttribute="leading" id="XOY-i3-CsC"/>
+                            <constraint firstItem="g3F-n9-a4f" firstAttribute="top" secondItem="M3c-hU-2R5" secondAttribute="bottom" id="egi-fL-lbd"/>
+                            <constraint firstItem="M3c-hU-2R5" firstAttribute="top" secondItem="jJs-a8-rxu" secondAttribute="bottom" id="fSf-yr-ofd"/>
+                            <constraint firstAttribute="trailing" secondItem="M3c-hU-2R5" secondAttribute="trailing" id="qiN-aT-TuW"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Class" id="BRU-Ab-XMl"/>
+                    <connections>
+                        <outlet property="tableView" destination="M3c-hU-2R5" id="mzU-1x-fKr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="04d-Pu-Yyo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-482" y="445"/>
         </scene>
         <!--Add Course Wrapper-->
         <scene sceneID="mUy-NJ-Lnq">

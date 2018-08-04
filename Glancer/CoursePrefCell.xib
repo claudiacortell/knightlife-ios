@@ -27,7 +27,7 @@
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_tag" translatesAutoresizingMaskIntoConstraints="NO" id="CQj-mR-vbC">
                             <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
-                            <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" red="0.58039215686274503" green="0.58039215686274503" blue="0.58039215686274503" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="16" id="Prk-Tu-LRA"/>
                                 <constraint firstAttribute="width" secondItem="CQj-mR-vbC" secondAttribute="height" multiplier="1:1" id="x8U-bm-0Ae"/>
@@ -36,7 +36,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" text="Block" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ll-J1-kl3">
                             <rect key="frame" x="21" y="0.0" width="37.5" height="16"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" red="0.58039215686274503" green="0.58039215686274503" blue="0.58039215686274503" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -55,6 +55,7 @@
             <connections>
                 <outlet property="blockLabel" destination="2ll-J1-kl3" id="Anu-nF-s3e"/>
                 <outlet property="blockStack" destination="Feg-cu-Yux" id="XRn-91-Jr1"/>
+                <outlet property="tagImage" destination="CQj-mR-vbC" id="UTd-h8-GQy"/>
                 <outlet property="titleLabel" destination="1Aj-aK-5C8" id="WIV-Be-37k"/>
             </connections>
             <point key="canvasLocation" x="-406.5" y="-256.5"/>

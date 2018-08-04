@@ -61,18 +61,40 @@ class TodayController: DayController {
 		switch self.state! {
 		case .LOADING:
 			self.showLoading(layout: layout)
+			break
 		case .ERROR:
 			self.showError(layout: layout)
-		case let .NO_CLASS(_, nextDay):
+			break
+		case let .NO_CLASS(today, nextDay):
+			self.date = today.date
+			self.setupNavigationItem()
+			
 			self.showNoClass(layout: layout, bundle: nextDay)
+			break
 		case let .BEFORE_SCHOOL(bundle, firstBlock, minutesUntil):
+			self.date = bundle.date
+			self.setupNavigationItem()
+			
 			self.showBeforeSchool(layout: layout, bundle: bundle, block: firstBlock, minutes: minutesUntil)
+			break
 		case let .BETWEEN_CLASS(bundle, nextBlock, minutesUntil):
+			self.date = bundle.date
+			self.setupNavigationItem()
+			
 			self.showBetweenClass(layout: layout, bundle: bundle, block: nextBlock, minutes: minutesUntil)
+			break
 		case let .IN_CLASS(bundle, current, next, minutesLeft):
+			self.date = bundle.date
+			self.setupNavigationItem()
+			
 			self.showInClass(layout: layout, bundle: bundle, current: current, next: next, minutes: minutesLeft)
-		case let .AFTER_SCHOOL(_, nextDay):
+			break
+		case let .AFTER_SCHOOL(bundle, nextDay):
+			self.date = bundle.date
+			self.setupNavigationItem()
+			
 			self.showAfterSchool(layout: layout, bundle: nextDay)
+			break
 		}
 	}
 	

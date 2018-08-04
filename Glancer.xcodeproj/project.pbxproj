@@ -45,6 +45,9 @@
 		C05F5E871FAE54AA00724F42 /* SportTier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05F5E861FAE54AA00724F42 /* SportTier.swift */; };
 		C05F5E891FAE561400724F42 /* SportGender.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05F5E881FAE561400724F42 /* SportGender.swift */; };
 		C05F5E8B1FAE56CC00724F42 /* TeamDeclarations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05F5E8A1FAE56CC00724F42 /* TeamDeclarations.swift */; };
+		C061F80B2115F90600F0374C /* SettingsCourseTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C061F80A2115F90600F0374C /* SettingsCourseTextCell.swift */; };
+		C061F80D2115F91700F0374C /* SettingsCourseTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C061F80C2115F91600F0374C /* SettingsCourseTextCell.xib */; };
+		C06AE4F521154B79003A1EE8 /* SettingsClassController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06AE4F421154B79003A1EE8 /* SettingsClassController.swift */; };
 		C0707FC01F69753100C7D2ED /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0707FBF1F69753100C7D2ED /* Storage.swift */; };
 		C0711AFA20DAC2DB009243CC /* DayOfWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0711AF920DAC2DB009243CC /* DayOfWeek.swift */; };
 		C0711B0320DAC3BE009243CC /* TimeDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0711B0220DAC3BE009243CC /* TimeDuration.swift */; };
@@ -62,6 +65,8 @@
 		C09BF04D210ADB390073C217 /* CompositeBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09BF04C210ADB390073C217 /* CompositeBlock.swift */; };
 		C09BF050210AE5370073C217 /* CalendarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09BF04F210AE5370073C217 /* CalendarController.swift */; };
 		C0A0327F2037A5B20046575C /* RegistrationWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A0327E2037A5B20046575C /* RegistrationWebCall.swift */; };
+		C0A123402115FF4000A72CD8 /* SettingsCourseColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A1233F2115FF4000A72CD8 /* SettingsCourseColorCell.swift */; };
+		C0A123422115FF4E00A72CD8 /* SettingsCourseColorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0A123412115FF4E00A72CD8 /* SettingsCourseColorCell.xib */; };
 		C0A167AA210E678800DB6BC4 /* ErrorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0A167A9210E678800DB6BC4 /* ErrorCell.xib */; };
 		C0A167AC210E679700DB6BC4 /* ErrorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A167AB210E679700DB6BC4 /* ErrorCell.swift */; };
 		C0A167AE210E6AB200DB6BC4 /* ErrorReloadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A167AD210E6AB200DB6BC4 /* ErrorReloadable.swift */; };
@@ -78,6 +83,10 @@
 		C0ACFD1A21116863002886A2 /* TodayStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ACFD1921116863002886A2 /* TodayStatusCell.swift */; };
 		C0ACFD1C2111686D002886A2 /* TodayStatusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0ACFD1B2111686D002886A2 /* TodayStatusCell.xib */; };
 		C0B04F461FD177EC00F5D116 /* MeetingPrefModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B04F451FD177EC00F5D116 /* MeetingPrefModule.swift */; };
+		C0B08EC52115108D00FD7289 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0B08EC42115108D00FD7289 /* NotificationCenter.framework */; };
+		C0B08EC82115108D00FD7289 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B08EC72115108D00FD7289 /* TodayViewController.swift */; };
+		C0B08ECB2115108D00FD7289 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0B08EC92115108D00FD7289 /* MainInterface.storyboard */; };
+		C0B08ECF2115108D00FD7289 /* Schedule.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C0B08EC32115108D00FD7289 /* Schedule.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C0B56A292110F8F3000A8C3F /* AddCourseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B56A282110F8F3000A8C3F /* AddCourseController.swift */; };
 		C0C176521FAA39E50059E956 /* SportsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C176511FAA39E50059E956 /* SportsManager.swift */; };
 		C0C176591FAA5F450059E956 /* Scheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C176581FAA5F450059E956 /* Scheme.swift */; };
@@ -107,6 +116,16 @@
 		FCA8F115BA18B9ED9502A35F /* Pods_Glancer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F470ADD7C18579EBB839A46 /* Pods_Glancer.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		C0B08ECD2115108D00FD7289 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5BD285CF1B03CF29007A0472 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C0B08EC22115108D00FD7289;
+			remoteInfo = Schedule;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		5BC261901B0EA7D700AEBAC1 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -114,6 +133,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				C0B08ECF2115108D00FD7289 /* Schedule.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -165,6 +185,9 @@
 		C05F5E861FAE54AA00724F42 /* SportTier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportTier.swift; sourceTree = "<group>"; };
 		C05F5E881FAE561400724F42 /* SportGender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportGender.swift; sourceTree = "<group>"; };
 		C05F5E8A1FAE56CC00724F42 /* TeamDeclarations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDeclarations.swift; sourceTree = "<group>"; };
+		C061F80A2115F90600F0374C /* SettingsCourseTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCourseTextCell.swift; sourceTree = "<group>"; };
+		C061F80C2115F91600F0374C /* SettingsCourseTextCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsCourseTextCell.xib; sourceTree = "<group>"; };
+		C06AE4F421154B79003A1EE8 /* SettingsClassController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsClassController.swift; sourceTree = "<group>"; };
 		C0707FBF1F69753100C7D2ED /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		C0711AF920DAC2DB009243CC /* DayOfWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeek.swift; sourceTree = "<group>"; };
 		C0711B0220DAC3BE009243CC /* TimeDuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDuration.swift; sourceTree = "<group>"; };
@@ -182,6 +205,8 @@
 		C09BF04C210ADB390073C217 /* CompositeBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeBlock.swift; sourceTree = "<group>"; };
 		C09BF04F210AE5370073C217 /* CalendarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarController.swift; sourceTree = "<group>"; };
 		C0A0327E2037A5B20046575C /* RegistrationWebCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationWebCall.swift; sourceTree = "<group>"; };
+		C0A1233F2115FF4000A72CD8 /* SettingsCourseColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCourseColorCell.swift; sourceTree = "<group>"; };
+		C0A123412115FF4E00A72CD8 /* SettingsCourseColorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsCourseColorCell.xib; sourceTree = "<group>"; };
 		C0A167A9210E678800DB6BC4 /* ErrorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorCell.xib; sourceTree = "<group>"; };
 		C0A167AB210E679700DB6BC4 /* ErrorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCell.swift; sourceTree = "<group>"; };
 		C0A167AD210E6AB200DB6BC4 /* ErrorReloadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorReloadable.swift; sourceTree = "<group>"; };
@@ -198,6 +223,11 @@
 		C0ACFD1921116863002886A2 /* TodayStatusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayStatusCell.swift; sourceTree = "<group>"; };
 		C0ACFD1B2111686D002886A2 /* TodayStatusCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodayStatusCell.xib; sourceTree = "<group>"; };
 		C0B04F451FD177EC00F5D116 /* MeetingPrefModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingPrefModule.swift; sourceTree = "<group>"; };
+		C0B08EC32115108D00FD7289 /* Schedule.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Schedule.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0B08EC42115108D00FD7289 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		C0B08EC72115108D00FD7289 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		C0B08ECA2115108D00FD7289 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		C0B08ECC2115108D00FD7289 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C0B56A282110F8F3000A8C3F /* AddCourseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourseController.swift; sourceTree = "<group>"; };
 		C0C176511FAA39E50059E956 /* SportsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsManager.swift; sourceTree = "<group>"; };
 		C0C176581FAA5F450059E956 /* Scheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scheme.swift; sourceTree = "<group>"; };
@@ -235,6 +265,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C0B08EC02115108D00FD7289 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C0B08EC52115108D00FD7289 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -242,6 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				5BD285D91B03CF29007A0472 /* Glancer */,
+				C0B08EC62115108D00FD7289 /* Schedule */,
 				5BD285D81B03CF29007A0472 /* Products */,
 				5CC528ECC20EEE2AB3AA5808 /* Pods */,
 				B0E83D8F4EDAB52132304F9D /* Frameworks */,
@@ -252,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				5BD285D71B03CF29007A0472 /* Glancer.app */,
+				C0B08EC32115108D00FD7289 /* Schedule.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -285,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				1F470ADD7C18579EBB839A46 /* Pods_Glancer.framework */,
+				C0B08EC42115108D00FD7289 /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -507,6 +548,24 @@
 			name = Team;
 			sourceTree = "<group>";
 		};
+		C061F8082115F5B700F0374C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				C0A1233E2115FF2B00A72CD8 /* Color */,
+				C061F8092115F87200F0374C /* Text Association */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		C061F8092115F87200F0374C /* Text Association */ = {
+			isa = PBXGroup;
+			children = (
+				C061F80A2115F90600F0374C /* SettingsCourseTextCell.swift */,
+				C061F80C2115F91600F0374C /* SettingsCourseTextCell.xib */,
+			);
+			name = "Text Association";
+			sourceTree = "<group>";
+		};
 		C0711AF820DAC2CD009243CC /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -537,11 +596,21 @@
 			name = "No Class";
 			sourceTree = "<group>";
 		};
+		C076716D211543FF005D6460 /* Settings Course */ = {
+			isa = PBXGroup;
+			children = (
+				C061F8082115F5B700F0374C /* Cells */,
+				C06AE4F421154B79003A1EE8 /* SettingsClassController.swift */,
+			);
+			name = "Settings Course";
+			sourceTree = "<group>";
+		};
 		C079C22F1FACA97D009067DE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				C01539BD2110F57C0059C807 /* Add Course */,
 				C006914D210EC5460099CD57 /* Settings */,
+				C076716D211543FF005D6460 /* Settings Course */,
 				C0CAF2CC210C2230001A69BF /* Lunch */,
 				C09BF04E210AE36A0073C217 /* Calendar */,
 				C0A3D57D21093555004F5049 /* Day */,
@@ -619,6 +688,15 @@
 			name = Registration;
 			sourceTree = "<group>";
 		};
+		C0A1233E2115FF2B00A72CD8 /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				C0A1233F2115FF4000A72CD8 /* SettingsCourseColorCell.swift */,
+				C0A123412115FF4E00A72CD8 /* SettingsCourseColorCell.xib */,
+			);
+			name = Color;
+			sourceTree = "<group>";
+		};
 		C0A167AF210E6ADC00DB6BC4 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -690,6 +768,16 @@
 				C0ACFD1B2111686D002886A2 /* TodayStatusCell.xib */,
 			);
 			name = Cell;
+			sourceTree = "<group>";
+		};
+		C0B08EC62115108D00FD7289 /* Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				C0B08EC72115108D00FD7289 /* TodayViewController.swift */,
+				C0B08EC92115108D00FD7289 /* MainInterface.storyboard */,
+				C0B08ECC2115108D00FD7289 /* Info.plist */,
+			);
+			path = Schedule;
 			sourceTree = "<group>";
 		};
 		C0C176501FAA31010059E956 /* Sports */ = {
@@ -844,11 +932,29 @@
 			buildRules = (
 			);
 			dependencies = (
+				C0B08ECE2115108D00FD7289 /* PBXTargetDependency */,
 			);
 			name = Glancer;
 			productName = Glancer;
 			productReference = 5BD285D71B03CF29007A0472 /* Glancer.app */;
 			productType = "com.apple.product-type.application";
+		};
+		C0B08EC22115108D00FD7289 /* Schedule */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C0B08ED22115108D00FD7289 /* Build configuration list for PBXNativeTarget "Schedule" */;
+			buildPhases = (
+				C0B08EBF2115108D00FD7289 /* Sources */,
+				C0B08EC02115108D00FD7289 /* Frameworks */,
+				C0B08EC12115108D00FD7289 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Schedule;
+			productName = Schedule;
+			productReference = C0B08EC32115108D00FD7289 /* Schedule.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -857,7 +963,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 1000;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Dylan Hanson";
 				TargetAttributes = {
@@ -881,6 +987,11 @@
 							};
 						};
 					};
+					C0B08EC22115108D00FD7289 = {
+						CreatedOnToolsVersion = 10.0;
+						DevelopmentTeam = P57BN8GJ33;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 5BD285D21B03CF29007A0472 /* Build configuration list for PBXProject "Glancer" */;
@@ -897,6 +1008,7 @@
 			projectRoot = "";
 			targets = (
 				5BD285D61B03CF29007A0472 /* Glancer */,
+				C0B08EC22115108D00FD7289 /* Schedule */,
 			);
 		};
 /* End PBXProject section */
@@ -908,8 +1020,10 @@
 			files = (
 				5BD072481C74AEB40074B56D /* Main.storyboard in Resources */,
 				C051F1F8210FF957004C064F /* CoursePrefCell.xib in Resources */,
+				C061F80D2115F91700F0374C /* SettingsCourseTextCell.xib in Resources */,
 				C08FBF9D210FB290005812F1 /* TodayDoneCell.xib in Resources */,
 				C05BD6812110EDBA00B5B399 /* LunchPrefsCell.xib in Resources */,
+				C0A123422115FF4E00A72CD8 /* SettingsCourseColorCell.xib in Resources */,
 				C0A167AA210E678800DB6BC4 /* ErrorCell.xib in Resources */,
 				C0A167B3210E6F3300DB6BC4 /* LoadingCell.xib in Resources */,
 				C0C785B3210FDB88003A5EB8 /* TitleCell.xib in Resources */,
@@ -921,6 +1035,14 @@
 				C0F02CA72110E13400AE9F91 /* VariationPrefCell.xib in Resources */,
 				C04D1EC6210FD7C10001C99C /* LunchItemCell.xib in Resources */,
 				C0ACFD1C2111686D002886A2 /* TodayStatusCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C0B08EC12115108D00FD7289 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C0B08ECB2115108D00FD7289 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -937,8 +1059,9 @@
 				"${BUILT_PRODUCTS_DIR}/AddictiveLib/AddictiveLib.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Color-Picker-for-iOS/Color_Picker_for_iOS.framework",
+				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
-				"${BUILT_PRODUCTS_DIR}/JTCalendar/JTCalendar.framework",
+				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Unbox/Unbox.framework",
 				"${BUILT_PRODUCTS_DIR}/UnboxedAlamofire/UnboxedAlamofire.framework",
@@ -948,8 +1071,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AddictiveLib.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Color_Picker_for_iOS.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTCalendar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Unbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UnboxedAlamofire.framework",
@@ -1014,6 +1138,7 @@
 				C0C176521FAA39E50059E956 /* SportsManager.swift in Sources */,
 				C081C2E81FE450F0008073F3 /* LunchManager.swift in Sources */,
 				C05BD67A2110E2E500B5B399 /* VariationPrefsModule.swift in Sources */,
+				C061F80B2115F90600F0374C /* SettingsCourseTextCell.swift in Sources */,
 				C0A167AE210E6AB200DB6BC4 /* ErrorReloadable.swift in Sources */,
 				C04DE46D1FAE6E74000D4DA6 /* GetSportsMeetingResponse.swift in Sources */,
 				C0A167AC210E679700DB6BC4 /* ErrorCell.swift in Sources */,
@@ -1030,6 +1155,7 @@
 				C0DF4F04210CEB26002A433C /* DayBundle.swift in Sources */,
 				C02A2B141FAD527600D3A9CD /* Block.swift in Sources */,
 				C0B04F461FD177EC00F5D116 /* MeetingPrefModule.swift in Sources */,
+				C0A123402115FF4000A72CD8 /* SettingsCourseColorCell.swift in Sources */,
 				C054B7C71FAF65080041BA03 /* SportsMeetingWrapper.swift in Sources */,
 				C05F5E801FAE4ACA00724F42 /* SportMeeting.swift in Sources */,
 				C0A5F023210B9FBA00606ED3 /* BlockPayload.swift in Sources */,
@@ -1065,11 +1191,39 @@
 				C0711AFA20DAC2DB009243CC /* DayOfWeek.swift in Sources */,
 				C05F5E8B1FAE56CC00724F42 /* TeamDeclarations.swift in Sources */,
 				C04DE4651FAE6AF9000D4DA6 /* DailySportsList.swift in Sources */,
+				C06AE4F521154B79003A1EE8 /* SettingsClassController.swift in Sources */,
 				C0707FC01F69753100C7D2ED /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C0B08EBF2115108D00FD7289 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C0B08EC82115108D00FD7289 /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C0B08ECE2115108D00FD7289 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C0B08EC22115108D00FD7289 /* Schedule */;
+			targetProxy = C0B08ECD2115108D00FD7289 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C0B08EC92115108D00FD7289 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C0B08ECA2115108D00FD7289 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		5BD285F41B03CF29007A0472 /* Debug */ = {
@@ -1250,6 +1404,61 @@
 			};
 			name = Release;
 		};
+		C0B08ED02115108D00FD7289 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = P57BN8GJ33;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Schedule/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = MAD.BBN.KnightLife.Schedule;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C0B08ED12115108D00FD7289 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P57BN8GJ33;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Schedule/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = MAD.BBN.KnightLife.Schedule;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1267,6 +1476,15 @@
 			buildConfigurations = (
 				5BD285F71B03CF29007A0472 /* Debug */,
 				5BD285F81B03CF29007A0472 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C0B08ED22115108D00FD7289 /* Build configuration list for PBXNativeTarget "Schedule" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C0B08ED02115108D00FD7289 /* Debug */,
+				C0B08ED12115108D00FD7289 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

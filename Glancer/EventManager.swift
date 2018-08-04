@@ -31,7 +31,12 @@ class EventManager: Manager {
 		return self.eventWatchers[date.webSafeDate]!
 	}
 	
-	func getEvents(date: Date, then: @escaping (WebCallResult<EventList>) -> Void = {_ in}) {
+	func getEvents(date: Date, force: Bool = false, then: @escaping (WebCallResult<EventList>) -> Void = {_ in}) {
+		if !force, let events = self.getCachedEvents(date: date) {
+			then(WebCallResult.success(result: events))
+			return
+		}
+		
 		GetEventsWebCall(date: date).callback() {
 			result in
 			

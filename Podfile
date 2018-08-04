@@ -13,7 +13,8 @@ target 'Glancer' do
   pod 'AddictiveLib'
   pod 'Hero'
   pod 'SnapKit'
-  pod 'JTCalendar'
+  pod 'FSCalendar'
   pod 'Color-Picker-for-iOS'
+  pod 'Presentr'
 
 end

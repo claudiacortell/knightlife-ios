@@ -16,7 +16,7 @@ enum CourseFrequency {
 	
 }
 
-struct CourseSchedule {
+class CourseSchedule {
 	
     let block: BlockID //Null = all day
 	let frequency: CourseFrequency

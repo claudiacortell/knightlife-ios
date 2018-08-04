@@ -5,8 +5,9 @@ PODS:
     - UnboxedAlamofire
   - Alamofire (4.7.3)
   - Color-Picker-for-iOS (2.0.2)
+  - FSCalendar (2.7.9)
   - Hero (1.2.0)
-  - JTCalendar (2.2.3)
+  - Presentr (1.3.2)
   - SnapKit (4.0.0)
   - Unbox (2.5.0)
   - UnboxedAlamofire (2.0.4):
@@ -16,8 +17,9 @@ PODS:
 DEPENDENCIES:
   - AddictiveLib
   - Color-Picker-for-iOS
+  - FSCalendar
   - Hero
-  - JTCalendar
+  - Presentr
   - SnapKit
 
 SPEC REPOS:
@@ -26,8 +28,9 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - Color-Picker-for-iOS
+    - FSCalendar
     - Hero
-    - JTCalendar
+    - Presentr
     - SnapKit
     - Unbox
     - UnboxedAlamofire
@@ -36,12 +39,13 @@ SPEC CHECKSUMS:
   AddictiveLib: 18be644ea87c1b8bfbf6337bb7bab2f2ba577211
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   Color-Picker-for-iOS: 4980589b3e3cfe7198f227dd50be9adb02d8bc0b
+  FSCalendar: a04b09f16f811bc92e82f3cf852a15225233b9d5
   Hero: 33dadf2cd1c98af71e213dcbc2902e6e03622a4e
-  JTCalendar: f54975f1426facc38d112f372f0d3d955aae8d86
+  Presentr: 797ae6ec8904eaba4ec58a4c2065bd66e31569ea
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   Unbox: 30e437e6151a6de16139375fd4e8dd9a664cfbf7
   UnboxedAlamofire: e803f471553e3aecec711f5d50f80cda6c65feaa
 
-PODFILE CHECKSUM: ff29d2ca758ee57f8162ccb754a3cadfcfb9f9dc
+PODFILE CHECKSUM: 278f2dcbc29df5fbe3ebb063c90f8a486423c3ac
 
 COCOAPODS: 1.5.2
