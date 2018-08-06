@@ -21,6 +21,12 @@ class TodayController: DayController {
 		super.viewDidLoad()
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		self.handleStateChange(state: TodayManager.instance.currentState)
+	}
+	
 	override func setupNavigationItem() {
 		self.navigationItem.title = "Today"
 		if let item = self.navigationItem as? SubtitleNavigationItem {
@@ -104,7 +110,7 @@ class TodayController: DayController {
 			return
 		}
 		
-		layout.addSection().addCell(NoClassCell()).setHeight(100)
+		layout.addSection().addCell(NoClassCell()).setHeight(120)
 		self.addNextSchoolday(layout: layout, bundle: bundle!)
 	}
 	
@@ -135,9 +141,14 @@ class TodayController: DayController {
 		let analyst = BlockAnalyst(schedule: bundle.schedule, block: current)
 		
 		let section = layout.addSection()
-		section.addCell(TodayStatusCell(state: analyst.getDisplayName(), minutes: minutes, image: UIImage(named: "icon_clock")!, color: analyst.getColor()))
+		section.addCell(TodayStatusCell(state: "in \(analyst.getDisplayName())", minutes: minutes, image: UIImage(named: "icon_clock")!, color: analyst.getColor()))
 		
-		section.addDivider()
+		let secondPassed = Calendar.normalizedCalendar.dateComponents([.second], from: current.time.start, to: Date.today).second!
+		let secondDuration = Calendar.normalizedCalendar.dateComponents([.second], from: current.time.start, to: current.time.end).second!
+		
+		let duration = Float(secondPassed) / Float(secondDuration)
+		
+		section.addCell(TodayBarCell(color: analyst.getColor(), duration: duration))
 		section.addCell(BlockCell(controller: self, composite: self.generateCompositeBlock(bundle: bundle, block: current)))
 		section.addDivider()
 		

@@ -5,16 +5,21 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 platform :ios, '10.0'
 
-target 'Glancer' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
+use_frameworks!
 
-  # Pods for Glancer
+def glancer_pods
   pod 'AddictiveLib'
   pod 'Hero'
   pod 'SnapKit'
   pod 'FSCalendar'
   pod 'Color-Picker-for-iOS'
   pod 'Presentr'
+end
 
+target 'Glancer' do
+  glancer_pods
+end
+
+target 'TodayWidget' do
+  glancer_pods
 end

@@ -20,6 +20,10 @@ class EventManager: Manager {
 		super.init("Events")
 	}
 	
+	func clearCache() {
+		self.events.removeAll()
+	}
+	
 	func getCachedEvents(date: Date) -> EventList? {
 		return self.events[date.webSafeDate]
 	}

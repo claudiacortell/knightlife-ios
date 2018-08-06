@@ -20,6 +20,10 @@ class SettingsController: UIViewController, TableBuilder {
 		
 		self.tableHandler = TableHandler(table: self.tableView)
 		self.tableHandler.builder = self
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
 		
 		self.tableHandler.reload()
 	}

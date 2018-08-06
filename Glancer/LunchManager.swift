@@ -25,6 +25,10 @@ class LunchManager: Manager {
 		self.registerStorage(ShowAllergyStorage(manager: self))
 	}
 	
+	func clearCache() {
+		self.lunches.removeAll()
+	}
+	
 	func loadedShowAllergens(value: Bool) {
 		self.showAllergens = value
 	}
@@ -47,7 +51,12 @@ class LunchManager: Manager {
 		return self.lunchWatchers[date.webSafeDate]!
 	}
 	
-	func fetchLunchMenu(date: Date, then: @escaping (WebCallResult<LunchMenu>) -> Void = {_ in}) {
+	func fetchLunchMenu(date: Date, force: Bool = false, then: @escaping (WebCallResult<LunchMenu>) -> Void = {_ in}) {
+		if !force, let menu = self.getCachedMenu(date: date) {
+			then(WebCallResult.success(result: menu))
+			return
+		}
+		
 		GetMenuWebCall(date: date).callback() {
 			result in
 			

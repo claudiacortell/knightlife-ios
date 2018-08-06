@@ -17,8 +17,8 @@ struct TimeDuration {
 
 extension TimeDuration {
 
-	public func duration() -> (hours: Int, minutes: Int, seconds: Int) {
-		return (hours: abs(self.start.hour - self.end.hour), minutes: abs(self.start.minute - self.end.minute), seconds: abs(self.start.second - self.end.second))
+	public func duration() -> Int {
+		return self.start.minuteDifference(date: self.end)
 	}
 	
 	public func contains(date: Date) -> Bool {

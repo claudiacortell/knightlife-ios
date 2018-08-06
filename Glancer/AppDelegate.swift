@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import AddictiveLib
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,14 +24,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
         UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
 		
-        if application.responds(to: #selector(UIApplication.registerUserNotificationSettings(_:)))
-		{
-            let types: UIUserNotificationType = ([.alert, .badge, .sound])
-            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: types, categories: nil)
-
-            application.registerUserNotificationSettings(settings)
-            application.registerForRemoteNotifications()
-        }
+		UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) {
+			result, error in
+			
+			if result {
+				print("Successfully authorized notifications")
+			} else {
+				print("Failed to authorize notifications: \(error != nil ? error!.localizedDescription : "None")")
+			}
+		}
 		
 		_ = TodayManager.instance
 		_ = ScheduleManager.instance
@@ -49,7 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             tokenString += String(format: "%02.2hhx", arguments: [tokenChars[i]])
         }
         
-        print("Device Token:", tokenString)
 		Globals.DeviceID = tokenString
 		
 		RegistrationWebCall().callback() {
@@ -65,39 +66,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("failed to register for remote notifications: \(error)")
+        print("failed to register for remote notifications: \(error.localizedDescription)")
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-		if let aps = userInfo as? [String: Any], let type = aps["type"] as? Int {
-			if type == 0 {
-//				ScheduleManager.instance.reloadAllSchedules()
-			}
-		}
+		PushNotificationManager.instance.handle(payload: userInfo)
     }
+	
+	func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
+		ScheduleManager.instance.clearCache()
+		LunchManager.instance.clearCache()
+		EventManager.instance.clearCache()
+	}
 	
     func applicationWillResignActive(_ application: UIApplication) {
 		TodayManager.instance.stopTimer()
 	}
     
     func applicationDidEnterBackground(_ application: UIApplication){
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+		
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    }
+
+	}
     
     func applicationDidBecomeActive(_ application: UIApplication) {
 		TodayManager.instance.startTimer()
 	}
-    
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-    
-    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-//		LOAD BLOCKS
-    }
+	
 }

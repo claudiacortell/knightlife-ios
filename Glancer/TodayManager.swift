@@ -11,7 +11,7 @@ import AddictiveLib
 
 class TodayManager: Manager {
 	
-	enum TodayScheduleState: Equatable {
+	public enum TodayScheduleState: Equatable {
 		
 		case LOADING
 		case ERROR
@@ -189,6 +189,10 @@ class TodayManager: Manager {
 	}
 	
 	func startTimer() {
+		if self.timer != nil {
+			return
+		}
+		
 		self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) {
 			timer in
 			self.doUpdate()
@@ -276,8 +280,17 @@ class TodayManager: Manager {
 		let previousState = self.currentState
 		self.currentState = state
 		
-		if watcher && (force || previousState != state) {
-			self.statusWatcher.handle(nil, state)
+		if watcher {
+			if force || previousState != state {
+				self.statusWatcher.handle(nil, state)
+			} else {
+				switch state {
+				case .IN_CLASS(_, _, _, _): // Always update in class so the loading bar can update every second.
+					self.statusWatcher.handle(nil, state)
+				default:
+					break
+				}
+			}
 		}
 	}
 	

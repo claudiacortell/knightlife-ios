@@ -45,16 +45,8 @@ extension DateSchedule: Equatable {
 	}
 	
 	func getBlocks(_ allVariations: Bool = false, variation: Int? = nil) -> [Block] {
-		var blocks: [Block] = []
-		
 		let filterVariation = variation ?? ScheduleManager.instance.getVariation(self.date)
-		for block in self.blocks {
-			if block.variation == nil || allVariations || block.variation == filterVariation {
-				blocks.append(block)
-			}
-		}
-		
-		return blocks
+		return self.blocks.filter({ $0.variation == nil || allVariations || $0.variation! == filterVariation })
 	}
 	
 	func hasBlock(_ id: BlockID) -> Bool {

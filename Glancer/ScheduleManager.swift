@@ -32,6 +32,10 @@ class ScheduleManager: Manager {
 		self.loadTemplate()
 	}
 	
+	func clearCache() {
+		self.patches.removeAll()
+	}
+	
 	func getVariationWatcher(day: DayOfWeek) -> ResourceWatcher<Int> {
 		if self.scheduleVariationWatchers[day] == nil {
 			self.scheduleVariationWatchers[day] = ResourceWatcher<Int>()
@@ -89,7 +93,12 @@ class ScheduleManager: Manager {
 		}.execute()
 	}
 	
-	func loadSchedule(date: Date, then: @escaping (WebCallResult<DateSchedule>) -> Void = {_ in}) {
+	func loadSchedule(date: Date, force: Bool = false, then: @escaping (WebCallResult<DateSchedule>) -> Void = {_ in}) {
+		if !force, let patch = self.getCachedPatch(date: date) {
+			then(WebCallResult.success(result: patch))
+			return
+		}
+		
 		GetPatchWebCall(date: date).callback() {
 			result in
 			

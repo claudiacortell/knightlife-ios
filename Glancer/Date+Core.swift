@@ -43,7 +43,7 @@ extension Date {
 	
 	static var webTimeFormatter: DateFormatter {
 		let formatter = Date.normalizedFormatter
-		formatter.dateFormat = "hh-mm"
+		formatter.dateFormat = "HH-mm"
 		return formatter
 	}
 	
