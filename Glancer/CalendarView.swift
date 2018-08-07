@@ -2,33 +2,119 @@
 //  CalendarView.swift
 //  Glancer
 //
-//  Created by Dylan Hanson on 8/5/18.
+//  Created by Dylan Hanson on 8/7/18.
 //  Copyright © 2018 Dylan Hanson. All rights reserved.
 //
 
 import Foundation
-import AddictiveLib
 import UIKit
+import SnapKit
 
-class CalendarView: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate {
+class CalendarView: UIView {
 	
-	override func reloadData() {
-		self.delegate = self
-		self.dataSource = self
+	var controller: CalendarController!
+	
+	@IBOutlet weak private var weekAStackView: UIStackView!
+	@IBOutlet weak private var weekBStackView: UIStackView!
+	@IBOutlet weak private var weekCStackView: UIStackView!
+	@IBOutlet weak private var weekDStackView: UIStackView!
+	
+	lazy var weekStackList: [UIStackView] = {
+		return [self.weekAStackView, self.weekBStackView, self.weekCStackView, self.weekDStackView]
+	}()
+	
+	private var startOfWeek: Date!
+	
+	private var dates: [[Date]] {
+		let today = Date.today
+		let startOfWeek = today.dayInRelation(offset: -(today.dayOfWeek))
 		
-		super.reloadData()
+		var days: [[Date]] = []
+		
+		for weekNum in 0..<4 {
+			var setupDates: [Date] = []
+			for dayNum in 0..<7 {
+				setupDates.append(startOfWeek.dayInRelation(offset: (weekNum * 7) + dayNum))
+			}
+			days.append(setupDates)
+		}
+		return days
 	}
 	
-	func numberOfSections(in collectionView: UICollectionView) -> Int {
-		return 4
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		
+		self.addBottom()
 	}
 	
-	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return 7
+	override init(frame: CGRect) {
+		super.init(frame: frame)
+		
+		self.addBottom()
 	}
 	
-	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		return self.dequeueReusableCell(withReuseIdentifier: "date", for: indexPath)
+	private func addBottom() {
+		let view = UIView()
+		view.backgroundColor = Scheme.dividerColor.color
+		self.addSubview(view)
+		
+		view.snp.makeConstraints() {
+			constrain in
+			
+			constrain.leading.equalToSuperview()
+			constrain.trailing.equalToSuperview()
+			constrain.bottom.equalToSuperview()
+			constrain.height.equalTo(1)
+		}
 	}
+	
+	func setupViews() {
+		let today = Date.today
+		let dates = self.dates
+		
+		self.startOfWeek = today.dayInRelation(offset: -(today.dayOfWeek))
+		
+		for weekIndex in 0..<dates.count {
+			let week = dates[weekIndex];
+			let weekStack = self.weekStackList[weekIndex]
+			
+			for dayIndex in 0..<week.count {
+				let day = week[dayIndex]
 
+				if let button = weekStack.arrangedSubviews[dayIndex] as? UIButton {
+					button.tag = weekIndex * 7 + dayIndex
+					button.addTarget(self, action: #selector(self.dayButtonClicked(_:)), for: .touchUpInside)
+					
+					button.setTitle("\(day.day)", for: .normal)
+					
+					if let label = button.titleLabel {
+						if day.webSafeDate == today.webSafeDate {
+							button.setTitleColor(Scheme.blue.color, for: .normal)
+							label.font = UIFont.systemFont(ofSize: 16.0, weight: .heavy)
+						} else if day.month != today.month {
+							button.setTitleColor(Scheme.lightText.color, for: .normal)
+							label.font = UIFont.systemFont(ofSize: 16.0, weight: .semibold)
+						} else {
+							button.setTitleColor(Scheme.text.color, for: .normal)
+							label.font = UIFont.systemFont(ofSize: 16.0, weight: .semibold)
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	@objc func dayButtonClicked(_ sender: UIButton) {
+		let tag = sender.tag
+		
+		let date = self.startOfWeek.dayInRelation(offset: tag)
+		
+		guard let controller = self.controller.storyboard?.instantiateViewController(withIdentifier: "Day") as? DayController else {
+			return
+		}
+		
+		controller.date = date
+		self.controller.navigationController?.pushViewController(controller, animated: true)
+	}
+	
 }
