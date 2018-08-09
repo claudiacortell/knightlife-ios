@@ -17,6 +17,8 @@ class Course {
 	var color: UIColor = Scheme.nullColor.color
 	var location: String?
 	
+	var showNotifications: Bool = true
+	
 	init(name: String, schedule: CourseSchedule) {
 		self.name = name
 		self.courseSchedule = schedule

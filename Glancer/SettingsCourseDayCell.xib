@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="dIL-NV-VeV" customClass="UISettingsCourseDayCell" customModule="Glancer" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oc8-ah-Gso">
+                    <rect key="frame" x="20" y="324" width="335" height="19.5"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                    <color key="textColor" red="0.25490196079999999" green="0.51372549020000002" blue="0.84313725490000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="oc8-ah-Gso" firstAttribute="centerY" secondItem="dIL-NV-VeV" secondAttribute="centerY" id="2MF-sR-PAA"/>
+                <constraint firstItem="oc8-ah-Gso" firstAttribute="leading" secondItem="Wny-a7-TgE" secondAttribute="leading" constant="20" id="Pb8-uf-vl9"/>
+                <constraint firstItem="Wny-a7-TgE" firstAttribute="trailing" secondItem="oc8-ah-Gso" secondAttribute="trailing" constant="20" id="eli-9d-w6D"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Wny-a7-TgE"/>
+            <connections>
+                <outlet property="dayLabel" destination="oc8-ah-Gso" id="Ota-SS-lEA"/>
+            </connections>
+            <point key="canvasLocation" x="118" y="145"/>
+        </view>
+    </objects>
+</document>

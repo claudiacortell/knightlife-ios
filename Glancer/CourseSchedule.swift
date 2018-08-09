@@ -35,10 +35,12 @@ class CourseSchedule {
 		}
 	}
 	
+	@discardableResult
 	func addMeetingDay(_ day: DayOfWeek) -> Bool {
 		switch self.frequency {
 		case .specificDays(var days):
 			days.append(day)
+			self.frequency = .specificDays(days)
 			return true
 		default:
 			break
@@ -46,12 +48,15 @@ class CourseSchedule {
 		return false
 	}
 	
+	@discardableResult
 	func removeMeetingDay(_ day: DayOfWeek) -> Bool {
 		switch self.frequency {
 		case .specificDays(var days):
 			for i in 0..<days.count {
 				if days[i] == day {
 					days.remove(at: i)
+					
+					self.frequency = .specificDays(days)
 					return true
 				}
 			}

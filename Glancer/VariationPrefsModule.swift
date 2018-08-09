@@ -19,15 +19,16 @@ class VariationPrefsModule: TableModule {
 		
 		for weekday in DayOfWeek.weekdays() {
 			let variation = ScheduleManager.instance.getVariation(weekday)
-			section.addCell(VariationPrefCell(module: self, weekday: weekday, variation: variation))
+			
+			section.addCell(PrefToggleCell(title: weekday.displayName, on: variation == 1) {
+				let newVariation = $0 ? 1 : 0
+				ScheduleManager.instance.setVariation(day: weekday, variation: newVariation)
+			})
+			
 			section.addDivider()
 		}
 		
 		section.addSpacerCell().setBackgroundColor(.clear).setHeight(35)
-	}
-	
-	func valueChanged(weekday: DayOfWeek, variation: Int) {
-		ScheduleManager.instance.setVariation(day: weekday, variation: variation)
 	}
 	
 }

@@ -20,15 +20,89 @@ class MeetingPrefModule: StorageHandler {
 	}
 	
 	func saveData() -> Any? {
-		return nil
-//		return self.manager.meetings
+		var arrayOfData: [[String: Any]] = []
+		
+		for course in self.manager.meetings {
+			var map: [String: Any] = [:]
+			
+			map["name"] = course.name
+			
+			map["color"] = course.color.toHex ?? nil
+			map["location"] = course.location
+			
+			map["notifications"] = course.showNotifications
+			
+			map["schedule.block"] = course.courseSchedule.block.rawValue
+			
+			switch course.courseSchedule.frequency {
+			case .everyDay:
+				map["schedule.frequency"] = "everyday"
+			case .specificDays(let days):
+				map["schedule.frequency"] = days.map({ return $0.rawValue })
+			}
+			
+			arrayOfData.append(map)
+		}
+		
+		return arrayOfData
 	}
 	
 	func loadData(data: Any) {
-		if let list = data as? [Course] {
-			for meeting in list {
-				self.manager.addCourse(meeting)
+		guard let list = data as? [[String: Any]] else {
+			return
+		}
+		
+		for item in list {
+			guard let name = item["name"] as? String else {
+				print("Invalid course name")
+				continue
 			}
+			
+			var location: String?
+			if let rawLocation = item["location"] as? String {
+				location = rawLocation
+			}
+			
+			guard let rawColor = item["color"] as? String, let color = UIColor(hex: rawColor) else {
+				print("Invalid course color")
+				continue
+			}
+			
+			guard let notifications = item["notifications"] as? Bool else {
+				print("Invalid course notifications")
+				continue
+			}
+			
+			guard let rawBlock = item["schedule.block"] as? Int, let block = BlockID(rawValue: rawBlock) else {
+				print("Invalid course block")
+				continue
+			}
+			
+			var frequency: CourseFrequency!
+			if let _ = item["schedule.frequency"] as? String {
+				frequency = CourseFrequency.everyDay
+			} else if let rawFrequencyDays = item["schedule.frequency"] as? [Int] {
+//				We could easily use a simple map function, but that would require force unwrapping, and I don't want to have the option of a crash.
+				var days: [DayOfWeek] = []
+				for id in rawFrequencyDays {
+					if let day = DayOfWeek(rawValue: id) { days.append(day) }
+				}
+				frequency = CourseFrequency.specificDays(days)
+			} else {
+				print("Invalid course frequency")
+				continue
+			}
+			
+			let schedule = CourseSchedule(block: block, frequency: frequency)
+			let course = Course(name: name, schedule: schedule)
+			
+			course.color = color
+			course.showNotifications = notifications
+			course.location = location
+			
+			print("Successfully loaded course: \(course.name)")
+			
+			self.manager.loadedCourse(course: course)
 		}
 	}
 	
@@ -61,6 +135,8 @@ class MeetingPrefModule: StorageHandler {
 					self.manager.addCourse(course)
 				}
 			}
+			
+			Storage.USER_META.delete()
 		}
 	}
 }

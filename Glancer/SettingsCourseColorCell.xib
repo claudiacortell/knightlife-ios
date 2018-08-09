@@ -17,30 +17,24 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KiH-Kh-sk1">
-                    <rect key="frame" x="20" y="323.5" width="335" height="20"/>
+                    <rect key="frame" x="20" y="324" width="335" height="19.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Color" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRy-1c-lGr">
-                            <rect key="frame" x="0.0" y="0.5" width="315" height="19.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="319" height="19.5"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mcG-Ly-tu2">
-                            <rect key="frame" x="315" y="0.0" width="20" height="20"/>
+                            <rect key="frame" x="319" y="1.5" width="16" height="16"/>
                             <color key="backgroundColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="mcG-Ly-tu2" secondAttribute="height" id="cSd-gB-qgj"/>
-                                <constraint firstAttribute="width" constant="20" id="pcz-QS-Jvp"/>
+                                <constraint firstAttribute="width" constant="16" id="pcz-QS-Jvp"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="10"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                    <real key="value" value="1"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                    <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <real key="value" value="8"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>

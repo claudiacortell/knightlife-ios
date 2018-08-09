@@ -23,7 +23,11 @@ class NotificationManager: Manager {
 //	func registerNotification(date: Date, block: Block) {
 //		let content = UNNotificationContent().
 //		
-//		UNNotificationRequest(identifier: <#T##String#>, content: <#T##UNNotificationContent#>, trigger: <#T##UNNotificationTrigger?#>)
+//		UNNotificationRequest(identifier: T##String, content: T##UNNotificationContent, trigger: T##UNNotificationTrigger?)
 //	}
+	
+	private func setupNotificationsFromTemplate(date: Date) {
+		
+	}
 	
 }

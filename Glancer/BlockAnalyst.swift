@@ -62,6 +62,10 @@ class BlockAnalyst {
 				return previousAnalyst.getColor()
 			}
 			
+			if let blockMeta = BlockMetaManager.instance.getBlockMeta(id: self.block.id) {
+				return blockMeta.color
+			}
+			
 			return Scheme.nullColor.color
 		}
 		

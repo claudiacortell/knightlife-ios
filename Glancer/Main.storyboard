@@ -120,6 +120,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mRg-JI-ul6">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.25490196079999999" green="0.51372549020000002" blue="0.84313725490000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="2XL-7K-gSm" kind="relationship" relationship="rootViewController" id="aWe-hv-QU7"/>
@@ -487,6 +488,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qPp-bt-Ele">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.25490196079999999" green="0.51372549020000002" blue="0.84313725490000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="72g-Bz-APE" kind="relationship" relationship="rootViewController" id="K0A-UL-dhs"/>
@@ -564,6 +566,131 @@
             </objects>
             <point key="canvasLocation" x="-482" y="445"/>
         </scene>
+        <!--Settings Block Controller-->
+        <scene sceneID="rOO-ZW-kvt">
+            <objects>
+                <viewController storyboardIdentifier="SettingsBlock" id="WQR-IT-qN0" customClass="SettingsBlockController" customModule="Glancer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oUn-al-dh3"/>
+                        <viewControllerLayoutGuide type="bottom" id="klX-80-v7X"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eLZ-Jz-MYT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ej9-fH-ki6">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Ej9-fH-ki6" secondAttribute="trailing" id="Ntn-m2-D4l"/>
+                            <constraint firstItem="klX-80-v7X" firstAttribute="top" secondItem="Ej9-fH-ki6" secondAttribute="bottom" id="XZo-Hx-Ps1"/>
+                            <constraint firstItem="Ej9-fH-ki6" firstAttribute="leading" secondItem="eLZ-Jz-MYT" secondAttribute="leading" id="fGm-3H-i4c"/>
+                            <constraint firstItem="Ej9-fH-ki6" firstAttribute="top" secondItem="oUn-al-dh3" secondAttribute="bottom" id="foa-in-2Qa"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="tV7-vc-7wn"/>
+                    <connections>
+                        <outlet property="tableView" destination="Ej9-fH-ki6" id="Azr-8F-HTV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D8c-yd-JWn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="292" y="444.82758620689657"/>
+        </scene>
+        <!--Color Picker-->
+        <scene sceneID="owg-Jz-GIE">
+            <objects>
+                <viewController storyboardIdentifier="Color" title="Color Picker" id="Ynj-VW-FHR" customClass="SettingsColorPickerController" customModule="Glancer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="E3L-wV-mmI"/>
+                        <viewControllerLayoutGuide type="bottom" id="S53-kh-fIQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ruc-pj-oeW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WPy-hE-ufz" customClass="HRColorPickerView">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TKa-5d-okN">
+                                        <rect key="frame" x="20" y="20" width="335" height="607"/>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kAP-RX-REs" customClass="SettingsColorInfoView" customModule="Glancer" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="15" width="75" height="100"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="75" id="O5o-Dm-Ypz"/>
+                                            <constraint firstAttribute="height" constant="100" id="ctU-Ec-8gr"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TtC-RX-ZKa" customClass="HRColorMapView">
+                                        <rect key="frame" x="0.0" y="135" width="395" height="512"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="tileSize">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="saturationUpperLimit">
+                                                <integer key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BI9-Kz-2xs" customClass="HRBrightnessSlider">
+                                        <rect key="frame" x="110" y="100" width="245" height="15"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15" id="7G1-LG-95L"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="brightnessLowerLimit">
+                                                <real key="value" value="0.40000000000000002"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="TtC-RX-ZKa" secondAttribute="bottom" id="9Dg-EH-Z44"/>
+                                    <constraint firstAttribute="trailing" secondItem="TtC-RX-ZKa" secondAttribute="trailing" constant="-20" id="ChG-qi-eVP"/>
+                                    <constraint firstAttribute="trailing" secondItem="BI9-Kz-2xs" secondAttribute="trailing" constant="20" id="DDT-LB-GiG"/>
+                                    <constraint firstAttribute="trailing" secondItem="TKa-5d-okN" secondAttribute="trailing" constant="20" id="HuK-pO-Gpe"/>
+                                    <constraint firstItem="kAP-RX-REs" firstAttribute="bottom" secondItem="TtC-RX-ZKa" secondAttribute="top" constant="-20" id="RHM-dt-ydL"/>
+                                    <constraint firstItem="BI9-Kz-2xs" firstAttribute="bottom" secondItem="kAP-RX-REs" secondAttribute="bottom" id="aPH-FA-0Gi"/>
+                                    <constraint firstItem="TKa-5d-okN" firstAttribute="top" secondItem="WPy-hE-ufz" secondAttribute="top" constant="20" id="gRW-vQ-Lcp"/>
+                                    <constraint firstItem="TtC-RX-ZKa" firstAttribute="leading" secondItem="WPy-hE-ufz" secondAttribute="leading" id="gXJ-9L-Ll1"/>
+                                    <constraint firstItem="kAP-RX-REs" firstAttribute="top" secondItem="WPy-hE-ufz" secondAttribute="top" constant="15" id="hHJ-Wn-Yus"/>
+                                    <constraint firstItem="TKa-5d-okN" firstAttribute="leading" secondItem="WPy-hE-ufz" secondAttribute="leading" constant="20" id="nCB-bl-He7"/>
+                                    <constraint firstItem="kAP-RX-REs" firstAttribute="leading" secondItem="WPy-hE-ufz" secondAttribute="leading" constant="20" id="r3R-b0-5oa"/>
+                                    <constraint firstAttribute="bottom" secondItem="TKa-5d-okN" secondAttribute="bottom" constant="20" id="rYx-al-mMU"/>
+                                    <constraint firstItem="BI9-Kz-2xs" firstAttribute="leading" secondItem="kAP-RX-REs" secondAttribute="trailing" constant="15" id="x76-xF-qJQ"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="brightnessSlider" destination="BI9-Kz-2xs" id="ixR-pJ-Vsp"/>
+                                    <outlet property="colorInfoView" destination="kAP-RX-REs" id="iIp-gZ-GYp"/>
+                                    <outlet property="colorMapView" destination="TtC-RX-ZKa" id="g5Z-Is-Gc3"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="WPy-hE-ufz" firstAttribute="top" secondItem="E3L-wV-mmI" secondAttribute="bottom" id="GKK-7A-SmC"/>
+                            <constraint firstItem="WPy-hE-ufz" firstAttribute="leading" secondItem="ruc-pj-oeW" secondAttribute="leading" id="KLX-j7-DuZ"/>
+                            <constraint firstItem="S53-kh-fIQ" firstAttribute="top" secondItem="WPy-hE-ufz" secondAttribute="bottom" id="dXC-pE-MuB"/>
+                            <constraint firstAttribute="trailing" secondItem="WPy-hE-ufz" secondAttribute="trailing" id="l0i-LJ-rbd"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title=" " id="AGW-Op-OIg"/>
+                    <connections>
+                        <outlet property="colorPickerView" destination="WPy-hE-ufz" id="MRD-0t-IG2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8ki-uw-ZxR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1050" y="445"/>
+        </scene>
         <!--Today Navigation-->
         <scene sceneID="5S7-eC-QTM">
             <objects>
@@ -572,6 +699,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9yy-aE-SVS">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.25490196079999999" green="0.51372549020000002" blue="0.84313725490000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="UUE-dZ-2Ek" kind="relationship" relationship="rootViewController" id="nsc-Pt-v4W"/>

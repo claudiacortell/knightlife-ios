@@ -30,6 +30,7 @@ class SettingsController: UIViewController, TableBuilder {
 	
 	func buildCells(layout: TableLayout) {
 		self.tableHandler.addModule(CoursesPrefModule(controller: self))
+		self.tableHandler.addModule(BlockPrefsModule(controller: self))
 		self.tableHandler.addModule(VariationPrefsModule())
 		self.tableHandler.addModule(LunchPrefsModule())
 	}

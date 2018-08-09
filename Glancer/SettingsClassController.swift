@@ -30,6 +30,10 @@ class SettingsClassController: UIViewController, TableBuilder {
 		self.tableHandler.reload()
 	}
 	
+	private func didChangeSettings() {
+		CourseManager.instance.saveStorage()
+	}
+	
 	func buildCells(layout: TableLayout) {
 		let about = layout.addSection()
 		about.addDivider()
@@ -42,7 +46,19 @@ class SettingsClassController: UIViewController, TableBuilder {
 		about.addDivider()
 		
 		about.addCell(SettingsCourseColorCell(color: self.course.color) {
-//			Open color change dialog
+			guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Color") as? SettingsColorPickerController else {
+				return
+			}
+
+			controller.color = self.course.color
+			controller.colorPicked = {
+				color in
+				
+				self.course.color = color
+				self.didChangeSettings()
+			}
+			
+			self.navigationController?.pushViewController(controller, animated: true)
 		})
 		
 		about.addDivider()
@@ -76,14 +92,63 @@ class SettingsClassController: UIViewController, TableBuilder {
 			switch self.course.courseSchedule.frequency {
 			case .everyDay:
 				return "Every"
-			case .specificDays(let days):
-				return days.map({ $0.shortName }).joined(separator: ", ")
+			default:
+				return "Specific"
 			}
 		}(), clicked: {
-//			Change days dialog
+			self.showChangeDays()
 		}))
 		
+		switch self.course.courseSchedule.frequency {
+		case .specificDays(_):
+			for weekday in DayOfWeek.weekdays() {
+				scheduling.addCell(SettingsCourseDayCell(course: self.course, day: weekday) {
+					path, day, selected in
+					
+					if selected {
+						self.course.courseSchedule.addMeetingDay(day)
+					} else {
+						self.course.courseSchedule.removeMeetingDay(day)
+					}
+					
+					self.tableView.reloadRows(at: [path], with: .fade)
+					self.didChangeSettings()
+				})
+			}
+			break
+		default:
+			break
+		}
+		
 		scheduling.addDivider()
+		
+		scheduling.addSpacerCell().setBackgroundColor(.clear).setHeight(35)
+
+		let notifications = layout.addSection()
+		notifications.addDivider()
+		
+		notifications.addCell(TitleCell(title: "Notifications"))
+		
+		notifications.addDivider()
+		
+		notifications.addCell(PrefToggleCell(title: "Show Alerts", on: self.course.showNotifications) {
+			self.course.showNotifications = $0
+			self.didChangeSettings()
+		})
+		
+		notifications.addDivider()
+		
+		notifications.addSpacerCell().setBackgroundColor(.clear).setHeight(70)
+		
+		let delete = layout.addSection()
+		delete.addDivider()
+		
+		delete.addCell(SettingsCourseDeleteCell() {
+			self.showDelete()
+		})
+		
+		delete.addDivider()
+		delete.addSpacerCell().setBackgroundColor(.clear).setHeight(35)
 	}
 	
 	private func showChangeName() {
@@ -94,6 +159,8 @@ class SettingsClassController: UIViewController, TableBuilder {
 			if let name = alert.textFields?.first?.text {
 				self.course.name = name.trimmingCharacters(in: .whitespaces)
 				self.tableHandler.reload()
+				
+				self.didChangeSettings()
 			}
 		})
 		
@@ -124,6 +191,8 @@ class SettingsClassController: UIViewController, TableBuilder {
 
 				self.course.location = trimmed.count > 0 ? trimmed : nil
 				self.tableHandler.reload()
+				
+				self.didChangeSettings()
 			}
 		})
 		
@@ -141,7 +210,7 @@ class SettingsClassController: UIViewController, TableBuilder {
 	}
 	
 	private func showChangeBlock() {
-		let alert = UIAlertController(title: "Block", message: nil, preferredStyle: .actionSheet)
+		let alert = UIAlertController(title: "Block", message: "What block does this class meet during?", preferredStyle: .actionSheet)
 		
 //		Array of tuples instead of dictionary so that it retains its order
 		var blockActions: [(id: BlockID, alert: UIAlertAction)] = []
@@ -149,12 +218,15 @@ class SettingsClassController: UIViewController, TableBuilder {
 		let handler: (UIAlertAction) -> Void = {
 			alert in
 			
+//			Get the tuple with this specific action, and thus its blockId
 			guard let key = blockActions.filter({ $0.alert === alert }).first?.id else {
 				return
 			}
 			
 			self.course.courseSchedule.block = key
 			self.tableHandler.reload()
+			
+			self.didChangeSettings()
 		}
 		
 		blockActions = [
@@ -174,6 +246,67 @@ class SettingsClassController: UIViewController, TableBuilder {
 			
 			alert.addAction(action)
 		}
+		
+		alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		
+		self.present(alert, animated: true)
+	}
+	
+	private func showChangeDays() {
+		let alert = UIAlertController(title: "Days", message: "On which days does this class meet? This should be Every Day unless the class skips certain days.", preferredStyle: .actionSheet)
+		
+		let everyDayAction = UIAlertAction(title: "Every Day", style: .default) {
+			action in
+			
+			switch self.course.courseSchedule.frequency {
+			case .specificDays(_): // Only need to change things if the value was changed.
+				self.course.courseSchedule.frequency = CourseFrequency.everyDay
+				self.didChangeSettings()
+			default:
+				break
+			}
+			
+			self.tableHandler.reload()
+		}
+		
+		let specificDaysAction = UIAlertAction(title: "Specific Days", style: .default) {
+			action in
+			
+			switch self.course.courseSchedule.frequency {
+			case .everyDay: // Only need to change things if the value was changed.
+				self.course.courseSchedule.frequency = CourseFrequency.specificDays(DayOfWeek.weekdays())
+				self.didChangeSettings()
+			default:
+				break
+			}
+			
+			self.tableHandler.reload()
+		}
+		
+		switch self.course.courseSchedule.frequency {
+		case .everyDay:
+			everyDayAction.setValue(true, forKey: "checked")
+		case .specificDays(_):
+			specificDaysAction.setValue(true, forKey: "checked")
+		}
+		
+		alert.addAction(everyDayAction)
+		alert.addAction(specificDaysAction)
+		
+		alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		
+		self.present(alert, animated: true)
+	}
+	
+	private func showDelete() {
+		let alert = UIAlertController(title: "Remove Class", message: "This action cannot be undone.", preferredStyle: .actionSheet)
+		
+		alert.addAction(UIAlertAction(title: "Remove", style: UIAlertActionStyle.destructive) {
+			action in
+			
+			CourseManager.instance.removeCourse(self.course)
+			self.navigationController?.popViewController(animated: true)
+		})
 		
 		alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 		

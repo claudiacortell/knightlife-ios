@@ -12,32 +12,33 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="Nor-cS-Csp" customClass="UILunchPrefsCell" customModule="Glancer" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="YUz-JW-jEs" customClass="UIPrefToggleCell" customModule="Glancer" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Allergy Warnings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ob3-Oy-U6A">
-                    <rect key="frame" x="20" y="324" width="286" height="19.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="opd-5K-18j">
+                    <rect key="frame" x="20" y="323.5" width="286" height="20"/>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k7P-mJ-dnM">
+                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rte-xW-SaY">
                     <rect key="frame" x="306" y="318" width="51" height="31"/>
                     <color key="onTintColor" red="0.25490196079999999" green="0.51372549020000002" blue="0.84313725490000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </switch>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="eAl-8C-IRD" firstAttribute="trailing" secondItem="k7P-mJ-dnM" secondAttribute="trailing" constant="20" id="PhP-xo-dW8"/>
-                <constraint firstItem="k7P-mJ-dnM" firstAttribute="leading" secondItem="Ob3-Oy-U6A" secondAttribute="trailing" id="VHZ-hI-N4p"/>
-                <constraint firstItem="Ob3-Oy-U6A" firstAttribute="centerY" secondItem="Nor-cS-Csp" secondAttribute="centerY" id="WMo-zX-93M"/>
-                <constraint firstItem="k7P-mJ-dnM" firstAttribute="centerY" secondItem="Nor-cS-Csp" secondAttribute="centerY" id="eL7-Ud-wud"/>
-                <constraint firstItem="Ob3-Oy-U6A" firstAttribute="leading" secondItem="eAl-8C-IRD" secondAttribute="leading" constant="20" id="gEM-bR-8Bj"/>
+                <constraint firstItem="Oox-H0-xNX" firstAttribute="trailing" secondItem="rte-xW-SaY" secondAttribute="trailing" constant="20" id="3bL-eh-kdO"/>
+                <constraint firstItem="opd-5K-18j" firstAttribute="centerY" secondItem="YUz-JW-jEs" secondAttribute="centerY" id="DGX-5W-lJx"/>
+                <constraint firstItem="rte-xW-SaY" firstAttribute="centerY" secondItem="YUz-JW-jEs" secondAttribute="centerY" id="MCP-ug-jnF"/>
+                <constraint firstItem="rte-xW-SaY" firstAttribute="leading" secondItem="opd-5K-18j" secondAttribute="trailing" id="QdL-rh-ZsA"/>
+                <constraint firstItem="opd-5K-18j" firstAttribute="leading" secondItem="Oox-H0-xNX" secondAttribute="leading" constant="20" id="xKu-Xc-71W"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="eAl-8C-IRD"/>
+            <viewLayoutGuide key="safeArea" id="Oox-H0-xNX"/>
             <connections>
-                <outlet property="switch" destination="k7P-mJ-dnM" id="bpw-Bs-XHP"/>
+                <outlet property="switch" destination="rte-xW-SaY" id="1PE-hz-14V"/>
+                <outlet property="title" destination="opd-5K-18j" id="k56-Q8-CiN"/>
             </connections>
             <point key="canvasLocation" x="-73" y="-92"/>
         </view>

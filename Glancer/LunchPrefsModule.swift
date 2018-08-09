@@ -16,13 +16,13 @@ class LunchPrefsModule: TableModule {
 		section.addDivider()
 		section.addCell(TitleCell(title: "Lunch"))
 		section.addDivider()
-		section.addCell(LunchPrefsCell(module: self, show: LunchManager.instance.showAllergens))
+
+		section.addCell(PrefToggleCell(title: "Allergy Warnings", on: LunchManager.instance.showAllergens) {
+			LunchManager.instance.setShowAllergens(value: $0)
+		})
+
 		section.addDivider()
 		section.addSpacerCell().setBackgroundColor(.clear).setHeight(35)
-	}
-	
-	func valueChanged(bool: Bool) {
-		LunchManager.instance.setShowAllergens(value: bool)
 	}
 	
 }

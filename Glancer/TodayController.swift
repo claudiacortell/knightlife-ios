@@ -24,6 +24,7 @@ class TodayController: DayController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
+		TodayManager.instance.startTimer()
 		self.handleStateChange(state: TodayManager.instance.currentState)
 	}
 	

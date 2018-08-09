@@ -200,7 +200,7 @@ class TodayManager: Manager {
 	}
 	
 	func stopTimer() {
-		if self.timer != nil { self.timer!.invalidate() }
+		if self.timer != nil { self.timer!.invalidate() ; self.timer = nil }
 	}
 	
 	private func doUpdate() {
