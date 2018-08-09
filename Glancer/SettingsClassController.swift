@@ -39,7 +39,7 @@ class SettingsClassController: UIViewController, TableBuilder {
 		about.addDivider()
 		about.addCell(TitleCell(title: "About"))
 		about.addDivider()
-		about.addCell(SettingsCourseTextCell(left: "Name", right: self.course.name) {
+		about.addCell(SettingsTextCell(left: "Name", right: self.course.name) {
 			self.showChangeName()
 		})
 		
@@ -67,7 +67,7 @@ class SettingsClassController: UIViewController, TableBuilder {
 		
 		about.addDivider()
 		
-		about.addCell(SettingsCourseTextCell(left: "Location", right: self.course.location ?? "") {
+		about.addCell(SettingsTextCell(left: "Location", right: self.course.location ?? "") {
 			self.showChangeClass()
 		})
 		
@@ -82,13 +82,13 @@ class SettingsClassController: UIViewController, TableBuilder {
 		
 		scheduling.addDivider()
 		
-		scheduling.addCell(SettingsCourseTextCell(left: "Block", right: self.course.courseSchedule.block.displayName) {
+		scheduling.addCell(SettingsTextCell(left: "Block", right: self.course.courseSchedule.block.displayName) {
 			self.showChangeBlock()
 		})
 		
 		scheduling.addDivider()
 		
-		scheduling.addCell(SettingsCourseTextCell(left: "Days", right: {
+		scheduling.addCell(SettingsTextCell(left: "Days", right: {
 			switch self.course.courseSchedule.frequency {
 			case .everyDay:
 				return "Every"
@@ -210,7 +210,7 @@ class SettingsClassController: UIViewController, TableBuilder {
 	}
 	
 	private func showChangeBlock() {
-		let alert = UIAlertController(title: "Block", message: "What block does this class meet during?", preferredStyle: .actionSheet)
+		let alert = UIAlertController(title: "Block", message: "During what block does this class meet?", preferredStyle: .actionSheet)
 		
 //		Array of tuples instead of dictionary so that it retains its order
 		var blockActions: [(id: BlockID, alert: UIAlertAction)] = []

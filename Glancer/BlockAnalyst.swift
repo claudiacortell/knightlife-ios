@@ -37,13 +37,24 @@ class BlockAnalyst {
 			return courses.courses.first!.name
 		} else {
 			guard self.block.id == .lab, let previous = self.schedule.getBlockBefore(self.block) else {
+				if let blockMeta = BlockMetaManager.instance.getBlockMeta(id: self.block.id), blockMeta.block == .free {
+					return blockMeta.customName ?? self.block.id.displayName
+				}
+				
 				return self.block.id.displayName
 			}
 			
 //			Logic for if the block is a Lab.
 			let previousAnalyst = BlockAnalyst(schedule: self.schedule, block: previous)
 			if previousAnalyst.getCourses().isEmpty {
-				return self.block.id.displayName
+				let previousNameBase: String = {
+					if let previousMeta = BlockMetaManager.instance.getBlockMeta(id: previous.id), previousMeta.block == .free {
+						return previousMeta.customName ?? previous.id.shortName
+					}
+					return previous.id.shortName
+				}()
+				
+				return "\(previousNameBase) \(self.block.id.displayName)"
 			} else {
 				return "\(previousAnalyst.getDisplayName()) \(self.block.id.displayName)"
 			}

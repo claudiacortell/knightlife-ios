@@ -26,7 +26,7 @@ class CoursesPrefModule: TableModule {
 		section.addDivider()
 		
 		for course in CourseManager.instance.meetings {
-			section.addCell(CoursePrefCell(controller: self.controller, course: course))
+			section.addCell(CoursePrefCell(module: self, course: course))
 			section.addDivider()
 		}
 		
@@ -39,7 +39,43 @@ class CoursesPrefModule: TableModule {
 	}
 	
 	private func openAddMenu() {
-
+		let alert = UIAlertController(title: "Add Class", message: nil, preferredStyle: .alert)
+		alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		
+		let saveAction = UIAlertAction(title: "Add", style: .default, handler: { action in
+			if let name = alert.textFields?.first?.text {
+				let trimmedName = name.trimmingCharacters(in: .whitespaces)
+				let course = Course(name: trimmedName, schedule: CourseSchedule(block: .none, frequency: .everyDay))
+				
+				CourseManager.instance.addCourse(course)
+				
+				self.presentCourse(course: course)
+			}
+		})
+		
+		alert.addAction(saveAction)
+		
+		alert.addTextField(configurationHandler: { textField in
+			textField.autocapitalizationType = .words
+			textField.autocorrectionType = .default
+			
+			textField.placeholder = "e.g. English"
+			
+			NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { (notification) in
+				saveAction.isEnabled = textField.text!.trimmingCharacters(in: .whitespaces).count > 0
+			}
+		})
+		
+		self.controller.present(alert, animated: true)
+	}
+	
+	func presentCourse(course: Course) {
+		guard let classView = self.controller.storyboard?.instantiateViewController(withIdentifier: "SettingsClass") as? SettingsClassController else {
+			return
+		}
+		
+		classView.course = course
+		controller.navigationController?.pushViewController(classView, animated: true)
 	}
 	
 }

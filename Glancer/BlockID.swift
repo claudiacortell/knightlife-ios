@@ -25,6 +25,7 @@ enum BlockID: Int {
 	case advisory
 	case classMeeting
 	case assembly
+	case none // Only used for blank Courses. Shouldn't ever really be used for anything else
 	
 	var technicalValue: String {
 		switch self {
@@ -58,6 +59,8 @@ enum BlockID: Int {
 			return "class_meeting"
 		case .assembly:
 			return "assembly"
+		case .none:
+			return "none"
 		}
 	}
 	
@@ -93,6 +96,8 @@ enum BlockID: Int {
 			return "Class Meeting"
 		case .assembly:
 			return "Assembly"
+		case .none:
+			return "Not Set"
 		}
 	}
 	
@@ -112,7 +117,7 @@ enum BlockID: Int {
 		return nil
 	}
 	
-	static var values: [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x, .custom, .activities, .lab, .lunch, .advisory, .classMeeting, .assembly] }
+	static var values: [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x, .custom, .activities, .lab, .lunch, .advisory, .classMeeting, .assembly, .none] }
 	static var letterBlocks: [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x] }
 	static var academicBlocks: [BlockID] { return [.a, .b, .c, .d, .e, .f, .g] }
 

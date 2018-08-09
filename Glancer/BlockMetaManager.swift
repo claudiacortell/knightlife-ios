@@ -30,7 +30,6 @@ class BlockMetaManager: Manager {
 	
 	func getBlockMeta(id: BlockID) -> BlockMeta? {
 		guard let metaId = BlockMetaID.fromBlockID(block: id) else {
-			self.out("Some idiot tried to get the meta ID of BlockID.Custom")
 			return nil
 		}
 		

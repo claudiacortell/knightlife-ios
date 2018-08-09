@@ -102,8 +102,8 @@
 		C0600127211B2C5100ECAD1A /* BlockPrefsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0600126211B2C5100ECAD1A /* BlockPrefsModule.swift */; };
 		C0600129211B2D0400ECAD1A /* BlocksPrefCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0600128211B2D0400ECAD1A /* BlocksPrefCell.swift */; };
 		C060012B211B2D0D00ECAD1A /* BlocksPrefCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C060012A211B2D0D00ECAD1A /* BlocksPrefCell.xib */; };
-		C061F80B2115F90600F0374C /* SettingsCourseTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C061F80A2115F90600F0374C /* SettingsCourseTextCell.swift */; };
-		C061F80D2115F91700F0374C /* SettingsCourseTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C061F80C2115F91600F0374C /* SettingsCourseTextCell.xib */; };
+		C061F80B2115F90600F0374C /* SettingsTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C061F80A2115F90600F0374C /* SettingsTextCell.swift */; };
+		C061F80D2115F91700F0374C /* SettingsTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C061F80C2115F91600F0374C /* SettingsTextCell.xib */; };
 		C067913F211B4CFA00628098 /* SettingsColorInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C067913E211B4CFA00628098 /* SettingsColorInfoView.swift */; };
 		C0679142211B5B2C00628098 /* SettingsCourseDeleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0679141211B5B2C00628098 /* SettingsCourseDeleteCell.swift */; };
 		C0679144211B5B3A00628098 /* SettingsCourseDeleteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0679143211B5B3A00628098 /* SettingsCourseDeleteCell.xib */; };
@@ -271,8 +271,8 @@
 		C0600126211B2C5100ECAD1A /* BlockPrefsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockPrefsModule.swift; sourceTree = "<group>"; };
 		C0600128211B2D0400ECAD1A /* BlocksPrefCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocksPrefCell.swift; sourceTree = "<group>"; };
 		C060012A211B2D0D00ECAD1A /* BlocksPrefCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlocksPrefCell.xib; sourceTree = "<group>"; };
-		C061F80A2115F90600F0374C /* SettingsCourseTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCourseTextCell.swift; sourceTree = "<group>"; };
-		C061F80C2115F91600F0374C /* SettingsCourseTextCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsCourseTextCell.xib; sourceTree = "<group>"; };
+		C061F80A2115F90600F0374C /* SettingsTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTextCell.swift; sourceTree = "<group>"; };
+		C061F80C2115F91600F0374C /* SettingsTextCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTextCell.xib; sourceTree = "<group>"; };
 		C067913E211B4CFA00628098 /* SettingsColorInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsColorInfoView.swift; sourceTree = "<group>"; };
 		C0679141211B5B2C00628098 /* SettingsCourseDeleteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCourseDeleteCell.swift; sourceTree = "<group>"; };
 		C0679143211B5B3A00628098 /* SettingsCourseDeleteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsCourseDeleteCell.xib; sourceTree = "<group>"; };
@@ -730,7 +730,6 @@
 				C0679140211B5B1800628098 /* Delete */,
 				C039C86B211A8CA2008E0AF0 /* Day */,
 				C0A1233E2115FF2B00A72CD8 /* Color */,
-				C061F8092115F87200F0374C /* Text Association */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -738,8 +737,8 @@
 		C061F8092115F87200F0374C /* Text Association */ = {
 			isa = PBXGroup;
 			children = (
-				C061F80A2115F90600F0374C /* SettingsCourseTextCell.swift */,
-				C061F80C2115F91600F0374C /* SettingsCourseTextCell.xib */,
+				C061F80A2115F90600F0374C /* SettingsTextCell.swift */,
+				C061F80C2115F91600F0374C /* SettingsTextCell.xib */,
 			);
 			name = "Text Association";
 			sourceTree = "<group>";
@@ -875,6 +874,7 @@
 		C0929F3E2110C5E8004A373B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				C061F8092115F87200F0374C /* Text Association */,
 				C0315D6F211B241000323661 /* Toggle */,
 				C0929F3F2110C5F6004A373B /* Action */,
 			);
@@ -1248,7 +1248,7 @@
 				5BD072481C74AEB40074B56D /* Main.storyboard in Resources */,
 				C051F1F8210FF957004C064F /* CoursePrefCell.xib in Resources */,
 				C0315D73211B248300323661 /* PrefToggleCell.xib in Resources */,
-				C061F80D2115F91700F0374C /* SettingsCourseTextCell.xib in Resources */,
+				C061F80D2115F91700F0374C /* SettingsTextCell.xib in Resources */,
 				C08FBF9D210FB290005812F1 /* TodayDoneCell.xib in Resources */,
 				C0A123422115FF4E00A72CD8 /* SettingsCourseColorCell.xib in Resources */,
 				C0679144211B5B3A00628098 /* SettingsCourseDeleteCell.xib in Resources */,
@@ -1396,7 +1396,7 @@
 				C0600127211B2C5100ECAD1A /* BlockPrefsModule.swift in Sources */,
 				C05BD67A2110E2E500B5B399 /* VariationPrefsModule.swift in Sources */,
 				C0791CA82117E80C0066CE62 /* NotificationStorage.swift in Sources */,
-				C061F80B2115F90600F0374C /* SettingsCourseTextCell.swift in Sources */,
+				C061F80B2115F90600F0374C /* SettingsTextCell.swift in Sources */,
 				C0A167AE210E6AB200DB6BC4 /* ErrorReloadable.swift in Sources */,
 				C04DE46D1FAE6E74000D4DA6 /* GetSportsMeetingResponse.swift in Sources */,
 				C0A167AC210E679700DB6BC4 /* ErrorCell.swift in Sources */,

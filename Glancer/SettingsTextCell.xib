@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="hUH-9Q-OYb" customClass="UISettingsCourseTextCell" customModule="Glancer" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="hUH-9Q-OYb" customClass="UISettingsTextCell" customModule="Glancer" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -42,8 +42,8 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="8ct-bh-BRP"/>
             <connections>
-                <outlet property="leftLabel" destination="Jeo-ee-wIT" id="3CK-lX-4st"/>
-                <outlet property="rightLabel" destination="75C-0E-qAH" id="t6X-hs-jWC"/>
+                <outlet property="leftLabel" destination="Jeo-ee-wIT" id="dfz-jk-HP9"/>
+                <outlet property="rightLabel" destination="75C-0E-qAH" id="gCD-EQ-5HS"/>
             </connections>
             <point key="canvasLocation" x="-58" y="160"/>
         </view>

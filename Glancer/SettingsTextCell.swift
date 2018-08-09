@@ -1,5 +1,5 @@
 //
-//  SettingsCourseTextCell.swift
+//  SettingsTextCell.swift
 //  Glancer
 //
 //  Created by Dylan Hanson on 8/4/18.
@@ -10,10 +10,10 @@ import Foundation
 import UIKit
 import AddictiveLib
 
-class SettingsCourseTextCell: TableCell {
+class SettingsTextCell: TableCell {
 	
 	init(left: String, right: String, clicked: @escaping () -> Void) {
-		super.init("coursetext", nib: "SettingsCourseTextCell")
+		super.init("settingstext", nib: "SettingsTextCell")
 		
 		self.setHeight(44)
 		
@@ -22,7 +22,7 @@ class SettingsCourseTextCell: TableCell {
 		self.setCallback() {
 			template, cell in
 			
-			guard let textCell = cell as? UISettingsCourseTextCell else {
+			guard let textCell = cell as? UISettingsTextCell else {
 				return
 			}
 			
@@ -39,7 +39,7 @@ class SettingsCourseTextCell: TableCell {
 	
 }
 
-class UISettingsCourseTextCell: UITableViewCell {
+class UISettingsTextCell: UITableViewCell {
 	
 	@IBOutlet weak var leftLabel: UILabel!
 	@IBOutlet weak var rightLabel: UILabel!

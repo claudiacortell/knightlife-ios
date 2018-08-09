@@ -18,7 +18,7 @@ enum CourseFrequency {
 
 class CourseSchedule {
 	
-    var block: BlockID //Null = all day
+    var block: BlockID
 	var frequency: CourseFrequency
 	
 	init(block: BlockID, frequency: CourseFrequency) {

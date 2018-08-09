@@ -16,11 +16,15 @@ class BlockMeta {
 	var color: UIColor
 	var notifications: Bool
 	
-	init(block: BlockMetaID, color: UIColor? = nil, notifications: Bool? = nil) {
+	var customName: String?
+	
+	init(block: BlockMetaID, color: UIColor? = nil, notifications: Bool? = nil, customName: String? = nil) {
 		self.block = block
 		
 		self.color = color ?? Scheme.nullColor.color
 		self.notifications = notifications ?? true
+		
+		self.customName = customName
 	}
 	
 }

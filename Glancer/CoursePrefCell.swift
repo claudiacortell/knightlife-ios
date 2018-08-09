@@ -12,7 +12,7 @@ import AddictiveLib
 
 class CoursePrefCell: TableCell {
 	
-	init(controller: UIViewController, course: Course) {
+	init(module: CoursesPrefModule, course: Course) {
 		super.init("coursepref", nib: "CoursePrefCell")
 		
 		self.setHeight(44)
@@ -20,12 +20,7 @@ class CoursePrefCell: TableCell {
 		self.setSelection() {
 			template, cell in
 			
-			guard let classView = controller.storyboard?.instantiateViewController(withIdentifier: "SettingsClass") as? SettingsClassController else {
-				return
-			}
-			
-			classView.course = course
-			controller.navigationController?.pushViewController(classView, animated: true)
+			module.presentCourse(course: course)
 		}
 		
 		self.setCallback() {

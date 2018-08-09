@@ -30,6 +30,8 @@ class BlockMetaStorage: StorageHandler {
 			
 			metaData["notifications"] = meta.notifications
 			
+			metaData["name"] = meta.customName
+			
 			data.append(metaData)
 		}
 		
@@ -57,7 +59,14 @@ class BlockMetaStorage: StorageHandler {
 				continue
 			}
 			
-			let meta = BlockMeta(block: block, color: color, notifications: notifications)
+			var name: String?
+			if block == .free {
+				if let rawName = item["name"] as? String {
+					name = rawName
+				}
+			}
+			
+			let meta = BlockMeta(block: block, color: color, notifications: notifications, customName: name)
 			self.manager.loadedMeta(meta: meta)
 			
 			print("Successfully loaded Block Meta: \(meta.block.displayName)")
