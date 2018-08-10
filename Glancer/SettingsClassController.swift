@@ -138,7 +138,7 @@ class SettingsClassController: UIViewController, TableBuilder {
 		
 		notifications.addDivider()
 		
-		notifications.addSpacerCell().setBackgroundColor(.clear).setHeight(70)
+		notifications.addSpacerCell().setBackgroundColor(.clear).setHeight(35)
 		
 		let delete = layout.addSection()
 		delete.addDivider()
