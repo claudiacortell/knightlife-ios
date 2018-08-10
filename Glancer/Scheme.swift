@@ -44,7 +44,7 @@ enum Scheme {
 		case .lightText:
 			return UIColor.lightGray
 		case .nullColor:
-			return UIColor(hex: "777777")!
+			return UIColor(hex: "848484")!
 		case .hollowText:
 			return UIColor(hex: "9F9FAA")!
 		case .dividerColor:

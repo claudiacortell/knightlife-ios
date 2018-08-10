@@ -612,84 +612,1082 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WPy-hE-ufz" customClass="HRColorPickerView">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahU-Eq-MXD">
+                                <rect key="frame" x="10" y="20" width="355" height="647"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TKa-5d-okN">
-                                        <rect key="frame" x="20" y="20" width="335" height="607"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="qB0-ex-3n1">
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="1091.5"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wGM-tS-2Wb">
+                                                <rect key="frame" x="0.0" y="0.0" width="355" height="10"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="10" id="9JQ-Ys-0lQ"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0sL-OZ-JoA">
+                                                <rect key="frame" x="0.0" y="15" width="355" height="22"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Classic Palette" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fGT-XI-U1H">
+                                                        <rect key="frame" x="0.0" y="2.5" width="97.5" height="17"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                                        <color key="textColor" red="0.62352941179999999" green="0.62352941179999999" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="fGT-XI-U1H" firstAttribute="leading" secondItem="0sL-OZ-JoA" secondAttribute="leading" id="R0G-eA-OpQ"/>
+                                                    <constraint firstItem="fGT-XI-U1H" firstAttribute="centerY" secondItem="0sL-OZ-JoA" secondAttribute="centerY" id="mmh-1P-wAD"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fGT-XI-U1H" secondAttribute="trailing" id="ntH-eo-3UL"/>
+                                                    <constraint firstAttribute="height" constant="22" id="qyX-hV-fro"/>
+                                                </constraints>
+                                            </view>
+                                            <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="olQ-JU-oRC">
+                                                <rect key="frame" x="0.0" y="42" width="355" height="58.5"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="Lq9-16-e2g">
+                                                        <rect key="frame" x="0.0" y="0.0" width="473.5" height="58.5"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="40i-2a-1Kd" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.69803921568627447" green="0.17254901960784313" blue="0.11764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="40i-2a-1Kd" secondAttribute="height" multiplier="1:1" id="pMN-fs-B9o"/>
+                                                                </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j5M-pF-u97" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="59.5" y="0.0" width="58" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.74509803921568629" green="0.36862745098039218" blue="0.090196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yKO-tn-0C4" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="118.5" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.83921568627450982" green="0.69019607843137254" blue="0.074509803921568626" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gxz-1M-ul3" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="178" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.086274509803921567" green="0.62745098039215685" blue="0.52156862745098043" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v1A-0l-75V" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="237.5" y="0.0" width="58" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.10196078431372549" green="0.47058823529411764" blue="0.6588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X3o-v5-7ru" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="296.5" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.46666666666666667" green="0.17254901960784313" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e3I-Dq-MYr" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="356" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.6588235294117647" green="0.11764705882352941" blue="0.49411764705882355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QKh-g9-Ufk" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="415.5" y="0.0" width="58" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="Lq9-16-e2g" firstAttribute="top" secondItem="olQ-JU-oRC" secondAttribute="top" id="9PO-HR-xI6"/>
+                                                    <constraint firstItem="Lq9-16-e2g" firstAttribute="centerY" secondItem="olQ-JU-oRC" secondAttribute="centerY" id="Qc2-sU-ML3"/>
+                                                    <constraint firstItem="Lq9-16-e2g" firstAttribute="leading" secondItem="olQ-JU-oRC" secondAttribute="leading" id="RT3-3T-HY6"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Lq9-16-e2g" secondAttribute="bottom" id="Ylg-P2-ajl"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Lq9-16-e2g" secondAttribute="trailing" id="wva-qi-7Q1"/>
+                                                </constraints>
+                                            </scrollView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lU4-NF-RI2">
+                                                <rect key="frame" x="0.0" y="105.5" width="355" height="10"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="10" id="Guo-It-lpc"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yvh-F2-gA4">
+                                                <rect key="frame" x="0.0" y="120.5" width="355" height="22"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Complete Palette" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pp9-xB-Q7C">
+                                                        <rect key="frame" x="0.0" y="2.5" width="114" height="17"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                                        <color key="textColor" red="0.62352941176470589" green="0.62352941176470589" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="pp9-xB-Q7C" firstAttribute="centerY" secondItem="yvh-F2-gA4" secondAttribute="centerY" id="Cdy-F8-vGo"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pp9-xB-Q7C" secondAttribute="trailing" id="QvA-WZ-01r"/>
+                                                    <constraint firstItem="pp9-xB-Q7C" firstAttribute="leading" secondItem="yvh-F2-gA4" secondAttribute="leading" id="Xqf-Z7-pyr"/>
+                                                    <constraint firstAttribute="height" constant="22" id="hKL-k8-ZCv"/>
+                                                </constraints>
+                                            </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="zoi-ov-0rM">
+                                                <rect key="frame" x="0.0" y="147.5" width="355" height="889"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="gDb-Xn-v4m">
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="58"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XcC-JJ-BCy" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="58.5" height="58"/>
+                                                                <color key="backgroundColor" red="0.36078431372549019" green="0.13725490196078433" blue="0.039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="XcC-JJ-BCy" secondAttribute="height" multiplier="1:1" id="UwA-uk-MzJ"/>
+                                                                </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oPX-j4-tgh" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="59.5" y="0.0" width="58" height="58"/>
+                                                                <color key="backgroundColor" red="0.56862745098039214" green="0.21568627450980393" blue="0.062745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1P8-Rq-v0I" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="118.5" y="0.0" width="58.5" height="58"/>
+                                                                <color key="backgroundColor" red="0.7803921568627451" green="0.29411764705882354" blue="0.086274509803921567" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I2F-Tu-k8g" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="178" y="0.0" width="58.5" height="58"/>
+                                                                <color key="backgroundColor" red="0.90980392156862744" green="0.40784313725490196" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vcG-ta-Cc9" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="237.5" y="0.0" width="58" height="58"/>
+                                                                <color key="backgroundColor" red="0.93333333333333335" green="0.5607843137254902" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vFO-P4-dgg" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="296.5" y="0.0" width="58.5" height="58"/>
+                                                                <color key="backgroundColor" red="0.95686274509803915" green="0.71372549019607845" blue="0.61176470588235299" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="nat-eg-8sL">
+                                                        <rect key="frame" x="0.0" y="59" width="355" height="58.5"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2oI-wS-DH1" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.36078431372549019" green="0.054901960784313725" blue="0.039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kTn-YG-0jl" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="59.5" y="0.0" width="58" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.56862745098039214" green="0.090196078431372548" blue="0.062745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k68-Cq-Yj0" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="118.5" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.7803921568627451" green="0.12156862745098039" blue="0.086274509803921567" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ykC-Ls-wCY" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="178" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.90980392156862744" green="0.22745098039215686" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T61-dE-yKn" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="237.5" y="0.0" width="58" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.93333333333333335" green="0.42745098039215684" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="elj-uE-Jt4" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="296.5" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.95686274509803915" green="0.62745098039215685" blue="0.61176470588235299" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="4aJ-cf-7xs">
+                                                        <rect key="frame" x="0.0" y="118.5" width="355" height="58.5"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UGT-DV-fOb" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.36078431372549019" green="0.039215686274509803" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0jK-vf-oMj" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="59.5" y="0.0" width="58" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.56862745098039214" green="0.062745098039215685" blue="0.31764705882352939" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rwu-aZ-Aca" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="118.5" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.7803921568627451" green="0.086274509803921567" blue="0.43529411764705883" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oE5-9V-r5y" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="178" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.90980392156862744" green="0.18823529411764706" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ico-SJ-Npr" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="237.5" y="0.0" width="58" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.93333333333333335" green="0.40000000000000002" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f1k-bP-1UX" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="296.5" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.95686274509803915" green="0.61176470588235299" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="0vE-5z-qiZ">
+                                                        <rect key="frame" x="0.0" y="178" width="355" height="58"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cti-D6-46Q" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="58.5" height="58"/>
+                                                                <color key="backgroundColor" red="0.19607843137254902" green="0.039215686274509803" blue="0.36078431372549019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lt1-nJ-Wj5" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="59.5" y="0.0" width="58" height="58"/>
+                                                                <color key="backgroundColor" red="0.30980392156862746" green="0.062745098039215685" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ppJ-ep-z7s" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="118.5" y="0.0" width="58.5" height="58"/>
+                                                                <color key="backgroundColor" red="0.42352941176470588" green="0.086274509803921567" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KsB-RC-wBs" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="178" y="0.0" width="58.5" height="58"/>
+                                                                <color key="backgroundColor" red="0.53725490196078429" green="0.18823529411764706" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RjK-hH-4YC" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="237.5" y="0.0" width="58" height="58"/>
+                                                                <color key="backgroundColor" red="0.6588235294117647" green="0.40000000000000002" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eBO-3h-jlF" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="296.5" y="0.0" width="58.5" height="58"/>
+                                                                <color key="backgroundColor" red="0.77647058823529413" green="0.61176470588235299" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="edG-lZ-UNt">
+                                                        <rect key="frame" x="0.0" y="237" width="355" height="58.5"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wtr-vn-zh8" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.066666666666666666" green="0.039215686274509803" blue="0.36078431372549019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O3d-Xh-xDl" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="59.5" y="0.0" width="58" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.10588235294117647" green="0.062745098039215685" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Ng-c0-nsr" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="118.5" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.14509803921568626" green="0.086274509803921567" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mgF-ui-lV0" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="178" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.25098039215686274" green="0.18823529411764706" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jn2-bg-Ujz" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="237.5" y="0.0" width="58" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.44313725490196076" green="0.40000000000000002" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dUT-jn-TDU" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="296.5" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.63921568627450975" green="0.61176470588235299" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="5W2-oa-BaJ">
+                                                        <rect key="frame" x="0.0" y="296.5" width="355" height="58.5"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ge0-Kj-I2f" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.039215686274509803" green="0.1803921568627451" blue="0.36078431372549019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QjI-zj-Coo" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="59.5" y="0.0" width="58" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.062745098039215685" green="0.28235294117647058" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zZ3-dS-V04" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="118.5" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.086274509803921567" green="0.38823529411764707" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a9H-Cf-o6e" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="178" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.18823529411764706" green="0.50196078431372548" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f9f-Hn-vRN" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="237.5" y="0.0" width="58" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.40000000000000002" green="0.63137254901960782" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="igt-ec-pJU" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="296.5" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.61176470588235299" green="0.76078431372549016" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="DUL-5t-6eP">
+                                                        <rect key="frame" x="0.0" y="356" width="355" height="58"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZIt-Rq-lwe" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="58.5" height="58"/>
+                                                                <color key="backgroundColor" red="0.039215686274509803" green="0.30588235294117649" blue="0.36078431372549019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hFO-iU-r87" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="59.5" y="0.0" width="58" height="58"/>
+                                                                <color key="backgroundColor" red="0.062745098039215685" green="0.48627450980392156" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FSq-k7-PU4" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="118.5" y="0.0" width="58.5" height="58"/>
+                                                                <color key="backgroundColor" red="0.086274509803921567" green="0.66274509803921566" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CkV-Cq-6ig" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="178" y="0.0" width="58.5" height="58"/>
+                                                                <color key="backgroundColor" red="0.18823529411764706" green="0.78823529411764703" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8x3-zI-bj6" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="237.5" y="0.0" width="58" height="58"/>
+                                                                <color key="backgroundColor" red="0.40000000000000002" green="0.84313725490196079" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cLh-bm-DvI" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="296.5" y="0.0" width="58.5" height="58"/>
+                                                                <color key="backgroundColor" red="0.61176470588235299" green="0.89803921568627454" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="6aD-KY-g2P">
+                                                        <rect key="frame" x="0.0" y="415" width="355" height="58.5"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Vb-st-nUJ" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.039215686274509803" green="0.36078431372549019" blue="0.28627450980392155" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TP4-sK-QsM" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="59.5" y="0.0" width="58" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.062745098039215685" green="0.56862745098039214" blue="0.45098039215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yTY-Au-kap" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="118.5" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.086274509803921567" green="0.7803921568627451" blue="0.61960784313725492" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cjw-fT-lEv" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="178" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.18823529411764706" green="0.90980392156862744" blue="0.74117647058823533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BQ9-2N-RmS" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="237.5" y="0.0" width="58" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.40000000000000002" green="0.93333333333333335" blue="0.80784313725490198" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8nb-Kf-g7h" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="296.5" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.61176470588235299" green="0.95686274509803915" blue="0.87450980392156863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="JeA-bD-EaC">
+                                                        <rect key="frame" x="0.0" y="474.5" width="355" height="58.5"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="teW-RJ-VcV" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.039215686274509803" green="0.36078431372549019" blue="0.082352941176470587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GJQ-XA-FNY" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="59.5" y="0.0" width="58" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.062745098039215685" green="0.56862745098039214" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qaA-KP-f4R" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="118.5" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.086274509803921567" green="0.7803921568627451" blue="0.1803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bIq-s7-XCI" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="178" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.18823529411764706" green="0.90980392156862744" blue="0.28627450980392155" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tEo-vo-Vno" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="237.5" y="0.0" width="58" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.40000000000000002" green="0.93333333333333335" blue="0.47058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kGT-iS-iwm" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="296.5" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.61176470588235299" green="0.95686274509803915" blue="0.65490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="8KW-f6-Jrg">
+                                                        <rect key="frame" x="0.0" y="534" width="355" height="58"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rki-eF-mma" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="58.5" height="58"/>
+                                                                <color key="backgroundColor" red="0.24313725490196078" green="0.36078431372549019" blue="0.039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="50C-6h-WgP" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="59.5" y="0.0" width="58" height="58"/>
+                                                                <color key="backgroundColor" red="0.38431372549019605" green="0.56862745098039214" blue="0.062745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bXp-pc-apT" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="118.5" y="0.0" width="58.5" height="58"/>
+                                                                <color key="backgroundColor" red="0.52549019607843139" green="0.7803921568627451" blue="0.086274509803921567" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cOx-vK-Ynl" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="178" y="0.0" width="58.5" height="58"/>
+                                                                <color key="backgroundColor" red="0.6470588235294118" green="0.90980392156862744" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5EM-jA-Dke" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="237.5" y="0.0" width="58" height="58"/>
+                                                                <color key="backgroundColor" red="0.73725490196078436" green="0.93333333333333335" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Hg-Rv-U56" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="296.5" y="0.0" width="58.5" height="58"/>
+                                                                <color key="backgroundColor" red="0.83137254901960778" green="0.95686274509803915" blue="0.61176470588235299" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="BMb-9Q-5eq">
+                                                        <rect key="frame" x="0.0" y="593" width="355" height="58.5"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9po-kO-pyf" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.36078431372549019" green="0.34901960784313724" blue="0.039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZuH-7K-5RM" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="59.5" y="0.0" width="58" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.56862745098039214" green="0.55294117647058827" blue="0.062745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mpt-xk-xEY" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="118.5" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.7803921568627451" green="0.75686274509803919" blue="0.086274509803921567" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e3a-va-OD3" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="178" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.90980392156862744" green="0.88627450980392153" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qwU-4a-LeA" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="237.5" y="0.0" width="58" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.93333333333333335" green="0.9137254901960784" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gcp-KV-PNd" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="296.5" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.95686274509803915" green="0.94509803921568625" blue="0.61176470588235299" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="fz3-9j-dGU">
+                                                        <rect key="frame" x="0.0" y="652.5" width="355" height="58.5"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ivq-8V-Sy3" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.36078431372549019" green="0.27450980392156865" blue="0.039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Irj-ee-Flp" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="59.5" y="0.0" width="58" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.56862745098039214" green="0.43529411764705883" blue="0.062745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WtX-pR-9dK" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="118.5" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.7803921568627451" green="0.59607843137254901" blue="0.086274509803921567" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TWY-fo-VY8" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="178" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.90980392156862744" green="0.71764705882352942" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lKM-xk-WTD" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="237.5" y="0.0" width="58" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.93333333333333335" green="0.792156862745098" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eMh-Io-al6" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="296.5" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.95686274509803915" green="0.86274509803921573" blue="0.61176470588235299" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="3W3-8Y-QVP">
+                                                        <rect key="frame" x="0.0" y="712" width="355" height="58"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fpq-Xc-utV" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="58.5" height="58"/>
+                                                                <color key="backgroundColor" red="0.36078431372549019" green="0.20000000000000001" blue="0.039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BiX-Vd-1u7" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="59.5" y="0.0" width="58" height="58"/>
+                                                                <color key="backgroundColor" red="0.56862745098039214" green="0.31764705882352939" blue="0.062745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CiZ-MQ-N8i" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="118.5" y="0.0" width="58.5" height="58"/>
+                                                                <color key="backgroundColor" red="0.7803921568627451" green="0.43529411764705883" blue="0.086274509803921567" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dd6-nA-KiT" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="178" y="0.0" width="58.5" height="58"/>
+                                                                <color key="backgroundColor" red="0.90980392156862744" green="0.5490196078431373" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o0d-Ug-ip7" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="237.5" y="0.0" width="58" height="58"/>
+                                                                <color key="backgroundColor" red="0.93333333333333335" green="0.66666666666666663" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QPy-yT-gV0" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="296.5" y="0.0" width="58.5" height="58"/>
+                                                                <color key="backgroundColor" red="0.95686274509803915" green="0.78431372549019607" blue="0.61176470588235299" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="4wY-lu-0u0">
+                                                        <rect key="frame" x="0.0" y="771" width="355" height="58.5"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0v4-dj-n7H" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.30196078431372547" green="0.17254901960784313" blue="0.098039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qoI-Kw-Ikj" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="59.5" y="0.0" width="58" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.47450980392156861" green="0.27450980392156865" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MDP-eO-LTg" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="118.5" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.65098039215686276" green="0.37647058823529411" blue="0.21568627450980393" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ecC-UH-mZ6" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="178" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.77647058823529413" green="0.49019607843137253" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hm3-e6-1mg" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="237.5" y="0.0" width="58" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.83529411764705885" green="0.62352941176470589" blue="0.50196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DHx-lH-f7Y" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="296.5" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.8901960784313725" green="0.75294117647058822" blue="0.67450980392156867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="6hv-b4-UzB">
+                                                        <rect key="frame" x="0.0" y="830.5" width="355" height="58.5"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YMO-Zp-7Si" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Bd-JO-RRM" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="59.5" y="0.0" width="58" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.14117647058823529" green="0.14117647058823529" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0rH-Yi-Y0R" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="118.5" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.32941176470588235" green="0.32941176470588235" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2fA-q9-mwu" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="178" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.51764705882352935" green="0.51764705882352935" blue="0.51764705882352935" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B6G-9s-A6H" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="237.5" y="0.0" width="58" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.70588235294117641" green="0.70588235294117641" blue="0.70588235294117641" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wqu-cO-IFF" customClass="SettingsColorView" customModule="Glancer" customModuleProvider="target">
+                                                                <rect key="frame" x="296.5" y="0.0" width="58.5" height="58.5"/>
+                                                                <color key="backgroundColor" red="0.89411764705882346" green="0.89411764705882346" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zTx-TB-UlM">
+                                                <rect key="frame" x="0.0" y="1041.5" width="355" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="AE7-kQ-0Am"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="olQ-JU-oRC" firstAttribute="height" secondItem="gDb-Xn-v4m" secondAttribute="height" id="Qaw-z2-Hbl"/>
+                                        </constraints>
                                     </stackView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kAP-RX-REs" customClass="SettingsColorInfoView" customModule="Glancer" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="15" width="75" height="100"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="75" id="O5o-Dm-Ypz"/>
-                                            <constraint firstAttribute="height" constant="100" id="ctU-Ec-8gr"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TtC-RX-ZKa" customClass="HRColorMapView">
-                                        <rect key="frame" x="0.0" y="135" width="395" height="512"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="tileSize">
-                                                <integer key="value" value="20"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="saturationUpperLimit">
-                                                <integer key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BI9-Kz-2xs" customClass="HRBrightnessSlider">
-                                        <rect key="frame" x="110" y="100" width="245" height="15"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="15" id="7G1-LG-95L"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="brightnessLowerLimit">
-                                                <real key="value" value="0.40000000000000002"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="TtC-RX-ZKa" secondAttribute="bottom" id="9Dg-EH-Z44"/>
-                                    <constraint firstAttribute="trailing" secondItem="TtC-RX-ZKa" secondAttribute="trailing" constant="-20" id="ChG-qi-eVP"/>
-                                    <constraint firstAttribute="trailing" secondItem="BI9-Kz-2xs" secondAttribute="trailing" constant="20" id="DDT-LB-GiG"/>
-                                    <constraint firstAttribute="trailing" secondItem="TKa-5d-okN" secondAttribute="trailing" constant="20" id="HuK-pO-Gpe"/>
-                                    <constraint firstItem="kAP-RX-REs" firstAttribute="bottom" secondItem="TtC-RX-ZKa" secondAttribute="top" constant="-20" id="RHM-dt-ydL"/>
-                                    <constraint firstItem="BI9-Kz-2xs" firstAttribute="bottom" secondItem="kAP-RX-REs" secondAttribute="bottom" id="aPH-FA-0Gi"/>
-                                    <constraint firstItem="TKa-5d-okN" firstAttribute="top" secondItem="WPy-hE-ufz" secondAttribute="top" constant="20" id="gRW-vQ-Lcp"/>
-                                    <constraint firstItem="TtC-RX-ZKa" firstAttribute="leading" secondItem="WPy-hE-ufz" secondAttribute="leading" id="gXJ-9L-Ll1"/>
-                                    <constraint firstItem="kAP-RX-REs" firstAttribute="top" secondItem="WPy-hE-ufz" secondAttribute="top" constant="15" id="hHJ-Wn-Yus"/>
-                                    <constraint firstItem="TKa-5d-okN" firstAttribute="leading" secondItem="WPy-hE-ufz" secondAttribute="leading" constant="20" id="nCB-bl-He7"/>
-                                    <constraint firstItem="kAP-RX-REs" firstAttribute="leading" secondItem="WPy-hE-ufz" secondAttribute="leading" constant="20" id="r3R-b0-5oa"/>
-                                    <constraint firstAttribute="bottom" secondItem="TKa-5d-okN" secondAttribute="bottom" constant="20" id="rYx-al-mMU"/>
-                                    <constraint firstItem="BI9-Kz-2xs" firstAttribute="leading" secondItem="kAP-RX-REs" secondAttribute="trailing" constant="15" id="x76-xF-qJQ"/>
+                                    <constraint firstItem="qB0-ex-3n1" firstAttribute="leading" secondItem="ahU-Eq-MXD" secondAttribute="leading" id="5KW-Kh-taQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="qB0-ex-3n1" secondAttribute="trailing" id="TSC-bb-eQL"/>
+                                    <constraint firstItem="qB0-ex-3n1" firstAttribute="width" secondItem="ahU-Eq-MXD" secondAttribute="width" id="aU8-lE-CaO"/>
+                                    <constraint firstItem="qB0-ex-3n1" firstAttribute="top" secondItem="ahU-Eq-MXD" secondAttribute="top" id="fhU-62-CYm"/>
+                                    <constraint firstAttribute="bottom" secondItem="qB0-ex-3n1" secondAttribute="bottom" id="jby-ID-dWH"/>
                                 </constraints>
-                                <connections>
-                                    <outlet property="brightnessSlider" destination="BI9-Kz-2xs" id="ixR-pJ-Vsp"/>
-                                    <outlet property="colorInfoView" destination="kAP-RX-REs" id="iIp-gZ-GYp"/>
-                                    <outlet property="colorMapView" destination="TtC-RX-ZKa" id="g5Z-Is-Gc3"/>
-                                </connections>
-                            </view>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="WPy-hE-ufz" firstAttribute="top" secondItem="E3L-wV-mmI" secondAttribute="bottom" id="GKK-7A-SmC"/>
-                            <constraint firstItem="WPy-hE-ufz" firstAttribute="leading" secondItem="ruc-pj-oeW" secondAttribute="leading" id="KLX-j7-DuZ"/>
-                            <constraint firstItem="S53-kh-fIQ" firstAttribute="top" secondItem="WPy-hE-ufz" secondAttribute="bottom" id="dXC-pE-MuB"/>
-                            <constraint firstAttribute="trailing" secondItem="WPy-hE-ufz" secondAttribute="trailing" id="l0i-LJ-rbd"/>
+                            <constraint firstItem="ahU-Eq-MXD" firstAttribute="top" secondItem="E3L-wV-mmI" secondAttribute="bottom" id="8rY-CR-3iU"/>
+                            <constraint firstItem="S53-kh-fIQ" firstAttribute="top" secondItem="ahU-Eq-MXD" secondAttribute="bottom" id="ifY-Rm-li8"/>
+                            <constraint firstAttribute="trailing" secondItem="ahU-Eq-MXD" secondAttribute="trailing" constant="10" id="voq-KP-cxW"/>
+                            <constraint firstItem="ahU-Eq-MXD" firstAttribute="leading" secondItem="ruc-pj-oeW" secondAttribute="leading" constant="10" id="wZb-hk-RA0"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title=" " id="AGW-Op-OIg"/>
-                    <connections>
-                        <outlet property="colorPickerView" destination="WPy-hE-ufz" id="MRD-0t-IG2"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8ki-uw-ZxR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1050" y="445"/>
+            <point key="canvasLocation" x="1048.8" y="444.82758620689657"/>
         </scene>
         <!--Today Navigation-->
         <scene sceneID="5S7-eC-QTM">

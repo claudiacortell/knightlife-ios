@@ -13,25 +13,52 @@ import Color_Picker_for_iOS
 
 class SettingsColorPickerController: UIViewController {
 	
-	@IBOutlet weak var colorPickerView: HRColorPickerView!
-	
 	var color: UIColor!
 	var colorPicked: (UIColor) -> Void = {_ in}
+	
+	var colorViews: [String: SettingsColorView] = [:]
+	
+	var selected: SettingsColorView?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		self.colorPickerView.addTarget(self, action: #selector(self.didChangeColor(_:)), for: .valueChanged)
+		self.findColorViews()
+		
+		if let colorHex = self.color.toHex, let selectedView = self.colorViews[colorHex] {
+			selectedView.select()
+			self.selected = selectedView
+		}
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		
-		self.colorPickerView.color = self.color
 	}
 	
-	@objc func didChangeColor(_ sender: HRColorPickerView) {
-		self.colorPicked(sender.color)
+	private func findColorViews(_ find: UIView? = nil) {
+		let view = find ?? self.view
+		
+		if let colorView = view as? SettingsColorView, !self.colorViews.values.contains(colorView) {
+			colorView.controller = self
+			self.colorViews[colorView.color.toHex ?? ""] = colorView
+		}
+		
+		for subview in view!.subviews {
+			self.findColorViews(subview)
+		}
+	}
+	
+	func colorPicked(color: UIColor, view: SettingsColorView) {
+		if self.selected === view {
+			return
+		}
+		
+		if self.selected != nil {
+			self.selected!.deselect()
+		}
+		
+		self.selected = view
+		self.colorPicked(color)
 	}
 	
 }

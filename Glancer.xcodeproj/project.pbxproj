@@ -61,6 +61,7 @@
 		C01A6C7C2118CA64000B7442 /* MeetingPrefModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B04F451FD177EC00F5D116 /* MeetingPrefModule.swift */; };
 		C01A6C7D2118CA6F000B7442 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0707FBF1F69753100C7D2ED /* Storage.swift */; };
 		C01F2D0E21138EBE00E461FA /* NextSchooldayWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01F2D0D21138EBE00E461FA /* NextSchooldayWebCall.swift */; };
+		C024A03A211CC5150025C5B1 /* SettingsColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C024A039211CC5150025C5B1 /* SettingsColorView.swift */; };
 		C02A2B0D1FAD47E400D3A9CD /* GetPatchWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02A2B0C1FAD47E400D3A9CD /* GetPatchWebCall.swift */; };
 		C02A2B141FAD527600D3A9CD /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02A2B131FAD527600D3A9CD /* Block.swift */; };
 		C02A2B171FAD539E00D3A9CD /* DaySchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02A2B161FAD539E00D3A9CD /* DaySchedule.swift */; };
@@ -104,7 +105,6 @@
 		C060012B211B2D0D00ECAD1A /* BlocksPrefCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C060012A211B2D0D00ECAD1A /* BlocksPrefCell.xib */; };
 		C061F80B2115F90600F0374C /* SettingsTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C061F80A2115F90600F0374C /* SettingsTextCell.swift */; };
 		C061F80D2115F91700F0374C /* SettingsTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C061F80C2115F91600F0374C /* SettingsTextCell.xib */; };
-		C067913F211B4CFA00628098 /* SettingsColorInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C067913E211B4CFA00628098 /* SettingsColorInfoView.swift */; };
 		C0679142211B5B2C00628098 /* SettingsCourseDeleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0679141211B5B2C00628098 /* SettingsCourseDeleteCell.swift */; };
 		C0679144211B5B3A00628098 /* SettingsCourseDeleteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0679143211B5B3A00628098 /* SettingsCourseDeleteCell.xib */; };
 		C0679147211BF3A500628098 /* UIColor+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0679146211BF3A500628098 /* UIColor+Core.swift */; };
@@ -152,7 +152,6 @@
 		C0ACFD1A21116863002886A2 /* TodayStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ACFD1921116863002886A2 /* TodayStatusCell.swift */; };
 		C0ACFD1C2111686D002886A2 /* TodayStatusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0ACFD1B2111686D002886A2 /* TodayStatusCell.xib */; };
 		C0B04F461FD177EC00F5D116 /* MeetingPrefModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B04F451FD177EC00F5D116 /* MeetingPrefModule.swift */; };
-		C0B56A292110F8F3000A8C3F /* AddCourseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B56A282110F8F3000A8C3F /* AddCourseController.swift */; };
 		C0C176521FAA39E50059E956 /* SportsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C176511FAA39E50059E956 /* SportsManager.swift */; };
 		C0C176591FAA5F450059E956 /* Scheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C176581FAA5F450059E956 /* Scheme.swift */; };
 		C0C1765B1FAA60C10059E956 /* SportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1765A1FAA60C10059E956 /* SportType.swift */; };
@@ -234,6 +233,7 @@
 		C01A6C502118C892000B7442 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		C01A6C522118C892000B7442 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C01F2D0D21138EBE00E461FA /* NextSchooldayWebCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextSchooldayWebCall.swift; sourceTree = "<group>"; };
+		C024A039211CC5150025C5B1 /* SettingsColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsColorView.swift; sourceTree = "<group>"; };
 		C02A2B0C1FAD47E400D3A9CD /* GetPatchWebCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPatchWebCall.swift; sourceTree = "<group>"; };
 		C02A2B131FAD527600D3A9CD /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		C02A2B161FAD539E00D3A9CD /* DaySchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaySchedule.swift; sourceTree = "<group>"; };
@@ -273,7 +273,6 @@
 		C060012A211B2D0D00ECAD1A /* BlocksPrefCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlocksPrefCell.xib; sourceTree = "<group>"; };
 		C061F80A2115F90600F0374C /* SettingsTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTextCell.swift; sourceTree = "<group>"; };
 		C061F80C2115F91600F0374C /* SettingsTextCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTextCell.xib; sourceTree = "<group>"; };
-		C067913E211B4CFA00628098 /* SettingsColorInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsColorInfoView.swift; sourceTree = "<group>"; };
 		C0679141211B5B2C00628098 /* SettingsCourseDeleteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCourseDeleteCell.swift; sourceTree = "<group>"; };
 		C0679143211B5B3A00628098 /* SettingsCourseDeleteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsCourseDeleteCell.xib; sourceTree = "<group>"; };
 		C0679146211BF3A500628098 /* UIColor+Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Core.swift"; sourceTree = "<group>"; };
@@ -321,7 +320,6 @@
 		C0ACFD1B2111686D002886A2 /* TodayStatusCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodayStatusCell.xib; sourceTree = "<group>"; };
 		C0B04F451FD177EC00F5D116 /* MeetingPrefModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingPrefModule.swift; sourceTree = "<group>"; };
 		C0B08EC42115108D00FD7289 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
-		C0B56A282110F8F3000A8C3F /* AddCourseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourseController.swift; sourceTree = "<group>"; };
 		C0C176511FAA39E50059E956 /* SportsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsManager.swift; sourceTree = "<group>"; };
 		C0C176581FAA5F450059E956 /* Scheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scheme.swift; sourceTree = "<group>"; };
 		C0C1765A1FAA60C10059E956 /* SportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportType.swift; sourceTree = "<group>"; };
@@ -461,14 +459,6 @@
 			name = Storage;
 			sourceTree = "<group>";
 		};
-		C01539BD2110F57C0059C807 /* Add Course */ = {
-			isa = PBXGroup;
-			children = (
-				C0B56A282110F8F3000A8C3F /* AddCourseController.swift */,
-			);
-			name = "Add Course";
-			sourceTree = "<group>";
-		};
 		C01573BA20C462DC008CACA5 /* Today */ = {
 			isa = PBXGroup;
 			children = (
@@ -523,6 +513,17 @@
 				C01F2D0D21138EBE00E461FA /* NextSchooldayWebCall.swift */,
 			);
 			name = "Web Call";
+			sourceTree = "<group>";
+		};
+		C024A036211CBC9C0025C5B1 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				C006914D210EC5460099CD57 /* Settings */,
+				C076716D211543FF005D6460 /* Settings Course */,
+				C0AC3FC8211B2F0A00401FB8 /* Settings Block */,
+				C0815910211B46C900522B25 /* Settings Color Picker */,
+			);
+			name = Preferences;
 			sourceTree = "<group>";
 		};
 		C02A2B151FAD52CE00D3A9CD /* Elements */ = {
@@ -821,11 +822,7 @@
 		C079C22F1FACA97D009067DE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C01539BD2110F57C0059C807 /* Add Course */,
-				C006914D210EC5460099CD57 /* Settings */,
-				C076716D211543FF005D6460 /* Settings Course */,
-				C0AC3FC8211B2F0A00401FB8 /* Settings Block */,
-				C0815910211B46C900522B25 /* Settings Color Picker */,
+				C024A036211CBC9C0025C5B1 /* Preferences */,
 				C0CAF2CC210C2230001A69BF /* Lunch */,
 				C09BF04E210AE36A0073C217 /* Calendar */,
 				C0A3D57D21093555004F5049 /* Day */,
@@ -838,7 +835,7 @@
 			isa = PBXGroup;
 			children = (
 				C0815911211B46DE00522B25 /* SettingsColorPickerController.swift */,
-				C067913E211B4CFA00628098 /* SettingsColorInfoView.swift */,
+				C024A039211CC5150025C5B1 /* SettingsColorView.swift */,
 			);
 			name = "Settings Color Picker";
 			sourceTree = "<group>";
@@ -1376,7 +1373,6 @@
 				C0DF4EFF210CEAD7002A433C /* DayBundleManager.swift in Sources */,
 				C0679142211B5B2C00628098 /* SettingsCourseDeleteCell.swift in Sources */,
 				C0FCDBCE210AAC980080A883 /* LunchAttachmentView.swift in Sources */,
-				C0B56A292110F8F3000A8C3F /* AddCourseController.swift in Sources */,
 				C02A2B171FAD539E00D3A9CD /* DaySchedule.swift in Sources */,
 				C0CAF2CE210C223C001A69BF /* LunchController.swift in Sources */,
 				C0C176591FAA5F450059E956 /* Scheme.swift in Sources */,
@@ -1389,7 +1385,6 @@
 				C0711B0320DAC3BE009243CC /* TimeDuration.swift in Sources */,
 				C0791CA62117E7A20066CE62 /* NotificationManager.swift in Sources */,
 				5BD285DD1B03CF29007A0472 /* AppDelegate.swift in Sources */,
-				C067913F211B4CFA00628098 /* SettingsColorInfoView.swift in Sources */,
 				C0C176521FAA39E50059E956 /* SportsManager.swift in Sources */,
 				C060011A211B280000ECAD1A /* BlockMeta.swift in Sources */,
 				C081C2E81FE450F0008073F3 /* LunchManager.swift in Sources */,
@@ -1403,6 +1398,7 @@
 				C036366B1FACF7EA008FC9A9 /* ScheduleManager.swift in Sources */,
 				C0FCDBC4210978D00080A883 /* SubtitleNavigationItem.swift in Sources */,
 				C0A1FB132001B247004146CE /* BlockAnalyst.swift in Sources */,
+				C024A03A211CC5150025C5B1 /* SettingsColorView.swift in Sources */,
 				C0760227210F8A0800398827 /* NoClassCell.swift in Sources */,
 				C05B7A111FCE0C71007C735C /* BlockCourseList.swift in Sources */,
 				C04653C8210936B9004AD09C /* BlockCell.swift in Sources */,
