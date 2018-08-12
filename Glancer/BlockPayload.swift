@@ -36,9 +36,13 @@ class CustomBlockPayload: WebCallPayload {
 	let name: String
 	let color: String
 	
+	let location: String?
+	
 	required init(unboxer: Unboxer) throws {
 		self.name = try unboxer.unbox(key: "name")
 		self.color = try unboxer.unbox(key: "color")
+		
+		self.location = unboxer.unbox(key: "location")
 	}
 	
 }

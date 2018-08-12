@@ -19,6 +19,10 @@ class BlockAnalyst {
 		self.block = block
 	}
 	
+	func getCourse() -> Course? {
+		return self.getCourses().courses.first
+	}
+	
 	func getCourses() -> BlockCourseList {
 		return CourseManager.instance.getCourses(schedule: self.schedule, block: block.id)
 	}
@@ -32,9 +36,8 @@ class BlockAnalyst {
 			}
 		}
 		
-		let courses = self.getCourses()
-		if !courses.isEmpty {
-			return courses.courses.first!.name
+		if let course = self.getCourse() {
+			return course.name
 		} else {
 			guard self.block.id == .lab, let previous = self.schedule.getBlockBefore(self.block) else {
 				if let blockMeta = BlockMetaManager.instance.getBlockMeta(id: self.block.id), blockMeta.block == .free {
@@ -66,20 +69,32 @@ class BlockAnalyst {
 			return custom.color
 		}
 		
-		let courses = self.getCourses()
-		if courses.isEmpty {
-			if self.block.id == .lab, let previous = self.schedule.getBlockBefore(self.block) {
-				let previousAnalyst = BlockAnalyst(schedule: self.schedule, block: previous)
-				return previousAnalyst.getColor()
-			}
-			
-			if let blockMeta = BlockMetaManager.instance.getBlockMeta(id: self.block.id) {
-				return blockMeta.color
-			}
-			
-			return Scheme.nullColor.color
+		if let course = self.getCourse() {
+			return course.color
 		}
 		
-		return courses.courses.first!.color
+		if self.block.id == .lab, let previous = self.schedule.getBlockBefore(self.block) {
+			let previousAnalyst = BlockAnalyst(schedule: self.schedule, block: previous)
+			return previousAnalyst.getColor()
+		}
+		
+		if let blockMeta = BlockMetaManager.instance.getBlockMeta(id: self.block.id) {
+			return blockMeta.color
+		}
+		
+		return Scheme.nullColor.color
 	}
+	
+	func getLocation() -> String? {
+		if self.block.id == .custom, let custom = self.block.custom {
+			return custom.location
+		}
+		
+		if let course = self.getCourse() {
+			return course.location
+		}
+		
+		return nil
+	}
+	
 }

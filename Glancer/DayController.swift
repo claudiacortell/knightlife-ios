@@ -27,6 +27,8 @@ class DayController: UIViewController, TableBuilder, ErrorReloadable {
 		self.tableHandler = TableHandler(table: self.tableView)
 		self.tableHandler.builder = self
 		
+		self.tableView.delaysContentTouches = false
+		
 		self.registerListeners()
 		self.reloadData()
 	}
@@ -90,9 +92,25 @@ class DayController: UIViewController, TableBuilder, ErrorReloadable {
 	
 	func setupNavigationItem() {
 		self.navigationItem.title = self.date.prettyDate
+		
+		if let subtitleItem = self.navigationItem as? SubtitleNavigationItem {
+			if let bundle = self.bundle {
+				if bundle.schedule.changed {
+					subtitleItem.subtitle = "Special"
+					subtitleItem.subtitleColor = .red
+					
+					return
+				}
+			}
+			
+			subtitleItem.subtitle = nil
+			subtitleItem.subtitleColor = UIColor.darkGray
+		}
 	}
 	
 	func buildCells(layout: TableLayout) {
+		self.setupNavigationItem()
+		
 		if !self.bundleDownloaded {
 			self.showLoading(layout: layout)
 			return
@@ -109,7 +127,7 @@ class DayController: UIViewController, TableBuilder, ErrorReloadable {
 		}
 		
 		let composites = self.generateCompositeList(bundle: self.bundle!, blocks: self.bundle!.schedule.getBlocks())
-		self.tableHandler.addModule(BlockListModule(controller: self, composites: composites))
+		self.tableHandler.addModule(BlockListModule(controller: self, composites: composites))		
 	}
 	
 	func showNone(layout: TableLayout) {

@@ -435,14 +435,38 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5dv-o4-nSF">
+                                        <rect key="frame" x="0.0" y="226.5" width="375" height="0.5"/>
+                                        <color key="backgroundColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="0.5" id="pcP-BT-7fL"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="5dv-o4-nSF" firstAttribute="leading" secondItem="ZyG-on-TVt" secondAttribute="leading" id="C8s-LQ-mdF"/>
                                     <constraint firstItem="Ai7-IH-0kf" firstAttribute="top" secondItem="ZyG-on-TVt" secondAttribute="top" constant="15" id="NN2-GO-Gpe"/>
                                     <constraint firstItem="Ai7-IH-0kf" firstAttribute="leading" secondItem="ZyG-on-TVt" secondAttribute="leading" constant="20" id="TAM-Vv-Gqo"/>
                                     <constraint firstAttribute="trailing" secondItem="Ai7-IH-0kf" secondAttribute="trailing" constant="20" id="Tzs-6f-Ywb"/>
+                                    <constraint firstAttribute="trailing" secondItem="5dv-o4-nSF" secondAttribute="trailing" id="pgV-I5-wq0"/>
                                     <constraint firstAttribute="bottom" secondItem="Ai7-IH-0kf" secondAttribute="bottom" constant="15" id="psO-HJ-J5j"/>
+                                    <constraint firstAttribute="bottom" secondItem="5dv-o4-nSF" secondAttribute="bottom" id="sb7-Qv-6Tn"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                        <size key="value" width="0.0" height="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="weekAStackView" destination="y8T-wi-eKs" id="Nvm-sz-jb4"/>
                                     <outlet property="weekBStackView" destination="MHr-n4-IKe" id="Djh-X9-5zd"/>

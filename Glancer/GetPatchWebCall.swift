@@ -48,7 +48,7 @@ class GetPatchWebCall: UnboxWebCall<KnightlifePayload<PatchDatePayload>, DateSch
 			let duration = TimeDuration(start: adjustedStart, end: adjustedEnd)
 			let custom: CustomBlockMeta? = {
 				if let responseCustom = responseBlock.custom {
-					return CustomBlockMeta(name: responseCustom.name, color: UIColor(hex: responseCustom.color) ?? Scheme.darkText.color)
+					return CustomBlockMeta(name: responseCustom.name, color: UIColor(hex: responseCustom.color) ?? Scheme.darkText.color, location: responseCustom.location)
 				}
 				return nil
 			}()
@@ -66,7 +66,12 @@ class GetPatchWebCall: UnboxWebCall<KnightlifePayload<PatchDatePayload>, DateSch
 		let notices: [DateNotice] = content.notices == nil ? [] : {
 			var list: [DateNotice] = []
 			for responseNotice in content.notices! {
-				list.append(DateNotice(priority: responseNotice.priority, message: responseNotice.message))
+				guard let priority = DateNoticePriority(rawValue: responseNotice.priority) else {
+					print("Recieved an invalid notice priority: \(responseNotice.priority)")
+					continue
+				}
+				
+				list.append(DateNotice(priority: priority, message: responseNotice.message))
 			}
 			return list
 		}()

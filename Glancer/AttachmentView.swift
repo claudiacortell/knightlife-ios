@@ -10,7 +10,32 @@ import Foundation
 import UIKit
 import SnapKit
 
-class AttachmentView: UIView {
+enum AttachmentStyle {
+	
+	case BLUE
+	case YELLOW
+	case GREEN
+	case RED
+	case ORANGE
+	
+	var color: UIColor {
+		switch self {
+		case .BLUE: // Blue
+			return UIColor(hex: "E4F1FE")!
+		case .YELLOW: // Yellow
+			return UIColor(hex: "FFF0CC")!
+		case .GREEN: // Green
+			return UIColor(hex: "D9F2EB")!
+		case .RED:
+			return UIColor(hex: "FFD3C9")!
+		case .ORANGE:
+			return UIColor(hex: "FFDEB7")!
+		}
+	}
+	
+}
+
+class AttachmentView: UIView, UIGestureRecognizerDelegate {
 	
 	var style: AttachmentStyle! {
 		didSet {
@@ -60,6 +85,8 @@ class AttachmentView: UIView {
 		}
 	}
 	
+	var clickHandler: () -> Void = {}
+	
 	fileprivate var stack: UIStackView!
 	fileprivate var textLabel: UILabel!
 	fileprivate var rightDisclosureWrapper: UIView!
@@ -82,7 +109,7 @@ class AttachmentView: UIView {
 	}
 	
 	private func build() {
-		self.style = .INFO
+		self.style = .BLUE
 		
 //		Style
 		self.cornerRadius = 5.0
@@ -145,25 +172,67 @@ class AttachmentView: UIView {
 			constrain.width.equalTo(18)
 		}
 		
-		self.rightDisclosureWrapper.isHidden = !self.showDisclosure
+		self.rightDisclosureWrapper.isHidden = !self.showDisclosure		
+	}
+	
+	func enableClicks() {
+		let clickRecognizer = AttachmentTapRecognizer(target: self, action: #selector(handleClick(_:)))
+		clickRecognizer.cancelsTouchesInView = false
+		clickRecognizer.delegate = self
+		self.addGestureRecognizer(clickRecognizer)
+	}
+	
+	@objc func handleClick(_ recognizer: UIGestureRecognizer) {
+		self.clickHandler()
 	}
 	
 }
 
-enum AttachmentStyle {
+fileprivate class AttachmentTapRecognizer: UITapGestureRecognizer {
 	
-	case INFO
-	case WARNING
-	case ADDITIONAL
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
+		super.touchesBegan(touches, with: event)
+		
+		if let view = self.view as? AttachmentView {
+			view.backgroundColor = view.style.color.withAlphaComponent(0.25)
+			
+//			This timer is because otherwise the view doesn't deselect if you drag the tableView at all. Someone smarter than me can deal with it.
+			Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) {
+				timer in
+				
+				if self.state != .began {
+					print(self.state.rawValue)
+					self.animateEnd()
+				}
+			}
+		}
+	}
 	
-	var color: UIColor {
-		switch self {
-		case .INFO:
-			return UIColor(hex: "E4F1FE")!
-		case .WARNING:
-			return UIColor(hex: "FFF0CC")!
-		case .ADDITIONAL:
-			return UIColor(hex: "D9F2EB")!
+	override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
+		super.touchesEnded(touches, with: event)
+		self.animateEnd()
+	}
+	
+	override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent) {
+		super.touchesCancelled(touches, with: event)
+		self.animateEnd()
+	}
+	
+	override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent) {
+		super.pressesEnded(presses, with: event)
+		self.animateEnd()
+	}
+	
+	override func pressesCancelled(_ presses: Set<UIPress>, with event: UIPressesEvent) {
+		super.pressesCancelled(presses, with: event)
+		self.animateEnd()
+	}
+	
+	private func animateEnd() {
+		UIView.animate(withDuration: 0.25) {
+			if let view = self.view as? AttachmentView {
+				view.backgroundColor = view.style.color
+			}
 		}
 	}
 	

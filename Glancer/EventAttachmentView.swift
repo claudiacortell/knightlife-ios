@@ -27,7 +27,7 @@ class EventAttachmentView: AttachmentView {
 	}
 	
 	private func setup() {
-		self.style = .WARNING
+		self.style = .YELLOW
 		self.showDisclosure = false
 		
 		self.leftImage = UIImage(named: "icon_alert")!

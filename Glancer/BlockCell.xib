@@ -22,7 +22,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Pp4-OK-FBX" userLabel="Left Stack">
                             <rect key="frame" x="20" y="15" width="58.5" height="45"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T2F-ke-E9H">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T2F-ke-E9H">
                                     <rect key="frame" x="0.0" y="0.0" width="54" height="24"/>
                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                     <color key="textColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
@@ -74,11 +74,21 @@
                                 </label>
                             </subviews>
                         </stackView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eF9-RG-PkO">
+                            <rect key="frame" x="297" y="43.5" width="58" height="17"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                            <color key="textColor" white="0.62075660342261907" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="75" id="7Cq-jD-eaG"/>
+                        <constraint firstItem="eF9-RG-PkO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bYh-BR-FDE" secondAttribute="trailing" id="Ewg-zt-OeE"/>
+                        <constraint firstAttribute="trailing" secondItem="eF9-RG-PkO" secondAttribute="trailing" constant="20" id="KuP-AM-sx0"/>
                         <constraint firstAttribute="trailing" secondItem="kkm-UY-OD4" secondAttribute="trailing" constant="20" id="MWI-ey-rTD"/>
+                        <constraint firstItem="T2F-ke-E9H" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="kkm-UY-OD4" secondAttribute="leading" id="Uwb-cO-5Pk"/>
+                        <constraint firstItem="eF9-RG-PkO" firstAttribute="centerY" secondItem="bYh-BR-FDE" secondAttribute="centerY" id="cBl-0E-MAz"/>
                         <constraint firstItem="kkm-UY-OD4" firstAttribute="centerY" secondItem="T2F-ke-E9H" secondAttribute="centerY" id="f9A-h3-J6F"/>
                         <constraint firstItem="Pp4-OK-FBX" firstAttribute="centerY" secondItem="kGJ-NF-agL" secondAttribute="centerY" id="ntJ-c4-AEw"/>
                         <constraint firstItem="Pp4-OK-FBX" firstAttribute="leading" secondItem="kGJ-NF-agL" secondAttribute="leading" constant="20" id="wQ6-RJ-iur"/>
@@ -117,6 +127,7 @@
                 <outlet property="attachmentsStack" destination="3Da-J0-5aU" id="Owu-VX-KUO"/>
                 <outlet property="blockNameLabel" destination="S29-PT-252" id="dtx-Uk-8u4"/>
                 <outlet property="fromLabel" destination="8cY-jk-fvp" id="HyH-RJ-piR"/>
+                <outlet property="locationLabel" destination="eF9-RG-PkO" id="V8W-yM-J6U"/>
                 <outlet property="nameLabel" destination="T2F-ke-E9H" id="W3m-sF-R3x"/>
                 <outlet property="rightIcon" destination="cLl-5b-oQh" id="seK-fz-dK6"/>
                 <outlet property="tagIcon" destination="aRg-nF-ndS" id="L49-Vy-Xug"/>

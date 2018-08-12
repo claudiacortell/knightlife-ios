@@ -46,6 +46,8 @@ class BlockCell: TableCell {
 		cell.fromLabel.text = block.time.start.prettyTime
 		cell.toLabel.text = block.time.end.prettyTime
 		
+		cell.locationLabel.text = analyst.getLocation()
+		
 //		Formatting
 		var heavy = !analyst.getCourses().isEmpty
 		if block.id == .lab, let before = self.composite.schedule.getBlockBefore(block) {
@@ -66,7 +68,7 @@ class BlockCell: TableCell {
 		if block.id == .lunch {
 			if let menu = self.composite.lunch {
 				let lunchView = LunchAttachmentView(menuName: menu.title)
-				lunchView.onClick = {
+				lunchView.clickHandler = {
 					self.controller.openLunchMenu(menu: menu)
 				}
 				cell.attachmentsStack.addArrangedSubview(lunchView)
@@ -74,8 +76,12 @@ class BlockCell: TableCell {
 		}
 		
 		for event in composite.events {
+			if !event.isRelevantToUser() {
+				continue // Don't show if it's not relevant
+			}
+			
 			let view = EventAttachmentView()
-			view.text = event.description
+			view.text = event.completeDescription()
 			cell.attachmentsStack.addArrangedSubview(view)
 		}
 		
@@ -97,5 +103,7 @@ class UIBlockCell: UITableViewCell {
 	
 	@IBOutlet weak var attachmentsStack: UIStackView!
 	@IBOutlet weak var attachmentStackBottomConstraint: NSLayoutConstraint!
+	
+	@IBOutlet weak var locationLabel: UILabel!
 	
 }

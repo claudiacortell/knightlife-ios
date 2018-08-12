@@ -11,8 +11,9 @@ import AddictiveLib
 
 extension TableSection {
 	
-	func addDivider() {
-		self.addDividerCell(left: 0, right: 0, backgroundColor: UIColor.clear, insetColor: Scheme.dividerColor.color)
+	@discardableResult
+	func addDivider() -> TableCell {
+		return self.addDividerCell(left: 0, right: 0, backgroundColor: UIColor.clear, insetColor: Scheme.dividerColor.color)
 	}
 	
 }

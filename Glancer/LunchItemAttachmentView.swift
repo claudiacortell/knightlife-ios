@@ -27,7 +27,7 @@ class LunchItemAttachmentView: AttachmentView {
 	}
 	
 	private func setup() {
-		self.style = .ADDITIONAL
+		self.style = .GREEN
 		self.showDisclosure = false
 		
 		self.leftImage = UIImage(named: "icon_flag")!

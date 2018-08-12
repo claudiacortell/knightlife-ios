@@ -41,33 +41,6 @@ class CalendarView: UIView {
 		return days
 	}
 	
-	required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
-		
-		self.addBottom()
-	}
-	
-	override init(frame: CGRect) {
-		super.init(frame: frame)
-		
-		self.addBottom()
-	}
-	
-	private func addBottom() {
-		let view = UIView()
-		view.backgroundColor = Scheme.dividerColor.color
-		self.addSubview(view)
-		
-		view.snp.makeConstraints() {
-			constrain in
-			
-			constrain.leading.equalToSuperview()
-			constrain.trailing.equalToSuperview()
-			constrain.bottom.equalToSuperview()
-			constrain.height.equalTo(1)
-		}
-	}
-	
 	func setupViews() {
 		let today = Date.today
 		let dates = self.dates
@@ -106,15 +79,9 @@ class CalendarView: UIView {
 	
 	@objc func dayButtonClicked(_ sender: UIButton) {
 		let tag = sender.tag
-		
 		let date = self.startOfWeek.dayInRelation(offset: tag)
 		
-		guard let controller = self.controller.storyboard?.instantiateViewController(withIdentifier: "Day") as? DayController else {
-			return
-		}
-		
-		controller.date = date
-		self.controller.navigationController?.pushViewController(controller, animated: true)
+		self.controller.openDay(date: date)
 	}
 	
 }

@@ -9,9 +9,25 @@
 import Foundation
 import AddictiveLib
 
+enum DateNoticePriority: Int {
+	
+	case notice
+	case warning
+	
+	var displayName: String {
+		switch self {
+		case .notice:
+			return "Notice"
+		case .warning:
+			return "Alert"
+		}
+	}
+	
+}
+
 struct DateNotice {
 	
-	let priority: Int
+	let priority: DateNoticePriority
 	let message: String
 	
 }

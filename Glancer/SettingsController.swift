@@ -13,7 +13,7 @@ import AddictiveLib
 class SettingsController: UIViewController, TableBuilder {
 	
 	@IBOutlet weak var tableView: UITableView!
-	private var tableHandler: TableHandler!
+	private(set) var tableHandler: TableHandler!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -32,6 +32,7 @@ class SettingsController: UIViewController, TableBuilder {
 		self.tableHandler.addModule(CoursesPrefModule(controller: self))
 		self.tableHandler.addModule(BlockPrefsModule(controller: self))
 		self.tableHandler.addModule(VariationPrefsModule())
+		self.tableHandler.addModule(EventsPrefsModule(controller: self))
 		self.tableHandler.addModule(LunchPrefsModule())
 	}
 	

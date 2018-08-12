@@ -15,6 +15,8 @@ struct CustomBlockMeta {
 	let name: String
 	let color: UIColor
 	
+	let location: String?
+	
 }
 
 struct Block {

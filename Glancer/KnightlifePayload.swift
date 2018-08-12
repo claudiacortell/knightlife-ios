@@ -31,7 +31,7 @@ class KnightlifeListPayload<MainPayload: Unboxable>: WebCallPayload {
 	let attributes: KnightlifePayloadAttributes
 	
 	required init(unboxer: Unboxer) throws {
-		self.content = unboxer.unbox(key: "content")
+		self.content = unboxer.unbox(key: "content", allowInvalidElements: true)
 		self.error = unboxer.unbox(key: "error")
 		self.attributes = try unboxer.unbox(key: "attributes")
 	}

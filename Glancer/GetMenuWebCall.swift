@@ -60,7 +60,7 @@ class MenuItemPayload: WebCallPayload {
 	var allergy: String?
 	
 	required init(unboxer: Unboxer) throws {
-		self.type = try unboxer.unbox(key: "type")
+		self.type = try unboxer.unbox(key: "itemType")
 		self.name = try unboxer.unbox(key: "name")
 		self.allergy = unboxer.unbox(key: "allergy")
 	}

@@ -11,8 +11,6 @@ def glancer_pods
   pod 'AddictiveLib'
   pod 'Hero'
   pod 'SnapKit'
-  pod 'Color-Picker-for-iOS'
-  pod 'Presentr'
 end
 
 target 'Glancer' do

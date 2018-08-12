@@ -29,6 +29,12 @@ class SubtitleNavigationItem: UINavigationItem {
 		}
 	}
 	
+	@IBInspectable var subtitleColor: UIColor = UIColor.darkGray {
+		didSet {
+			self.subtitleLabel.textColor = self.subtitleColor
+		}
+	}
+	
 	required init?(coder: NSCoder) {
 		super.init(coder: coder)
 		self.setup()
@@ -50,7 +56,7 @@ class SubtitleNavigationItem: UINavigationItem {
 		titleLabel.text = self.title
 		
 		let subtitleLabel = UILabel()
-		subtitleLabel.textColor = UIColor.darkGray
+		subtitleLabel.textColor = self.subtitleColor
 		subtitleLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
 		subtitleLabel.text = self.subtitle
 		

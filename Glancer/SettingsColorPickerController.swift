@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import AddictiveLib
-import Color_Picker_for_iOS
 
 class SettingsColorPickerController: UIViewController {
 	

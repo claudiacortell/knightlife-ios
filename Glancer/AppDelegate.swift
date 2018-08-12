@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 	
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+		Globals.setData("debug", data: false)
+		
 		Globals.BundleID = "MAD.BBN.KnightLife"
 		Globals.StorageID = "MAD.BBN.KnightLife.Storage"
 		

@@ -30,8 +30,19 @@ class TodayController: DayController {
 	
 	override func setupNavigationItem() {
 		self.navigationItem.title = "Today"
-		if let item = self.navigationItem as? SubtitleNavigationItem {
-			item.subtitle = Date.today.prettyDate
+		
+		if let subtitleItem = self.navigationItem as? SubtitleNavigationItem {
+			if let bundle = self.bundle {
+				if bundle.schedule.changed {
+					subtitleItem.subtitle = "Special"
+					subtitleItem.subtitleColor = .red
+					
+					return
+				}
+			}
+			
+			subtitleItem.subtitle = Date.today.prettyDate
+			subtitleItem.subtitleColor = UIColor.darkGray
 		}
 	}
 	
@@ -68,9 +79,13 @@ class TodayController: DayController {
 		switch self.state! {
 		case .LOADING:
 			self.showLoading(layout: layout)
+			self.setupNavigationItem()
+			
 			break
 		case .ERROR:
 			self.showError(layout: layout)
+			self.setupNavigationItem()
+			
 			break
 		case let .NO_CLASS(today, nextDay):
 			self.date = today.date
@@ -102,7 +117,7 @@ class TodayController: DayController {
 			
 			self.showAfterSchool(layout: layout, bundle: nextDay)
 			break
-		}
+		}		
 	}
 	
 	private func showNoClass(layout: TableLayout, bundle: DayBundle?) {

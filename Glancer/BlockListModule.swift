@@ -32,6 +32,8 @@ class BlockListModule: TableModule {
 			section.addCell(BlockCell(controller: self.controller, composite: composite))
 			section.addDivider()
 		}
+		
+		layout.addSection().addSpacerCell().setBackgroundColor(.clear).setHeight(35)
 	}
 	
 }
