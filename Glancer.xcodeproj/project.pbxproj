@@ -79,6 +79,11 @@
 		C036366D1FACF864008FC9A9 /* GetScheduleWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C036366C1FACF864008FC9A9 /* GetScheduleWebCall.swift */; };
 		C039C86D211A8CC1008E0AF0 /* SettingsCourseDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C039C86C211A8CC1008E0AF0 /* SettingsCourseDayCell.swift */; };
 		C039C86F211A8CCE008E0AF0 /* SettingsCourseDayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C039C86E211A8CCE008E0AF0 /* SettingsCourseDayCell.xib */; };
+		C03BA78A21209AE400AB9DA2 /* PushUnboxRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03BA78921209AE400AB9DA2 /* PushUnboxRefresh.swift */; };
+		C03BA78B21209AE400AB9DA2 /* PushUnboxRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03BA78921209AE400AB9DA2 /* PushUnboxRefresh.swift */; };
+		C03BA78C21209AE800AB9DA2 /* PushNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0791CA32116B86F0066CE62 /* PushNotificationManager.swift */; };
+		C03BA78F21209DAA00AB9DA2 /* PushRefreshListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03BA78E21209DAA00AB9DA2 /* PushRefreshListener.swift */; };
+		C03BA79021209DAA00AB9DA2 /* PushRefreshListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03BA78E21209DAA00AB9DA2 /* PushRefreshListener.swift */; };
 		C0405714211DDA7E00C7A1A4 /* NoConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0405713211DDA7E00C7A1A4 /* NoConnectionView.swift */; };
 		C040571B211DDACC00C7A1A4 /* NoConnectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C040571A211DDACC00C7A1A4 /* NoConnectionView.xib */; };
 		C040571D211DDB0200C7A1A4 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C040571C211DDB0200C7A1A4 /* CustomView.swift */; };
@@ -273,6 +278,9 @@
 		C036366C1FACF864008FC9A9 /* GetScheduleWebCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetScheduleWebCall.swift; sourceTree = "<group>"; };
 		C039C86C211A8CC1008E0AF0 /* SettingsCourseDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCourseDayCell.swift; sourceTree = "<group>"; };
 		C039C86E211A8CCE008E0AF0 /* SettingsCourseDayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsCourseDayCell.xib; sourceTree = "<group>"; };
+		C03BA7872120995600AB9DA2 /* TodayWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodayWidget.entitlements; sourceTree = "<group>"; };
+		C03BA78921209AE400AB9DA2 /* PushUnboxRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushUnboxRefresh.swift; sourceTree = "<group>"; };
+		C03BA78E21209DAA00AB9DA2 /* PushRefreshListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushRefreshListener.swift; sourceTree = "<group>"; };
 		C0405713211DDA7E00C7A1A4 /* NoConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoConnectionView.swift; sourceTree = "<group>"; };
 		C040571A211DDACC00C7A1A4 /* NoConnectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoConnectionView.xib; sourceTree = "<group>"; };
 		C040571C211DDB0200C7A1A4 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
@@ -544,6 +552,7 @@
 		C01A6C4C2118C892000B7442 /* TodayWidget */ = {
 			isa = PBXGroup;
 			children = (
+				C03BA7872120995600AB9DA2 /* TodayWidget.entitlements */,
 				C0405718211DDAB500C7A1A4 /* Views */,
 				C01A6C4D2118C892000B7442 /* TodayViewController.swift */,
 				C01A6C4F2118C892000B7442 /* MainInterface.storyboard */,
@@ -661,6 +670,22 @@
 				C039C86E211A8CCE008E0AF0 /* SettingsCourseDayCell.xib */,
 			);
 			name = Day;
+			sourceTree = "<group>";
+		};
+		C03BA78821209AC600AB9DA2 /* Unbox */ = {
+			isa = PBXGroup;
+			children = (
+				C03BA78921209AE400AB9DA2 /* PushUnboxRefresh.swift */,
+			);
+			name = Unbox;
+			sourceTree = "<group>";
+		};
+		C03BA78D21209D9B00AB9DA2 /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				C03BA78E21209DAA00AB9DA2 /* PushRefreshListener.swift */,
+			);
+			name = Types;
 			sourceTree = "<group>";
 		};
 		C0405718211DDAB500C7A1A4 /* Views */ = {
@@ -936,6 +961,8 @@
 		C0791CA22116B84C0066CE62 /* Push */ = {
 			isa = PBXGroup;
 			children = (
+				C03BA78D21209D9B00AB9DA2 /* Types */,
+				C03BA78821209AC600AB9DA2 /* Unbox */,
 				C0791CA32116B86F0066CE62 /* PushNotificationManager.swift */,
 			);
 			name = Push;
@@ -1384,6 +1411,11 @@
 						CreatedOnToolsVersion = 10.0;
 						DevelopmentTeam = P57BN8GJ33;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -1550,6 +1582,7 @@
 				C0FCDBCE210AAC980080A883 /* LunchAttachmentView.swift in Sources */,
 				C02A2B171FAD539E00D3A9CD /* DaySchedule.swift in Sources */,
 				C0CAF2CE210C223C001A69BF /* LunchController.swift in Sources */,
+				C03BA78A21209AE400AB9DA2 /* PushUnboxRefresh.swift in Sources */,
 				C0C176591FAA5F450059E956 /* Scheme.swift in Sources */,
 				C0679147211BF3A500628098 /* UIColor+Core.swift in Sources */,
 				C07E3C8E211A287700D7263E /* DayNotificationGroup.swift in Sources */,
@@ -1597,6 +1630,7 @@
 				C051F1F6210FF94C004C064F /* CoursePrefCell.swift in Sources */,
 				C0CB9C131FE464D900437C5D /* Event.swift in Sources */,
 				C0A26FBC1FAF76620060DC23 /* SportsPrefModule.swift in Sources */,
+				C03BA78F21209DAA00AB9DA2 /* PushRefreshListener.swift in Sources */,
 				C04DE46A1FAE6E09000D4DA6 /* GetSportsMeetingWebCall.swift in Sources */,
 				C08FBF9F210FB29C005812F1 /* TodayDoneCell.swift in Sources */,
 				C081C2EA1FE45108008073F3 /* LunchMenu.swift in Sources */,
@@ -1662,6 +1696,7 @@
 				C01A6C5C2118C989000B7442 /* DayBundle.swift in Sources */,
 				C01A6C792118CA4C000B7442 /* NextSchooldayWebCall.swift in Sources */,
 				C01A6C5B2118C987000B7442 /* DayBundleManager.swift in Sources */,
+				C03BA78C21209AE800AB9DA2 /* PushNotificationManager.swift in Sources */,
 				C029E12B211E1F4800C2BEAF /* AfterSchoolView.swift in Sources */,
 				C01A6C722118CA1F000B7442 /* BlockCourseList.swift in Sources */,
 				C01A6C7A2118CA58000B7442 /* ScheduleVariationStorage.swift in Sources */,
@@ -1680,6 +1715,8 @@
 				C0405714211DDA7E00C7A1A4 /* NoConnectionView.swift in Sources */,
 				C01A6C632118C9BA000B7442 /* Calendar+Core.swift in Sources */,
 				C0600125211B2BC400ECAD1A /* BlockMetaID.swift in Sources */,
+				C03BA79021209DAA00AB9DA2 /* PushRefreshListener.swift in Sources */,
+				C03BA78B21209AE400AB9DA2 /* PushUnboxRefresh.swift in Sources */,
 				C01A6C6F2118CA08000B7442 /* DayPayload.swift in Sources */,
 				C01A6C752118CA2D000B7442 /* Scheme.swift in Sources */,
 				C02E5552211FA34B00043C9E /* EventGradeStorage.swift in Sources */,
@@ -1905,6 +1942,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = TodayWidget/TodayWidget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -1935,6 +1973,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = TodayWidget/TodayWidget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;

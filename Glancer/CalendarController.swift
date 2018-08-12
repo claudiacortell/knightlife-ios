@@ -11,8 +11,10 @@ import UIKit
 import AddictiveLib
 import SnapKit
 
-class CalendarController: UIViewController, TableBuilder, ErrorReloadable {
+class CalendarController: UIViewController, TableBuilder, ErrorReloadable, PushRefreshListener {
 
+	var refreshListenerType: [PushRefreshType] = [.EVENTS, .SCHEDULE]
+	
 	@IBOutlet weak var tableView: UITableView!
 	var tableHandler: TableHandler!
 	
@@ -79,6 +81,7 @@ class CalendarController: UIViewController, TableBuilder, ErrorReloadable {
 	
 	private func removeRefresh() {
 		if self.tableView.refreshControl != nil {
+			self.tableView.refreshControl?.endRefreshing()
 			self.tableView.refreshControl?.removeFromSuperview()
 			self.tableView.refreshControl = nil
 		}
@@ -89,6 +92,14 @@ class CalendarController: UIViewController, TableBuilder, ErrorReloadable {
 			self.tableView.refreshControl?.endRefreshing()
 			self.tableHandler.reload()
 		}
+	}
+	
+	func doListenerRefresh(date: Date) {
+		self.fetchUpcoming {
+			self.tableHandler.reload()
+		}
+
+		self.tableHandler.reload()
 	}
 	
 	func fetchUpcoming(then: @escaping () -> Void = {}) {

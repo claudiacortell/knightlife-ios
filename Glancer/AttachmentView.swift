@@ -127,10 +127,7 @@ class AttachmentView: UIView, UIGestureRecognizerDelegate {
 		stack.snp.makeConstraints() {
 			constrain in
 			
-			constrain.leading.equalToSuperview().inset(15)
-			constrain.trailing.equalToSuperview().inset(15)
-			constrain.top.equalToSuperview().inset(10)
-			constrain.bottom.equalToSuperview().inset(10)
+			constrain.edges.equalToSuperview().inset(UIEdgeInsetsMake(10, 15, 10, 15))
 		}
 		
 //		Center label
@@ -172,7 +169,7 @@ class AttachmentView: UIView, UIGestureRecognizerDelegate {
 			constrain.width.equalTo(18)
 		}
 		
-		self.rightDisclosureWrapper.isHidden = !self.showDisclosure		
+		self.rightDisclosureWrapper.isHidden = !self.showDisclosure
 	}
 	
 	func enableClicks() {

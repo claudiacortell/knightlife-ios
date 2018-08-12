@@ -9,9 +9,11 @@
 import Foundation
 import AddictiveLib
 
-class EventManager: Manager {
+class EventManager: Manager, PushRefreshListener {
 	
 	static let instance = EventManager()
+	
+	let refreshListenerType: [PushRefreshType] = [.EVENTS]
 	
 	private(set) var events: [String: EventList] = [:]
 	private var eventWatchers: [String: ResourceWatcher<EventList>] = [:]
@@ -21,6 +23,7 @@ class EventManager: Manager {
 	init() {
 		super.init("Events")
 		
+		PushNotificationManager.instance.addListener(type: .REFRESH, listener: self)
 		self.registerStorage(EventGradeStorage(manager: self))
 	}
 	
@@ -46,6 +49,10 @@ class EventManager: Manager {
 			self.eventWatchers[date.webSafeDate] = ResourceWatcher<EventList>()
 		}
 		return self.eventWatchers[date.webSafeDate]!
+	}
+	
+	func doListenerRefresh(date: Date) {
+		self.getEvents(date: date, force: true)
 	}
 	
 	func getEvents(date: Date, force: Bool = false, then: @escaping (WebCallResult<EventList>) -> Void = {_ in}) {

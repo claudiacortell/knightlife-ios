@@ -9,9 +9,11 @@
 import Foundation
 import AddictiveLib
 
-class LunchManager: Manager {
+class LunchManager: Manager, PushRefreshListener {
 	
 	static let instance = LunchManager()
+	
+	var refreshListenerType: [PushRefreshType] = [.LUNCH]
 	
 	private(set) var showAllergens: Bool!
 	let showAllergensWatcher = ResourceWatcher<Bool>()
@@ -22,6 +24,7 @@ class LunchManager: Manager {
 	init() {
 		super.init("Lunch Manager")
 		
+		PushNotificationManager.instance.addListener(type: .REFRESH, listener: self)
 		self.registerStorage(ShowAllergyStorage(manager: self))
 	}
 	
@@ -49,6 +52,10 @@ class LunchManager: Manager {
 			self.lunchWatchers[date.webSafeDate] = ResourceWatcher<LunchMenu>()
 		}
 		return self.lunchWatchers[date.webSafeDate]!
+	}
+	
+	func doListenerRefresh(date: Date) {
+		self.fetchLunchMenu(date: date, force: true)
 	}
 	
 	func fetchLunchMenu(date: Date, force: Bool = false, then: @escaping (WebCallResult<LunchMenu>) -> Void = {_ in}) {

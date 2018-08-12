@@ -19,7 +19,7 @@ class DayBundleManager: Manager {
 		super.init("Bundle")
 	}
 	
-	func registerListeners(date: Date) {
+	private func registerListeners(date: Date) {
 //		These just listen for new data from each of the three points, then reloads that date's respective bundle.
 		
 		ScheduleManager.instance.getPatchWatcher(date: date).onSuccess(self) {

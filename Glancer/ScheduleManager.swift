@@ -9,9 +9,11 @@
 import Foundation
 import AddictiveLib
 
-class ScheduleManager: Manager {
-	
+class ScheduleManager: Manager, PushRefreshListener {
+
 	static let instance = ScheduleManager()
+	
+	let refreshListenerType: [PushRefreshType] = [.SCHEDULE] // Only listener to Schedule refresh requests.
 	
 	let defaultVariation = 0
 	private(set) var scheduleVariations: [DayOfWeek: Int] = [:]
@@ -27,6 +29,7 @@ class ScheduleManager: Manager {
 	init() {
 		super.init("Schedule")
 
+		PushNotificationManager.instance.addListener(type: .REFRESH, listener: self)
 		self.registerStorage(ScheduleVariationStorage(manager: self))
 		
 		self.loadTemplate()
@@ -91,6 +94,10 @@ class ScheduleManager: Manager {
 			}
 			
 		}.execute()
+	}
+	
+	func doListenerRefresh(date: Date) {
+		self.loadSchedule(date: date, force: true)
 	}
 	
 	func loadSchedule(date: Date, force: Bool = false, then: @escaping (WebCallResult<DateSchedule>) -> Void = {_ in}) {
