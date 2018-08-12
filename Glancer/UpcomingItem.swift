@@ -41,17 +41,7 @@ class ScheduleChangedUpcomingItem: UpcomingItem {
 	}
 	
 	override func generateAttachmentView() -> AttachmentView {
-		let view = AttachmentView()
-		
-		view.text = "Special schedule"
-		
-		view.style = .RED
-		view.leftImage = UIImage(named: "icon_clock")
-		
-//		view.showDisclosure = true
-//		view.enableClicks()
-		
-		return view
+		return ScheduleChangedAttachment()
 	}
 	
 }
@@ -67,16 +57,8 @@ class ScheduleNoticeUpcomingItem: UpcomingItem {
 	}
 	
 	override func generateAttachmentView() -> AttachmentView {
-		let view = AttachmentView()
-		
-		view.text = "\(self.notice.priority.displayName): \(self.notice.message)"
-		
-		view.style = .ORANGE
-		view.leftImage = UIImage(named: "icon_danger")
-		
-//		view.showDisclosure = true
-//		view.enableClicks()
-		
+		let view = NoticeAttachmentView()
+		view.notice = notice
 		return view
 	}
 	
@@ -93,16 +75,8 @@ class EventUpcomingItem: UpcomingItem {
 	}
 	
 	override func generateAttachmentView() -> AttachmentView {
-		let view = AttachmentView()
-		
-		view.text = "\(self.event.completeDescription())"
-		
-		view.style = .YELLOW
-		view.leftImage = UIImage(named: "icon_alert")
-		
-//		view.showDisclosure = true
-//		view.enableClicks()
-		
+		let view = EventAttachmentView()
+		view.event = self.event
 		return view
 	}
 	

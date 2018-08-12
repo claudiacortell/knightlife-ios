@@ -1,19 +1,19 @@
 //
-//  EventAttachmentView.swift
+//  NoticeAttachmentView.swift
 //  Glancer
 //
-//  Created by Dylan Hanson on 7/26/18.
+//  Created by Dylan Hanson on 8/12/18.
 //  Copyright © 2018 Dylan Hanson. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class EventAttachmentView: AttachmentView {
+class NoticeAttachmentView: AttachmentView {
 	
-	var event: Event? {
+	var notice: DateNotice? {
 		didSet {
-			self.setupEvent()
+			self.setupNotice()
 		}
 	}
 	
@@ -33,19 +33,19 @@ class EventAttachmentView: AttachmentView {
 	}
 	
 	private func setup() {
-		self.style = .YELLOW
+		self.style = .ORANGE
 		self.showDisclosure = false
 		
-		self.leftImage = UIImage(named: "icon_alert")!
+		self.leftImage = UIImage(named: "icon_mail")!
 		
-		self.setupEvent()
+		self.setupNotice()
 	}
 	
-	private func setupEvent() {
-		if self.event == nil {
+	private func setupNotice() {
+		if self.notice == nil {
 			self.text = nil
 		} else {
-			self.text = "\(self.event!.completeDescription())"
+			self.text = "\(self.notice!.priority.displayName): \(self.notice!.message)"
 		}
 	}
 	

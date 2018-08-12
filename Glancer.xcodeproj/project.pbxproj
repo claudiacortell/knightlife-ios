@@ -138,7 +138,6 @@
 		C0791CA62117E7A20066CE62 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0791CA52117E7A20066CE62 /* NotificationManager.swift */; };
 		C0791CA82117E80C0066CE62 /* NotificationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0791CA72117E80C0066CE62 /* NotificationStorage.swift */; };
 		C07CB590211BF44F00010FEA /* UIColor+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0679146211BF3A500628098 /* UIColor+Core.swift */; };
-		C07E3C8E211A287700D7263E /* DayNotificationGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07E3C8D211A287700D7263E /* DayNotificationGroup.swift */; };
 		C07EE28D2119EEF50034B383 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07EE28C2119EEF50034B383 /* CalendarView.swift */; };
 		C080E83C211E31AC000A67DB /* BetweenClassView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C080E83B211E31AC000A67DB /* BetweenClassView.xib */; };
 		C080E83E211E320D000A67DB /* BetweenClassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C080E83D211E320D000A67DB /* BetweenClassView.swift */; };
@@ -178,6 +177,11 @@
 		C0B7221E211F2DF40095BA70 /* UpcomingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B7221D211F2DF40095BA70 /* UpcomingItem.swift */; };
 		C0B72224211F44CB0095BA70 /* UpcomingAttachmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B72223211F44CB0095BA70 /* UpcomingAttachmentCell.swift */; };
 		C0B72226211F44D40095BA70 /* UpcomingAttachmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0B72225211F44D40095BA70 /* UpcomingAttachmentCell.xib */; };
+		C0BD0F9B2120CAA600C8F403 /* NoticesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BD0F9A2120CAA600C8F403 /* NoticesController.swift */; };
+		C0BD0F9F2120CBE400C8F403 /* NoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BD0F9E2120CBE400C8F403 /* NoticeCell.swift */; };
+		C0BD0FA12120CBED00C8F403 /* NoticeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0BD0FA02120CBED00C8F403 /* NoticeCell.xib */; };
+		C0BD0FA32120CD5D00C8F403 /* NoticeAttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BD0FA22120CD5D00C8F403 /* NoticeAttachmentView.swift */; };
+		C0BD0FA52120CE6C00C8F403 /* ScheduleChangedAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BD0FA42120CE6C00C8F403 /* ScheduleChangedAttachment.swift */; };
 		C0C176521FAA39E50059E956 /* SportsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C176511FAA39E50059E956 /* SportsManager.swift */; };
 		C0C176591FAA5F450059E956 /* Scheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C176581FAA5F450059E956 /* Scheme.swift */; };
 		C0C1765B1FAA60C10059E956 /* SportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1765A1FAA60C10059E956 /* SportType.swift */; };
@@ -329,7 +333,6 @@
 		C0791CA32116B86F0066CE62 /* PushNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManager.swift; sourceTree = "<group>"; };
 		C0791CA52117E7A20066CE62 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		C0791CA72117E80C0066CE62 /* NotificationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStorage.swift; sourceTree = "<group>"; };
-		C07E3C8D211A287700D7263E /* DayNotificationGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayNotificationGroup.swift; sourceTree = "<group>"; };
 		C07EE28C2119EEF50034B383 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		C080E83B211E31AC000A67DB /* BetweenClassView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BetweenClassView.xib; sourceTree = "<group>"; };
 		C080E83D211E320D000A67DB /* BetweenClassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetweenClassView.swift; sourceTree = "<group>"; };
@@ -370,6 +373,11 @@
 		C0B7221D211F2DF40095BA70 /* UpcomingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingItem.swift; sourceTree = "<group>"; };
 		C0B72223211F44CB0095BA70 /* UpcomingAttachmentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingAttachmentCell.swift; sourceTree = "<group>"; };
 		C0B72225211F44D40095BA70 /* UpcomingAttachmentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UpcomingAttachmentCell.xib; sourceTree = "<group>"; };
+		C0BD0F9A2120CAA600C8F403 /* NoticesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticesController.swift; sourceTree = "<group>"; };
+		C0BD0F9E2120CBE400C8F403 /* NoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeCell.swift; sourceTree = "<group>"; };
+		C0BD0FA02120CBED00C8F403 /* NoticeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeCell.xib; sourceTree = "<group>"; };
+		C0BD0FA22120CD5D00C8F403 /* NoticeAttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeAttachmentView.swift; sourceTree = "<group>"; };
+		C0BD0FA42120CE6C00C8F403 /* ScheduleChangedAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleChangedAttachment.swift; sourceTree = "<group>"; };
 		C0C176511FAA39E50059E956 /* SportsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsManager.swift; sourceTree = "<group>"; };
 		C0C176581FAA5F450059E956 /* Scheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scheme.swift; sourceTree = "<group>"; };
 		C0C1765A1FAA60C10059E956 /* SportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportType.swift; sourceTree = "<group>"; };
@@ -953,7 +961,6 @@
 			children = (
 				C0791CA52117E7A20066CE62 /* NotificationManager.swift */,
 				C0791CA72117E80C0066CE62 /* NotificationStorage.swift */,
-				C07E3C8D211A287700D7263E /* DayNotificationGroup.swift */,
 			);
 			name = Notification;
 			sourceTree = "<group>";
@@ -974,6 +981,7 @@
 				C024A036211CBC9C0025C5B1 /* Preferences */,
 				C0CAF2CC210C2230001A69BF /* Lunch */,
 				C09BF04E210AE36A0073C217 /* Calendar */,
+				C0BD0F992120CA9600C8F403 /* Notices */,
 				C0A3D57D21093555004F5049 /* Day */,
 				C0A3D57A21093539004F5049 /* Today */,
 			);
@@ -1188,6 +1196,32 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		C0BD0F992120CA9600C8F403 /* Notices */ = {
+			isa = PBXGroup;
+			children = (
+				C0BD0F9C2120CBCC00C8F403 /* Cells */,
+				C0BD0F9A2120CAA600C8F403 /* NoticesController.swift */,
+			);
+			name = Notices;
+			sourceTree = "<group>";
+		};
+		C0BD0F9C2120CBCC00C8F403 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				C0BD0F9D2120CBD600C8F403 /* Notice */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		C0BD0F9D2120CBD600C8F403 /* Notice */ = {
+			isa = PBXGroup;
+			children = (
+				C0BD0F9E2120CBE400C8F403 /* NoticeCell.swift */,
+				C0BD0FA02120CBED00C8F403 /* NoticeCell.xib */,
+			);
+			name = Notice;
+			sourceTree = "<group>";
+		};
 		C0C176501FAA31010059E956 /* Sports */ = {
 			isa = PBXGroup;
 			children = (
@@ -1330,6 +1364,8 @@
 				C0FCDBCD210AAC980080A883 /* LunchAttachmentView.swift */,
 				C0FCDBCF210AB5F60080A883 /* EventAttachmentView.swift */,
 				C0C785AF210FD980003A5EB8 /* LunchItemAttachmentView.swift */,
+				C0BD0FA42120CE6C00C8F403 /* ScheduleChangedAttachment.swift */,
+				C0BD0FA22120CD5D00C8F403 /* NoticeAttachmentView.swift */,
 			);
 			name = Attachments;
 			sourceTree = "<group>";
@@ -1461,6 +1497,7 @@
 				C0B72226211F44D40095BA70 /* UpcomingAttachmentCell.xib in Resources */,
 				C0929F432110C61B004A373B /* PrefsActionCell.xib in Resources */,
 				C01862AC2118A29E0042F38A /* TodayBarCell.xib in Resources */,
+				C0BD0FA12120CBED00C8F403 /* NoticeCell.xib in Resources */,
 				C060012B211B2D0D00ECAD1A /* BlocksPrefCell.xib in Resources */,
 				C04D1EC6210FD7C10001C99C /* LunchItemCell.xib in Resources */,
 				C0ACFD1C2111686D002886A2 /* TodayStatusCell.xib in Resources */,
@@ -1585,13 +1622,13 @@
 				C03BA78A21209AE400AB9DA2 /* PushUnboxRefresh.swift in Sources */,
 				C0C176591FAA5F450059E956 /* Scheme.swift in Sources */,
 				C0679147211BF3A500628098 /* UIColor+Core.swift in Sources */,
-				C07E3C8E211A287700D7263E /* DayNotificationGroup.swift in Sources */,
 				C0815912211B46DE00522B25 /* SettingsColorPickerController.swift in Sources */,
 				C0FCDBCB210A964A0080A883 /* AttachmentView.swift in Sources */,
 				C0791CA42116B86F0066CE62 /* PushNotificationManager.swift in Sources */,
 				C09B41D0211378BD00D636D7 /* TableSection+Core.swift in Sources */,
 				C0711B0320DAC3BE009243CC /* TimeDuration.swift in Sources */,
 				C0791CA62117E7A20066CE62 /* NotificationManager.swift in Sources */,
+				C0BD0F9B2120CAA600C8F403 /* NoticesController.swift in Sources */,
 				5BD285DD1B03CF29007A0472 /* AppDelegate.swift in Sources */,
 				C0C176521FAA39E50059E956 /* SportsManager.swift in Sources */,
 				C060011A211B280000ECAD1A /* BlockMeta.swift in Sources */,
@@ -1605,6 +1642,7 @@
 				C0A167AC210E679700DB6BC4 /* ErrorCell.swift in Sources */,
 				C036366B1FACF7EA008FC9A9 /* ScheduleManager.swift in Sources */,
 				C0FCDBC4210978D00080A883 /* SubtitleNavigationItem.swift in Sources */,
+				C0BD0F9F2120CBE400C8F403 /* NoticeCell.swift in Sources */,
 				C0A1FB132001B247004146CE /* BlockAnalyst.swift in Sources */,
 				C0B7221E211F2DF40095BA70 /* UpcomingItem.swift in Sources */,
 				C024A03A211CC5150025C5B1 /* SettingsColorView.swift in Sources */,
@@ -1612,6 +1650,7 @@
 				C0760227210F8A0800398827 /* NoClassCell.swift in Sources */,
 				C05B7A111FCE0C71007C735C /* BlockCourseList.swift in Sources */,
 				C04653C8210936B9004AD09C /* BlockCell.swift in Sources */,
+				C0BD0FA52120CE6C00C8F403 /* ScheduleChangedAttachment.swift in Sources */,
 				C05F5E891FAE561400724F42 /* SportGender.swift in Sources */,
 				C0A1FB1A2001D705004146CE /* DateSchedule.swift in Sources */,
 				C0C7EA4921135D2400717B53 /* KnightlifePayload.swift in Sources */,
@@ -1639,6 +1678,7 @@
 				C0D6E9442107BC7A004BD0F4 /* Calendar+Core.swift in Sources */,
 				C01573BC20C462ED008CACA5 /* TodayManager.swift in Sources */,
 				C01862AA2118A2920042F38A /* TodayBarCell.swift in Sources */,
+				C0BD0FA32120CD5D00C8F403 /* NoticeAttachmentView.swift in Sources */,
 				C0FCDBC9210A86000080A883 /* BlockListModule.swift in Sources */,
 				C0929F412110C612004A373B /* PrefsActionCell.swift in Sources */,
 				C0A3D57F2109355E004F5049 /* DayController.swift in Sources */,

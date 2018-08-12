@@ -29,6 +29,8 @@ class TodayController: DayController {
 	}
 	
 	override func setupNavigationItem() {
+		self.setupMailButtonItem()
+		
 		self.navigationItem.title = "Today"
 		
 		if let subtitleItem = self.navigationItem as? SubtitleNavigationItem {
@@ -78,42 +80,61 @@ class TodayController: DayController {
 	override func buildCells(layout: TableLayout) {
 		switch self.state! {
 		case .LOADING:
+			self.bundle = nil
+			
 			self.showLoading(layout: layout)
 			self.setupNavigationItem()
 			
 			break
 		case .ERROR:
+			self.bundle = nil
+			
 			self.showError(layout: layout)
 			self.setupNavigationItem()
 			
 			break
 		case let .NO_CLASS(today, nextDay):
+			self.bundle = today
+			
 			self.date = today.date
 			self.setupNavigationItem()
+			self.showNotices()
 			
 			self.showNoClass(layout: layout, bundle: nextDay)
 			break
 		case let .BEFORE_SCHOOL(bundle, firstBlock, minutesUntil):
+			self.bundle = bundle
+			
 			self.date = bundle.date
 			self.setupNavigationItem()
+			self.showNotices()
 			
 			self.showBeforeSchool(layout: layout, bundle: bundle, block: firstBlock, minutes: minutesUntil)
 			break
 		case let .BETWEEN_CLASS(bundle, nextBlock, minutesUntil):
+			self.bundle = bundle
+			
 			self.date = bundle.date
 			self.setupNavigationItem()
+			self.showNotices()
 			
 			self.showBetweenClass(layout: layout, bundle: bundle, block: nextBlock, minutes: minutesUntil)
 			break
 		case let .IN_CLASS(bundle, current, next, minutesLeft):
+			self.bundle = bundle
+			
 			self.date = bundle.date
 			self.setupNavigationItem()
+			self.showNotices()
 			
 			self.showInClass(layout: layout, bundle: bundle, current: current, next: next, minutes: minutesLeft)
 			break
 		case let .AFTER_SCHOOL(bundle, nextDay):
+			self.bundle = bundle
+			
 			self.date = bundle.date
 			self.setupNavigationItem()
+			self.showNotices()
 			
 			self.showAfterSchool(layout: layout, bundle: nextDay)
 			break

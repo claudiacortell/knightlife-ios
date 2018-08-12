@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="TeA-Q0-12d" customClass="UINoticeCell" customModule="Glancer" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="OgT-9I-xF5">
+                    <rect key="frame" x="20" y="25" width="335" height="637"/>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="OgT-9I-xF5" firstAttribute="leading" secondItem="TEn-cn-U5m" secondAttribute="leading" constant="20" id="9dl-nb-Jrj"/>
+                <constraint firstItem="OgT-9I-xF5" firstAttribute="top" secondItem="TEn-cn-U5m" secondAttribute="top" constant="5" id="DZ2-Xo-9aX"/>
+                <constraint firstItem="TEn-cn-U5m" firstAttribute="bottom" secondItem="OgT-9I-xF5" secondAttribute="bottom" constant="5" id="Jxf-lw-mTj"/>
+                <constraint firstItem="TEn-cn-U5m" firstAttribute="trailing" secondItem="OgT-9I-xF5" secondAttribute="trailing" constant="20" id="LxC-Gu-e2l"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="TEn-cn-U5m"/>
+            <connections>
+                <outlet property="attachmentStack" destination="OgT-9I-xF5" id="dHr-Qa-aIg"/>
+            </connections>
+            <point key="canvasLocation" x="-123" y="0.0"/>
+        </view>
+    </objects>
+</document>
