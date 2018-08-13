@@ -24,15 +24,15 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="033-ou-GcY">
                     <rect key="frame" x="101" y="303" width="173" height="61.5"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_finished" translatesAutoresizingMaskIntoConstraints="NO" id="67J-eK-1QV">
+                        <imageView userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_finished" translatesAutoresizingMaskIntoConstraints="NO" id="67J-eK-1QV">
                             <rect key="frame" x="70.5" y="0.0" width="32" height="32"/>
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="67J-eK-1QV" secondAttribute="height" multiplier="1:1" id="gBb-si-g4F"/>
                                 <constraint firstAttribute="width" constant="32" id="yWU-uh-s6h"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The school day is over!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zP6-86-ueB">
+                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The school day is over!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zP6-86-ueB">
                             <rect key="frame" x="0.0" y="42" width="173" height="19.5"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>

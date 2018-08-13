@@ -17,14 +17,26 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 	@IBOutlet weak var activeStack: UIStackView!
 	var activeView: UIView?
 	
+	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+		self.setup()
+	}
+	
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		self.setup()
+	}
+	
+	private func setup() {
+		Globals.BundleID = "MAD.BBN.KnightLife.TodayWidget"
+		Globals.StorageID = "group.KnightLife.MAD.Storage"
+		Globals.storeUrlBase(url: "https://knightlife-server.herokuapp.com/api/")
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		self.registerListener()
-		
-		Globals.BundleID = "MAD.BBN.KnightLife.TodayWidget"
-		Globals.StorageID = "MAD.BBN.KnightLife.Storage"
-		Globals.storeUrlBase(url: "https://knightlife-server.herokuapp.com/api/")
 		
 		_ = TodayManager.instance
 		self.handleStateChange(state: TodayManager.instance.currentState)
@@ -57,7 +69,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 	}
 	
 	func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
+		BlockMetaManager.instance.loadStorage()
+		CourseManager.instance.loadStorage()
 		TodayManager.instance.reloadTodayBundle()
+		
 		completionHandler(NCUpdateResult.newData)
 	}
 	
@@ -91,6 +106,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 			self.setView(view: BetweenClassView(schedule: bundle.schedule, block: block, minutes: minutes))
 		case let .BEFORE_SCHOOL(bundle, block, minutes):
 			self.setView(view: BeforeSchoolView(schedule: bundle.schedule, block: block, minutes: minutes))
+		case let .BEFORE_SCHOOL_GET_TO_CLASS(bundle, block, minutes):
+			self.setView(view: BetweenClassView(schedule: bundle.schedule, block: block, minutes: minutes))
 		}
 	}
 	

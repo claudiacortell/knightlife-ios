@@ -40,7 +40,7 @@ class NotificationStorage: StorageHandler {
 				continue
 			}
 			
-			self.manager.loadedNotifications(notification: KLNotification(id: id, date: date))
+			self.manager.loadedNotification(notification: KLNotification(id: id, date: date))
 		}
 	}
 	

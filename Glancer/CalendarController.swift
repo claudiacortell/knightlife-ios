@@ -42,19 +42,33 @@ class CalendarController: UIViewController, TableBuilder, ErrorReloadable, PushR
 		self.tableHandler.builder = self
 				
 		self.calendarView.controller = self
+		self.calendarView.setupViews()
 		
 		self.fetchUpcoming {
 			self.tableHandler.reload()
 		}
+		
+		self.registerListeners()
 	}
-	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-		
-		self.calendarView.setupViews()
-		self.setupNavigation()
-		
-		self.tableHandler.reload()
+//
+//	override func viewWillAppear(_ animated: Bool) {
+//		super.viewWillAppear(animated)
+//
+//		self.calendarView.setupViews()
+//		self.setupNavigation()
+//
+//		self.tableHandler.reload()
+//	}
+//
+	private func registerListeners() {
+		TodayManager.instance.nextDayWatcher.onSuccess(self) {
+			date in
+			
+			self.calendarView.setupViews()
+			self.setupNavigation()
+			
+			self.tableHandler.reload()
+		}
 	}
 	
 	private func setupNavigation() {

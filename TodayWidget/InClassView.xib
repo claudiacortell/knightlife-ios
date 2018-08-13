@@ -31,16 +31,17 @@
                     <rect key="frame" x="67.5" y="15.5" width="240" height="79"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="abJ-mT-ds4">
-                            <rect key="frame" x="83.5" y="0.0" width="73" height="31.5"/>
+                            <rect key="frame" x="84" y="0.0" width="72" height="31.5"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YSJ-Pn-ROk">
-                                    <rect key="frame" x="0.0" y="0.0" width="40" height="31.5"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
-                                    <color key="textColor" red="0.14901960780000001" green="0.76078431369999999" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YSJ-Pn-ROk">
+                                    <rect key="frame" x="0.0" y="0.0" width="39" height="31.5"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="26"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_clock" translatesAutoresizingMaskIntoConstraints="NO" id="vla-Kn-Pti">
-                                    <rect key="frame" x="47" y="3" width="26" height="26"/>
+                                <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_clock" translatesAutoresizingMaskIntoConstraints="NO" id="vla-Kn-Pti">
+                                    <rect key="frame" x="46" y="3" width="26" height="26"/>
+                                    <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="26" id="JWL-hq-3pv"/>
                                         <constraint firstAttribute="width" secondItem="vla-Kn-Pti" secondAttribute="height" multiplier="1:1" id="OsX-hH-8eJ"/>
@@ -48,10 +49,10 @@
                                 </imageView>
                             </subviews>
                         </stackView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="in Precalculus" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I5P-78-cyQ">
-                            <rect key="frame" x="70" y="31.5" width="100.5" height="19.5"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                            <color key="textColor" red="0.14901960780000001" green="0.76078431369999999" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="in Precalculus" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I5P-78-cyQ">
+                            <rect key="frame" x="68.5" y="31.5" width="103.5" height="19.5"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZZu-2r-bzf">
@@ -62,20 +63,20 @@
                             </constraints>
                         </view>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="LrZ-mu-hF6" userLabel="Tag Stack">
-                            <rect key="frame" x="91" y="63" width="58.5" height="16"/>
+                            <rect key="frame" x="91" y="63" width="58" height="16"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_tag" translatesAutoresizingMaskIntoConstraints="NO" id="PTN-TZ-Y8V">
+                                <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_tag" translatesAutoresizingMaskIntoConstraints="NO" id="PTN-TZ-Y8V">
                                     <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
-                                    <color key="tintColor" white="0.70999999999999996" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="PTN-TZ-Y8V" secondAttribute="height" multiplier="1:1" id="PxG-LA-3Pk"/>
                                         <constraint firstAttribute="height" constant="16" id="fdd-zX-Zud"/>
                                     </constraints>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Block" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PEO-Fw-V3U">
-                                    <rect key="frame" x="21" y="0.0" width="37.5" height="16"/>
-                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                    <color key="textColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Block" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PEO-Fw-V3U">
+                                    <rect key="frame" x="21" y="0.0" width="37" height="16"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -83,16 +84,16 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Khj-5O-REF">
-                    <rect key="frame" x="0.0" y="108" width="375" height="2"/>
+                    <rect key="frame" x="0.0" y="106" width="375" height="4"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fl0-aX-nxv">
-                            <rect key="frame" x="0.0" y="0.0" width="245" height="2"/>
+                            <rect key="frame" x="0.0" y="0.0" width="245" height="4"/>
                             <color key="backgroundColor" red="0.1215686275" green="0.61960784310000006" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="2" id="Cfq-md-qEY"/>
+                        <constraint firstAttribute="height" constant="4" id="Cfq-md-qEY"/>
                         <constraint firstAttribute="bottom" secondItem="Fl0-aX-nxv" secondAttribute="bottom" id="Qka-eH-4iS"/>
                         <constraint firstItem="Fl0-aX-nxv" firstAttribute="leading" secondItem="Khj-5O-REF" secondAttribute="leading" id="ZEH-ur-kTU"/>
                         <constraint firstItem="Fl0-aX-nxv" firstAttribute="top" secondItem="Khj-5O-REF" secondAttribute="top" id="kaN-pd-Opz"/>

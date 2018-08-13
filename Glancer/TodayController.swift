@@ -111,6 +111,15 @@ class TodayController: DayController {
 			
 			self.showBeforeSchool(layout: layout, bundle: bundle, block: firstBlock, minutes: minutesUntil)
 			break
+		case let .BEFORE_SCHOOL_GET_TO_CLASS(bundle, nextBlock, minutesUntil):
+			self.bundle = bundle
+			
+			self.date = bundle.date
+			self.setupNavigationItem()
+			self.showNotices()
+			
+			self.showBetweenClass(layout: layout, bundle: bundle, block: nextBlock, minutes: minutesUntil)
+			break
 		case let .BETWEEN_CLASS(bundle, nextBlock, minutesUntil):
 			self.bundle = bundle
 			
@@ -161,8 +170,10 @@ class TodayController: DayController {
 	private func showBetweenClass(layout: TableLayout, bundle: DayBundle, block: Block, minutes: Int) {
 		let analyst = BlockAnalyst(schedule: bundle.schedule, block: block)
 		
+		let state = analyst.getCourse() == nil ? "\(analyst.getDisplayName()) starting soon" : "Get to \(analyst.getDisplayName())"
+		
 		let section = layout.addSection()
-		section.addCell(TodayStatusCell(state: "Get to \(analyst.getDisplayName())", minutes: minutes, image: UIImage(named: "icon_class")!, color: analyst.getColor()))
+		section.addCell(TodayStatusCell(state: state, minutes: minutes, image: UIImage(named: "icon_class")!, color: analyst.getColor()))
 		
 		section.addDivider()
 		section.addCell(BlockCell(controller: self, composite: self.generateCompositeBlock(bundle: bundle, block: block)))

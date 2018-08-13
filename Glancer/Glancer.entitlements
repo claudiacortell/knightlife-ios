@@ -6,7 +6,7 @@
 	<string>development</string>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.KnightLife.MAD.Widget</string>
+		<string>group.KnightLife.MAD.Storage</string>
 	</array>
 </dict>
 </plist>

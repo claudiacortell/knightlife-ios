@@ -52,6 +52,8 @@ class ScheduleVariationStorage: StorageHandler {
 					self.manager.loadedVariation(day: dayId, variation: val ? 1 : 0)
 				}
 			}
+			
+			Storage.USER_SWITCHES.delete()
 		}
 	}
 

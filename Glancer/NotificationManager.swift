@@ -29,7 +29,7 @@ class KLNotification {
 
 class NotificationManager: Manager, PushRefreshListener {
 	
-	let projection = 10 // Schedule 10 days into the future.
+	let projection = 7 // Schedule 7 days into the future. This could be extended except iOS only allows 64 schedule local notifications
 	let shallowProjection = 2
 	
 	var refreshListenerType: [PushRefreshType] = [.SCHEDULE, .NOTIFICATIONS]
@@ -68,6 +68,8 @@ class NotificationManager: Manager, PushRefreshListener {
 	}
 	
 	private func registerListeners() {
+		PushNotificationManager.instance.addListener(type: .REFRESH, listener: self)
+		
 		ScheduleManager.instance.templateWatcher.onSuccess(self) {
 			self.template = $0
 			self.templateError = nil
@@ -82,12 +84,24 @@ class NotificationManager: Manager, PushRefreshListener {
 		
 		ScheduleManager.instance.scheduleVariationUpdatedWatcher.onSuccess(self) {
 			tuple in
-			self.scheduleNotifications(daysAhead: 2) // Only schedule for 1 day ahead when settings are changed. This means if the user changes a lot at once, the system won't get too bogged down.
+			self.scheduleShallowNotifications() // Only schedule for 2 day ahead when settings are changed. This means if the user changes a lot at once, the system won't get too bogged down.
+		}
+		
+		TodayManager.instance.nextDayWatcher.onSuccess(self) {
+			date in
+			
+			self.scheduleNotifications(daysAhead: self.projection) // When the day changes, reschedule all our notifications!
 		}
 	}
 	
-	func loadedNotifications(notification: KLNotification) {
+	func loadedNotification(notification: KLNotification) {
 		self.scheduledNotifications.append(notification)
+	}
+	
+	private func validateNotificationCount(result: @escaping (Bool) -> Void) {
+		self.hub.getPendingNotificationRequests() {
+			result($0.count < 64)
+		}
 	}
 	
 //	This is decently unnecessary, but I'm going to keep it here in case we ever fine tune this Manager in the future so it isn't so intensive.
@@ -97,7 +111,6 @@ class NotificationManager: Manager, PushRefreshListener {
 	}
 	
 	func unregisterAll() {
-		self.out("Unregistering all notifications.")
 		let ids = self.scheduledNotifications.map({ $0.id })
 		
 		self.hub.removePendingNotificationRequests(withIdentifiers: ids)
@@ -106,14 +119,8 @@ class NotificationManager: Manager, PushRefreshListener {
 		self.saveStorage()
 	}
 	
-	func saveNotification(notification: KLNotification, save: Bool = true) {
-//		self.out("Saving notification at time: \(notification.date.webSafeDate) \(notification.date.webSafeTime.replacingOccurrences(of: "-", with: ":"))")
-		
+	func saveNotification(notification: KLNotification) {
 		self.scheduledNotifications.append(notification)
-		
-		if save {
-			self.saveStorage()
-		}
 	}
 	
 	func scheduleShallowNotifications() {
@@ -154,13 +161,12 @@ class NotificationManager: Manager, PushRefreshListener {
 			let selfItem = dispatchItem!
 		
 			self.unregisterAll() // unregister all previous notifications.
-//			self.out("----------------------------------------------------")
 			
 			let today = Date.today
 			
 			for i in 0..<daysAhead {
 				if selfItem.isCancelled {
-					break
+					return
 				}
 				
 				let offsetDate = today.dayInRelation(offset: i)
@@ -180,7 +186,7 @@ class NotificationManager: Manager, PushRefreshListener {
 				
 				for block in schedule.getBlocks() {
 					if selfItem.isCancelled {
-						break
+						return
 					}
 
 					let analyst = BlockAnalyst(schedule: schedule, block: block)
@@ -206,30 +212,38 @@ class NotificationManager: Manager, PushRefreshListener {
 					}
 					
 					let klnotification = KLNotification(date: adjustedTime)
-					
-					let content = self.buildNotificationContent(block: block, schedule: schedule)
-					let components = Calendar.normalizedCalendar.dateComponents([.year, .month, .day, .hour, .minute, .calendar, .timeZone], from: adjustedTime)
-					let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
-					
-					let request = UNNotificationRequest(identifier: klnotification.id, content: content, trigger: trigger)
-					
-					if selfItem.isCancelled {
-						return
-					}
-					
-					self.hub.add(request) {
-						error in
+					self.validateNotificationCount() { // Ensure that we have space to do this
+						result in
 						
-						if error != nil {
-							self.out("Failed to add notification: \(error!.localizedDescription)")
-						} else {
-							if selfItem.isCancelled { // If the item is cancelled by the time the hub registers this, we have no real choice but to remove it immediately. I doubt this will hurt the hub at all but don't quote me on that.
-								self.hub.removePendingNotificationRequests(withIdentifiers: [klnotification.id])
-								return
-							}
-							
-							self.saveNotification(notification: klnotification)
+						if !result {
+							selfItem.cancel()
+							return
 						}
+						
+						if selfItem.isCancelled {
+							return
+						}
+						
+						let content = self.buildNotificationContent(block: block, schedule: schedule)
+						let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.normalizedCalendar.dateComponents([.year, .month, .day, .hour, .minute, .calendar, .timeZone], from: adjustedTime), repeats: false)
+						
+						let request = UNNotificationRequest(identifier: klnotification.id, content: content, trigger: trigger)
+						
+						self.hub.add(request) {
+							error in
+							
+							if error != nil {
+								self.out("Failed to add notification: \(error!.localizedDescription)")
+							} else {
+								if selfItem.isCancelled { // If the item is cancelled by the time the hub registers this, we have no real choice but to remove it immediately. I doubt this will hurt the hub at all but don't quote me on that.
+									self.hub.removePendingNotificationRequests(withIdentifiers: [klnotification.id])
+									return
+								}
+								
+								self.saveNotification(notification: klnotification)
+							}
+						}
+						return
 					}
 				}
 			}
@@ -237,26 +251,31 @@ class NotificationManager: Manager, PushRefreshListener {
 		
 		self.currentDispatchItem = dispatchItem
 		self.dispatchQueue.async(execute: dispatchItem)
+		self.dispatchQueue.async {
+			if self.currentDispatchItem === dispatchItem { // Only save if the current item is still active and it hasn't been replaced.
+				self.saveStorage()
+			}
+		}
 	}
 	
 	private func buildNotificationContent(block: Block, schedule: DateSchedule) -> UNNotificationContent {
 		let analyst = BlockAnalyst(schedule: schedule, block: block)
 		
 		let content = UNMutableNotificationContent()
+		
 		if analyst.getCourse() == nil {
 			content.title = "Next Block"
 		} else {
 			content.title = "Get to Class"
 		}
 		
-		content.body = "\(analyst.getDisplayName()) in 5 min."
-		
-		
-		content.title = "Get to Class"
+		content.sound = UNNotificationSound.default()
 		content.body = "5 min until \(analyst.getDisplayName())"
 		
+		content.threadIdentifier = "schedule"
+		
 		if analyst.getLocation() != nil {
-			content.body = content.body + " \(analyst.getLocation()!)"
+			content.body = content.body + ". \(analyst.getLocation()!)"
 		}
 		
 		return content

@@ -19,6 +19,8 @@ class TodayManager: Manager {
 		case NO_CLASS(DayBundle, DayBundle?)
 		
 		case BEFORE_SCHOOL(DayBundle, Block, Int)
+		
+		case BEFORE_SCHOOL_GET_TO_CLASS(DayBundle, Block, Int)
 		case BETWEEN_CLASS(DayBundle, Block, Int)
 		case IN_CLASS(DayBundle, Block, Block?, Int)
 		
@@ -34,6 +36,8 @@ class TodayManager: Manager {
 				return todayA == todayB && tomorrowA == tomorrowB
 			case (let .BEFORE_SCHOOL(todayA, nextA, timeA), let .BEFORE_SCHOOL(todayB, nextB, timeB)):
 				return todayA == todayB && nextA == nextB && timeA == timeB
+			case (let .BEFORE_SCHOOL_GET_TO_CLASS(bundleA, blockA, timeA), let .BEFORE_SCHOOL_GET_TO_CLASS(bundleB, blockB, timeB)):
+				return bundleA == bundleB && blockA == blockB && timeA == timeB
 			case (let .BETWEEN_CLASS(todayA, curA, timeA), let .BETWEEN_CLASS(todayB, curB, timeB)):
 				return todayA == todayB && curA == curB && timeA == timeB
 			case (let .IN_CLASS(todayA, curA, nextA, timeA), let .IN_CLASS(todayB, curB, nextB, timeB)):
@@ -61,6 +65,8 @@ class TodayManager: Manager {
 	
 	let statusWatcher = ResourceWatcher<TodayScheduleState>()
 	private(set) var currentState: TodayScheduleState = .LOADING
+	
+	let nextDayWatcher = ResourceWatcher<Date>() // Fires off when it's the next day.
 	
 	init() {
 		self.today = Date.today
@@ -197,6 +203,8 @@ class TodayManager: Manager {
 			timer in
 			self.doUpdate()
 		}
+		
+		self.timer!.fire() // Fire immediately without waiting a second.
 	}
 	
 	func stopTimer() {
@@ -238,6 +246,8 @@ class TodayManager: Manager {
 			self.findingNextDay = false
 			
 			self.reloadTodayBundle()
+			
+			self.nextDayWatcher.handle(nil, self.today)
 		} else {
 			if self.nextDay == nil && !self.findingNextDay {
 				self.findingNextDay = true

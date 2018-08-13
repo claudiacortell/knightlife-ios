@@ -22,9 +22,9 @@ class BetweenClassView: CustomView {
 	
 	var color: UIColor! {
 		didSet {
-			self.minuteLabel.tintColor = self.color
-			self.statusIconImage.tintColor = self.color
-			self.statusLabel.tintColor = self.color
+//			self.minuteLabel.textColor = self.color
+//			self.statusIconImage.tintColor = self.color
+//			self.statusLabel.textColor = self.color
 		}
 	}
 	
@@ -54,11 +54,13 @@ class BetweenClassView: CustomView {
 		
 		let analyst = BlockAnalyst(schedule: self.schedule, block: self.block)
 		
+		let state = analyst.getCourse() == nil ? "\(analyst.getDisplayName()) starting soon" : "Get to \(analyst.getDisplayName())"
+		
 		self.statusIconImage.image = self.statusIconImage.image?.withRenderingMode(.alwaysTemplate)
 		self.blockImage.image = self.blockImage.image?.withRenderingMode(.alwaysTemplate)
 		
 		self.blockLabel.text = "\(self.block.id.displayName)"
-		self.statusLabel.text = "Get to \(analyst.getDisplayName())"
+		self.statusLabel.text = state
 		self.minuteLabel.text = {
 			let hours: Int = Int(floor(Double(self.minutes / 60)))
 			let minutes: Int = self.minutes % 60

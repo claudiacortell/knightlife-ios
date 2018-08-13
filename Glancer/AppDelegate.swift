@@ -12,7 +12,7 @@ import AddictiveLib
 import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 	
     var window: UIWindow?
 	
@@ -20,13 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		Globals.setData("debug", data: false)
 		
 		Globals.BundleID = "MAD.BBN.KnightLife"
-		Globals.StorageID = "MAD.BBN.KnightLife.Storage"
+		Globals.StorageID = "group.KnightLife.MAD.Storage"
 		
 		Globals.storeUrlBase(url: "https://knightlife-server.herokuapp.com/api/")
-		
-        UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
-		
-		UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) {
+				
+		UNUserNotificationCenter.current().delegate = self
+		UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
 			result, error in
 			
 			if result {
@@ -43,6 +42,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		_ = CourseManager.instance
 		_ = LunchManager.instance
 		_ = EventManager.instance
+//		
+//		let content = UNMutableNotificationContent()
+//		content.title = "Get to Class"
+//		content.body = "5 min until English. Room #183."
+//		content.sound = UNNotificationSound.default()
+//		
+//		DispatchQueue.main.async {
+//
+//		var adjusted = Date.mergeDateAndTime(date: Date.fromWebDate(string: "2018-08-13")!, time: Date.fromWebTime(string: "16-57")!)!
+//		adjusted = Calendar.normalizedCalendar.date(byAdding: .minute, value: -1, to: adjusted)!
+//
+//
+//
+//		let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.normalizedCalendar.dateComponents([.year, .month, .day, .hour, .minute, .timeZone, .calendar], from: adjusted), repeats: false)
+//
+//		let unrequest = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+//
+//		UNUserNotificationCenter.current().add(unrequest) {
+//			error in
+//
+//			if error != nil {
+//				print("Failed to add notification: \(error!.localizedDescription)")
+//			} else {
+//
+//			}
+//		}
+//		}
 		
         return true
     }
@@ -98,6 +124,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
 		TodayManager.instance.startTimer()
+	}
+	
+	func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+		completionHandler(UNNotificationPresentationOptions.alert)
+		HapticUtils.NOTIFICATION.notificationOccurred(.success)
 	}
 	
 }

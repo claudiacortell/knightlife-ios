@@ -23,11 +23,13 @@ class InClassView: CustomView {
 	@IBOutlet weak var statusBarView: UIView!
 	@IBOutlet weak var statusBarTrailingConstraint: NSLayoutConstraint!
 	
+	var percentage: Float!
+	
 	var color: UIColor! {
 		didSet {
-			self.minuteLabel.tintColor = self.color
-			self.statusIconImage.tintColor = self.color
-			self.statusLabel.tintColor = self.color
+//			self.minuteLabel.textColor = self.color
+//			self.statusIconImage.tintColor = self.color
+//			self.statusLabel.textColor = self.color
 			self.statusBarView.backgroundColor = self.color
 		}
 	}
@@ -76,10 +78,21 @@ class InClassView: CustomView {
 			}
 		}()
 		
-		let percentage = Float(self.minutes) / Float(self.block.time.duration())
-		self.statusBarTrailingConstraint.constant = (self.superview!.bounds.size.width * CGFloat(percentage))
+		let secondPassed = Calendar.normalizedCalendar.dateComponents([.second], from: self.block.time.start, to: Date.today).second!
+		let secondDuration = Calendar.normalizedCalendar.dateComponents([.second], from: self.block.time.start, to: self.block.time.end).second!
+		
+		let secondsLeft = secondDuration - secondPassed
+		
+		let percentage = Float(secondsLeft) / Float(secondDuration)
+		self.percentage = percentage
 		
 		self.color = analyst.getColor()
+	}
+	
+	override func willMove(toSuperview newSuperview: UIView?) {
+		if newSuperview != nil {
+			self.statusBarTrailingConstraint.constant = (newSuperview!.bounds.size.width * CGFloat(percentage))
+		}
 	}
 	
 }
