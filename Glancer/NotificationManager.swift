@@ -30,6 +30,7 @@ class KLNotification {
 class NotificationManager: Manager, PushRefreshListener {
 	
 	let projection = 10 // Schedule 10 days into the future.
+	let shallowProjection = 2
 	
 	var refreshListenerType: [PushRefreshType] = [.SCHEDULE, .NOTIFICATIONS]
 	
@@ -115,8 +116,11 @@ class NotificationManager: Manager, PushRefreshListener {
 		}
 	}
 	
-//	This should be async safe.
-	func scheduleNotifications(daysAhead: Int) {
+	func scheduleShallowNotifications() {
+		self.scheduleNotifications(daysAhead: self.shallowProjection)
+	}
+	
+	private func scheduleNotifications(daysAhead: Int) {
 		if !self.templateLoaded {
 			self.out("Couldn't schedule notifications: template not downloaded")
 			return

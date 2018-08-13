@@ -31,7 +31,7 @@ class SettingsBlockController: UIViewController, TableBuilder {
 	}
 	
 	private func needsNotificationsUpdate() {
-		NotificationManager.instance.scheduleNotifications(daysAhead: 2)
+		NotificationManager.instance.scheduleShallowNotifications()
 	}
 	
 	private func didChangeSettings() {
