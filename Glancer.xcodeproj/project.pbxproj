@@ -169,6 +169,7 @@
 		C0A3D57F2109355E004F5049 /* DayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A3D57E2109355E004F5049 /* DayController.swift */; };
 		C0A5F023210B9FBA00606ED3 /* BlockPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A5F022210B9FBA00606ED3 /* BlockPayload.swift */; };
 		C0A5F025210BA22200606ED3 /* DayPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A5F024210BA22200606ED3 /* DayPayload.swift */; };
+		C0AA2FE92120FBAA0009C686 /* SpecialSchedulesWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AA2FE82120FBAA0009C686 /* SpecialSchedulesWebCall.swift */; };
 		C0AC3FCA211B2F2400401FB8 /* SettingsBlockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AC3FC9211B2F2400401FB8 /* SettingsBlockController.swift */; };
 		C0ACFD1A21116863002886A2 /* TodayStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ACFD1921116863002886A2 /* TodayStatusCell.swift */; };
 		C0ACFD1C2111686D002886A2 /* TodayStatusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0ACFD1B2111686D002886A2 /* TodayStatusCell.xib */; };
@@ -364,6 +365,7 @@
 		C0A3D57E2109355E004F5049 /* DayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayController.swift; sourceTree = "<group>"; };
 		C0A5F022210B9FBA00606ED3 /* BlockPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockPayload.swift; sourceTree = "<group>"; };
 		C0A5F024210BA22200606ED3 /* DayPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayPayload.swift; sourceTree = "<group>"; };
+		C0AA2FE82120FBAA0009C686 /* SpecialSchedulesWebCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialSchedulesWebCall.swift; sourceTree = "<group>"; };
 		C0AC3FC9211B2F2400401FB8 /* SettingsBlockController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBlockController.swift; sourceTree = "<group>"; };
 		C0ACFD1921116863002886A2 /* TodayStatusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayStatusCell.swift; sourceTree = "<group>"; };
 		C0ACFD1B2111686D002886A2 /* TodayStatusCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodayStatusCell.xib; sourceTree = "<group>"; };
@@ -959,6 +961,7 @@
 		C0791CA12116B7380066CE62 /* Notification */ = {
 			isa = PBXGroup;
 			children = (
+				C0AA2FE72120FB910009C686 /* Web Call */,
 				C0791CA52117E7A20066CE62 /* NotificationManager.swift */,
 				C0791CA72117E80C0066CE62 /* NotificationStorage.swift */,
 			);
@@ -1152,6 +1155,14 @@
 				C09BF04C210ADB390073C217 /* CompositeBlock.swift */,
 			);
 			name = Day;
+			sourceTree = "<group>";
+		};
+		C0AA2FE72120FB910009C686 /* Web Call */ = {
+			isa = PBXGroup;
+			children = (
+				C0AA2FE82120FBAA0009C686 /* SpecialSchedulesWebCall.swift */,
+			);
+			name = "Web Call";
 			sourceTree = "<group>";
 		};
 		C0AC3FC8211B2F0A00401FB8 /* Settings Block */ = {
@@ -1613,6 +1624,7 @@
 				C0CB9C201FE4698000437C5D /* EventList.swift in Sources */,
 				C0315D71211B244400323661 /* PrefToggleCell.swift in Sources */,
 				C0D2110D2069463200D5D2B2 /* CourseManager.swift in Sources */,
+				C0AA2FE92120FBAA0009C686 /* SpecialSchedulesWebCall.swift in Sources */,
 				C0A5F025210BA22200606ED3 /* DayPayload.swift in Sources */,
 				C0DF4EFF210CEAD7002A433C /* DayBundleManager.swift in Sources */,
 				C0679142211B5B2C00628098 /* SettingsCourseDeleteCell.swift in Sources */,

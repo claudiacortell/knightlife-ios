@@ -17,6 +17,7 @@ class BlockMetaManager: Manager {
 	static let instance = BlockMetaManager()
 	
 	private(set) var meta: [BlockMetaID: BlockMeta] = [:]
+	let metaUpdatedWatcher = ResourceWatcher<BlockMeta>()
 	
 	init() {
 		super.init("Block Meta")
@@ -26,6 +27,11 @@ class BlockMetaManager: Manager {
 	
 	func loadedMeta(meta: BlockMeta) {
 		self.meta[meta.block] = meta
+	}
+	
+	func metaChanged(meta: BlockMeta) {
+		self.metaUpdatedWatcher.handle(nil, meta)
+		self.saveStorage()
 	}
 	
 	func getBlockMeta(id: BlockID) -> BlockMeta? {

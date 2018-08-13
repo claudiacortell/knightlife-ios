@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
         UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
 		
-		UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) {
+		UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) {
 			result, error in
 			
 			if result {
@@ -35,6 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 				print("Failed to authorize notifications: \(error != nil ? error!.localizedDescription : "None")")
 			}
 		}
+		
+		_ = NotificationManager.instance
 		
 		_ = TodayManager.instance
 		_ = ScheduleManager.instance
@@ -60,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			
 			switch result {
 			case .failure(let error):
-				print(error)
+				print(error.localizedDescription)
 			case .success(_):
 				break
 			}

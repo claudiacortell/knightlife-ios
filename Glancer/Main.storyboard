@@ -112,7 +112,42 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="maD-5r-XlB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-481" y="-985"/>
+            <point key="canvasLocation" x="1049" y="-281"/>
+        </scene>
+        <!--Messages-->
+        <scene sceneID="Idh-qh-gsZ">
+            <objects>
+                <viewController storyboardIdentifier="Lunch" title="Messages" id="nbf-qm-dY2" customClass="LunchController" customModule="Glancer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qjs-QZ-n1y"/>
+                        <viewControllerLayoutGuide type="bottom" id="alR-gk-ykM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="V4c-Q9-BRu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RhM-mi-FP3">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="RhM-mi-FP3" firstAttribute="leading" secondItem="V4c-Q9-BRu" secondAttribute="leading" id="2C7-BX-ySo"/>
+                            <constraint firstItem="RhM-mi-FP3" firstAttribute="top" secondItem="qjs-QZ-n1y" secondAttribute="bottom" id="7dm-Rl-fCN"/>
+                            <constraint firstItem="alR-gk-ykM" firstAttribute="top" secondItem="RhM-mi-FP3" secondAttribute="bottom" id="ABF-Qv-Gje"/>
+                            <constraint firstAttribute="trailing" secondItem="RhM-mi-FP3" secondAttribute="trailing" id="GCx-V5-SAt"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Lunch" id="N9C-YP-6vD"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="tableView" destination="RhM-mi-FP3" id="T5i-jg-pKE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J50-1Y-Fhb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="292" y="-281"/>
         </scene>
         <!--Upcoming Navigation-->
         <scene sceneID="Rr5-Ct-Wsk">

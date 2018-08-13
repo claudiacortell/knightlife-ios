@@ -30,8 +30,12 @@ class SettingsBlockController: UIViewController, TableBuilder {
 		self.tableHandler.reload()
 	}
 	
+	private func needsNotificationsUpdate() {
+		NotificationManager.instance.scheduleNotifications(daysAhead: 2)
+	}
+	
 	private func didChangeSettings() {
-		BlockMetaManager.instance.saveStorage()
+		BlockMetaManager.instance.metaChanged(meta: self.meta)
 	}
 	
 	func buildCells(layout: TableLayout) {
@@ -79,7 +83,9 @@ class SettingsBlockController: UIViewController, TableBuilder {
 		
 		notifications.addCell(PrefToggleCell(title: "Show Alerts", on: self.meta.notifications) {
 			self.meta.notifications = $0
+			
 			self.didChangeSettings()
+			self.needsNotificationsUpdate()
 		})
 		notifications.addDivider()
 		
@@ -98,6 +104,7 @@ class SettingsBlockController: UIViewController, TableBuilder {
 				self.tableHandler.reload()
 				
 				self.didChangeSettings()
+				self.needsNotificationsUpdate()
 			}
 		})
 		

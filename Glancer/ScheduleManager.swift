@@ -18,6 +18,7 @@ class ScheduleManager: Manager, PushRefreshListener {
 	let defaultVariation = 0
 	private(set) var scheduleVariations: [DayOfWeek: Int] = [:]
 	private(set) var scheduleVariationWatchers: [DayOfWeek: ResourceWatcher<Int>] = [:]
+	private(set) var scheduleVariationUpdatedWatcher = ResourceWatcher<(DayOfWeek, Int)>()
 	
 	private(set) var template: [DayOfWeek: DaySchedule]?
 	let templateWatcher: ResourceWatcher<[DayOfWeek: DaySchedule]> = ResourceWatcher<[DayOfWeek: DaySchedule]>()
@@ -66,6 +67,8 @@ class ScheduleManager: Manager, PushRefreshListener {
 		self.saveStorage()
 		
 		self.getVariationWatcher(day: day).handle(nil, variation)
+		
+		self.scheduleVariationUpdatedWatcher.handle(nil, (day, variation))
 	}
 	
 	func getVariation(_ day: DayOfWeek) -> Int {

@@ -198,7 +198,6 @@ fileprivate class AttachmentTapRecognizer: UITapGestureRecognizer {
 				timer in
 				
 				if self.state != .began {
-					print(self.state.rawValue)
 					self.animateEnd()
 				}
 			}

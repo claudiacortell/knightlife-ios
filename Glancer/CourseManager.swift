@@ -14,6 +14,7 @@ class CourseManager: Manager {
 	static let instance = CourseManager()
 	
 	private(set) var meetings: [Course] = [] // All added meetings including one time ones.
+	let meetingsUpdatedWatcher = ResourceWatcher<Course>()
 	
 	init() {
 		super.init("Meetings")
@@ -25,13 +26,18 @@ class CourseManager: Manager {
 		self.meetings.append(course)
 	}
 	
+	func courseChanged(course: Course) {
+		self.saveStorage()
+		self.meetingsUpdatedWatcher.handle(nil, course)
+	}
+	
 	func removeCourse(_ meeting: Course) {
 		while self.meetings.contains(meeting) {
 			for i in 0..<self.meetings.count {
 				if self.meetings[i] == meeting {
 					self.meetings.remove(at: i)
 					
-					self.saveStorage()
+					self.courseChanged(course: meeting)
 					break
 				}
 			}
@@ -40,7 +46,7 @@ class CourseManager: Manager {
 	
 	func addCourse(_ meeting: Course) {
 		self.meetings.append(meeting)
-		self.saveStorage()
+		self.courseChanged(course: meeting)
 	}
 	
 	func getCourses(schedule: DateSchedule, block: BlockID) -> BlockCourseList {

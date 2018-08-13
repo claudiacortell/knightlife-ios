@@ -30,8 +30,12 @@ class SettingsClassController: UIViewController, TableBuilder {
 		self.tableHandler.reload()
 	}
 	
+	private func needsNotificationUpdate() {
+		NotificationManager.instance.scheduleNotifications(daysAhead: 2)
+	}
+	
 	private func didChangeSettings() {
-		CourseManager.instance.saveStorage()
+		CourseManager.instance.courseChanged(course: self.course)
 	}
 	
 	func buildCells(layout: TableLayout) {
@@ -113,6 +117,7 @@ class SettingsClassController: UIViewController, TableBuilder {
 					
 					self.tableView.reloadRows(at: [path], with: .fade)
 					self.didChangeSettings()
+					self.needsNotificationUpdate()
 				})
 			}
 			break
@@ -134,6 +139,7 @@ class SettingsClassController: UIViewController, TableBuilder {
 		notifications.addCell(PrefToggleCell(title: "Show Alerts", on: self.course.showNotifications) {
 			self.course.showNotifications = $0
 			self.didChangeSettings()
+			self.needsNotificationUpdate()
 		})
 		
 		notifications.addDivider()
@@ -161,6 +167,7 @@ class SettingsClassController: UIViewController, TableBuilder {
 				self.tableHandler.reload()
 				
 				self.didChangeSettings()
+				self.needsNotificationUpdate()
 			}
 		})
 		
@@ -193,6 +200,7 @@ class SettingsClassController: UIViewController, TableBuilder {
 				self.tableHandler.reload()
 				
 				self.didChangeSettings()
+				self.needsNotificationUpdate()
 			}
 		})
 		
@@ -227,6 +235,7 @@ class SettingsClassController: UIViewController, TableBuilder {
 			self.tableHandler.reload()
 			
 			self.didChangeSettings()
+			self.needsNotificationUpdate()
 		}
 		
 		blockActions = [
@@ -262,6 +271,7 @@ class SettingsClassController: UIViewController, TableBuilder {
 			case .specificDays(_): // Only need to change things if the value was changed.
 				self.course.courseSchedule.frequency = CourseFrequency.everyDay
 				self.didChangeSettings()
+				self.needsNotificationUpdate()
 			default:
 				break
 			}
@@ -276,6 +286,7 @@ class SettingsClassController: UIViewController, TableBuilder {
 			case .everyDay: // Only need to change things if the value was changed.
 				self.course.courseSchedule.frequency = CourseFrequency.specificDays(DayOfWeek.weekdays())
 				self.didChangeSettings()
+				self.needsNotificationUpdate()
 			default:
 				break
 			}
@@ -305,6 +316,8 @@ class SettingsClassController: UIViewController, TableBuilder {
 			action in
 			
 			CourseManager.instance.removeCourse(self.course)
+			self.needsNotificationUpdate()
+			
 			self.navigationController?.popViewController(animated: true)
 		})
 		
