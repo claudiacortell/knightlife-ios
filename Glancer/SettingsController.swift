@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import AddictiveLib
+import SafariServices
 
 class SettingsController: UIViewController, TableBuilder {
 	
@@ -34,6 +35,25 @@ class SettingsController: UIViewController, TableBuilder {
 		self.tableHandler.addModule(VariationPrefsModule())
 		self.tableHandler.addModule(EventsPrefsModule(controller: self))
 		self.tableHandler.addModule(LunchPrefsModule())
+		self.tableHandler.addModule(BottomPrefsModule())
+	}
+	
+	@IBAction func surveyClicked(_ sender: Any) {
+		if let text = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+			SurveyWebCall(version: text).callback() {
+				result in
+				
+				switch result {
+				case .success(let url):
+					let safariController = SFSafariViewController(url: url)
+					self.present(safariController, animated: true, completion: nil)
+				default:
+					let alertController = UIAlertController(title: "Error", message: "Couldn't fetch the survey", preferredStyle: .alert)
+					alertController.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+					self.present(alertController, animated: true, completion: nil)
+				}
+			}.execute()
+		}
 	}
 	
 }

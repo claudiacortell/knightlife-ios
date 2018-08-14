@@ -281,7 +281,7 @@ class DayController: UIViewController, TableBuilder, ErrorReloadable {
 		Globals.setData("displayedNotices", data: displayedNotices) // Make sure it gets set properly again
 		
 		let alert = UIAlertController(title: "Alert", message: notice.message, preferredStyle: .alert)
-		alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+		alert.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
 		
 		self.present(alert, animated: true)
 	}

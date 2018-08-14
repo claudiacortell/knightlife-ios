@@ -7,16 +7,13 @@ use_frameworks!
 
 platform :ios, '10.0'
 
-def glancer_pods
+target 'Glancer' do
   pod 'AddictiveLib'
   pod 'Hero'
   pod 'SnapKit'
 end
 
-target 'Glancer' do
-  glancer_pods
-end
-
 target 'TodayWidget' do
-  glancer_pods
+  pod 'AddictiveLib'
+  pod 'SnapKit'
 end
