@@ -15,6 +15,8 @@ class DayController: UIViewController, TableBuilder, ErrorReloadable {
 	@IBOutlet weak var tableView: UITableView!
 	var tableHandler: TableHandler!
 	
+	@IBOutlet weak var tableHeightAnchor: UIView!
+	
 	var date: Date!
 	
 	var bundle: DayBundle?
@@ -38,6 +40,12 @@ class DayController: UIViewController, TableBuilder, ErrorReloadable {
 		
 		self.tableHandler.reload()
 		self.setupNavigationItem()
+	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		self.tableHandler.reload() // Deal with any pesky layout constraint bugs.
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
@@ -207,15 +215,15 @@ class DayController: UIViewController, TableBuilder, ErrorReloadable {
 	}
 	
 	func showNone(layout: TableLayout) {
-		layout.addSection().addCell(NoClassCell()).setHeight(self.tableView.bounds.size.height)
+		layout.addSection().addCell(NoClassCell()).setHeight(self.tableHeightAnchor.frame.height)
 	}
 	
 	func showLoading(layout: TableLayout) {
-		layout.addSection().addCell(LoadingCell()).setHeight(self.tableView.bounds.size.height)
+		layout.addSection().addCell(LoadingCell()).setHeight(self.tableHeightAnchor.frame.height)
 	}
 	
 	func showError(layout: TableLayout) {
-		layout.addSection().addCell(ErrorCell(reloadable: self)).setHeight(self.tableView.bounds.size.height)
+		layout.addSection().addCell(ErrorCell(reloadable: self)).setHeight(self.tableHeightAnchor.frame.height)
 	}
 	
 	func generateCompositeList(bundle: DayBundle, blocks: [Block]) -> [CompositeBlock] {

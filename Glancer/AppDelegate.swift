@@ -23,7 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 		Globals.StorageID = "group.KnightLife.MAD.Storage"
 		
 		Globals.storeUrlBase(url: "https://knightlife-server.herokuapp.com/api/")
-				
+		
+		application.registerForRemoteNotifications()
+		
 		UNUserNotificationCenter.current().delegate = self
 		UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
 			result, error in
@@ -34,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 				print("Failed to authorize notifications: \(error != nil ? error!.localizedDescription : "None")")
 			}
 		}
-		
+						
 		_ = NotificationManager.instance
 		
 		_ = TodayManager.instance
@@ -42,33 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 		_ = CourseManager.instance
 		_ = LunchManager.instance
 		_ = EventManager.instance
-//		
-//		let content = UNMutableNotificationContent()
-//		content.title = "Get to Class"
-//		content.body = "5 min until English. Room #183."
-//		content.sound = UNNotificationSound.default()
-//		
-//		DispatchQueue.main.async {
-//
-//		var adjusted = Date.mergeDateAndTime(date: Date.fromWebDate(string: "2018-08-13")!, time: Date.fromWebTime(string: "16-57")!)!
-//		adjusted = Calendar.normalizedCalendar.date(byAdding: .minute, value: -1, to: adjusted)!
-//
-//
-//
-//		let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.normalizedCalendar.dateComponents([.year, .month, .day, .hour, .minute, .timeZone, .calendar], from: adjusted), repeats: false)
-//
-//		let unrequest = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-//
-//		UNUserNotificationCenter.current().add(unrequest) {
-//			error in
-//
-//			if error != nil {
-//				print("Failed to add notification: \(error!.localizedDescription)")
-//			} else {
-//
-//			}
-//		}
-//		}
 		
         return true
     }

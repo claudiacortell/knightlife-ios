@@ -50,16 +50,16 @@ class CalendarController: UIViewController, TableBuilder, ErrorReloadable, PushR
 		
 		self.registerListeners()
 	}
-//
-//	override func viewWillAppear(_ animated: Bool) {
-//		super.viewWillAppear(animated)
-//
-//		self.calendarView.setupViews()
-//		self.setupNavigation()
-//
-//		self.tableHandler.reload()
-//	}
-//
+
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+
+		self.calendarView.setupViews()
+		self.setupNavigation()
+
+		self.tableHandler.reload()
+	}
+
 	private func registerListeners() {
 		TodayManager.instance.nextDayWatcher.onSuccess(self) {
 			date in

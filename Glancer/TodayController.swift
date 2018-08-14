@@ -15,6 +15,15 @@ class TodayController: DayController {
 	
 	private var state: TodayManager.TodayScheduleState!
 	
+	private var showStatusBar = false
+	override var prefersStatusBarHidden: Bool {
+		return !self.showStatusBar
+	}
+	
+	override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+		return .slide
+	}
+	
 	override func viewDidLoad() {
 		self.date = Date.today
 		
@@ -26,6 +35,25 @@ class TodayController: DayController {
 		
 		TodayManager.instance.startTimer()
 		self.handleStateChange(state: TodayManager.instance.currentState)
+		
+//		Animate status bar!
+		let animateStatus: Bool = Globals.getData("animate-status") ?? false
+		self.showStatusBar = true
+		if animateStatus {
+			Globals.setData("animate-status", data: false)
+			
+			UIView.animate(withDuration: 0.5) {
+				self.setNeedsStatusBarAppearanceUpdate()
+			}
+		} else {
+			self.setNeedsStatusBarAppearanceUpdate()
+		}
+	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		self.tableHandler.reload() // Deal with any pesky layout constraint bugs.
 	}
 	
 	override func setupNavigationItem() {

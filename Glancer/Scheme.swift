@@ -30,7 +30,7 @@ enum Scheme {
 	var color: UIColor {
 		switch self {
 		case .blue:
-			return UIColor(hex: "5794DC")!
+			return UIColor(hex: "4481eb")!
 		case .main:
 			return UIColor.white
 		case .backgroundMedium:

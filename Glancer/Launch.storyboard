@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,24 +13,32 @@
         <scene sceneID="QdU-X7-PgD">
             <objects>
                 <viewController title="Launch" id="AuF-N8-2Q4" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="XRu-7V-mpb">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="XRu-7V-mpb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_large" translatesAutoresizingMaskIntoConstraints="NO" id="TaE-R3-7y2">
-                                <rect key="frame" x="150" y="290" width="75" height="57"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="Mgi-YY-KHX">
+                                <rect key="frame" x="-50.5" y="0.0" width="476" height="667"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="TaE-R3-7y2" secondAttribute="height" multiplier="250:191" id="hFn-9e-EtZ"/>
-                                    <constraint firstAttribute="width" constant="75" id="heg-ZT-EPl"/>
+                                    <constraint firstAttribute="width" secondItem="Mgi-YY-KHX" secondAttribute="height" multiplier="15:21" id="gWw-Ye-yIh"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="TaE-R3-7y2">
+                                <rect key="frame" x="112.5" y="258.5" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="heg-ZT-EPl"/>
+                                    <constraint firstAttribute="width" secondItem="TaE-R3-7y2" secondAttribute="height" multiplier="1:1" id="wAJ-HM-sRu"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="TaE-R3-7y2" firstAttribute="centerX" secondItem="YEu-Wv-SfL" secondAttribute="centerX" id="npB-6q-Cth"/>
-                            <constraint firstItem="TaE-R3-7y2" firstAttribute="centerY" secondItem="YEu-Wv-SfL" secondAttribute="centerY" constant="-25" id="seM-RN-BTU"/>
+                            <constraint firstAttribute="bottom" secondItem="Mgi-YY-KHX" secondAttribute="bottom" id="8ed-7D-Erh"/>
+                            <constraint firstItem="Mgi-YY-KHX" firstAttribute="top" secondItem="XRu-7V-mpb" secondAttribute="top" id="gRU-iB-KKC"/>
+                            <constraint firstItem="TaE-R3-7y2" firstAttribute="centerX" secondItem="XRu-7V-mpb" secondAttribute="centerX" id="npB-6q-Cth"/>
+                            <constraint firstItem="Mgi-YY-KHX" firstAttribute="centerX" secondItem="XRu-7V-mpb" secondAttribute="centerX" id="nsb-3s-rKL"/>
+                            <constraint firstItem="TaE-R3-7y2" firstAttribute="centerY" secondItem="XRu-7V-mpb" secondAttribute="centerY" id="seM-RN-BTU"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="YEu-Wv-SfL"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AoX-9A-hun" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -40,6 +47,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="logo_large" width="250" height="191"/>
+        <image name="logo" width="450" height="450"/>
+        <image name="splash" width="750" height="1050"/>
     </resources>
 </document>
