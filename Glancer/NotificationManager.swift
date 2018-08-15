@@ -190,15 +190,8 @@ class NotificationManager: Manager, PushRefreshListener {
 					}
 
 					let analyst = BlockAnalyst(schedule: schedule, block: block)
-					
-					if let course = analyst.getCourse() {
-						if !course.showNotifications {
-							continue // Skip!
-						}
-					} else if let meta = BlockMetaManager.instance.getBlockMeta(id: block.id) {
-						if !meta.notifications {
-							continue // Skip!
-						}
+					if !analyst.shouldShowNotifications() {
+						continue
 					}
 					
 					guard let time = Date.mergeDateAndTime(date: offsetDate, time: block.time.start) else {

@@ -128,7 +128,7 @@ class TodayController: DayController {
 			self.setupNavigationItem()
 			self.showNotices()
 			
-			self.showNoClass(layout: layout, bundle: nextDay)
+			self.showNoClass(layout: layout, tomorrow: nextDay)
 			break
 		case let .BEFORE_SCHOOL(bundle, firstBlock, minutesUntil):
 			self.bundle = bundle
@@ -178,21 +178,46 @@ class TodayController: DayController {
 		}		
 	}
 	
-	private func showNoClass(layout: TableLayout, bundle: DayBundle?) {
-		if bundle == nil {
-			self.showNone(layout: layout)
+	private func showNoClass(layout: TableLayout, tomorrow: DayBundle?) {
+		let events = self.bundle!.events.getOutOfSchoolEvents()
+		let addEvents = !events.isEmpty
+		
+		if tomorrow == nil {
+			self.showNone(layout: layout, height: addEvents ? nil : CGFloat(120))
+			
+			if addEvents {
+				layout.addSection().addDivider()
+				self.showAfterSchoolEvents(layout: layout, events: events)
+			}
 			return
 		}
 		
-		layout.addSection().addCell(NoClassCell()).setHeight(120)
-		self.addNextSchoolday(layout: layout, bundle: bundle!)
+		self.showNone(layout: layout, height: CGFloat(120))
+		
+		if addEvents {
+			layout.addSection().addDivider()
+			self.showAfterSchoolEvents(layout: layout, events: events)
+		} else {
+			layout.addSection().addDivider()
+		}
+		
+		self.addNextSchoolday(layout: layout, bundle: tomorrow!)
+		layout.addSection().addSpacerCell().setBackgroundColor(.clear).setHeight(35)
 	}
 	
 	private func showBeforeSchool(layout: TableLayout, bundle: DayBundle, block: Block, minutes: Int) {
 		layout.addSection().addCell(TodayStatusCell(state: "Before School", minutes: minutes, image: UIImage(named: "icon_clock")!, color: UIColor.black.withAlphaComponent(0.3)))
 
 		let upcomingBlocks = bundle.schedule.getBlocks()
-		self.tableHandler.addModule(BlockListModule(controller: self, composites: self.generateCompositeList(bundle: bundle, blocks: upcomingBlocks)))
+		layout.addSection().addDivider()
+		self.tableHandler.addModule(BlockListModule(controller: self, composites: self.generateCompositeList(bundle: bundle, blocks: upcomingBlocks), section: layout.addSection()))
+		
+		let events = bundle.events.getOutOfSchoolEvents()
+		if !events.isEmpty {
+			self.showAfterSchoolEvents(layout: layout, events: events)
+		}
+		
+		layout.addSection().addSpacerCell().setBackgroundColor(.clear).setHeight(35)
 	}
 	
 	private func showBetweenClass(layout: TableLayout, bundle: DayBundle, block: Block, minutes: Int) {
@@ -210,7 +235,15 @@ class TodayController: DayController {
 		section.addSpacerCell().setHeight(30)
 
 		let upcomingBlocks = bundle.schedule.getBlocksAfter(block)
-		self.tableHandler.addModule(BlockListModule(controller: self, composites: self.generateCompositeList(bundle: bundle, blocks: upcomingBlocks)))
+		layout.addSection().addDivider()
+		self.tableHandler.addModule(BlockListModule(controller: self, composites: self.generateCompositeList(bundle: bundle, blocks: upcomingBlocks), section: layout.addSection()))
+		
+		let events = bundle.events.getOutOfSchoolEvents()
+		if !events.isEmpty {
+			self.showAfterSchoolEvents(layout: layout, events: events)
+		}
+		
+		layout.addSection().addSpacerCell().setBackgroundColor(.clear).setHeight(35)
 	}
 	
 	private func showInClass(layout: TableLayout, bundle: DayBundle, current: Block, next: Block?, minutes: Int) {
@@ -230,19 +263,48 @@ class TodayController: DayController {
 		
 		section.addSpacerCell().setHeight(30)
 		
-		let upcomingBlocks = bundle.schedule.getBlocksAfter(current)		
-		self.tableHandler.addModule(BlockListModule(controller: self, composites: self.generateCompositeList(bundle: bundle, blocks: upcomingBlocks)))
+		let upcomingBlocks = bundle.schedule.getBlocksAfter(current)
+		layout.addSection().addDivider()
+		self.tableHandler.addModule(BlockListModule(controller: self, composites: self.generateCompositeList(bundle: bundle, blocks: upcomingBlocks), section: layout.addSection()))
+		
+		let events = bundle.events.getOutOfSchoolEvents()
+		if !events.isEmpty {
+			if upcomingBlocks.isEmpty {
+				layout.addSection().addDivider()
+			}
+			
+			self.showAfterSchoolEvents(layout: layout, events: events)
+		}
+		
+		layout.addSection().addSpacerCell().setBackgroundColor(.clear).setHeight(35)
 	}
 	
 	private func showAfterSchool(layout: TableLayout, bundle: DayBundle?) {
+		let events = self.bundle!.events.getOutOfSchoolEvents()
+		let showEvents = !events.isEmpty
+
 		guard let bundle = bundle else {
-			layout.addSection().addCell(TodayDoneCell()).setHeight(self.tableView.bounds.size.height)
+			layout.addSection().addCell(TodayDoneCell()).setHeight(showEvents ? 120 : self.tableView.bounds.size.height)
+			
+			if !events.isEmpty {
+				layout.addSection().addDivider()
+				self.showAfterSchoolEvents(layout: layout, events: events)
+			}
 			return
 		}
 		
 		let doneSection = layout.addSection()
 		doneSection.addCell(TodayDoneCell()).setHeight(120)
+		
+		if showEvents {
+			layout.addSection().addDivider()
+			self.showAfterSchoolEvents(layout: layout, events: events)
+		}
+		
+		layout.addSection().addDivider()
 		self.addNextSchoolday(layout: layout, bundle: bundle)
+		
+		layout.addSection().addSpacerCell().setBackgroundColor(.clear).setHeight(35)
 	}
 	
 	private func addNextSchoolday(layout: TableLayout, bundle: DayBundle) {
@@ -266,11 +328,17 @@ class TodayController: DayController {
 		}
 		
 		let section = layout.addSection()
-		section.addDivider()
+//		section.addDivider()
 		section.addCell(TitleCell(title: "Next School Day (\(label))"))
-		
+		section.addDivider()
+
 		let compiled = self.generateCompositeList(bundle: bundle, blocks: bundle.schedule.getBlocks())
 		self.tableHandler.addModule(BlockListModule(controller: self, composites: compiled, section: section))
+		
+		let events = bundle.events.getOutOfSchoolEvents()
+		if !events.isEmpty {
+			self.showAfterSchoolEvents(layout: layout, events: events)
+		}
 	}
 	
 }

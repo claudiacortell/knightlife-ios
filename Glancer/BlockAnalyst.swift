@@ -27,6 +27,14 @@ class BlockAnalyst {
 		return CourseManager.instance.getCourses(schedule: self.schedule, block: block.id)
 	}
 	
+	func getLabAssociatedBlock() -> Block? {
+		guard self.block.id == .lab, let previous = self.schedule.getBlockBefore(self.block) else {
+			return nil
+		}
+		
+		return previous
+	}
+	
 	func getDisplayName() -> String {
 		if self.block.id == .custom {
 			if let custom = self.block.custom {
@@ -39,7 +47,7 @@ class BlockAnalyst {
 		if let course = self.getCourse() {
 			return course.name
 		} else {
-			guard self.block.id == .lab, let previous = self.schedule.getBlockBefore(self.block) else {
+			guard let previous = self.getLabAssociatedBlock() else {
 				if let blockMeta = BlockMetaManager.instance.getBlockMeta(id: self.block.id), blockMeta.block == .free {
 					return blockMeta.customName ?? self.block.id.displayName
 				}
@@ -73,7 +81,7 @@ class BlockAnalyst {
 			return course.color
 		}
 		
-		if self.block.id == .lab, let previous = self.schedule.getBlockBefore(self.block) {
+		if let previous = self.getLabAssociatedBlock() {
 			let previousAnalyst = BlockAnalyst(schedule: self.schedule, block: previous)
 			return previousAnalyst.getColor()
 		}
@@ -95,6 +103,23 @@ class BlockAnalyst {
 		}
 		
 		return nil
+	}
+	
+	func shouldShowNotifications() -> Bool {
+		if let course = self.getCourse() {
+			return course.showNotifications
+		}
+		
+		if let blockMeta = BlockMetaManager.instance.getBlockMeta(id: self.block.id) {
+			return blockMeta.notifications
+		}
+		
+		if let labPrevious = self.getLabAssociatedBlock() {
+			let previousAnalyst = BlockAnalyst(schedule: self.schedule, block: labPrevious)
+			return previousAnalyst.shouldShowNotifications()
+		}
+		
+		return true
 	}
 	
 }

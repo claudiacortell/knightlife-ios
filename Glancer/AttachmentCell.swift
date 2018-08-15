@@ -11,27 +11,33 @@ import UIKit
 import AddictiveLib
 import SnapKit
 
-class UpcomingAttachmentCell: TableCell {
+class AttachmentCell: TableCell {
 	
 	var clickHandler: () -> Void = {}
 	
-	init(attachmentViews: [AttachmentView]) {
-		super.init("upcomingattachment", nib: "UpcomingAttachmentCell")
+	init(attachmentViews: [AttachmentView], selectable: Bool = true) {
+		super.init("attachment", nib: "AttachmentCell")
 		
 		self.setEstimatedHeight(attachmentViews.count * 75)
 		
-		self.setSelection() {
-			template, cell in
-			
-			self.clickHandler()
+		if selectable {
+			self.setSelection() {
+				template, cell in
+				
+				self.clickHandler()
+			}
+		} else {
+			self.setSelectionStyle(.none)
 		}
 		
 		self.setCallback() {
 			template, cell in
 			
-			guard let cell = cell as? UIUpcomingAttachmentCell else {
+			guard let cell = cell as? UIAttachmentCell else {
 				return
 			}
+			
+			cell.selectable = selectable
 			
 			for subview in cell.attachmentStack.arrangedSubviews { subview.removeFromSuperview() }
 			
@@ -43,11 +49,17 @@ class UpcomingAttachmentCell: TableCell {
 	
 }
 
-class UIUpcomingAttachmentCell: UITableViewCell {
+class UIAttachmentCell: UITableViewCell {
 	
 	@IBOutlet weak var attachmentStack: UIStackView!
+	var selectable: Bool = true
 
 	override func setSelected(_ selected: Bool, animated: Bool) {
+		if !self.selectable {
+			super.setSelected(selected, animated: animated)
+			return
+		}
+		
 		if !animated {
 			self.backgroundColor = selected ? Scheme.backgroundColor.color : .white
 			return
@@ -59,6 +71,11 @@ class UIUpcomingAttachmentCell: UITableViewCell {
 	}
 	
 	override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+		if !self.selectable {
+			super.setHighlighted(highlighted, animated: animated)
+			return
+		}
+		
 		if !animated {
 			self.backgroundColor = highlighted ? Scheme.backgroundColor.color : .white
 			return

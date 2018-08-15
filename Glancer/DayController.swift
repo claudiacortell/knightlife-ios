@@ -211,19 +211,33 @@ class DayController: UIViewController, TableBuilder, ErrorReloadable {
 		self.showNotices()
 		
 		let composites = self.generateCompositeList(bundle: self.bundle!, blocks: self.bundle!.schedule.getBlocks())
-		self.tableHandler.addModule(BlockListModule(controller: self, composites: composites))		
+		
+		layout.addSection().addDivider()
+		
+		self.tableHandler.addModule(BlockListModule(controller: self, composites: composites, section: layout.addSection()))
+		
+		let outOfDayEvents = self.bundle!.events.getOutOfSchoolEvents()
+		if outOfDayEvents.count > 0 {
+			self.showAfterSchoolEvents(layout: layout, events: outOfDayEvents)
+		}
+		
+		layout.addSection().addSpacerCell().setBackgroundColor(.clear).setHeight(35)
 	}
 	
-	func showNone(layout: TableLayout) {
-		layout.addSection().addCell(NoClassCell()).setHeight(self.tableHeightAnchor.frame.height)
+	func showNone(layout: TableLayout, height: CGFloat? = nil) {
+		layout.addSection().addCell(NoClassCell()).setHeight(height ?? self.tableHeightAnchor.frame.height)
 	}
 	
-	func showLoading(layout: TableLayout) {
-		layout.addSection().addCell(LoadingCell()).setHeight(self.tableHeightAnchor.frame.height)
+	func showLoading(layout: TableLayout, height: CGFloat? = nil) {
+		layout.addSection().addCell(LoadingCell()).setHeight(height ?? self.tableHeightAnchor.frame.height)
 	}
 	
-	func showError(layout: TableLayout) {
-		layout.addSection().addCell(ErrorCell(reloadable: self)).setHeight(self.tableHeightAnchor.frame.height)
+	func showError(layout: TableLayout, height: CGFloat? = nil) {
+		layout.addSection().addCell(ErrorCell(reloadable: self)).setHeight(height ?? self.tableHeightAnchor.frame.height)
+	}
+	
+	func showAfterSchoolEvents(layout: TableLayout, events: [TimeEvent]) {
+		self.tableHandler.addModule(TimeEventListModule(events: events, section: layout.addSection()))
 	}
 	
 	func generateCompositeList(bundle: DayBundle, blocks: [Block]) -> [CompositeBlock] {

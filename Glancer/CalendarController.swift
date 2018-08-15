@@ -42,7 +42,6 @@ class CalendarController: UIViewController, TableBuilder, ErrorReloadable, PushR
 		self.tableHandler.builder = self
 				
 		self.calendarView.controller = self
-		self.calendarView.setupViews()
 		
 		self.fetchUpcoming {
 			self.tableHandler.reload()
@@ -155,6 +154,7 @@ class CalendarController: UIViewController, TableBuilder, ErrorReloadable, PushR
 		let list = self.upcomingItems!
 
 		if list.isEmpty {
+			layout.addSection().addCell(NothingUpcomingCell()).setHeight(self.tableView.bounds.size.height)
 //			No items
 			return
 		}
@@ -192,7 +192,7 @@ class CalendarController: UIViewController, TableBuilder, ErrorReloadable, PushR
 				views.append(upcoming.generateAttachmentView())
 			}
 			
-			let cell = UpcomingAttachmentCell(attachmentViews: views)
+			let cell = AttachmentCell(attachmentViews: views)
 			cell.clickHandler = {
 				self.openDay(date: item.date)
 			}
@@ -208,6 +208,7 @@ class CalendarController: UIViewController, TableBuilder, ErrorReloadable, PushR
 		self.fetchUpcoming {
 			self.tableHandler.reload()
 		}
+		self.tableHandler.reload()
 	}
 	
 }

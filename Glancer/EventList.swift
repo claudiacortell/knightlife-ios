@@ -18,14 +18,12 @@ struct EventList {
 
 extension EventList {
 	
-	func getEventsByBlock(block: BlockID) -> [Event] {
-		var events: [Event] = []
-		for event in self.events {
-			if event.block == block {
-				events.append(event)
-			}
-		}
-		return events
+	func getEventsByBlock(block: BlockID) -> [BlockEvent] {
+		return self.events.filter({ $0 is BlockEvent }).map({ $0 as! BlockEvent }).filter({ $0.block == block })
+	}
+	
+	func getOutOfSchoolEvents() -> [TimeEvent] {
+		return self.events.filter({ $0 is TimeEvent }).map({ $0 as! TimeEvent })
 	}
 	
 }

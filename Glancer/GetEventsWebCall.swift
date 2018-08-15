@@ -29,11 +29,6 @@ class GetEventsWebCall: UnboxWebCall<KnightlifeListPayload<EventPayload>, EventL
 		
 		var events: [Event] = []
 		for event in content {
-			guard let blockId = BlockID.fromStringValue(name: event.block) else {
-				print("Wasn't able to parse event block: \(event.block)")
-				continue
-			}
-			
 			var audience: [EventAudience] = []
 			for group in event.audience {
 				guard let grade = Grade(rawValue: group.id) else {
@@ -44,7 +39,30 @@ class GetEventsWebCall: UnboxWebCall<KnightlifeListPayload<EventPayload>, EventL
 				audience.append(EventAudience(grade: grade, mandatory: group.mandatory))
 			}
 			
-			events.append(Event(block: blockId, description: event.description, audience: audience))
+			if let rawBlock = event.block, let blockId = BlockID.fromStringValue(name: rawBlock) {
+				events.append(BlockEvent(block: blockId, description: event.description, audience: audience))
+			} else if let rawTime = event.time, let startTime = Date.fromWebTime(string: rawTime.start) {
+				guard let start = Date.mergeDateAndTime(date: self.date, time: startTime) else {
+					print("Couldn't parse event start/end times.")
+					continue
+				}
+				
+				let end: Date? = {
+					guard let rawEnd = rawTime.end, let endTime = Date.fromWebTime(string: rawEnd) else {
+						return nil
+					}
+					
+					guard let end = Date.mergeDateAndTime(date: self.date, time: endTime) else {
+						return nil
+					}
+					
+					return end
+				}()
+				
+				events.append(TimeEvent(startTime: start, endTime: end, description: event.description, audience: audience))
+			} else {
+				print("Couldn't parse event block: \(event.block ?? "-")")
+			}
 		}
 		return EventList(date: self.date, events: events)
 	}
@@ -52,16 +70,30 @@ class GetEventsWebCall: UnboxWebCall<KnightlifeListPayload<EventPayload>, EventL
 
 class EventPayload: WebCallPayload {
 	
-	let block: String
 	let description: String
-
 	let audience: [EventAudiencePayload]
 	
+	let block: String?
+	let time: EventTimePayload?
+	
 	required init(unboxer: Unboxer) throws {
-		self.block = try unboxer.unbox(key: "block")
 		self.description = try unboxer.unbox(key: "description")
-
 		self.audience = try unboxer.unbox(key: "audience")
+		
+		self.block = unboxer.unbox(key: "block")
+		self.time = unboxer.unbox(key: "time")
+	}
+	
+}
+
+class EventTimePayload: WebCallPayload {
+	
+	let start: String
+	let end: String?
+	
+	required init(unboxer: Unboxer) throws {
+		self.start = try unboxer.unbox(keyPath: "start")
+		self.end = unboxer.unbox(keyPath: "end")
 	}
 	
 }

@@ -8,13 +8,31 @@
 
 import Foundation
 
-struct Event {
+protocol Event {
+	
+	var description: String { get }
+	var audience: [EventAudience] { get }
+	
+}
+
+struct BlockEvent: Event {
 	
 	let block: BlockID
 	let description: String
 	
 	let audience: [EventAudience]
 
+}
+
+struct TimeEvent: Event {
+	
+	let startTime: Date
+	let endTime: Date?
+	
+	let description: String
+	
+	let audience: [EventAudience]
+	
 }
 
 extension Event {

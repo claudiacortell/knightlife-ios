@@ -23,17 +23,11 @@ class BlockListModule: TableModule {
 	
 	func loadCells(layout: TableLayout) {
 		let section = self.section ?? layout.addSection()
-		
-		if !self.composites.isEmpty {
-			section.addDivider()
-		}
-		
+
 		for composite in self.composites {
 			section.addCell(BlockCell(controller: self.controller, composite: composite))
 			section.addDivider()
-		}
-		
-		layout.addSection().addSpacerCell().setBackgroundColor(.clear).setHeight(35)
+		}		
 	}
 	
 }

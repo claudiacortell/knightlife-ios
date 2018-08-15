@@ -45,10 +45,10 @@ class AttachmentView: UIView, UIGestureRecognizerDelegate {
 	
 	var leftImage: UIImage? {
 		didSet {
-			if let imageView = self.leftImageView {
+			if let imageView = self.v_leftImageView {
 				if self.leftImage == nil {
-					self.stack.removeArrangedSubview(imageView)
-					self.leftImageView = nil
+					self.v_stack.removeArrangedSubview(imageView)
+					self.v_leftImageView = nil
 					return
 				}
 				
@@ -61,37 +61,37 @@ class AttachmentView: UIView, UIGestureRecognizerDelegate {
 				let imageView = UIImageView(image: self.leftImage!.withRenderingMode(.alwaysTemplate))
 				imageView.tintColor = UIColor.black.withAlphaComponent(0.4)
 
-				self.stack.insertArrangedSubview(imageView, at: 0)
+				self.v_stack.insertArrangedSubview(imageView, at: 0)
 				imageView.snp.makeConstraints() {
 					constrain in
 					
 					constrain.height.equalTo(18)
 					constrain.width.equalTo(18)
 				}
-				self.leftImageView = imageView
+				self.v_leftImageView = imageView
 			}
 		}
 	}
 	
 	var showDisclosure: Bool = false {
 		didSet {
-			self.rightDisclosureWrapper.isHidden = !self.showDisclosure
+			self.v_rightDisclosureWrapper.isHidden = !self.showDisclosure
 		}
 	}
 	
 	var text: String? {
 		didSet {
-			self.textLabel.text = self.text
+			self.v_textlabel.text = self.text
 		}
 	}
 	
 	var clickHandler: () -> Void = {}
 	
-	fileprivate var stack: UIStackView!
-	fileprivate var textLabel: UILabel!
-	fileprivate var rightDisclosureWrapper: UIView!
+	var v_stack: UIStackView!
+	var v_textlabel: UILabel!
+	var v_rightDisclosureWrapper: UIView!
 
-	fileprivate var leftImageView: UIImageView?
+	var v_leftImageView: UIImageView?
 	
 	init() {
 		super.init(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
@@ -139,13 +139,13 @@ class AttachmentView: UIView, UIGestureRecognizerDelegate {
 		label.lineBreakMode = .byWordWrapping
 		label.numberOfLines = 0
 		
-		self.stack = stack
-		self.textLabel = label
+		self.v_stack = stack
+		self.v_textlabel = label
 		
 //		Disclosure wrapper
 		let wrapper = UIView()
-		self.stack.addArrangedSubview(wrapper)
-		self.rightDisclosureWrapper = wrapper
+		self.v_stack.addArrangedSubview(wrapper)
+		self.v_rightDisclosureWrapper = wrapper
 		
 		wrapper.snp.makeConstraints() {
 			constrain in
@@ -169,7 +169,7 @@ class AttachmentView: UIView, UIGestureRecognizerDelegate {
 			constrain.width.equalTo(18)
 		}
 		
-		self.rightDisclosureWrapper.isHidden = !self.showDisclosure
+		self.v_rightDisclosureWrapper.isHidden = !self.showDisclosure
 	}
 	
 	func enableClicks() {
