@@ -206,6 +206,10 @@ class NotificationManager: Manager, PushRefreshListener {
 						continue
 					}
 					
+					if adjustedTime < today { // If this was earlier today or has already passed.
+						continue
+					}
+					
 					let klnotification = KLNotification(date: adjustedTime)
 					if !self.validateNotificationCount() { // Ensure that we have space to do this
 						selfItem.cancel()
