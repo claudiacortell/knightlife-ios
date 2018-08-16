@@ -32,6 +32,8 @@ class NotificationManager: Manager, PushRefreshListener {
 	let projection = 7 // Schedule 7 days into the future. This could be extended except iOS only allows 64 schedule local notifications
 	let shallowProjection = 2
 	
+	let allowedNotificationCount = 60 // Leave 4 room just to be safe.
+	
 	var refreshListenerType: [PushRefreshType] = [.SCHEDULE, .NOTIFICATIONS]
 	
 	static let instance = NotificationManager()
@@ -98,10 +100,8 @@ class NotificationManager: Manager, PushRefreshListener {
 		self.scheduledNotifications.append(notification)
 	}
 	
-	private func validateNotificationCount(result: @escaping (Bool) -> Void) {
-		self.hub.getPendingNotificationRequests() {
-			result($0.count < 64)
-		}
+	private func validateNotificationCount() -> Bool {
+		return self.scheduledNotifications.count < self.allowedNotificationCount
 	}
 	
 //	This is decently unnecessary, but I'm going to keep it here in case we ever fine tune this Manager in the future so it isn't so intensive.
@@ -120,6 +120,8 @@ class NotificationManager: Manager, PushRefreshListener {
 	}
 	
 	func saveNotification(notification: KLNotification) {
+//		self.out("Saved notification at date: \(notification.date.webSafeDate) \(notification.date.webSafeTime)")
+		
 		self.scheduledNotifications.append(notification)
 	}
 	
@@ -205,38 +207,29 @@ class NotificationManager: Manager, PushRefreshListener {
 					}
 					
 					let klnotification = KLNotification(date: adjustedTime)
-					self.validateNotificationCount() { // Ensure that we have space to do this
-						result in
-						
-						if !result {
-							selfItem.cancel()
-							return
-						}
-						
-						if selfItem.isCancelled {
-							return
-						}
-						
-						let content = self.buildNotificationContent(block: block, schedule: schedule)
-						let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.normalizedCalendar.dateComponents([.year, .month, .day, .hour, .minute, .calendar, .timeZone], from: adjustedTime), repeats: false)
-						
-						let request = UNNotificationRequest(identifier: klnotification.id, content: content, trigger: trigger)
-						
-						self.hub.add(request) {
-							error in
-							
-							if error != nil {
-								self.out("Failed to add notification: \(error!.localizedDescription)")
-							} else {
-								if selfItem.isCancelled { // If the item is cancelled by the time the hub registers this, we have no real choice but to remove it immediately. I doubt this will hurt the hub at all but don't quote me on that.
-									self.hub.removePendingNotificationRequests(withIdentifiers: [klnotification.id])
-									return
-								}
-								
-								self.saveNotification(notification: klnotification)
-							}
-						}
+					if !self.validateNotificationCount() { // Ensure that we have space to do this
+						selfItem.cancel()
 						return
+					}
+					
+					let content = self.buildNotificationContent(block: block, schedule: schedule)
+					let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.normalizedCalendar.dateComponents([.year, .month, .day, .hour, .minute, .calendar, .timeZone], from: adjustedTime), repeats: false)
+					
+					let request = UNNotificationRequest(identifier: klnotification.id, content: content, trigger: trigger)
+					
+					self.hub.add(request) {
+						error in
+						
+						if error != nil {
+							self.out("Failed to add notification: \(error!.localizedDescription)")
+						} else {
+							if selfItem.isCancelled { // If the item is cancelled by the time the hub registers this, we have no real choice but to remove it immediately. I doubt this will hurt the hub at all but don't quote me on that.
+								self.hub.removePendingNotificationRequests(withIdentifiers: [klnotification.id])
+								return
+							}
+							
+							self.saveNotification(notification: klnotification)
+						}
 					}
 				}
 			}

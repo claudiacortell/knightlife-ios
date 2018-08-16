@@ -269,10 +269,6 @@ class TodayController: DayController {
 		
 		let events = bundle.events.getOutOfSchoolEvents()
 		if !events.isEmpty {
-			if upcomingBlocks.isEmpty {
-				layout.addSection().addDivider()
-			}
-			
 			self.showAfterSchoolEvents(layout: layout, events: events)
 		}
 		
@@ -299,9 +295,10 @@ class TodayController: DayController {
 		if showEvents {
 			layout.addSection().addDivider()
 			self.showAfterSchoolEvents(layout: layout, events: events)
+		} else {
+			layout.addSection().addDivider()
 		}
 		
-		layout.addSection().addDivider()
 		self.addNextSchoolday(layout: layout, bundle: bundle)
 		
 		layout.addSection().addSpacerCell().setBackgroundColor(.clear).setHeight(35)
