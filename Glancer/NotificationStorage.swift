@@ -27,7 +27,16 @@ class NotificationStorage: StorageHandler {
 	}
 	
 	func loadData(data: Any) {
-		guard let data = data as? [[String: Any]] else {
+		guard let package = data as? [String: Any] else {
+			return
+		}
+		
+		let firstLoad = (package["legacy"] as? Bool) ?? true // Default to true meaning this hasn't been loaded before
+		if firstLoad {
+			self.manager.needsToClearLegacyNotifications()
+		}
+		
+		guard let data = package["data"] as? [[String: Any]] else {
 			return
 		}
 		
@@ -57,11 +66,15 @@ class NotificationStorage: StorageHandler {
 			
 			data.append(notificationData)
 		}
-		return data
+		
+		return [
+			"data": data,
+			"legacy": false // Set this to false so the app never thinks this is the first load again. This is used to clear existing local notifications
+		]
 	}
 	
 	func loadDefaults() {
-		
+		self.manager.needsToClearLegacyNotifications()
 	}
 	
 }

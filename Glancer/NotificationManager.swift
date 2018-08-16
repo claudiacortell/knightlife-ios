@@ -92,8 +92,16 @@ class NotificationManager: Manager, PushRefreshListener {
 		TodayManager.instance.nextDayWatcher.onSuccess(self) {
 			date in
 			
+			self.hub.removeAllDeliveredNotifications()
 			self.scheduleNotifications(daysAhead: self.projection) // When the day changes, reschedule all our notifications!
 		}
+	}
+	
+	func needsToClearLegacyNotifications() {
+//		Called when this first loads.
+		print("Removing legacy notifications.")
+		
+		self.hub.removeAllPendingNotificationRequests()
 	}
 	
 	func loadedNotification(notification: KLNotification) {

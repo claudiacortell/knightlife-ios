@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AuF-N8-2Q4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AuF-N8-2Q4">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -23,7 +24,7 @@
                                     <constraint firstAttribute="width" secondItem="Mgi-YY-KHX" secondAttribute="height" multiplier="15:21" id="gWw-Ye-yIh"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="TaE-R3-7y2">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_head" translatesAutoresizingMaskIntoConstraints="NO" id="TaE-R3-7y2">
                                 <rect key="frame" x="112.5" y="258.5" width="150" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="heg-ZT-EPl"/>
@@ -39,6 +40,7 @@
                             <constraint firstItem="Mgi-YY-KHX" firstAttribute="centerX" secondItem="XRu-7V-mpb" secondAttribute="centerX" id="nsb-3s-rKL"/>
                             <constraint firstItem="TaE-R3-7y2" firstAttribute="centerY" secondItem="XRu-7V-mpb" secondAttribute="centerY" id="seM-RN-BTU"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="LyQ-Bv-wbO"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AoX-9A-hun" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -47,7 +49,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="logo" width="450" height="450"/>
+        <image name="logo_head" width="450" height="450"/>
         <image name="splash" width="750" height="1050"/>
     </resources>
 </document>
