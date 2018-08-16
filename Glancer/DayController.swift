@@ -33,19 +33,13 @@ class DayController: UIViewController, TableBuilder, ErrorReloadable {
 		self.reloadData()
 	}
 	
-	override func viewWillAppear(_ animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {		
 		super.viewWillAppear(animated)
 		
 		self.registerListeners()
 		
 		self.tableHandler.reload()
 		self.setupNavigationItem()
-	}
-	
-	override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
-		
-		self.tableHandler.reload() // Deal with any pesky layout constraint bugs.
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
@@ -203,12 +197,18 @@ class DayController: UIViewController, TableBuilder, ErrorReloadable {
 			return
 		}
 		
-		if self.bundle!.schedule.getBlocks().isEmpty {
-			self.showNone(layout: layout)
+		self.showNotices()
+		let outOfDayEvents = self.bundle!.events.getOutOfSchoolEvents()
+		
+		if self.bundle!.schedule.getBlocks().isEmpty { // No school
+			self.showNone(layout: layout, height: outOfDayEvents.isEmpty ? nil : 120)
+			
+			if outOfDayEvents.count > 0 {
+				layout.addSection().addDivider()
+				self.showAfterSchoolEvents(layout: layout, events: outOfDayEvents, title: "Events")
+			}
 			return
 		}
-		
-		self.showNotices()
 		
 		let composites = self.generateCompositeList(bundle: self.bundle!, blocks: self.bundle!.schedule.getBlocks())
 		
@@ -216,7 +216,6 @@ class DayController: UIViewController, TableBuilder, ErrorReloadable {
 		
 		self.tableHandler.addModule(BlockListModule(controller: self, composites: composites, section: layout.addSection()))
 		
-		let outOfDayEvents = self.bundle!.events.getOutOfSchoolEvents()
 		if outOfDayEvents.count > 0 {
 			self.showAfterSchoolEvents(layout: layout, events: outOfDayEvents)
 		}
@@ -225,19 +224,19 @@ class DayController: UIViewController, TableBuilder, ErrorReloadable {
 	}
 	
 	func showNone(layout: TableLayout, height: CGFloat? = nil) {
-		layout.addSection().addCell(NoClassCell()).setHeight(height ?? self.tableHeightAnchor.frame.height)
+		layout.addSection().addCell(NoClassCell()).setHeight(height ?? self.tableView.bounds.size.height)
 	}
 	
 	func showLoading(layout: TableLayout, height: CGFloat? = nil) {
-		layout.addSection().addCell(LoadingCell()).setHeight(height ?? self.tableHeightAnchor.frame.height)
+		layout.addSection().addCell(LoadingCell()).setHeight(height ?? self.tableView.bounds.size.height)
 	}
 	
 	func showError(layout: TableLayout, height: CGFloat? = nil) {
-		layout.addSection().addCell(ErrorCell(reloadable: self)).setHeight(height ?? self.tableHeightAnchor.frame.height)
+		layout.addSection().addCell(ErrorCell(reloadable: self)).setHeight(height ?? self.tableView.bounds.size.height)
 	}
 	
-	func showAfterSchoolEvents(layout: TableLayout, events: [TimeEvent]) {
-		self.tableHandler.addModule(TimeEventListModule(events: events, section: layout.addSection()))
+	func showAfterSchoolEvents(layout: TableLayout, events: [TimeEvent], title: String? = nil) {
+		self.tableHandler.addModule(TimeEventListModule(events: events, section: layout.addSection(), title: title))
 	}
 	
 	func generateCompositeList(bundle: DayBundle, blocks: [Block]) -> [CompositeBlock] {

@@ -13,16 +13,18 @@ class TimeEventListModule: TableModule {
 	
 	let section: TableSection?
 	let events: [TimeEvent]
+	let title: String?
 	
-	init(events: [TimeEvent], section: TableSection? = nil) {
+	init(events: [TimeEvent], section: TableSection? = nil, title: String? = nil) {
 		self.events = events
 		self.section = section
+		self.title = title
 	}
 	
 	func loadCells(layout: TableLayout) {
 		let section = self.section ?? layout.addSection()
 		
-		section.addCell(TitleCell(title: "After School"))
+		section.addCell(TitleCell(title: self.title ?? "After School"))
 		section.addDivider()
 		
 		for event in self.events {

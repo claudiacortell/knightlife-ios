@@ -187,7 +187,7 @@ class TodayController: DayController {
 			
 			if addEvents {
 				layout.addSection().addDivider()
-				self.showAfterSchoolEvents(layout: layout, events: events)
+				self.showAfterSchoolEvents(layout: layout, events: events, title: "Events")
 			}
 			return
 		}

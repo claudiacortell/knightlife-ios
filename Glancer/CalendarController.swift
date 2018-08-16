@@ -60,6 +60,8 @@ class CalendarController: UIViewController, TableBuilder, ErrorReloadable, PushR
 	}
 
 	private func registerListeners() {
+		PushNotificationManager.instance.addListener(type: .REFRESH, listener: self)
+		
 		TodayManager.instance.nextDayWatcher.onSuccess(self) {
 			date in
 			
