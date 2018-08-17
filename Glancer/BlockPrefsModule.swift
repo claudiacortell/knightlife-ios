@@ -16,10 +16,13 @@ class BlockPrefsModule: TableModule {
 	
 	init(controller: UIViewController) {
 		self.controller = controller
+		
+		super.init()
 	}
 	
-	func loadCells(layout: TableLayout) {
-		let section = layout.addSection()
+	override func build() {
+		let section = self.addSection()
+		
 		section.addDivider()
 		section.addCell(TitleCell(title: "Block Configuration"))
 		section.addDivider()

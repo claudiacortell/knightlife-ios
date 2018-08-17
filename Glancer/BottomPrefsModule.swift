@@ -11,8 +11,8 @@ import AddictiveLib
 
 class BottomPrefsModule: TableModule {
 	
-	func loadCells(layout: TableLayout) {
-		let section = layout.addSection()
+	override func build() {
+		let section = self.addSection()
 		
 		section.addCell("survey").setHeight(35)
 		section.addCell("credits").setHeight(35)

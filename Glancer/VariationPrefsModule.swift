@@ -11,8 +11,8 @@ import AddictiveLib
 
 class VariationPrefsModule: TableModule {
 	
-	func loadCells(layout: TableLayout) {
-		let section = layout.addSection()
+	override func build() {
+		let section = self.addSection()
 		section.addDivider()
 		section.addCell(TitleCell(title: "First Lunch"))
 		section.addDivider()

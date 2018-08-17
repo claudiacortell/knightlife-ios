@@ -9,7 +9,7 @@
 import Foundation
 import AddictiveLib
 
-class SettingsBlockController: UIViewController, TableBuilder {
+class SettingsBlockController: UIViewController, TableHandlerDataSource {
 	
 	@IBOutlet weak var tableView: UITableView!
 	private var tableHandler: TableHandler!
@@ -20,7 +20,7 @@ class SettingsBlockController: UIViewController, TableBuilder {
 		super.viewDidLoad()
 		
 		self.tableHandler = TableHandler(table: self.tableView)
-		self.tableHandler.builder = self
+		self.tableHandler.dataSource = self
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -38,9 +38,9 @@ class SettingsBlockController: UIViewController, TableBuilder {
 		BlockMetaManager.instance.metaChanged(meta: self.meta)
 	}
 	
-	func buildCells(layout: TableLayout) {
+	func buildCells(handler: TableHandler, layout: TableLayout) {
 		let about = layout.addSection()
-		
+				
 		about.addDivider()
 		about.addCell(TitleCell(title: "About"))
 		about.addDivider()

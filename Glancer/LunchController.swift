@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import AddictiveLib
 
-class LunchController: UIViewController, TableBuilder {
+class LunchController: UIViewController, TableHandlerDataSource {
 	
 	var menu: LunchMenu!
 	
@@ -21,7 +21,7 @@ class LunchController: UIViewController, TableBuilder {
 		super.viewDidLoad()
 		
 		self.tableHandler = TableHandler(table: self.tableView)
-		self.tableHandler.builder = self
+		self.tableHandler.dataSource = self
 		
 		self.navigationItem.title = self.menu.title ?? "Lunch"
 
@@ -33,7 +33,7 @@ class LunchController: UIViewController, TableBuilder {
 		self.tableHandler.reload()
 	}
 	
-	func buildCells(layout: TableLayout) {
+	func buildCells(handler: TableHandler, layout: TableLayout) {
 		let section = layout.addSection()
 		
 		section.addDivider()

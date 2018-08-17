@@ -11,7 +11,7 @@ import UIKit
 import AddictiveLib
 import SafariServices
 
-class SettingsController: UIViewController, TableBuilder {
+class SettingsController: UIViewController, TableHandlerDataSource {
 	
 	@IBOutlet weak var tableView: UITableView!
 	private(set) var tableHandler: TableHandler!
@@ -20,7 +20,7 @@ class SettingsController: UIViewController, TableBuilder {
 		super.viewDidLoad()
 		
 		self.tableHandler = TableHandler(table: self.tableView)
-		self.tableHandler.builder = self
+		self.tableHandler.dataSource = self
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -29,13 +29,13 @@ class SettingsController: UIViewController, TableBuilder {
 		self.tableHandler.reload()
 	}
 	
-	func buildCells(layout: TableLayout) {
-		self.tableHandler.addModule(CoursesPrefModule(controller: self))
-		self.tableHandler.addModule(BlockPrefsModule(controller: self))
-		self.tableHandler.addModule(VariationPrefsModule())
-		self.tableHandler.addModule(EventsPrefsModule(controller: self))
-		self.tableHandler.addModule(LunchPrefsModule())
-		self.tableHandler.addModule(BottomPrefsModule())
+	func buildCells(handler: TableHandler, layout: TableLayout) {
+		layout.addModule(CoursesPrefModule(controller: self))
+		layout.addModule(BlockPrefsModule(controller: self))
+		layout.addModule(VariationPrefsModule())
+		layout.addModule(EventsPrefsModule(controller: self))
+		layout.addModule(LunchPrefsModule())
+		layout.addModule(BottomPrefsModule())
 	}
 	
 	@IBAction func surveyClicked(_ sender: Any) {

@@ -105,7 +105,7 @@ class TodayController: DayController {
 		self.tableHandler.reload()
 	}
 	
-	override func buildCells(layout: TableLayout) {
+	override func buildCells(handler: TableHandler, layout: TableLayout) {
 		switch self.state! {
 		case .LOADING:
 			self.bundle = nil
@@ -210,7 +210,7 @@ class TodayController: DayController {
 
 		let upcomingBlocks = bundle.schedule.getBlocks()
 		layout.addSection().addDivider()
-		self.tableHandler.addModule(BlockListModule(controller: self, composites: self.generateCompositeList(bundle: bundle, blocks: upcomingBlocks), section: layout.addSection()))
+		layout.addModule(BlockListModule(controller: self, composites: self.generateCompositeList(bundle: bundle, blocks: upcomingBlocks)))
 		
 		let events = bundle.events.getOutOfSchoolEvents()
 		if !events.isEmpty {
@@ -236,7 +236,7 @@ class TodayController: DayController {
 
 		let upcomingBlocks = bundle.schedule.getBlocksAfter(block)
 		layout.addSection().addDivider()
-		self.tableHandler.addModule(BlockListModule(controller: self, composites: self.generateCompositeList(bundle: bundle, blocks: upcomingBlocks), section: layout.addSection()))
+		layout.addModule(BlockListModule(controller: self, composites: self.generateCompositeList(bundle: bundle, blocks: upcomingBlocks)))
 		
 		let events = bundle.events.getOutOfSchoolEvents()
 		if !events.isEmpty {
@@ -264,8 +264,10 @@ class TodayController: DayController {
 		section.addSpacerCell().setHeight(30)
 		
 		let upcomingBlocks = bundle.schedule.getBlocksAfter(current)
-		layout.addSection().addDivider()
-		self.tableHandler.addModule(BlockListModule(controller: self, composites: self.generateCompositeList(bundle: bundle, blocks: upcomingBlocks), section: layout.addSection()))
+		if !upcomingBlocks.isEmpty {
+			layout.addSection().addDivider()
+		}
+		layout.addModule(BlockListModule(controller: self, composites: self.generateCompositeList(bundle: bundle, blocks: upcomingBlocks)))
 		
 		let events = bundle.events.getOutOfSchoolEvents()
 		if !events.isEmpty {
@@ -330,7 +332,7 @@ class TodayController: DayController {
 		section.addDivider()
 
 		let compiled = self.generateCompositeList(bundle: bundle, blocks: bundle.schedule.getBlocks())
-		self.tableHandler.addModule(BlockListModule(controller: self, composites: compiled, section: section))
+		layout.addModule(BlockListModule(controller: self, composites: compiled))
 		
 		let events = bundle.events.getOutOfSchoolEvents()
 		if !events.isEmpty {

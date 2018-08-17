@@ -29,7 +29,7 @@ class KLNotification {
 
 class NotificationManager: Manager, PushRefreshListener {
 	
-	let projection = 7 // Schedule 7 days into the future. This could be extended except iOS only allows 64 schedule local notifications
+	let projection = 8 // Schedule 8 days into the future. This could be extended except iOS only allows 64 schedule local notifications
 	let shallowProjection = 2
 	
 	let allowedNotificationCount = 60 // Leave 4 room just to be safe.
@@ -119,9 +119,10 @@ class NotificationManager: Manager, PushRefreshListener {
 	}
 	
 	func unregisterAll() {
-		let ids = self.scheduledNotifications.map({ $0.id })
+//		let ids = self.scheduledNotifications.map({ $0.id })
 		
-		self.hub.removePendingNotificationRequests(withIdentifiers: ids)
+//		self.hub.removePendingNotificationRequests(withIdentifiers: ids)
+		self.hub.removeAllPendingNotificationRequests() // This will nuke even the locally scheduled ones that we don't want to remove, but atm I'm getting double notifications and this seems to be the best option.
 		
 		self.scheduledNotifications.removeAll()
 		self.saveStorage()

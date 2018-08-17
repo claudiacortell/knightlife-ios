@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import AddictiveLib
 
-class SettingsClassController: UIViewController, TableBuilder {
+class SettingsClassController: UIViewController, TableHandlerDataSource {
 	
 	var course: Course!
 	
@@ -21,7 +21,7 @@ class SettingsClassController: UIViewController, TableBuilder {
 		super.viewDidLoad()
 		
 		self.tableHandler = TableHandler(table: self.tableView)
-		self.tableHandler.builder = self
+		self.tableHandler.dataSource = self
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -38,7 +38,7 @@ class SettingsClassController: UIViewController, TableBuilder {
 		CourseManager.instance.courseChanged(course: self.course)
 	}
 	
-	func buildCells(layout: TableLayout) {
+	func buildCells(handler: TableHandler, layout: TableLayout) {
 		let about = layout.addSection()
 		about.addDivider()
 		about.addCell(TitleCell(title: "About"))

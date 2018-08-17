@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import AddictiveLib
 
-class DayController: UIViewController, TableBuilder, ErrorReloadable {
+class DayController: UIViewController, TableHandlerDataSource, ErrorReloadable {
 
 	@IBOutlet weak var tableView: UITableView!
 	var tableHandler: TableHandler!
@@ -27,7 +27,7 @@ class DayController: UIViewController, TableBuilder, ErrorReloadable {
 		super.viewDidLoad()
 		
 		self.tableHandler = TableHandler(table: self.tableView)
-		self.tableHandler.builder = self
+		self.tableHandler.dataSource = self
 		
 		self.registerListeners()
 		self.reloadData()
@@ -184,7 +184,7 @@ class DayController: UIViewController, TableBuilder, ErrorReloadable {
 		self.navigationController?.pushViewController(controller, animated: true)
 	}
 	
-	func buildCells(layout: TableLayout) {
+	func buildCells(handler: TableHandler, layout: TableLayout) {
 		self.setupNavigationItem()
 		
 		if !self.bundleDownloaded {
@@ -214,7 +214,7 @@ class DayController: UIViewController, TableBuilder, ErrorReloadable {
 		
 		layout.addSection().addDivider()
 		
-		self.tableHandler.addModule(BlockListModule(controller: self, composites: composites, section: layout.addSection()))
+		layout.addModule(BlockListModule(controller: self, composites: composites))
 		
 		if outOfDayEvents.count > 0 {
 			self.showAfterSchoolEvents(layout: layout, events: outOfDayEvents)
@@ -236,7 +236,7 @@ class DayController: UIViewController, TableBuilder, ErrorReloadable {
 	}
 	
 	func showAfterSchoolEvents(layout: TableLayout, events: [TimeEvent], title: String? = nil) {
-		self.tableHandler.addModule(TimeEventListModule(events: events, section: layout.addSection(), title: title))
+		layout.addModule(TimeEventListModule(events: events, title: title))
 	}
 	
 	func generateCompositeList(bundle: DayBundle, blocks: [Block]) -> [CompositeBlock] {

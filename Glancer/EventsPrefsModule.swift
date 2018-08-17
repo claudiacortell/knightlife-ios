@@ -18,8 +18,8 @@ class EventsPrefsModule: TableModule {
 		self.controller = controller
 	}
 	
-	func loadCells(layout: TableLayout) {
-		let section = layout.addSection()
+	override func build() {
+		let section = self.addSection()
 		section.addDivider()
 		section.addCell(TitleCell(title: "Events"))
 		section.addDivider()

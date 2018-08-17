@@ -19,8 +19,9 @@ class CoursesPrefModule: TableModule {
 		self.controller = controller
 	}
 	
-	func loadCells(layout: TableLayout) {
-		let section = layout.addSection()
+	override func build() {
+		let section = self.addSection()
+		
 		section.addDivider()
 		section.addCell(TitleCell(title: CourseManager.instance.meetings.isEmpty ? "No Classes" : "Classes"))
 		section.addDivider()

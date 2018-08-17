@@ -1,5 +1,5 @@
 PODS:
-  - AddictiveLib (1.1.0):
+  - AddictiveLib (1.1.3):
     - Alamofire
     - Unbox
     - UnboxedAlamofire
@@ -27,7 +27,7 @@ SPEC REPOS:
     - UnboxedAlamofire
 
 SPEC CHECKSUMS:
-  AddictiveLib: 5fac950756ca28e04340d922325d126251a4cabd
+  AddictiveLib: 3ebfbb9e1244eb61196e59c52bd9d9ce92889b48
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   Hero: 3eecd3fd62dd2425cbc7e35505c557b86d5a379e
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694

@@ -11,18 +11,16 @@ import AddictiveLib
 
 class TimeEventListModule: TableModule {
 	
-	let section: TableSection?
 	let events: [TimeEvent]
 	let title: String?
 	
-	init(events: [TimeEvent], section: TableSection? = nil, title: String? = nil) {
+	init(events: [TimeEvent], title: String? = nil) {
 		self.events = events
-		self.section = section
 		self.title = title
 	}
 	
-	func loadCells(layout: TableLayout) {
-		let section = self.section ?? layout.addSection()
+	override func build() {
+		let section = self.addSection()
 		
 		section.addCell(TitleCell(title: self.title ?? "After School"))
 		section.addDivider()
@@ -33,7 +31,8 @@ class TimeEventListModule: TableModule {
 			
 			section.addCell(AttachmentCell(attachmentViews: [view], selectable: false))
 			section.addDivider()
-		}		
+		}
+
 	}
 	
 }

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import AddictiveLib
 
-class NoticesController: UIViewController, TableBuilder {
+class NoticesController: UIViewController, TableHandlerDataSource {
 	
 	var notices: [DateNotice]!
 	
@@ -21,7 +21,7 @@ class NoticesController: UIViewController, TableBuilder {
 		super.viewDidLoad()
 		
 		self.tableHandler = TableHandler(table: self.tableView)
-		self.tableHandler.builder = self
+		self.tableHandler.dataSource = self
 		
 		self.navigationItem.title = "Messages"
 	}
@@ -32,7 +32,7 @@ class NoticesController: UIViewController, TableBuilder {
 		self.tableHandler.reload()
 	}
 	
-	func buildCells(layout: TableLayout) {
+	func buildCells(handler: TableHandler, layout: TableLayout) {
 		let lowPriority = self.notices.filter({ $0.priority == .notice })
 		let highPriority = self.notices.filter({ $0.priority == .warning })
 		

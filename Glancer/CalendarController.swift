@@ -11,7 +11,7 @@ import UIKit
 import AddictiveLib
 import SnapKit
 
-class CalendarController: UIViewController, TableBuilder, ErrorReloadable, PushRefreshListener {
+class CalendarController: UIViewController, TableHandlerDataSource, ErrorReloadable, PushRefreshListener {
 
 	var refreshListenerType: [PushRefreshType] = [.EVENTS, .SCHEDULE]
 	
@@ -39,7 +39,7 @@ class CalendarController: UIViewController, TableBuilder, ErrorReloadable, PushR
 		super.viewDidLoad()
 		
 		self.tableHandler = TableHandler(table: self.tableView)
-		self.tableHandler.builder = self
+		self.tableHandler.dataSource = self
 				
 		self.calendarView.controller = self
 		
@@ -139,7 +139,9 @@ class CalendarController: UIViewController, TableBuilder, ErrorReloadable, PushR
 		}.execute()
 	}
 	
-	func buildCells(layout: TableLayout) {
+	
+	
+	func buildCells(handler: TableHandler, layout: TableLayout) {
 		if !self.upcomingItemsLoaded {
 			self.removeRefresh()
 			layout.addSection().addCell(LoadingCell()).setHeight(self.tableView.bounds.size.height)

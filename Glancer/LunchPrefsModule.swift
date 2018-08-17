@@ -11,8 +11,9 @@ import AddictiveLib
 
 class LunchPrefsModule: TableModule {
 	
-	func loadCells(layout: TableLayout) {
-		let section = layout.addSection()
+	override func build() {
+		let section = self.addSection()
+		
 		section.addDivider()
 		section.addCell(TitleCell(title: "Lunch"))
 		section.addDivider()
