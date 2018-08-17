@@ -13,6 +13,8 @@ class RegistrationWebCall: WebCall<Any> {
 	
 	init() {
 		super.init(call: "device/register")
+		
+		self.setMethod(.post)
 		self.parameter("device", val: Globals.DeviceID ?? "")
 	}
 	

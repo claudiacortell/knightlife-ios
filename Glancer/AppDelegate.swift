@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 		Globals.BundleID = "MAD.BBN.KnightLife"
 		Globals.StorageID = "group.KnightLife.MAD.Storage"
 		
-		Globals.storeUrlBase(url: "https://knightlife-server.herokuapp.com/api/")
+		Globals.storeUrlBase(url: "https://www.bbnknightlife.com/api/")
 		
 		application.registerForRemoteNotifications()
 		
@@ -63,6 +63,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 			
 			switch result {
 			case .failure(let error):
+				if error is InvalidWebCodeError {
+					print((error as! InvalidWebCodeError).code)
+				}
 				print(error.localizedDescription)
 			case .success(_):
 				break
