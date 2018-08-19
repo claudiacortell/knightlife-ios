@@ -355,6 +355,11 @@ class TodayManager: Manager {
 		if now < schedule.getFirstBlock()!.time.start { // Before school
 			var minUntilStart = abs(schedule.getFirstBlock()!.time.start.minuteDifference(date: now))
 			minUntilStart += 1
+			
+			if minUntilStart <= 5 {
+				return TodayScheduleState.BEFORE_SCHOOL_GET_TO_CLASS(bundle, schedule.getFirstBlock()!, minUntilStart)
+			}
+			
 			return TodayScheduleState.BEFORE_SCHOOL(bundle, schedule.getFirstBlock()!, minUntilStart)
 		}
 		

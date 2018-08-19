@@ -188,67 +188,28 @@ class DayController: UIViewController, TableHandlerDataSource, ErrorReloadable {
 		self.setupNavigationItem()
 		
 		if !self.bundleDownloaded {
-			self.showLoading(layout: layout)
+			layout.addModule(LoadingModule(table: self.tableView))
 			return
 		}
 		
 		if let _ = self.bundleError {
-			self.showError(layout: layout)
+			layout.addModule(ErrorModule(table: self.tableView, reloadable: self))
 			return
 		}
 		
 		self.showNotices()
-		let outOfDayEvents = self.bundle!.events.getOutOfSchoolEvents()
 		
-		if self.bundle!.schedule.getBlocks().isEmpty { // No school
-			self.showNone(layout: layout, height: outOfDayEvents.isEmpty ? nil : 120)
+		if self.bundle!.schedule.getBlocks().isEmpty {
+			layout.addModule(NoClassModule(table: self.tableView, fullHeight: !self.bundle!.events.hasOutOfSchoolEvents))
+			layout.addModule(AfterSchoolEventsModule(bundle: self.bundle!, title: "Events", options: [.topBorder, .bottomBorder]))
 			
-			if outOfDayEvents.count > 0 {
-				layout.addSection().addDivider()
-				self.showAfterSchoolEvents(layout: layout, events: outOfDayEvents, title: "Events")
-			}
 			return
 		}
 		
-		let composites = self.generateCompositeList(bundle: self.bundle!, blocks: self.bundle!.schedule.getBlocks())
-		
-		layout.addSection().addDivider()
-		
-		layout.addModule(BlockListModule(controller: self, composites: composites))
-		
-		if outOfDayEvents.count > 0 {
-			self.showAfterSchoolEvents(layout: layout, events: outOfDayEvents)
-		}
+		layout.addModule(BlockListModule(controller: self, bundle: self.bundle!, title: nil, blocks: self.bundle!.schedule.getBlocks(), options: [.topBorder, .bottomBorder]))
+		layout.addModule(AfterSchoolEventsModule(bundle: self.bundle!, title: "After School", options: [.bottomBorder]))
 		
 		layout.addSection().addSpacerCell().setBackgroundColor(.clear).setHeight(35)
-	}
-	
-	func showNone(layout: TableLayout, height: CGFloat? = nil) {
-		layout.addSection().addCell(NoClassCell()).setHeight(height ?? self.tableView.bounds.size.height)
-	}
-	
-	func showLoading(layout: TableLayout, height: CGFloat? = nil) {
-		layout.addSection().addCell(LoadingCell()).setHeight(height ?? self.tableView.bounds.size.height)
-	}
-	
-	func showError(layout: TableLayout, height: CGFloat? = nil) {
-		layout.addSection().addCell(ErrorCell(reloadable: self)).setHeight(height ?? self.tableView.bounds.size.height)
-	}
-	
-	func showAfterSchoolEvents(layout: TableLayout, events: [TimeEvent], title: String? = nil) {
-		layout.addModule(TimeEventListModule(events: events, title: title))
-	}
-	
-	func generateCompositeList(bundle: DayBundle, blocks: [Block]) -> [CompositeBlock] {
-		var list: [CompositeBlock] = []
-		for block in blocks {
-			list.append(self.generateCompositeBlock(bundle: bundle, block: block))
-		}
-		return list
-	}
-	
-	func generateCompositeBlock(bundle: DayBundle, block: Block) -> CompositeBlock {
-		return CompositeBlock(schedule: bundle.schedule, block: block, lunch: (block.id == .lunch && !bundle.menu.items.isEmpty ? bundle.menu : nil), events: bundle.events.getEventsByBlock(block: block.id))
 	}
 	
 	func openLunchMenu(menu: LunchMenu) {

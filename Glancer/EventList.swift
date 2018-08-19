@@ -26,4 +26,8 @@ extension EventList {
 		return self.events.filter({ $0 is TimeEvent }).map({ $0 as! TimeEvent })
 	}
 	
+	var hasOutOfSchoolEvents: Bool {
+		return !self.getOutOfSchoolEvents().isEmpty
+	}
+	
 }
