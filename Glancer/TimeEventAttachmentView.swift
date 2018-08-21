@@ -48,7 +48,7 @@ class TimeEventAttachmentView: AttachmentView {
 		self.timeStack = timeStack
 		
 		timeStack.axis = .horizontal
-		timeStack.spacing = 10.0
+		timeStack.spacing = 8.0
 		timeStack.alignment = .center
 		
 		self.v_stack.addArrangedSubview(timeStack)

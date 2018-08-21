@@ -30,10 +30,10 @@ class GetMenuWebCall: UnboxWebCall<KnightlifePayload<MenuPayload>, LunchMenu> {
 		var items: [LunchMenuItem] = []
 		
 		for item in content.items {
-			if let type = LunchMenuItemType(rawValue: item.type) {
-				let item = LunchMenuItem(type, name: item.name, allergy: item.allergy)
+//			if let type = LunchMenuItemType(rawValue: item.type) {
+				let item = LunchMenuItem(/* type, */ name: item.name, allergy: item.allergy)
 				items.append(item)
-			}
+//			}
 		}
 		
 		return LunchMenu(self.date, title: content.description, items: items)
@@ -55,12 +55,12 @@ class MenuPayload: WebCallPayload {
 
 class MenuItemPayload: WebCallPayload {
 	
-	let type: String
+//	let type: String
 	let name: String
 	var allergy: String?
 	
 	required init(unboxer: Unboxer) throws {
-		self.type = try unboxer.unbox(key: "itemType")
+//		self.type = try unboxer.unbox(key: "itemType")
 		self.name = try unboxer.unbox(key: "name")
 		self.allergy = unboxer.unbox(key: "allergy")
 	}

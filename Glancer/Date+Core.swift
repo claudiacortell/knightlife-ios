@@ -103,13 +103,15 @@ extension Date {
 	
 	var prettyTime: String {
 		let formatter = Date.normalizedFormatter
-		formatter.dateFormat = "hh:mm"
+		formatter.dateFormat = "h:mma"
+		formatter.amSymbol = "am"
+		formatter.pmSymbol = "pm"
 		return formatter.string(from: self)
 	}
 	
 	var prettyDate: String {
 		let formatter = Date.normalizedFormatter
-		formatter.dateFormat = "MMMM dd"
+		formatter.dateFormat = "MMMM d"
 		return "\(self.weekday.displayName), \(formatter.string(from: self))"
 	}
 	

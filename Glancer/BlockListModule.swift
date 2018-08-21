@@ -13,6 +13,8 @@ class BlockListModule: TableModule {
 	
 	let controller: DayController
 	
+	let title: String?
+	
 	let bundle: DayBundle
 	let blocks: [Block]
 	
@@ -20,6 +22,8 @@ class BlockListModule: TableModule {
 	
 	init(controller: DayController, bundle: DayBundle, title: String?, blocks: [Block], options: [DayModuleOptions] = []) {
 		self.controller = controller
+		
+		self.title = title
 		
 		self.bundle = bundle
 		self.blocks = blocks
@@ -37,6 +41,11 @@ class BlockListModule: TableModule {
 		let section = self.addSection()
 		
 		if self.options.contains(.topBorder) { section.addDivider() }
+		
+		if let title = self.title {
+			section.addCell(TitleCell(title: title))
+			section.addDivider()
+		}
 		
 		for block in self.blocks {
 			let composite = CompositeBlock(schedule: self.bundle.schedule, block: block, lunch: (block.id == .lunch && !self.bundle.menu.items.isEmpty ? bundle.menu : nil), events: self.bundle.events.getEventsByBlock(block: block.id))

@@ -9,20 +9,20 @@
 import Foundation
 import AddictiveLib
 
-enum LunchMenuItemType: String {
-	
-	case
-	main = "main",
-	accompaniment = "accompaniment",
-	side = "side",
-	pasta = "pasta",
-	salad = "salad",
-	soup = "soup",
-	other = "other"
-
-	static var values: [LunchMenuItemType] = [.main, .accompaniment, .side, .pasta, .salad, .soup, .other]
-	
-}
+//enum LunchMenuItemType: String {
+//
+//	case
+//	main = "main",
+//	accompaniment = "accompaniment",
+//	side = "side",
+//	pasta = "pasta",
+//	salad = "salad",
+//	soup = "soup",
+//	other = "other"
+//
+//	static var values: [LunchMenuItemType] = [.main, .accompaniment, .side, .pasta, .salad, .soup, .other]
+//
+//}
 
 struct LunchMenu {
 	
@@ -40,12 +40,12 @@ struct LunchMenu {
 
 struct LunchMenuItem {
 	
-	let type: LunchMenuItemType
+//	let type: LunchMenuItemType
 	let name: String
 	let allergy: String?
 	
-	init(_ type: LunchMenuItemType, name: String, allergy: String?) {
-		self.type = type
+	init(/*_ type: LunchMenuItemType,*/ name: String, allergy: String?) {
+//		self.type = type
 		self.name = name
 		self.allergy = allergy
 	}

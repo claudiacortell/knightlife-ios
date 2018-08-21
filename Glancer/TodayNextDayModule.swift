@@ -44,6 +44,6 @@ class TodayNextDayModule: TableModule {
 		}
 		
 		self.addModule(BlockListModule(controller: self.controller, bundle: self.tomorrow, title: "Next School Day (\(label))", blocks: self.tomorrow.schedule.getBlocks(), options: [.topBorder, .bottomBorder]))
-		self.addModule(AfterSchoolEventsModule(bundle: self.tomorrow, title: "After School", options: [ .bottomBorder ]))
+		self.addModule(AfterSchoolEventsModule(bundle: self.tomorrow, title: "After School (\(label))", options: [ .bottomBorder ]))
 	}
 }
