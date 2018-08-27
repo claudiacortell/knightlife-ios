@@ -56,17 +56,17 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 		}
 	}
 	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-		
-		TodayManager.instance.startTimer()
-	}
-	
-	override func viewWillDisappear(_ animated: Bool) {
-		super.viewWillDisappear(animated)
-		
-		TodayManager.instance.stopTimer()
-	}
+//	override func viewWillAppear(_ animated: Bool) {
+//		super.viewWillAppear(animated)
+//		
+//		TodayManager.instance.startTimer()
+//	}
+//	
+//	override func viewWillDisappear(_ animated: Bool) {
+//		super.viewWillDisappear(animated)
+//		
+//		TodayManager.instance.stopTimer()
+//	}
 	
 	func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
 		BlockMetaManager.instance.loadStorage()

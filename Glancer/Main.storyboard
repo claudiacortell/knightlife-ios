@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="dMb-BZ-as2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="dMb-BZ-as2">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -90,7 +92,9 @@
                             <constraint firstItem="7jh-yO-goe" firstAttribute="leading" secondItem="BaP-fS-1W9" secondAttribute="leading" id="ufK-0n-1F0"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Today" id="qfT-ww-m2G" customClass="SubtitleNavigationItem" customModule="Glancer" customModuleProvider="target"/>
+                    <navigationItem key="navigationItem" title="Today" id="qfT-ww-m2G" customClass="SubtitleNavigationItem" customModule="Glancer" customModuleProvider="target">
+                        <barButtonItem key="backBarButtonItem" title=" " id="GoS-BC-CZf"/>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="tableHeightAnchor" destination="7jh-yO-goe" id="gCh-TZ-VzZ"/>
@@ -553,7 +557,9 @@
                             <constraint firstItem="kb8-u0-ENq" firstAttribute="top" secondItem="Xcb-y9-Z7B" secondAttribute="bottom" id="pKD-Dl-Ji6"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Upcoming" id="ZCy-iG-pqn" customClass="SubtitleNavigationItem" customModule="Glancer" customModuleProvider="target"/>
+                    <navigationItem key="navigationItem" title="Upcoming" id="ZCy-iG-pqn" customClass="SubtitleNavigationItem" customModule="Glancer" customModuleProvider="target">
+                        <barButtonItem key="backBarButtonItem" title=" " id="sfi-OA-1uO"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="calendarView" destination="ZyG-on-TVt" id="yD0-Sf-5GJ"/>
                         <outlet property="tableView" destination="fQO-lO-qwx" id="4Le-b8-INI"/>
@@ -605,7 +611,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sKF-iS-nJe">
-                                                    <rect key="frame" x="113.5" y="2.5" width="93" height="30"/>
+                                                    <rect key="frame" x="141" y="2.5" width="93" height="30"/>
                                                     <color key="backgroundColor" red="0.2666666667" green="0.50588235290000005" blue="0.92156862750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                     <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
@@ -637,7 +643,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qGg-eY-nKp">
-                                                    <rect key="frame" x="136" y="3" width="48" height="29"/>
+                                                    <rect key="frame" x="163.5" y="3" width="48" height="29"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                     <state key="normal" title="Credits">
                                                         <color key="titleColor" red="0.2666666667" green="0.50588235290000005" blue="0.92156862750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -665,7 +671,9 @@
                             <constraint firstAttribute="trailing" secondItem="uw6-YG-VqF" secondAttribute="trailing" id="qnd-HE-a6v"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Settings" id="k9v-62-JJ3"/>
+                    <navigationItem key="navigationItem" title="Settings" id="k9v-62-JJ3">
+                        <barButtonItem key="backBarButtonItem" title=" " id="O9x-y1-oRm"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="uw6-YG-VqF" id="d2c-ZV-wav"/>
                     </connections>

@@ -66,7 +66,7 @@ class NotificationManager: Manager, PushRefreshListener {
 		self.fetchSpecialSchedules()
 		
 		self.registerStorage(NotificationStorage(manager: self))
-		self.cleanExpired()
+//		self.cleanExpired()
 	}
 	
 	private func registerListeners() {
@@ -114,8 +114,8 @@ class NotificationManager: Manager, PushRefreshListener {
 	
 //	This is decently unnecessary, but I'm going to keep it here in case we ever fine tune this Manager in the future so it isn't so intensive.
 	func cleanExpired() {
-		let now = Date.today
-		self.scheduledNotifications.removeAll(where: { $0.date < now })
+//		let now = Date.today
+//		self.scheduledNotifications.removeAll(where: { $0.date < now })
 	}
 	
 	func unregisterAll() {

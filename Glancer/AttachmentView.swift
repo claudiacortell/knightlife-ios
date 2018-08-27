@@ -86,6 +86,8 @@ class AttachmentView: UIView, UIGestureRecognizerDelegate {
 	}
 	
 	var clickHandler: () -> Void = {}
+	private var clicksEnabled: Bool = false
+	private var clickRecognizer: UITapGestureRecognizer?
 	
 	var v_stack: UIStackView!
 	var v_textlabel: UILabel!
@@ -173,63 +175,115 @@ class AttachmentView: UIView, UIGestureRecognizerDelegate {
 	}
 	
 	func enableClicks() {
-		let clickRecognizer = AttachmentTapRecognizer(target: self, action: #selector(handleClick(_:)))
+		if self.clickRecognizer != nil {
+			return
+		}
+		
+		let clickRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleClick(_:)))
 		clickRecognizer.cancelsTouchesInView = false
 		clickRecognizer.delegate = self
 		self.addGestureRecognizer(clickRecognizer)
+		
+		self.clickRecognizer = clickRecognizer
+		
+//		let clickRecognizer = AttachmentTapRecognizer(target: self, action: #selector(handleClick(_:)))
+//		clickRecognizer.cancelsTouchesInView = false
+//		clickRecognizer.delegate = self
+//		self.addGestureRecognizer(clickRecognizer)
+
+		self.clicksEnabled = true
 	}
 	
 	@objc func handleClick(_ recognizer: UIGestureRecognizer) {
 		self.clickHandler()
 	}
 	
-}
-
-fileprivate class AttachmentTapRecognizer: UITapGestureRecognizer {
-	
-	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		super.touchesBegan(touches, with: event)
 		
-		if let view = self.view as? AttachmentView {
-			view.backgroundColor = view.style.color.withAlphaComponent(0.25)
+		if !self.clicksEnabled { return }
+		
+		self.backgroundColor = self.style.color.withAlphaComponent(0.25)
+		
+		//			This timer is because otherwise the view doesn't deselect if you drag the tableView at all. Someone smarter than me can deal with it.
+		Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) {
+			timer in
 			
-//			This timer is because otherwise the view doesn't deselect if you drag the tableView at all. Someone smarter than me can deal with it.
-			Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) {
-				timer in
-				
-				if self.state != .began {
-					self.animateEnd()
-				}
+			if self.clickRecognizer != nil && self.clickRecognizer!.state != .began {
+				self.animateTouchesEnd()
 			}
 		}
 	}
 	
-	override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
+	func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
 		super.touchesEnded(touches, with: event)
-		self.animateEnd()
+		
+		if !self.clicksEnabled { return }
+
+		self.animateTouchesEnd()
 	}
 	
-	override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent) {
+	func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent) {
 		super.touchesCancelled(touches, with: event)
-		self.animateEnd()
+		
+		if !self.clicksEnabled { return }
+
+		self.animateTouchesEnd()
 	}
 	
-	override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent) {
-		super.pressesEnded(presses, with: event)
-		self.animateEnd()
-	}
-	
-	override func pressesCancelled(_ presses: Set<UIPress>, with event: UIPressesEvent) {
-		super.pressesCancelled(presses, with: event)
-		self.animateEnd()
-	}
-	
-	private func animateEnd() {
+	private func animateTouchesEnd() {
 		UIView.animate(withDuration: 0.25) {
-			if let view = self.view as? AttachmentView {
-				view.backgroundColor = view.style.color
-			}
+			self.backgroundColor = self.style.color
 		}
 	}
 	
 }
+
+//fileprivate class AttachmentTapRecognizer: UITapGestureRecognizer {
+//
+//	func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
+////		super.touchesBegan(touches, with: event)
+//
+//		if let view = self.view as? AttachmentView {
+//			view.backgroundColor = view.style.color.withAlphaComponent(0.25)
+//
+////			This timer is because otherwise the view doesn't deselect if you drag the tableView at all. Someone smarter than me can deal with it.
+//			Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) {
+//				timer in
+//
+//				if self.state != .began {
+//					self.animateEnd()
+//				}
+//			}
+//		}
+//	}
+//
+//	func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
+////		super.touchesEnded(touches, with: event)
+//		self.animateEnd()
+//	}
+//
+//	func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent) {
+////		super.touchesCancelled(touches, with: event)
+//		self.animateEnd()
+//	}
+//
+//	func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent) {
+////		super.pressesEnded(presses, with: event)
+//		self.animateEnd()
+//	}
+//
+//	func pressesCancelled(_ presses: Set<UIPress>, with event: UIPressesEvent) {
+////		super.pressesCancelled(presses, with: event)
+//		self.animateEnd()
+//	}
+//
+//	private func animateEnd() {
+//		UIView.animate(withDuration: 0.25) {
+//			if let view = self.view as? AttachmentView {
+//				view.backgroundColor = view.style.color
+//			}
+//		}
+//	}
+//
+//}

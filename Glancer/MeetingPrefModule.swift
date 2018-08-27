@@ -116,7 +116,7 @@ class MeetingPrefModule: StorageHandler {
 		{
 			for (rawBlockId, keyPairs) in meta
 			{
-				if let blockId = BlockID(rawValue: ["A", "B", "C", "D", "E", "F", "G"].firstIndex(of: rawBlockId) ?? 99) {
+				if let blockId = BlockID(rawValue: ["A", "B", "C", "D", "E", "F", "G"].index(of: rawBlockId) ?? 99) {
 					let name: String = {
 						if keyPairs["name"] != nil
 						{ if keyPairs["name"]! != nil
