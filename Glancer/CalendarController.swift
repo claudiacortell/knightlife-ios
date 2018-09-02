@@ -109,9 +109,12 @@ class CalendarController: UIViewController, TableHandlerDataSource, ErrorReloada
 		}
 	}
 	
-	func doListenerRefresh(date: Date) {
+	func doListenerRefresh(date: Date, queue: DispatchGroup) {
+		queue.enter()
+		
 		self.fetchUpcoming {
 			self.tableHandler.reload()
+			queue.leave()
 		}
 
 		self.tableHandler.reload()

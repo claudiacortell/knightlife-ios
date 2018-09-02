@@ -78,8 +78,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-		PushNotificationManager.instance.handle(payload: userInfo)
-		completionHandler(UIBackgroundFetchResult.newData)
+		let queue = DispatchGroup()
+		
+		PushNotificationManager.instance.handle(payload: userInfo, queue: queue)
+		
+		queue.notify(queue: .main) {
+			completionHandler(.newData)
+		}
     }
 	
 	func applicationDidReceiveMemoryWarning(_ application: UIApplication) {

@@ -12,6 +12,7 @@ import AddictiveLib
 
 class PrefToggleCell: TableCell {
 	
+	var personalSwitch: UISwitch!
 	let flipped: (Bool) -> Void
 	
 	init(title: String, on: Bool, flipped: @escaping (Bool) -> Void) {
@@ -31,6 +32,7 @@ class PrefToggleCell: TableCell {
 			
 			toggleCell.title.text = title
 			
+			self.personalSwitch = toggleCell.switch
 			toggleCell.switch.removeTarget(self, action: #selector(self.switchFlipped(_:)), for: .valueChanged)
 			toggleCell.switch.addTarget(self, action: #selector(self.switchFlipped(_:)), for: .valueChanged)
 			
@@ -39,6 +41,10 @@ class PrefToggleCell: TableCell {
 	}
 	
 	@objc func switchFlipped(_ sender: Any) {
+		if let senderSwitch = sender as? UISwitch, senderSwitch !== self.personalSwitch {
+			return
+		}
+		
 		if let flip = sender as? UISwitch {
 			self.flipped(flip.isOn)
 		}

@@ -12,7 +12,7 @@ protocol PushRefreshListener: PushListener {
 	
 	var refreshListenerType: [PushRefreshType] { get }
 	
-	func doListenerRefresh(date: Date)
+	func doListenerRefresh(date: Date, queue: DispatchGroup)
 	
 }
 

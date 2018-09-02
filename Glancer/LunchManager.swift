@@ -54,8 +54,14 @@ class LunchManager: Manager, PushRefreshListener {
 		return self.lunchWatchers[date.webSafeDate]!
 	}
 	
-	func doListenerRefresh(date: Date) {
-		self.fetchLunchMenu(date: date, force: true)
+	func doListenerRefresh(date: Date, queue: DispatchGroup) {
+		queue.enter()
+		
+		self.fetchLunchMenu(date: date, force: true) {
+			result in
+			
+			queue.leave()
+		}
 	}
 	
 	func fetchLunchMenu(date: Date, force: Bool = false, then: @escaping (WebCallResult<LunchMenu>) -> Void = {_ in}) {

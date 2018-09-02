@@ -38,7 +38,7 @@ class PushNotificationManager: Manager {
 		self.listeners[type]!.append(listener)
 	}
 	
-	func handle(payload: [AnyHashable: Any]) {
+	func handle(payload: [AnyHashable: Any], queue: DispatchGroup) {
 		guard let dictionary = payload as? [String: Any] else {
 			return
 		}
@@ -61,7 +61,7 @@ class PushNotificationManager: Manager {
 					.filter({ $0 is PushRefreshListener }) // Only get the listeners that are PushRefreshListeners i.e. the only ones capable of handling the call
 					.map({ $0 as! PushRefreshListener })
 					.filter({ $0.refreshListenerType.contains(token.target) })
-					.forEach({ $0.doListenerRefresh(date: token.date) })
+					.forEach({ $0.doListenerRefresh(date: token.date, queue: queue) })
 			} catch {
 				print("Invalid data for Refresh request.")
 			}

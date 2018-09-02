@@ -99,8 +99,14 @@ class ScheduleManager: Manager, PushRefreshListener {
 		}.execute()
 	}
 	
-	func doListenerRefresh(date: Date) {
-		self.loadSchedule(date: date, force: true)
+	func doListenerRefresh(date: Date, queue: DispatchGroup) {
+		queue.enter()
+		
+		self.loadSchedule(date: date, force: true) {
+			_ in
+			
+			queue.leave()
+		}
 	}
 	
 	func loadSchedule(date: Date, force: Bool = false, then: @escaping (WebCallResult<DateSchedule>) -> Void = {_ in}) {

@@ -51,8 +51,14 @@ class EventManager: Manager, PushRefreshListener {
 		return self.eventWatchers[date.webSafeDate]!
 	}
 	
-	func doListenerRefresh(date: Date) {
-		self.getEvents(date: date, force: true)
+	func doListenerRefresh(date: Date, queue: DispatchGroup) {
+		queue.enter()
+		
+		self.getEvents(date: date, force: true) {
+			result in
+			
+			queue.leave()
+		}
 	}
 	
 	func getEvents(date: Date, force: Bool = false, then: @escaping (WebCallResult<EventList>) -> Void = {_ in}) {

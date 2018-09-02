@@ -138,7 +138,9 @@ class NotificationManager: Manager, PushRefreshListener {
 		self.scheduleNotifications(daysAhead: self.shallowProjection)
 	}
 	
-	private func scheduleNotifications(daysAhead: Int) {
+	private func scheduleNotifications(daysAhead: Int, queue: DispatchGroup? = nil) {
+		self.out("Registering notifications with projection: \(daysAhead)")
+		
 		if !self.templateLoaded {
 			self.out("Couldn't schedule notifications: template not downloaded")
 			return
@@ -230,6 +232,9 @@ class NotificationManager: Manager, PushRefreshListener {
 					
 					let request = UNNotificationRequest(identifier: klnotification.id, content: content, trigger: trigger)
 					
+					let group = DispatchGroup()
+					group.enter()
+					
 					self.hub.add(request) {
 						error in
 						
@@ -238,12 +243,15 @@ class NotificationManager: Manager, PushRefreshListener {
 						} else {
 							if selfItem.isCancelled { // If the item is cancelled by the time the hub registers this, we have no real choice but to remove it immediately. I doubt this will hurt the hub at all but don't quote me on that.
 								self.hub.removePendingNotificationRequests(withIdentifiers: [klnotification.id])
-								return
+							} else {
+								self.saveNotification(notification: klnotification)
 							}
-							
-							self.saveNotification(notification: klnotification)
 						}
+						
+						group.leave()
 					}
+					
+					group.wait()
 				}
 			}
 		}
@@ -253,6 +261,12 @@ class NotificationManager: Manager, PushRefreshListener {
 		self.dispatchQueue.async {
 			if self.currentDispatchItem === dispatchItem { // Only save if the current item is still active and it hasn't been replaced.
 				self.saveStorage()
+			}
+			
+			self.out("Finished registering notifications. \(self.scheduledNotifications.count) registered.")
+			
+			if let queue = queue {
+				queue.leave() // Notify the notification handler that we're done.
 			}
 		}
 	}
@@ -280,11 +294,13 @@ class NotificationManager: Manager, PushRefreshListener {
 		return content
 	}
 	
-	func doListenerRefresh(date: Date) {
-		self.fetchSpecialSchedules()
+	func doListenerRefresh(date: Date, queue: DispatchGroup) {
+		queue.enter()
+		
+		self.fetchSpecialSchedules(queue: queue)
 	}
 	
-	func fetchSpecialSchedules() {
+	func fetchSpecialSchedules(queue: DispatchGroup? = nil) {
 		self.specialSchedules = nil
 		self.specialSchedulesError = nil
 		
@@ -300,12 +316,12 @@ class NotificationManager: Manager, PushRefreshListener {
 				self.specialSchedulesError = error
 			}
 			
-			self.finishedSpecialSchedulesFetch()
+			self.finishedSpecialSchedulesFetch(queue: queue)
 		}.execute()
 	}
 	
-	func finishedSpecialSchedulesFetch() {
-		self.scheduleNotifications(daysAhead: self.projection)
+	func finishedSpecialSchedulesFetch(queue: DispatchGroup? = nil) {
+		self.scheduleNotifications(daysAhead: self.projection, queue: queue)
 	}
 	
 }
