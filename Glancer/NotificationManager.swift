@@ -27,6 +27,29 @@ class KLNotification {
 
 }
 
+fileprivate class FirstLoadStorage: StorageHandler {
+	
+	var storageKey: String = "notifications.clearlegacy"
+	let manager: NotificationManager
+	
+	init(manager: NotificationManager) {
+		self.manager = manager
+	}
+	
+	func saveData() -> Any? {
+		return true
+	}
+	
+	func loadData(data: Any) {
+		
+	}
+	
+	func loadDefaults() {
+		self.manager.needsToClearLegacyNotifications()
+	}
+	
+}
+
 class NotificationManager: Manager, PushRefreshListener {
 	
 	let projection = 8 // Schedule 8 days into the future. This could be extended except iOS only allows 64 schedule local notifications
@@ -65,6 +88,7 @@ class NotificationManager: Manager, PushRefreshListener {
 		self.registerListeners()
 		self.fetchSpecialSchedules()
 		
+		self.registerStorage(FirstLoadStorage(manager: self)) // Calls the needs to clear legacy notifications thing
 		self.registerStorage(NotificationStorage(manager: self))
 //		self.cleanExpired()
 	}
@@ -101,7 +125,8 @@ class NotificationManager: Manager, PushRefreshListener {
 //		Called when this first loads.
 		print("Removing legacy notifications.")
 		
-		self.hub.removeAllPendingNotificationRequests()
+		UIApplication.shared.cancelAllLocalNotifications()
+		self.saveStorage()
 	}
 	
 	func loadedNotification(notification: KLNotification) {

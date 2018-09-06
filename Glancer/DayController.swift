@@ -162,7 +162,7 @@ class DayController: UIViewController, TableHandlerDataSource, ErrorReloadable {
 	}
 	
 	private func addMailButton(badge: Int) {
-		self.navigationItem.setRightBarButton(self.buildMailButtonItem(badge: badge), animated: true)
+		self.navigationItem.setRightBarButton(self.buildMailButtonItem(badge: badge), animated: false)
 	}
 	
 	@objc func messagesButtonClicked(_ sender: Any) {

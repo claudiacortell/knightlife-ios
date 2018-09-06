@@ -30,7 +30,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 	private func setup() {
 		Globals.BundleID = "MAD.BBN.KnightLife.TodayWidget"
 		Globals.StorageID = "group.KnightLife.MAD.Storage"
-		Globals.storeUrlBase(url: "https://knightlife-server.herokuapp.com/api/")
+		
+		Globals.storeUrlBase(url: "https://www.bbnknightlife.com/api/")
 	}
 	
 	override func viewDidLoad() {
@@ -56,24 +57,27 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 		}
 	}
 	
-//	override func viewWillAppear(_ animated: Bool) {
-//		super.viewWillAppear(animated)
-//		
-//		TodayManager.instance.startTimer()
-//	}
-//	
-//	override func viewWillDisappear(_ animated: Bool) {
-//		super.viewWillDisappear(animated)
-//		
-//		TodayManager.instance.stopTimer()
-//	}
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		TodayManager.instance.startTimer()
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		
+		TodayManager.instance.stopTimer()
+	}
 	
 	func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
 		BlockMetaManager.instance.loadStorage()
 		CourseManager.instance.loadStorage()
-		TodayManager.instance.reloadTodayBundle()
 		
-		completionHandler(NCUpdateResult.newData)
+		TodayManager.instance.reloadTodayBundle() {
+			success in
+			
+			completionHandler(success ? .newData : .failed)
+		}
 	}
 	
 	private func handleStateChange(state: TodayManager.TodayScheduleState?) {
