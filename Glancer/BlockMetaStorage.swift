@@ -28,7 +28,8 @@ class BlockMetaStorage: StorageHandler {
 			metaData["block"] = meta.block.rawValue
 			metaData["color"] = meta.color.toHex
 			
-			metaData["notifications"] = meta.notifications
+			metaData["notifications"] = meta.beforeClassNotifications
+			metaData["notifications_after"] = meta.afterClassNotifications
 			
 			metaData["name"] = meta.customName
 			
@@ -54,10 +55,12 @@ class BlockMetaStorage: StorageHandler {
 				continue
 			}
 			
-			guard let notifications = item["notifications"] as? Bool else {
+			guard let beforeClassNotifications = item["notifications"] as? Bool else {
 				print("Invalid Block Meta notifications flag")
 				continue
 			}
+			
+			let afterClassNotifications: Bool? = item["notifications_after"] as? Bool
 			
 			var name: String?
 			if block == .free {
@@ -66,7 +69,7 @@ class BlockMetaStorage: StorageHandler {
 				}
 			}
 			
-			let meta = BlockMeta(block: block, color: color, notifications: notifications, customName: name)
+			let meta = BlockMeta(block: block, color: color, beforeClassNotifications: beforeClassNotifications, afterClassNotifications: afterClassNotifications, customName: name)
 			self.manager.loadedMeta(meta: meta)
 			
 			print("Successfully loaded Block Meta: \(meta.block.displayName)")

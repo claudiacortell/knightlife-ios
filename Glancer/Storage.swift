@@ -8,6 +8,11 @@
 
 import Foundation
 
+/*
+THIS CLASS IS LEGACY, FROM KL V2.0 ORIGINAL RELEASE. I'M LEAVING IT HERE FOR REMINISCING PURPOSES, AS IT'S THE ONLY THING LEFT OF MY ORIGINAL REWRITE.
+PLEASE LEAVE IT HERE FOR POSTERITY. NEVER FORGET <3
+*/
+
 class Storage
 {
 	//	Wrapper class for settings. Makes it easy to check settings.

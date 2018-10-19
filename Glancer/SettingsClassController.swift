@@ -136,8 +136,16 @@ class SettingsClassController: UIViewController, TableHandlerDataSource {
 		
 		notifications.addDivider()
 		
-		notifications.addCell(PrefToggleCell(title: "Show Alerts", on: self.course.showNotifications) {
-			self.course.showNotifications = $0
+		notifications.addCell(PrefToggleCell(title: "Before Class", on: self.course.showBeforeClassNotifications) {
+			self.course.showBeforeClassNotifications = $0
+			self.didChangeSettings()
+			self.needsNotificationUpdate()
+		})
+		
+		notifications.addDivider()
+		
+		notifications.addCell(PrefToggleCell(title: "Class End", on: self.course.showAfterClassNotifications) {
+			self.course.showAfterClassNotifications = $0
 			self.didChangeSettings()
 			self.needsNotificationUpdate()
 		})

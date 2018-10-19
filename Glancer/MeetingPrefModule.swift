@@ -30,7 +30,8 @@ class MeetingPrefModule: StorageHandler {
 			map["color"] = course.color.toHex ?? nil
 			map["location"] = course.location
 			
-			map["notifications"] = course.showNotifications
+			map["notifications"] = course.showBeforeClassNotifications
+			map["notifications_after"] = course.showAfterClassNotifications
 			
 			map["schedule.block"] = course.courseSchedule.block.rawValue
 			
@@ -68,7 +69,7 @@ class MeetingPrefModule: StorageHandler {
 				continue
 			}
 			
-			guard let notifications = item["notifications"] as? Bool else {
+			guard let beforeClassNotifications = item["notifications"] as? Bool else {
 				print("Invalid course notifications")
 				continue
 			}
@@ -97,7 +98,12 @@ class MeetingPrefModule: StorageHandler {
 			let course = Course(name: name, schedule: schedule)
 			
 			course.color = color
-			course.showNotifications = notifications
+			course.showBeforeClassNotifications = beforeClassNotifications
+			
+			if let afterClassNotifications = item["notifications_after"] as? Bool {
+				course.showAfterClassNotifications = afterClassNotifications
+			}
+			
 			course.location = location
 			
 			print("Successfully loaded course: \(course.name)")

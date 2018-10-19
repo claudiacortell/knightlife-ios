@@ -105,21 +105,38 @@ class BlockAnalyst {
 		return nil
 	}
 	
-	func shouldShowNotifications() -> Bool {
+	func shouldShowBeforeClassNotifications() -> Bool {
 		if let course = self.getCourse() {
-			return course.showNotifications
+			return course.showBeforeClassNotifications
 		}
 		
 		if let blockMeta = BlockMetaManager.instance.getBlockMeta(id: self.block.id) {
-			return blockMeta.notifications
+			return blockMeta.beforeClassNotifications
 		}
 		
 		if let labPrevious = self.getLabAssociatedBlock() {
 			let previousAnalyst = BlockAnalyst(schedule: self.schedule, block: labPrevious)
-			return previousAnalyst.shouldShowNotifications()
+			return previousAnalyst.shouldShowBeforeClassNotifications()
 		}
 		
 		return true
+	}
+	
+	func shouldShowAfterClassNotifications() -> Bool {
+		if let course = self.getCourse() {
+			return course.showAfterClassNotifications
+		}
+		
+		if let blockMeta = BlockMetaManager.instance.getBlockMeta(id: self.block.id) {
+			return blockMeta.afterClassNotifications
+		}
+		
+		if let labPrevious = self.getLabAssociatedBlock() {
+			let previousAnalyst = BlockAnalyst(schedule: self.schedule, block: labPrevious)
+			return previousAnalyst.shouldShowAfterClassNotifications()
+		}
+		
+		return false
 	}
 	
 }

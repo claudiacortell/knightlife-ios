@@ -81,12 +81,22 @@ class SettingsBlockController: UIViewController, TableHandlerDataSource {
 		notifications.addCell(TitleCell(title: "Notifications"))
 		notifications.addDivider()
 		
-		notifications.addCell(PrefToggleCell(title: "Show Alerts", on: self.meta.notifications) {
-			self.meta.notifications = $0
+		notifications.addCell(PrefToggleCell(title: "Before Block", on: self.meta.beforeClassNotifications) {
+			self.meta.beforeClassNotifications = $0
 			
 			self.didChangeSettings()
 			self.needsNotificationsUpdate()
 		})
+		
+		notifications.addDivider()
+		
+		notifications.addCell(PrefToggleCell(title: "Block End", on: self.meta.afterClassNotifications) {
+			self.meta.afterClassNotifications = $0
+			
+			self.didChangeSettings()
+			self.needsNotificationsUpdate()
+		})
+		
 		notifications.addDivider()
 		
 		notifications.addSpacerCell().setBackgroundColor(.clear).setHeight(35)

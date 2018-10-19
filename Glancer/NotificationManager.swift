@@ -53,7 +53,7 @@ fileprivate class FirstLoadStorage: StorageHandler {
 class NotificationManager: Manager, PushRefreshListener {
 	
 	let projection = 8 // Schedule 8 days into the future. This could be extended except iOS only allows 64 schedule local notifications
-	let shallowProjection = 2
+	let shallowProjection = 3
 	
 	let allowedNotificationCount = 60 // Leave 4 room just to be safe.
 	
@@ -228,55 +228,50 @@ class NotificationManager: Manager, PushRefreshListener {
 					}
 
 					let analyst = BlockAnalyst(schedule: schedule, block: block)
-					if !analyst.shouldShowNotifications() {
-						continue
+					var toSchedule: [(KLNotification, UNNotificationRequest)] = []
+
+					if analyst.shouldShowBeforeClassNotifications() {
+						if let beforeClassNotificationRequest = self.buildBeforeClassNotification(date: offsetDate, block: block, analyst: analyst, schedule: schedule) {
+							toSchedule.append(beforeClassNotificationRequest)
+						}
 					}
 					
-					guard let time = Date.mergeDateAndTime(date: offsetDate, time: block.time.start) else {
-						self.out("Failed to find start time for block: \(block)")
-						continue
+					if analyst.shouldShowAfterClassNotifications() {
+						if let afterClassNotificationRequest = self.buildAfterClassNotification(date: offsetDate, block: block, analyst: analyst, schedule: schedule) {
+							toSchedule.append(afterClassNotificationRequest)
+						}
 					}
 					
-					guard let adjustedTime = Calendar.normalizedCalendar.date(byAdding: .minute, value: -5, to: time) else {
-						self.out("Failed to find adjusted start time for block: \(block)")
-						continue
-					}
+					for notification in toSchedule {
+						let klnotification = notification.0
+						let request = notification.1
 					
-					if adjustedTime < today { // If this was earlier today or has already passed.
-						continue
-					}
-					
-					let klnotification = KLNotification(date: adjustedTime)
-					if !self.validateNotificationCount() { // Ensure that we have space to do this
-						selfItem.cancel()
-						return
-					}
-					
-					let content = self.buildNotificationContent(block: block, schedule: schedule)
-					let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.normalizedCalendar.dateComponents([.year, .month, .day, .hour, .minute, .calendar, .timeZone], from: adjustedTime), repeats: false)
-					
-					let request = UNNotificationRequest(identifier: klnotification.id, content: content, trigger: trigger)
-					
-					let group = DispatchGroup()
-					group.enter()
-					
-					self.hub.add(request) {
-						error in
-						
-						if error != nil {
-							self.out("Failed to add notification: \(error!.localizedDescription)")
-						} else {
-							if selfItem.isCancelled { // If the item is cancelled by the time the hub registers this, we have no real choice but to remove it immediately. I doubt this will hurt the hub at all but don't quote me on that.
-								self.hub.removePendingNotificationRequests(withIdentifiers: [klnotification.id])
-							} else {
-								self.saveNotification(notification: klnotification)
-							}
+						if !self.validateNotificationCount() { // Ensure that we have space to do this
+							selfItem.cancel()
+							return
 						}
 						
-						group.leave()
+						let group = DispatchGroup()
+						group.enter()
+						
+						self.hub.add(request) {
+							error in
+							
+							if error != nil {
+								self.out("Failed to add notification: \(error!.localizedDescription)")
+							} else {
+								if selfItem.isCancelled { // If the item is cancelled by the time the hub registers this, we have no real choice but to remove it immediately. I doubt this will hurt the hub at all but don't quote me on that.
+									self.hub.removePendingNotificationRequests(withIdentifiers: [klnotification.id])
+								} else {
+									self.saveNotification(notification: klnotification)
+								}
+							}
+							
+							group.leave()
+						}
+						
+						group.wait()
 					}
-					
-					group.wait()
 				}
 			}
 		}
@@ -296,8 +291,22 @@ class NotificationManager: Manager, PushRefreshListener {
 		}
 	}
 	
-	private func buildNotificationContent(block: Block, schedule: DateSchedule) -> UNNotificationContent {
-		let analyst = BlockAnalyst(schedule: schedule, block: block)
+	private func buildBeforeClassNotification(date: Date, block: Block, analyst: BlockAnalyst, schedule: DateSchedule) -> (KLNotification, UNNotificationRequest)? {
+		guard let time = Date.mergeDateAndTime(date: date, time: block.time.end) else {
+			self.out("Failed to find start time for block: \(block)")
+			return nil
+		}
+		
+		guard let adjustedTime = Calendar.normalizedCalendar.date(byAdding: .minute, value: -2, to: time) else {
+			self.out("Failed to find adjusted start time for block: \(block)")
+			return nil
+		}
+		
+		if adjustedTime < Date.today { // If this was earlier today or has already passed.
+			return nil
+		}
+		
+		let klnotification = KLNotification(date: adjustedTime)
 		
 		let content = UNMutableNotificationContent()
 		
@@ -316,7 +325,50 @@ class NotificationManager: Manager, PushRefreshListener {
 			content.body = content.body + ". \(analyst.getLocation()!)"
 		}
 		
-		return content
+		let trigger = self.buildTrigger(date: adjustedTime)
+		
+		let request = UNNotificationRequest(identifier: klnotification.id, content: content, trigger: trigger)
+		return (klnotification, request)
+	}
+	
+	private func buildAfterClassNotification(date: Date, block: Block, analyst: BlockAnalyst, schedule: DateSchedule) -> (KLNotification, UNNotificationRequest)? {
+		guard let time = Date.mergeDateAndTime(date: date, time: block.time.end) else {
+			self.out("Failed to find start time for block: \(block)")
+			return nil
+		}
+		
+		guard let adjustedTime = Calendar.normalizedCalendar.date(byAdding: .minute, value: -2, to: time) else {
+			self.out("Failed to find adjusted start time for block: \(block)")
+			return nil
+		}
+		
+		if adjustedTime < Date.today { // If this was earlier today or has already passed.
+			return nil
+		}
+		
+		let klnotification = KLNotification(date: adjustedTime)
+		
+		let content = UNMutableNotificationContent()
+		
+		if analyst.getCourse() == nil {
+			content.title = "End of Block"
+		} else {
+			content.title = "End of Class"
+		}
+		
+		content.sound = UNNotificationSound.default()
+		content.body = "\(analyst.getDisplayName()) ends in 2 min"
+		
+		content.threadIdentifier = "schedule"
+		
+		let trigger = self.buildTrigger(date: adjustedTime)
+		
+		let request = UNNotificationRequest(identifier: klnotification.id, content: content, trigger: trigger)
+		return (klnotification, request)
+	}
+	
+	private func buildTrigger(date: Date) -> UNCalendarNotificationTrigger {
+		return UNCalendarNotificationTrigger(dateMatching: Calendar.normalizedCalendar.dateComponents([.year, .month, .day, .hour, .minute, .calendar, .timeZone], from: date), repeats: false)
 	}
 	
 	func doListenerRefresh(date: Date, queue: DispatchGroup) {
