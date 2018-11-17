@@ -154,7 +154,10 @@ class NotificationManager: Manager, PushRefreshListener {
 	}
 	
 	func saveNotification(notification: KLNotification) {
-//		self.out("Saved notification at date: \(notification.date.webSafeDate) \(notification.date.webSafeTime)")
+		let debug: Bool? = Globals.getData("debug")
+		if (debug ?? false) {
+			self.out("Saved notification at date: \(notification.date.webSafeDate) \(notification.date.webSafeTime)")
+		}
 		
 		self.scheduledNotifications.append(notification)
 	}
@@ -292,12 +295,12 @@ class NotificationManager: Manager, PushRefreshListener {
 	}
 	
 	private func buildBeforeClassNotification(date: Date, block: Block, analyst: BlockAnalyst, schedule: DateSchedule) -> (KLNotification, UNNotificationRequest)? {
-		guard let time = Date.mergeDateAndTime(date: date, time: block.time.end) else {
+		guard let time = Date.mergeDateAndTime(date: date, time: block.time.start) else {
 			self.out("Failed to find start time for block: \(block)")
 			return nil
 		}
 		
-		guard let adjustedTime = Calendar.normalizedCalendar.date(byAdding: .minute, value: -2, to: time) else {
+		guard let adjustedTime = Calendar.normalizedCalendar.date(byAdding: .minute, value: -5, to: time) else {
 			self.out("Failed to find adjusted start time for block: \(block)")
 			return nil
 		}
