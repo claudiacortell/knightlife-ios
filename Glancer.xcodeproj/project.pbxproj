@@ -1097,6 +1097,13 @@
 			name = WebCall;
 			sourceTree = "<group>";
 		};
+		C08B7471217A784E00E7BA26 /* Planner */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Planner;
+			sourceTree = "<group>";
+		};
 		C08FBF99210FB26E005812F1 /* Today Done */ = {
 			isa = PBXGroup;
 			children = (
@@ -1384,6 +1391,7 @@
 		C0CB9C0D1FE4610C00437C5D /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				C08B7471217A784E00E7BA26 /* Planner */,
 				C0600118211B27F200ECAD1A /* Block Meta */,
 				C0791CA22116B84C0066CE62 /* Push */,
 				C0791CA12116B7380066CE62 /* Notification */,

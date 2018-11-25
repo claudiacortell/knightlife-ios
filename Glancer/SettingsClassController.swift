@@ -136,8 +136,16 @@ class SettingsClassController: UIViewController, TableHandlerDataSource {
 		
 		notifications.addDivider()
 		
-		notifications.addCell(PrefToggleCell(title: "Show Alerts", on: self.course.showNotifications) {
-			self.course.showNotifications = $0
+		notifications.addCell(PrefToggleCell(title: "Before Class", on: self.course.showBeforeClassNotifications) {
+			self.course.showBeforeClassNotifications = $0
+			self.didChangeSettings()
+			self.needsNotificationUpdate()
+		})
+		
+		notifications.addDivider()
+		
+		notifications.addCell(PrefToggleCell(title: "Class End", on: self.course.showAfterClassNotifications) {
+			self.course.showAfterClassNotifications = $0
 			self.didChangeSettings()
 			self.needsNotificationUpdate()
 		})
@@ -246,7 +254,8 @@ class SettingsClassController: UIViewController, TableHandlerDataSource {
 			(.e, UIAlertAction(title: "E Block", style: .default, handler: handler)),
 			(.f, UIAlertAction(title: "F Block", style: .default, handler: handler)),
 			(.g, UIAlertAction(title: "G Block", style: .default, handler: handler)),
-			(.x, UIAlertAction(title: "X Block", style: .default, handler: handler))
+			(.x, UIAlertAction(title: "X Block", style: .default, handler: handler)),
+			(.activities, UIAlertAction(title: "Activities", style: .default, handler: handler))
 		]
 		
 		for (id, action) in blockActions {
