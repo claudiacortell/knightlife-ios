@@ -45,16 +45,16 @@ class ScheduleVariationStorage: StorageHandler {
 	}
 	
 	func loadDefaults() {
-		if let switches = Storage.USER_SWITCHES.getValue() as? [String: Bool] {
-			print(switches)
-			for (rawDayId, val) in switches {
-				if let dayId = DayOfWeek.fromShortName(shortName: rawDayId) {
-					self.manager.loadedVariation(day: dayId, variation: val ? 1 : 0)
-				}
-			}
-			
-			Storage.USER_SWITCHES.delete()
-		}
+//		if let switches = Storage.USER_SWITCHES.getValue() as? [String: Bool] {
+//			print(switches)
+//			for (rawDayId, val) in switches {
+//				if let dayId = DayOfWeek.fromShortName(shortName: rawDayId) {
+//					self.manager.loadedVariation(day: dayId, variation: val ? 1 : 0)
+//				}
+//			}
+//			
+//			Storage.USER_SWITCHES.delete()
+//		}
 	}
 
 }

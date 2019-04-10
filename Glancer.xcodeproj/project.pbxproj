@@ -35,8 +35,8 @@
 		C01A6C5F2118C9A6000B7442 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CB9C121FE464D900437C5D /* Event.swift */; };
 		C01A6C602118C9A6000B7442 /* EventAudience.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CB9C141FE4668B00437C5D /* EventAudience.swift */; };
 		C01A6C612118C9A6000B7442 /* EventList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CB9C1F1FE4698000437C5D /* EventList.swift */; };
-		C01A6C622118C9BA000B7442 /* Date+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D6E9412107B8AC004BD0F4 /* Date+Core.swift */; };
-		C01A6C632118C9BA000B7442 /* Calendar+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D6E9432107BC7A004BD0F4 /* Calendar+Core.swift */; };
+		C01A6C622118C9BA000B7442 /* Date+KL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D6E9412107B8AC004BD0F4 /* Date+KL.swift */; };
+		C01A6C632118C9BA000B7442 /* Calendar+KL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D6E9432107BC7A004BD0F4 /* Calendar+KL.swift */; };
 		C01A6C642118C9BA000B7442 /* DayOfWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0711AF920DAC2DB009243CC /* DayOfWeek.swift */; };
 		C01A6C652118C9BA000B7442 /* TimeDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0711B0220DAC3BE009243CC /* TimeDuration.swift */; };
 		C01A6C662118C9C7000B7442 /* BlockID.swift in Sources */ = {isa = PBXBuildFile; fileRef = C093434A1FAA1B7A00629A84 /* BlockID.swift */; };
@@ -62,7 +62,6 @@
 		C01A6C7A2118CA58000B7442 /* ScheduleVariationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A1FB152001B36C004146CE /* ScheduleVariationStorage.swift */; };
 		C01A6C7B2118CA5D000B7442 /* ShowAllergyStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01539BA2110EE890059C807 /* ShowAllergyStorage.swift */; };
 		C01A6C7C2118CA64000B7442 /* MeetingPrefModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B04F451FD177EC00F5D116 /* MeetingPrefModule.swift */; };
-		C01A6C7D2118CA6F000B7442 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0707FBF1F69753100C7D2ED /* Storage.swift */; };
 		C01ECD2A2129BC0A0001C013 /* DayNoClassModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01ECD292129BC0A0001C013 /* DayNoClassModule.swift */; };
 		C01ECD2C2129BDB70001C013 /* DayModuleOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01ECD2B2129BDB70001C013 /* DayModuleOptions.swift */; };
 		C01ECD2E2129BEB10001C013 /* LoadingModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01ECD2D2129BEB10001C013 /* LoadingModule.swift */; };
@@ -107,23 +106,13 @@
 		C04653C8210936B9004AD09C /* BlockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04653C7210936B9004AD09C /* BlockCell.swift */; };
 		C04D1EC4210FD7B90001C99C /* LunchItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04D1EC3210FD7B90001C99C /* LunchItemCell.swift */; };
 		C04D1EC6210FD7C10001C99C /* LunchItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C04D1EC5210FD7C10001C99C /* LunchItemCell.xib */; };
-		C04DE4651FAE6AF9000D4DA6 /* DailySportsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04DE4641FAE6AF9000D4DA6 /* DailySportsList.swift */; };
-		C04DE46A1FAE6E09000D4DA6 /* GetSportsMeetingWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04DE4691FAE6E09000D4DA6 /* GetSportsMeetingWebCall.swift */; };
-		C04DE46D1FAE6E74000D4DA6 /* GetSportsMeetingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04DE46C1FAE6E74000D4DA6 /* GetSportsMeetingResponse.swift */; };
 		C051F1F3210FF841004C064F /* CoursesPrefModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C051F1F2210FF841004C064F /* CoursesPrefModule.swift */; };
 		C051F1F6210FF94C004C064F /* CoursePrefCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C051F1F5210FF94C004C064F /* CoursePrefCell.swift */; };
 		C051F1F8210FF957004C064F /* CoursePrefCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C051F1F7210FF957004C064F /* CoursePrefCell.xib */; };
 		C052B1CA21231EAA003746F9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BD285E31B03CF29007A0472 /* Images.xcassets */; };
-		C054B7C71FAF65080041BA03 /* SportsMeetingWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C054B7C61FAF65080041BA03 /* SportsMeetingWrapper.swift */; };
 		C05B7A111FCE0C71007C735C /* BlockCourseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05B7A101FCE0C71007C735C /* BlockCourseList.swift */; };
 		C05BD67A2110E2E500B5B399 /* VariationPrefsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05BD6792110E2E500B5B399 /* VariationPrefsModule.swift */; };
 		C05BD67D2110EDA200B5B399 /* LunchPrefsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05BD67C2110EDA200B5B399 /* LunchPrefsModule.swift */; };
-		C05F5E801FAE4ACA00724F42 /* SportMeeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05F5E7F1FAE4ACA00724F42 /* SportMeeting.swift */; };
-		C05F5E821FAE51AB00724F42 /* SportTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05F5E811FAE51AB00724F42 /* SportTeam.swift */; };
-		C05F5E851FAE542D00724F42 /* SportSeason.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05F5E841FAE542D00724F42 /* SportSeason.swift */; };
-		C05F5E871FAE54AA00724F42 /* SportTier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05F5E861FAE54AA00724F42 /* SportTier.swift */; };
-		C05F5E891FAE561400724F42 /* SportGender.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05F5E881FAE561400724F42 /* SportGender.swift */; };
-		C05F5E8B1FAE56CC00724F42 /* TeamDeclarations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05F5E8A1FAE56CC00724F42 /* TeamDeclarations.swift */; };
 		C060011A211B280000ECAD1A /* BlockMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0600119211B280000ECAD1A /* BlockMeta.swift */; };
 		C060011C211B28E100ECAD1A /* BlockMetaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060011B211B28E100ECAD1A /* BlockMetaManager.swift */; };
 		C060011E211B291A00ECAD1A /* BlockMetaID.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060011D211B291A00ECAD1A /* BlockMetaID.swift */; };
@@ -139,11 +128,10 @@
 		C061F80D2115F91700F0374C /* SettingsTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C061F80C2115F91600F0374C /* SettingsTextCell.xib */; };
 		C0679142211B5B2C00628098 /* SettingsCourseDeleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0679141211B5B2C00628098 /* SettingsCourseDeleteCell.swift */; };
 		C0679144211B5B3A00628098 /* SettingsCourseDeleteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0679143211B5B3A00628098 /* SettingsCourseDeleteCell.xib */; };
-		C0679147211BF3A500628098 /* UIColor+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0679146211BF3A500628098 /* UIColor+Core.swift */; };
+		C0679147211BF3A500628098 /* UIColor+KL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0679146211BF3A500628098 /* UIColor+KL.swift */; };
 		C06AE4F521154B79003A1EE8 /* SettingsClassController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06AE4F421154B79003A1EE8 /* SettingsClassController.swift */; };
 		C06BB7D2211E33CB006EC66F /* BeforeSchoolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06BB7D1211E33CB006EC66F /* BeforeSchoolView.swift */; };
 		C06BB7D4211E33D5006EC66F /* BeforeSchoolView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C06BB7D3211E33D5006EC66F /* BeforeSchoolView.xib */; };
-		C0707FC01F69753100C7D2ED /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0707FBF1F69753100C7D2ED /* Storage.swift */; };
 		C0711AFA20DAC2DB009243CC /* DayOfWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0711AF920DAC2DB009243CC /* DayOfWeek.swift */; };
 		C0711B0320DAC3BE009243CC /* TimeDuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0711B0220DAC3BE009243CC /* TimeDuration.swift */; };
 		C0760225210F89FD00398827 /* NoClassCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0760224210F89FD00398827 /* NoClassCell.xib */; };
@@ -151,7 +139,7 @@
 		C0791CA42116B86F0066CE62 /* PushNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0791CA32116B86F0066CE62 /* PushNotificationManager.swift */; };
 		C0791CA62117E7A20066CE62 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0791CA52117E7A20066CE62 /* NotificationManager.swift */; };
 		C0791CA82117E80C0066CE62 /* NotificationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0791CA72117E80C0066CE62 /* NotificationStorage.swift */; };
-		C07CB590211BF44F00010FEA /* UIColor+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0679146211BF3A500628098 /* UIColor+Core.swift */; };
+		C07CB590211BF44F00010FEA /* UIColor+KL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0679146211BF3A500628098 /* UIColor+KL.swift */; };
 		C07EE28D2119EEF50034B383 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07EE28C2119EEF50034B383 /* CalendarView.swift */; };
 		C080E83C211E31AC000A67DB /* BetweenClassView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C080E83B211E31AC000A67DB /* BetweenClassView.xib */; };
 		C080E83E211E320D000A67DB /* BetweenClassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C080E83D211E320D000A67DB /* BetweenClassView.swift */; };
@@ -164,7 +152,7 @@
 		C0929F412110C612004A373B /* PrefsActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0929F402110C612004A373B /* PrefsActionCell.swift */; };
 		C0929F432110C61B004A373B /* PrefsActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0929F422110C61B004A373B /* PrefsActionCell.xib */; };
 		C093434B1FAA1B7A00629A84 /* BlockID.swift in Sources */ = {isa = PBXBuildFile; fileRef = C093434A1FAA1B7A00629A84 /* BlockID.swift */; };
-		C09B41D0211378BD00D636D7 /* TableSection+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09B41CF211378BD00D636D7 /* TableSection+Core.swift */; };
+		C09B41D0211378BD00D636D7 /* TableSection+KL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09B41CF211378BD00D636D7 /* TableSection+KL.swift */; };
 		C09BF050210AE5370073C217 /* CalendarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09BF04F210AE5370073C217 /* CalendarController.swift */; };
 		C0A0327F2037A5B20046575C /* RegistrationWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A0327E2037A5B20046575C /* RegistrationWebCall.swift */; };
 		C0A123402115FF4000A72CD8 /* SettingsCourseColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A1233F2115FF4000A72CD8 /* SettingsCourseColorCell.swift */; };
@@ -177,11 +165,11 @@
 		C0A1FB132001B247004146CE /* BlockAnalyst.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A1FB122001B247004146CE /* BlockAnalyst.swift */; };
 		C0A1FB162001B36C004146CE /* ScheduleVariationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A1FB152001B36C004146CE /* ScheduleVariationStorage.swift */; };
 		C0A1FB1A2001D705004146CE /* DateSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A1FB192001D705004146CE /* DateSchedule.swift */; };
-		C0A26FBC1FAF76620060DC23 /* SportsPrefModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A26FBB1FAF76620060DC23 /* SportsPrefModule.swift */; };
 		C0A3D57C21093545004F5049 /* TodayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A3D57B21093545004F5049 /* TodayController.swift */; };
 		C0A3D57F2109355E004F5049 /* DayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A3D57E2109355E004F5049 /* DayController.swift */; };
 		C0A5F023210B9FBA00606ED3 /* BlockPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A5F022210B9FBA00606ED3 /* BlockPayload.swift */; };
 		C0A5F025210BA22200606ED3 /* DayPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A5F024210BA22200606ED3 /* DayPayload.swift */; };
+		C0A9294E225DA04300CE2D12 /* TableSection+KL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09B41CF211378BD00D636D7 /* TableSection+KL.swift */; };
 		C0AA2FE92120FBAA0009C686 /* SpecialSchedulesWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AA2FE82120FBAA0009C686 /* SpecialSchedulesWebCall.swift */; };
 		C0AB03552122556400FA5412 /* HubController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AB03542122556400FA5412 /* HubController.swift */; };
 		C0AC3FCA211B2F2400401FB8 /* SettingsBlockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0AC3FC9211B2F2400401FB8 /* SettingsBlockController.swift */; };
@@ -197,9 +185,7 @@
 		C0BD0FA12120CBED00C8F403 /* NoticeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0BD0FA02120CBED00C8F403 /* NoticeCell.xib */; };
 		C0BD0FA32120CD5D00C8F403 /* NoticeAttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BD0FA22120CD5D00C8F403 /* NoticeAttachmentView.swift */; };
 		C0BD0FA52120CE6C00C8F403 /* ScheduleChangedAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BD0FA42120CE6C00C8F403 /* ScheduleChangedAttachment.swift */; };
-		C0C176521FAA39E50059E956 /* SportsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C176511FAA39E50059E956 /* SportsManager.swift */; };
 		C0C176591FAA5F450059E956 /* Scheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C176581FAA5F450059E956 /* Scheme.swift */; };
-		C0C1765B1FAA60C10059E956 /* SportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1765A1FAA60C10059E956 /* SportType.swift */; };
 		C0C4550F2123B585004A41ED /* NothingUpcomingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C4550E2123B585004A41ED /* NothingUpcomingCell.swift */; };
 		C0C455112123B592004A41ED /* NothingUpcomingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0C455102123B592004A41ED /* NothingUpcomingCell.xib */; };
 		C0C455132123C1D0004A41ED /* TimeEventAttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C455122123C1D0004A41ED /* TimeEventAttachmentView.swift */; };
@@ -217,8 +203,8 @@
 		C0CF76F7211E24C800EC35B4 /* InClassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CF76F6211E24C800EC35B4 /* InClassView.swift */; };
 		C0CF76F9211E24D200EC35B4 /* InClassView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0CF76F8211E24D200EC35B4 /* InClassView.xib */; };
 		C0D2110D2069463200D5D2B2 /* CourseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D2110C2069463200D5D2B2 /* CourseManager.swift */; };
-		C0D6E9422107B8AC004BD0F4 /* Date+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D6E9412107B8AC004BD0F4 /* Date+Core.swift */; };
-		C0D6E9442107BC7A004BD0F4 /* Calendar+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D6E9432107BC7A004BD0F4 /* Calendar+Core.swift */; };
+		C0D6E9422107B8AC004BD0F4 /* Date+KL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D6E9412107B8AC004BD0F4 /* Date+KL.swift */; };
+		C0D6E9442107BC7A004BD0F4 /* Calendar+KL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D6E9432107BC7A004BD0F4 /* Calendar+KL.swift */; };
 		C0DF4EFF210CEAD7002A433C /* DayBundleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DF4EFE210CEAD7002A433C /* DayBundleManager.swift */; };
 		C0DF4F04210CEB26002A433C /* DayBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DF4F03210CEB26002A433C /* DayBundle.swift */; };
 		C0E356722122746D00FDDE2F /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E356712122746D00FDDE2F /* TabController.swift */; };
@@ -320,22 +306,12 @@
 		C04653C7210936B9004AD09C /* BlockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockCell.swift; sourceTree = "<group>"; };
 		C04D1EC3210FD7B90001C99C /* LunchItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchItemCell.swift; sourceTree = "<group>"; };
 		C04D1EC5210FD7C10001C99C /* LunchItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LunchItemCell.xib; sourceTree = "<group>"; };
-		C04DE4641FAE6AF9000D4DA6 /* DailySportsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySportsList.swift; sourceTree = "<group>"; };
-		C04DE4691FAE6E09000D4DA6 /* GetSportsMeetingWebCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSportsMeetingWebCall.swift; sourceTree = "<group>"; };
-		C04DE46C1FAE6E74000D4DA6 /* GetSportsMeetingResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSportsMeetingResponse.swift; sourceTree = "<group>"; };
 		C051F1F2210FF841004C064F /* CoursesPrefModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesPrefModule.swift; sourceTree = "<group>"; };
 		C051F1F5210FF94C004C064F /* CoursePrefCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePrefCell.swift; sourceTree = "<group>"; };
 		C051F1F7210FF957004C064F /* CoursePrefCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CoursePrefCell.xib; sourceTree = "<group>"; };
-		C054B7C61FAF65080041BA03 /* SportsMeetingWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsMeetingWrapper.swift; sourceTree = "<group>"; };
 		C05B7A101FCE0C71007C735C /* BlockCourseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockCourseList.swift; sourceTree = "<group>"; };
 		C05BD6792110E2E500B5B399 /* VariationPrefsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariationPrefsModule.swift; sourceTree = "<group>"; };
 		C05BD67C2110EDA200B5B399 /* LunchPrefsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchPrefsModule.swift; sourceTree = "<group>"; };
-		C05F5E7F1FAE4ACA00724F42 /* SportMeeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportMeeting.swift; sourceTree = "<group>"; };
-		C05F5E811FAE51AB00724F42 /* SportTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportTeam.swift; sourceTree = "<group>"; };
-		C05F5E841FAE542D00724F42 /* SportSeason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportSeason.swift; sourceTree = "<group>"; };
-		C05F5E861FAE54AA00724F42 /* SportTier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportTier.swift; sourceTree = "<group>"; };
-		C05F5E881FAE561400724F42 /* SportGender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportGender.swift; sourceTree = "<group>"; };
-		C05F5E8A1FAE56CC00724F42 /* TeamDeclarations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDeclarations.swift; sourceTree = "<group>"; };
 		C0600119211B280000ECAD1A /* BlockMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockMeta.swift; sourceTree = "<group>"; };
 		C060011B211B28E100ECAD1A /* BlockMetaManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockMetaManager.swift; sourceTree = "<group>"; };
 		C060011D211B291A00ECAD1A /* BlockMetaID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockMetaID.swift; sourceTree = "<group>"; };
@@ -347,11 +323,10 @@
 		C061F80C2115F91600F0374C /* SettingsTextCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTextCell.xib; sourceTree = "<group>"; };
 		C0679141211B5B2C00628098 /* SettingsCourseDeleteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCourseDeleteCell.swift; sourceTree = "<group>"; };
 		C0679143211B5B3A00628098 /* SettingsCourseDeleteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsCourseDeleteCell.xib; sourceTree = "<group>"; };
-		C0679146211BF3A500628098 /* UIColor+Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Core.swift"; sourceTree = "<group>"; };
+		C0679146211BF3A500628098 /* UIColor+KL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+KL.swift"; sourceTree = "<group>"; };
 		C06AE4F421154B79003A1EE8 /* SettingsClassController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsClassController.swift; sourceTree = "<group>"; };
 		C06BB7D1211E33CB006EC66F /* BeforeSchoolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeforeSchoolView.swift; sourceTree = "<group>"; };
 		C06BB7D3211E33D5006EC66F /* BeforeSchoolView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BeforeSchoolView.xib; sourceTree = "<group>"; };
-		C0707FBF1F69753100C7D2ED /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		C0711AF920DAC2DB009243CC /* DayOfWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeek.swift; sourceTree = "<group>"; };
 		C0711B0220DAC3BE009243CC /* TimeDuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDuration.swift; sourceTree = "<group>"; };
 		C0760224210F89FD00398827 /* NoClassCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoClassCell.xib; sourceTree = "<group>"; };
@@ -371,7 +346,7 @@
 		C0929F402110C612004A373B /* PrefsActionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsActionCell.swift; sourceTree = "<group>"; };
 		C0929F422110C61B004A373B /* PrefsActionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrefsActionCell.xib; sourceTree = "<group>"; };
 		C093434A1FAA1B7A00629A84 /* BlockID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockID.swift; sourceTree = "<group>"; };
-		C09B41CF211378BD00D636D7 /* TableSection+Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableSection+Core.swift"; sourceTree = "<group>"; };
+		C09B41CF211378BD00D636D7 /* TableSection+KL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableSection+KL.swift"; sourceTree = "<group>"; };
 		C09BF04F210AE5370073C217 /* CalendarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarController.swift; sourceTree = "<group>"; };
 		C0A0327E2037A5B20046575C /* RegistrationWebCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationWebCall.swift; sourceTree = "<group>"; };
 		C0A1233F2115FF4000A72CD8 /* SettingsCourseColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCourseColorCell.swift; sourceTree = "<group>"; };
@@ -384,7 +359,6 @@
 		C0A1FB122001B247004146CE /* BlockAnalyst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockAnalyst.swift; sourceTree = "<group>"; };
 		C0A1FB152001B36C004146CE /* ScheduleVariationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleVariationStorage.swift; sourceTree = "<group>"; };
 		C0A1FB192001D705004146CE /* DateSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSchedule.swift; sourceTree = "<group>"; };
-		C0A26FBB1FAF76620060DC23 /* SportsPrefModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsPrefModule.swift; sourceTree = "<group>"; };
 		C0A3D57B21093545004F5049 /* TodayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayController.swift; sourceTree = "<group>"; };
 		C0A3D57E2109355E004F5049 /* DayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayController.swift; sourceTree = "<group>"; };
 		C0A5F022210B9FBA00606ED3 /* BlockPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockPayload.swift; sourceTree = "<group>"; };
@@ -405,9 +379,7 @@
 		C0BD0FA02120CBED00C8F403 /* NoticeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeCell.xib; sourceTree = "<group>"; };
 		C0BD0FA22120CD5D00C8F403 /* NoticeAttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeAttachmentView.swift; sourceTree = "<group>"; };
 		C0BD0FA42120CE6C00C8F403 /* ScheduleChangedAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleChangedAttachment.swift; sourceTree = "<group>"; };
-		C0C176511FAA39E50059E956 /* SportsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsManager.swift; sourceTree = "<group>"; };
 		C0C176581FAA5F450059E956 /* Scheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scheme.swift; sourceTree = "<group>"; };
-		C0C1765A1FAA60C10059E956 /* SportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportType.swift; sourceTree = "<group>"; };
 		C0C4550E2123B585004A41ED /* NothingUpcomingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NothingUpcomingCell.swift; sourceTree = "<group>"; };
 		C0C455102123B592004A41ED /* NothingUpcomingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NothingUpcomingCell.xib; sourceTree = "<group>"; };
 		C0C455122123C1D0004A41ED /* TimeEventAttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeEventAttachmentView.swift; sourceTree = "<group>"; };
@@ -425,8 +397,8 @@
 		C0CF76F6211E24C800EC35B4 /* InClassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InClassView.swift; sourceTree = "<group>"; };
 		C0CF76F8211E24D200EC35B4 /* InClassView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InClassView.xib; sourceTree = "<group>"; };
 		C0D2110C2069463200D5D2B2 /* CourseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseManager.swift; sourceTree = "<group>"; };
-		C0D6E9412107B8AC004BD0F4 /* Date+Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Core.swift"; sourceTree = "<group>"; };
-		C0D6E9432107BC7A004BD0F4 /* Calendar+Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calendar+Core.swift"; sourceTree = "<group>"; };
+		C0D6E9412107B8AC004BD0F4 /* Date+KL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+KL.swift"; sourceTree = "<group>"; };
+		C0D6E9432107BC7A004BD0F4 /* Calendar+KL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calendar+KL.swift"; sourceTree = "<group>"; };
 		C0DF4EFE210CEAD7002A433C /* DayBundleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayBundleManager.swift; sourceTree = "<group>"; };
 		C0DF4F03210CEB26002A433C /* DayBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayBundle.swift; sourceTree = "<group>"; };
 		C0E356712122746D00FDDE2F /* TabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabController.swift; sourceTree = "<group>"; };
@@ -497,11 +469,8 @@
 				5BD285DB1B03CF29007A0472 /* Info.plist */,
 				5BD285E31B03CF29007A0472 /* Images.xcassets */,
 				5BD285DC1B03CF29007A0472 /* AppDelegate.swift */,
-				C0C176581FAA5F450059E956 /* Scheme.swift */,
-				C0707FBF1F69753100C7D2ED /* Storage.swift */,
-				C0711AF820DAC2CD009243CC /* Core */,
-				C0CB9C0D1FE4610C00437C5D /* Components */,
-				C01867211FC75EFE002027B8 /* Storyboard */,
+				C0A92941225D9A2900CE2D12 /* Business Logic */,
+				C0A92942225D9A3600CE2D12 /* User Interface */,
 			);
 			path = Glancer;
 			sourceTree = "<group>";
@@ -587,17 +556,6 @@
 				C0ACFD1B2111686D002886A2 /* TodayStatusCell.xib */,
 			);
 			name = Status;
-			sourceTree = "<group>";
-		};
-		C01867211FC75EFE002027B8 /* Storyboard */ = {
-			isa = PBXGroup;
-			children = (
-				5BD072471C74AEB40074B56D /* Main.storyboard */,
-				C019C1601F7D3CED00FC4EED /* Launch.storyboard */,
-				C04653C32109368A004AD09C /* Elements */,
-				C079C22F1FACA97D009067DE /* Controllers */,
-			);
-			name = Storyboard;
 			sourceTree = "<group>";
 		};
 		C01A6C4C2118C892000B7442 /* TodayWidget */ = {
@@ -798,16 +756,6 @@
 			name = Loading;
 			sourceTree = "<group>";
 		};
-		C04653C32109368A004AD09C /* Elements */ = {
-			isa = PBXGroup;
-			children = (
-				C0A167AF210E6ADC00DB6BC4 /* Cell */,
-				C0FCDBCC210AAC8D0080A883 /* Attachments */,
-				C0FCDBC3210978D00080A883 /* SubtitleNavigationItem.swift */,
-			);
-			name = Elements;
-			sourceTree = "<group>";
-		};
 		C04653C421093696004AD09C /* Block */ = {
 			isa = PBXGroup;
 			children = (
@@ -833,32 +781,6 @@
 				C04D1EC5210FD7C10001C99C /* LunchItemCell.xib */,
 			);
 			name = Cells;
-			sourceTree = "<group>";
-		};
-		C04DE4661FAE6C41000D4DA6 /* Elements */ = {
-			isa = PBXGroup;
-			children = (
-				C04DE4641FAE6AF9000D4DA6 /* DailySportsList.swift */,
-				C05F5E7F1FAE4ACA00724F42 /* SportMeeting.swift */,
-			);
-			name = Elements;
-			sourceTree = "<group>";
-		};
-		C04DE4671FAE6D19000D4DA6 /* WebCall */ = {
-			isa = PBXGroup;
-			children = (
-				C04DE4681FAE6DB5000D4DA6 /* GetMeeting */,
-			);
-			name = WebCall;
-			sourceTree = "<group>";
-		};
-		C04DE4681FAE6DB5000D4DA6 /* GetMeeting */ = {
-			isa = PBXGroup;
-			children = (
-				C04DE46C1FAE6E74000D4DA6 /* GetSportsMeetingResponse.swift */,
-				C04DE4691FAE6E09000D4DA6 /* GetSportsMeetingWebCall.swift */,
-			);
-			name = GetMeeting;
 			sourceTree = "<group>";
 		};
 		C051F1F1210FF81E004C064F /* Modules */ = {
@@ -890,26 +812,6 @@
 				C05BD67C2110EDA200B5B399 /* LunchPrefsModule.swift */,
 			);
 			name = Lunch;
-			sourceTree = "<group>";
-		};
-		C05F5E831FAE53C700724F42 /* Declarations */ = {
-			isa = PBXGroup;
-			children = (
-				C0C1765A1FAA60C10059E956 /* SportType.swift */,
-				C05F5E841FAE542D00724F42 /* SportSeason.swift */,
-				C05F5E861FAE54AA00724F42 /* SportTier.swift */,
-				C05F5E881FAE561400724F42 /* SportGender.swift */,
-			);
-			name = Declarations;
-			sourceTree = "<group>";
-		};
-		C05F5E8C1FAE56CF00724F42 /* Team */ = {
-			isa = PBXGroup;
-			children = (
-				C05F5E811FAE51AB00724F42 /* SportTeam.swift */,
-				C05F5E8A1FAE56CC00724F42 /* TeamDeclarations.swift */,
-			);
-			name = Team;
 			sourceTree = "<group>";
 		};
 		C0600117211B27E500ECAD1A /* Blocks */ = {
@@ -969,14 +871,6 @@
 			name = Delete;
 			sourceTree = "<group>";
 		};
-		C0679145211BF39A00628098 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				C0679146211BF3A500628098 /* UIColor+Core.swift */,
-			);
-			name = UI;
-			sourceTree = "<group>";
-		};
 		C06BB7D0211E33BC006EC66F /* Before School */ = {
 			isa = PBXGroup;
 			children = (
@@ -984,28 +878,6 @@
 				C06BB7D3211E33D5006EC66F /* BeforeSchoolView.xib */,
 			);
 			name = "Before School";
-			sourceTree = "<group>";
-		};
-		C0711AF820DAC2CD009243CC /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				C0679145211BF39A00628098 /* UI */,
-				C09B41CE211378AB00D636D7 /* Table */,
-				C0C7EA4721135D1200717B53 /* Web Call */,
-				C0711AFB20DAC2F9009243CC /* Time */,
-			);
-			name = Core;
-			sourceTree = "<group>";
-		};
-		C0711AFB20DAC2F9009243CC /* Time */ = {
-			isa = PBXGroup;
-			children = (
-				C0D6E9412107B8AC004BD0F4 /* Date+Core.swift */,
-				C0D6E9432107BC7A004BD0F4 /* Calendar+Core.swift */,
-				C0711AF920DAC2DB009243CC /* DayOfWeek.swift */,
-				C0711B0220DAC3BE009243CC /* TimeDuration.swift */,
-			);
-			name = Time;
 			sourceTree = "<group>";
 		};
 		C0760221210F89DF00398827 /* No Class */ = {
@@ -1097,13 +969,6 @@
 			name = WebCall;
 			sourceTree = "<group>";
 		};
-		C08B7471217A784E00E7BA26 /* Planner */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Planner;
-			sourceTree = "<group>";
-		};
 		C08FBF99210FB26E005812F1 /* Today Done */ = {
 			isa = PBXGroup;
 			children = (
@@ -1130,14 +995,6 @@
 				C0929F422110C61B004A373B /* PrefsActionCell.xib */,
 			);
 			name = Action;
-			sourceTree = "<group>";
-		};
-		C09B41CE211378AB00D636D7 /* Table */ = {
-			isa = PBXGroup;
-			children = (
-				C09B41CF211378BD00D636D7 /* TableSection+Core.swift */,
-			);
-			name = Table;
 			sourceTree = "<group>";
 		};
 		C09BF04E210AE36A0073C217 /* Calendar */ = {
@@ -1207,14 +1064,6 @@
 			name = Prefs;
 			sourceTree = "<group>";
 		};
-		C0A26FBA1FAF74690060DC23 /* Prefs */ = {
-			isa = PBXGroup;
-			children = (
-				C0A26FBB1FAF76620060DC23 /* SportsPrefModule.swift */,
-			);
-			name = Prefs;
-			sourceTree = "<group>";
-		};
 		C0A3D57A21093539004F5049 /* Today */ = {
 			isa = PBXGroup;
 			children = (
@@ -1233,6 +1082,140 @@
 				C0A3D57E2109355E004F5049 /* DayController.swift */,
 			);
 			name = Day;
+			sourceTree = "<group>";
+		};
+		C0A92941225D9A2900CE2D12 /* Business Logic */ = {
+			isa = PBXGroup;
+			children = (
+				C0A92943225D9A7400CE2D12 /* Content */,
+				C0A92944225D9CDA00CE2D12 /* Managers */,
+				C0A92945225D9E9700CE2D12 /* Common */,
+				C0A92947225D9EEE00CE2D12 /* Extensions */,
+				C0A92949225D9F3E00CE2D12 /* Utils */,
+			);
+			name = "Business Logic";
+			sourceTree = "<group>";
+		};
+		C0A92942225D9A3600CE2D12 /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				C079C22F1FACA97D009067DE /* Controllers */,
+				C0A92950225DA0F800CE2D12 /* Views */,
+				C0A9294F225DA0D600CE2D12 /* Storyboards */,
+			);
+			name = "User Interface";
+			sourceTree = "<group>";
+		};
+		C0A92943225D9A7400CE2D12 /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				C0DF4EFD210CEAC9002A433C /* Bundled */,
+				C0CB9C0E1FE4619A00437C5D /* Events */,
+				C081C2E61FE4509F008073F3 /* Lunch */,
+				C0C776801FACB090003EE125 /* Schedule */,
+			);
+			name = Content;
+			sourceTree = "<group>";
+		};
+		C0A92944225D9CDA00CE2D12 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				C0A0327D2037A5600046575C /* Registration */,
+				C0600118211B27F200ECAD1A /* Block Meta */,
+				C0791CA12116B7380066CE62 /* Notification */,
+				C01573BA20C462DC008CACA5 /* Today */,
+				C0791CA22116B84C0066CE62 /* Push */,
+				C002329C1FA37D700019D328 /* Courses */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		C0A92945225D9E9700CE2D12 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				C0C176581FAA5F450059E956 /* Scheme.swift */,
+				C0A92946225D9EE000CE2D12 /* Date */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		C0A92946225D9EE000CE2D12 /* Date */ = {
+			isa = PBXGroup;
+			children = (
+				C0711AF920DAC2DB009243CC /* DayOfWeek.swift */,
+			);
+			name = Date;
+			sourceTree = "<group>";
+		};
+		C0A92947225D9EEE00CE2D12 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C0A92948225D9F1D00CE2D12 /* Date */,
+				C0A9294D225DA02E00CE2D12 /* User Interface */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		C0A92948225D9F1D00CE2D12 /* Date */ = {
+			isa = PBXGroup;
+			children = (
+				C0D6E9412107B8AC004BD0F4 /* Date+KL.swift */,
+				C0D6E9432107BC7A004BD0F4 /* Calendar+KL.swift */,
+			);
+			name = Date;
+			sourceTree = "<group>";
+		};
+		C0A92949225D9F3E00CE2D12 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C0A9294B225D9F9F00CE2D12 /* Web */,
+				C0A9294A225D9F7700CE2D12 /* Date */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		C0A9294A225D9F7700CE2D12 /* Date */ = {
+			isa = PBXGroup;
+			children = (
+				C0711B0220DAC3BE009243CC /* TimeDuration.swift */,
+			);
+			name = Date;
+			sourceTree = "<group>";
+		};
+		C0A9294B225D9F9F00CE2D12 /* Web */ = {
+			isa = PBXGroup;
+			children = (
+				C0C7EA4821135D2400717B53 /* KnightlifePayload.swift */,
+			);
+			name = Web;
+			sourceTree = "<group>";
+		};
+		C0A9294D225DA02E00CE2D12 /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				C0679146211BF3A500628098 /* UIColor+KL.swift */,
+				C09B41CF211378BD00D636D7 /* TableSection+KL.swift */,
+			);
+			name = "User Interface";
+			sourceTree = "<group>";
+		};
+		C0A9294F225DA0D600CE2D12 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				5BD072471C74AEB40074B56D /* Main.storyboard */,
+				C019C1601F7D3CED00FC4EED /* Launch.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		C0A92950225DA0F800CE2D12 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C0A167AF210E6ADC00DB6BC4 /* Cell */,
+				C0FCDBCC210AAC8D0080A883 /* Attachments */,
+				C0FCDBC3210978D00080A883 /* SubtitleNavigationItem.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		C0AA2FE72120FB910009C686 /* Web Call */ = {
@@ -1319,20 +1302,6 @@
 			name = Notice;
 			sourceTree = "<group>";
 		};
-		C0C176501FAA31010059E956 /* Sports */ = {
-			isa = PBXGroup;
-			children = (
-				C0A26FBA1FAF74690060DC23 /* Prefs */,
-				C04DE4671FAE6D19000D4DA6 /* WebCall */,
-				C04DE4661FAE6C41000D4DA6 /* Elements */,
-				C05F5E8C1FAE56CF00724F42 /* Team */,
-				C05F5E831FAE53C700724F42 /* Declarations */,
-				C0C176511FAA39E50059E956 /* SportsManager.swift */,
-				C054B7C61FAF65080041BA03 /* SportsMeetingWrapper.swift */,
-			);
-			name = Sports;
-			sourceTree = "<group>";
-		};
 		C0C4550D2123B576004A41ED /* Nothing */ = {
 			isa = PBXGroup;
 			children = (
@@ -1351,7 +1320,7 @@
 			name = Attachment;
 			sourceTree = "<group>";
 		};
-		C0C776801FACB090003EE125 /* Schedule Core */ = {
+		C0C776801FACB090003EE125 /* Schedule */ = {
 			isa = PBXGroup;
 			children = (
 				C0A1FB142001B329004146CE /* Prefs */,
@@ -1359,7 +1328,7 @@
 				C03636691FACF78F008FC9A9 /* WebCall */,
 				C036366A1FACF7EA008FC9A9 /* ScheduleManager.swift */,
 			);
-			name = "Schedule Core";
+			name = Schedule;
 			sourceTree = "<group>";
 		};
 		C0C785B1210FDB67003A5EB8 /* Title */ = {
@@ -1371,14 +1340,6 @@
 			name = Title;
 			sourceTree = "<group>";
 		};
-		C0C7EA4721135D1200717B53 /* Web Call */ = {
-			isa = PBXGroup;
-			children = (
-				C0C7EA4821135D2400717B53 /* KnightlifePayload.swift */,
-			);
-			name = "Web Call";
-			sourceTree = "<group>";
-		};
 		C0CAF2CC210C2230001A69BF /* Lunch */ = {
 			isa = PBXGroup;
 			children = (
@@ -1386,25 +1347,6 @@
 				C0CAF2CD210C223C001A69BF /* LunchController.swift */,
 			);
 			name = Lunch;
-			sourceTree = "<group>";
-		};
-		C0CB9C0D1FE4610C00437C5D /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				C08B7471217A784E00E7BA26 /* Planner */,
-				C0600118211B27F200ECAD1A /* Block Meta */,
-				C0791CA22116B84C0066CE62 /* Push */,
-				C0791CA12116B7380066CE62 /* Notification */,
-				C0DF4EFD210CEAC9002A433C /* Bundled */,
-				C01573BA20C462DC008CACA5 /* Today */,
-				C0A0327D2037A5600046575C /* Registration */,
-				C0C776801FACB090003EE125 /* Schedule Core */,
-				C0CB9C0E1FE4619A00437C5D /* Events */,
-				C081C2E61FE4509F008073F3 /* Lunch */,
-				C002329C1FA37D700019D328 /* Courses */,
-				C0C176501FAA31010059E956 /* Sports */,
-			);
-			name = Components;
 			sourceTree = "<group>";
 		};
 		C0CB9C0E1FE4619A00437C5D /* Events */ = {
@@ -1580,6 +1522,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -1722,8 +1665,6 @@
 				C01ECD342129C7950001C013 /* AfterSchoolEventsModule.swift in Sources */,
 				C09BF050210AE5370073C217 /* CalendarController.swift in Sources */,
 				C0A0327F2037A5B20046575C /* RegistrationWebCall.swift in Sources */,
-				C0C1765B1FAA60C10059E956 /* SportType.swift in Sources */,
-				C05F5E871FAE54AA00724F42 /* SportTier.swift in Sources */,
 				C0C455132123C1D0004A41ED /* TimeEventAttachmentView.swift in Sources */,
 				C00232A71FA37EFC0019D328 /* CourseSchedule.swift in Sources */,
 				C0AC3FCA211B2F2400401FB8 /* SettingsBlockController.swift in Sources */,
@@ -1732,7 +1673,6 @@
 				C0A3D57C21093545004F5049 /* TodayController.swift in Sources */,
 				C05BD67D2110EDA200B5B399 /* LunchPrefsModule.swift in Sources */,
 				C0C785B5210FDB8E003A5EB8 /* TitleCell.swift in Sources */,
-				C05F5E821FAE51AB00724F42 /* SportTeam.swift in Sources */,
 				C0AB03552122556400FA5412 /* HubController.swift in Sources */,
 				C0CB9C201FE4698000437C5D /* EventList.swift in Sources */,
 				C0315D71211B244400323661 /* PrefToggleCell.swift in Sources */,
@@ -1746,16 +1686,15 @@
 				C0CAF2CE210C223C001A69BF /* LunchController.swift in Sources */,
 				C03BA78A21209AE400AB9DA2 /* PushUnboxRefresh.swift in Sources */,
 				C0C176591FAA5F450059E956 /* Scheme.swift in Sources */,
-				C0679147211BF3A500628098 /* UIColor+Core.swift in Sources */,
+				C0679147211BF3A500628098 /* UIColor+KL.swift in Sources */,
 				C0815912211B46DE00522B25 /* SettingsColorPickerController.swift in Sources */,
 				C0FCDBCB210A964A0080A883 /* AttachmentView.swift in Sources */,
 				C0791CA42116B86F0066CE62 /* PushNotificationManager.swift in Sources */,
-				C09B41D0211378BD00D636D7 /* TableSection+Core.swift in Sources */,
+				C09B41D0211378BD00D636D7 /* TableSection+KL.swift in Sources */,
 				C0711B0320DAC3BE009243CC /* TimeDuration.swift in Sources */,
 				C0791CA62117E7A20066CE62 /* NotificationManager.swift in Sources */,
 				C0BD0F9B2120CAA600C8F403 /* NoticesController.swift in Sources */,
 				5BD285DD1B03CF29007A0472 /* AppDelegate.swift in Sources */,
-				C0C176521FAA39E50059E956 /* SportsManager.swift in Sources */,
 				C01ECD412129D43C0001C013 /* TodayNextDayModule.swift in Sources */,
 				C060011A211B280000ECAD1A /* BlockMeta.swift in Sources */,
 				C081C2E81FE450F0008073F3 /* LunchManager.swift in Sources */,
@@ -1764,7 +1703,6 @@
 				C0791CA82117E80C0066CE62 /* NotificationStorage.swift in Sources */,
 				C061F80B2115F90600F0374C /* SettingsTextCell.swift in Sources */,
 				C0A167AE210E6AB200DB6BC4 /* ErrorReloadable.swift in Sources */,
-				C04DE46D1FAE6E74000D4DA6 /* GetSportsMeetingResponse.swift in Sources */,
 				C0A167AC210E679700DB6BC4 /* ErrorCell.swift in Sources */,
 				C01ECD2A2129BC0A0001C013 /* DayNoClassModule.swift in Sources */,
 				C036366B1FACF7EA008FC9A9 /* ScheduleManager.swift in Sources */,
@@ -1784,7 +1722,6 @@
 				C05B7A111FCE0C71007C735C /* BlockCourseList.swift in Sources */,
 				C04653C8210936B9004AD09C /* BlockCell.swift in Sources */,
 				C0BD0FA52120CE6C00C8F403 /* ScheduleChangedAttachment.swift in Sources */,
-				C05F5E891FAE561400724F42 /* SportGender.swift in Sources */,
 				C0A1FB1A2001D705004146CE /* DateSchedule.swift in Sources */,
 				C0C7EA4921135D2400717B53 /* KnightlifePayload.swift in Sources */,
 				C0CB9C151FE4668B00437C5D /* EventAudience.swift in Sources */,
@@ -1793,9 +1730,7 @@
 				C0B04F461FD177EC00F5D116 /* MeetingPrefModule.swift in Sources */,
 				C07EE28D2119EEF50034B383 /* CalendarView.swift in Sources */,
 				C0A123402115FF4000A72CD8 /* SettingsCourseColorCell.swift in Sources */,
-				C054B7C71FAF65080041BA03 /* SportsMeetingWrapper.swift in Sources */,
 				C02E5551211FA1AE00043C9E /* EventGradeStorage.swift in Sources */,
-				C05F5E801FAE4ACA00724F42 /* SportMeeting.swift in Sources */,
 				C0A5F023210B9FBA00606ED3 /* BlockPayload.swift in Sources */,
 				C00232A51FA37E760019D328 /* Course.swift in Sources */,
 				C0600129211B2D0400ECAD1A /* BlocksPrefCell.swift in Sources */,
@@ -1803,14 +1738,12 @@
 				C0C455162123D414004A41ED /* TimeEventListModule.swift in Sources */,
 				C0107A3B212324D600C9A6D7 /* BottomPrefsModule.swift in Sources */,
 				C0CB9C131FE464D900437C5D /* Event.swift in Sources */,
-				C0A26FBC1FAF76620060DC23 /* SportsPrefModule.swift in Sources */,
 				C03BA78F21209DAA00AB9DA2 /* PushRefreshListener.swift in Sources */,
-				C04DE46A1FAE6E09000D4DA6 /* GetSportsMeetingWebCall.swift in Sources */,
 				C08FBF9F210FB29C005812F1 /* TodayDoneCell.swift in Sources */,
 				C081C2EA1FE45108008073F3 /* LunchMenu.swift in Sources */,
 				C093434B1FAA1B7A00629A84 /* BlockID.swift in Sources */,
 				C036366D1FACF864008FC9A9 /* GetScheduleWebCall.swift in Sources */,
-				C0D6E9442107BC7A004BD0F4 /* Calendar+Core.swift in Sources */,
+				C0D6E9442107BC7A004BD0F4 /* Calendar+KL.swift in Sources */,
 				C01573BC20C462ED008CACA5 /* TodayManager.swift in Sources */,
 				C01862AA2118A2920042F38A /* TodayBarCell.swift in Sources */,
 				C0BD0FA32120CD5D00C8F403 /* NoticeAttachmentView.swift in Sources */,
@@ -1826,7 +1759,6 @@
 				C0A1FB162001B36C004146CE /* ScheduleVariationStorage.swift in Sources */,
 				C060011E211B291A00ECAD1A /* BlockMetaID.swift in Sources */,
 				C0600121211B29C400ECAD1A /* BlockMetaStorage.swift in Sources */,
-				C05F5E851FAE542D00724F42 /* SportSeason.swift in Sources */,
 				C04D1EC4210FD7B90001C99C /* LunchItemCell.swift in Sources */,
 				C0CB9C191FE468F500437C5D /* GetEventsWebCall.swift in Sources */,
 				C060011C211B28E100ECAD1A /* BlockMetaManager.swift in Sources */,
@@ -1836,13 +1768,10 @@
 				C0A167B5210E6FB800DB6BC4 /* LoadingCell.swift in Sources */,
 				C006914F210EC55C0099CD57 /* SettingsController.swift in Sources */,
 				C01ECD3B2129D2330001C013 /* TodayBetweenClassModule.swift in Sources */,
-				C0D6E9422107B8AC004BD0F4 /* Date+Core.swift in Sources */,
+				C0D6E9422107B8AC004BD0F4 /* Date+KL.swift in Sources */,
 				C0C785B0210FD980003A5EB8 /* LunchItemAttachmentView.swift in Sources */,
 				C0711AFA20DAC2DB009243CC /* DayOfWeek.swift in Sources */,
-				C05F5E8B1FAE56CC00724F42 /* TeamDeclarations.swift in Sources */,
-				C04DE4651FAE6AF9000D4DA6 /* DailySportsList.swift in Sources */,
 				C06AE4F521154B79003A1EE8 /* SettingsClassController.swift in Sources */,
-				C0707FC01F69753100C7D2ED /* Storage.swift in Sources */,
 				C01ECD2C2129BDB70001C013 /* DayModuleOptions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1854,18 +1783,17 @@
 				C01A6C682118C9C7000B7442 /* DaySchedule.swift in Sources */,
 				C0600124211B2BC400ECAD1A /* BlockMetaManager.swift in Sources */,
 				C01A6C602118C9A6000B7442 /* EventAudience.swift in Sources */,
-				C07CB590211BF44F00010FEA /* UIColor+Core.swift in Sources */,
+				C07CB590211BF44F00010FEA /* UIColor+KL.swift in Sources */,
 				C06BB7D2211E33CB006EC66F /* BeforeSchoolView.swift in Sources */,
 				C0CF76F7211E24C800EC35B4 /* InClassView.swift in Sources */,
 				C01A6C772118CA3F000B7442 /* LunchManager.swift in Sources */,
-				C01A6C7D2118CA6F000B7442 /* Storage.swift in Sources */,
 				C0600123211B2BC400ECAD1A /* BlockMeta.swift in Sources */,
 				C01A6C702118CA1A000B7442 /* CourseManager.swift in Sources */,
 				C01A6C6B2118C9D3000B7442 /* GetScheduleWebCall.swift in Sources */,
 				C01A6C692118C9C7000B7442 /* DateSchedule.swift in Sources */,
 				C01A6C762118CA3F000B7442 /* GetMenuWebCall.swift in Sources */,
 				C01A6C5F2118C9A6000B7442 /* Event.swift in Sources */,
-				C01A6C622118C9BA000B7442 /* Date+Core.swift in Sources */,
+				C01A6C622118C9BA000B7442 /* Date+KL.swift in Sources */,
 				C01A6C7B2118CA5D000B7442 /* ShowAllergyStorage.swift in Sources */,
 				C01A6C5D2118C99B000B7442 /* EventManager.swift in Sources */,
 				C080E83E211E320D000A67DB /* BetweenClassView.swift in Sources */,
@@ -1892,11 +1820,12 @@
 				C01A6C642118C9BA000B7442 /* DayOfWeek.swift in Sources */,
 				C01A6C6D2118CA08000B7442 /* GetPatchWebCall.swift in Sources */,
 				C0405714211DDA7E00C7A1A4 /* NoConnectionView.swift in Sources */,
-				C01A6C632118C9BA000B7442 /* Calendar+Core.swift in Sources */,
+				C01A6C632118C9BA000B7442 /* Calendar+KL.swift in Sources */,
 				C0600125211B2BC400ECAD1A /* BlockMetaID.swift in Sources */,
 				C03BA79021209DAA00AB9DA2 /* PushRefreshListener.swift in Sources */,
 				C03BA78B21209AE400AB9DA2 /* PushUnboxRefresh.swift in Sources */,
 				C01A6C6F2118CA08000B7442 /* DayPayload.swift in Sources */,
+				C0A9294E225DA04300CE2D12 /* TableSection+KL.swift in Sources */,
 				C01A6C752118CA2D000B7442 /* Scheme.swift in Sources */,
 				C02E5552211FA34B00043C9E /* EventGradeStorage.swift in Sources */,
 				C01A6C652118C9BA000B7442 /* TimeDuration.swift in Sources */,
