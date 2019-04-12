@@ -166,7 +166,6 @@
 		C093434B1FAA1B7A00629A84 /* BlockID.swift in Sources */ = {isa = PBXBuildFile; fileRef = C093434A1FAA1B7A00629A84 /* BlockID.swift */; };
 		C09B41D0211378BD00D636D7 /* TableSection+KL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09B41CF211378BD00D636D7 /* TableSection+KL.swift */; };
 		C09BF050210AE5370073C217 /* CalendarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09BF04F210AE5370073C217 /* CalendarController.swift */; };
-		C0A0327F2037A5B20046575C /* RegistrationWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A0327E2037A5B20046575C /* RegistrationWebCall.swift */; };
 		C0A123402115FF4000A72CD8 /* SettingsCourseColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A1233F2115FF4000A72CD8 /* SettingsCourseColorCell.swift */; };
 		C0A123422115FF4E00A72CD8 /* SettingsCourseColorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0A123412115FF4E00A72CD8 /* SettingsCourseColorCell.xib */; };
 		C0A167AA210E678800DB6BC4 /* ErrorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0A167A9210E678800DB6BC4 /* ErrorCell.xib */; };
@@ -366,7 +365,6 @@
 		C093434A1FAA1B7A00629A84 /* BlockID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockID.swift; sourceTree = "<group>"; };
 		C09B41CF211378BD00D636D7 /* TableSection+KL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableSection+KL.swift"; sourceTree = "<group>"; };
 		C09BF04F210AE5370073C217 /* CalendarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarController.swift; sourceTree = "<group>"; };
-		C0A0327E2037A5B20046575C /* RegistrationWebCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationWebCall.swift; sourceTree = "<group>"; };
 		C0A1233F2115FF4000A72CD8 /* SettingsCourseColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCourseColorCell.swift; sourceTree = "<group>"; };
 		C0A123412115FF4E00A72CD8 /* SettingsCourseColorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsCourseColorCell.xib; sourceTree = "<group>"; };
 		C0A167A9210E678800DB6BC4 /* ErrorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ErrorCell.xib; sourceTree = "<group>"; };
@@ -1044,14 +1042,6 @@
 			name = Calendar;
 			sourceTree = "<group>";
 		};
-		C0A0327D2037A5600046575C /* Registration */ = {
-			isa = PBXGroup;
-			children = (
-				C0A0327E2037A5B20046575C /* RegistrationWebCall.swift */,
-			);
-			name = Registration;
-			sourceTree = "<group>";
-		};
 		C0A1233E2115FF2B00A72CD8 /* Color */ = {
 			isa = PBXGroup;
 			children = (
@@ -1155,7 +1145,6 @@
 		C0A92944225D9CDA00CE2D12 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				C0A0327D2037A5600046575C /* Registration */,
 				C0600118211B27F200ECAD1A /* Block Meta */,
 				C0791CA12116B7380066CE62 /* Notification */,
 				C01573BA20C462DC008CACA5 /* Today */,
@@ -1720,7 +1709,6 @@
 				C01ECD342129C7950001C013 /* AfterSchoolEventsModule.swift in Sources */,
 				C09BF050210AE5370073C217 /* CalendarController.swift in Sources */,
 				C07D913D225EF7E100A59345 /* Refreshable.swift in Sources */,
-				C0A0327F2037A5B20046575C /* RegistrationWebCall.swift in Sources */,
 				C0C455132123C1D0004A41ED /* TimeEventAttachmentView.swift in Sources */,
 				C00232A71FA37EFC0019D328 /* CourseSchedule.swift in Sources */,
 				C0AC3FCA211B2F2400401FB8 /* SettingsBlockController.swift in Sources */,
