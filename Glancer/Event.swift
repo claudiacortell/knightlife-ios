@@ -39,7 +39,7 @@ extension Event {
 	
 	func getWholeSchoolAudience() -> EventAudience? {
 		for audience in self.audience {
-			if audience.grade == .allSchool {
+			if audience.grade == nil {
 				return audience
 			}
 		}
@@ -70,7 +70,7 @@ extension Event {
 	}
 	
 	func isRelevantToUser() -> Bool {
-		if EventManager.instance.userGrade! == .allSchool {
+		if EventManager.instance.userGrade == nil {
 			return true
 		}
 		
@@ -78,14 +78,14 @@ extension Event {
 	}
 	
 	func completeDescription() -> String {
-		let userGrade = EventManager.instance.userGrade!
+		let userGrade = EventManager.instance.userGrade
 		
 		let addDescriptionPunctuation = !(self.description.last == "." || self.description.last == "?" || self.description.last == "!")
 
-		if userGrade == .allSchool || !self.isRelevantToUser() { // Not set or not relevant to user
+		if userGrade == nil || !self.isRelevantToUser() { // Not set or not relevant to user
 			let otherGrades: String = {
 				var otherGradesString = ""
-				for audience in self.audience { otherGradesString += "\(audience.mandatory ? "Mandatory" : "Optional") for \(audience.grade.displayName)." }
+				for audience in self.audience { otherGradesString += "\((audience.mandatory ? "Mandatory" : "Optional")) for \(audience.grade == nil ? "All School" : audience.grade!.plural)." }
 				return otherGradesString.trimmingCharacters(in: .whitespaces)
 			}()
 			
@@ -97,7 +97,7 @@ extension Event {
 			var string = ""
 			for audience in self.audience {
 				if audience === bestAudience { continue } // Ignore own grade
-				string += "\(audience.mandatory ? "Mandatory" : "Optional") for \(audience.grade.displayName). " // E.G. Optional for Sophomores.
+				string += "\(audience.mandatory ? "Mandatory" : "Optional") for \(audience.grade == nil ? "All School" : audience.grade!.plural). " // E.G. Optional for Sophomores.
 			}
 			return string.trimmingCharacters(in: .whitespaces)
 		}()

@@ -42,7 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 		_ = TodayManager.instance
 		_ = ScheduleManager.instance
 		_ = CourseManager.instance
-		_ = LunchManager.instance
 		_ = EventManager.instance
 		
         return true
@@ -89,7 +88,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 	
 	func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
 		ScheduleManager.instance.clearCache()
-		LunchManager.instance.clearCache()
 		EventManager.instance.clearCache()
 	}
 	

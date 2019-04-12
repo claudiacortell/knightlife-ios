@@ -18,7 +18,7 @@ class EventManager: Manager, PushRefreshListener {
 	private(set) var events: [String: EventList] = [:]
 	private var eventWatchers: [String: ResourceWatcher<EventList>] = [:]
 	
-	private(set) var userGrade: Grade!
+	private(set) var userGrade: Grade?
 	
 	init() {
 		super.init("Events")
@@ -27,11 +27,11 @@ class EventManager: Manager, PushRefreshListener {
 		self.registerStorage(EventGradeStorage(manager: self))
 	}
 	
-	func loadedGrade(grade: Grade) {
+	func loadedGrade(grade: Grade?) {
 		self.userGrade = grade
 	}
 	
-	func setGrade(grade: Grade) {
+	func setGrade(grade: Grade?) {
 		self.userGrade = grade
 		self.saveStorage()
 	}

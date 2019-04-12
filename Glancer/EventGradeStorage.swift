@@ -22,16 +22,16 @@ class EventGradeStorage: StorageHandler {
 		if let flag = data as? Int, let grade = Grade(rawValue: flag) {
 			self.manager.loadedGrade(grade: grade)
 		} else {
-			self.manager.loadedGrade(grade: Grade.allSchool)
+			self.manager.loadedGrade(grade: nil)
 		}
 	}
 	
 	func saveData() -> Any? {
-		return self.manager.userGrade.rawValue;
+		return self.manager.userGrade == nil ? nil : self.manager.userGrade!.rawValue
 	}
 	
 	func loadDefaults() {
-		self.manager.loadedGrade(grade: Grade.allSchool)
+		self.manager.loadedGrade(grade: nil)
 	}
 	
 }

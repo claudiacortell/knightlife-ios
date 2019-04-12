@@ -12,7 +12,7 @@ import AddictiveLib
 
 class LunchController: UIViewController, TableHandlerDataSource {
 	
-	var menu: LunchMenu!
+	var menu: Lunch!
 	
 	@IBOutlet weak var tableView: UITableView!
 	private var tableHandler: TableHandler!
@@ -39,7 +39,7 @@ class LunchController: UIViewController, TableHandlerDataSource {
 		section.addDivider()
 		
 		for item in self.menu.items {
-			section.addCell(LunchItemCell(item: item, showAllergen: LunchManager.instance.showAllergens))
+			section.addCell(LunchItemCell(item: item, showAllergen: true))
 			section.addDivider()
 		}
 	}

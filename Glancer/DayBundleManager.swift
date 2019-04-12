@@ -8,6 +8,7 @@
 
 import Foundation
 import AddictiveLib
+import SwiftyJSON
 
 class DayBundleManager: Manager {
 	
@@ -30,12 +31,10 @@ class DayBundleManager: Manager {
 			ProcessChain().link() {
 				chain in
 				
-				LunchManager.instance.fetchLunchMenu(date: date) {
-					result in
-					
-					switch result {
-					case .success(let result):
-						chain.setData("menu", data: result)
+				Lunch.fetch(for: date).subscribeOnce(with: self) {
+					switch $0 {
+					case .success(let lunch):
+						chain.setData("menu", data: lunch)
 						chain.next()
 					case .failure(let error):
 						chain.setData("error", data: error)
@@ -76,8 +75,7 @@ class DayBundleManager: Manager {
 			self.getBundleWatcher(date: date).handle(error, nil)
 		}
 		
-		LunchManager.instance.getLunchWatcher(date: date).onSuccess(self) {
-			menu in
+		Lunch.onFetch.subscribe(with: self) { menu in
 			
 //			Have Menu, fetch schedule and events.
 //			Perform a chain to get the menu for each of the other ones, then update the corresponding watcher so that everything gets sent to everything else.
@@ -123,12 +121,6 @@ class DayBundleManager: Manager {
 			}.start()
 		}
 		
-		LunchManager.instance.getLunchWatcher(date: date).onFailure(self) {
-			error in
-			
-			self.getBundleWatcher(date: date).handle(error, nil)
-		}
-		
 		EventManager.instance.getEventWatcher(date: date).onSuccess(self) {
 			events in
 			
@@ -137,10 +129,8 @@ class DayBundleManager: Manager {
 			ProcessChain().link() {
 				chain in
 				
-				LunchManager.instance.fetchLunchMenu(date: date) {
-					result in
-					
-					switch result {
+				Lunch.fetch(for: date).subscribeOnce(with: self) {
+					switch $0 {
 					case .success(let result):
 						chain.setData("menu", data: result)
 						chain.next()
@@ -224,22 +214,21 @@ class DayBundleManager: Manager {
 		}.link() {
 			chain in
 			
-			LunchManager.instance.fetchLunchMenu(date: date) {
-				result in
-				
-				switch result {
-				case .success(let lunch):
-					chain.setData("lunch", data: lunch)
+			Lunch.fetch(for: date).subscribeOnce(with: self) {
+				switch $0 {
+				case .success(let result):
+					chain.setData("menu", data: result)
 					chain.next()
 				case .failure(let error):
 					chain.setData("error", data: error)
 					chain.next(false)
 				}
 			}
+
 		}.success() {
 			chain in
 			
-			let bundle = DayBundle(date: date, schedule: chain.getData("schedule")!, events: chain.getData("events")!, menu: chain.getData("lunch")!)
+			let bundle = DayBundle(date: date, schedule: chain.getData("schedule")!, events: chain.getData("events")!, menu: chain.getData("menu")!)
 			self.getBundleWatcher(date: date).handle(nil, bundle)
 			
 			self.registerListeners(date: date)
@@ -247,6 +236,10 @@ class DayBundleManager: Manager {
 			then(true)
 		}.failure() {
 			chain in
+			
+			let error: Error = chain.getData("error")!
+			
+			print(error.localizedDescription)
 			self.getBundleWatcher(date: date).handle(chain.getData("error"), nil)
 			
 			self.registerListeners(date: date)

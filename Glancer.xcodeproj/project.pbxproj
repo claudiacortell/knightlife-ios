@@ -17,7 +17,6 @@
 		C006914F210EC55C0099CD57 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C006914E210EC55C0099CD57 /* SettingsController.swift */; };
 		C0107A3B212324D600C9A6D7 /* BottomPrefsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0107A3A212324D600C9A6D7 /* BottomPrefsModule.swift */; };
 		C0107A3E2123278F00C9A6D7 /* SurveyWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0107A3D2123278F00C9A6D7 /* SurveyWebCall.swift */; };
-		C01539BB2110EE890059C807 /* ShowAllergyStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01539BA2110EE890059C807 /* ShowAllergyStorage.swift */; };
 		C01573BC20C462ED008CACA5 /* TodayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01573BB20C462ED008CACA5 /* TodayManager.swift */; };
 		C01862AA2118A2920042F38A /* TodayBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01862A92118A2920042F38A /* TodayBarCell.swift */; };
 		C01862AC2118A29E0042F38A /* TodayBarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C01862AB2118A29E0042F38A /* TodayBarCell.xib */; };
@@ -55,12 +54,8 @@
 		C01A6C732118CA1F000B7442 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00232A41FA37E760019D328 /* Course.swift */; };
 		C01A6C742118CA1F000B7442 /* CourseSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00232A61FA37EFC0019D328 /* CourseSchedule.swift */; };
 		C01A6C752118CA2D000B7442 /* Scheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C176581FAA5F450059E956 /* Scheme.swift */; };
-		C01A6C762118CA3F000B7442 /* GetMenuWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081C2EC1FE45120008073F3 /* GetMenuWebCall.swift */; };
-		C01A6C772118CA3F000B7442 /* LunchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081C2E71FE450F0008073F3 /* LunchManager.swift */; };
-		C01A6C782118CA3F000B7442 /* LunchMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081C2E91FE45108008073F3 /* LunchMenu.swift */; };
 		C01A6C792118CA4C000B7442 /* NextSchooldayWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01F2D0D21138EBE00E461FA /* NextSchooldayWebCall.swift */; };
 		C01A6C7A2118CA58000B7442 /* ScheduleVariationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A1FB152001B36C004146CE /* ScheduleVariationStorage.swift */; };
-		C01A6C7B2118CA5D000B7442 /* ShowAllergyStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01539BA2110EE890059C807 /* ShowAllergyStorage.swift */; };
 		C01A6C7C2118CA64000B7442 /* MeetingPrefModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B04F451FD177EC00F5D116 /* MeetingPrefModule.swift */; };
 		C01ECD2A2129BC0A0001C013 /* DayNoClassModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01ECD292129BC0A0001C013 /* DayNoClassModule.swift */; };
 		C01ECD2C2129BDB70001C013 /* DayModuleOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01ECD2B2129BDB70001C013 /* DayModuleOptions.swift */; };
@@ -140,13 +135,30 @@
 		C0791CA62117E7A20066CE62 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0791CA52117E7A20066CE62 /* NotificationManager.swift */; };
 		C0791CA82117E80C0066CE62 /* NotificationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0791CA72117E80C0066CE62 /* NotificationStorage.swift */; };
 		C07CB590211BF44F00010FEA /* UIColor+KL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0679146211BF3A500628098 /* UIColor+KL.swift */; };
+		C07D8F92225EF63B00A59345 /* Lunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07D8F91225EF63B00A59345 /* Lunch.swift */; };
+		C07D8F93225EF63B00A59345 /* Lunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07D8F91225EF63B00A59345 /* Lunch.swift */; };
+		C07D9128225EF72100A59345 /* Realm+KL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07D9127225EF72100A59345 /* Realm+KL.swift */; };
+		C07D9129225EF72100A59345 /* Realm+KL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07D9127225EF72100A59345 /* Realm+KL.swift */; };
+		C07D912C225EF76700A59345 /* UserDefaults+KL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07D912B225EF76700A59345 /* UserDefaults+KL.swift */; };
+		C07D912D225EF76700A59345 /* UserDefaults+KL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07D912B225EF76700A59345 /* UserDefaults+KL.swift */; };
+		C07D912F225EF78200A59345 /* Grade.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07D912E225EF78200A59345 /* Grade.swift */; };
+		C07D9130225EF78200A59345 /* Grade.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07D912E225EF78200A59345 /* Grade.swift */; };
+		C07D9133225EF7A200A59345 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07D9132225EF7A200A59345 /* API.swift */; };
+		C07D9134225EF7A200A59345 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07D9132225EF7A200A59345 /* API.swift */; };
+		C07D913B225EF7E100A59345 /* Optionals.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07D9136225EF7E000A59345 /* Optionals.swift */; };
+		C07D913C225EF7E100A59345 /* Optionals.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07D9136225EF7E000A59345 /* Optionals.swift */; };
+		C07D913D225EF7E100A59345 /* Refreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07D9137225EF7E000A59345 /* Refreshable.swift */; };
+		C07D913E225EF7E100A59345 /* Refreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07D9137225EF7E000A59345 /* Refreshable.swift */; };
+		C07D913F225EF7E100A59345 /* BadgeTetheredPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07D9138225EF7E000A59345 /* BadgeTetheredPreferences.swift */; };
+		C07D9140225EF7E100A59345 /* BadgeTetheredPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07D9138225EF7E000A59345 /* BadgeTetheredPreferences.swift */; };
+		C07D9141225EF7E100A59345 /* Callback.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07D9139225EF7E000A59345 /* Callback.swift */; };
+		C07D9142225EF7E100A59345 /* Callback.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07D9139225EF7E000A59345 /* Callback.swift */; };
+		C07D9143225EF7E100A59345 /* Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07D913A225EF7E000A59345 /* Decodable.swift */; };
+		C07D9144225EF7E100A59345 /* Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07D913A225EF7E000A59345 /* Decodable.swift */; };
 		C07EE28D2119EEF50034B383 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07EE28C2119EEF50034B383 /* CalendarView.swift */; };
 		C080E83C211E31AC000A67DB /* BetweenClassView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C080E83B211E31AC000A67DB /* BetweenClassView.xib */; };
 		C080E83E211E320D000A67DB /* BetweenClassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C080E83D211E320D000A67DB /* BetweenClassView.swift */; };
 		C0815912211B46DE00522B25 /* SettingsColorPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0815911211B46DE00522B25 /* SettingsColorPickerController.swift */; };
-		C081C2E81FE450F0008073F3 /* LunchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081C2E71FE450F0008073F3 /* LunchManager.swift */; };
-		C081C2EA1FE45108008073F3 /* LunchMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081C2E91FE45108008073F3 /* LunchMenu.swift */; };
-		C081C2ED1FE45120008073F3 /* GetMenuWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081C2EC1FE45120008073F3 /* GetMenuWebCall.swift */; };
 		C08FBF9D210FB290005812F1 /* TodayDoneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C08FBF9C210FB290005812F1 /* TodayDoneCell.xib */; };
 		C08FBF9F210FB29C005812F1 /* TodayDoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08FBF9E210FB29C005812F1 /* TodayDoneCell.swift */; };
 		C0929F412110C612004A373B /* PrefsActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0929F402110C612004A373B /* PrefsActionCell.swift */; };
@@ -256,7 +268,6 @@
 		C006914E210EC55C0099CD57 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		C0107A3A212324D600C9A6D7 /* BottomPrefsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomPrefsModule.swift; sourceTree = "<group>"; };
 		C0107A3D2123278F00C9A6D7 /* SurveyWebCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyWebCall.swift; sourceTree = "<group>"; };
-		C01539BA2110EE890059C807 /* ShowAllergyStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAllergyStorage.swift; sourceTree = "<group>"; };
 		C01573BB20C462ED008CACA5 /* TodayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayManager.swift; sourceTree = "<group>"; };
 		C01862A92118A2920042F38A /* TodayBarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayBarCell.swift; sourceTree = "<group>"; };
 		C01862AB2118A29E0042F38A /* TodayBarCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodayBarCell.xib; sourceTree = "<group>"; };
@@ -334,13 +345,20 @@
 		C0791CA32116B86F0066CE62 /* PushNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManager.swift; sourceTree = "<group>"; };
 		C0791CA52117E7A20066CE62 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		C0791CA72117E80C0066CE62 /* NotificationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStorage.swift; sourceTree = "<group>"; };
+		C07D8F91225EF63B00A59345 /* Lunch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lunch.swift; sourceTree = "<group>"; };
+		C07D9127225EF72100A59345 /* Realm+KL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Realm+KL.swift"; sourceTree = "<group>"; };
+		C07D912B225EF76700A59345 /* UserDefaults+KL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+KL.swift"; sourceTree = "<group>"; };
+		C07D912E225EF78200A59345 /* Grade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grade.swift; sourceTree = "<group>"; };
+		C07D9132225EF7A200A59345 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		C07D9136225EF7E000A59345 /* Optionals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Optionals.swift; sourceTree = "<group>"; };
+		C07D9137225EF7E000A59345 /* Refreshable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Refreshable.swift; sourceTree = "<group>"; };
+		C07D9138225EF7E000A59345 /* BadgeTetheredPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeTetheredPreferences.swift; sourceTree = "<group>"; };
+		C07D9139225EF7E000A59345 /* Callback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Callback.swift; sourceTree = "<group>"; };
+		C07D913A225EF7E000A59345 /* Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decodable.swift; sourceTree = "<group>"; };
 		C07EE28C2119EEF50034B383 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		C080E83B211E31AC000A67DB /* BetweenClassView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BetweenClassView.xib; sourceTree = "<group>"; };
 		C080E83D211E320D000A67DB /* BetweenClassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetweenClassView.swift; sourceTree = "<group>"; };
 		C0815911211B46DE00522B25 /* SettingsColorPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsColorPickerController.swift; sourceTree = "<group>"; };
-		C081C2E71FE450F0008073F3 /* LunchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchManager.swift; sourceTree = "<group>"; };
-		C081C2E91FE45108008073F3 /* LunchMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchMenu.swift; sourceTree = "<group>"; };
-		C081C2EC1FE45120008073F3 /* GetMenuWebCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMenuWebCall.swift; sourceTree = "<group>"; };
 		C08FBF9C210FB290005812F1 /* TodayDoneCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodayDoneCell.xib; sourceTree = "<group>"; };
 		C08FBF9E210FB29C005812F1 /* TodayDoneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayDoneCell.swift; sourceTree = "<group>"; };
 		C0929F402110C612004A373B /* PrefsActionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsActionCell.swift; sourceTree = "<group>"; };
@@ -521,14 +539,6 @@
 				C0107A3D2123278F00C9A6D7 /* SurveyWebCall.swift */,
 			);
 			name = "Web Call";
-			sourceTree = "<group>";
-		};
-		C01539B92110EE7E0059C807 /* Storage */ = {
-			isa = PBXGroup;
-			children = (
-				C01539BA2110EE890059C807 /* ShowAllergyStorage.swift */,
-			);
-			name = Storage;
 			sourceTree = "<group>";
 		};
 		C01573BA20C462DC008CACA5 /* Today */ = {
@@ -932,6 +942,42 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		C07D9126225EF71400A59345 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				C07D9127225EF72100A59345 /* Realm+KL.swift */,
+			);
+			name = Realm;
+			sourceTree = "<group>";
+		};
+		C07D912A225EF75900A59345 /* Defaults */ = {
+			isa = PBXGroup;
+			children = (
+				C07D912B225EF76700A59345 /* UserDefaults+KL.swift */,
+			);
+			name = Defaults;
+			sourceTree = "<group>";
+		};
+		C07D9131225EF78B00A59345 /* Networking Targets */ = {
+			isa = PBXGroup;
+			children = (
+				C07D9132225EF7A200A59345 /* API.swift */,
+			);
+			name = "Networking Targets";
+			sourceTree = "<group>";
+		};
+		C07D9135225EF7BD00A59345 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				C07D9138225EF7E000A59345 /* BadgeTetheredPreferences.swift */,
+				C07D9139225EF7E000A59345 /* Callback.swift */,
+				C07D913A225EF7E000A59345 /* Decodable.swift */,
+				C07D9136225EF7E000A59345 /* Optionals.swift */,
+				C07D9137225EF7E000A59345 /* Refreshable.swift */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
 		C080E83A211E316A000A67DB /* Between Class */ = {
 			isa = PBXGroup;
 			children = (
@@ -953,20 +999,9 @@
 		C081C2E61FE4509F008073F3 /* Lunch */ = {
 			isa = PBXGroup;
 			children = (
-				C01539B92110EE7E0059C807 /* Storage */,
-				C081C2EB1FE45111008073F3 /* WebCall */,
-				C081C2E71FE450F0008073F3 /* LunchManager.swift */,
-				C081C2E91FE45108008073F3 /* LunchMenu.swift */,
+				C07D8F91225EF63B00A59345 /* Lunch.swift */,
 			);
 			name = Lunch;
-			sourceTree = "<group>";
-		};
-		C081C2EB1FE45111008073F3 /* WebCall */ = {
-			isa = PBXGroup;
-			children = (
-				C081C2EC1FE45120008073F3 /* GetMenuWebCall.swift */,
-			);
-			name = WebCall;
 			sourceTree = "<group>";
 		};
 		C08FBF99210FB26E005812F1 /* Today Done */ = {
@@ -1134,6 +1169,8 @@
 			isa = PBXGroup;
 			children = (
 				C0C176581FAA5F450059E956 /* Scheme.swift */,
+				C07D912E225EF78200A59345 /* Grade.swift */,
+				C07D9131225EF78B00A59345 /* Networking Targets */,
 				C0A92946225D9EE000CE2D12 /* Date */,
 			);
 			name = Common;
@@ -1150,6 +1187,8 @@
 		C0A92947225D9EEE00CE2D12 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				C07D912A225EF75900A59345 /* Defaults */,
+				C07D9126225EF71400A59345 /* Realm */,
 				C0A92948225D9F1D00CE2D12 /* Date */,
 				C0A9294D225DA02E00CE2D12 /* User Interface */,
 			);
@@ -1170,6 +1209,7 @@
 			children = (
 				C0A9294B225D9F9F00CE2D12 /* Web */,
 				C0A9294A225D9F7700CE2D12 /* Date */,
+				C07D9135225EF7BD00A59345 /* Data */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1633,7 +1673,15 @@
 				"${BUILT_PRODUCTS_DIR}/AddictiveLib/AddictiveLib.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/Signals/Signals.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyUserDefaults/SwiftyUserDefaults.framework",
+				"${BUILT_PRODUCTS_DIR}/Timepiece/Timepiece.framework",
 				"${BUILT_PRODUCTS_DIR}/Unbox/Unbox.framework",
 				"${BUILT_PRODUCTS_DIR}/UnboxedAlamofire/UnboxedAlamofire.framework",
 			);
@@ -1642,7 +1690,15 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AddictiveLib.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Signals.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyUserDefaults.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Timepiece.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Unbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UnboxedAlamofire.framework",
 			);
@@ -1659,11 +1715,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C01ECD2E2129BEB10001C013 /* LoadingModule.swift in Sources */,
-				C01539BB2110EE890059C807 /* ShowAllergyStorage.swift in Sources */,
 				C02B91CB1FB6886E004E0D5D /* DayCourseList.swift in Sources */,
 				C051F1F3210FF841004C064F /* CoursesPrefModule.swift in Sources */,
 				C01ECD342129C7950001C013 /* AfterSchoolEventsModule.swift in Sources */,
 				C09BF050210AE5370073C217 /* CalendarController.swift in Sources */,
+				C07D913D225EF7E100A59345 /* Refreshable.swift in Sources */,
 				C0A0327F2037A5B20046575C /* RegistrationWebCall.swift in Sources */,
 				C0C455132123C1D0004A41ED /* TimeEventAttachmentView.swift in Sources */,
 				C00232A71FA37EFC0019D328 /* CourseSchedule.swift in Sources */,
@@ -1673,6 +1729,7 @@
 				C0A3D57C21093545004F5049 /* TodayController.swift in Sources */,
 				C05BD67D2110EDA200B5B399 /* LunchPrefsModule.swift in Sources */,
 				C0C785B5210FDB8E003A5EB8 /* TitleCell.swift in Sources */,
+				C07D9133225EF7A200A59345 /* API.swift in Sources */,
 				C0AB03552122556400FA5412 /* HubController.swift in Sources */,
 				C0CB9C201FE4698000437C5D /* EventList.swift in Sources */,
 				C0315D71211B244400323661 /* PrefToggleCell.swift in Sources */,
@@ -1697,7 +1754,7 @@
 				5BD285DD1B03CF29007A0472 /* AppDelegate.swift in Sources */,
 				C01ECD412129D43C0001C013 /* TodayNextDayModule.swift in Sources */,
 				C060011A211B280000ECAD1A /* BlockMeta.swift in Sources */,
-				C081C2E81FE450F0008073F3 /* LunchManager.swift in Sources */,
+				C07D9143225EF7E100A59345 /* Decodable.swift in Sources */,
 				C0600127211B2C5100ECAD1A /* BlockPrefsModule.swift in Sources */,
 				C05BD67A2110E2E500B5B399 /* VariationPrefsModule.swift in Sources */,
 				C0791CA82117E80C0066CE62 /* NotificationStorage.swift in Sources */,
@@ -1705,6 +1762,7 @@
 				C0A167AE210E6AB200DB6BC4 /* ErrorReloadable.swift in Sources */,
 				C0A167AC210E679700DB6BC4 /* ErrorCell.swift in Sources */,
 				C01ECD2A2129BC0A0001C013 /* DayNoClassModule.swift in Sources */,
+				C07D913F225EF7E100A59345 /* BadgeTetheredPreferences.swift in Sources */,
 				C036366B1FACF7EA008FC9A9 /* ScheduleManager.swift in Sources */,
 				C0FCDBC4210978D00080A883 /* SubtitleNavigationItem.swift in Sources */,
 				C0BD0F9F2120CBE400C8F403 /* NoticeCell.swift in Sources */,
@@ -1718,6 +1776,7 @@
 				C0E356722122746D00FDDE2F /* TabController.swift in Sources */,
 				C01ECD372129D12B0001C013 /* TodayNoClassModule.swift in Sources */,
 				C0760227210F8A0800398827 /* NoClassCell.swift in Sources */,
+				C07D912F225EF78200A59345 /* Grade.swift in Sources */,
 				C01ECD3D2129D2C70001C013 /* TodayInClassModule.swift in Sources */,
 				C05B7A111FCE0C71007C735C /* BlockCourseList.swift in Sources */,
 				C04653C8210936B9004AD09C /* BlockCell.swift in Sources */,
@@ -1726,10 +1785,12 @@
 				C0C7EA4921135D2400717B53 /* KnightlifePayload.swift in Sources */,
 				C0CB9C151FE4668B00437C5D /* EventAudience.swift in Sources */,
 				C0DF4F04210CEB26002A433C /* DayBundle.swift in Sources */,
+				C07D9141225EF7E100A59345 /* Callback.swift in Sources */,
 				C02A2B141FAD527600D3A9CD /* Block.swift in Sources */,
 				C0B04F461FD177EC00F5D116 /* MeetingPrefModule.swift in Sources */,
 				C07EE28D2119EEF50034B383 /* CalendarView.swift in Sources */,
 				C0A123402115FF4000A72CD8 /* SettingsCourseColorCell.swift in Sources */,
+				C07D9128225EF72100A59345 /* Realm+KL.swift in Sources */,
 				C02E5551211FA1AE00043C9E /* EventGradeStorage.swift in Sources */,
 				C0A5F023210B9FBA00606ED3 /* BlockPayload.swift in Sources */,
 				C00232A51FA37E760019D328 /* Course.swift in Sources */,
@@ -1738,9 +1799,10 @@
 				C0C455162123D414004A41ED /* TimeEventListModule.swift in Sources */,
 				C0107A3B212324D600C9A6D7 /* BottomPrefsModule.swift in Sources */,
 				C0CB9C131FE464D900437C5D /* Event.swift in Sources */,
+				C07D913B225EF7E100A59345 /* Optionals.swift in Sources */,
 				C03BA78F21209DAA00AB9DA2 /* PushRefreshListener.swift in Sources */,
 				C08FBF9F210FB29C005812F1 /* TodayDoneCell.swift in Sources */,
-				C081C2EA1FE45108008073F3 /* LunchMenu.swift in Sources */,
+				C07D8F92225EF63B00A59345 /* Lunch.swift in Sources */,
 				C093434B1FAA1B7A00629A84 /* BlockID.swift in Sources */,
 				C036366D1FACF864008FC9A9 /* GetScheduleWebCall.swift in Sources */,
 				C0D6E9442107BC7A004BD0F4 /* Calendar+KL.swift in Sources */,
@@ -1758,11 +1820,11 @@
 				C0FCDBD0210AB5F60080A883 /* EventAttachmentView.swift in Sources */,
 				C0A1FB162001B36C004146CE /* ScheduleVariationStorage.swift in Sources */,
 				C060011E211B291A00ECAD1A /* BlockMetaID.swift in Sources */,
+				C07D912C225EF76700A59345 /* UserDefaults+KL.swift in Sources */,
 				C0600121211B29C400ECAD1A /* BlockMetaStorage.swift in Sources */,
 				C04D1EC4210FD7B90001C99C /* LunchItemCell.swift in Sources */,
 				C0CB9C191FE468F500437C5D /* GetEventsWebCall.swift in Sources */,
 				C060011C211B28E100ECAD1A /* BlockMetaManager.swift in Sources */,
-				C081C2ED1FE45120008073F3 /* GetMenuWebCall.swift in Sources */,
 				C0CB9C101FE4634000437C5D /* EventManager.swift in Sources */,
 				C0ACFD1A21116863002886A2 /* TodayStatusCell.swift in Sources */,
 				C0A167B5210E6FB800DB6BC4 /* LoadingCell.swift in Sources */,
@@ -1780,25 +1842,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C07D8F93225EF63B00A59345 /* Lunch.swift in Sources */,
 				C01A6C682118C9C7000B7442 /* DaySchedule.swift in Sources */,
 				C0600124211B2BC400ECAD1A /* BlockMetaManager.swift in Sources */,
 				C01A6C602118C9A6000B7442 /* EventAudience.swift in Sources */,
 				C07CB590211BF44F00010FEA /* UIColor+KL.swift in Sources */,
 				C06BB7D2211E33CB006EC66F /* BeforeSchoolView.swift in Sources */,
+				C07D9134225EF7A200A59345 /* API.swift in Sources */,
 				C0CF76F7211E24C800EC35B4 /* InClassView.swift in Sources */,
-				C01A6C772118CA3F000B7442 /* LunchManager.swift in Sources */,
 				C0600123211B2BC400ECAD1A /* BlockMeta.swift in Sources */,
+				C07D9130225EF78200A59345 /* Grade.swift in Sources */,
+				C07D9142225EF7E100A59345 /* Callback.swift in Sources */,
 				C01A6C702118CA1A000B7442 /* CourseManager.swift in Sources */,
 				C01A6C6B2118C9D3000B7442 /* GetScheduleWebCall.swift in Sources */,
 				C01A6C692118C9C7000B7442 /* DateSchedule.swift in Sources */,
-				C01A6C762118CA3F000B7442 /* GetMenuWebCall.swift in Sources */,
 				C01A6C5F2118C9A6000B7442 /* Event.swift in Sources */,
 				C01A6C622118C9BA000B7442 /* Date+KL.swift in Sources */,
-				C01A6C7B2118CA5D000B7442 /* ShowAllergyStorage.swift in Sources */,
 				C01A6C5D2118C99B000B7442 /* EventManager.swift in Sources */,
 				C080E83E211E320D000A67DB /* BetweenClassView.swift in Sources */,
 				C01A6C732118CA1F000B7442 /* Course.swift in Sources */,
 				C01A6C672118C9C7000B7442 /* BlockAnalyst.swift in Sources */,
+				C07D9129225EF72100A59345 /* Realm+KL.swift in Sources */,
 				C01A6C6C2118C9E5000B7442 /* KnightlifePayload.swift in Sources */,
 				C01A6C5C2118C989000B7442 /* DayBundle.swift in Sources */,
 				C01A6C792118CA4C000B7442 /* NextSchooldayWebCall.swift in Sources */,
@@ -1814,6 +1878,7 @@
 				C01A6C5E2118C99F000B7442 /* GetEventsWebCall.swift in Sources */,
 				C0600122211B2BC400ECAD1A /* BlockMetaStorage.swift in Sources */,
 				C01A6C7C2118CA64000B7442 /* MeetingPrefModule.swift in Sources */,
+				C07D912D225EF76700A59345 /* UserDefaults+KL.swift in Sources */,
 				C01A6C5A2118C974000B7442 /* Block.swift in Sources */,
 				C040571D211DDB0200C7A1A4 /* CustomView.swift in Sources */,
 				C01A6C6E2118CA08000B7442 /* BlockPayload.swift in Sources */,
@@ -1824,15 +1889,18 @@
 				C0600125211B2BC400ECAD1A /* BlockMetaID.swift in Sources */,
 				C03BA79021209DAA00AB9DA2 /* PushRefreshListener.swift in Sources */,
 				C03BA78B21209AE400AB9DA2 /* PushUnboxRefresh.swift in Sources */,
+				C07D9144225EF7E100A59345 /* Decodable.swift in Sources */,
 				C01A6C6F2118CA08000B7442 /* DayPayload.swift in Sources */,
 				C0A9294E225DA04300CE2D12 /* TableSection+KL.swift in Sources */,
 				C01A6C752118CA2D000B7442 /* Scheme.swift in Sources */,
+				C07D9140225EF7E100A59345 /* BadgeTetheredPreferences.swift in Sources */,
 				C02E5552211FA34B00043C9E /* EventGradeStorage.swift in Sources */,
 				C01A6C652118C9BA000B7442 /* TimeDuration.swift in Sources */,
-				C01A6C782118CA3F000B7442 /* LunchMenu.swift in Sources */,
 				C01A6C4E2118C892000B7442 /* TodayViewController.swift in Sources */,
 				C01A6C712118CA1F000B7442 /* DayCourseList.swift in Sources */,
 				C01A6C612118C9A6000B7442 /* EventList.swift in Sources */,
+				C07D913C225EF7E100A59345 /* Optionals.swift in Sources */,
+				C07D913E225EF7E100A59345 /* Refreshable.swift in Sources */,
 				C01A6C592118C942000B7442 /* TodayManager.swift in Sources */,
 				C0405721211DE59700C7A1A4 /* LoadingView.swift in Sources */,
 			);

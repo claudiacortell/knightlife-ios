@@ -16,7 +16,7 @@ struct DayBundle {
 	
 	let schedule: DateSchedule
 	let events: EventList
-	let menu: LunchMenu
+	let menu: Lunch
 	
 }
 

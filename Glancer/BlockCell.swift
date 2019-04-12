@@ -69,7 +69,7 @@ class BlockCell: TableCell {
 			if let menu = self.composite.lunch {
 				let lunchView = LunchAttachmentView(menuName: menu.title)
 				lunchView.clickHandler = {
-					self.controller.openLunchMenu(menu: menu)
+					self.controller.openLunch(menu: menu)
 				}
 				cell.attachmentsStack.addArrangedSubview(lunchView)
 			}

@@ -212,7 +212,7 @@ class DayController: UIViewController, TableHandlerDataSource, ErrorReloadable {
 		layout.addSection().addSpacerCell().setBackgroundColor(.clear).setHeight(35)
 	}
 	
-	func openLunchMenu(menu: LunchMenu) {
+	func openLunch(menu: Lunch) {
 		guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Lunch") as? LunchController else {
 			return
 		}

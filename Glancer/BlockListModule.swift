@@ -67,7 +67,7 @@ struct CompositeBlock {
 	let schedule: DateSchedule
 	let block: Block
 	
-	let lunch: LunchMenu?
+	let lunch: Lunch?
 	let events: [Event]
 	
 }

@@ -11,9 +11,21 @@ target 'Glancer' do
   pod 'AddictiveLib'
   pod 'Hero'
   pod 'SnapKit'
+  pod 'Moya'
+  pod 'RealmSwift'
+  pod 'Signals'
+  pod 'SwiftyJSON'
+  pod 'SwiftyUserDefaults'
+  pod 'Timepiece'
 end
 
 target 'TodayWidget' do
   pod 'AddictiveLib'
   pod 'SnapKit'
+  pod 'Moya'
+  pod 'RealmSwift'
+  pod 'Signals'
+  pod 'SwiftyJSON'
+  pod 'SwiftyUserDefaults'
+  pod 'Timepiece'
 end

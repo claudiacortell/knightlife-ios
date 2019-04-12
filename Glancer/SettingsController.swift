@@ -34,7 +34,7 @@ class SettingsController: UIViewController, TableHandlerDataSource {
 		layout.addModule(BlockPrefsModule(controller: self))
 		layout.addModule(VariationPrefsModule())
 		layout.addModule(EventsPrefsModule(controller: self))
-		layout.addModule(LunchPrefsModule())
+//		layout.addModule(LunchPrefsModule())
 		layout.addModule(BottomPrefsModule())
 	}
 	

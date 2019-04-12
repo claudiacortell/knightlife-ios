@@ -18,8 +18,8 @@ class LunchPrefsModule: TableModule {
 		section.addCell(TitleCell(title: "Lunch"))
 		section.addDivider()
 
-		section.addCell(PrefToggleCell(title: "Allergy Warnings", on: LunchManager.instance.showAllergens) {
-			LunchManager.instance.setShowAllergens(value: $0)
+		section.addCell(PrefToggleCell(title: "Allergy Warnings", on: true) { _ in
+//			LunchManager.instance.setShowAllergens(value: $0)
 		})
 
 		section.addDivider()
