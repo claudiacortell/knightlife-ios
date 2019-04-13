@@ -26,16 +26,12 @@ class SettingsBlockController: UIViewController, TableHandlerDataSource {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		self.navigationItem.title = self.meta.block.displayName
+		self.navigationItem.title = self.meta.id.displayName
 		self.tableHandler.reload()
 	}
 	
 	private func needsNotificationsUpdate() {
 		NotificationManager.instance.scheduleShallowNotifications()
-	}
-	
-	private func didChangeSettings() {
-		BlockMetaManager.instance.metaChanged(meta: self.meta)
 	}
 	
 	func buildCells(handler: TableHandler, layout: TableLayout) {
@@ -45,7 +41,7 @@ class SettingsBlockController: UIViewController, TableHandlerDataSource {
 		about.addCell(TitleCell(title: "About"))
 		about.addDivider()
 		
-		if self.meta.block == .free {
+		if self.meta.id == .free {
 			about.addCell(SettingsTextCell(left: "Name", right: self.meta.customName ?? "") {
 				self.showChangeName()
 			})
@@ -65,8 +61,9 @@ class SettingsBlockController: UIViewController, TableHandlerDataSource {
 			controller.colorPicked = {
 				color in
 				
-				self.meta.color = color
-				self.didChangeSettings()
+				try! Realms.write {
+					self.meta.color = color
+				}
 			}
 			
 			self.navigationController?.pushViewController(controller, animated: true)
@@ -81,19 +78,21 @@ class SettingsBlockController: UIViewController, TableHandlerDataSource {
 		notifications.addCell(TitleCell(title: "Notifications"))
 		notifications.addDivider()
 		
-		notifications.addCell(PrefToggleCell(title: "Before Block", on: self.meta.beforeClassNotifications) {
-			self.meta.beforeClassNotifications = $0
+		notifications.addCell(PrefToggleCell(title: "Before Block", on: self.meta.beforeClassNotifications) { flag in
+			try! Realms.write {
+				self.meta.beforeClassNotifications = flag
+			}
 			
-			self.didChangeSettings()
 			self.needsNotificationsUpdate()
 		})
 		
 		notifications.addDivider()
 		
-		notifications.addCell(PrefToggleCell(title: "Block End", on: self.meta.afterClassNotifications) {
-			self.meta.afterClassNotifications = $0
+		notifications.addCell(PrefToggleCell(title: "Block End", on: self.meta.afterClassNotifications) { flag in
+			try! Realms.write {
+				self.meta.afterClassNotifications = flag
+			}
 			
-			self.didChangeSettings()
 			self.needsNotificationsUpdate()
 		})
 		
@@ -110,10 +109,12 @@ class SettingsBlockController: UIViewController, TableHandlerDataSource {
 			if let name = alert.textFields?.first?.text {
 				let trimmed = name.trimmingCharacters(in: .whitespaces)
 				
-				self.meta.customName = trimmed.count > 0 ? trimmed : nil
+				try! Realms.write {
+					self.meta.customName = trimmed.count > 0 ? trimmed : nil
+				}
+				
 				self.tableHandler.reload()
 				
-				self.didChangeSettings()
 				self.needsNotificationsUpdate()
 			}
 		})

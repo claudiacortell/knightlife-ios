@@ -835,20 +835,20 @@
 		C0600118211B27F200ECAD1A /* Block Meta */ = {
 			isa = PBXGroup;
 			children = (
-				C060011F211B29B900ECAD1A /* Prefs */,
-				C0600119211B280000ECAD1A /* BlockMeta.swift */,
 				C060011B211B28E100ECAD1A /* BlockMetaManager.swift */,
+				C0600119211B280000ECAD1A /* BlockMeta.swift */,
 				C060011D211B291A00ECAD1A /* BlockMetaID.swift */,
+				C060011F211B29B900ECAD1A /* Legacy */,
 			);
 			name = "Block Meta";
 			sourceTree = "<group>";
 		};
-		C060011F211B29B900ECAD1A /* Prefs */ = {
+		C060011F211B29B900ECAD1A /* Legacy */ = {
 			isa = PBXGroup;
 			children = (
 				C0600120211B29C400ECAD1A /* BlockMetaStorage.swift */,
 			);
-			name = Prefs;
+			name = Legacy;
 			sourceTree = "<group>";
 		};
 		C061F8082115F5B700F0374C /* Cells */ = {

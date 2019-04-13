@@ -7,28 +7,65 @@
 //
 
 import Foundation
+import RealmSwift
 import UIKit
+import Signals
 
-class BlockMeta {
+class BlockMeta: Object {
 	
-	let block: BlockMetaID
+	// Badge functions as raw BlockMetaID
+	@objc dynamic var badge: String = ""
 	
-	var color: UIColor
-	var beforeClassNotifications: Bool
-	var afterClassNotifications: Bool
+	let onUpdate = Signal<Void>()
 	
-	var customName: String?
+	var id: BlockMeta.ID {
+		return BlockMeta.ID(rawValue: self.badge)!
+	}
 	
-	init(block: BlockMetaID, color: UIColor? = nil, beforeClassNotifications: Bool? = nil, afterClassNotifications: Bool? = nil, customName: String? = nil) {
-		self.block = block
-		
-		self.color = color ?? Scheme.nullColor.color
-		
-		self.beforeClassNotifications = beforeClassNotifications ?? true
-		self.afterClassNotifications = afterClassNotifications ?? false
-		
-		self.customName = customName
+	@objc dynamic var colorString: String? = nil {
+		didSet {
+			self.onUpdate.fire()
+			BlockMetaM.onMetaUpdate.fire(self)
+		}
+	}
+	
+	@objc dynamic var customName: String? = nil {
+		didSet {
+			self.onUpdate.fire()
+			BlockMetaM.onMetaUpdate.fire(self)
+		}
+	}
+	
+	@objc dynamic var beforeClassNotifications: Bool = true {
+		didSet {
+			self.onUpdate.fire()
+			BlockMetaM.onMetaUpdate.fire(self)
+		}
+	}
+	
+	@objc dynamic var afterClassNotifications: Bool = false {
+		didSet {
+			self.onUpdate.fire()
+			BlockMetaM.onMetaUpdate.fire(self)
+		}
+	}
+	
+	override static func primaryKey() -> String {
+		return "badge"
 	}
 	
 }
 
+extension BlockMeta {
+	
+	var color: UIColor {
+		get {
+			return UIColor(hex: self.colorString ?? "") ?? Scheme.nullColor.color
+		}
+		
+		set {
+			self.colorString = newValue.toHex!
+		}
+	}
+	
+}

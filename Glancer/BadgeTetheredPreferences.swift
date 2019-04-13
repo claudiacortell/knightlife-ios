@@ -22,7 +22,7 @@ protocol BadgeTethered {
 final class BadgeTetheredPreferences: Object {
 	
 	@objc dynamic var badge: String!
-	@objc dynamic var preferences: [String: Any] = [:]
+//	@objc dynamic var preferences: [String: Any] = [:]
 	
 	override static func primaryKey() -> String {
 		return "badge"
@@ -51,11 +51,12 @@ extension BadgeTetheredPreferences {
 	
 	subscript<C: Any>(index: String) -> C? {
 		get {
-			return self.preferences[index] as? C
+			return nil
+//			return self.preferences[index] as? C
 		}
 		
 		set(newValue) {
-			self.preferences[index] = newValue
+//			self.preferences[index] = newValue
 		}
 	}
 	

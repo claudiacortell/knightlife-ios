@@ -11,44 +11,64 @@
 import Foundation
 import AddictiveLib
 import UIKit
+import Signals
+import SwiftyUserDefaults
 
-class BlockMetaManager: Manager {
+private(set) var BlockMetaM = BlockMetaManager()
+
+extension DefaultsKeys {
 	
-	static let instance = BlockMetaManager()
+	static let blockMetaMigratedToRealm = DefaultsKey<Bool>("migrated.blockmeta")
 	
-	private(set) var meta: [BlockMetaID: BlockMeta] = [:]
-	let metaUpdatedWatcher = ResourceWatcher<BlockMeta>()
+}
+
+class BlockMetaManager {
 	
-	init() {
-		super.init("Block Meta")
-		
-		self.registerStorage(BlockMetaStorage(manager: self))
+	let onMetaUpdate = Signal<BlockMeta>()
+	
+	fileprivate init() {
+
 	}
 	
-	func loadedMeta(meta: BlockMeta) {
-		self.meta[meta.block] = meta
+	func loadLegacyData() {
+		if !Defaults[.blockMetaMigratedToRealm] {
+			let oldStorage = BlockMetaStorage(manager: self)
+			StorageHub.instance.loadPrefs(oldStorage)
+			
+			Defaults[.blockMetaMigratedToRealm] = true
+		}
 	}
 	
-	func metaChanged(meta: BlockMeta) {
-		self.metaUpdatedWatcher.handle(nil, meta)
-		self.saveStorage()
-	}
-	
-	func getBlockMeta(id: BlockID) -> BlockMeta? {
-		guard let metaId = BlockMetaID.fromBlockID(block: id) else {
-			return nil
+	func loadLegacyMeta(meta: BlockMeta) {
+		try! Realms.write {
+			Realms.add(meta, update: true)
 		}
 		
-		return self.getBlockMeta(metaId: metaId)
+		print("Loaded legacy block meta for \( meta.badge )")
 	}
 	
-	func getBlockMeta(metaId: BlockMetaID) -> BlockMeta {
-		if self.meta[metaId] == nil {
-			self.meta[metaId] = BlockMeta(block: metaId)
-			self.saveStorage()
+	func getBlockMeta(block: BlockID) -> BlockMeta? {
+		if let metaId = BlockMeta.ID(id: block) {
+			return self.getBlockMeta(meta: metaId)
+		}
+		return nil
+	}
+	
+	func getBlockMeta(meta: BlockMeta.ID) -> BlockMeta {
+		let realm = Realms
+		
+		var object = realm.object(ofType: BlockMeta.self, forPrimaryKey: meta.rawValue)
+		
+		if object == nil {
+			object = BlockMeta()
+			object!.badge = meta.rawValue
+			
+			try! realm.write {
+				realm.add(object!, update: true)
+			}
 		}
 		
-		return self.meta[metaId]!
+		return object!
 	}
 	
 }

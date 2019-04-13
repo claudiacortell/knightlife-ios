@@ -29,7 +29,7 @@ class BlocksPrefCell: TableCell {
 				return
 			}
 			
-			prefCell.titleLabel.text = meta.block.displayName
+			prefCell.titleLabel.text = meta.id.displayName
 			prefCell.titleLabel.textColor = meta.color
 		}
 	}

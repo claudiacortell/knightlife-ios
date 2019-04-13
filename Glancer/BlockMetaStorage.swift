@@ -20,23 +20,24 @@ class BlockMetaStorage: StorageHandler {
 	}
 	
 	func saveData() -> Any? {
-		var data: [[String: Any]] = []
-		
-		for meta in self.manager.meta.values {
-			var metaData: [String: Any] = [:]
-			
-			metaData["block"] = meta.block.rawValue
-			metaData["color"] = meta.color.toHex
-			
-			metaData["notifications"] = meta.beforeClassNotifications
-			metaData["notifications_after"] = meta.afterClassNotifications
-			
-			metaData["name"] = meta.customName
-			
-			data.append(metaData)
-		}
-		
-		return data
+//		var data: [[String: Any]] = []
+//
+//		for meta in self.manager.meta.values {
+//			var metaData: [String: Any] = [:]
+//
+//			metaData["block"] = meta.block.rawValue
+//			metaData["color"] = meta.color.toHex
+//
+//			metaData["notifications"] = meta.beforeClassNotifications
+//			metaData["notifications_after"] = meta.afterClassNotifications
+//
+//			metaData["name"] = meta.customName
+//
+//			data.append(metaData)
+//		}
+//
+//		return data
+		return nil
 	}
 	
 	func loadData(data: Any) {
@@ -45,10 +46,12 @@ class BlockMetaStorage: StorageHandler {
 		}
 		
 		for item in data {
-			guard let rawBlock = item["block"] as? Int, let block = BlockMetaID(rawValue: rawBlock) else {
+			guard let rawBlock = item["block"] as? Int else {
 				print("Invalid Block Meta ID")
 				continue
 			}
+			
+			let block = BlockMeta.ID.values[rawBlock]
 			
 			guard let rawColor = item["color"] as? String, let color = UIColor(hex: rawColor) else {
 				print("Invalid Block Meta Color")
@@ -69,10 +72,15 @@ class BlockMetaStorage: StorageHandler {
 				}
 			}
 			
-			let meta = BlockMeta(block: block, color: color, beforeClassNotifications: beforeClassNotifications, afterClassNotifications: afterClassNotifications, customName: name)
-			self.manager.loadedMeta(meta: meta)
+			let meta = BlockMeta()
 			
-			print("Successfully loaded Block Meta: \(meta.block.displayName)")
+			meta.badge = block.rawValue
+			meta.color = color
+			meta.beforeClassNotifications = beforeClassNotifications
+			meta.afterClassNotifications = afterClassNotifications ?? false
+			meta.customName = name
+			
+			self.manager.loadLegacyMeta(meta: meta)
 		}
 	}
 	

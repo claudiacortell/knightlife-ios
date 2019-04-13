@@ -8,48 +8,24 @@
 
 import Foundation
 
-enum BlockMetaID: Int {
+extension BlockMeta {
 	
-	case lunch
-	case activities
-	case advisory
-	case classMeeting
-	case assembly
-	case x
-	
-	case free
-	
-	static var values: [BlockMetaID] = [
-		.free,
-		x,
-		.lunch,
-		.activities,
-		.advisory,
-		.classMeeting,
-		.assembly]
-
-	static func fromBlockID(block: BlockID) -> BlockMetaID? {
-		switch block {
-		case .lab:
-			return nil
-		case .custom:
-			return nil
-		case .x:
-			return .x
-		case .lunch:
-			return .lunch
-		case .activities:
-			return .activities
-		case .advisory:
-			return .advisory
-		case .classMeeting:
-			return .classMeeting
-		case .assembly:
-			return .assembly
-		default:
-			return .free
-		}
+	enum ID: String {
+		
+		case lunch
+		case activities
+		case advisory
+		case classMeeting
+		case assembly
+		case x
+		
+		case free
+		
 	}
+	
+}
+
+extension BlockMeta.ID {
 	
 	var displayName: String {
 		switch self {
@@ -68,6 +44,48 @@ enum BlockMetaID: Int {
 		case .free:
 			return "Free Blocks"
 		}
+	}
+	
+}
+
+extension BlockMeta.ID {
+	
+	static var values: [BlockMeta.ID] = [
+		.lunch,
+		.activities,
+		.advisory,
+		.classMeeting,
+		.assembly,
+		.x,
+		.free]
+	
+}
+
+extension BlockMeta.ID {
+	
+	init?(id: BlockID) {
+		
+		switch id {
+		case .lab:
+			return nil
+		case .custom:
+			return nil
+		case .x:
+			self = .x
+		case .lunch:
+			self = .lunch
+		case .activities:
+			self = .activities
+		case .advisory:
+			self = .advisory
+		case .classMeeting:
+			self = .classMeeting
+		case .assembly:
+			self = .assembly
+		default:
+			self = .free
+		}
+		
 	}
 	
 }

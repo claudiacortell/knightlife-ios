@@ -13,9 +13,7 @@ import SwiftyUserDefaults
 let Defaults = UserDefaults(suiteName: "group.KnightLife.MAD.Storage")!
 
 extension DefaultsKeys {
-	
-	static let migratedToRealm = DefaultsKey<Bool>("migratedToRealm")
-	
+		
 	static let deviceId = DefaultsKey<String>("deviceId")
 	
 	static let userGrade = DefaultsKey<Int?>("userGrade")

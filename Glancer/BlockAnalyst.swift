@@ -48,7 +48,7 @@ class BlockAnalyst {
 			return course.name
 		} else {
 			guard let previous = self.getLabAssociatedBlock() else {
-				if let blockMeta = BlockMetaManager.instance.getBlockMeta(id: self.block.id), blockMeta.block == .free {
+				if let blockMeta = BlockMetaM.getBlockMeta(block: self.block.id), blockMeta.id == .free {
 					return blockMeta.customName ?? self.block.id.displayName
 				}
 				
@@ -59,7 +59,7 @@ class BlockAnalyst {
 			let previousAnalyst = BlockAnalyst(schedule: self.schedule, block: previous)
 			if previousAnalyst.getCourses().isEmpty {
 				let previousNameBase: String = {
-					if let previousMeta = BlockMetaManager.instance.getBlockMeta(id: previous.id), previousMeta.block == .free {
+					if let previousMeta = BlockMetaM.getBlockMeta(block: previous.id), previousMeta.id == .free {
 						return previousMeta.customName ?? previous.id.shortName
 					}
 					return previous.id.shortName
@@ -86,7 +86,7 @@ class BlockAnalyst {
 			return previousAnalyst.getColor()
 		}
 		
-		if let blockMeta = BlockMetaManager.instance.getBlockMeta(id: self.block.id) {
+		if let blockMeta = BlockMetaM.getBlockMeta(block: self.block.id) {
 			return blockMeta.color
 		}
 		
@@ -110,7 +110,7 @@ class BlockAnalyst {
 			return course.showBeforeClassNotifications
 		}
 		
-		if let blockMeta = BlockMetaManager.instance.getBlockMeta(id: self.block.id) {
+		if let blockMeta = BlockMetaM.getBlockMeta(block: self.block.id) {
 			return blockMeta.beforeClassNotifications
 		}
 		
@@ -127,7 +127,7 @@ class BlockAnalyst {
 			return course.showAfterClassNotifications
 		}
 		
-		if let blockMeta = BlockMetaManager.instance.getBlockMeta(id: self.block.id) {
+		if let blockMeta = BlockMetaM.getBlockMeta(block: self.block.id) {
 			return blockMeta.afterClassNotifications
 		}
 		

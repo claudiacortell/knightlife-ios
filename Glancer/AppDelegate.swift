@@ -46,6 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 		_ = CourseManager.instance
 		_ = EventManager.instance
 		
+		BlockMetaM.loadLegacyData()
+		
         return true
     }
 	

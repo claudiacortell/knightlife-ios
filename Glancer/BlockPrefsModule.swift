@@ -27,30 +27,30 @@ class BlockPrefsModule: TableModule {
 		section.addCell(TitleCell(title: "Block Configuration"))
 		section.addDivider()
 
-		section.addCell(BlocksPrefCell(module: self, meta: BlockMetaManager.instance.getBlockMeta(metaId: .free)))
+		section.addCell(BlocksPrefCell(module: self, meta: BlockMetaM.getBlockMeta(meta: .free)))
 		section.addDivider()
-		section.addCell(BlocksPrefCell(module: self, meta: BlockMetaManager.instance.getBlockMeta(metaId: .x)))
+		section.addCell(BlocksPrefCell(module: self, meta: BlockMetaM.getBlockMeta(meta: .x)))
 		section.addDivider()
 		
 		section.addSpacerCell().setBackgroundColor(.clear).setHeight(35 / 2)
 		
 		section.addDivider()
-		section.addCell(BlocksPrefCell(module: self, meta: BlockMetaManager.instance.getBlockMeta(metaId: .lunch)))
+		section.addCell(BlocksPrefCell(module: self, meta: BlockMetaM.getBlockMeta(meta: .lunch)))
 		section.addDivider()
 
-		section.addCell(BlocksPrefCell(module: self, meta: BlockMetaManager.instance.getBlockMeta(metaId: .activities)))
+		section.addCell(BlocksPrefCell(module: self, meta: BlockMetaM.getBlockMeta(meta: .activities)))
 		section.addDivider()
 		
-		section.addCell(BlocksPrefCell(module: self, meta: BlockMetaManager.instance.getBlockMeta(metaId: .advisory)))
+		section.addCell(BlocksPrefCell(module: self, meta: BlockMetaM.getBlockMeta(meta: .advisory)))
 		section.addDivider()
 		
 		section.addSpacerCell().setBackgroundColor(.clear).setHeight(35 / 2)
 		
 		section.addDivider()
-		section.addCell(BlocksPrefCell(module: self, meta: BlockMetaManager.instance.getBlockMeta(metaId: .classMeeting)))
+		section.addCell(BlocksPrefCell(module: self, meta: BlockMetaM.getBlockMeta(meta: .classMeeting)))
 		section.addDivider()
 		
-		section.addCell(BlocksPrefCell(module: self, meta: BlockMetaManager.instance.getBlockMeta(metaId: .assembly)))
+		section.addCell(BlocksPrefCell(module: self, meta: BlockMetaM.getBlockMeta(meta: .assembly)))
 		section.addDivider()
 		
 		section.addSpacerCell().setBackgroundColor(.clear).setHeight(35)
