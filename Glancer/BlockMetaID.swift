@@ -63,7 +63,7 @@ extension BlockMeta.ID {
 
 extension BlockMeta.ID {
 	
-	init?(id: BlockID) {
+	init?(id: Block.ID) {
 		
 		switch id {
 		case .lab:

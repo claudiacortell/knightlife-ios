@@ -30,7 +30,7 @@ class GetPatchWebCall: UnboxWebCall<KnightlifePayload<PatchDatePayload>, DateSch
 		var blocks: [Block] = []
 		
 		for responseBlock in content.blocks {
-			guard let id = BlockID.fromStringValue(name: responseBlock.id) else {
+			guard let id = Block.ID(rawValue: responseBlock.id) else {
 				print("Invalid block id: \(responseBlock.id)")
 				continue
 			}

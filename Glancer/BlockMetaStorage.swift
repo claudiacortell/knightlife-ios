@@ -75,10 +75,10 @@ class BlockMetaStorage: StorageHandler {
 			let meta = BlockMeta()
 			
 			meta.badge = block.rawValue
-			meta.color = color
-			meta.beforeClassNotifications = beforeClassNotifications
-			meta.afterClassNotifications = afterClassNotifications ?? false
-			meta.customName = name
+			meta._color = color.toHex!
+			meta._beforeClassNotifications = beforeClassNotifications
+			meta._afterClassNotifications = afterClassNotifications ?? false
+			meta._customName = name
 			
 			self.manager.loadLegacyMeta(meta: meta)
 		}

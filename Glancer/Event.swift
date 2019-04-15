@@ -17,7 +17,7 @@ protocol Event {
 
 struct BlockEvent: Event {
 	
-	let block: BlockID
+	let block: Block.ID
 	let description: String
 	
 	let audience: [EventAudience]
@@ -60,9 +60,9 @@ extension Event {
 	}
 	
 	func getMostRelevantAudience() -> EventAudience? {
-		let userGrade = EventManager.instance.userGrade!
+		let userGrade = Grade.userGrade
 		
-		if let gradeAudience = self.getAudienceFor(grade: userGrade) {
+		if userGrade != nil, let gradeAudience = self.getAudienceFor(grade: userGrade!) {
 			return gradeAudience
 		}
 		
@@ -70,7 +70,7 @@ extension Event {
 	}
 	
 	func isRelevantToUser() -> Bool {
-		if EventManager.instance.userGrade == nil {
+		if Grade.userGrade == nil {
 			return true
 		}
 		
@@ -78,7 +78,7 @@ extension Event {
 	}
 	
 	func completeDescription() -> String {
-		let userGrade = EventManager.instance.userGrade
+		let userGrade = Grade.userGrade
 		
 		let addDescriptionPunctuation = !(self.description.last == "." || self.description.last == "?" || self.description.last == "!")
 

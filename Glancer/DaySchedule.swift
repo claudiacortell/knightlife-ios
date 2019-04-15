@@ -33,7 +33,7 @@ extension DaySchedule: Equatable {
 		return blocks
 	}
 	
-	func hasBlock(id: BlockID) -> Bool {
+	func hasBlock(id: Block.ID) -> Bool {
 		return getBlock(id: id) != nil
 	}
 	
@@ -41,7 +41,7 @@ extension DaySchedule: Equatable {
 		return self.blocks.contains(block)
 	}
 	
-	func getBlock(id: BlockID) -> Block? {
+	func getBlock(id: Block.ID) -> Block? {
 		for block in self.blocks {
 			if block.id == id {
 				return block

@@ -65,7 +65,7 @@ extension DateSchedule: Equatable {
 		return self.blocks.filter({ $0.variation == nil || allVariations || $0.variation! == filterVariation })
 	}
 	
-	func hasBlock(_ id: BlockID) -> Bool {
+	func hasBlock(_ id: Block.ID) -> Bool {
 		return getBlock(id) != nil
 	}
 	
@@ -73,7 +73,7 @@ extension DateSchedule: Equatable {
 		return self.getBlocks().contains(block)
 	}
 	
-	func getBlock(_ id: BlockID) -> Block? {
+	func getBlock(_ id: Block.ID) -> Block? {
 		for block in self.getBlocks() {
 			if block.id == id {
 				return block

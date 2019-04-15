@@ -18,7 +18,7 @@ struct EventList {
 
 extension EventList {
 	
-	func getEventsByBlock(block: BlockID) -> [BlockEvent] {
+	func getEventsByBlock(block: Block.ID) -> [BlockEvent] {
 		return self.relevantEvents.filter({ $0 is BlockEvent }).map({ $0 as! BlockEvent }).filter({ $0.block == block })
 	}
 	

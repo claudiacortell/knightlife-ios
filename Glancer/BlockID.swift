@@ -8,117 +8,80 @@
 
 import Foundation
 
-enum BlockID: Int {
+extension Block {
 	
-	case a
-	case b
-	case c
-	case d
-	case e
-	case f
-	case g
-	case x
-    case lunch
-	case activities
-	case lab
-	case custom
-	case advisory
-	case classMeeting
-	case assembly
-	case none // Only used for blank Courses. Shouldn't ever really be used for anything else
-	
-	var technicalValue: String {
-		switch self {
-		case .a:
-			return "a"
-		case .b:
-			return "b"
-		case .c:
-			return "c"
-		case .d:
-			return "d"
-		case .e:
-			return "e"
-		case .f:
-			return "f"
-		case .g:
-			return "g"
-		case .x:
-			return "x"
-		case .lunch:
-			return "lunch"
-		case .activities:
-			return "activities"
-		case .lab:
-			return "lab"
-		case .custom:
-			return "custom"
-		case .advisory:
-			return "advisory"
-		case .classMeeting:
-			return "class_meeting"
-		case .assembly:
-			return "assembly"
-		case .none:
-			return "none"
+	enum ID: String {
+		
+		case a = "a"
+		case b = "b"
+		case c = "c"
+		case d = "d"
+		case e = "e"
+		case f = "f"
+		case g = "g"
+		case x = "x"
+		case lunch = "lunch"
+		case activities = "activities"
+		case lab = "lab"
+		case custom = "custom"
+		case advisory = "advisory"
+		case classMeeting = "class_meeting"
+		case assembly = "assembly"
+		
+		init?(index: Int) {
+			let values: [Block.ID] = [.a, .b, .c, .d, .e, .f, .g, .x, .lunch, .activities, .lab, .custom, .advisory, .classMeeting, .assembly]
+			if !values.indices.contains(index) {
+				return nil
+			}
+			
+			self = values[index]
 		}
-	}
-	
-	var shortName: String {
-		switch self {
-		case .a:
-			return "A"
-		case .b:
-			return "B"
-		case .c:
-			return "C"
-		case .d:
-			return "D"
-		case .e:
-			return "E"
-		case .f:
-			return "F"
-		case .g:
-			return "G"
-		case .x:
-			return "X"
-		case .lunch:
-			return "Lunch"
-		case .activities:
-			return "Activities"
-		case .lab:
-			return "Lab"
-		case .custom:
-			return "Special"
-		case .advisory:
-			return "Advisory"
-		case .classMeeting:
-			return "Class Meeting"
-		case .assembly:
-			return "Assembly"
-		case .none:
-			return "Not Set"
-		}
-	}
-	
-	var displayName: String {
-		if BlockID.letterBlocks.contains(self) {
-			return "\(self.shortName) Block"
-		}
-		return self.shortName
-	}
-	
-	static func fromStringValue(name: String) -> BlockID? {
-		for cur in BlockID.values {
-			if cur.technicalValue == name {
-				return cur
+		
+		var shortName: String {
+			switch self {
+			case .a:
+				return "A"
+			case .b:
+				return "B"
+			case .c:
+				return "C"
+			case .d:
+				return "D"
+			case .e:
+				return "E"
+			case .f:
+				return "F"
+			case .g:
+				return "G"
+			case .x:
+				return "X"
+			case .lunch:
+				return "Lunch"
+			case .activities:
+				return "Activities"
+			case .lab:
+				return "Lab"
+			case .custom:
+				return "Special"
+			case .advisory:
+				return "Advisory"
+			case .classMeeting:
+				return "Class Meeting"
+			case .assembly:
+				return "Assembly"
 			}
 		}
-		return nil
+		
+		var displayName: String {
+			if ID.letterBlocks.contains(self) {
+				return "\(self.shortName) Block"
+			}
+			return self.shortName
+		}
+		
+		static var letterBlocks: [ID] { return [.a, .b, .c, .d, .e, .f, .g, .x] }
+		static var academicBlocks: [ID] { return [.a, .b, .c, .d, .e, .f, .g] }
+		
 	}
 	
-	static var values: [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x, .custom, .activities, .lab, .lunch, .advisory, .classMeeting, .assembly, .none] }
-	static var letterBlocks: [BlockID] { return [.a, .b, .c, .d, .e, .f, .g, .x] }
-	static var academicBlocks: [BlockID] { return [.a, .b, .c, .d, .e, .f, .g] }
-
 }

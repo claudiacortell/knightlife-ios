@@ -44,14 +44,38 @@ enum Grade: Int {
 	
 }
 
+extension DefaultsKeys {
+	
+	static let gradeMigratedToRealm = DefaultsKey<Bool>("migrated.grade")
+	static let gradeLegacy = DefaultsKey<Int>("events.grade")
+	
+}
+
 extension Grade {
 	
 	static var userGrade: Grade? {
 		get {
+			// Not yet migrated so fetch via legacy
+			if !Defaults[.gradeMigratedToRealm] {
+				let legacyGrade = Defaults[.gradeLegacy]
+				
+				if let grade = Grade(rawValue: legacyGrade) {
+					// Save legacy in new value
+					Defaults[.userGrade] = grade.rawValue
+					
+					print("Loaded user legacy grade \( grade.singular )")
+					
+					return grade
+				}
+			}
+			
 			return Grade(rawValue: Defaults[.userGrade] ?? -1)
 		}
 		
 		set {
+			// Set migrated to true so we don't accidentally overwrite new settings
+			Defaults[.gradeMigratedToRealm] = true
+			
 			Defaults[.userGrade] = newValue == nil ? nil : newValue!.rawValue
 		}
 	}

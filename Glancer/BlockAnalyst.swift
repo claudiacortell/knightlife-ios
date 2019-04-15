@@ -20,11 +20,11 @@ class BlockAnalyst {
 	}
 	
 	func getCourse() -> Course? {
-		return self.getCourses().courses.first
+		return self.getCourses().first
 	}
 	
-	func getCourses() -> BlockCourseList {
-		return CourseManager.instance.getCourses(schedule: self.schedule, block: block.id)
+	func getCourses() -> [Course] {
+		return CourseM.getCourses(schedule: self.schedule, block: block.id)
 	}
 	
 	func getLabAssociatedBlock() -> Block? {
@@ -107,7 +107,7 @@ class BlockAnalyst {
 	
 	func shouldShowBeforeClassNotifications() -> Bool {
 		if let course = self.getCourse() {
-			return course.showBeforeClassNotifications
+			return course.beforeClassNotifications
 		}
 		
 		if let blockMeta = BlockMetaM.getBlockMeta(block: self.block.id) {
@@ -124,7 +124,7 @@ class BlockAnalyst {
 	
 	func shouldShowAfterClassNotifications() -> Bool {
 		if let course = self.getCourse() {
-			return course.showAfterClassNotifications
+			return course.afterClassNotifications
 		}
 		
 		if let blockMeta = BlockMetaM.getBlockMeta(block: self.block.id) {

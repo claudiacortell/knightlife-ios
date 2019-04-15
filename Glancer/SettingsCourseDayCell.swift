@@ -20,7 +20,7 @@ class SettingsCourseDayCell: TableCell {
 		self.setSelection() {
 			template, path in
 			
-			selection(path, day, !course.courseSchedule.meetingDaysContains(day))
+			selection(path, day, !course.schedule.meetingDaysContains(day))
 		}
 		
 		self.setCallback() {
@@ -30,7 +30,7 @@ class SettingsCourseDayCell: TableCell {
 				return
 			}
 			
-			let selected = course.courseSchedule.meetingDaysContains(day)
+			let selected = course.schedule.meetingDaysContains(day)
 			
 			dayCell.dayLabel.text = day.displayName
 			dayCell.dayLabel.textColor = Scheme.blue.color

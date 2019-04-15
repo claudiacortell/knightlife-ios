@@ -61,9 +61,7 @@ class SettingsBlockController: UIViewController, TableHandlerDataSource {
 			controller.colorPicked = {
 				color in
 				
-				try! Realms.write {
-					self.meta.color = color
-				}
+				self.meta.color = color
 			}
 			
 			self.navigationController?.pushViewController(controller, animated: true)
@@ -79,9 +77,7 @@ class SettingsBlockController: UIViewController, TableHandlerDataSource {
 		notifications.addDivider()
 		
 		notifications.addCell(PrefToggleCell(title: "Before Block", on: self.meta.beforeClassNotifications) { flag in
-			try! Realms.write {
-				self.meta.beforeClassNotifications = flag
-			}
+			self.meta.beforeClassNotifications = flag
 			
 			self.needsNotificationsUpdate()
 		})
@@ -89,9 +85,7 @@ class SettingsBlockController: UIViewController, TableHandlerDataSource {
 		notifications.addDivider()
 		
 		notifications.addCell(PrefToggleCell(title: "Block End", on: self.meta.afterClassNotifications) { flag in
-			try! Realms.write {
-				self.meta.afterClassNotifications = flag
-			}
+			self.meta.afterClassNotifications = flag
 			
 			self.needsNotificationsUpdate()
 		})
@@ -109,9 +103,7 @@ class SettingsBlockController: UIViewController, TableHandlerDataSource {
 			if let name = alert.textFields?.first?.text {
 				let trimmed = name.trimmingCharacters(in: .whitespaces)
 				
-				try! Realms.write {
-					self.meta.customName = trimmed.count > 0 ? trimmed : nil
-				}
+				self.meta.customName = trimmed.count > 0 ? trimmed : nil
 				
 				self.tableHandler.reload()
 				

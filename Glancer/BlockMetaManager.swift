@@ -18,7 +18,7 @@ private(set) var BlockMetaM = BlockMetaManager()
 
 extension DefaultsKeys {
 	
-	static let blockMetaMigratedToRealm = DefaultsKey<Bool>("migrated.blockmeta")
+	fileprivate static let blockMetaMigratedToRealm = DefaultsKey<Bool>("migrated.blockmeta")
 	
 }
 
@@ -47,7 +47,7 @@ class BlockMetaManager {
 		print("Loaded legacy block meta for \( meta.badge )")
 	}
 	
-	func getBlockMeta(block: BlockID) -> BlockMeta? {
+	func getBlockMeta(block: Block.ID) -> BlockMeta? {
 		if let metaId = BlockMeta.ID(id: block) {
 			return self.getBlockMeta(meta: metaId)
 		}

@@ -8,6 +8,7 @@
 
 import Foundation
 import AddictiveLib
+import RealmSwift
 
 class MeetingPrefModule: StorageHandler {
 	
@@ -20,32 +21,33 @@ class MeetingPrefModule: StorageHandler {
 	}
 	
 	func saveData() -> Any? {
-		var arrayOfData: [[String: Any]] = []
-		
-		for course in self.manager.meetings {
-			var map: [String: Any] = [:]
-			
-			map["name"] = course.name
-			
-			map["color"] = course.color.toHex ?? nil
-			map["location"] = course.location
-			
-			map["notifications"] = course.showBeforeClassNotifications
-			map["notifications_after"] = course.showAfterClassNotifications
-			
-			map["schedule.block"] = course.courseSchedule.block.rawValue
-			
-			switch course.courseSchedule.frequency {
-			case .everyDay:
-				map["schedule.frequency"] = "everyday"
-			case .specificDays(let days):
-				map["schedule.frequency"] = days.map({ return $0.rawValue })
-			}
-			
-			arrayOfData.append(map)
-		}
-		
-		return arrayOfData
+//		var arrayOfData: [[String: Any]] = []
+//
+//		for course in self.manager.meetings {
+//			var map: [String: Any] = [:]
+//
+//			map["name"] = course.name
+//
+//			map["color"] = course.color.toHex ?? nil
+//			map["location"] = course.location
+//
+//			map["notifications"] = course.showBeforeClassNotifications
+//			map["notifications_after"] = course.showAfterClassNotifications
+//
+//			map["schedule.block"] = course.courseSchedule.block.rawValue
+//
+//			switch course.courseSchedule.frequency {
+//			case .everyDay:
+//				map["schedule.frequency"] = "everyday"
+//			case .specificDays(let days):
+//				map["schedule.frequency"] = days.map({ return $0.rawValue })
+//			}
+//
+//			arrayOfData.append(map)
+//		}
+//
+//		return arrayOfData
+		return nil
 	}
 	
 	func loadData(data: Any) {
@@ -74,41 +76,47 @@ class MeetingPrefModule: StorageHandler {
 				continue
 			}
 			
-			guard let rawBlock = item["schedule.block"] as? Int, let block = BlockID(rawValue: rawBlock) else {
+			guard let rawBlock = item["schedule.block"] as? Int, let block = Block.ID(index: rawBlock) else {
 				print("Invalid course block")
 				continue
 			}
 			
-			var frequency: CourseFrequency!
+			var frequency: Int = 0
+			var days: [Int] = []
+			
 			if let _ = item["schedule.frequency"] as? String {
-				frequency = CourseFrequency.everyDay
+				frequency = 0
 			} else if let rawFrequencyDays = item["schedule.frequency"] as? [Int] {
 //				We could easily use a simple map function, but that would require force unwrapping, and I don't want to have the option of a crash.
-				var days: [DayOfWeek] = []
-				for id in rawFrequencyDays {
-					if let day = DayOfWeek(rawValue: id) { days.append(day) }
-				}
-				frequency = CourseFrequency.specificDays(days)
+				
+				frequency = 1
+				days = rawFrequencyDays
 			} else {
 				print("Invalid course frequency")
 				continue
 			}
 			
-			let schedule = CourseSchedule(block: block, frequency: frequency)
-			let course = Course(name: name, schedule: schedule)
 			
-			course.color = color
-			course.showBeforeClassNotifications = beforeClassNotifications
+			let course = Course()
+
+			course._scheduleFrequency = frequency
+			course._scheduleBlock = block.rawValue
+			
+			course._meetingDays = List<Int>()
+			course._meetingDays.append(objectsIn: days)
+			
+			course._beforeClassNotifications = beforeClassNotifications
+			
+			course._name = name
+			course._color = color.toHex!
+			
+			course._location = location
 			
 			if let afterClassNotifications = item["notifications_after"] as? Bool {
-				course.showAfterClassNotifications = afterClassNotifications
+				course._afterClassNotifications = afterClassNotifications
 			}
 			
-			course.location = location
-			
-			print("Successfully loaded course: \(course.name)")
-			
-			self.manager.loadedCourse(course: course)
+			self.manager.loadLegacyCourse(course: course)
 		}
 	}
 	
@@ -122,7 +130,7 @@ class MeetingPrefModule: StorageHandler {
 //		{
 //			for (rawBlockId, keyPairs) in meta
 //			{
-//				if let blockId = BlockID(rawValue: ["A", "B", "C", "D", "E", "F", "G"].index(of: rawBlockId) ?? 99) {
+//				if let blockId = Block.ID(rawValue: ["A", "B", "C", "D", "E", "F", "G"].index(of: rawBlockId) ?? 99) {
 //					let name: String = {
 //						if keyPairs["name"] != nil
 //						{ if keyPairs["name"]! != nil

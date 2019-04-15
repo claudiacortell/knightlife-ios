@@ -21,10 +21,10 @@ class EventsPrefsModule: TableModule {
 	override func build() {
 		let section = self.addSection()
 		section.addDivider()
-		section.addCell(TitleCell(title: "Events"))
+		section.addCell(TitleCell(title: "Grade"))
 		section.addDivider()
 		
-		section.addCell(SettingsTextCell(left: "Your Grade", right: EventManager.instance.userGrade == nil ? "Not Set" : EventManager.instance.userGrade!.singular) {
+		section.addCell(SettingsTextCell(left: "Your Grade", right: Grade.userGrade == nil ? "Not Set" : Grade.userGrade!.singular) {
 			self.showChangeGrade()
 		})
 		

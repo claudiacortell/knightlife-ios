@@ -12,6 +12,7 @@ import AddictiveLib
 import UserNotifications
 import Moya
 import SwiftyJSON
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -43,10 +44,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 		
 		_ = TodayManager.instance
 		_ = ScheduleManager.instance
-		_ = CourseManager.instance
+		_ = CourseM
 		_ = EventManager.instance
 		
 		BlockMetaM.loadLegacyData()
+		CourseM.loadLegacyData()
 		
         return true
     }

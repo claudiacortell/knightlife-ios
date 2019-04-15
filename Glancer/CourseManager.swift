@@ -7,88 +7,92 @@
 //
 
 import Foundation
+import Signals
 import AddictiveLib
+import SwiftyUserDefaults
 
-class CourseManager: Manager {
+private(set) var CourseM = CourseManager()
+
+extension DefaultsKeys {
 	
-	static let instance = CourseManager()
+	fileprivate static let courseMigratedToRealm = DefaultsKey<Bool>("migrated.course")
 	
-	private(set) var meetings: [Course] = [] // All added meetings including one time ones.
-	let meetingsUpdatedWatcher = ResourceWatcher<Course>()
+}
+
+class CourseManager {
 	
-	init() {
-		super.init("Meetings")
+	let onMeetingUpdate = Signal<Course>()
+	
+	fileprivate init() {
 		
-		self.registerStorage(MeetingPrefModule(self))		
 	}
 	
-	func loadedCourse(course: Course) {
-		self.meetings.append(course)
-	}
-	
-	func courseChanged(course: Course) {
-		self.saveStorage()
-		self.meetingsUpdatedWatcher.handle(nil, course)
-	}
-	
-	func removeCourse(_ meeting: Course) {
-		while self.meetings.contains(meeting) {
-			for i in 0..<self.meetings.count {
-				if self.meetings[i] == meeting {
-					self.meetings.remove(at: i)
-					
-					self.courseChanged(course: meeting)
-					break
-				}
-			}
+	func loadLegacyData() {
+		if !Defaults[.courseMigratedToRealm] {
+			let oldStorage = MeetingPrefModule(self)
+			StorageHub.instance.loadPrefs(oldStorage)
+			
+			Defaults[.courseMigratedToRealm] = true
 		}
 	}
 	
-	func addCourse(_ meeting: Course) {
-		self.meetings.append(meeting)
-		self.courseChanged(course: meeting)
-	}
-	
-	func getCourses(schedule: DateSchedule, block: BlockID) -> BlockCourseList {
-		return self.getCourses(date: schedule.date, schedule: schedule).fromBlock(block)
-	}
-	
-	func getCourses(date: Date, schedule: DateSchedule) -> DayCourseList {
-		var list: [Course] = []
-		
-		for activity in self.meetings {
-			if self.doesMeetOnDate(activity, date: date, schedule: schedule) {
-				list.append(activity)
-			}
+	func loadLegacyCourse(course: Course) {
+		try! Realms.write {
+			Realms.add(course, update: true)
 		}
 		
-		return DayCourseList(date: date, meetings: list)
+		print("Loaded legacy course \( course.name )")
+	}
+	
+	var courses: [Course] {
+		return Array(Realms.objects(Course.self))
+	}
+	
+	func createCourse(name: String) -> Course {
+		let course = Course()
+		
+		course.name = name
+		
+		try! Realms.write {
+			Realms.add(course)
+		}
+		
+		return course
+	}
+	
+	func deleteCourse(course: Course) {
+		try! Realms.write {
+			Realms.delete(course)
+		}
+	}
+	
+	func getCourses(schedule: DateSchedule, block: Block.ID) -> [Course] {
+		return self.getCourses(date: schedule.date, schedule: schedule).filter({ $0.scheduleBlock == block })
+	}
+	
+	func getCourses(date: Date, schedule: DateSchedule) -> [Course] {
+		return self.courses.filter({ self.doesMeetOnDate($0, date: date, schedule: schedule) })
 	}
 	
 	private func doesMeetOnDate(_ meeting: Course, date: Date, schedule: DateSchedule) -> Bool {
-		let meetingSchedule = meeting.courseSchedule
-		switch meetingSchedule.frequency {
-		case .everyDay:
-			if schedule.hasBlock(meetingSchedule.block) {
-				return true
-			}
-			break
-		case .specificDays:
-			if let daySub = schedule.day { // Is actually standing in for a different day.
-				if meetingSchedule.meetingDaysContains(daySub) {
-					if schedule.hasBlock(meetingSchedule.block) {
-						return true
-					}
-				}
-			} else {
-				if meetingSchedule.meetingDaysContains(date.weekday) {
-					if schedule.hasBlock(meetingSchedule.block) {
-						return true
-					}
+		switch meeting.schedule {
+		case let .everyDay(block):
+			if let block = block {
+				if schedule.hasBlock(block) {
+					return true
 				}
 			}
-			break
+			return false
+		case let .specificDays(block, days):
+			if let block = block {
+				let scheduleDay = schedule.day ?? date.weekday
+				
+				if days.contains(scheduleDay) && schedule.hasBlock(block) {
+					return true
+				}
+			}
+			return false
 		}
-		return false
 	}
+	
 }

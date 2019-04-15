@@ -34,10 +34,6 @@ class SettingsClassController: UIViewController, TableHandlerDataSource {
 		NotificationManager.instance.scheduleShallowNotifications()
 	}
 	
-	private func didChangeSettings() {
-		CourseManager.instance.courseChanged(course: self.course)
-	}
-	
 	func buildCells(handler: TableHandler, layout: TableLayout) {
 		let about = layout.addSection()
 		about.addDivider()
@@ -59,7 +55,6 @@ class SettingsClassController: UIViewController, TableHandlerDataSource {
 				color in
 				
 				self.course.color = color
-				self.didChangeSettings()
 			}
 			
 			self.navigationController?.pushViewController(controller, animated: true)
@@ -86,14 +81,14 @@ class SettingsClassController: UIViewController, TableHandlerDataSource {
 		
 		scheduling.addDivider()
 		
-		scheduling.addCell(SettingsTextCell(left: "Block", right: self.course.courseSchedule.block.displayName) {
+		scheduling.addCell(SettingsTextCell(left: "Block", right: self.course.scheduleBlock == nil ? "Not Set" : self.course.scheduleBlock!.displayName) {
 			self.showChangeBlock()
 		})
 		
 		scheduling.addDivider()
 		
 		scheduling.addCell(SettingsTextCell(left: "Days", right: {
-			switch self.course.courseSchedule.frequency {
+			switch self.course.schedule {
 			case .everyDay:
 				return "Every"
 			default:
@@ -103,20 +98,21 @@ class SettingsClassController: UIViewController, TableHandlerDataSource {
 			self.showChangeDays()
 		}))
 		
-		switch self.course.courseSchedule.frequency {
-		case .specificDays(_):
+		switch self.course.schedule {
+		case .specificDays(_, _):
 			for weekday in DayOfWeek.weekdays() {
 				scheduling.addCell(SettingsCourseDayCell(course: self.course, day: weekday) {
 					path, day, selected in
 					
 					if selected {
-						self.course.courseSchedule.addMeetingDay(day)
+						if !self.course.meetingDays.contains(day) {
+							self.course.meetingDays.append(day)
+						}
 					} else {
-						self.course.courseSchedule.removeMeetingDay(day)
+						self.course.meetingDays.removeAll(where: { $0 == day })
 					}
 					
 					self.tableView.reloadRows(at: [path], with: .fade)
-					self.didChangeSettings()
 					self.needsNotificationUpdate()
 				})
 			}
@@ -136,17 +132,15 @@ class SettingsClassController: UIViewController, TableHandlerDataSource {
 		
 		notifications.addDivider()
 		
-		notifications.addCell(PrefToggleCell(title: "Before Class", on: self.course.showBeforeClassNotifications) {
-			self.course.showBeforeClassNotifications = $0
-			self.didChangeSettings()
+		notifications.addCell(PrefToggleCell(title: "Before Class", on: self.course.beforeClassNotifications) {
+			self.course.beforeClassNotifications = $0
 			self.needsNotificationUpdate()
 		})
 		
 		notifications.addDivider()
 		
-		notifications.addCell(PrefToggleCell(title: "Class End", on: self.course.showAfterClassNotifications) {
-			self.course.showAfterClassNotifications = $0
-			self.didChangeSettings()
+		notifications.addCell(PrefToggleCell(title: "Class End", on: self.course.afterClassNotifications) {
+			self.course.afterClassNotifications = $0
 			self.needsNotificationUpdate()
 		})
 		
@@ -171,10 +165,11 @@ class SettingsClassController: UIViewController, TableHandlerDataSource {
 		
 		let saveAction = UIAlertAction(title: "Save", style: .default, handler: { action in
 			if let name = alert.textFields?.first?.text {
+				
 				self.course.name = name.trimmingCharacters(in: .whitespaces)
+				
 				self.tableHandler.reload()
 				
-				self.didChangeSettings()
 				self.needsNotificationUpdate()
 			}
 		})
@@ -205,9 +200,9 @@ class SettingsClassController: UIViewController, TableHandlerDataSource {
 				let trimmed = name.trimmingCharacters(in: .whitespaces)
 
 				self.course.location = trimmed.count > 0 ? trimmed : nil
+				
 				self.tableHandler.reload()
 				
-				self.didChangeSettings()
 				self.needsNotificationUpdate()
 			}
 		})
@@ -229,7 +224,7 @@ class SettingsClassController: UIViewController, TableHandlerDataSource {
 		let alert = UIAlertController(title: "Block", message: "During what block does this class meet?", preferredStyle: .actionSheet)
 		
 //		Array of tuples instead of dictionary so that it retains its order
-		var blockActions: [(id: BlockID, alert: UIAlertAction)] = []
+		var blockActions: [(id: Block.ID, alert: UIAlertAction)] = []
 		
 		let handler: (UIAlertAction) -> Void = {
 			alert in
@@ -239,10 +234,9 @@ class SettingsClassController: UIViewController, TableHandlerDataSource {
 				return
 			}
 			
-			self.course.courseSchedule.block = key
+			self.course.scheduleBlock = key
 			self.tableHandler.reload()
 			
-			self.didChangeSettings()
 			self.needsNotificationUpdate()
 		}
 		
@@ -259,7 +253,7 @@ class SettingsClassController: UIViewController, TableHandlerDataSource {
 		]
 		
 		for (id, action) in blockActions {
-			if self.course.courseSchedule.block == id {
+			if self.course.scheduleBlock == id {
 				action.setValue(true, forKey: "checked")
 			}
 			
@@ -277,10 +271,9 @@ class SettingsClassController: UIViewController, TableHandlerDataSource {
 		let everyDayAction = UIAlertAction(title: "Every Day", style: .default) {
 			action in
 			
-			switch self.course.courseSchedule.frequency {
-			case .specificDays(_): // Only need to change things if the value was changed.
-				self.course.courseSchedule.frequency = CourseFrequency.everyDay
-				self.didChangeSettings()
+			switch self.course.schedule {
+			case .specificDays(let block, _): // Only need to change things if the value was changed.
+				self.course.schedule = CourseSchedule.everyDay(block)
 				self.needsNotificationUpdate()
 			default:
 				break
@@ -292,10 +285,9 @@ class SettingsClassController: UIViewController, TableHandlerDataSource {
 		let specificDaysAction = UIAlertAction(title: "Specific Days", style: .default) {
 			action in
 			
-			switch self.course.courseSchedule.frequency {
-			case .everyDay: // Only need to change things if the value was changed.
-				self.course.courseSchedule.frequency = CourseFrequency.specificDays(DayOfWeek.weekdays())
-				self.didChangeSettings()
+			switch self.course.schedule {
+			case .everyDay(let block): // Only need to change things if the value was changed.
+				self.course.schedule = .specificDays(block, self.course.meetingDays.isEmpty ? DayOfWeek.weekdays() : self.course.meetingDays)
 				self.needsNotificationUpdate()
 			default:
 				break
@@ -304,10 +296,10 @@ class SettingsClassController: UIViewController, TableHandlerDataSource {
 			self.tableHandler.reload()
 		}
 		
-		switch self.course.courseSchedule.frequency {
-		case .everyDay:
+		switch self.course.schedule {
+		case .everyDay(_):
 			everyDayAction.setValue(true, forKey: "checked")
-		case .specificDays(_):
+		case .specificDays(_, _):
 			specificDaysAction.setValue(true, forKey: "checked")
 		}
 		
@@ -325,7 +317,7 @@ class SettingsClassController: UIViewController, TableHandlerDataSource {
 		alert.addAction(UIAlertAction(title: "Remove", style: UIAlertActionStyle.destructive) {
 			action in
 			
-			CourseManager.instance.removeCourse(self.course)
+			CourseM.deleteCourse(course: self.course)
 			self.needsNotificationUpdate()
 			
 			self.navigationController?.popViewController(animated: true)

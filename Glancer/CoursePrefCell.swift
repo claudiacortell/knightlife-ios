@@ -38,7 +38,7 @@ class CoursePrefCell: TableCell {
 			prefCell.titleLabel.text = course.name
 			prefCell.titleLabel.textColor = course.color
 			
-			prefCell.blockLabel.text = course.courseSchedule.block.displayName
+			prefCell.blockLabel.text = course.scheduleBlock == nil ? "Not Set" : course.scheduleBlock!.displayName
 			
 			prefCell.tagImage.image = prefCell.tagImage.image?.withRenderingMode(.alwaysTemplate)
 		}

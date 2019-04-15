@@ -32,7 +32,7 @@ class SpecialSchedulesWebCall: UnboxWebCall<KnightlifeListPayload<SpecialSchedul
 			var blocks: [Block] = []
 			
 			for responseBlock in dayPayload.blocks {
-				guard let id = BlockID.fromStringValue(name: responseBlock.id) else {
+				guard let id = Block.ID(rawValue: responseBlock.id) else {
 					print("Invalid block id: \(responseBlock.id)")
 					continue
 				}

@@ -23,10 +23,10 @@ class CoursesPrefModule: TableModule {
 		let section = self.addSection()
 		
 		section.addDivider()
-		section.addCell(TitleCell(title: CourseManager.instance.meetings.isEmpty ? "No Classes" : "Classes"))
+		section.addCell(TitleCell(title: CourseM.courses.isEmpty ? "No Classes" : "Classes"))
 		section.addDivider()
 		
-		for course in CourseManager.instance.meetings {
+		for course in CourseM.courses {
 			section.addCell(CoursePrefCell(module: self, course: course))
 			section.addDivider()
 		}
@@ -46,9 +46,8 @@ class CoursesPrefModule: TableModule {
 		let saveAction = UIAlertAction(title: "Add", style: .default, handler: { action in
 			if let name = alert.textFields?.first?.text {
 				let trimmedName = name.trimmingCharacters(in: .whitespaces)
-				let course = Course(name: trimmedName, schedule: CourseSchedule(block: .none, frequency: .everyDay))
 				
-				CourseManager.instance.addCourse(course)
+				let course = CourseM.createCourse(name: trimmedName)
 				
 				self.presentCourse(course: course)
 			}

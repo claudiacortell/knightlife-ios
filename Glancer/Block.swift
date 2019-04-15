@@ -23,7 +23,7 @@ struct Block {
 	
 	fileprivate let uuid: UUID = UUID()
 	
-	let id: BlockID
+	let id: Block.ID
 	let variation: Int?
 
 	let time: TimeDuration

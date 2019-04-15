@@ -80,7 +80,7 @@ class UpcomingWebCall: UnboxWebCall<KnightlifeListPayload<UpcomingPayload>, [(Da
 			audience.append(EventAudience(grade: grade, mandatory: group.mandatory))
 		}
 		
-		if let rawBlock = event.block, let blockId = BlockID.fromStringValue(name: rawBlock) {
+		if let rawBlock = event.block, let blockId = Block.ID(rawValue: rawBlock) {
 			return BlockEvent(block: blockId, description: event.description, audience: audience)
 		} else if let rawTime = event.time, let startTime = Date.fromWebTime(string: rawTime.start) {
 			guard let start = Date.mergeDateAndTime(date: self.date, time: startTime) else {
