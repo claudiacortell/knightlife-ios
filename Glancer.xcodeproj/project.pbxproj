@@ -11,6 +11,7 @@
 		5BD285DD1B03CF29007A0472 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD285DC1B03CF29007A0472 /* AppDelegate.swift */; };
 		5BD285E41B03CF29007A0472 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BD285E31B03CF29007A0472 /* Images.xcassets */; };
 		5CFBEFE6144F6AA9605B073D /* Pods_Glancer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 768D5C143BC6676A698CE0BD /* Pods_Glancer.framework */; };
+		75247C6B226D6BCE00A16736 /* UpcomingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75247C6A226D6BCE00A16736 /* UpcomingController.swift */; };
 		A600C00A614BDF7292AD1D30 /* Pods_TodayWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA411407FAA1EF6BCD02F68 /* Pods_TodayWidget.framework */; };
 		C006914F210EC55C0099CD57 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C006914E210EC55C0099CD57 /* SettingsController.swift */; };
 		C0107A3B212324D600C9A6D7 /* BottomPrefsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0107A3A212324D600C9A6D7 /* BottomPrefsModule.swift */; };
@@ -253,6 +254,7 @@
 		5BD285DB1B03CF29007A0472 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5BD285DC1B03CF29007A0472 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BD285E31B03CF29007A0472 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		75247C6A226D6BCE00A16736 /* UpcomingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingController.swift; sourceTree = "<group>"; };
 		768D5C143BC6676A698CE0BD /* Pods_Glancer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Glancer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		94DE637E603DFC218CF78513 /* Pods-TodayWidget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodayWidget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TodayWidget/Pods-TodayWidget.debug.xcconfig"; sourceTree = "<group>"; };
 		95FAF88FCF8A901540F9C3EB /* Pods-Glancer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Glancer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Glancer/Pods-Glancer.release.xcconfig"; sourceTree = "<group>"; };
@@ -480,6 +482,14 @@
 				C0A92942225D9A3600CE2D12 /* User Interface */,
 			);
 			path = Glancer;
+			sourceTree = "<group>";
+		};
+		75247C69226D6B9100A16736 /* Upcoming */ = {
+			isa = PBXGroup;
+			children = (
+				75247C6A226D6BCE00A16736 /* UpcomingController.swift */,
+			);
+			path = Upcoming;
 			sourceTree = "<group>";
 		};
 		B0E83D8F4EDAB52132304F9D /* Frameworks */ = {
@@ -894,6 +904,7 @@
 		C079C22F1FACA97D009067DE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				75247C69226D6B9100A16736 /* Upcoming */,
 				C0AB03512122536600FA5412 /* Hub */,
 				C024A036211CBC9C0025C5B1 /* Preferences */,
 				C0CAF2CC210C2230001A69BF /* Lunch */,
@@ -1750,6 +1761,7 @@
 				C07D913B225EF7E100A59345 /* Optionals.swift in Sources */,
 				C03BA78F21209DAA00AB9DA2 /* PushRefreshListener.swift in Sources */,
 				C08FBF9F210FB29C005812F1 /* TodayDoneCell.swift in Sources */,
+				75247C6B226D6BCE00A16736 /* UpcomingController.swift in Sources */,
 				C07D8F92225EF63B00A59345 /* Lunch.swift in Sources */,
 				C093434B1FAA1B7A00629A84 /* BlockID.swift in Sources */,
 				C036366D1FACF864008FC9A9 /* GetScheduleWebCall.swift in Sources */,
