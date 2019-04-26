@@ -69,7 +69,7 @@ class NotificationManager: Manager, PushRefreshListener {
 	private(set) var scheduledNotifications: [KLNotification] = []
 	
 //	Downloaded Specials
-	private(set) var specialSchedules: [DateSchedule]?
+	private(set) var specialSchedules: [Schedule]?
 	private(set) var specialSchedulesError: Error?
 	var specialSchedulesLoaded: Bool {
 		return self.specialSchedules != nil || self.specialSchedulesError != nil
@@ -212,13 +212,13 @@ class NotificationManager: Manager, PushRefreshListener {
 				
 				let offsetDate = today.dayInRelation(offset: i)
 				
-				var schedule: DateSchedule!
+				var schedule: Schedule!
 				
 				//				If there's a special schedule
 				if let specialSchedule = specialSchedules.filter({ $0.date.webSafeDate == offsetDate.webSafeDate }).first {
 					schedule = specialSchedule
 				} else if let templateSchedule = template[offsetDate.weekday] {
-					let dateSchedule = DateSchedule(date: offsetDate, day: nil, changed: false, notices: [], blocks: templateSchedule.getBlocks())
+					let dateSchedule = Schedule(date: offsetDate, day: nil, changed: false, notices: [], blocks: templateSchedule.getBlocks())
 					schedule = dateSchedule
 				} else {
 					self.out("Couldn't find a suitable schedule for date: \(offsetDate.webSafeDate)")
@@ -294,7 +294,7 @@ class NotificationManager: Manager, PushRefreshListener {
 		}
 	}
 	
-	private func buildBeforeClassNotification(date: Date, block: Block, analyst: BlockAnalyst, schedule: DateSchedule) -> (KLNotification, UNNotificationRequest)? {
+	private func buildBeforeClassNotification(date: Date, block: Block, analyst: BlockAnalyst, schedule: Schedule) -> (KLNotification, UNNotificationRequest)? {
 		guard let time = Date.mergeDateAndTime(date: date, time: block.time.start) else {
 			self.out("Failed to find start time for block: \(block)")
 			return nil
@@ -334,7 +334,7 @@ class NotificationManager: Manager, PushRefreshListener {
 		return (klnotification, request)
 	}
 	
-	private func buildAfterClassNotification(date: Date, block: Block, analyst: BlockAnalyst, schedule: DateSchedule) -> (KLNotification, UNNotificationRequest)? {
+	private func buildAfterClassNotification(date: Date, block: Block, analyst: BlockAnalyst, schedule: Schedule) -> (KLNotification, UNNotificationRequest)? {
 		guard let time = Date.mergeDateAndTime(date: date, time: block.time.end) else {
 			self.out("Failed to find start time for block: \(block)")
 			return nil

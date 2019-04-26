@@ -16,7 +16,7 @@ class BeforeSchoolView: CustomView {
 	
 	let minutes: Int!
 	
-	init(schedule: DateSchedule!, block: Block, minutes: Int) {
+	init(schedule: Schedule!, block: Block, minutes: Int) {
 		self.minutes = minutes
 		
 		super.init(frame: CGRect.zero)

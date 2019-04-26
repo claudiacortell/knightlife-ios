@@ -64,7 +64,7 @@ class BlockListModule: TableModule {
 
 struct CompositeBlock {
 	
-	let schedule: DateSchedule
+	let schedule: Schedule
 	let block: Block
 	
 	let lunch: Lunch?

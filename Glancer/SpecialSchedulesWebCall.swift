@@ -10,7 +10,7 @@ import Foundation
 import AddictiveLib
 import Unbox
 
-class SpecialSchedulesWebCall: UnboxWebCall<KnightlifeListPayload<SpecialSchedulePayload>, [DateSchedule]> {
+class SpecialSchedulesWebCall: UnboxWebCall<KnightlifeListPayload<SpecialSchedulePayload>, [Schedule]> {
 	
 	init(date: Date) {
 		super.init(call: "schedule/special")
@@ -18,12 +18,12 @@ class SpecialSchedulesWebCall: UnboxWebCall<KnightlifeListPayload<SpecialSchedul
 		self.parameter("date", val: date.webSafeDate)
 	}
 	
-	override func convertToken(_ data: KnightlifeListPayload<SpecialSchedulePayload>) -> [DateSchedule]? {
+	override func convertToken(_ data: KnightlifeListPayload<SpecialSchedulePayload>) -> [Schedule]? {
 		guard let content = data.content else {
 			return nil
 		}
 		
-		var schedules: [DateSchedule] = []
+		var schedules: [Schedule] = []
 		for dayPayload in content {
 			guard let date = Date.fromWebDate(string: dayPayload.date) else {
 				continue
@@ -60,7 +60,7 @@ class SpecialSchedulesWebCall: UnboxWebCall<KnightlifeListPayload<SpecialSchedul
 			
 			let day: DayOfWeek? = {
 				if let responseDay = dayPayload.day {
-					return DayOfWeek.fromShortName(shortName: responseDay)
+					return DayOfWeek(shortName: responseDay)
 				}
 				return nil
 			}()
@@ -78,7 +78,7 @@ class SpecialSchedulesWebCall: UnboxWebCall<KnightlifeListPayload<SpecialSchedul
 				return list
 			}()
 			
-			let daySchedule = DateSchedule(date: date, day: day, changed: dayPayload.changed ?? false, notices: notices, blocks: blocks)
+			let daySchedule = Schedule(date: date, day: day, changed: dayPayload.changed ?? false, notices: notices, blocks: blocks)
 			schedules.append(daySchedule)
 		}
 		return schedules

@@ -100,7 +100,7 @@ class SettingsClassController: UIViewController, TableHandlerDataSource {
 		
 		switch self.course.schedule {
 		case .specificDays(_, _):
-			for weekday in DayOfWeek.weekdays() {
+			for weekday in DayOfWeek.weekdays {
 				scheduling.addCell(SettingsCourseDayCell(course: self.course, day: weekday) {
 					path, day, selected in
 					
@@ -287,7 +287,7 @@ class SettingsClassController: UIViewController, TableHandlerDataSource {
 			
 			switch self.course.schedule {
 			case .everyDay(let block): // Only need to change things if the value was changed.
-				self.course.schedule = .specificDays(block, self.course.meetingDays.isEmpty ? DayOfWeek.weekdays() : self.course.meetingDays)
+				self.course.schedule = .specificDays(block, self.course.meetingDays.isEmpty ? DayOfWeek.weekdays : self.course.meetingDays)
 				self.needsNotificationUpdate()
 			default:
 				break

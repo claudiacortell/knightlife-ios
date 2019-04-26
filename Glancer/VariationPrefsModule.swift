@@ -17,7 +17,7 @@ class VariationPrefsModule: TableModule {
 		section.addCell(TitleCell(title: "First Lunch"))
 		section.addDivider()
 		
-		for weekday in DayOfWeek.weekdays() {
+		for weekday in DayOfWeek.weekdays {
 			let variation = ScheduleManager.instance.getVariation(weekday)
 			
 			section.addCell(PrefToggleCell(title: weekday.displayName, on: variation == 1) {

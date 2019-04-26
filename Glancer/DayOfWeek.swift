@@ -18,6 +18,16 @@ public enum DayOfWeek: Int {
 	case saturday
 	case sunday
 	
+	init?(shortName: String) {
+		for day in DayOfWeek.values {
+			if day.shortName == shortName {
+				self = day
+				return
+			}
+		}
+		return nil
+	}
+	
 	var shortName: String {
 		switch self {
 		case .monday:
@@ -62,12 +72,12 @@ public enum DayOfWeek: Int {
 		return DayOfWeek(rawValue: (id % 7))!
 	}
 	
-	static func weekdays() -> [DayOfWeek] { return [.monday, .tuesday, .wednesday, .thursday, .friday] }
-	static func weekends() -> [DayOfWeek] { return [.saturday, .sunday] }
-	static func values() -> [DayOfWeek] { return [.monday, .tuesday, .wednesday, .thursday, .friday, .saturday, .sunday] }
+	static var weekdays: [DayOfWeek] { return [.monday, .tuesday, .wednesday, .thursday, .friday] }
+	static var weekends: [DayOfWeek] { return [.saturday, .sunday] }
+	static var values: [DayOfWeek] { return [.monday, .tuesday, .wednesday, .thursday, .friday, .saturday, .sunday] }
 	
 	static func fromShortName(shortName: String) -> DayOfWeek? {
-		for day in DayOfWeek.values() {
+		for day in DayOfWeek.values {
 			if day.shortName == shortName {
 				return day
 			}

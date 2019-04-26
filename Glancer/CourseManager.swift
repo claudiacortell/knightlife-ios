@@ -66,29 +66,30 @@ class CourseManager {
 		}
 	}
 	
-	func getCourses(schedule: DateSchedule, block: Block.ID) -> [Course] {
-		return self.getCourses(date: schedule.date, schedule: schedule).filter({ $0.scheduleBlock == block })
+	func getCourses(block: Block) -> [Course] {
+		return self.getCourses(schedule: block.timetable.schedule).filter({ $0.scheduleBlock == block.id })
 	}
 	
-	func getCourses(date: Date, schedule: DateSchedule) -> [Course] {
-		return self.courses.filter({ self.doesMeetOnDate($0, date: date, schedule: schedule) })
+	func getCourses(schedule: Schedule) -> [Course] {
+		return self.courses.filter({ self.doesMeetOnDate($0, schedule: schedule) })
 	}
 	
-	private func doesMeetOnDate(_ meeting: Course, date: Date, schedule: DateSchedule) -> Bool {
+	private func doesMeetOnDate(_ meeting: Course, schedule: Schedule) -> Bool {
 		switch meeting.schedule {
 		case let .everyDay(block):
 			if let block = block {
-				if schedule.hasBlock(block) {
+				if let timetable = schedule.selectedTimetable, timetable.hasBlock(id: block) {
 					return true
 				}
 			}
 			return false
 		case let .specificDays(block, days):
 			if let block = block {
-				let scheduleDay = schedule.day ?? date.weekday
-				
-				if days.contains(scheduleDay) && schedule.hasBlock(block) {
-					return true
+				let day = schedule.dayOfWeek!
+				if let timetable = schedule.selectedTimetable {
+					if days.contains(day) && timetable.hasBlock(id: block) {
+						return true
+					}
 				}
 			}
 			return false

@@ -23,11 +23,9 @@ class DayBundleManager: Manager {
 	private func registerListeners(date: Date) {
 //		These just listen for new data from each of the three points, then reloads that date's respective bundle.
 		
-		ScheduleManager.instance.getPatchWatcher(date: date).onSuccess(self) {
-			schedule in
-			
-//			Have Schedule, fetch lunch and events.
-//			Perform a chain to get the menu for each of the other ones, then update the corresponding watcher so that everything gets sent to everything else.
+		Schedule.onFetch.subscribe(with: self) { schedule in
+			//			Have Schedule, fetch lunch and events.
+			//			Perform a chain to get the menu for each of the other ones, then update the corresponding watcher so that everything gets sent to everything else.
 			ProcessChain().link() {
 				chain in
 				
@@ -41,38 +39,31 @@ class DayBundleManager: Manager {
 						chain.next(false)
 					}
 				}
-			}.link() {
-				chain in
-				
-				EventManager.instance.getEvents(date: date) {
-					result in
+				}.link() {
+					chain in
 					
-					switch result {
-					case .success(let result):
-						chain.setData("events", data: result)
-						chain.next()
-					case .failure(let error):
-						chain.setData("error", data: error)
-						chain.next(false)
+					EventManager.instance.getEvents(date: date) {
+						result in
+						
+						switch result {
+						case .success(let result):
+							chain.setData("events", data: result)
+							chain.next()
+						case .failure(let error):
+							chain.setData("error", data: error)
+							chain.next(false)
+						}
 					}
-				}
-			}.success() {
-				chain in
-				
-				let bundle = DayBundle(date: date, schedule: schedule, events: chain.getData("events")!, menu: chain.getData("menu")!)
-				self.getBundleWatcher(date: date).handle(nil, bundle)
-			}.failure() {
-				chain in
-				
-				self.getBundleWatcher(date: date).handle(chain.getData("error"), nil)
-			}.start()
-		}
-		
-		ScheduleManager.instance.getPatchWatcher(date: date).onFailure(self) {
-			error in
-			
-//			Flame out bundle on failure
-			self.getBundleWatcher(date: date).handle(error, nil)
+				}.success() {
+					chain in
+					
+					let bundle = DayBundle(date: date, schedule: schedule, events: chain.getData("events")!, menu: chain.getData("menu")!)
+					self.getBundleWatcher(date: date).handle(nil, bundle)
+				}.failure() {
+					chain in
+					
+					self.getBundleWatcher(date: date).handle(chain.getData("error"), nil)
+				}.start()
 		}
 		
 		Lunch.onFetch.subscribe(with: self) { menu in
@@ -82,10 +73,8 @@ class DayBundleManager: Manager {
 			ProcessChain().link() {
 				chain in
 				
-				ScheduleManager.instance.loadSchedule(date: date) {
-					result in
-					
-					switch result {
+				Schedule.fetch(for: date).subscribeOnce(with: self) {
+					switch $0 {
 					case .success(let result):
 						chain.setData("schedule", data: result)
 						chain.next()
@@ -142,10 +131,8 @@ class DayBundleManager: Manager {
 			}.link() {
 				chain in
 				
-				ScheduleManager.instance.loadSchedule(date: date) {
-					result in
-					
-					switch result {
+				Schedule.fetch(for: date).subscribeOnce(with: self) {
+					switch $0 {
 					case .success(let result):
 						chain.setData("schedule", data: result)
 						chain.next()
@@ -184,12 +171,10 @@ class DayBundleManager: Manager {
 		ProcessChain().link() {
 			chain in
 			
-			ScheduleManager.instance.loadSchedule(date: date) {
-				result in
-				
-				switch result {
-				case .success(let schedule):
-					chain.setData("schedule", data: schedule)
+			Schedule.fetch(for: date).subscribeOnce(with: self) {
+				switch $0 {
+				case .success(let result):
+					chain.setData("schedule", data: result)
 					chain.next()
 				case .failure(let error):
 					chain.setData("error", data: error)

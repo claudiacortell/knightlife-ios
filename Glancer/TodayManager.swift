@@ -127,11 +127,11 @@ class TodayManager: Manager {
 			self.updateState(state: self.getState())
 		}
 		
-		ScheduleManager.instance.getVariationWatcher(day: self.today.weekday).onSuccess(self) {
-			variation in
+		Schedule.onFirstLunchChange.subscribe(with: self) { change in
 			
 			self.updateState(state: self.getState(), force: true)
-		}
+			
+		}.filter({ $0.dayOfWeek == self.today.weekday })
 	}
 	
 	private func registerNextDayListeners() {
@@ -173,25 +173,23 @@ class TodayManager: Manager {
 			self.updateState(state: self.getState())
 		}
 		
-		ScheduleManager.instance.getVariationWatcher(day: localNextDay.weekday).onSuccess(self) {
-			variation in
+		Schedule.onFirstLunchChange.subscribe(with: self) { change in
 			
 			self.updateState(state: self.getState(), force: true)
-		}
+			
+		}.filter({ $0.dayOfWeek == localNextDay.weekday })
 	}
 	
 	private func unregisterListeners() {
 		DayBundleManager.instance.getBundleWatcher(date: self.today).unregisterSuccess(self)
 		DayBundleManager.instance.getBundleWatcher(date: self.today).unregisterFailure(self)
 		
-		ScheduleManager.instance.getVariationWatcher(day: self.today.weekday).unregisterSuccess(self)
-		
 		if let nextDay = self.nextDay {
 			DayBundleManager.instance.getBundleWatcher(date: nextDay).unregisterSuccess(self)
 			DayBundleManager.instance.getBundleWatcher(date: nextDay).unregisterFailure(self)
-			
-			ScheduleManager.instance.getVariationWatcher(day: nextDay.weekday).unregisterSuccess(self)
 		}
+		
+		Schedule.onFirstLunchChange.cancelSubscription(for: self)
 	}
 	
 	func startTimer() {
@@ -310,10 +308,13 @@ class TodayManager: Manager {
 		}
 		
 		let current = Date()
-		for block in bundle.schedule.getBlocks() {
-			if block.time.contains(date: current) {
-				return block
+		if let timetable = bundle.schedule.selectedTimetable {
+			for block in timetable.filterBlocksByLunch() {
+				if block.time.contains(date: current) {
+					return block
+				}
 			}
+
 		}
 		return nil
 	}
@@ -325,13 +326,16 @@ class TodayManager: Manager {
 		
 		let now = Date.today
 		
-		for block in bundle.schedule.getBlocks() {
-			if block.time.start < now { // Is already in progress or has passed
-				continue
+		if let timetable = bundle.schedule.selectedTimetable {
+			for block in timetable.filterBlocksByLunch() {
+				if block.time.start < now { // Is already in progress or has passed
+					continue
+				}
+				
+				return block
 			}
-			
-			return block
 		}
+		
 		return nil
 	}
 	
@@ -347,30 +351,32 @@ class TodayManager: Manager {
 		let bundle = self.todayBundle!
 		let schedule = bundle.schedule
 		
-		if schedule.getBlocks().isEmpty {
+		if !schedule.hasSchool {
 			return TodayScheduleState.NO_CLASS(bundle, self.nextDayBundle)
 		}
 		
+		let timetable = schedule.selectedTimetable!
+		
 		let now = Date.today
-		if now < schedule.getFirstBlock()!.time.start { // Before school
-			var minUntilStart = abs(schedule.getFirstBlock()!.time.start.minuteDifference(date: now))
+		if now < timetable.firstBlock!.time.start { // Before school
+			var minUntilStart = abs(timetable.firstBlock!.time.start.minuteDifference(date: now))
 			minUntilStart += 1
 			
 			if minUntilStart <= 5 {
-				return TodayScheduleState.BEFORE_SCHOOL_GET_TO_CLASS(bundle, schedule.getFirstBlock()!, minUntilStart)
+				return TodayScheduleState.BEFORE_SCHOOL_GET_TO_CLASS(bundle, timetable.firstBlock!, minUntilStart)
 			}
 			
-			return TodayScheduleState.BEFORE_SCHOOL(bundle, schedule.getFirstBlock()!, minUntilStart)
+			return TodayScheduleState.BEFORE_SCHOOL(bundle, timetable.firstBlock!, minUntilStart)
 		}
 		
-		if now > schedule.getLastBlock()!.time.end { // After school
+		if now > timetable.lastBlock!.time.end { // After school
 			return TodayScheduleState.AFTER_SCHOOL(bundle, self.nextDayBundle)
 		}
 		
 		if let currentBlock = self.getCurrentBlock() { // In class
 			var minLeft = abs(currentBlock.time.end.minuteDifference(date: now))
 			minLeft += 1
-			let nextBlock = schedule.getBlockAfter(currentBlock)
+			let nextBlock = timetable.getBlockAfter(block: currentBlock)
 			return TodayScheduleState.IN_CLASS(bundle, currentBlock, nextBlock, minLeft)
 		} else { // Not in class
 			let nextBlock = self.getNextBlock()!
