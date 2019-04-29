@@ -142,8 +142,6 @@ class CalendarController: UIViewController, TableHandlerDataSource, ErrorReloada
 		}.execute()
 	}
 	
-	
-	
 	func buildCells(handler: TableHandler, layout: TableLayout) {
 		if !self.upcomingItemsLoaded {
 			self.removeRefresh()

@@ -12,6 +12,8 @@
 		5BD285E41B03CF29007A0472 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BD285E31B03CF29007A0472 /* Images.xcassets */; };
 		5CFBEFE6144F6AA9605B073D /* Pods_Glancer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 768D5C143BC6676A698CE0BD /* Pods_Glancer.framework */; };
 		75247C6B226D6BCE00A16736 /* UpcomingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75247C6A226D6BCE00A16736 /* UpcomingController.swift */; };
+		75247C6E2276979D00A16736 /* UpcomingBlockListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75247C6D2276979D00A16736 /* UpcomingBlockListModule.swift */; };
+		75247C712276987400A16736 /* UpcomingBlockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75247C702276987400A16736 /* UpcomingBlockCell.swift */; };
 		A600C00A614BDF7292AD1D30 /* Pods_TodayWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA411407FAA1EF6BCD02F68 /* Pods_TodayWidget.framework */; };
 		C006914F210EC55C0099CD57 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C006914E210EC55C0099CD57 /* SettingsController.swift */; };
 		C0107A3B212324D600C9A6D7 /* BottomPrefsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0107A3A212324D600C9A6D7 /* BottomPrefsModule.swift */; };
@@ -255,6 +257,8 @@
 		5BD285DC1B03CF29007A0472 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BD285E31B03CF29007A0472 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		75247C6A226D6BCE00A16736 /* UpcomingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingController.swift; sourceTree = "<group>"; };
+		75247C6D2276979D00A16736 /* UpcomingBlockListModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingBlockListModule.swift; sourceTree = "<group>"; };
+		75247C702276987400A16736 /* UpcomingBlockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingBlockCell.swift; sourceTree = "<group>"; };
 		768D5C143BC6676A698CE0BD /* Pods_Glancer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Glancer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		94DE637E603DFC218CF78513 /* Pods-TodayWidget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodayWidget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TodayWidget/Pods-TodayWidget.debug.xcconfig"; sourceTree = "<group>"; };
 		95FAF88FCF8A901540F9C3EB /* Pods-Glancer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Glancer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Glancer/Pods-Glancer.release.xcconfig"; sourceTree = "<group>"; };
@@ -487,9 +491,27 @@
 		75247C69226D6B9100A16736 /* Upcoming */ = {
 			isa = PBXGroup;
 			children = (
+				75247C6F2276985F00A16736 /* Cells */,
+				75247C6C2276976E00A16736 /* Modules */,
 				75247C6A226D6BCE00A16736 /* UpcomingController.swift */,
 			);
 			path = Upcoming;
+			sourceTree = "<group>";
+		};
+		75247C6C2276976E00A16736 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				75247C6D2276979D00A16736 /* UpcomingBlockListModule.swift */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		75247C6F2276985F00A16736 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				75247C702276987400A16736 /* UpcomingBlockCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		B0E83D8F4EDAB52132304F9D /* Frameworks */ = {
@@ -1488,7 +1510,7 @@
 				TargetAttributes = {
 					5BD285D61B03CF29007A0472 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = P57BN8GJ33;
+						DevelopmentTeam = V3BCL77UDQ;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -1794,8 +1816,10 @@
 				C0C785B0210FD980003A5EB8 /* LunchItemAttachmentView.swift in Sources */,
 				C0711AFA20DAC2DB009243CC /* DayOfWeek.swift in Sources */,
 				C06AE4F521154B79003A1EE8 /* SettingsClassController.swift in Sources */,
+				75247C6E2276979D00A16736 /* UpcomingBlockListModule.swift in Sources */,
 				C0B7CBE22264DF0200C6EF67 /* CourseSchedule.swift in Sources */,
 				C01ECD2C2129BDB70001C013 /* DayModuleOptions.swift in Sources */,
+				75247C712276987400A16736 /* UpcomingBlockCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2009,7 +2033,8 @@
 				CODE_SIGN_ENTITLEMENTS = Glancer/Glancer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = P57BN8GJ33;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V3BCL77UDQ;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2045,7 +2070,8 @@
 				CODE_SIGN_ENTITLEMENTS = Glancer/Glancer.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = P57BN8GJ33;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V3BCL77UDQ;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2061,6 +2087,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = MAD.BBN.KnightLife;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
 			};
