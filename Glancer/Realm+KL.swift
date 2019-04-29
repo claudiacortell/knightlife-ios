@@ -15,7 +15,12 @@ var Realms: Realm {
 	https://realm.io/docs/swift/latest/#updating-values
 	**/
 	
+	let directory = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.KnightLife.MAD.Realms")!
+	let realmPath = directory.path.appending("/db.realm");
+	
 	let config = Realm.Configuration(
+		fileURL: URL(string: realmPath)!,
+		
 		// Set the new schema version. This must be greater than the previously used
 		// version (if you've never set a schema version before, the version is 0).
 		schemaVersion: 0,
@@ -37,6 +42,12 @@ var Realms: Realm {
 	// Now that we've told Realm how to handle the schema change, opening the file
 	// will automatically perform the migration
 	let realm = try! Realm()
+	
+	// Get our Realm file's parent directory
+	let folderPath = realm.configuration.fileURL!.deletingLastPathComponent().path
+	
+	// We disable encryption for the Realm database so that application extensions can access its data
+	try! FileManager.default.setAttributes([ FileAttributeKey.protectionKey: FileProtectionType.none ], ofItemAtPath: folderPath)
 	
 	return realm
 	

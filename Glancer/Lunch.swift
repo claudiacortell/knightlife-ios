@@ -22,8 +22,7 @@ final class Lunch: Refreshable, Decodable {
 		init(json: JSON) throws {
 
 			self.name = try Optionals.unwrap(json["name"].string)
-			self.allergy = json["allergy"].string
-
+			self.allergy = json["allergy"].string			
 		}
 		
 	}
@@ -173,3 +172,4 @@ extension Lunch {
 	}
 	
 }
+

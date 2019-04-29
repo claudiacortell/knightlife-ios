@@ -7,6 +7,7 @@
 	<key>com.apple.security.application-groups</key>
 	<array>
 		<string>group.KnightLife.MAD.Storage</string>
+		<string>group.KnightLife.MAD.Realms</string>
 	</array>
 </dict>
 </plist>

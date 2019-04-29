@@ -126,7 +126,7 @@ extension API: TargetType {
 	var headers: [String : String]? {
 		return [
 			"Device": Defaults[.deviceId],
-			"Build": (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "Unknown",
+			"Version": (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "Unknown",
 			"API": "3.0"
 		];
 	}
