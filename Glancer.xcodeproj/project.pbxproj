@@ -12,6 +12,7 @@
 		5BD285E41B03CF29007A0472 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BD285E31B03CF29007A0472 /* Images.xcassets */; };
 		5CFBEFE6144F6AA9605B073D /* Pods_Glancer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 768D5C143BC6676A698CE0BD /* Pods_Glancer.framework */; };
 		A600C00A614BDF7292AD1D30 /* Pods_TodayWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA411407FAA1EF6BCD02F68 /* Pods_TodayWidget.framework */; };
+		BA2D3F1C2277BD0400EAC14D /* CalendarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA2D3F1B2277BD0400EAC14D /* CalendarCell.xib */; };
 		C006914F210EC55C0099CD57 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C006914E210EC55C0099CD57 /* SettingsController.swift */; };
 		C0107A3B212324D600C9A6D7 /* BottomPrefsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0107A3A212324D600C9A6D7 /* BottomPrefsModule.swift */; };
 		C0107A3E2123278F00C9A6D7 /* SurveyWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0107A3D2123278F00C9A6D7 /* SurveyWebCall.swift */; };
@@ -256,6 +257,7 @@
 		768D5C143BC6676A698CE0BD /* Pods_Glancer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Glancer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		94DE637E603DFC218CF78513 /* Pods-TodayWidget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodayWidget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TodayWidget/Pods-TodayWidget.debug.xcconfig"; sourceTree = "<group>"; };
 		95FAF88FCF8A901540F9C3EB /* Pods-Glancer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Glancer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Glancer/Pods-Glancer.release.xcconfig"; sourceTree = "<group>"; };
+		BA2D3F1B2277BD0400EAC14D /* CalendarCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarCell.xib; sourceTree = "<group>"; };
 		C006914E210EC55C0099CD57 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		C0107A3A212324D600C9A6D7 /* BottomPrefsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomPrefsModule.swift; sourceTree = "<group>"; };
 		C0107A3D2123278F00C9A6D7 /* SurveyWebCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyWebCall.swift; sourceTree = "<group>"; };
@@ -490,6 +492,14 @@
 				2CA411407FAA1EF6BCD02F68 /* Pods_TodayWidget.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BA2D3F1A2277BB8A00EAC14D /* Block */ = {
+			isa = PBXGroup;
+			children = (
+				BA2D3F1B2277BD0400EAC14D /* CalendarCell.xib */,
+			);
+			name = Block;
 			sourceTree = "<group>";
 		};
 		C002329C1FA37D700019D328 /* Courses */ = {
@@ -1265,6 +1275,7 @@
 		C0B72222211F44920095BA70 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				BA2D3F1A2277BB8A00EAC14D /* Block */,
 				C0C4550D2123B576004A41ED /* Nothing */,
 			);
 			name = Cells;
@@ -1546,6 +1557,7 @@
 				C0A167AA210E678800DB6BC4 /* ErrorCell.xib in Resources */,
 				C0A167B3210E6F3300DB6BC4 /* LoadingCell.xib in Resources */,
 				C0C785B3210FDB88003A5EB8 /* TitleCell.xib in Resources */,
+				BA2D3F1C2277BD0400EAC14D /* CalendarCell.xib in Resources */,
 				C039C86F211A8CCE008E0AF0 /* SettingsCourseDayCell.xib in Resources */,
 				C04653C6210936AC004AD09C /* BlockCell.xib in Resources */,
 				C0760225210F89FD00398827 /* NoClassCell.xib in Resources */,
@@ -1622,7 +1634,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Glancer/Pods-Glancer-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Glancer/Pods-Glancer-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AddictiveLib/AddictiveLib.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
@@ -1657,7 +1669,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Glancer/Pods-Glancer-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Glancer/Pods-Glancer-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
