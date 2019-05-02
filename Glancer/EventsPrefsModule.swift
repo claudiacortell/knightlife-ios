@@ -67,7 +67,9 @@ class EventsPrefsModule: TableModule {
 		}
 		
 		// Set no grade set action to be checked
-		let nullAction = UIAlertAction(title: "Not Set", style: .default, handler: handler)
+		let nullAction = UIAlertAction(title: "Not Set", style: .default) { alert in
+			Grade.userGrade = nil
+		}
 		
 		if Grade.userGrade == nil {
 			nullAction.setValue(true, forKey: "checked")

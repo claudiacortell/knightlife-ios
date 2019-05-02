@@ -119,7 +119,7 @@ class DayBundleManager: Manager {
 				
 				self.getBundleWatcher(date: date).handle(chain.getData("error"), nil)
 			}.start()
-		}
+		}.filter({ $0.date.webSafeDate == date.webSafeDate })
 		
 		EventManager.instance.getEventWatcher(date: date).onSuccess(self) {
 			events in

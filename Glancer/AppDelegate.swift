@@ -50,6 +50,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 		BlockMetaM.loadLegacyData()
 		CourseM.loadLegacyData()
 		
+		// Listen to Push notifications for the Lunch menu
+		PushNotificationManager.instance.addListener(type: .REFRESH, listener: LunchPushListener())
+		
         return true
     }
 	

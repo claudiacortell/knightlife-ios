@@ -59,7 +59,7 @@ extension Grade {
 			if !Defaults[.gradeMigratedToRealm] {
 				let legacyGrade = Defaults[.gradeLegacy]
 				
-				if let grade = Grade(rawValue: legacyGrade) {
+				if let grade = Grade(rawValue: legacyGrade - 1) {
 					// Save legacy in new value
 					Defaults[.userGrade] = grade.rawValue
 					
