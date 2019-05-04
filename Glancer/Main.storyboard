@@ -2161,15 +2161,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Fyc-E3-ZhN">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <tabBar key="tableFooterView" clipsSubviews="YES" contentMode="top" id="a4w-vp-h7A">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <items>
-                                        <tabBarItem title="Schedule" image="icon_calendar" id="i6N-Dc-2OU"/>
-                                        <tabBarItem tag="1" title="Homework" image="icon_alert" id="zfY-Mn-ZJY"/>
-                                    </items>
-                                </tabBar>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -2184,7 +2175,6 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="rPd-el-XGQ"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="tabBar" destination="a4w-vp-h7A" id="tdK-3G-mJI"/>
                         <outlet property="tableView" destination="Fyc-E3-ZhN" id="oY4-d7-aPa"/>
                     </connections>
                 </viewController>
@@ -2194,7 +2184,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icon_alert" width="24" height="24"/>
         <image name="icon_calendar" width="24" height="24"/>
         <image name="icon_circle-right" width="24" height="24"/>
         <image name="icon_heart" width="24" height="24"/>

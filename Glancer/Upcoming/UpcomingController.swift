@@ -11,11 +11,9 @@ import UIKit
 import AddictiveLib
 import SnapKit
 
-class UpcomingController: UIViewController, UITabBarDelegate, TableHandlerDataSource, ErrorReloadable {
+class UpcomingController: UIViewController, TableHandlerDataSource, ErrorReloadable {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var tabBar: UITabBar!
-    
     var tableHandler: TableHandler!
     
     var date: Date!
@@ -30,13 +28,10 @@ class UpcomingController: UIViewController, UITabBarDelegate, TableHandlerDataSo
     let SCHEDULE: Int = 0
     let HOMEWORK: Int = 1
     
-    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        //function (from UITabBarDelegate) is called whenever tab is clicked
-        
-        //simply sets the tag (see values in above comment) of the clicked tab
-        selectedTabTag = item.tag
-        self.reloadData()
-    }
+    let cTabBar: CustomTabBar = {
+        let tb = CustomTabBar()
+        return tb
+    }()
     
     func buildCells(handler: TableHandler, layout: TableLayout) {
         
@@ -61,26 +56,77 @@ class UpcomingController: UIViewController, UITabBarDelegate, TableHandlerDataSo
             layout.addModule(UpcomingBlockListModule(controller: self, bundle: self.bundle!, title: nil, blocks: self.bundle!.schedule.getBlocks(), options: [.topBorder, .bottomBorder]))
             layout.addModule(AfterSchoolEventsModule(bundle: self.bundle!, title: "After School", options: [.bottomBorder]))
             
-            layout.addSection().addSpacerCell().setBackgroundColor(.clear).setHeight(35)
+        layout.addSection().addSpacerCell().setBackgroundColor(.clear).setHeight(35)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.date = Date.tomorrow()
+        self.date = Date.today
         
         self.tableHandler = TableHandler(table: self.tableView)
         self.tableHandler.dataSource = self
         
-        self.tabBar.delegate = self
-        
         //set default tab as SCHEDULE
-        self.tabBar.selectedItem = tabBar.items![SCHEDULE] as UITabBarItem?
         selectedTabTag = SCHEDULE
-
+        self.cTabBar.setSelected(index: selectedTabTag)
+        
         self.registerListeners()
         self.reloadData()
+        
+        tableView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
+        tableView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
+        
+        self.setupCustomTabBar()
+        self.setupTabBarObserver()
+    }
+    
+    private func setupTabBarObserver() {
+        NotificationCenter.default.addObserver(forName: Notification.Name("TabSelected"), object: nil, queue: nil) {
+            (notification) in
+            
+            self.selectedTabTag = self.cTabBar.getSelected()
+            self.reloadData()
+        }
+    }
+    
+    private func setupCustomTabBar() {
+        view.addSubview(cTabBar)
+        //view.addConstraintsWithFormat("H:|[v0]|", views: cTabBar)
+        //view.addConstraintsWithFormat("V:|[v0(50)]", views: cTabBar)
+        self.formatTabView(tView: cTabBar)
+    }
+    
+    private func formatTabView(tView: UIView) {
+        tView.translatesAutoresizingMaskIntoConstraints = false
+        if #available(iOS 11.0, *) {
+            let guide = self.view.safeAreaLayoutGuide
+            tView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
+            tView.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
+            tView.topAnchor.constraint(equalTo: guide.topAnchor).isActive = true
+            tView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        } else {
+            NSLayoutConstraint(item: tView,
+                               attribute: .top,
+                               relatedBy: .equal,
+                               toItem: view, attribute: .top,
+                               multiplier: 1.0, constant: 0).isActive = true
+            NSLayoutConstraint(item: tView,
+                               attribute: .leading,
+                               relatedBy: .equal, toItem: view,
+                               attribute: .leading,
+                               multiplier: 1.0,
+                               constant: 0).isActive = true
+            NSLayoutConstraint(item: tView, attribute: .trailing,
+                               relatedBy: .equal,
+                               toItem: view,
+                               attribute: .trailing,
+                               multiplier: 1.0,
+                               constant: 0).isActive = true
+            
+            tView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,38 +134,13 @@ class UpcomingController: UIViewController, UITabBarDelegate, TableHandlerDataSo
         
         self.registerListeners()
         
+     
+        self.navigationController?.navigationBar.tintColor = UIColor.init(displayP3Red: 0.266667
+            , green: 0.505882
+            , blue: 0.921569
+            , alpha: 1)
+        
         self.tableHandler.reload()
-    }
-    
-    private func buildMailButtonItem(badge: Int) -> UIBarButtonItem {
-        let button = UIButton()
-        button.setImage(UIImage(named: "icon_mail")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        button.tintColor = Scheme.blue.color
-        
-        let badgeWrapper = UIView()
-        badgeWrapper.backgroundColor = UIColor.red
-        badgeWrapper.cornerRadius = 7.0
-        
-        let badgeLabel = UILabel()
-        badgeLabel.font = UIFont.systemFont(ofSize: 10.0, weight: .bold)
-        badgeLabel.text = "\(badge)"
-        badgeLabel.textColor = UIColor.white
-        
-        badgeWrapper.addSubview(badgeLabel)
-        badgeLabel.snp.makeConstraints() { $0.center.equalToSuperview() }
-        
-        button.addSubview(badgeWrapper)
-        badgeWrapper.snp.makeConstraints() {
-            constrain in
-            
-            constrain.width.equalTo(14.0)
-            constrain.height.equalTo(14.0)
-            
-            constrain.centerX.equalTo(button.snp.trailing).inset(1)
-            constrain.centerY.equalTo(button.snp.top).inset(2)
-        }
-        
-        return UIBarButtonItem(customView: button)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -209,5 +230,17 @@ class UpcomingController: UIViewController, UITabBarDelegate, TableHandlerDataSo
         alert.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
         
         self.present(alert, animated: true)
+    }
+}
+
+extension UIView {
+    func addConstraintsWithFormat(_ format: String, views: UIView...) {
+        var viewsDictionary = [String: UIView]()
+        for (index, view) in views.enumerated() {
+            let key = "v\(index)"
+            view.translatesAutoresizingMaskIntoConstraints = false
+            viewsDictionary[key] = view
+        }
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: viewsDictionary))
     }
 }
