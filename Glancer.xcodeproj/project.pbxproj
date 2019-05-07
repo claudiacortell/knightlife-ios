@@ -13,6 +13,7 @@
 		5CFBEFE6144F6AA9605B073D /* Pods_Glancer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 768D5C143BC6676A698CE0BD /* Pods_Glancer.framework */; };
 		A600C00A614BDF7292AD1D30 /* Pods_TodayWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA411407FAA1EF6BCD02F68 /* Pods_TodayWidget.framework */; };
 		BA2D3F1C2277BD0400EAC14D /* CalendarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA2D3F1B2277BD0400EAC14D /* CalendarCell.xib */; };
+		BA9C6059227FDE4100C1B640 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C6058227FDE4100C1B640 /* CalendarCell.swift */; };
 		C006914F210EC55C0099CD57 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C006914E210EC55C0099CD57 /* SettingsController.swift */; };
 		C0107A3B212324D600C9A6D7 /* BottomPrefsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0107A3A212324D600C9A6D7 /* BottomPrefsModule.swift */; };
 		C0107A3E2123278F00C9A6D7 /* SurveyWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0107A3D2123278F00C9A6D7 /* SurveyWebCall.swift */; };
@@ -258,6 +259,7 @@
 		94DE637E603DFC218CF78513 /* Pods-TodayWidget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodayWidget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TodayWidget/Pods-TodayWidget.debug.xcconfig"; sourceTree = "<group>"; };
 		95FAF88FCF8A901540F9C3EB /* Pods-Glancer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Glancer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Glancer/Pods-Glancer.release.xcconfig"; sourceTree = "<group>"; };
 		BA2D3F1B2277BD0400EAC14D /* CalendarCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarCell.xib; sourceTree = "<group>"; };
+		BA9C6058227FDE4100C1B640 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		C006914E210EC55C0099CD57 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		C0107A3A212324D600C9A6D7 /* BottomPrefsModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomPrefsModule.swift; sourceTree = "<group>"; };
 		C0107A3D2123278F00C9A6D7 /* SurveyWebCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyWebCall.swift; sourceTree = "<group>"; };
@@ -498,6 +500,7 @@
 			isa = PBXGroup;
 			children = (
 				BA2D3F1B2277BD0400EAC14D /* CalendarCell.xib */,
+				BA9C6058227FDE4100C1B640 /* CalendarCell.swift */,
 			);
 			name = Block;
 			sourceTree = "<group>";
@@ -1706,6 +1709,7 @@
 				C03BA78A21209AE400AB9DA2 /* PushUnboxRefresh.swift in Sources */,
 				C0C176591FAA5F450059E956 /* Scheme.swift in Sources */,
 				C0679147211BF3A500628098 /* UIColor+KL.swift in Sources */,
+				BA9C6059227FDE4100C1B640 /* CalendarCell.swift in Sources */,
 				C0815912211B46DE00522B25 /* SettingsColorPickerController.swift in Sources */,
 				C0FCDBCB210A964A0080A883 /* AttachmentView.swift in Sources */,
 				C0791CA42116B86F0066CE62 /* PushNotificationManager.swift in Sources */,
