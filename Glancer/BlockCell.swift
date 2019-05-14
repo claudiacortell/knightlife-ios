@@ -76,12 +76,12 @@ class BlockCell: TableCell {
 		}
 		
 		for event in composite.events {
-			if !event.isRelevantToUser() {
+			if !event.gradeRelevant {
 				continue // Don't show if it's not relevant
 			}
 			
 			let view = EventAttachmentView()
-			view.text = event.completeDescription()
+			view.text = event.oldCompleteTitle
 			cell.attachmentsStack.addArrangedSubview(view)
 		}
 		

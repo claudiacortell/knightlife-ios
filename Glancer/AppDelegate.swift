@@ -45,14 +45,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 		_ = TodayManager.instance
 		_ = ScheduleManager.instance
 		_ = CourseM
-		_ = EventManager.instance
 		
 		BlockMetaM.loadLegacyData()
 		CourseM.loadLegacyData()
 		
-		// Listen to Push notifications for the Lunch menu
+		// Listen to Refresh Push notifications
 		PushNotificationManager.instance.addListener(type: .REFRESH, listener: LunchPushListener())
-		
+		PushNotificationManager.instance.addListener(type: .REFRESH, listener: EventPushListener())
+
         return true
     }
 	
@@ -104,7 +104,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 	
 	func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
 		ScheduleManager.instance.clearCache()
-		EventManager.instance.clearCache()
 	}
 	
     func applicationWillResignActive(_ application: UIApplication) {

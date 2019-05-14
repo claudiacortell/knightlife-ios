@@ -11,12 +11,12 @@ import AddictiveLib
 
 class AfterSchoolEventsModule: TableModule {
 	
-	let events: [TimeEvent]
+	let events: [Event]
 	let title: String
 	let options: [DayModuleOptions]
 	
 	init(bundle: DayBundle, title: String, options: [DayModuleOptions]) {
-		self.events = bundle.events.getOutOfSchoolEvents()
+		self.events = bundle.events.timeEvents
 		self.title = title
 		self.options = options
 		

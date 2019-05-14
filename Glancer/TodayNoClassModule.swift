@@ -51,7 +51,7 @@ fileprivate class TodayNoClassNoTomorrowModule: TableModule {
 	}
 	
 	override func build() {
-		if today.events.hasOutOfSchoolEvents {
+		if !today.events.timeEvents.isEmpty {
 			self.addModule(NoClassModule(table: self.table, fullHeight: false))
 			self.addModule(AfterSchoolEventsModule(bundle: self.today, title: "Events", options: [.topBorder, .bottomBorder]))
 		} else {
@@ -80,7 +80,7 @@ fileprivate class TodayNoClassWithTomorrowModule: TableModule {
 	override func build() {
 		self.addModule(NoClassModule(table: self.table, fullHeight: false))
 		
-		if today.events.hasOutOfSchoolEvents {
+		if !today.events.timeEvents.isEmpty {
 			self.addModule(AfterSchoolEventsModule(bundle: self.today, title: "Events", options: [.topBorder]))
 		}
 		

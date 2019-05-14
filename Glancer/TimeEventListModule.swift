@@ -11,10 +11,10 @@ import AddictiveLib
 
 class TimeEventListModule: TableModule {
 	
-	let events: [TimeEvent]
+	let events: [Event]
 	let title: String?
 	
-	init(events: [TimeEvent], title: String? = nil) {
+	init(events: [Event], title: String? = nil) {
 		self.events = events
 		self.title = title
 	}

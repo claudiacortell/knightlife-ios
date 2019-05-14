@@ -200,7 +200,7 @@ class DayController: UIViewController, TableHandlerDataSource, ErrorReloadable {
 		self.showNotices()
 		
 		if self.bundle!.schedule.getBlocks().isEmpty {
-			layout.addModule(NoClassModule(table: self.tableView, fullHeight: !self.bundle!.events.hasOutOfSchoolEvents))
+			layout.addModule(NoClassModule(table: self.tableView, fullHeight: self.bundle!.events.timeEvents.isEmpty))
 			layout.addModule(AfterSchoolEventsModule(bundle: self.bundle!, title: "Events", options: [.topBorder, .bottomBorder]))
 			
 			return

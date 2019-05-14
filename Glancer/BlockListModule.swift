@@ -48,7 +48,7 @@ class BlockListModule: TableModule {
 		}
 		
 		for block in self.blocks {
-			let composite = CompositeBlock(schedule: self.bundle.schedule, block: block, lunch: (block.id == .lunch && !self.bundle.menu.items.isEmpty ? bundle.menu : nil), events: self.bundle.events.getEventsByBlock(block: block.id))
+			let composite = CompositeBlock(schedule: self.bundle.schedule, block: block, lunch: (block.id == .lunch && !self.bundle.menu.items.isEmpty ? bundle.menu : nil), events: self.bundle.events.eventsFor(block: block.id))
 			
 			section.addCell(BlockCell(controller: self.controller, composite: composite))
 			

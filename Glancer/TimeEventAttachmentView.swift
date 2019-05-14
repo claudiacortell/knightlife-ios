@@ -16,7 +16,7 @@ class TimeEventAttachmentView: AttachmentView {
 	fileprivate var arrowImage: UIImageView!
 	fileprivate var endLabel: UILabel!
 	
-	var event: TimeEvent? {
+	var event: Event? {
 		didSet {
 			self.setupEvent()
 		}
@@ -84,12 +84,12 @@ class TimeEventAttachmentView: AttachmentView {
 	
 	private func setupEvent() {
 		if let event = self.event {
-			self.text = "\(event.completeDescription())"
+			self.text = "\(event.oldCompleteTitle)"
 			self.timeStack.isHidden = false
 			
-			self.startLabel.text = event.startTime.prettyTime
+			self.startLabel.text = event.schedule.start!.prettyTime
 			
-			if let end = event.endTime {
+			if let end = event.schedule.end {
 				self.arrowImage.isHidden = false
 				self.endLabel.isHidden = false
 				

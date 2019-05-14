@@ -28,9 +28,9 @@ class TodayAfterSchoolModule: TableModule {
 	override func build() {
 //		Today
 		if self.tomorrow == nil {
-			self.addSection().addCell(TodayDoneCell()).setHeight(self.today.events.hasOutOfSchoolEvents ? 120 : self.table.frame.height)
+			self.addSection().addCell(TodayDoneCell()).setHeight(!self.today.events.timeEvents.isEmpty ? 120 : self.table.frame.height)
 			
-			if self.today.events.hasOutOfSchoolEvents {
+			if !self.today.events.timeEvents.isEmpty {
 				self.addModule(AfterSchoolEventsModule(bundle: self.today, title: "After School", options: [ .topBorder, .bottomBorder ]))
 			}
 			
@@ -40,7 +40,7 @@ class TodayAfterSchoolModule: TableModule {
 //		Tomorrow
 		self.addSection().addCell(TodayDoneCell()).setHeight(120)
 		
-		if self.today.events.hasOutOfSchoolEvents {
+		if !self.today.events.timeEvents.isEmpty {
 			self.addModule(AfterSchoolEventsModule(bundle: self.today, title: "After School", options: [ .topBorder ]))
 		}
 		

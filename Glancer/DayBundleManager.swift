@@ -44,10 +44,9 @@ class DayBundleManager: Manager {
 			}.link() {
 				chain in
 				
-				EventManager.instance.getEvents(date: date) {
-					result in
-					
-					switch result {
+				// Fetch Events for that day
+				DayEventList.fetch(for: date).subscribeOnce(with: self) {
+					switch $0 {
 					case .success(let result):
 						chain.setData("events", data: result)
 						chain.next()
@@ -97,10 +96,9 @@ class DayBundleManager: Manager {
 			}.link() {
 				chain in
 				
-				EventManager.instance.getEvents(date: date) {
-					result in
-					
-					switch result {
+				// Fetch Events for that day
+				DayEventList.fetch(for: date).subscribeOnce(with: self) {
+					switch $0 {
 					case .success(let result):
 						chain.setData("events", data: result)
 						chain.next()
@@ -121,8 +119,7 @@ class DayBundleManager: Manager {
 			}.start()
 		}.filter({ $0.date.webSafeDate == date.webSafeDate })
 		
-		EventManager.instance.getEventWatcher(date: date).onSuccess(self) {
-			events in
+		DayEventList.onFetch.subscribe(with: self) { events in
 			
 			//			Have Schedule, fetch lunch and events.
 			//			Perform a chain to get the menu for each of the other ones, then update the corresponding watcher so that everything gets sent to everything else.
@@ -139,38 +136,33 @@ class DayBundleManager: Manager {
 						chain.next(false)
 					}
 				}
-			}.link() {
-				chain in
-				
-				ScheduleManager.instance.loadSchedule(date: date) {
-					result in
+				}.link() {
+					chain in
 					
-					switch result {
-					case .success(let result):
-						chain.setData("schedule", data: result)
-						chain.next()
-					case .failure(let error):
-						chain.setData("error", data: error)
-						chain.next(false)
+					ScheduleManager.instance.loadSchedule(date: date) {
+						result in
+						
+						switch result {
+						case .success(let result):
+							chain.setData("schedule", data: result)
+							chain.next()
+						case .failure(let error):
+							chain.setData("error", data: error)
+							chain.next(false)
+						}
 					}
-				}
-			}.success() {
-				chain in
-				
-				let bundle = DayBundle(date: date, schedule: chain.getData("schedule")!, events: events, menu: chain.getData("menu")!)
-				self.getBundleWatcher(date: date).handle(nil, bundle)
-			}.failure() {
-				chain in
-				
-				self.getBundleWatcher(date: date).handle(chain.getData("error"), nil)
-			}.start()
-		}
-		
-		EventManager.instance.getEventWatcher(date: date).onFailure(self) {
-			error in
+				}.success() {
+					chain in
+					
+					let bundle = DayBundle(date: date, schedule: chain.getData("schedule")!, events: events, menu: chain.getData("menu")!)
+					self.getBundleWatcher(date: date).handle(nil, bundle)
+				}.failure() {
+					chain in
+					
+					self.getBundleWatcher(date: date).handle(chain.getData("error"), nil)
+				}.start()
 			
-			self.getBundleWatcher(date: date).handle(error, nil)
-		}
+		}.filter({ $0.date.webSafeDate == date.webSafeDate })
 	}
 	
 	func getBundleWatcher(date: Date) -> ResourceWatcher<DayBundle> {
@@ -199,12 +191,11 @@ class DayBundleManager: Manager {
 		}.link() {
 			chain in
 			
-			EventManager.instance.getEvents(date: date) {
-				result in
-				
-				switch result {
-				case .success(let events):
-					chain.setData("events", data: events)
+			// Fetch Events for that day
+			DayEventList.fetch(for: date).subscribeOnce(with: self) {
+				switch $0 {
+				case .success(let result):
+					chain.setData("events", data: result)
 					chain.next()
 				case .failure(let error):
 					chain.setData("error", data: error)

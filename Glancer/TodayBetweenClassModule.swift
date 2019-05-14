@@ -42,7 +42,7 @@ class TodayBetweenClassModule: TableModule {
 		
 		self.addModule(BlockListModule(controller: self.controller, bundle: self.bundle, title: nil, blocks: upcomingBlocks, options: [ .topBorder, .bottomBorder ]))
 		
-		if self.bundle.events.hasOutOfSchoolEvents {
+		if !self.bundle.events.timeEvents.isEmpty {
 			self.addModule(AfterSchoolEventsModule(bundle: self.bundle, title: "After School", options: [ .bottomBorder ]))
 		}
 		

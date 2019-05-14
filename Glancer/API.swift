@@ -30,7 +30,7 @@ enum API {
 	
 	case getEventBy(badge: String)
 	case getEvents(categories: [String]?, filters: [String: String])
-	case getEventsFor(date: Date, categories: [String]?, filters: [String: String]?)
+	case getEventsFor(date: Date)
 	
 }
 
@@ -70,7 +70,7 @@ extension API: TargetType {
 			return "events/\( badge )"
 		case .getEvents(_, _):
 			return "events"
-		case let .getEventsFor(date, _, _):
+		case let .getEventsFor(date):
 			return "events/\(date.year)/\(date.month)/\(date.day)"
 		}
 	}
@@ -102,19 +102,6 @@ extension API: TargetType {
 			
 			// Formats filters in format: Key:Value,Key:Value
 			parameters["filters"] = filters.map({ "\($0):\($1)" }).joined(separator: ",")
-			
-			return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
-		case let .getEventsFor(_, categories, filters):
-			var parameters: [String: String] = [:]
-			
-			if let categories = categories {
-				parameters["categories"] = categories.joined(separator: ",")
-			}
-			
-			// Formats filters in format: Key:Value,Key:Value
-			if let filters = filters {
-				parameters["filters"] = filters.map({ "\($0):\($1)" }).joined(separator: ",")
-			}
 			
 			return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
 		

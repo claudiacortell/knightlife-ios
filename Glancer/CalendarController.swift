@@ -171,7 +171,7 @@ class CalendarController: UIViewController, TableHandlerDataSource, ErrorReloada
 			var invalidEvents = 0
 			for upcoming in item.items {
 				if upcoming.type == .event {
-					if !(upcoming as? EventUpcomingItem)!.event.isRelevantToUser() {
+					if !(upcoming as? EventUpcomingItem)!.event.gradeRelevant {
 						invalidEvents += 1
 					}
 				}
@@ -191,7 +191,7 @@ class CalendarController: UIViewController, TableHandlerDataSource, ErrorReloada
 			var views: [AttachmentView] = []
 			for upcoming in item.items {
 				if let eventUpcoming = upcoming as? EventUpcomingItem {
-					if !eventUpcoming.event.isRelevantToUser() {
+					if !eventUpcoming.event.gradeRelevant {
 						continue
 					}
 				}

@@ -75,9 +75,9 @@ class EventUpcomingItem: UpcomingItem {
 	}
 	
 	override func generateAttachmentView() -> AttachmentView {
-		if self.event is TimeEvent {
+		if self.event.schedule.usesTime {
 			let view = TimeEventAttachmentView()
-			view.event = self.event as? TimeEvent
+			view.event = self.event
 			return view
 		} else {
 			let view = EventAttachmentView()

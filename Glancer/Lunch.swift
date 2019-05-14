@@ -40,7 +40,7 @@ final class Lunch: Refreshable, Decodable {
 		// Load data from JSON
 		self.badge = try Optionals.unwrap(json["badge"].string)
 		
-		self.date = try Optionals.unwrap(try Optionals.unwrap((json["date"].string)).dateInISO8601Format(with: [ .withFullDate ]))
+		self.date = try Optionals.unwrap(try Optionals.unwrap((json["date"].string)).dateFromInternetFormat)
 		self.title = json["title"].string
 
 		self.items = try (json["items"].array ?? []).map({

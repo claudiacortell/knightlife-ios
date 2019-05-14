@@ -45,7 +45,7 @@ class EventAttachmentView: AttachmentView {
 		if self.event == nil {
 			self.text = nil
 		} else {
-			self.text = "\(self.event!.completeDescription())"
+			self.text = "\(self.event!.oldCompleteTitle)"
 		}
 	}
 	
