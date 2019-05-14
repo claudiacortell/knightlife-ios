@@ -20,11 +20,6 @@ class CalendarController: UIViewController, TableHandlerDataSource, ErrorReloada
 	
 	@IBOutlet weak var calendarView: CalendarView!
 	
-	var upcomingItems: [(date: Date, items: [UpcomingItem])]?
-	var upcomingItemsError: Error?
-	var upcomingItemsLoaded: Bool {
-		return self.upcomingItems != nil || self.upcomingItemsError != nil
-	}
 	
 	func openDay(date: Date) {
 		guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Day") as? DayController else {
@@ -42,10 +37,6 @@ class CalendarController: UIViewController, TableHandlerDataSource, ErrorReloada
 		self.tableHandler.dataSource = self
 				
 		self.calendarView.controller = self
-		
-		self.fetchUpcoming {
-			self.tableHandler.reload()
-		}
 		
 		self.registerListeners()
 	}
@@ -103,108 +94,20 @@ class CalendarController: UIViewController, TableHandlerDataSource, ErrorReloada
 	}
 	
 	@objc func refreshSubmitted(_ sender: Any) {
-		self.fetchUpcoming {
-			self.tableView.refreshControl?.endRefreshing()
-			self.tableHandler.reload()
-		}
+		
 	}
 	
 	func doListenerRefresh(date: Date, queue: DispatchGroup) {
 		queue.enter()
 		
-		self.fetchUpcoming {
-			self.tableHandler.reload()
-			queue.leave()
-		}
 
 		self.tableHandler.reload()
 	}
 	
-	func fetchUpcoming(then: @escaping () -> Void = {}) {
-		self.upcomingItems = nil
-		self.upcomingItemsError = nil
-		
-		UpcomingWebCall(date: Date.today).callback() {
-			result in
-			
-			switch result {
-			case .success(let items):
-				self.upcomingItems = items
-			case .failure(let error):
-				self.upcomingItemsError = error
-				print(error.localizedDescription)
-			}
-			
-			Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) {
-				timer in
-				then()
-			}
-		}.execute()
-	}
-	
-	
 	
 	func buildCells(handler: TableHandler, layout: TableLayout) {
-		if !self.upcomingItemsLoaded {
-			self.removeRefresh()
-			layout.addSection().addCell(LoadingCell()).setHeight(self.tableView.bounds.size.height)
-			return
-		}
-		
-		if let _ = self.upcomingItemsError {
-			self.removeRefresh()
-			layout.addSection().addCell(ErrorCell(reloadable: self)).setHeight(self.tableView.bounds.size.height)
-			return
-		}
 		
 		self.setupRefresh()
-		let list = self.upcomingItems!
-
-		if list.isEmpty {
-			layout.addSection().addCell(NothingUpcomingCell()).setHeight(self.tableView.bounds.size.height)
-//			No items
-			return
-		}
-		
-		for item in list {
-			// Check if there are any events here that can't be displayed because of grade settings
-			var invalidEvents = 0
-			for upcoming in item.items {
-				if upcoming.type == .event {
-					if !(upcoming as? EventUpcomingItem)!.event.isRelevantToUser() {
-						invalidEvents += 1
-					}
-				}
-			}
-			
-			if invalidEvents >= item.items.count {
-//				If every item in here is an event, and none of them can be shown, just continue
-				continue
-			}
-			
-			let section = layout.addSection()
-			
-			section.addDivider()			
-			section.addCell(TitleCell(title: item.date.prettyDate))
-			section.addDivider()
-			
-			var views: [AttachmentView] = []
-			for upcoming in item.items {
-				if let eventUpcoming = upcoming as? EventUpcomingItem {
-					if !eventUpcoming.event.isRelevantToUser() {
-						continue
-					}
-				}
-				
-				views.append(upcoming.generateAttachmentView())
-			}
-			
-			let cell = AttachmentCell(attachmentViews: views)
-			cell.clickHandler = {
-				self.openDay(date: item.date)
-			}
-			section.addCell(cell)
-		}
 		
 		let newSection = layout.addSection()
 		newSection.addDivider()
@@ -212,9 +115,6 @@ class CalendarController: UIViewController, TableHandlerDataSource, ErrorReloada
 	}
 	
 	func reloadData() {
-		self.fetchUpcoming {
-			self.tableHandler.reload()
-		}
 		self.tableHandler.reload()
 	}
 	

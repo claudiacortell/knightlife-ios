@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="dMb-BZ-as2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="dMb-BZ-as2">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -556,6 +554,9 @@
                             <constraint firstAttribute="trailing" secondItem="fQO-lO-qwx" secondAttribute="trailing" id="laj-tz-5i8"/>
                             <constraint firstItem="kb8-u0-ENq" firstAttribute="top" secondItem="Xcb-y9-Z7B" secondAttribute="bottom" id="pKD-Dl-Ji6"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="UICalendarCell" destination="fQO-lO-qwx" id="DgS-Gu-kOf"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Upcoming" id="ZCy-iG-pqn" customClass="SubtitleNavigationItem" customModule="Glancer" customModuleProvider="target">
                         <barButtonItem key="backBarButtonItem" title=" " id="sfi-OA-1uO"/>
