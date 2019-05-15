@@ -69,6 +69,7 @@ class EventsPrefsModule: TableModule {
 		// Set no grade set action to be checked
 		let nullAction = UIAlertAction(title: "Not Set", style: .default) { alert in
 			Grade.userGrade = nil
+			self.controller.tableHandler.reload()
 		}
 		
 		if Grade.userGrade == nil {

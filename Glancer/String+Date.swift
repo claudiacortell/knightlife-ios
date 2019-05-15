@@ -7,7 +7,7 @@
 //
 
 import Foundation
-//import Timepiece
+import Timepiece
 
 extension String {
 	
