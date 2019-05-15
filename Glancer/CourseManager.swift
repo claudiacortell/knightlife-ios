@@ -66,15 +66,15 @@ class CourseManager {
 		}
 	}
 	
-	func getCourses(schedule: DateSchedule, block: Block.ID) -> [Course] {
+	func getCourses(schedule: Schedule, block: Block.ID) -> [Course] {
 		return self.getCourses(date: schedule.date, schedule: schedule).filter({ $0.scheduleBlock == block })
 	}
 	
-	func getCourses(date: Date, schedule: DateSchedule) -> [Course] {
+	func getCourses(date: Date, schedule: Schedule) -> [Course] {
 		return self.courses.filter({ self.doesMeetOnDate($0, date: date, schedule: schedule) })
 	}
 	
-	private func doesMeetOnDate(_ meeting: Course, date: Date, schedule: DateSchedule) -> Bool {
+	private func doesMeetOnDate(_ meeting: Course, date: Date, schedule: Schedule) -> Bool {
 		switch meeting.schedule {
 		case let .everyDay(block):
 			if let block = block {

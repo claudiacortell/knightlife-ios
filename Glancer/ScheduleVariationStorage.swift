@@ -22,13 +22,14 @@ class ScheduleVariationStorage: StorageHandler {
 	}
 	
 	func saveData() -> Any? {
-		let variations = self.manager.scheduleVariations
-		
-		var newMap: [String: Int] = [:]
-		for (day, variation) in variations {
-			newMap[day.shortName] = variation
-		}
-		return newMap
+//		let variations = self.manager.scheduleVariations
+//
+//		var newMap: [String: Int] = [:]
+//		for (day, variation) in variations {
+//			newMap[day.shortName] = variation
+//		}
+//		return newMap
+		return nil
 	}
 	
 	func loadData(data: Any) {
@@ -39,7 +40,7 @@ class ScheduleVariationStorage: StorageHandler {
 					continue
 				}
 				
-				self.manager.loadedVariation(day: dayId, variation: val)
+				self.manager.loadLegacyVariation(day: dayId, variation: val)
 			}
 		}
 	}

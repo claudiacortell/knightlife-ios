@@ -64,10 +64,10 @@ public enum DayOfWeek: Int {
 	
 	static func weekdays() -> [DayOfWeek] { return [.monday, .tuesday, .wednesday, .thursday, .friday] }
 	static func weekends() -> [DayOfWeek] { return [.saturday, .sunday] }
-	static func values() -> [DayOfWeek] { return [.monday, .tuesday, .wednesday, .thursday, .friday, .saturday, .sunday] }
+	static var values: [DayOfWeek] { return [.monday, .tuesday, .wednesday, .thursday, .friday, .saturday, .sunday] }
 	
 	static func fromShortName(shortName: String) -> DayOfWeek? {
-		for day in DayOfWeek.values() {
+		for day in DayOfWeek.values {
 			if day.shortName == shortName {
 				return day
 			}

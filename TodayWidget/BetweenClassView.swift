@@ -28,11 +28,11 @@ class BetweenClassView: CustomView {
 		}
 	}
 	
-	let schedule: DateSchedule!
+	let schedule: Schedule!
 	let block: Block!
 	let minutes: Int!
 	
-	init(schedule: DateSchedule!, block: Block, minutes: Int) {
+	init(schedule: Schedule!, block: Block, minutes: Int) {
 		self.schedule = schedule
 		self.block = block
 		self.minutes = minutes
