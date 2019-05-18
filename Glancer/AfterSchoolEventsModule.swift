@@ -15,7 +15,7 @@ class AfterSchoolEventsModule: TableModule {
 	let title: String
 	let options: [DayModuleOptions]
 	
-	init(bundle: DayBundle, title: String, options: [DayModuleOptions]) {
+	init(bundle: Day, title: String, options: [DayModuleOptions]) {
 		self.events = bundle.events.timeEvents
 		self.title = title
 		self.options = options

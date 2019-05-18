@@ -11,11 +11,11 @@ import UIKit
 
 class NoticeAttachmentView: AttachmentView {
 	
-	var notice: DateNotice? {
-		didSet {
-			self.setupNotice()
-		}
-	}
+//	var notice: DateNotice? {
+//		didSet {
+//			self.setupNotice()
+//		}
+//	}
 	
 	override init() {
 		super.init()
@@ -42,11 +42,11 @@ class NoticeAttachmentView: AttachmentView {
 	}
 	
 	private func setupNotice() {
-		if self.notice == nil {
-			self.text = nil
-		} else {
-			self.text = "\(self.notice!.priority.displayName): \(self.notice!.message)"
-		}
+//		if self.notice == nil {
+//			self.text = nil
+//		} else {
+//			self.text = "\(self.notice!.priority.displayName): \(self.notice!.message)"
+//		}
 	}
 	
 }

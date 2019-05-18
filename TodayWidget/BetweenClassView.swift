@@ -52,9 +52,9 @@ class BetweenClassView: CustomView {
 		Bundle.main.loadNibNamed("BetweenClassView", owner: self, options: nil)
 		self.secure(view: self.backgroundView)
 		
-		let analyst = BlockAnalyst(schedule: self.schedule, block: self.block)
+		let analyst = self.block.analyst
 		
-		let state = analyst.getCourse() == nil ? "\(analyst.getDisplayName()) starting soon" : "Get to \(analyst.getDisplayName())"
+		let state = analyst.bestCourse == nil ? "\(analyst.displayName) starting soon" : "Get to \(analyst.displayName)"
 		
 		self.statusIconImage.image = self.statusIconImage.image?.withRenderingMode(.alwaysTemplate)
 		self.blockImage.image = self.blockImage.image?.withRenderingMode(.alwaysTemplate)
@@ -74,7 +74,7 @@ class BetweenClassView: CustomView {
 			}
 		}()
 		
-		self.color = analyst.getColor()
+		self.color = analyst.color
 	}
 	
 }

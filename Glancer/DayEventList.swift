@@ -20,10 +20,26 @@ final class DayEventList: Decodable, Refreshable {
 	
 	required init(json: JSON) throws {
 		
-		self.date = try Optionals.unwrap(try Optionals.unwrap((json["date"].string)).dateFromInternetFormat)
+		self.date = try Optionals.unwrap(json["date"].string?.dateFromInternetFormat)
 		self.events = (try Optionals.unwrap(json["events"].array)).compactMap({ try? Event.instantiate(json: $0) })
 		
-		self.stopListeningToEventUpdates()
+		self.listenToEventUpdates()
+		
+		// Register self for updates
+		DayEventList.onFetch.subscribe(with: self) {
+			// Update this event with the newest version
+			self.updateContent(from: $0)
+		}.filter({ $0.date.webSafeDate == self.date.webSafeDate })
+		
+		
+	}
+	
+	init(date: Date, events: [Event]) {
+		
+		self.date = date
+		self.events = events
+		
+		self.listenToEventUpdates()
 		
 	}
 	

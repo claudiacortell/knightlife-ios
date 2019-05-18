@@ -48,17 +48,19 @@ class ScheduleChangedUpcomingItem: UpcomingItem {
 
 class ScheduleNoticeUpcomingItem: UpcomingItem {
 	
-	let notice: DateNotice
+//	let notice: DateNotice
 	
-	init(notice: DateNotice, date: Date) {
-		self.notice = notice
+	init(
+//		notice: DateNotice,
+		date: Date) {
+//		self.notice = notice
 		
 		super.init(type: .scheduleNotice, date: date)
 	}
 	
 	override func generateAttachmentView() -> AttachmentView {
 		let view = NoticeAttachmentView()
-		view.notice = notice
+//		view.notice = notice
 		return view
 	}
 	

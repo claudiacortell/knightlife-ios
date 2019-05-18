@@ -12,7 +12,9 @@ import AddictiveLib
 
 class NoticeCell: TableCell {
 	
-	init(notice: DateNotice) {
+	init(
+//		notice: DateNotice
+		) {
 		super.init("notice", nib: "NoticeCell")
 		
 		self.setEstimatedHeight(40)
@@ -28,7 +30,7 @@ class NoticeCell: TableCell {
 			for view in cell.attachmentStack.arrangedSubviews { view.removeFromSuperview() }
 			
 			let attachment = NoticeAttachmentView()
-			attachment.notice = notice
+//			attachment.notice = notice
 			cell.attachmentStack.addArrangedSubview(attachment)
 		}
 	}

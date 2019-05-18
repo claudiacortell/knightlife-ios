@@ -39,7 +39,9 @@ extension BadgeTetheredPreferences {
 			preferences = BadgeTetheredPreferences()
 			preferences!.badge = `for`.badge
 			
-			Realms.add(preferences!, update: true)
+			try! Realms.write {
+				Realms.add(preferences!, update: true)
+			}
 		}
 		
 		return preferences!

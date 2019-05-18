@@ -14,10 +14,10 @@ class TodayNoClassModule: TableModule {
 	
 	let controller: DayController
 	let table: UITableView
-	let today: DayBundle
-	let tomorrow: DayBundle?
+	let today: Day
+	let tomorrow: Day?
 	
-	init(controller: DayController, table: UITableView, today: DayBundle, tomorrow: DayBundle?) {
+	init(controller: DayController, table: UITableView, today: Day, tomorrow: Day?) {
 		self.controller = controller
 		self.table = table
 		self.today = today
@@ -41,9 +41,9 @@ class TodayNoClassModule: TableModule {
 fileprivate class TodayNoClassNoTomorrowModule: TableModule {
 	
 	let table: UITableView
-	let today: DayBundle
+	let today: Day
 	
-	init(table: UITableView, today: DayBundle) {
+	init(table: UITableView, today: Day) {
 		self.table = table
 		self.today = today
 		
@@ -65,10 +65,10 @@ fileprivate class TodayNoClassWithTomorrowModule: TableModule {
 	
 	let controller: DayController
 	let table: UITableView
-	let today: DayBundle
-	let tomorrow: DayBundle
+	let today: Day
+	let tomorrow: Day
 	
-	init(controller: DayController, table: UITableView, today: DayBundle, tomorrow: DayBundle) {
+	init(controller: DayController, table: UITableView, today: Day, tomorrow: Day) {
 		self.controller = controller
 		self.table = table
 		self.today = today

@@ -12,7 +12,7 @@ import UIKit
 import UserNotifications
 import Timepiece
 
-struct Timetable: Decodable {
+final class Timetable: Decodable {
 	
 	let badge: String
 	let grades: [Grade]
@@ -29,7 +29,7 @@ struct Timetable: Decodable {
 			return Grade(rawValue: ($0 as? Int) ?? -1)
 		})
 		
-		self.title = try Optionals.unwrap(json["title"].string)
+		self.title = json["title"].string
 		
 		self.blocks = try Optionals.unwrap(json["blocks"].array).map({
 			var block = try Block(json: $0)
@@ -40,7 +40,7 @@ struct Timetable: Decodable {
 		
 	}
 	
-	mutating func setSchedule(schedule: Schedule) {
+	func setSchedule(schedule: Schedule) {
 		self.schedule = schedule
 	}
 	
@@ -88,6 +88,11 @@ extension Timetable {
 	func hasBlock(block: Block, firstLunch: Bool? = nil) -> Bool {
 		let blocks = self.filterBlocksByLunch(firstLunch: firstLunch)
 		return blocks.contains(block)
+	}
+	
+	func hasBlock(id: Block.ID, firstLunch: Bool? = nil) -> Bool {
+		let blocks = self.filterBlocksByLunch(firstLunch: firstLunch)
+		return blocks.contains(where: { $0.id == id })
 	}
 	
 	func getBlockOffsetFrom(block: Block, by: Int, firstLunch: Bool? = nil) -> Block? {

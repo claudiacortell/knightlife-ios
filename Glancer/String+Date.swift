@@ -14,8 +14,7 @@ extension String {
 	var dateFromInternetFormat: Date? {
 		let dateFormatter = ISO8601DateFormatter()
 		
-		dateFormatter.formatOptions = [ .withInternetDateTime, .withFractionalSeconds ]
-		dateFormatter.timeZone = Calendar.timezone
+		dateFormatter.formatOptions = [ .withInternetDateTime ]
 		
 		return dateFormatter.date(from: self)
 	}

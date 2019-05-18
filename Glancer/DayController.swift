@@ -19,7 +19,7 @@ class DayController: UIViewController, TableHandlerDataSource, ErrorReloadable {
 	
 	var date: Date!
 	
-	var bundle: DayBundle?
+	var bundle: Day?
 	var bundleError: Error?
 	var bundleDownloaded: Bool { return bundle != nil || bundleError != nil }
 	
@@ -55,39 +55,28 @@ class DayController: UIViewController, TableHandlerDataSource, ErrorReloadable {
 		
 		self.tableHandler.reload()
 		
-		DayBundleManager.instance.getDayBundle(date: self.date)
+		Day.fetch(for: self.date).subscribeOnce(with: self) {
+			switch $0 {
+			case .success(let day):
+				self.bundle = day
+				self.bundleError = nil
+			case .failure(let error):
+				self.bundle = nil
+				self.bundleError = error
+			}
+			
+			self.tableHandler.reload()
+		}
 	}
 	
 	func registerListeners() {
-		DayBundleManager.instance.getBundleWatcher(date: self.date).onSuccess(self) {
-			bundle in
-			
-			self.bundle = bundle
-			self.bundleError = nil
-			
+		Schedule.onFirstLunchChange.subscribe(with: self) { change in
 			self.tableHandler.reload()
-		}
-		
-		DayBundleManager.instance.getBundleWatcher(date: self.date).onFailure(self) {
-			error in
-			
-			self.bundle = nil
-			self.bundleError = error
-			
-			self.tableHandler.reload()
-		}
-		
-		ScheduleManager.instance.getVariationWatcher(day: self.date.weekday).onSuccess(self) {
-			variation in
-			self.tableHandler.reload()
-		}
+		}.filter({ $0.dayOfWeek == self.date.weekday })
 	}
 	
 	func unregisterListeners() {
-		DayBundleManager.instance.getBundleWatcher(date: self.date).unregisterFailure(self)
-		DayBundleManager.instance.getBundleWatcher(date: self.date).unregisterSuccess(self)
-		
-		ScheduleManager.instance.getVariationWatcher(day: self.date.weekday).unregisterSuccess(self)
+		Schedule.onFirstLunchChange.cancelSubscription(for: self)
 	}
 	
 	func setupNavigationItem() {
@@ -96,15 +85,15 @@ class DayController: UIViewController, TableHandlerDataSource, ErrorReloadable {
 		self.navigationItem.title = self.date.prettyDate
 		
 		if let subtitleItem = self.navigationItem as? SubtitleNavigationItem {
-			if let bundle = self.bundle {
-				if bundle.schedule.changed {
-					subtitleItem.subtitle = "Special"
-					subtitleItem.subtitleColor = .red
-					
-					return
-				}
-			}
-			
+//			if let bundle = self.bundle {
+//				if bundle.schedule.changed {
+//					subtitleItem.subtitle = "Special"
+//					subtitleItem.subtitleColor = .red
+//
+//					return
+//				}
+//			}
+
 			subtitleItem.subtitle = nil
 			subtitleItem.subtitleColor = UIColor.darkGray
 		}
@@ -144,15 +133,15 @@ class DayController: UIViewController, TableHandlerDataSource, ErrorReloadable {
 	}
 	
 	func setupMailButtonItem() {
-		if let bundle = self.bundle {
-			if bundle.schedule.notices.isEmpty {
-				self.removeMailButton()
-			} else {
-				self.addMailButton(badge: bundle.schedule.notices.count)
-			}
-		} else {
+//		if let bundle = self.bundle {
+//			if bundle.schedule.notices.isEmpty {
+//				self.removeMailButton()
+//			} else {
+//				self.addMailButton(badge: bundle.schedule.notices.count)
+//			}
+//		} else {
 			self.removeMailButton()
-		}
+//		}
 	}
 	
 	private func removeMailButton() {
@@ -171,16 +160,16 @@ class DayController: UIViewController, TableHandlerDataSource, ErrorReloadable {
 			return
 		}
 		
-		if bundle.schedule.notices.isEmpty {
-			self.setupNavigationItem()
-			return
-		}
+//		if bundle.schedule.notices.isEmpty {
+//			self.setupNavigationItem()
+//			return
+//		}
 		
 		guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "Messages") as? NoticesController else {
 			return
 		}
 		
-		controller.notices = bundle.schedule.notices
+//		controller.notices = bundle.schedule.notices
 		self.navigationController?.pushViewController(controller, animated: true)
 	}
 	
@@ -199,14 +188,14 @@ class DayController: UIViewController, TableHandlerDataSource, ErrorReloadable {
 		
 		self.showNotices()
 		
-		if self.bundle!.schedule.getBlocks().isEmpty {
+		if !self.bundle!.schedule.hasSchool {
 			layout.addModule(NoClassModule(table: self.tableView, fullHeight: self.bundle!.events.timeEvents.isEmpty))
 			layout.addModule(AfterSchoolEventsModule(bundle: self.bundle!, title: "Events", options: [.topBorder, .bottomBorder]))
 			
 			return
 		}
 		
-		layout.addModule(BlockListModule(controller: self, bundle: self.bundle!, title: nil, blocks: self.bundle!.schedule.getBlocks(), options: [.topBorder, .bottomBorder]))
+		layout.addModule(BlockListModule(controller: self, bundle: self.bundle!, title: nil, blocks: self.bundle!.schedule.selectedTimetable!.filterBlocksByLunch(), options: [.topBorder, .bottomBorder]))
 		layout.addModule(AfterSchoolEventsModule(bundle: self.bundle!, title: "After School", options: [.bottomBorder]))
 		
 		layout.addSection().addSpacerCell().setBackgroundColor(.clear).setHeight(35)
@@ -224,40 +213,40 @@ class DayController: UIViewController, TableHandlerDataSource, ErrorReloadable {
 	func showNotices() {
 		if let bundle = self.bundle {
 //			This will only display the first notice, but I really think that's OK.
-			bundle.schedule.notices.filter({ $0.priority == .warning && !self.hasDisplayedNoticeAlready(notice: $0) }).forEach({ self.showNotice(notice: $0) })
+//			bundle.schedule.notices.filter({ $0.priority == .warning && !self.hasDisplayedNoticeAlready(notice: $0) }).forEach({ self.showNotice(notice: $0) })
 		}
 	}
 	
-	private func hasDisplayedNoticeAlready(notice: DateNotice) -> Bool {
-		guard let displayedNotices: [String: [String]] = Globals.getData("displayedNotices") else {
-			let array: [String: [String]] = [:]
-			Globals.setData("displayedNotices", data: array)
-			return false
-		}
-		
-		guard let todayNotices = displayedNotices[self.date.webSafeDate] else {
-			return false
-		}
-		
-		let noticeHash = "\(notice.priority.rawValue)\(notice.message)"
-		return todayNotices.contains(noticeHash)
-	}
-	
-	private func showNotice(notice: DateNotice) {
-		var displayedNotices: [String: [String]] = Globals.getData("displayedNotices")!
-		if displayedNotices[self.date.webSafeDate] == nil {
-			displayedNotices[self.date.webSafeDate] = []
-		}
-		
-		let noticeHash = "\(notice.priority.rawValue)\(notice.message)"
-		displayedNotices[self.date.webSafeDate]!.append(noticeHash)
-		
-		Globals.setData("displayedNotices", data: displayedNotices) // Make sure it gets set properly again
-		
-		let alert = UIAlertController(title: "Alert", message: notice.message, preferredStyle: .alert)
-		alert.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
-		
-		self.present(alert, animated: true)
-	}
+//	private func hasDisplayedNoticeAlready(notice: DateNotice) -> Bool {
+//		guard let displayedNotices: [String: [String]] = Globals.getData("displayedNotices") else {
+//			let array: [String: [String]] = [:]
+//			Globals.setData("displayedNotices", data: array)
+//			return false
+//		}
+//
+//		guard let todayNotices = displayedNotices[self.date.webSafeDate] else {
+//			return false
+//		}
+//
+//		let noticeHash = "\(notice.priority.rawValue)\(notice.message)"
+//		return todayNotices.contains(noticeHash)
+//	}
+//
+//	private func showNotice(notice: DateNotice) {
+//		var displayedNotices: [String: [String]] = Globals.getData("displayedNotices")!
+//		if displayedNotices[self.date.webSafeDate] == nil {
+//			displayedNotices[self.date.webSafeDate] = []
+//		}
+//
+//		let noticeHash = "\(notice.priority.rawValue)\(notice.message)"
+//		displayedNotices[self.date.webSafeDate]!.append(noticeHash)
+//
+//		Globals.setData("displayedNotices", data: displayedNotices) // Make sure it gets set properly again
+//
+//		let alert = UIAlertController(title: "Alert", message: notice.message, preferredStyle: .alert)
+//		alert.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
+//
+//		self.present(alert, animated: true)
+//	}
 	
 }

@@ -12,11 +12,11 @@ import AddictiveLib
 class TodayBetweenClassModule: TableModule {
 	
 	let controller: DayController
-	let bundle: DayBundle
+	let bundle: Day
 	let nextBlock: Block
 	let minutesUntil: Int
 	
-	init(controller: DayController, bundle: DayBundle, nextBlock: Block, minutesUntil: Int) {
+	init(controller: DayController, bundle: Day, nextBlock: Block, minutesUntil: Int) {
 		self.controller = controller
 		self.bundle = bundle
 		self.nextBlock = nextBlock
@@ -26,19 +26,19 @@ class TodayBetweenClassModule: TableModule {
 	}
 	
 	override func build() {
-		let analyst = BlockAnalyst(schedule: bundle.schedule, block: self.nextBlock)
+		let analyst = self.nextBlock.analyst
 		
-		let state = analyst.getCourse() == nil ? "\(analyst.getDisplayName()) starting soon" : "Get to \(analyst.getDisplayName())"
+		let state = analyst.bestCourse == nil ? "\(analyst.displayName) starting soon" : "Get to \(analyst.displayName)"
 		
 		let todaySection = self.addSection()
-		todaySection.addCell(TodayStatusCell(state: state, minutes: self.minutesUntil, image: UIImage(named: "icon_class")!, color: analyst.getColor()))
+		todaySection.addCell(TodayStatusCell(state: state, minutes: self.minutesUntil, image: UIImage(named: "icon_class")!, color: analyst.color))
 		
 		self.addModule(BlockListModule(controller: self.controller, bundle: self.bundle, title: nil, blocks: [ self.nextBlock ], options: [ .topBorder, .bottomBorder ]))
 		
 		let section = self.addSection()
 		section.addSpacerCell().setHeight(30)
 		
-		let upcomingBlocks = self.bundle.schedule.getBlocksAfter(self.nextBlock)
+		let upcomingBlocks = self.bundle.schedule.selectedTimetable!.getBlocksAfter(block: self.nextBlock)
 		
 		self.addModule(BlockListModule(controller: self.controller, bundle: self.bundle, title: nil, blocks: upcomingBlocks, options: [ .topBorder, .bottomBorder ]))
 		

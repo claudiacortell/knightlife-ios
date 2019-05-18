@@ -36,28 +36,28 @@ class BlockCell: TableCell {
 //	Set name label to bold if there's a class or not
 	
 	private func layout(cell: UIBlockCell) {
-		let analyst = BlockAnalyst(schedule: self.composite.schedule, block: self.composite.block)
+		let analyst = self.composite.block.analyst
 		let block = self.composite.block
 		
 //		Setup
-		cell.nameLabel.text = analyst.getDisplayName()
+		cell.nameLabel.text = analyst.displayName
 		cell.blockNameLabel.text = block.id.displayName
 		
-		cell.fromLabel.text = block.time.start.prettyTime
-		cell.toLabel.text = block.time.end.prettyTime
+		cell.fromLabel.text = block.schedule.start.prettyTime
+		cell.toLabel.text = block.schedule.end.prettyTime
 		
-		cell.locationLabel.text = analyst.getLocation()
+		cell.locationLabel.text = analyst.location
 		
 //		Formatting
-		var heavy = !analyst.getCourses().isEmpty
-		if block.id == .lab, let before = self.composite.schedule.getBlockBefore(block) {
-			if !BlockAnalyst(schedule: self.composite.schedule, block: before).getCourses().isEmpty {
+		var heavy = !analyst.courses.isEmpty
+		if block.id == .lab, let before = self.composite.schedule.selectedTimetable!.getBlockBefore(block: block) {
+			if !before.analyst.courses.isEmpty {
 				heavy = true
 			}
 		}
 		
 		cell.nameLabel.font = UIFont.systemFont(ofSize: 22, weight: heavy ? .bold : .semibold)
-		cell.nameLabel.textColor = analyst.getColor()
+		cell.nameLabel.textColor = analyst.color
 		
 		cell.tagIcon.image = cell.tagIcon.image!.withRenderingMode(.alwaysTemplate)
 		cell.rightIcon.image = cell.rightIcon.image!.withRenderingMode(.alwaysTemplate)

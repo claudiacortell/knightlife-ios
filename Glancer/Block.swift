@@ -10,18 +10,18 @@ import Foundation
 import SwiftyJSON
 import UserNotifications
 
-struct Block: Decodable {
+final class Block: Decodable {
 	
 	private(set) var timetable: Timetable!
 	
 	let badge: String
 	let id: ID
 	
-	let state: String
+//	let state: String
 	
 	let firstLunch: Bool?
 	
-	private(set) var time: TimeDuration
+	private(set) var schedule: BlockSchedule
 	
 	let annotations: [Annotation]
 	var relevantAnnotations: [Annotation] {
@@ -69,22 +69,37 @@ struct Block: Decodable {
 		self.badge = try Optionals.unwrap(json["badge"].string)
 		self.id = try Optionals.unwrap(ID(rawValue: json["id"].string ?? ""))
 		
-		self.state = try Optionals.unwrap(json["state"].string)
+//		self.state = try Optionals.unwrap(json["state"].string)
 		
 		self.firstLunch = json["firstLunch"].bool
 		
-		self.time = try TimeDuration(json: json["time"])
+		self.schedule = try BlockSchedule(json: json["time"])
 		
 		self.annotations = (try Optionals.unwrap(json["annotations"].array)).compactMap({
 			try? Annotation(json: $0)
 		})
-		
-		self.time.startNotifiable.delegate = self
-		self.time.endNotifiable.delegate = self
 	}
 	
-	mutating func setTimetable(timetable: Timetable) {
+	func setTimetable(timetable: Timetable) {
 		self.timetable = timetable
+	}
+	
+}
+
+struct BlockSchedule {
+	
+	var start: Date
+	var end: Date
+	
+	var duration: TimeDuration {
+		return TimeDuration(start: self.start, end: self.end)
+	}
+	
+	init(json: JSON) throws {
+		
+		self.start = try Optionals.unwrap(json["start"].string?.dateFromInternetFormat)
+		self.end = try Optionals.unwrap(json["end"].string?.dateFromInternetFormat)
+		
 	}
 	
 }
@@ -154,6 +169,15 @@ extension Block {
 		static var letterBlocks: [ID] { return [.a, .b, .c, .d, .e, .f, .g, .x] }
 		static var academicBlocks: [ID] { return [.a, .b, .c, .d, .e, .f, .g] }
 		
+		init?(index: Int) {
+			let values: [Block.ID] = [.a, .b, .c, .d, .e, .f, .g, .x, .lunch, .activities, .lab, .custom, .advisory, .classMeeting, .assembly]
+			if !values.indices.contains(index) {
+				return nil
+			}
+			
+			self = values[index]
+		}
+		
 	}
 	
 }
@@ -202,81 +226,81 @@ extension Block.Annotation {
 	
 }
 
-extension Block: StartNotifiableDelegate {
-	
-	var startState: String { return self.state }
-	
-	var startBadge: String { return self.badge + ".start" }
-	
-	var startCategories: [String] { return self.categories }
-	
-	func startIsNotifiable(duration: TimeDuration) -> Bool {
-		return self.analyst.shouldShowBeforeClassNotifications
-	}
-	
-	func startGetNotificationContent(duration: TimeDuration) -> UNMutableNotificationContent {
-		let analyst = self.analyst
-		let content = UNMutableNotificationContent()
-		
-		if analyst.courses.isEmpty {
-			content.title = "Next Block"
-		} else {
-			content.title = "Get to Class"
-		}
-		
-		content.sound = UNNotificationSound.default()
-		content.body = "5 min until \(analyst.displayName)"
-		
-		content.threadIdentifier = "schedule"
-		
-		if analyst.location != nil {
-			content.body = content.body + ". \(analyst.location!)"
-		}
-		
-		return content
-	}
-	
-	func startGetNotificationTrigger(duration: TimeDuration) -> UNCalendarNotificationTrigger {
-		return UNCalendarNotificationTrigger(dateMatching: Calendar.normalizedCalendar.dateComponents([.year, .month, .day, .hour, .minute, .calendar, .timeZone], from: duration.start), repeats: false)
-	}
-	
-}
-
-extension Block: EndNotifiableDelegate {
-	
-	var endState: String { return self.state }
-	
-	var endBadge: String { return self.badge + ".end" }
-	
-	var endCategories: [String] { return self.categories }
-	
-	func endIsNotifiable(duration: TimeDuration) -> Bool {
-		return self.analyst.shouldShowAfterClassNotifications
-	}
-	
-	func endGetNotificationContent(duration: TimeDuration) -> UNMutableNotificationContent {
-		let analyst = self.analyst
-		let content = UNMutableNotificationContent()
-		
-		if analyst.bestCourse == nil {
-			content.title = "End of Block"
-		} else {
-			content.title = "End of Class"
-		}
-		
-		content.sound = UNNotificationSound.default()
-		content.body = "\(analyst.displayName) ends in 2 min"
-		
-		content.threadIdentifier = "schedule"
-		
-		return content
-	}
-	
-	func endGetNotificationTrigger(duration: TimeDuration) -> UNCalendarNotificationTrigger {
-		return UNCalendarNotificationTrigger(dateMatching: Calendar.normalizedCalendar.dateComponents([.year, .month, .day, .hour, .minute, .calendar, .timeZone], from: duration.end), repeats: false)
-	}
-	
-}
+//extension Block: StartNotifiableDelegate {
+//
+//	var startState: String { return self.state }
+//
+//	var startBadge: String { return self.badge + ".start" }
+//
+//	var startCategories: [String] { return self.categories }
+//
+//	func startIsNotifiable(duration: TimeDuration) -> Bool {
+//		return self.analyst.shouldShowBeforeClassNotifications
+//	}
+//
+//	func startGetNotificationContent(duration: TimeDuration) -> UNMutableNotificationContent {
+//		let analyst = self.analyst
+//		let content = UNMutableNotificationContent()
+//
+//		if analyst.courses.isEmpty {
+//			content.title = "Next Block"
+//		} else {
+//			content.title = "Get to Class"
+//		}
+//
+//		content.sound = UNNotificationSound.default()
+//		content.body = "5 min until \(analyst.displayName)"
+//
+//		content.threadIdentifier = "schedule"
+//
+//		if analyst.location != nil {
+//			content.body = content.body + ". \(analyst.location!)"
+//		}
+//
+//		return content
+//	}
+//
+//	func startGetNotificationTrigger(duration: TimeDuration) -> UNCalendarNotificationTrigger {
+//		return UNCalendarNotificationTrigger(dateMatching: Calendar.normalizedCalendar.dateComponents([.year, .month, .day, .hour, .minute, .calendar, .timeZone], from: duration.start), repeats: false)
+//	}
+//
+//}
+//
+//extension Block: EndNotifiableDelegate {
+//
+//	var endState: String { return self.state }
+//
+//	var endBadge: String { return self.badge + ".end" }
+//
+//	var endCategories: [String] { return self.categories }
+//
+//	func endIsNotifiable(duration: TimeDuration) -> Bool {
+//		return self.analyst.shouldShowAfterClassNotifications
+//	}
+//
+//	func endGetNotificationContent(duration: TimeDuration) -> UNMutableNotificationContent {
+//		let analyst = self.analyst
+//		let content = UNMutableNotificationContent()
+//
+//		if analyst.bestCourse == nil {
+//			content.title = "End of Block"
+//		} else {
+//			content.title = "End of Class"
+//		}
+//
+//		content.sound = UNNotificationSound.default()
+//		content.body = "\(analyst.displayName) ends in 2 min"
+//
+//		content.threadIdentifier = "schedule"
+//
+//		return content
+//	}
+//
+//	func endGetNotificationTrigger(duration: TimeDuration) -> UNCalendarNotificationTrigger {
+//		return UNCalendarNotificationTrigger(dateMatching: Calendar.normalizedCalendar.dateComponents([.year, .month, .day, .hour, .minute, .calendar, .timeZone], from: duration.end), repeats: false)
+//	}
+//
+//}
 
 extension Block: Equatable {
 	

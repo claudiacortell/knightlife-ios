@@ -13,10 +13,10 @@ class TodayAfterSchoolModule: TableModule {
 	
 	let controller: DayController
 	let table: UITableView
-	let today: DayBundle
-	let tomorrow: DayBundle?
+	let today: Day
+	let tomorrow: Day?
 	
-	init(controller: DayController, table: UITableView, today: DayBundle, tomorrow: DayBundle?) {
+	init(controller: DayController, table: UITableView, today: Day, tomorrow: Day?) {
 		self.controller = controller
 		self.table = table
 		self.today = today

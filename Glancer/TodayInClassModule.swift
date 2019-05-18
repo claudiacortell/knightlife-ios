@@ -12,12 +12,12 @@ import AddictiveLib
 class TodayInClassModule: TableModule {
 	
 	let controller: DayController
-	let bundle: DayBundle
+	let bundle: Day
 	let current: Block
 	let next: Block?
 	let minutesLeft: Int
 	
-	init(controller: DayController, bundle: DayBundle, current: Block, next: Block?, minutesLeft: Int) {
+	init(controller: DayController, bundle: Day, current: Block, next: Block?, minutesLeft: Int) {
 		self.controller = controller
 		self.bundle = bundle
 		self.current = current
@@ -28,24 +28,24 @@ class TodayInClassModule: TableModule {
 	}
 	
 	override func build() {
-		let analyst = BlockAnalyst(schedule: bundle.schedule, block: current)
+		let analyst = self.current.analyst
 		
 		let todaySection = self.addSection()
-		todaySection.addCell(TodayStatusCell(state: "in \(analyst.getDisplayName())", minutes: self.minutesLeft, image: UIImage(named: "icon_clock")!, color: analyst.getColor()))
+		todaySection.addCell(TodayStatusCell(state: "in \(analyst.displayName)", minutes: self.minutesLeft, image: UIImage(named: "icon_clock")!, color: analyst.color))
 		
-		let secondPassed = Calendar.normalizedCalendar.dateComponents([.second], from: current.time.start, to: Date.today).second!
-		let secondDuration = Calendar.normalizedCalendar.dateComponents([.second], from: current.time.start, to: current.time.end).second!
+		let secondPassed = Calendar.normalizedCalendar.dateComponents([.second], from: current.schedule.start, to: Date.today).second!
+		let secondDuration = Calendar.normalizedCalendar.dateComponents([.second], from: current.schedule.start, to: current.schedule.end).second!
 		
 		let duration = Float(secondPassed) / Float(secondDuration)
 		
-		todaySection.addCell(TodayBarCell(color: analyst.getColor(), duration: duration))
+		todaySection.addCell(TodayBarCell(color: analyst.color, duration: duration))
 		
 		self.addModule(BlockListModule(controller: self.controller, bundle: self.bundle, title: nil, blocks: [ self.current ], options: [ .bottomBorder ]))
 		
 		let section = self.addSection()
 		section.addSpacerCell().setHeight(30)
 		
-		let upcomingBlocks = self.bundle.schedule.getBlocksAfter(self.current)
+		let upcomingBlocks = self.bundle.schedule.selectedTimetable!.getBlocksAfter(block: self.current)
 		self.addModule(BlockListModule(controller: self.controller, bundle: self.bundle, title: nil, blocks: upcomingBlocks, options: [ .topBorder, .bottomBorder ]))
 		
 		if upcomingBlocks.isEmpty {

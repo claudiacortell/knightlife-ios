@@ -57,6 +57,8 @@ extension Grade {
 		get {
 			// Not yet migrated so fetch via legacy
 			if !Defaults[.gradeMigratedToRealm] {
+				Defaults[.gradeMigratedToRealm] = true
+				
 				let legacyGrade = Defaults[.gradeLegacy]
 				
 				if let grade = Grade(rawValue: legacyGrade - 1) {

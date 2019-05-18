@@ -9,6 +9,8 @@
 import Foundation
 import AddictiveLib
 import UserNotifications
+import SwiftyJSON
+import Moya
 
 class KLNotification {
 
@@ -50,7 +52,7 @@ fileprivate class FirstLoadStorage: StorageHandler {
 	
 }
 
-class NotificationManager: Manager, PushRefreshListener {
+class NotificationManager: AddictiveLib.Manager, PushRefreshListener {
 	
 	let projection = 8 // Schedule 8 days into the future. This could be extended except iOS only allows 64 schedule local notifications
 	let shallowProjection = 3
@@ -69,17 +71,11 @@ class NotificationManager: Manager, PushRefreshListener {
 	private(set) var scheduledNotifications: [KLNotification] = []
 	
 //	Downloaded Specials
-	private(set) var specialSchedules: [DateSchedule]?
-	private(set) var specialSchedulesError: Error?
-	var specialSchedulesLoaded: Bool {
-		return self.specialSchedules != nil || self.specialSchedulesError != nil
-	}
+	private(set) var weekSchedules: [Schedule]?
+	private(set) var weekSchedulesError: Error?
 	
-//	Downloaded template
-	private(set) var template: [DayOfWeek: DaySchedule]?
-	private(set) var templateError: Error?
-	var templateLoaded: Bool {
-		return self.template != nil || self.templateError != nil
+	var weekSchedulesLoaded: Bool {
+		return self.weekSchedules != nil || self.weekSchedulesError != nil
 	}
 	
 	init() {
@@ -94,31 +90,21 @@ class NotificationManager: Manager, PushRefreshListener {
 	}
 	
 	private func registerListeners() {
+		
 		PushNotificationManager.instance.addListener(type: .REFRESH, listener: self)
 		
-		ScheduleManager.instance.templateWatcher.onSuccess(self) {
-			self.template = $0
-			self.templateError = nil
-			
+		// Reschedule notifications on First Lunch change
+		Schedule.onFirstLunchChange.subscribe(with: self) { change in
+			self.scheduleShallowNotifications()
+		}
+		
+		TodayM.onNextDay.subscribe(with: self) { date in
+			self.hub.removeAllDeliveredNotifications()
 			self.scheduleNotifications(daysAhead: self.projection)
 		}
 		
-		ScheduleManager.instance.templateWatcher.onFailure(self) {
-			self.templateError = $0
-			self.template = nil
-		}
+		TodayM.fetchTodayBundle()
 		
-		ScheduleManager.instance.scheduleVariationUpdatedWatcher.onSuccess(self) {
-			tuple in
-			self.scheduleShallowNotifications() // Only schedule for 2 day ahead when settings are changed. This means if the user changes a lot at once, the system won't get too bogged down.
-		}
-		
-		TodayManager.instance.nextDayWatcher.onSuccess(self) {
-			date in
-			
-			self.hub.removeAllDeliveredNotifications()
-			self.scheduleNotifications(daysAhead: self.projection) // When the day changes, reschedule all our notifications!
-		}
 	}
 	
 	func needsToClearLegacyNotifications() {
@@ -169,22 +155,12 @@ class NotificationManager: Manager, PushRefreshListener {
 	private func scheduleNotifications(daysAhead: Int, queue: DispatchGroup? = nil) {
 		self.out("Registering notifications with projection: \(daysAhead)")
 		
-		if !self.templateLoaded {
-			self.out("Couldn't schedule notifications: template not downloaded")
-			return
-		}
-		
-		guard let template = self.template else {
-			self.out("Couldn't schedule notifications: no template present")
-			return
-		}
-		
-		if !self.specialSchedulesLoaded {
+		if !self.weekSchedulesLoaded {
 			self.out("Couldn't schedule notifications: Special Schedules not downloaded.")
 			return
 		}
 		
-		guard let specialSchedules = self.specialSchedules else {
+		guard let specialSchedules = self.weekSchedules else {
 			self.fetchSpecialSchedules()
 			
 			self.out("Couldn't schedule notifications: no special schedules present")
@@ -212,34 +188,31 @@ class NotificationManager: Manager, PushRefreshListener {
 				
 				let offsetDate = today.dayInRelation(offset: i)
 				
-				var schedule: DateSchedule!
+				var schedule: Schedule!
 				
 				//				If there's a special schedule
 				if let specialSchedule = specialSchedules.filter({ $0.date.webSafeDate == offsetDate.webSafeDate }).first {
 					schedule = specialSchedule
-				} else if let templateSchedule = template[offsetDate.weekday] {
-					let dateSchedule = DateSchedule(date: offsetDate, day: nil, changed: false, notices: [], blocks: templateSchedule.getBlocks())
-					schedule = dateSchedule
 				} else {
 					self.out("Couldn't find a suitable schedule for date: \(offsetDate.webSafeDate)")
 					continue
 				}
 				
-				for block in schedule.getBlocks() {
+				for block in (schedule.selectedTimetable?.filterBlocksByLunch() ?? []) {
 					if selfItem.isCancelled {
 						return
 					}
 
-					let analyst = BlockAnalyst(schedule: schedule, block: block)
+					let analyst = block.analyst
 					var toSchedule: [(KLNotification, UNNotificationRequest)] = []
 
-					if analyst.shouldShowBeforeClassNotifications() {
+					if analyst.shouldShowBeforeClassNotifications {
 						if let beforeClassNotificationRequest = self.buildBeforeClassNotification(date: offsetDate, block: block, analyst: analyst, schedule: schedule) {
 							toSchedule.append(beforeClassNotificationRequest)
 						}
 					}
 					
-					if analyst.shouldShowAfterClassNotifications() {
+					if analyst.shouldShowAfterClassNotifications {
 						if let afterClassNotificationRequest = self.buildAfterClassNotification(date: offsetDate, block: block, analyst: analyst, schedule: schedule) {
 							toSchedule.append(afterClassNotificationRequest)
 						}
@@ -294,8 +267,8 @@ class NotificationManager: Manager, PushRefreshListener {
 		}
 	}
 	
-	private func buildBeforeClassNotification(date: Date, block: Block, analyst: BlockAnalyst, schedule: DateSchedule) -> (KLNotification, UNNotificationRequest)? {
-		guard let time = Date.mergeDateAndTime(date: date, time: block.time.start) else {
+	private func buildBeforeClassNotification(date: Date, block: Block, analyst: Block.Analyst, schedule: Schedule) -> (KLNotification, UNNotificationRequest)? {
+		guard let time = Date.mergeDateAndTime(date: date, time: block.schedule.start) else {
 			self.out("Failed to find start time for block: \(block)")
 			return nil
 		}
@@ -313,19 +286,19 @@ class NotificationManager: Manager, PushRefreshListener {
 		
 		let content = UNMutableNotificationContent()
 		
-		if analyst.getCourse() == nil {
+		if analyst.bestCourse == nil {
 			content.title = "Next Block"
 		} else {
 			content.title = "Get to Class"
 		}
 		
 		content.sound = UNNotificationSound.default()
-		content.body = "5 min until \(analyst.getDisplayName())"
+		content.body = "5 min until \(analyst.displayName)"
 		
 		content.threadIdentifier = "schedule"
 		
-		if analyst.getLocation() != nil {
-			content.body = content.body + ". \(analyst.getLocation()!)"
+		if analyst.location != nil {
+			content.body = content.body + ". \(analyst.location!)"
 		}
 		
 		let trigger = self.buildTrigger(date: adjustedTime)
@@ -334,8 +307,8 @@ class NotificationManager: Manager, PushRefreshListener {
 		return (klnotification, request)
 	}
 	
-	private func buildAfterClassNotification(date: Date, block: Block, analyst: BlockAnalyst, schedule: DateSchedule) -> (KLNotification, UNNotificationRequest)? {
-		guard let time = Date.mergeDateAndTime(date: date, time: block.time.end) else {
+	private func buildAfterClassNotification(date: Date, block: Block, analyst: Block.Analyst, schedule: Schedule) -> (KLNotification, UNNotificationRequest)? {
+		guard let time = Date.mergeDateAndTime(date: date, time: block.schedule.end) else {
 			self.out("Failed to find start time for block: \(block)")
 			return nil
 		}
@@ -353,14 +326,14 @@ class NotificationManager: Manager, PushRefreshListener {
 		
 		let content = UNMutableNotificationContent()
 		
-		if analyst.getCourse() == nil {
+		if analyst.bestCourse == nil {
 			content.title = "End of Block"
 		} else {
 			content.title = "End of Class"
 		}
 		
 		content.sound = UNNotificationSound.default()
-		content.body = "\(analyst.getDisplayName()) ends in 2 min"
+		content.body = "\(analyst.displayName) ends in 2 min"
 		
 		content.threadIdentifier = "schedule"
 		
@@ -381,23 +354,41 @@ class NotificationManager: Manager, PushRefreshListener {
 	}
 	
 	func fetchSpecialSchedules(queue: DispatchGroup? = nil) {
-		self.specialSchedules = nil
-		self.specialSchedulesError = nil
+		self.weekSchedules = nil
+		self.weekSchedulesError = nil
 		
-		SpecialSchedulesWebCall(date: Date.today).callback() {
-			result in
-			
-			switch result {
-			case .success(let payload):
-				self.specialSchedules = payload
-				self.specialSchedulesError = nil
+		let provider = MoyaProvider<API>()
+		provider.request(.getWeekBundles) {
+			switch $0 {
+			case .success(let res):
+				do {
+					_ = try res.filterSuccessfulStatusCodes()
+
+					let data = res.data
+					let json = try JSON(data: data)
+					
+					let bundles = try json.dictionaryValue.values.compactMap({ try Day(json: $0) })
+					
+					// Because we don't registeer notifications for Events yet, we're just taking the bundle then getting the schedules out
+					let schedules = bundles.map({ $0.schedule! })
+					
+					self.weekSchedules = schedules
+					self.weekSchedulesError = nil
+				} catch {
+					self.weekSchedules = nil
+					self.weekSchedulesError = error
+					
+					print(error)
+				}
 			case .failure(let error):
-				self.specialSchedules = nil
-				self.specialSchedulesError = error
+				self.weekSchedules = nil
+				self.weekSchedulesError = error
+				
+				print(error)
 			}
-			
+
 			self.finishedSpecialSchedulesFetch(queue: queue)
-		}.execute()
+		}
 	}
 	
 	func finishedSpecialSchedulesFetch(queue: DispatchGroup? = nil) {

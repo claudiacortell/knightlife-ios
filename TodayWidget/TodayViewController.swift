@@ -12,7 +12,7 @@ import AddictiveLib
 
 class TodayViewController: UIViewController, NCWidgetProviding {
 	
-	private var state: TodayManager.TodayScheduleState? // Null if error
+	private var state: TodayManager.ScheduleState? // Null if error
 	
 	@IBOutlet weak var activeStack: UIStackView!
 	var activeView: UIView?
@@ -39,45 +39,40 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 		
 		self.registerListener()
 		
-		_ = TodayManager.instance
-		self.handleStateChange(state: TodayManager.instance.currentState)
+		_ = TodayM
+		self.handleStateChange(state: TodayM.state)
 	}
 	
 	private func registerListener() {
-		TodayManager.instance.statusWatcher.onSuccess(self) {
-			state in
-			
+		TodayM.onStateChange.subscribe(with: self) { state in
 			self.handleStateChange(state: state)
-		}
-		
-		TodayManager.instance.statusWatcher.onFailure(self) {
-			error in
-			
-			self.handleStateChange(state: nil)
 		}
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		TodayManager.instance.startTimer()
+		TodayM.startTimer()
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 		
-		TodayManager.instance.stopTimer()
+		TodayM.stopTimer()
 	}
 	
-	func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {		
-		TodayManager.instance.reloadTodayBundle() {
-			success in
-			
-			completionHandler(success ? .newData : .failed)
+	func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
+		TodayM.fetchTodayBundle().subscribeOnce(with: self) {
+			switch $0 {
+			case .success(_):
+				completionHandler(.newData)
+			case .failure(_):
+				completionHandler(.failed)
+			}
 		}
 	}
 	
-	private func handleStateChange(state: TodayManager.TodayScheduleState?) {
+	private func handleStateChange(state: TodayManager.ScheduleState?) {
 		self.state = state
 		self.updateViews()
 	}

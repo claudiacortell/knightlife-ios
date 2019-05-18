@@ -160,7 +160,7 @@ extension Event {
 				return otherGradesString.trimmingCharacters(in: .whitespaces)
 			}()
 			
-			return "\(self.description)\(addDescriptionPunctuation ? "." : "") \(otherGrades)"
+			return "\(self.title)\(addDescriptionPunctuation ? "." : "") \(otherGrades)"
 		}
 		
 //		let bestAudience = self.getMostRelevantAudience()!

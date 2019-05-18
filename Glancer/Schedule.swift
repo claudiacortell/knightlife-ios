@@ -46,7 +46,7 @@ final class Schedule: BadgeTethered, Decodable, Refreshable {
 	let onUpdate: Signal<Schedule> = Signal<Schedule>()
 	
 	let badge: String
-	private(set) var state: String!
+//	private(set) var state: String!
 	
 	let date: Date
 	private(set) var dayOfWeek: DayOfWeek!
@@ -59,9 +59,9 @@ final class Schedule: BadgeTethered, Decodable, Refreshable {
 
 		// Load data from JSON
 		self.badge = try Optionals.unwrap(json["badge"].string)
-		self.state = try Optionals.unwrap(json["state"].string)
+//		self.state = try Optionals.unwrap(json["state"].string)
 
-		self.date = try Optionals.unwrap(try Optionals.unwrap(json["date"].string).dateInISO8601Format())
+		self.date = try Optionals.unwrap(json["date"].string?.dateFromInternetFormat)
 		self.dayOfWeek = DayOfWeek(rawValue: json["day"].int ?? -1) ?? self.date.weekday
 		
 		self.timetables = try Optionals.unwrap(json["timetables"].array).map({
@@ -84,7 +84,7 @@ final class Schedule: BadgeTethered, Decodable, Refreshable {
 	}
 	
 	func updateContent(from: Schedule) {
-		self.state = from.state
+//		self.state = from.state
 		self.dayOfWeek = from.dayOfWeek
 		self.timetables = from.timetables
 		
@@ -100,12 +100,12 @@ final class Schedule: BadgeTethered, Decodable, Refreshable {
 	let onSelectedTimetableChange = Signal<Timetable?>()
 	var selectedTimetable: Timetable? {
 		get {
-			if let timetableBadge = self.prefs["selectedTimetable"] as? String {
-				// Find timetable by that badge
-				if let foundTimetable = self.timetables.filter({ $0.badge == timetableBadge }).first {
-					return foundTimetable
-				}
-			}
+//			if let timetableBadge = self.prefs["selectedTimetable"] as? String {
+//				// Find timetable by that badge
+//				if let foundTimetable = self.timetables.filter({ $0.badge == timetableBadge }).first {
+//					return foundTimetable
+//				}
+//			}
 			
 			// If there's none selected, we just return the default
 			return self.defaultTimetable
@@ -145,15 +145,15 @@ final class Schedule: BadgeTethered, Decodable, Refreshable {
 	var hasFirstLunch: Bool {
 		get {
 			// Fetch schedule-specific setting first
-			if let badgePref = self.prefs["firstLunch"] as? Bool {
-				return badgePref
-			}
+//			if let badgePref = self.prefs["firstLunch"] as? Bool {
+//				return badgePref
+//			}
 			
 			return Schedule.firstLunches[self.dayOfWeek]!
 		}
 		
 		set {
-			self.prefs["firstLunch"] = newValue
+//			self.prefs["firstLunch"] = newValue
 			self.onFirstLunchUpdate.fire(newValue)
 		}
 	}

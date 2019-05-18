@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 						
 		_ = NotificationManager.instance
 		
-		_ = TodayManager.instance
+		_ = TodayM
 		_ = CourseM
 		_ = BlockMetaM
 		
@@ -105,11 +105,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 	
 	func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
-		ScheduleManager.instance.clearCache()
+
 	}
 	
     func applicationWillResignActive(_ application: UIApplication) {
-		TodayManager.instance.stopTimer()
+		TodayM.stopTimer()
 	}
     
     func applicationDidEnterBackground(_ application: UIApplication){
@@ -121,7 +121,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 	}
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-		TodayManager.instance.startTimer()
+		TodayM.startTimer()
 	}
 	
 	func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {

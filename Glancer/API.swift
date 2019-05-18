@@ -17,7 +17,7 @@ enum API {
 	
 	case getSurveyURL
 	
-	case getStartupBundle
+	case getWeekBundles
 	case getBundle(date: Date)
 	
 	case getScheduleBy(badge: String)
@@ -48,8 +48,8 @@ extension API: TargetType {
 		case .getSurveyURL:
 			return "survey"
 			
-		case .getStartupBundle:
-			return "bundle/startup"
+		case .getWeekBundles:
+			return "bundle/week"
 		case let .getBundle(date):
 			return "bundle/\( date.year )/\( date.month )/\( date.day )"
 			
