@@ -27,7 +27,7 @@ class CalendarController: UIViewController, TableHandlerDataSource, ErrorReloada
 		}
 		
 		controller.date = date
-		self.navigationController?.pushViewController(controller, animated: true)
+        tableView.dataSource = controller as? UITableViewDataSource
 	}
 	
 	override func viewDidLoad() {
