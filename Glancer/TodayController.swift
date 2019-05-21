@@ -77,6 +77,8 @@ class TodayController: DayController {
 	}
 	
 	override func registerListeners() {
+		super.registerListeners()
+		
 		TodayM.onStateChange.subscribe(with: self) { state in
 			self.handleStateChange(state: state)
 		}

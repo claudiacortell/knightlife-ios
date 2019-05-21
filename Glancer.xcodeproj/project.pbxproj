@@ -31,7 +31,6 @@
 		C01A6C6C2118C9E5000B7442 /* KnightlifePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C7EA4821135D2400717B53 /* KnightlifePayload.swift */; };
 		C01A6C702118CA1A000B7442 /* CourseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D2110C2069463200D5D2B2 /* CourseManager.swift */; };
 		C01A6C752118CA2D000B7442 /* Scheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C176581FAA5F450059E956 /* Scheme.swift */; };
-		C01A6C792118CA4C000B7442 /* NextSchooldayWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01F2D0D21138EBE00E461FA /* NextSchooldayWebCall.swift */; };
 		C01A6C7A2118CA58000B7442 /* ScheduleVariationStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A1FB152001B36C004146CE /* ScheduleVariationStorage.swift */; };
 		C01A6C7C2118CA64000B7442 /* MeetingPrefModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B04F451FD177EC00F5D116 /* MeetingPrefModule.swift */; };
 		C01ECD2A2129BC0A0001C013 /* DayNoClassModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01ECD292129BC0A0001C013 /* DayNoClassModule.swift */; };
@@ -45,7 +44,6 @@
 		C01ECD3D2129D2C70001C013 /* TodayInClassModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01ECD3C2129D2C70001C013 /* TodayInClassModule.swift */; };
 		C01ECD3F2129D3C80001C013 /* TodayAfterSchoolModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01ECD3E2129D3C80001C013 /* TodayAfterSchoolModule.swift */; };
 		C01ECD412129D43C0001C013 /* TodayNextDayModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01ECD402129D43C0001C013 /* TodayNextDayModule.swift */; };
-		C01F2D0E21138EBE00E461FA /* NextSchooldayWebCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01F2D0D21138EBE00E461FA /* NextSchooldayWebCall.swift */; };
 		C021A315228C778200548FE8 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C021A311228C778200548FE8 /* Schedule.swift */; };
 		C021A316228C778200548FE8 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C021A311228C778200548FE8 /* Schedule.swift */; };
 		C021A317228C778200548FE8 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = C021A312228C778200548FE8 /* Block.swift */; };
@@ -272,7 +270,6 @@
 		C01ECD3C2129D2C70001C013 /* TodayInClassModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayInClassModule.swift; sourceTree = "<group>"; };
 		C01ECD3E2129D3C80001C013 /* TodayAfterSchoolModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayAfterSchoolModule.swift; sourceTree = "<group>"; };
 		C01ECD402129D43C0001C013 /* TodayNextDayModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayNextDayModule.swift; sourceTree = "<group>"; };
-		C01F2D0D21138EBE00E461FA /* NextSchooldayWebCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextSchooldayWebCall.swift; sourceTree = "<group>"; };
 		C021A311228C778200548FE8 /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		C021A312228C778200548FE8 /* Block.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		C021A313228C778200548FE8 /* Timetable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timetable.swift; sourceTree = "<group>"; };
@@ -523,7 +520,6 @@
 		C01573BA20C462DC008CACA5 /* Today */ = {
 			isa = PBXGroup;
 			children = (
-				C01F2D0C21138EAC00E461FA /* Web Call */,
 				C01573BB20C462ED008CACA5 /* TodayManager.swift */,
 			);
 			name = Today;
@@ -583,14 +579,6 @@
 				C01ECD3E2129D3C80001C013 /* TodayAfterSchoolModule.swift */,
 			);
 			name = Modules;
-			sourceTree = "<group>";
-		};
-		C01F2D0C21138EAC00E461FA /* Web Call */ = {
-			isa = PBXGroup;
-			children = (
-				C01F2D0D21138EBE00E461FA /* NextSchooldayWebCall.swift */,
-			);
-			name = "Web Call";
 			sourceTree = "<group>";
 		};
 		C022316A211E1DC60018D517 /* No Class */ = {
@@ -1623,7 +1611,6 @@
 				C07D913D225EF7E100A59345 /* Refreshable.swift in Sources */,
 				C0C455132123C1D0004A41ED /* TimeEventAttachmentView.swift in Sources */,
 				C0AC3FCA211B2F2400401FB8 /* SettingsBlockController.swift in Sources */,
-				C01F2D0E21138EBE00E461FA /* NextSchooldayWebCall.swift in Sources */,
 				C02E5555211FA44000043C9E /* EventsPrefsModule.swift in Sources */,
 				C0A3D57C21093545004F5049 /* TodayController.swift in Sources */,
 				C021A31B228C778200548FE8 /* BlockAnalyst.swift in Sources */,
@@ -1758,7 +1745,6 @@
 				C07D9129225EF72100A59345 /* Realm+KL.swift in Sources */,
 				C0D11272228DA0A400CE270D /* Day.swift in Sources */,
 				C01A6C6C2118C9E5000B7442 /* KnightlifePayload.swift in Sources */,
-				C01A6C792118CA4C000B7442 /* NextSchooldayWebCall.swift in Sources */,
 				C03BA78C21209AE800AB9DA2 /* PushNotificationManager.swift in Sources */,
 				C029E12B211E1F4800C2BEAF /* AfterSchoolView.swift in Sources */,
 				C01A6C7A2118CA58000B7442 /* ScheduleVariationStorage.swift in Sources */,

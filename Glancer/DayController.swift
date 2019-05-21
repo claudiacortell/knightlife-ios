@@ -73,6 +73,10 @@ class DayController: UIViewController, TableHandlerDataSource, ErrorReloadable {
 		Schedule.onFirstLunchChange.subscribe(with: self) { change in
 			self.tableHandler.reload()
 		}.filter({ $0.dayOfWeek == self.date.weekday })
+		
+		Grade.onUserGradeChange.subscribe(with: self) { grade in
+			self.tableHandler.reload()
+		}
 	}
 	
 	func unregisterListeners() {

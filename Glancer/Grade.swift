@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyUserDefaults
+import Signals
 
 enum Grade: Int {
 	
@@ -79,7 +80,10 @@ extension Grade {
 			Defaults[.gradeMigratedToRealm] = true
 			
 			Defaults[.userGrade] = newValue == nil ? nil : newValue!.rawValue
+			Grade.onUserGradeChange.fire(newValue)
 		}
 	}
+	
+	static let onUserGradeChange: Signal<Grade?> = Signal<Grade?>()
 	
 }

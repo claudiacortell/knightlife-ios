@@ -124,8 +124,10 @@ final class TodayManager {
 					}
 				}
 			default:
-				self.update()
+				break
 			}
+			
+			self.update()
 		}
 		
 		// When the Next Day's bundle is fetched
@@ -156,8 +158,10 @@ final class TodayManager {
 					}
 				}
 			default:
-				self.update()
+				break
 			}
+			
+			self.update()
 		}
 	}
 	
@@ -245,6 +249,8 @@ final class TodayManager {
 			self.state = state
 			break
 		}
+		
+		self.onStateChange.fire(self.state)
 	}
 	
 	private func updateAfterSchool(state: ScheduleState) {
@@ -272,18 +278,34 @@ final class TodayManager {
 			self.fetchingNextDay = true
 			
 			let provider = MoyaProvider<API>()
-			provider.request(.getNextSchoolDay) {
+			provider.request(.getWeekBundles) {
 				switch $0 {
-				case .success(let request):
+				case .success(let res):
 					do {
-						_ = try request.filterSuccessfulStatusCodes()
+						_ = try res.filterSuccessfulStatusCodes()
 						
-						let json = try JSON(data: request.data)
-						let nextDayDate = try Optionals.unwrap((json["date"].string ?? "").dateInISO8601Format())
+						let data = res.data
+						let json = try JSON(data: data)
 						
-						self.nextDayDate = nextDayDate
+						var bundles = try json.dictionaryValue.values.compactMap({ try Day(json: $0) })
 						
-						self.fetchNextDayBundle()
+						// Sort bundles by date
+						bundles.sort(by: { $0.date < $1.date })
+						
+						// Sort through the bundles, find one that has school, set that as the next day
+						for bundle in bundles {
+							// Ignore today's bundle
+							if bundle.schedule.date.webSafeDate == Date.today().webSafeDate {
+								continue
+							}
+							
+							if bundle.schedule.hasSchool {
+								self.nextDayDate = bundle.date
+								self.nextDayUpdater.fire(.success(bundle))
+								
+								break
+							}
+						}
 					} catch {
 						self.nextDayUpdater.fire(.failure(error))
 					}
@@ -295,6 +317,7 @@ final class TodayManager {
 			}
 		}
 		
+		// SEt the state
 		self.state = state
 	}
 	
