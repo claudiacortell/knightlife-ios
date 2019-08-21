@@ -8,6 +8,8 @@
 
 import Foundation
 
+
+//creates the calendar? unsure
 extension Calendar {
 	
 	static let normalizedCalendar: Calendar = {

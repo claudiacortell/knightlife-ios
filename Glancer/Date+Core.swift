@@ -55,12 +55,20 @@ extension Date {
 		return Date.webTimeFormatter.string(from: self)
 	}
 	
+    
+    //sets up dayOfWeek as 0-6 values, 0 = mon, 1 = tues, etc
 	var dayOfWeek: Int {
 		var raw = Calendar.normalizedCalendar.component(.weekday, from: self)
-		if (raw == 1) { raw = 6 } else { raw -= 2; }
+        print(raw)
+		if (raw == 1) {
+            raw = 6
+        } else {
+            raw -= 2
+        }
 		return raw
 	}
 	
+    //returns the DayOfWeek object that corresponds with the rawValue created from dayOfWeek function above
 	var weekday: DayOfWeek {
 		return DayOfWeek(rawValue: self.dayOfWeek)!
 	}
@@ -101,6 +109,7 @@ extension Date {
 		return Calendar.normalizedCalendar.date(byAdding: .day, value: offset, to: self)!
 	}
 	
+    //sets up prettyTime, a string variable that has the time. Used throughout the app
 	var prettyTime: String {
 		let formatter = Date.normalizedFormatter
 		formatter.dateFormat = "h:mma"
@@ -109,6 +118,7 @@ extension Date {
 		return formatter.string(from: self)
 	}
 	
+     //sets up prettyDate, a string variable that has the date. Used throughout the app (
 	var prettyDate: String {
 		let formatter = Date.normalizedFormatter
 		formatter.dateFormat = "MMMM d"

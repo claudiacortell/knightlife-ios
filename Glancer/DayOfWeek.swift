@@ -8,6 +8,29 @@
 
 import Foundation
 
+/*creates a DayOfWeek object class.
+ the raw values of each case are ints, so 0 - 6 for each day
+ 
+ instance variables:
+    - shortName : String
+    - displayName : String
+    - nextDay : DayOfWeeek
+        it adds 1 to the raw value to get the next case (day)
+ 
+ functions
+    - weekdays() -> [DayOfWeek]
+        returns an array of DayOfWeek objects, one with a case monday, one with case tuesday, etc.
+    - weekends() -> [DayOfWeek]
+          returns an array of DayOfWeek objects (just cases saturday and sunday)
+    - values() -> [DayOfWeek]
+          returns an array of DayOfWeek objects (one case for each day)
+    - fromShortName(shortName: String) -> DayOfWeek?
+            takes in a string (its suppposed to be the shortName of day
+            checks each day in the array created by values() using a for in loop
+            if it matches, return day
+            if it never ends up matching, return nil (hence the DayOfWeek? return type)
+ */
+
 public enum DayOfWeek: Int {
 	
 	case monday
@@ -62,11 +85,12 @@ public enum DayOfWeek: Int {
 		return DayOfWeek(rawValue: (id % 7))!
 	}
 	
-	static func weekdays() -> [DayOfWeek] { return [.monday, .tuesday, .wednesday, .thursday, .friday] }
+	static func weekdays() -> [DayOfWeek] { return [.monday, .tuesday, .wednesday, .thursday, .friday]}
 	static func weekends() -> [DayOfWeek] { return [.saturday, .sunday] }
 	static func values() -> [DayOfWeek] { return [.monday, .tuesday, .wednesday, .thursday, .friday, .saturday, .sunday] }
 	
 	static func fromShortName(shortName: String) -> DayOfWeek? {
+        //for in loops = for each loops
 		for day in DayOfWeek.values() {
 			if day.shortName == shortName {
 				return day
