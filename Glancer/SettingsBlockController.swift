@@ -38,6 +38,7 @@ class SettingsBlockController: UIViewController, TableHandlerDataSource {
 		BlockMetaManager.instance.metaChanged(meta: self.meta)
 	}
 	
+    //the big boy method. pretty much creates the entire layout of the 'Block Configuration' section
 	func buildCells(handler: TableHandler, layout: TableLayout) {
 		let about = layout.addSection()
 				
@@ -96,7 +97,8 @@ class SettingsBlockController: UIViewController, TableHandlerDataSource {
 			self.didChangeSettings()
 			self.needsNotificationsUpdate()
 		})
-		
+        
+        
 		notifications.addDivider()
 		
 		notifications.addSpacerCell().setBackgroundColor(.clear).setHeight(35)

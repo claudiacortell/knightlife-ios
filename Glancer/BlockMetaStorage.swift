@@ -9,6 +9,9 @@
 import Foundation
 import AddictiveLib
 
+/* Inherits from StorageHandler, which is a Pod. Corresponds with the Manager subclass (BlockMetaManager). the Manager subclass saves it, and the changes get saved to here
+ 
+ */
 class BlockMetaStorage: StorageHandler {
 	
 	var storageKey: String = "blockmeta.items"
@@ -19,6 +22,8 @@ class BlockMetaStorage: StorageHandler {
 		self.manager = manager
 	}
 	
+    //saves the data into storage 
+    //not sure exactly how it works but thats ok
 	func saveData() -> Any? {
 		var data: [[String: Any]] = []
 		
@@ -39,7 +44,9 @@ class BlockMetaStorage: StorageHandler {
 		return data
 	}
 	
-	func loadData(data: Any) {
+	
+    
+    func loadData(data: Any) {
 		guard let data = data as? [[String: Any]] else {
 			return
 		}

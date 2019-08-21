@@ -6,7 +6,33 @@
 //  Copyright © 2018 Dylan Hanson. All rights reserved.
 //
 
+
+
 import Foundation
+
+/*creates a BlockMetaID object class.
+ there are 7 cases, lunch, activites, etc
+
+ 
+
+ BlockMetaID are the ID labels for 'extra' blocks.
+    (BlockID is a bigger subset of block labels, has abcdefg lab custom + BlockMetaID)
+ 
+ 
+variables:
+    - values: [BlockMetaID]
+        an array of all of the cases
+    - displayName: String
+ 
+ functions
+    - fromBlockID (block: BlockID) -> BlockMetaID?
+        return the corresponding BlockMetaID for block (the BlockID object)
+        if it is custom or lab, the BlockMetaID obj returned is nil
+        if it is anything other than that (abcdefg), it is returned as free
+ 
+ 
+ */
+
 
 enum BlockMetaID: Int {
 	
@@ -16,12 +42,12 @@ enum BlockMetaID: Int {
 	case classMeeting
 	case assembly
 	case x
-	
 	case free
 	
+    
 	static var values: [BlockMetaID] = [
 		.free,
-		x,
+		.x,
 		.lunch,
 		.activities,
 		.advisory,

@@ -11,7 +11,7 @@ import Foundation
 /*creates a DayOfWeek object class.
  the raw values of each case are ints, so 0 - 6 for each day
  
- instance variables:
+variables:
     - shortName : String
     - displayName : String
     - nextDay : DayOfWeeek

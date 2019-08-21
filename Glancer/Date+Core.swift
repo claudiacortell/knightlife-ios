@@ -59,7 +59,6 @@ extension Date {
     //sets up dayOfWeek as 0-6 values, 0 = mon, 1 = tues, etc
 	var dayOfWeek: Int {
 		var raw = Calendar.normalizedCalendar.component(.weekday, from: self)
-        print(raw)
 		if (raw == 1) {
             raw = 6
         } else {
